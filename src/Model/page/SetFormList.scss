@@ -1,0 +1,131 @@
+.SetFormList {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>div {
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.04);
+        padding: 8px;
+        border-radius: 8px;
+
+        &.Left {
+            width: 400px;
+            margin-right: 16px;
+        }
+
+        &.Right {
+            flex: 1;
+        }
+    }
+
+    .list-title {
+        padding: 10px;
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 24px;
+        color: #262626;
+    }
+
+    .scrollable-list {
+        flex: 1;
+        width: 100%;
+
+        .dx-sortable {
+            min-height: 60vh;
+        }
+
+
+
+
+        &.RightScroll {
+            .sortable-list {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                align-content: flex-start;
+                flex-wrap: wrap;
+            }
+        }
+    }
+}
+
+
+.SetLeftFormItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px;
+    border-radius: 4px;
+    background: white;
+
+    &>i {
+        width: 56px;
+        height: 56px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.04);
+        }
+    }
+
+    &>div:nth-child(2) {
+        flex: 1;
+    }
+
+    &>div:nth-child(3) {
+        width: 80px;
+    }
+
+    &>div:nth-child(4) {
+        padding: 0 8px;
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 16px;
+        color: #262626;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+}
+
+.SetRightFormGtoup {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    margin: 4px;
+    border-radius: 8px;
+
+    &>.handle-title {
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        &>div:first-child {
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 16px;
+            color: #262626;
+        }
+    }
+
+    .dx-sortable {
+        min-height: 200px !important;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        align-content: flex-start;
+        flex-wrap: wrap;
+    }
+}

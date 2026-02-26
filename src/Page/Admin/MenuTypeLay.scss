@@ -1,0 +1,175 @@
+.MenuTypeLay_None {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.MenuTypeLay_Loading {
+    width: 100%;
+    height: 100;
+}
+
+.MenuTypeLay_Content {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &>.ContentBox {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+
+        &.Edit {
+            box-shadow: 0 0 8px #262626 inset;
+            box-sizing: border-box;
+        }
+
+        .LayoutBack {
+            background: #ffffff10;
+            z-index: -1;
+        }
+
+        .SCALE {
+            position: absolute;
+            top: 0;
+            padding: 2px 8px;
+            font-family: DIN;
+            font-size: 24px;
+            color: white;
+            filter: drop-shadow(1px 1px 1px #262626);
+            pointer-events: none;
+            user-select: none;
+            z-index: 2;
+        }
+
+        &>.react-grid-layout {
+
+            .WindowBox {
+                overflow: hidden;
+
+                .WindowItem {
+                    width: 100%;
+                    height: 100%;
+                    padding: 4px;
+
+
+
+                    &.Edit {
+                        box-shadow: 0 0 8px #262626 inset;
+                        box-sizing: border-box;
+                    }
+
+                    &>.WindowContent {
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+
+                        &>.SCALE {
+                            right: 0;
+                        }
+
+
+                        &>.WindowTitle {
+                            width: 100%;
+                            background: var(--titleColor);
+                            -webkit-background-clip: text;
+                            background-clip: text;
+                            color: transparent;
+                        }
+
+
+                        &>.WindowNavSwiper {
+                            flex: 1;
+                            width: 100%;
+                            display: flex;
+                            align-items: flex-start;
+                            justify-content: flex-start;
+                            flex-direction: column;
+
+                            &>.WindowNav {
+
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                cursor: pointer;
+
+                                &>.WindowNavItem {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+
+                                    &>div {
+                                        margin: 0 4px;
+                                    }
+                                }
+                            }
+
+
+                            &>.WindowSwiper {
+                                flex: 1;
+                                width: 100%;
+                                height: 100%;
+                                overflow: hidden;
+
+
+                                &>.swiper {
+                                    width: 100%;
+                                    height: 100%;
+                                    overflow: hidden;
+
+
+                                    .WindowSwiperItem {
+                                        width: 100%;
+                                        height: 100%;
+                                        overflow: hidden;
+
+                                        &.Edit {
+                                            box-shadow: 0 0 8px #262626 inset;
+                                            box-sizing: border-box;
+                                        }
+
+                                        .WindowLayout {
+                                            width: 100%;
+                                            height: 100%;
+                                            overflow: hidden;
+
+                                            .react-grid-layout {
+                                                height: 100% !important;
+                                                overflow: hidden;
+                                            }
+
+                                            .LayoutBox {
+                                                width: 100%;
+                                                height: 100%;
+                                                overflow: hidden;
+
+                                                &>.SCALE {
+                                                    left: 0;
+                                                }
+
+
+                                                .TemplateBox {
+                                                    width: 100%;
+                                                    height: 100%;
+                                                    overflow: hidden;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

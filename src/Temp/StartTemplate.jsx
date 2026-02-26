@@ -1,0 +1,379 @@
+import './StartTemplate.scss'
+import dayjs from 'dayjs'
+import { Radio } from 'antd'
+import { useRafInterval } from 'ahooks'
+import { useState, useEffect } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+
+import { ICONMapping } from '../Config/IconMapping'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree } from '../Utils'
+
+const navMapping = {
+    A01: { label: "nav_name", value: "nav_url", children: 'start_navTwo' },
+    A02: { label: "two_name", value: "two_url", children: 'start_navTwo' },
+    A03: {},
+    A04: {},
+}
+
+export const TopTemplate = ({ data, status, LOGIN, StartEvent }) => {
+    const { home, topType, widthType, widthSize, heightSize, padding, margin, align_items, align_content, justify_content, flex_direction, flex_wrap } = data
+    if (home !== 'all') {
+        if (home === 'home' && status !== '/Start') return <div />
+        if (home === 'page' && status === '/Start') return <div />
+    }
+    const configStyle = {
+        height: heightSize,
+        padding: SpacingCallBack(padding),
+        margin: SpacingCallBack(margin),
+        '--alignItems': align_items,
+        '--alignContent': align_content,
+        '--justifyContent': justify_content,
+        '--flexDirection': flex_direction,
+        '--flexWrap': flex_wrap,
+    }
+    if (widthType === 'flex') configStyle.flex = widthSize
+    if (widthType === 'px') configStyle.width = widthSize
+
+    if (topType === 'empty') return (<div className={`TopItem Title`} style={{ ...configStyle }} />)
+    if (topType === 'title') {
+        const { titleText, titleColor, titleDeg, titleSize, titleFamily, titleWeight, titleStyle, titelFiled, titelFiled_data, titelFiled_color,
+            titelIcon, titelIcon_url, titelIcon_size, titelIcon_field, titelIcon_fieldData, titelIcon_fieldColor, titelIcon_padding, titelIcon_margin,
+        } = data
+
+        const titleStyleData = {
+            '--titleColor': ColorCallBack(titleColor, titleDeg),
+            fontSize: titleSize,
+            fontFamily: titleFamily,
+            fontWeight: titleWeight,
+            fontStyle: titleStyle,
+            filter: SetFilderParams(titelFiled, titelFiled_data, titelFiled_color),
+        }
+        const iconStyleData = {
+            width: titelIcon_size,
+            padding: SpacingCallBack(titelIcon_padding),
+            margin: SpacingCallBack(titelIcon_margin),
+            filter: SetFilderParams(titelIcon_field, titelIcon_fieldData, titelIcon_fieldColor),
+        }
+
+        return (
+            <div className={`TopItem Title`} style={{ ...configStyle, ...titleStyleData }}>
+                {titelIcon && <img src={titelIcon_url} alt="" style={{ ...iconStyleData }} />}
+                {titleText}
+            </div>
+        )
+    }
+    if (topType === 'option') {
+        const { option_icon, option_icon_color, option_icon_shadow, option_icon_shadow_color, option_icon_shadow_data, option_icon_size,
+            option_list, option_margin, option_padding, option_text, option_text_color, option_text_family,
+            option_text_shadow, option_text_shadow_color, option_text_shadow_data, option_text_size, option_text_style, option_text_weight
+        } = data
+
+        const optionIconStyleData = {
+            marginRight: option_margin,
+            color: option_icon_color,
+            fontSize: option_icon_size,
+            filter: SetFilderParams(option_icon_shadow, option_icon_shadow_data, option_icon_shadow_color),
+        }
+        const optionTextStyleData = {
+            color: option_text_color,
+            fontSize: option_text_size,
+            fontFamily: option_text_family,
+            fontWeight: option_text_weight,
+            fontStyle: option_text_style,
+            filter: SetFilderParams(option_text_shadow, option_text_shadow_data, option_text_shadow_color),
+        }
+
+        const onClick = (e) => {
+            if (!StartEvent) return
+            StartEvent.emit({ type: "onNavigate", data: e.type })
+        }
+
+        return (
+            <div className={`TopItem Option`} style={{ ...configStyle }}>
+                {LOGIN ? option_list.map((v, i) => (
+                    <div key={i} style={{ padding: `0 ${option_padding}px` }} onClick={() => onClick(v)}>
+                        {option_icon && <span style={optionIconStyleData}>{ICONMapping[v.icon]}</span>}
+                        {option_text && <div style={optionTextStyleData}>{v.text}</div>}
+                    </div>
+                )) :
+                    <div style={{ padding: `0 ${option_padding}px` }} onClick={() => onClick({ type: 'login' })}>
+                        {option_icon && <span style={optionIconStyleData}>{ICONMapping['fasTheaterMasks']}</span>}
+                        {option_text && <div style={optionTextStyleData}>登录</div>}
+                    </div>
+                }
+            </div>
+        )
+    }
+    if (topType === 'back') {
+        const { back_color, back_icon, back_shadow, back_shadow_color, back_shadow_data, back_size } = data
+        const backStyleData = {
+            color: back_color,
+            fontSize: back_size,
+            filter: SetFilderParams(back_shadow, back_shadow_data, back_shadow_color),
+        }
+
+        const onClick = (e) => {
+            if (!StartEvent) return
+            StartEvent.emit({ type: "onNavigate", data: 'home' })
+        }
+
+        return (
+            <div className={`TopItem Back`} style={{ ...configStyle, ...backStyleData }} onClick={onClick}>
+                <span>{ICONMapping[back_icon]}</span>
+            </div>
+        )
+    }
+    if (topType === 'nav') {
+        return <div className={`TopItem Nav`} style={{ ...configStyle }}>导航模块(仅占位)</div>
+    }
+    if (topType === 'text') {
+        const { text_text, text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color } = data
+
+        const testStyleData = {
+            '--titleColor': ColorCallBack(text_color, text_deg),
+            fontSize: text_size,
+            fontFamily: text_family,
+            fontWeight: text_weight,
+            fontStyle: text_style,
+            filter: SetFilderParams(text_filed, text_filed_data, text_filed_color),
+        }
+        return <div className={`TopItem Text`} style={{ ...configStyle, ...testStyleData }}>{text_text}</div>
+    }
+    if (topType === 'date') {
+        const { date_list } = data
+        const [Date, setData] = useState(dayjs())
+        useRafInterval(() => setData(dayjs()), 1000)
+
+        return (
+            <div className={`TopItem Date`} style={{ ...configStyle }}>
+                {date_list.map((v, i) => {
+                    const { date_format, date_color, date_deg, date_size, date_family, date_weight, date_style, date_filed, date_filed_data, date_filed_color } = v
+                    const dateStyleData = {
+                        '--titleColor': ColorCallBack(date_color, date_deg),
+                        fontSize: date_size,
+                        fontFamily: date_family,
+                        fontWeight: date_weight,
+                        fontStyle: date_style,
+                        filter: SetFilderParams(date_filed, date_filed_data, date_filed_color),
+                    }
+                    return <div key={i} style={dateStyleData}>{dayjs(Date).format(date_format)}</div>
+                })}
+            </div>
+        )
+    }
+}
+
+export const NavTemplate = ({ status, styleData, navList, extra, extraJugde, extraList }) => {
+    const { pathname } = useLocation()
+    const Navigate = useNavigate()
+
+
+
+    const { nav_level, nav_type, nav_typeModel, nav_typePower, nav_typeNumber, nav_position, nav_width, nav_height, nav_top, nav_right, nav_bottom, nav_left,
+        nav_item_width, nav_item_height, nav_item_padding, nav_item_margin, nav_align_items, nav_align_content, nav_justify_content,
+        nav_flex_direction, nav_flex_wrap, nav_back_type, nav_back_color, nav_back_deg, nav_back_url, nav_back_obj,
+        nav_default_color, nav_default_deg, nav_default_size, nav_default_family, nav_default_weight, nav_default_style,
+        nav_default_filed, nav_default_filed_size, nav_default_filed_color,
+        nav_active_color, nav_active_deg, nav_active_size, nav_active_family, nav_active_weight, nav_active_style,
+        nav_active_filed, nav_active_filed_size, nav_active_filed_color,
+        nav_active_back, nav_active_url, nav_start
+    } = styleData
+
+    const [DataList, setDataList] = useState([])
+    const [Active, setActive] = useState()
+
+    const findParent = (data, id) => {
+        const obj = data.find(c => c.nav_url === id) || data.find(p => p.start_navTwo?.some(c => c.two_url === id))
+        return obj || null
+    };
+
+    useEffect(() => {
+        const renderNavList = () => {
+            if (extra) {
+                const isExtra1 = findInTree(extraList, v => v.nav_url === pathname.split('/').at(-1))
+                const isExtra2 = findInTree(extraList, v => v.two_url === pathname.split('/').at(-1), 'start_navTwo')
+                if (isExtra1 || isExtra2) return extraList
+                else return navList
+            }
+            return navList
+        }
+
+
+        if (nav_level === "A01") {
+            setDataList(renderNavList())
+            const obj = findParent(renderNavList(), pathname.split('/').at(-1))
+            if (obj) setActive(obj?.nav_url || '')
+        }
+        if (nav_level === "A02") {
+            if (status) {
+                setDataList(renderNavList().find(item => item.nav_isChild && item.start_navTwo?.length)?.start_navTwo)
+            } else {
+                const obj = findParent(renderNavList(), pathname.split('/').at(-1))
+                setDataList()
+                setActive()
+                if (obj?.nav_isChild) {
+                    setDataList(obj.start_navTwo)
+                    setActive(pathname.split('/').at(-1))
+                }
+            }
+        }
+
+        if (pathname === '/Start') setActive()
+    }, [pathname])
+
+    if (nav_type !== 'A02') return false
+
+    const navStyle = {
+        '--alignItems': nav_align_items,
+        '--alignContent': nav_align_content,
+        '--justifyContent': nav_justify_content,
+        '--flexDirection': nav_flex_direction,
+        '--flexWrap': nav_flex_wrap,
+    }
+    if (nav_position === 'top') {
+        navStyle.top = nav_top
+        navStyle.right = nav_right
+        navStyle.left = nav_left
+        navStyle.height = nav_height
+    }
+    if (nav_position === 'right') {
+        navStyle.top = nav_top
+        navStyle.bottom = nav_bottom
+        navStyle.left = nav_left
+        navStyle.width = nav_width
+
+    }
+    if (nav_position === 'bottom') {
+        navStyle.right = nav_right
+        navStyle.bottom = nav_bottom
+        navStyle.left = nav_left
+        navStyle.height = nav_height
+    }
+    if (nav_position === 'left') {
+        navStyle.top = nav_top
+        navStyle.bottom = nav_bottom
+        navStyle.left = nav_left
+        navStyle.width = nav_width
+    }
+    const itemStyle = {
+        width: nav_item_width,
+        height: nav_item_height,
+        padding: SpacingCallBack(nav_item_padding),
+        margin: SpacingCallBack(nav_item_margin),
+    }
+    const itemDefaultStyle = {
+        '--titleColor': ColorCallBack(nav_default_color, nav_default_deg),
+        fontSize: nav_default_size,
+        fontFamily: nav_default_family,
+        fontWeight: nav_default_weight,
+        fontStyle: nav_active_style,
+        filter: SetFilderParams(nav_default_filed, nav_default_filed_size, nav_default_filed_color),
+    }
+    const itemActiveStyle = {
+        '--titleColor': ColorCallBack(nav_active_color, nav_active_deg),
+        fontSize: nav_active_size,
+        fontFamily: nav_active_family,
+        fontWeight: nav_active_weight,
+        fontStyle: nav_default_style,
+        filter: SetFilderParams(nav_active_filed, nav_active_filed_size, nav_active_filed_color),
+    }
+
+
+    const onClick = v => {
+        if (status) return false
+        const { nav_url, nav_isChild, start_navTwo, two_url } = v
+        if (nav_isChild) Navigate(`/Start/${start_navTwo[0].two_url}`)
+        else if (two_url) Navigate(`/Start/${two_url}`)
+        else Navigate(`/Start/${nav_url}`)
+    }
+
+    if (((nav_start) || (status !== '/Start' && pathname !== '/Start')) && DataList) {
+        if (nav_typeModel === 'A01') {
+            return (
+                <div className={`NavListBox ${nav_level}`} style={navStyle}>
+                    {DataList.map((v, i) => {
+                        const Status = Active === v[navMapping[nav_level].value]
+                        const admin = status ? i === 0 : false
+                        return (
+                            <div className='NavItem' key={v[navMapping[nav_level].value]} style={itemStyle} onClick={() => onClick(v)}>
+                                <div style={(Status || admin) ? itemActiveStyle : itemDefaultStyle}>{v[navMapping[nav_level].label]}</div>
+                                {nav_active_back && (Status || admin) && <img src={nav_active_url} alt="nav_active_url" />}
+                            </div>
+                        )
+                    })}
+                    <div className='Back'>
+                        {nav_back_type === 'color' && <div style={{ background: ColorCallBack(nav_back_color, nav_back_deg) }} />}
+                        {nav_back_type === 'image' && <img style={{ objectFit: nav_back_obj }} src={nav_back_url} alt="nav_back_url" />}
+                    </div>
+                </div>
+            )
+        }
+        if (nav_typeModel === 'A02') {
+            const newNav = splitArrayEvenly(DataList, nav_typePower === 'A01')
+            newNav.splice(1, 0, { type: 'empty', width: nav_typeNumber })
+            return (
+                <div className={`NavListBox A02 ${nav_level}`} style={navStyle}>
+                    {newNav.map((item, index) => {
+                        if (Array.isArray(item)) {
+                            return item.map((v, i) => {
+                                const Status = Active === v[navMapping[nav_level].value]
+                                const admin = status ? index === 0 && i === 0 : false
+                                return (
+                                    <div className='NavItem' key={v[navMapping[nav_level].value]} style={itemStyle} onClick={() => onClick(v)}>
+                                        <div style={(Status || admin) ? itemActiveStyle : itemDefaultStyle}>{v[navMapping[nav_level].label]}</div>
+                                        {nav_active_back && (Status || admin) && <img src={nav_active_url} alt="nav_active_url" />}
+                                    </div>
+                                )
+                            })
+                        } else return <div className='NavItemEmpty' key='empty' style={{ flex: 1 }} />
+                    })}
+                </div>
+            )
+        }
+    }
+}
+
+const options = [{ label: '首页', value: '/Start' }, { label: '页面', value: '/Start/Page' }]
+
+export const WinTemplate = ({ Config, startType, setStartType, children }) => {
+    const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
+        win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+        win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
+        win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt
+    } = Config
+    const winTitleStyle = {
+        '--titleColor': ColorCallBack(win_color, win_deg),
+        fontSize: win_size,
+        fontFamily: win_family,
+        fontWeight: win_weight,
+        fontStyle: win_style,
+        textIndent: win_index,
+        filter: SetFilderParams(win_filed, win_filed_data, win_filed_color),
+    }
+    const winBoxStyle = {
+        background: ColorCallBack(win_back_color, win_back_deg),
+        border: SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
+        backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
+    }
+    // animate__animated animate__bounce animate__infinite
+    return (
+        <div className='SmallWindowBox '>
+            <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
+                <div style={winTitleStyle}>{startType && setStartType ? win_title : window_titleTxt}</div>
+                <div>{Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}</div>
+            </div>
+            <div className='WinBox' style={winBoxStyle}>
+                {startType && setStartType ?
+                    <Radio.Group
+                        options={options}
+                        defaultValue={startType}
+                        optionType="button"
+                        buttonStyle="solid"
+                        onChange={(e) => setStartType(e.target.value)}
+                    /> :
+                    children
+                }
+            </div>
+        </div>
+    )
+}

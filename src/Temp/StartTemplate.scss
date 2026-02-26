@@ -1,0 +1,130 @@
+.SmallWindowBox {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+
+    &>.Title {
+        width: 100%;
+        position: relative;
+        z-index: 1;
+
+        &>div:first-child {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            background: var(--titleColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        &>div:last-child {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>img {
+                height: 100%;
+                user-select: none;
+                pointer-events: none;
+
+                &:nth-child(1) {
+                    width: var(--img1);
+                }
+
+                &:nth-child(2) {
+                    flex: 1;
+                }
+
+                &:nth-child(3) {
+                    width: var(--img3);
+                }
+            }
+        }
+    }
+
+    &>.WinBox {
+        flex: 1;
+        width: 100%;
+        overflow: hidden;
+
+        .ScrollBox {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.NavListBox {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    align-items: var(--alignItems);
+    align-content: var(--alignContent);
+    justify-content: var(--justifyContent);
+    flex-direction: var(--flexDirection);
+    flex-wrap: var(--flexWrap);
+
+    &>.NavItem {
+        position: relative;
+        z-index: 2;
+
+        &>div {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--titleColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            cursor: pointer;
+        }
+
+        &>img {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    }
+
+
+    &>.Back {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+
+        &>* {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+}

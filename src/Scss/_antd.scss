@@ -1,0 +1,143 @@
+.ant-tooltip,
+.ant-popover,
+.ant-select-dropdown,
+.ant-picker-dropdown,
+.ant-image-preview {
+    z-index: 2000;
+}
+
+.ant-select-tree {
+    background: transparent !important;
+}
+
+.ant-dropdown-menu,
+.ant-popover-container,
+.ant-select-dropdown,
+.ant-popover-arrow:before,
+.ant-notification-notice-wrapper,
+.ant-message-notice-content {
+    background: rgba(255, 255, 255, 0.55) !important;
+    backdrop-filter: blur(8px);
+}
+
+.ant-dropdown {
+    .ant-dropdown-menu-item {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        &>i {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+
+.ant-dropdown-menu {
+    .ant-dropdown-menu-item {
+
+        &>i,
+        &>.ant-dropdown-menu-item-icon {
+            font-size: 20px !important;
+        }
+
+        .ant-dropdown-menu-title-content {
+            font-size: 16px;
+            font-family: 汉真广标;
+
+            .ant-btn-icon {
+                width: var(--width);
+            }
+        }
+    }
+}
+
+.ant-notification {
+    .ant-notification-notice-title {
+        font-family: 汉真广标;
+        font-size: 20px !important;
+        line-height: 20px !important;
+        filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.4));
+    }
+
+    .ant-notification-notice-description {
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 16px !important;
+        filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.2));
+    }
+
+    .ant-notification-notice-close {
+        font-size: 20px;
+    }
+}
+
+.TempICON {
+    .rc-virtual-list-holder-inner {
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        align-content: center;
+        flex-direction: row !important;
+
+        &>div {
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            padding: 0 !important;
+
+            &>div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.DropdownGrid {
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(8px);
+    margin-top: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    &>div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+        background: transparent;
+        border-radius: 4px;
+        user-select: none;
+        box-shadow: none;
+        transition: all 0.35s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.55);
+            box-shadow: inset 1px 1px 2px #fff, 0 0 5px #4442;
+        }
+
+        &>span {
+
+            &>span,
+            &>i {
+                font-size: var(--size);
+                filter: var(--filter);
+            }
+        }
+    }
+}
+
+.ant-dropdown-menu-title-content {
+    color: rgba(0, 0, 0, 0.45);
+}

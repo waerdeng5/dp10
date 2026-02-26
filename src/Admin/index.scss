@@ -1,0 +1,398 @@
+.AdminIndex {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+
+    &>.BackBox {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+
+        &>.Mask {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+        }
+
+        &>.BackColor {
+            width: 100%;
+            height: 100%;
+        }
+
+        &>.BackImage {
+            width: 100%;
+            height: 100%;
+        }
+
+        &>.VideoTempA01 {
+            width: 100%;
+            height: 100%;
+        }
+
+        &>.BackGround {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &>.LayoutA01 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            overflow: hidden;
+
+            &>div {
+                overflow: hidden;
+            }
+        }
+    }
+
+    &>.LayoutA02 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        overflow: hidden;
+
+        &>div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+            &>div {
+                height: 100%;
+                overflow: hidden;
+            }
+        }
+
+        .HeadA01 {
+            flex: 1;
+        }
+    }
+
+    .LogoA01 {
+        display: flex;
+        align-items: var(--logo_align_items);
+        align-content: var(--logo_align_content);
+        justify-content: var(--logo_justify_content);
+        flex-direction: var(--logo_flex_direction);
+        flex-wrap: var(--logo_flex_wrap);
+
+        &>.text {
+            background: var(--background);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        &>img {
+            overflow: hidden;
+        }
+    }
+
+    .MenuA01 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        .ant-menu {
+            height: 100%;
+            overflow: hidden;
+            margin-bottom: 8px;
+            border-inline-end: none;
+            user-select: none;
+
+            .ant-menu-item-icon,
+            .ant-menu-submenu-arrow {
+                font-size: var(--iconSize);
+                color: var(--iconColor);
+                filter: var(--iconFilter);
+            }
+
+            .ant-menu-title-content {
+                color: var(--textColor);
+                font-size: var(--textSize);
+                font-family: var(--textFamily);
+                font-style: var(--textStyle);
+                font-weight: var(--textWeight);
+                filter: var(--textFilter);
+                margin-inline-start: var(--iconIndex)
+            }
+
+            &.menuDefault {
+                .ant-menu-submenu-selected {
+                    &>.ant-menu-submenu-title {
+                        .ant-menu-title-content {
+                            color: var(--active);
+                        }
+                    }
+                }
+            }
+
+            &.menuTypeA01 {
+                .ant-menu-submenu-selected {
+
+                    &>.ant-menu-submenu-title,
+                    .ant-menu-item-selected {
+                        background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--active50));
+                        position: relative;
+                        z-index: 1;
+                        border-radius: 0;
+
+                        &::after {
+                            position: absolute;
+                            content: '';
+                            right: 0;
+                            top: 0;
+                            width: 2px;
+                            height: 100%;
+                            background: var(--active);
+                            z-index: 1;
+                        }
+                    }
+                }
+            }
+
+            &.menuDefault {
+                .ant-menu-item-selected {
+                    background-color: var(--activeBack);
+
+                    .ant-menu-title-content {
+                        color: var(--textActive)
+                    }
+
+                }
+            }
+        }
+
+        .dx-scrollable-content {
+            transform: none !important;
+        }
+
+        button {
+            .ant-btn-icon {
+                color: var(--foltColor);
+                font-size: var(--foltSize);
+                filter: var(--foltFilter);
+            }
+        }
+
+    }
+
+    .BodyA01 {
+        flex: 1;
+        width: 100%;
+
+        .ant-tabs {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            .ant-tabs-nav::before {
+                content: none;
+            }
+
+            .ant-tabs-tab {
+                background: var(--tabsBack);
+                border: var(--tabsBorder);
+                border-radius: var(--tabsRadius);
+                border-bottom: none;
+                color: var(--tabsFontColor);
+                font-size: var(--tabsFontSize);
+                font-family: var(--tabsFontFamily);
+                font-weight: var(--tabsFontWeight);
+                font-style: var(--tabsFontStyle);
+                transition: all 0.15s;
+
+                .ant-tabs-tab-icon {
+                    font-size: var(--tabsIconSize);
+                    margin-inline-end: var(--tabsIconIndex);
+                    filter: var(--tabsIconFilter);
+                }
+
+                .ant-tabs-tab-btn {
+                    &>span:not(.ant-tabs-tab-icon) {
+                        filter: var(--tabsFontFilter)
+                    }
+                }
+
+                &.ant-tabs-tab-active {
+                    background: var(--activeTabsBack);
+                }
+            }
+
+            .ant-tabs-nav {
+                margin: 0;
+            }
+
+            .ant-tabs-content-holder {
+                flex: 1;
+                overflow: hidden;
+
+                .ant-tabs-content {
+                    height: 100%;
+                    overflow: hidden;
+
+                    .ant-tabs-tabpane {
+                        height: 100%;
+                        overflow: hidden;
+                    }
+                }
+
+                .MenuTypeDev {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                }
+            }
+
+            .ant-tabs-tab-remove {
+                color: var(--tabsCloseColor);
+            }
+        }
+    }
+
+    .HeadA01 {
+        width: 100%;
+        display: flex;
+        align-items: var(--logo_align_items);
+        align-content: var(--logo_align_content);
+        justify-content: var(--logo_justify_content);
+        flex-direction: var(--logo_flex_direction);
+        flex-wrap: var(--logo_flex_wrap);
+
+        &>.left {
+            background: var(--background);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+
+        &>.right {
+            height: 100%;
+            display: flex;
+
+            .options {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: row-reverse;
+
+                &>div {
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &>span,
+                    &>i {
+                        filter: var(--filter);
+                    }
+                }
+            }
+
+
+            .OffBtn {
+                height: 100%;
+                aspect-ratio: 1/1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-left: 1px solid rgba(38, 38, 38, 0.2);
+                margin-left: 8px;
+                cursor: pointer;
+                font-size: var(--fontSize);
+
+                &>i,
+                &>span {
+                    font-size: var(--fontSize);
+                }
+            }
+
+            .usesBtn {
+                display: flex;
+                align-items: center;
+
+                .ant-avatar {
+                    margin: var(--avaMargin);
+                    user-select: none;
+                }
+
+                .nameData {
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    user-select: none;
+
+                    &>div {
+                        background: var(--background);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        text-align: center;
+                        margin: 1px;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }
+            }
+        }
+
+
+    }
+
+    .LookPage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 99999999;
+        background: rgba(0, 0, 0, 0);
+        backdrop-filter: blur(24px);
+
+        &>.unlock {
+            position: absolute;
+            left: 0;
+            bottom: 80px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .ant-input-underlined {
+                background: transparent;
+            }
+
+            .ant-space-addon {
+                cursor: pointer;
+            }
+        }
+    }
+
+}

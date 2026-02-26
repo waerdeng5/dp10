@@ -1,0 +1,176 @@
+.SetDevRouter {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+
+    .SetDevRouterBox {
+        width: 100%;
+
+        .Title {
+            background: linear-gradient(0deg, #ffffff 0%, #70fff3 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 20px;
+            text-align: left;
+            font-style: normal;
+            filter: drop-shadow(1px 1px 1px #262626);
+            margin: 16px 0 8px 0;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .Label {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            &>.Item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 16px;
+
+                &>div:first-child {
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 18px;
+                    color: #515151;
+                    margin-right: 4px;
+                }
+
+                &>div:last-child {
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: #36cfc9;
+                    filter: drop-shadow(1px 1px 1px #262626);
+                }
+            }
+        }
+
+        .Text {
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 20px;
+            color: #36cfc9;
+            filter: drop-shadow(1px 1px 1px #262626);
+        }
+
+        .Table {
+            .List {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+
+                &.Title {
+                    &>div {
+                        font-family: ShuHeiTi;
+                        font-weight: bold;
+                        font-size: 18px;
+                        color: #36cfc9;
+                        filter: drop-shadow(1px 1px 1px #262626);
+                    }
+                }
+
+                &>div {
+                    width: 320px;
+                    padding: 4px 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: #515151;
+                }
+            }
+        }
+
+        .Options {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+
+
+
+            &>div {
+                width: 320px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                &>div {
+                    padding: 4px 8px;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: #515151;
+
+                    &.top {
+                        font-family: ShuHeiTi;
+                        font-weight: bold;
+                        font-size: 18px;
+                        color: #36cfc9;
+                        filter: drop-shadow(1px 1px 1px #262626);
+                    }
+
+                }
+
+
+            }
+        }
+
+        .Show {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+
+            &>div {
+                width: 320px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                filter: drop-shadow(1px 1px 1px #262626);
+
+                &>div {
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 18px;
+                    color: #36cfc9;
+                    filter: drop-shadow(1px 1px 1px #262626);
+                    margin-bottom: 8px;
+                }
+
+                &>span {
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 18px;
+                    color: #515151;
+                }
+
+
+                &>.show {
+                    color: #36cfc9;
+                }
+
+                &>.hidden {
+                    color: #ff4d4f;
+                }
+            }
+        }
+
+
+        .ErrorTips {
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 18px;
+            color: #ff4d4f;
+            filter: drop-shadow(1px 1px 1px #262626);
+        }
+    }
+}

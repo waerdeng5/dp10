@@ -1,0 +1,35 @@
+.CameraVideo {
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>div {
+        width: 100%;
+    }
+
+    &>.video {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        &>div {
+            width: calc(100% / 3);
+            height: 50%;
+            padding: 4px;
+        }
+    }
+
+    &>.paginations {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+    }
+}

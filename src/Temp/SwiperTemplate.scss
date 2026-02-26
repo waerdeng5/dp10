@@ -1,0 +1,47 @@
+.SwiperLoginBack {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        transition: 1s linear 2s;
+        transform: scale(1, 1);
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .swiper-slide-active img,
+    .swiper-slide-duplicate-active img {
+        transition: 6s linear;
+        transform: scale(1.1, 1.1);
+    }
+}
+
+.SwiperLookAnimation {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .LookItem {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 1;
+
+        &>.ActiveButton {
+            position: absolute;
+            left: 0;
+            bottom: 48px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>button {
+                width: 160px;
+            }
+        }
+    }
+}

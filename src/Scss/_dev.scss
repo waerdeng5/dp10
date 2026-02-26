@@ -1,0 +1,25 @@
+.devPopupStyle {
+    &>.dx-overlay-content {
+        background: rgba(255, 255, 255, 0.55) !important;
+        backdrop-filter: blur(8px);
+
+        &>.dx-popup-title {
+            padding: 0 16px;
+
+            .dx-toolbar-label {
+
+                background: linear-gradient(0deg, #ffffff 0%, #70fff3 100%);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 24px;
+                text-align: left;
+                font-style: normal;
+                filter: drop-shadow(1px 1px 1px #262626);
+            }
+        }
+
+    }
+}

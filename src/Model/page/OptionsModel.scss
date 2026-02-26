@@ -1,0 +1,186 @@
+.OptionsModelNone {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.OptionsModel__Excel {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.OptionsModelA04 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>.scrollable-list {
+        width: 100%;
+    }
+
+    &>button {
+        width: 200px;
+        margin-top: 16px;
+    }
+}
+
+.OptionsModelA04_Box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    user-select: none;
+
+    &>i {
+        font-size: 32px;
+    }
+
+    &>.RenderItemLabel {
+        flex: 1;
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 24px;
+        color: #262626;
+    }
+
+}
+
+.OptionsModelA07,
+.OptionsModelB03,
+.OptionsModelB08 {
+    width: 100%;
+    height: 100%;
+
+    &.Result {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.OptionsModelB09 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>.Tree {
+        width: 400px;
+        height: 100%;
+        overflow: hidden;
+        margin-right: 16px;
+    }
+
+    &>.Transfer {
+        flex: 1;
+        height: 100%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &>div {
+            flex: 1;
+            width: 100%;
+
+            .ant-transfer-section {
+                flex: 1;
+                height: 100%;
+            }
+        }
+
+        &>button {
+            width: 240px;
+            margin-top: 16px;
+        }
+    }
+}
+
+.OptionsModelB05,
+.OptionsModelB06 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &>.dx-widget {
+        height: 100%;
+        overflow: hidden;
+    }
+
+}
+
+.OptionsModelB1501 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>div {
+        flex: 1;
+        overflow: hidden;
+    }
+
+    &>button {
+        width: 240px;
+        margin-top: 16px;
+    }
+}
+
+.OptionsModelB14 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .Box {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &>div {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 8px;
+
+            &>.Label {
+                width: 240px;
+                text-align: right;
+                margin-right: 8px;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 18px;
+                color: #383838;
+            }
+
+            &>.Value {
+                flex: 1;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 18px;
+                color: #262626;
+            }
+
+            &>.Attach {
+                flex: 1;
+
+            }
+        }
+    }
+}

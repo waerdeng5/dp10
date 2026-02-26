@@ -1,0 +1,364 @@
+.CommonModelNone {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CommonModelA1001 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>.Tree {
+        .ant-tree {
+            background: transparent;
+        }
+    }
+
+    &>button {
+        margin-top: 16px;
+    }
+}
+
+.CommonModelB1504 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CommonModelA0903 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>.Options {
+        width: 100%;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>div:first-child {
+            margin-right: 16px;
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 20px;
+            color: #262626;
+        }
+
+        &>div:last-child {
+            width: 240px;
+            background: transparent;
+            outline: none;
+            border: none;
+            box-shadow: none !important;
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 20px;
+            color: #262626;
+        }
+    }
+
+    &>.Charts {
+        flex: 1;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+.CommonModel__attDetail {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &>embed {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.CommonModelB17 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .CommonModelB17__step {
+
+        .TimelineData {
+            &>div {
+                display: flex;
+                align-items: center;
+                justify-content: baseline;
+
+                &>div:first-child {
+                    margin-right: 4px;
+                }
+
+                &>div {
+                    background: var(--background);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                }
+            }
+        }
+    }
+}
+
+.CommonModelB1605 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .CommonModelB1605_Box {
+        &>div {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 8px;
+
+            &>div:first-child {
+                width: 60px;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #26262699;
+            }
+
+            &>div:last-child {
+                flex: 1;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #262626;
+            }
+        }
+    }
+
+    button {
+        width: 240px;
+        margin-top: 8px;
+    }
+}
+
+.CommonModelB1606 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    .DevScrollViewBox {
+        &>div {
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin-bottom: 4px;
+            user-select: none;
+
+            &>div:first-child {
+                width: 60px;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #262626;
+            }
+
+            &>div:last-child {
+                flex: 1;
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #262626;
+            }
+        }
+    }
+
+    button {
+        width: 240px;
+        margin-top: 8px;
+    }
+}
+
+.DevScrollViewBox_options {
+    min-height: 24px;
+    line-height: 24px;
+    padding: 8px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 4px;
+
+    &.active {
+        background: #73d13d40;
+    }
+
+    &>div {
+        width: 100%;
+        padding: 0 8px;
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 20px;
+        color: #262626;
+
+    }
+
+    &>i.check {
+        font-size: 24px;
+        color: red;
+        margin-right: 8px;
+    }
+
+    &>i.circle {
+        color: #262626;
+        margin: 0 8px;
+        cursor: pointer;
+    }
+
+    &>i.delete {
+        color: #262626;
+        margin-right: 16px;
+        cursor: pointer;
+
+    }
+}
+
+.CommonModelDxTheme {
+    width: 100%;
+    height: 100%;
+
+    .Box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 16px;
+
+        &>div {
+            width: 100%;
+
+            .ant-divider-inner-text {
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #262626;
+            }
+
+            &>.Item {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 8px;
+                margin: 4px 8px;
+                border-radius: 500px;
+
+
+                &.active,
+                &:hover {
+                    background: rgba(0, 0, 0, 0.15);
+
+                    &>div:first-child {
+                        &>div {
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+                }
+
+                &>div:first-child {
+                    width: 64px;
+                    height: 64px;
+                    margin-right: 16px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &>div {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        transition: all 0.35s;
+                    }
+
+                }
+
+                &>div:last-child {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    button {
+                        font-family: ShuHeiTi;
+                        font-weight: bold;
+                        font-size: 20px;
+                        color: #262626;
+
+                        &.active {
+                            color: #ffffff;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+}
+
+.CommonModelLookAnimation {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.CommonModel_WeChatBinding {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &>#QRcode {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &>.ant-result {
+        height: 100%;
+    }
+
+}
+
+.CommonModel_OfficialAccount {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &>img {
+        width: 100%;
+        height: 100%;
+    }
+}

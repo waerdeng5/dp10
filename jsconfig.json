@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "es2015",
+        "baseUrl": ".",
+        "forceConsistentCasingInFileNames": false, // 核心：关闭大小写强制检查
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -1,0 +1,485 @@
+.FormTemplate {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+
+    form {
+        &>div:last-child {
+            justify-content: center;
+            margin: 8px;
+        }
+
+        .HIDDEN {
+            display: none;
+        }
+
+        .ant-form-item-label {
+            position: absolute;
+            top: 0;
+            left: 8px;
+            z-index: 5;
+
+            &>label {
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 16px;
+                color: #FFFFFF;
+                text-indent: 12px;
+                filter: drop-shadow(1px 1px 1px #262626);
+
+                &.ant-form-item-required {
+                    text-indent: 0;
+                }
+
+            }
+        }
+
+        .ant-pro-card-collapse {
+            .ant-pro-card-body {
+                display: none !important;
+            }
+        }
+
+        .ant-pro-card {
+            background: rgba(255, 255, 255, 0.4);
+            margin: 2px;
+
+            .ant-pro-card-title {
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 20px;
+                color: #262626;
+                filter: drop-shadow(0px 0px 0px #262626);
+
+                &>span {
+                    font-size: 16px;
+                }
+            }
+
+
+            .ant-pro-card-body {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+        }
+
+        .INPUT,
+        .PASSWORD,
+        .TEXTAREA,
+        .NUMBER,
+        .RANGE,
+        .SLIDER,
+        .RATE {
+            position: relative;
+            z-index: 1;
+
+            .ant-space-compact {
+                width: 100%;
+            }
+
+            .ant-form-item-control {
+
+                .ant-input-affix-wrapper {
+                    padding: 0;
+                }
+
+                textarea,
+                input {
+                    border-radius: 8px 8px 0 0;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                    height: 72px;
+                    min-height: 72px;
+                    padding: 30px 16px 8px 16px;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 24px;
+                    color: #262626;
+
+                }
+
+                .ant-input-outlined,
+                .ant-input-number-outlined {
+                    border-radius: 8px 8px 0 0;
+                    height: 72px;
+                    background: rgba(0, 0, 0, 0.04);
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                    border-bottom: 1px solid #515151;
+
+                    &:hover {
+                        background: rgba(0, 0, 0, 0.07);
+                        border-bottom: 1px solid #1677ff;
+                    }
+
+                    .ant-input-number-handler-wrap {
+                        background: transparent;
+                    }
+
+                    .anticon {
+
+                        &.anticon-close-circle,
+                        &.anticon-eye,
+                        &.anticon-eye-invisible {
+                            padding: 0 16px;
+                            font-size: 20px;
+                        }
+
+                        &.anticon-up,
+                        &.anticon-down {
+                            font-size: 12px;
+                        }
+
+                    }
+                }
+            }
+        }
+
+        .RANGE {
+            .ant-input-number-compact-first-item {
+                border-radius: 8px 0 0 0 !important;
+            }
+
+            .ant-input-compact-item {
+                background: rgba(0, 0, 0, 0.04) !important;
+                border-radius: 0 !important;
+                height: 73px !important;
+            }
+
+            .ant-input-number-compact-last-item {
+                border-radius: 0 8px 0 0 !important;
+            }
+        }
+
+        .SLIDER {
+            .ant-form-item-control {
+                padding-top: 24px;
+            }
+        }
+
+        .RATE {
+            .ant-form-item-control-input-content {
+                padding-top: 24px;
+            }
+        }
+
+        .RADIO {
+            .ant-radio-group {
+                padding-top: 24px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &>label {
+                    flex: 1;
+                    height: 48px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: rgba(0, 0, 0, 0.04);
+
+                    &.ant-radio-button-wrapper-checked {
+                        background: rgba(0, 0, 0, 0.07);
+                    }
+
+                    &>.ant-radio-button-label {
+                        font-family: ShuHeiTi;
+                        font-weight: bold;
+                        font-size: 24px;
+                        color: #262626;
+                        filter: drop-shadow(1px 1px 1px #fff);
+                    }
+                }
+            }
+        }
+
+        .COLOR {
+            .ant-color-picker-trigger {
+                padding: 24px 16px 0px 16px;
+                height: 72px;
+                background: transparent;
+                border: none;
+                outline: none;
+                box-shadow: none;
+                display: flex !important;
+                align-items: center;
+                justify-content: flex-start;
+
+                &>.ant-color-picker-color-block,
+                &>.ant-color-picker-clear {
+                    width: 80px;
+                    height: 40px;
+
+                    &::after {
+                        width: 120px;
+                        transform: rotate(-25deg);
+                    }
+                }
+
+                &>.ant-color-picker-trigger-text {
+                    height: 40px;
+                    line-height: 40px;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 24px;
+                    color: #262626;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            .ant-form-item-control-input-content {
+                border-radius: 8px 8px 0 0;
+                background: rgba(0, 0, 0, 0.04);
+                border: none;
+                outline: none;
+                box-shadow: none;
+                border-bottom: 1px solid #515151;
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.07);
+                    border-bottom: 1px solid #1677ff;
+                }
+
+            }
+        }
+
+        .SELECT,
+        .SELECTM,
+        .TempICON {
+            .ant-select {
+                height: 72px;
+                border-radius: 8px 8px 0 0;
+                border: none;
+                outline: none !important;
+                box-shadow: none !important;
+                border-bottom: 1px solid #515151;
+                background: rgba(0, 0, 0, 0.04);
+
+                input {
+
+                    margin-top: 24px;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 24px;
+                }
+
+                .ant-select-placeholder,
+                .ant-select-content-value {
+                    margin-top: 24px;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-size: 24px;
+                }
+
+            }
+        }
+
+        .SELECTM {
+            .ant-select-content {
+                margin-top: 24px;
+                height: 40px;
+
+                input {
+                    margin-top: 0px;
+                }
+            }
+        }
+
+        .TIME {
+            .ant-form-item-control-input-content {
+                height: 72px;
+                border-radius: 8px 8px 0 0;
+                background: rgba(0, 0, 0, 0.04);
+                border: none;
+                outline: none;
+                box-shadow: none;
+                border-bottom: 1px solid #515151;
+
+                &:hover {
+                    background: rgba(0, 0, 0, 0.07);
+                    border-bottom: 1px solid #1677ff;
+                }
+            }
+
+            .ant-picker {
+                width: 100%;
+                height: 100%;
+                padding: 0 16px;
+                border: none;
+                outline: none;
+                box-shadow: none;
+                background: transparent;
+
+                &>.ant-picker-input {
+                    height: 40px;
+
+                    input {
+                        padding-top: 24px;
+                        font-family: ShuHeiTi;
+                        font-weight: bold;
+                        font-size: 24px;
+                    }
+
+                    span {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+.FormTemplateClass01 {
+    padding: 8px;
+
+    .HIDDEN {
+        display: none;
+    }
+
+    .INPUT {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .ant-col {
+            flex: 1;
+        }
+
+        .dx-button {
+            margin-top: 14px;
+            margin-left: 8px;
+            height: 38px;
+        }
+    }
+
+    form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .ant-row {
+        width: 100%;
+    }
+
+    .ant-pro-card {
+        background: rgba(255, 255, 255, 0.35);
+        margin: 2px;
+
+        .ant-pro-card-body {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    .ant-pro-card-collapse {
+        .ant-pro-card-body {
+            display: none;
+        }
+    }
+
+    .ant-form-item-label {
+        --ant-control-height-lg: 24px;
+        --ant-font-size: 16px;
+
+        &>label {
+            font-family: ShuHeiTi;
+            font-size: 20px;
+            margin-top: 8px;
+        }
+    }
+
+    .ant-picker-input {
+        height: 24px;
+        --ant-line-height-lg: 24px;
+        --ant-date-picker-input-font-size-lg: 24px;
+        font-family: DIN;
+    }
+
+    .ant-input-number-input {
+        font-size: 24px !important;
+        line-height: 24px;
+        font-family: DIN;
+        height: 38px;
+    }
+
+    .ant-input,
+    .ant-select-selection-item-content,
+    .ant-select-content-value {
+        font-size: 24px !important;
+        line-height: 24px;
+        font-family: 汉真广标;
+    }
+
+    .ant-select-selection-item-remove {
+        font-size: 14px;
+    }
+
+    .ant-picker,
+    .ant-space-compact {
+        width: 100%;
+    }
+
+    .ant-input-outlined {
+        border-top: none;
+    }
+
+    .ant-color-picker-trigger {
+        display: flex !important;
+        justify-content: flex-start;
+        border-radius: 0;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        box-shadow: none;
+    }
+
+    .ant-color-picker-trigger-text {
+        font-size: 24px !important;
+        line-height: 24px;
+        font-family: DIN;
+    }
+
+    .ant-radio-group {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>label {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+
+    .ant-input-group-addon {
+        background: #f5f5f5;
+        border: none !important;
+    }
+
+    .ant-color-picker-color-block,
+    .ant-color-picker-clear {
+        width: 80px !important;
+
+        &::after {
+            width: 200%;
+            transform: rotate(-22px) !important;
+        }
+    }
+
+}

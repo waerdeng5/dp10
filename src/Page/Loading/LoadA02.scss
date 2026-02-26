@@ -1,0 +1,150 @@
+.LoadA02 {
+    width: 350px;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cube {
+        position: relative;
+        height: 100px;
+        width: 100px;
+        transform-style: preserve-3d;
+        animation: animate 4s linear infinite;
+    }
+
+    @keyframes animate {
+        0% {
+            transform: rotateX(-30deg) rotateY(0deg);
+        }
+
+        100% {
+            transform: rotateX(-30deg) rotateY(360deg);
+        }
+    }
+
+    .cube .div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+    }
+
+    .cube .div .span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: rotateY(calc(90deg * var(--i))) translateZ(50px);
+        background: linear-gradient(to bottom,
+                hsl(270, 100%, 25.1%) 0%,
+                hsl(270, 100%, 32.06%) 5.5%,
+                hsl(270, 100%, 36.88%) 12.1%,
+                hsl(270, 100%, 40.7%) 19.6%,
+                hsl(270, 100%, 43.88%) 27.9%,
+                hsl(270, 100%, 46.58%) 36.6%,
+                hsl(270, 100%, 48.91%) 45.6%,
+                hsl(270, 100%, 50.91%) 54.6%,
+                hsl(270, 100%, 52.62%) 63.4%,
+                hsl(270, 100%, 54.08%) 71.7%,
+                hsl(270, 100%, 55.29%) 79.4%,
+                hsl(270, 100%, 56.28%) 86.2%,
+                hsl(270, 100%, 57.04%) 91.9%,
+                hsl(270, 100%, 57.59%) 96.3%,
+                hsl(270, 100%, 57.93%) 99%,
+                hsl(270, 100%, 58.04%) 100%);
+        // background-size: 1200% 1200%;
+        animation: AnimationName 30s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transform-style: preserve-3d;
+    }
+
+    .cube .div .span p {
+        position: absolute;
+        font-size: 24px;
+        color: white;
+        transform: translateZ(20px);
+    }
+
+    .cube .div .span p:nth-child(1) {
+        transform: translateZ(0) translateY(20px);
+        color: rgba(0, 0, 0, 0.1);
+        filter: blur(2px);
+    }
+
+    img {
+        padding: 16px;
+        width: 100%;
+        height: 100%;
+        transform: translateZ(20px);
+    }
+
+    @keyframes AnimationName {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    .top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 300px;
+        height: 300px;
+        background-image: linear-gradient(-45deg,
+                #000000,
+                #13273f,
+                #0d1729,
+                #6a6a8d);
+        transform: rotateX(90deg) translateZ(50px);
+        background-size: 1200% 1200%;
+        animation: AnimationName 30s ease infinite;
+    }
+
+    .top::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100px;
+        height: 100px;
+        background-image: linear-gradient(-45deg,
+                #000000,
+                #0d0d0e,
+                #030303,
+                #000000);
+        background-size: 1200% 1200%;
+        animation: AnimationName 30s ease infinite;
+        box-shadow: 0 0 120px #3d413e, 0 0 120px #302f2f, 0 0 120px #413f3f;
+        transition: box-shadow 3s;
+        transform: translateZ(-200px);
+        filter: blur(40px);
+    }
+
+    @keyframes AnimationName2 {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+}

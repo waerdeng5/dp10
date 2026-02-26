@@ -1,0 +1,33 @@
+.TestPage {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .iconList {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+
+        &>.icon {
+            width: 24px;
+            height: 24px;
+            margin: 4px;
+        }
+    }
+}
+
+.fontInfo {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    &>div {
+        width: 50%;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+}
