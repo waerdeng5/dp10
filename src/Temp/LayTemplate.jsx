@@ -26,12 +26,17 @@ import { modelStore } from '../Router/zustand'
 import { ICONMapping } from '../Config/IconMapping'
 import { PrefabricatedChartTemplate } from './PrefabricatedChart'
 import { PrefabricatedPlaceTemplate } from './PrefabricatedPlace'
-import { PlaceTempList, ChartTempList, TemplateParamsMapping } from '../Config'
+import { PrefabricatedDiyTemplate } from './PrefabricatedDiy'
+import { PlaceTempList, ChartTempList, DIYTempList, TemplateParamsMapping } from '../Config'
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
 const { port } = window.location
-const TemplateMapping = [...PlaceTempList, ...ChartTempList]
-const TemplateComponentMapping = { ...PrefabricatedChartTemplate, ...PrefabricatedPlaceTemplate }
+const TemplateMapping = [...PlaceTempList, ...ChartTempList, ...DIYTempList]
+const TemplateComponentMapping = {
+    ...PrefabricatedChartTemplate,
+    ...PrefabricatedPlaceTemplate,
+    ...PrefabricatedDiyTemplate
+}
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {
     return ([
@@ -161,6 +166,7 @@ export const LayoutTemplate = ({ UrlData, status, winId, layId, actId, params, w
 
     const layoutCallBack = e => {
         const { type, data } = e
+        // console.log('Lay', e)
         const Mapping = new Map([
             ['onSelectTemplate', () => onSelectTemplate(data)],
             ['onActiveLayout', () => onActiveLayout(data)],

@@ -23,6 +23,9 @@ const PrefabricatedPlaceEmpty = ({ tempId, data, LayoutEvent }) => {
     )
 }
 
+
+
+
 export const PrefabricatedPlaceTemplate = {
     PrefabricatedPlaceEmpty,
 }

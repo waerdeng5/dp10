@@ -76,37 +76,7 @@ export const ThemeBackImageList = {
     ThemeImageA07: `${CommonUrl}images/ThemeImage/ThemeImageA07.png`,
 }
 
-export const PlaceTempList = [
-    { uuid: 'PrefabricatedPlaceEmpty', title: '占位模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
-]
 
-export const ChartTempList = [
-    { uuid: 'PrefabricatedChartLine', title: '折线图', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartArea', title: '面积图', img: `${CommonUrl}images/Avatar/AvatarA02.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartBar', title: '柱状图', img: `${CommonUrl}images/Avatar/AvatarA03.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartHistogram', title: '直方图', img: `${CommonUrl}images/Avatar/AvatarA04.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartRangeColumn', title: '区间柱状图', img: `${CommonUrl}images/Avatar/AvatarA05.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartBoxPlot', title: '箱线图', img: `${CommonUrl}images/Avatar/AvatarA06.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartPie', title: '饼图', img: `${CommonUrl}images/Avatar/AvatarA07.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartRose', title: '玫瑰图', img: `${CommonUrl}images/Avatar/AvatarA08.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartFunnel', title: '漏斗图', img: `${CommonUrl}images/Avatar/AvatarA09.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartRadar', title: '雷达图', img: `${CommonUrl}images/Avatar/AvatarA10.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartSankey', title: '桑基图', img: `${CommonUrl}images/Avatar/AvatarA11.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartSequence', title: '序列图', img: `${CommonUrl}images/Avatar/AvatarA12.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartWordCloud', title: '词云图', img: `${CommonUrl}images/Avatar/AvatarA13.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartGauge', title: '仪表盘图', img: `${CommonUrl}images/Avatar/AvatarA14.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartLinearProgress', title: '线性进度图', img: `${CommonUrl}images/Avatar/AvatarA15.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartCircularProgress', title: '环形进度图', img: `${CommonUrl}images/Avatar/AvatarA16.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartTreemap', title: '树图', img: `${CommonUrl}images/Avatar/AvatarA17.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartWaterfall', title: '瀑布图', img: `${CommonUrl}images/Avatar/AvatarA18.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartCirclePacking', title: '圆包图', img: `${CommonUrl}images/Avatar/AvatarA19.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartSunburst', title: '旭日图', img: `${CommonUrl}images/Avatar/AvatarA20.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartCorrelation', title: '相关系数图', img: `${CommonUrl}images/Avatar/AvatarA21.webp`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'PrefabricatedChartLiquid', title: '水球图', img: `${CommonUrl}images/Avatar/AvatarA22.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartVenn', title: '韦恩图', img: `${CommonUrl}images/Avatar/AvatarA23.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartMosaic', title: '马赛克图', img: `${CommonUrl}images/Avatar/AvatarA24.webp`, x: 0, y: 0, w: 12, h: 12 },
-    // { uuid: 'PrefabricatedChartCandlestick', title: '蜡烛图', img: `${CommonUrl}images/Avatar/AvatarA25.webp`, x: 0, y: 0, w: 12, h: 12 },
-]
 
 // 基础色板一
 const ChartLineColorCommonDataA01 = [
@@ -432,11 +402,6 @@ const ChartIndicatorCommonData = {
     indicator_trigger: "hover",
     indicator_visible: true,
 }
-
-
-
-
-
 // line 图元
 const ChartLineCommonData = {
     line_visible: true,
@@ -507,7 +472,6 @@ const ChartRoseCommonData = {
     shadowBlur: 0,
     shadowColor: '#26262600'
 }
-
 const ChartLiquidCommonData = {
     maskShape: 'circle',
     wave: 1,
@@ -544,6 +508,46 @@ const ChartGaugeCommonData = {
     pointer_center_y: 3.9,
     tickMask: false
 }
+
+export const PlaceTempList = [
+    { uuid: 'PrefabricatedPlaceEmpty', title: '占位模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+export const ChartTempList = [
+    { uuid: 'PrefabricatedChartLine', title: '折线图', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartArea', title: '面积图', img: `${CommonUrl}images/Avatar/AvatarA02.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartBar', title: '柱状图', img: `${CommonUrl}images/Avatar/AvatarA03.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartHistogram', title: '直方图', img: `${CommonUrl}images/Avatar/AvatarA04.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartRangeColumn', title: '区间柱状图', img: `${CommonUrl}images/Avatar/AvatarA05.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartBoxPlot', title: '箱线图', img: `${CommonUrl}images/Avatar/AvatarA06.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartPie', title: '饼图', img: `${CommonUrl}images/Avatar/AvatarA07.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartRose', title: '玫瑰图', img: `${CommonUrl}images/Avatar/AvatarA08.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartFunnel', title: '漏斗图', img: `${CommonUrl}images/Avatar/AvatarA09.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartRadar', title: '雷达图', img: `${CommonUrl}images/Avatar/AvatarA10.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartSankey', title: '桑基图', img: `${CommonUrl}images/Avatar/AvatarA11.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartSequence', title: '序列图', img: `${CommonUrl}images/Avatar/AvatarA12.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartWordCloud', title: '词云图', img: `${CommonUrl}images/Avatar/AvatarA13.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartGauge', title: '仪表盘图', img: `${CommonUrl}images/Avatar/AvatarA14.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartLinearProgress', title: '线性进度图', img: `${CommonUrl}images/Avatar/AvatarA15.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartCircularProgress', title: '环形进度图', img: `${CommonUrl}images/Avatar/AvatarA16.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartTreemap', title: '树图', img: `${CommonUrl}images/Avatar/AvatarA17.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartWaterfall', title: '瀑布图', img: `${CommonUrl}images/Avatar/AvatarA18.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartCirclePacking', title: '圆包图', img: `${CommonUrl}images/Avatar/AvatarA19.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartSunburst', title: '旭日图', img: `${CommonUrl}images/Avatar/AvatarA20.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartCorrelation', title: '相关系数图', img: `${CommonUrl}images/Avatar/AvatarA21.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedChartLiquid', title: '水球图', img: `${CommonUrl}images/Avatar/AvatarA22.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartVenn', title: '韦恩图', img: `${CommonUrl}images/Avatar/AvatarA23.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartMosaic', title: '马赛克图', img: `${CommonUrl}images/Avatar/AvatarA24.webp`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'PrefabricatedChartCandlestick', title: '蜡烛图', img: `${CommonUrl}images/Avatar/AvatarA25.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+
+export const DIYTempList = [
+    { uuid: 'PrefabricatedDiyText', title: '数据文字', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+
+
 
 export const TemplateParamsMapping = {
     PrefabricatedPlaceEmpty: {
@@ -891,6 +895,22 @@ export const TemplateParamsMapping = {
         dataSourceType: 'A01',
         ...ChartBackCommonData,
         ...ChartTitleCommonData,
+    },
+
+    PrefabricatedDiyText: {
+        value: 'PrefabricatedDiyText',
+        left_img: true,
+        right_img: true,
+
+        left_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/indexL.png',
+        left_img_width: 92,
+        left_img_height: 270,
+        left_img_margin: '0',
+
+        right_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/intelligence.gif',
+        right_img_width: 320,
+        right_img_height: 320,
+        right_img_margin: '0',
     },
 }
 

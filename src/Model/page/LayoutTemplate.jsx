@@ -1,7 +1,7 @@
 import './LayoutTemplate.scss'
 import { Tabs } from 'antd'
 import { DevScrollView } from '../../Temp/DevTemplate'
-import { PlaceTempList, ChartTempList } from '../../Config'
+import { PlaceTempList, ChartTempList, DIYTempList } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
     return (
@@ -32,6 +32,15 @@ const LayoutTemplate = ({ data, Event }) => {
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
                         <ItemTemplate name='Legend' layId={data.layId} data={ChartTempList} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '3', label: '自定义模块', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={DIYTempList} Event={Event} />
                     </DevScrollView>
                 </div>
             )

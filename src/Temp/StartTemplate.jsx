@@ -189,31 +189,30 @@ export const NavTemplate = ({ status, styleData, navList, extra, extraJugde, ext
 
     useEffect(() => {
         const renderNavList = () => {
-            if (extra) {
-                const isExtra1 = findInTree(extraList, v => v.nav_url === pathname.split('/').at(-1))
-                const isExtra2 = findInTree(extraList, v => v.two_url === pathname.split('/').at(-1), 'start_navTwo')
+            if (extra && pathname.split('/').at(2)) {
+                const isExtra1 = findInTree(extraList, v => v.nav_url === pathname.split('/').at(2))
+                const isExtra2 = findInTree(extraList, v => v.two_url === pathname.split('/').at(2), 'start_navTwo')
                 if (isExtra1 || isExtra2) return extraList
                 else return navList
             }
             return navList
         }
 
-
         if (nav_level === "A01") {
             setDataList(renderNavList())
-            const obj = findParent(renderNavList(), pathname.split('/').at(-1))
+            const obj = findParent(renderNavList(), pathname.split('/').at(2))
             if (obj) setActive(obj?.nav_url || '')
         }
         if (nav_level === "A02") {
             if (status) {
                 setDataList(renderNavList().find(item => item.nav_isChild && item.start_navTwo?.length)?.start_navTwo)
             } else {
-                const obj = findParent(renderNavList(), pathname.split('/').at(-1))
+                const obj = findParent(renderNavList(), pathname.split('/').at(2))
                 setDataList()
                 setActive()
                 if (obj?.nav_isChild) {
                     setDataList(obj.start_navTwo)
-                    setActive(pathname.split('/').at(-1))
+                    setActive(pathname.split('/').at(2))
                 }
             }
         }

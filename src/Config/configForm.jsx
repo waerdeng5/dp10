@@ -3212,8 +3212,7 @@ const SetLoginPageConfig = [
             },
             {
                 span: 12, formType: 'GROUP', name: 'window_titleA02_small', label: '多行标题-副标题', collapsible: true,
-                jugde: [{ field: 'titleA02_status', value: [true] }],
-                children: [
+                jugde: [{ field: 'titleA02_status', value: [true] }], children: [
                     { span: 24, formType: 'INPUT', name: 'smallA02', label: '标题内容', rules: true },
                     { span: 24, formType: 'COLOR', name: 'smallA02_color', label: '标题颜色', rules: true },
                     { span: 24, formType: 'NUMBER', name: 'smallA02_deg', label: '颜色角度', rules: true },
@@ -5824,6 +5823,32 @@ const PrefabricatedChartCandlestick = [
     ChartCandlestickFormList,
 ]
 
+// !!! 自定义模块表单信息
+const PrefabricatedDiyText = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'RADIO', name: 'left_img', label: '左侧图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'right_img', label: '右侧图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 12, formType: 'GROUP', name: 'left_img_config', label: '左侧图片', collapsible: true,
+        jugde: [{ field: 'left_img', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'left_img_url', label: '图片地址', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'left_img_width', label: '图片宽度', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'left_img_height', label: '图片高度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'left_img_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'right_img_config', label: '右侧图片', collapsible: true,
+        jugde: [{ field: 'right_img', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'right_img_url', label: '图片地址', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'right_img_width', label: '图片宽度', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'right_img_height', label: '图片高度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'right_img_margin', label: '外间距', rules: true },
+        ]
+    }
+]
+
+
 
 export const FormConfig = {
     TextClassList,
@@ -5879,4 +5904,6 @@ export const FormConfig = {
     PrefabricatedChartVenn,
     PrefabricatedChartMosaic,
     PrefabricatedChartCandlestick,
+
+    PrefabricatedDiyText
 }

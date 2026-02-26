@@ -2,16 +2,13 @@ import './index.scss'
 
 import { useMount } from 'ahooks'
 import { useState, Fragment } from 'react'
-
+import { useNavigate } from 'react-router-dom'
 
 import { axios } from '../../Utils/Api'
-
-
 import { GetIndexedDB } from '../../Utils/IndexedDB'
 import { ICONMapping } from '../../Config/IconMapping'
-
-
 import { DevScrollView } from '../../Temp/DevTemplate'
+import { modelStore } from '../../Router/zustand'
 
 
 const ListA01 = [
@@ -43,15 +40,9 @@ const ListA04 = [
     { uuid: 3, title: '累计完成比例', value: 'A03', unit: '%', back: 'rgba(51, 114, 255, 0.2)', color: 'rgba(29, 229, 231, 1)' },
 ]
 
-
-
-const projectList = [
-    {}
-]
-
-
-
 const GJEQHome = () => {
+    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore
+    const Navigate = useNavigate()
 
     const [imageUrl, setImageUrl] = useState()
     const [ProjectList, setProjectList] = useState([])
@@ -72,16 +63,30 @@ const GJEQHome = () => {
         setActive(res[0]?.uuid || '')
     })
 
-
-
     const onProject = (e) => {
         setActive(e)
     }
 
     const onProjectItem = (e) => {
-        console.log(e)
+        if (e === '40491731-928e-4b02-aa30-f45f4a3a563e') return false
+        Navigate(`/Start/B01/${e}`)
     }
 
+    const onTopClick = (e) => {
+        switch (e) {
+            case 1:
+                console.log(e, '工建简介')
+                break;
+            case 2:
+                console.log(e, '权属企业')
+                break;
+            case 3:
+                console.log(e, '项目详情')
+                break;
+            default:
+                break;
+        }
+    }
 
     return (
         <div className="GJEQHome">
@@ -149,7 +154,22 @@ const GJEQHome = () => {
                 </div>
             </div>
             <div className='Top'>
-                <div>头部列表</div>
+                <div className='Back'>
+                    <img src={imageUrl + 'indexL.png'} alt="" />
+                    <img src={imageUrl + 'IndexBox.png'} alt="" />
+                    <img src={imageUrl + 'indexR.png'} alt="" />
+                </div>
+                <div className='List'>
+                    {ListA01.map(v => (
+                        <div key={v.uuid} onClick={() => onTopClick(v.uuid)}>
+                            <img src={imageUrl + v.img} alt="" />
+                            <div>
+                                <div>{DataA01[v.value]}</div>
+                                <div>{v.title}</div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

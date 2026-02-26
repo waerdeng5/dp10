@@ -28,7 +28,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
 
     const getStartData = async (page) => {
         console.log('page', page)
-        const pageParams = page === 'Start' || page === 'Home' ? 'Home' : page
+        const pageParams = page === 'Start' || !page ? 'Home' : page
         setComponentStatus({ loading: true, status: true, error: null, Template: null })
         const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `STA_PAGE/${pageParams}` } })
         if (err) {
@@ -72,7 +72,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
 
     }
 
-    useEffect(() => { getStartData(pathname.split('/').at(-1)) }, [pathname])
+    useEffect(() => { getStartData(pathname.split('/').at(2)) }, [pathname])
 
     if (componentStatus.loading) return (<div className='OutletBox NotSet'><Spin size='large' /></div>)
     if (componentStatus.status) return (
