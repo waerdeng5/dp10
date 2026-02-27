@@ -196,7 +196,7 @@ export const LayoutTemplate = ({ UrlData, status, winId, layId, actId, params, w
                             width={SIZE.width}
                             rowHeight={SIZE.height / 24}
                             margin={[0, 0]}
-                            color="#cccccc"
+                            color="#cccccc10"
                             borderRadius={4}
                         />
                     }

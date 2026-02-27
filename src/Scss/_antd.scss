@@ -141,3 +141,7 @@
 .ant-dropdown-menu-title-content {
     color: rgba(0, 0, 0, 0.45);
 }
+
+.react-grid-item>.react-resizable-handle.react-resizable-handle-se {
+    z-index: 5;
+}

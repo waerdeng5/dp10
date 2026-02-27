@@ -341,6 +341,7 @@ export const MappingData = {
         { value: 'icontext', label: '图标文字' },
         { value: 'texticon', label: '文字图标' },
     ],
+
     System__MappingType: [
         { value: 'local', label: '本地映射' },
         { value: 'onLine', label: '线上映射' },

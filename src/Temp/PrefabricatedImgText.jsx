@@ -71,7 +71,6 @@ const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
     useEffect(() => {
         if (!isEmptyObject(UrlData)) {
             const data = api_urlLevel ? getNestedValue(api_urlMapping, UrlData[api_urlName]) : UrlData[api_urlName]
-            console.log(data)
             setData(data)
         }
     }, [UrlData, api_urlName, api_urlMapping, api_urlLevel])

@@ -4364,7 +4364,7 @@ const ChartAxesCommonFormList = {
                             tooltip: '配置为 禁用 则显示在前后两个刻度中间'
                         },
                         {
-                            span: 24, formType: 'LIST', name: 'axes_grid_alternateColor', label: '网格颜色', collapsible: true,
+                            span: 24, formType: 'LIST', name: 'axes_grid_alternateColor', label: '网格阴影', collapsible: true,
                             children: [{ span: 24, formType: 'COLOR', name: 'color', label: '网格颜色', rules: true, mode: ['single'] }]
                         },
                         { span: 12, formType: 'COLOR', name: 'axes_grid_stroke', label: '网格颜色', rules: true, mode: ['single'] },
@@ -5920,7 +5920,6 @@ const PrefabricatedDiyText = [
     }
 ]
 
-
 // !!! 图文模块
 // 默认图文
 const PrefabricatedImgText = [
@@ -6008,9 +6007,56 @@ const PrefabricatedImgText = [
 const PrefabricatedList = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
+    { span: 24, formType: 'RADIO', name: 'data_type', label: '数据类型', rules: true, valueEnum: MappingData.dataTypeMapping },
+
+    {
+        span: 24, formType: 'LIST', name: 'data_arr_config', label: '数组设置', collapsible: true,
+        jugde: [{ field: 'data_type', value: ['A03'] }], children: [
+            { span: 8, formType: 'INPUT', name: 'data_field', label: '标题字段' },
+            { span: 8, formType: 'INPUT', name: 'data_fieldName', label: '标题识别' },
+            { span: 8, formType: 'INPUT', name: 'data_number', label: '数值字段' },
+            { span: 12, formType: 'INPUT', name: 'data_title', label: '字段标题' },
+            { span: 12, formType: 'INPUT', name: 'data_value', label: '数值字段' },
+
+            { span: 12, formType: 'COLOR', name: 'data_back', label: '单独背景颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_backDeg', label: '背景颜色角度' },
+            { span: 12, formType: 'COLOR', name: 'data_titleColor', label: '单独标题颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_titleDeg', label: '标题颜色角度' },
+            { span: 12, formType: 'COLOR', name: 'data_text', label: '单独数值颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_textDeg', label: '数值颜色角度' },
+            { span: 24, formType: 'INPUT', name: 'data_img', label: '图片地址' },
+            { span: 12, formType: 'TempICON', name: 'data_icon', label: '图标选择' },
+            { span: 12, formType: 'COLOR', name: 'data_icon_color', label: '单独图标颜色', mode: ['single'] },
+            { span: 12, formType: 'INPUT', name: 'data_unit', label: '单位信息' },
+            { span: 12, formType: 'COLOR', name: 'data_unitColor', label: '单独单位颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_unitDeg', label: '单位颜色角度' },
+        ]
+    },
+    {
+        span: 24, formType: 'LIST', name: 'data_obj_config', label: '对象列表', collapsible: true,
+        jugde: [{ field: 'data_type', value: ['A02'] }], children: [
+            { span: 12, formType: 'INPUT', name: 'data_title', label: '标题名称', rules: true },
+            { span: 12, formType: 'INPUT', name: 'data_value', label: '映射字段', rules: true },
+            { span: 12, formType: 'COLOR', name: 'data_back', label: '单独背景颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_backDeg', label: '背景颜色角度' },
+            { span: 12, formType: 'COLOR', name: 'data_titleColor', label: '单独标题颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_titleDeg', label: '标题颜色角度' },
+            { span: 12, formType: 'COLOR', name: 'data_text', label: '单独数值颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_textDeg', label: '数值颜色角度' },
+            { span: 24, formType: 'INPUT', name: 'data_img', label: '图片地址' },
+            { span: 12, formType: 'TempICON', name: 'data_icon', label: '图标选择' },
+            { span: 12, formType: 'COLOR', name: 'data_icon_color', label: '单独图标颜色', mode: ['single'] },
+            { span: 12, formType: 'INPUT', name: 'data_unit', label: '单位信息' },
+            { span: 12, formType: 'COLOR', name: 'data_unitColor', label: '单独单位颜色' },
+            { span: 12, formType: 'NUMBER', name: 'data_unitDeg', label: '单位颜色角度' },
+        ]
+    },
     {
         span: 24, formType: 'GROUP', name: 'whole_layout', label: '整体布局', collapsible: true,
         children: [
+            { span: 8, formType: 'RADIO', name: 'item_icon', label: '子项图标', rules: true, valueEnum: MappingData.System__FilesType },
+            { span: 8, formType: 'RADIO', name: 'item_back', label: '子项背景', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'RADIO', name: 'item_unit', label: '子项单位', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 8, formType: 'SELECT', name: 'whole_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
             { span: 8, formType: 'SELECT', name: 'whole_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
             { span: 8, formType: 'SELECT', name: 'whole_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
@@ -6018,9 +6064,150 @@ const PrefabricatedList = [
             { span: 12, formType: 'SELECT', name: 'whole_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
             { span: 12, formType: 'INPUT', name: 'whole_padding', label: '内填充', rules: true },
             { span: 12, formType: 'INPUT', name: 'whole_margin', label: '外间距', rules: true },
-
         ]
-    }
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'item_layout', label: '单项布局', collapsible: true,
+        children: [
+            { span: 12, formType: 'NUMBER', name: 'item_width', label: '单项宽度比例(%)', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'item_height', label: '单项高度(px)', rules: true },
+            { span: 8, formType: 'SELECT', name: 'item_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'item_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'item_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'item_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'item_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'item_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'item_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'text_layout', label: '文字区设置', collapsible: true,
+        children: [
+            { span: 8, formType: 'SELECT', name: 'text_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'text_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'text_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'text_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'text_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            {
+                span: 12, formType: 'GROUP', name: 'text_title', label: '标题设置', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'text_title_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'text_title_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'text_title_margin', label: '外间距', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'text_title_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'text_title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'text_title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'text_title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'text_title_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'text_title_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'text_title_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'text_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'text_title_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'text_value', label: '数值设置', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'text_value_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'text_value_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'text_value_margin', label: '外间距', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'text_value_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'text_value_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'text_value_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'text_value_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'text_value_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'text_value_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'text_value_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'text_value_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'text_value_filed', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'item_back_confit', label: '背景设置', collapsible: true,
+        jugde: [{ field: 'item_back', value: [true] }], children: [
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_margin', label: '向外间距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+            { span: 12, formType: 'NUMBER', name: 'back_border_size', label: '边框尺寸', rules: true, jugde: [{ field: 'back_border', value: [true] }] },
+            {
+                span: 12, formType: 'RADIO', name: 'back_border_type', label: '边框类型', rules: true,
+                valueEnum: MappingData.Style__BorderType, jugde: [{ field: 'back_border', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'back_border_color', label: '边框颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'back_border', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'item_icon_config', label: '图标设置', collapsible: true,
+        jugde: [{ field: 'item_icon', value: ['icon'] }], children: [
+            { span: 12, formType: 'COLOR', name: 'icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'icon_size', label: '图标尺寸', rules: true },
+            { span: 12, formType: 'INPUT', name: 'icon_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'RADIO', name: 'icon_filed', label: '图标阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'icon_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'icon_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'icon_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'icon_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'item_image_config', label: '图片设置', collapsible: true,
+        jugde: [{ field: 'item_icon', value: ['img'] }], children: [
+            { span: 12, formType: 'NUMBER', name: 'image_width', label: '图片宽度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'image_height', label: '图片高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'image_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'RADIO', name: 'image_filed', label: '图片阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'image_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'image_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'image_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'image_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'item_unit_config', label: '单位设置', collapsible: true,
+        jugde: [{ field: 'item_unit', value: [true] }], children: [
+            { span: 12, formType: 'COLOR', name: 'unit_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'unit_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'unit_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'unit_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'unit_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'unit_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'unit_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'unit_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'unit_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'unit_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'unit_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'unit_filed', value: [true] }]
+            },
+        ]
+    },
+
 ]
 
 

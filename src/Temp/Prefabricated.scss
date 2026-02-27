@@ -82,6 +82,65 @@
     width: 100%;
     height: 100%;
     position: relative;
-    z-index: 1;
     overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-content: var(--alignContent);
+    align-items: var(--alignItems);
+    flex-direction: var(--flexDirection);
+    flex-wrap: var(--flexWrap);
+    justify-content: var(--justifyContent);
+
+    &>.Item {
+        display: flex;
+        align-content: var(--alignContent);
+        align-items: var(--alignItems);
+        flex-direction: var(--flexDirection);
+        flex-wrap: var(--flexWrap);
+        justify-content: var(--justifyContent);
+        position: relative;
+        z-index: 1;
+
+        &>.itemIcon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        &>.itemBack {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255, 0, 0, 0.1);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+
+        &>.itemText {
+            flex: 1;
+            display: flex;
+            align-content: var(--alignContent);
+            align-items: var(--alignItems);
+            flex-direction: var(--flexDirection);
+            flex-wrap: var(--flexWrap);
+            justify-content: var(--justifyContent);
+
+            .title,
+            .text,
+            .unit {
+                background: var(--titleColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+
+            .value {
+                display: flex;
+                align-items: baseline;
+            }
+        }
+    }
 }
