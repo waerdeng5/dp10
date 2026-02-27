@@ -13,7 +13,7 @@ import ReactGridLayout from 'react-grid-layout'
 import { GridBackground } from "react-grid-layout/extras"
 
 import { modelStore } from '../Router/zustand'
-import { axios, axiosFor } from '../Utils/Api'
+import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
 import { Decrypt, Encrypt } from '../Utils/IndexedDB'
 import { PageLayoutWindowDetailsStyle } from '../Config'
 import { GlobalOperation, SwiperTemplate } from '../Temp/LayTemplate'
@@ -50,22 +50,22 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [FoldStatus, setFoldStatus] = useState(false)
 
     const getApiData = async (list) => {
-        // let data = {}
-        // const mapping = list.map(v => ({ method: v.api_method, url: v.api_url, path: v.api_https, params: strOfurlParamsFunc(v.api_params) }))
-        // const api = await axiosFor(mapping)
-        // list.forEach((v, i) => {
-        //     const [err, res] = api[i]
-        //     data[v.api_name] = err ? 'apiError' : res
-        //     if (err) notification.error({ title: '接口请求失败!', description: `${v.api_url} 接口请求失败` })
-        // })
-        // setUrlData(data)
+        let data = {}
+        const mapping = list.map(v => ({ method: v.api_method, url: v.api_url, path: v.api_https, params: strOfurlParamsFunc(v.api_params) }))
+        const api = await axiosFor(mapping)
+        list.forEach((v, i) => {
+            const [err, res] = api[i]
+            data[v.api_name] = err ? 'apiError' : res
+            if (err) notification.error({ title: '接口请求失败!', description: `${v.api_url} 接口请求失败` })
+        })
+        setUrlData(data)
     }
 
 
 
     const setPAGEDate = e => {
         const { api = [], layout = [], params = {}, window = {} } = e
-        // getApiData(api)
+        getApiData(api)
         setApiData(api)
         setLayoutData(layout)
         setWindowData(window)

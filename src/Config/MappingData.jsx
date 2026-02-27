@@ -1462,6 +1462,11 @@ export const MappingData = {
         { value: 'DIY', label: '自定小窗' },
     ],
 
+    ApiUrlLevel: [
+        { value: false, label: '默认层级' },
+        { value: true, label: '指定层级' },
+    ],
+
     // !!! 流程配置
     x6__Repeat: [
         { value: 'no-repeat', label: '不重复' },

@@ -13,4 +13,75 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+
+
+    .centerBox {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-content: var(--alignContent);
+        align-items: var(--alignItems);
+        flex-direction: var(--flexDirection);
+        flex-wrap: var(--flexWrap);
+        justify-content: var(--justifyContent);
+
+        &>.textItem {
+            background: var(--titleColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            display: flex;
+            align-items: baseline;
+
+            &>.textNumber {
+                background: var(--titleColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+        }
+    }
+}
+
+.PrefabricatedImgText {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &>.img {
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    &>div {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        display: flex;
+        width: 100%;
+        align-content: var(--alignContent);
+        align-items: var(--alignItems);
+        flex-direction: var(--flexDirection);
+        flex-wrap: var(--flexWrap);
+        justify-content: var(--justifyContent);
+        background: var(--titleColor);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        user-select: none;
+    }
+}
+
+.PrefabricatedList {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
 }

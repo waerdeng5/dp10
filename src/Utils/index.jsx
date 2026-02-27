@@ -290,7 +290,7 @@ export const findExtraItemsByUuid = (array1, array2, key = 'uuid') => {
 export const getNestedValue = (hierarchy, res) => {
     if (!hierarchy) return res
     if (typeof hierarchy !== 'string' || typeof res !== 'object' || res === null) {
-        console.error('Invalid input: hierarchy should be a string and res should be an object.')
+        console.error('无效输入：层级应为字符串，res应为对象。')
         return undefined
     }
     const keys = hierarchy.split('.')
@@ -300,7 +300,7 @@ export const getNestedValue = (hierarchy, res) => {
         if (currentData.hasOwnProperty(key)) {
             currentData = currentData[key]
         } else {
-            console.error(`Key "${key}" not found in the object.`)
+            console.error(`"${key}" 未在对象中找到。`)
             return undefined
         }
     }

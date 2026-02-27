@@ -546,10 +546,19 @@ export const DIYTempList = [
     { uuid: 'PrefabricatedDiyText', title: '数据文字', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
+export const ImgAndTextTempList = [
+    { uuid: 'PrefabricatedImgText', title: '图文模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+export const ListTempList = [
+    { uuid: 'PrefabricatedList', title: '列表模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
 
 
 
 export const TemplateParamsMapping = {
+    // TODO 占位组件
     PrefabricatedPlaceEmpty: {
         value: 'PrefabricatedPlaceEmpty',
         radius: '0',
@@ -560,7 +569,7 @@ export const TemplateParamsMapping = {
         backColor: '#f8f3d4',
         backDeg: 1
     },
-    // 图例
+    // TODO 图例
     PrefabricatedChartLine: {
         value: 'PrefabricatedChartLine',
         title_text: '折线图',
@@ -896,22 +905,51 @@ export const TemplateParamsMapping = {
         ...ChartBackCommonData,
         ...ChartTitleCommonData,
     },
-
+    // TODO 自定义模块
     PrefabricatedDiyText: {
         value: 'PrefabricatedDiyText',
         left_img: true,
         right_img: true,
-
         left_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/indexL.png',
         left_img_width: 92,
         left_img_height: 270,
         left_img_margin: '0',
-
         right_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/intelligence.gif',
         right_img_width: 320,
         right_img_height: 320,
         right_img_margin: '0',
+        center_width: 900,
+        center_height: 200,
+        center_color: [
+            { color: '#21afd500', percent: 0 },
+            { color: '#21afd580', percent: 50 },
+            { color: '#21afd500', percent: 100 },
+        ],
+        center_deg: 90,
+        center_padding: '0',
+        center_margin: '0',
+        center_align_content: "center",
+        center_align_items: "flex-start",
+        center_flex_direction: "column",
+        center_flex_wrap: "nowrap",
+        center_justify_content: "center",
     },
+
+    // TODO 图文模块
+    PrefabricatedImgText: {
+        value: 'PrefabricatedImgText',
+        render_img: true,
+        render_title: true,
+        render_data: true,
+        title_position: 'bottom',
+        data_position: 'top',
+    },
+    // TODO 列表模块
+    PrefabricatedList: {
+        value: 'PrefabricatedList',
+
+    }
+
 }
 
 export const OtherDiyPageConfig = {

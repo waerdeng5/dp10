@@ -5823,9 +5823,20 @@ const PrefabricatedChartCandlestick = [
     ChartCandlestickFormList,
 ]
 
+const TemplateApiConfig = {
+    span: 24, formType: 'GROUP', name: 'api_config', label: '数据来源', collapsible: true,
+    children: [
+        { span: 12, formType: 'INPUT', name: 'api_urlName', label: '接口名称', rules: true },
+        { span: 12, formType: 'RADIO', name: 'api_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+        { span: 12, formType: 'INPUT', name: 'api_urlMapping', label: '接口名称', jugde: [{ field: 'api_urlLevel', value: [true] }] },
+    ]
+}
+
 // !!! 自定义模块表单信息
+// 交投ai
 const PrefabricatedDiyText = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
     { span: 12, formType: 'RADIO', name: 'left_img', label: '左侧图片', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'RADIO', name: 'right_img', label: '右侧图片', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
@@ -5844,6 +5855,170 @@ const PrefabricatedDiyText = [
             { span: 24, formType: 'NUMBER', name: 'right_img_width', label: '图片宽度', rules: true },
             { span: 24, formType: 'NUMBER', name: 'right_img_height', label: '图片高度', rules: true },
             { span: 24, formType: 'INPUT', name: 'right_img_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'center_config', label: '背景设置', collapsible: true, children: [
+            { span: 8, formType: 'SELECT', name: 'center_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'center_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'center_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'center_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'center_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'NUMBER', name: 'center_width', label: '背景宽度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'center_height', label: '背景高度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'center_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'center_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'center_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'center_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'LIST', name: 'text_list', label: '展示文字列表', collapsible: true,
+        children: [
+            { span: 24, formType: 'TEXTAREA', name: 'text', label: '文字列表', rules: true },
+            { span: 12, formType: 'INPUT', name: 'text_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'COLOR', name: 'text_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'text_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'text_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'text_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'text_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'text_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'text_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'text_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'text_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'LIST', name: 'data_list', label: '数据列表', collapsible: true,
+        children: [
+            { span: 12, formType: 'INPUT', name: 'data_key', label: '映射字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'data_value', label: '映射数据', rules: true },
+
+            { span: 12, formType: 'INPUT', name: 'data_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'COLOR', name: 'data_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'data_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'data_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'data_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'data_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'data_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'data_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'data_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'data_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'data_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'data_filed', value: [true] }]
+            },
+        ]
+    }
+]
+
+
+// !!! 图文模块
+// 默认图文
+const PrefabricatedImgText = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    { span: 8, formType: 'RADIO', name: 'render_img', label: '显示图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'render_title', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'render_data', label: '显示数值', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+    {
+        span: 24, formType: 'GROUP', name: 'render_img_config', label: '图片设置', collapsible: true,
+        jugde: [{ field: 'render_img', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'img_url', label: '图片地址', rules: true },
+            { span: 12, formType: 'INPUT', name: 'img_padding', label: '图片填充', rules: true },
+            { span: 12, formType: 'RADIO', name: 'img_fit', label: '显示数值', rules: true, valueEnum: MappingData.Start__imgObjectFit },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'render_title_config', label: '标题设置', collapsible: true,
+        jugde: [{ field: 'render_title', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'title_position', label: '标题位置', rules: true, valueEnum: MappingData.topORbtm },
+            { span: 12, formType: 'NUMBER', name: 'title_top', label: '上方定位', rules: true, jugde: [{ field: 'title_position', value: ['top'] }] },
+            { span: 12, formType: 'NUMBER', name: 'title_btm', label: '下方定位', rules: true, jugde: [{ field: 'title_position', value: ['bottom'] }] },
+            { span: 8, formType: 'SELECT', name: 'title_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'title_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'title_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'title_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'title_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'title_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'title_mapping', label: '外间距', rules: true },
+
+            { span: 12, formType: 'INPUT', name: 'title_text', label: '标题内容', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'title_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'render_data_config', label: '数据设置', collapsible: true,
+        jugde: [{ field: 'render_data', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'data_position', label: '数据位置', rules: true, valueEnum: MappingData.topORbtm },
+            { span: 12, formType: 'NUMBER', name: 'data_top', label: '上方定位', rules: true, jugde: [{ field: 'data_position', value: ['top'] }] },
+            { span: 12, formType: 'NUMBER', name: 'data_btm', label: '下方定位', rules: true, jugde: [{ field: 'data_position', value: ['bottom'] }] },
+            { span: 8, formType: 'SELECT', name: 'data_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'data_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'data_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'data_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'data_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'data_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'data_mapping', label: '外间距', rules: true },
+
+            { span: 12, formType: 'INPUT', name: 'data_text', label: '数据字段', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'data_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'data_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'data_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'data_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'data_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'data_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'data_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'data_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'data_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'data_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'data_filed', value: [true] }]
+            },
+        ]
+    },
+]
+// !!! 列表模块
+// 默认列表
+const PrefabricatedList = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'whole_layout', label: '整体布局', collapsible: true,
+        children: [
+            { span: 8, formType: 'SELECT', name: 'whole_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'whole_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'whole_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'whole_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'whole_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'whole_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'whole_margin', label: '外间距', rules: true },
+
         ]
     }
 ]
@@ -5905,5 +6080,9 @@ export const FormConfig = {
     PrefabricatedChartMosaic,
     PrefabricatedChartCandlestick,
 
-    PrefabricatedDiyText
+    PrefabricatedDiyText,
+
+    PrefabricatedImgText,
+
+    PrefabricatedList,
 }
