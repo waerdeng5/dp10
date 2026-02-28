@@ -108,6 +108,13 @@
 
                                     &>div {
                                         margin: 0 4px;
+
+                                        &.text {
+                                            background: var(--textColor);
+                                            -webkit-background-clip: text;
+                                            background-clip: text;
+                                            color: transparent;
+                                        }
                                     }
                                 }
                             }

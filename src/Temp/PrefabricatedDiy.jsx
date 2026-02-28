@@ -85,7 +85,7 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
         <div className='PrefabricatedDiyText' >
             {left_img && <img src={left_img_url} style={leftImgStyle} alt="left_img_url" />}
             <div className='centerBox' style={centerStyle}>
-                {text_list.map((v, i) => {
+                {text_list?.map((v, i) => {
                     const { text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color, text_margin } = v
                     const textStyle = {
                         margin: SpacingCallBack(text_margin),

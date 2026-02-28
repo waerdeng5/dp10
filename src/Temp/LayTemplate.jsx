@@ -257,10 +257,13 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
         window_swiperEffects, window_swiperFadeEffect, window_swiperFlipSlideShadows, window_swiperFlipLimitRotation, window_swiperCardsSlideShadows,
         window_swiperCubeSlideShadows, window_swiperCubeShadow, window_swiperCubeShadowOffset, window_swiperCubeShadowScale,
         window_swiperCoverflowRotate, window_swiperCoverflowStretch, window_swiperCoverflowDepth, window_swiperCoverflowModifier, window_swiperCoverflowSlideShadows,
+        window_navPadding, window_navMargin
     } = params[data.i]
     const style = window_nav && {
         flexDirection: window_NavType === 'vertical' ? 'column' : 'row',
         width: window_NavType === 'vertical' ? 'auto' : '100%',
+        padding: SpacingCallBack(window_navPadding),
+        margin: SpacingCallBack(window_navMargin),
     }
 
     const [STATUS, setSTATUS] = useState()
@@ -395,8 +398,8 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
                             style={Active === item.window_navUuid ? activeBack : detailBack}
                             onClick={() => setActive(item.window_navUuid)}
                         >
-                            <div style={Active === item.window_navUuid ? activeIcon : detailIcon}>{ICONMapping[item.window_NavIcon]}</div>
-                            <div style={Active === item.window_navUuid ? activeText : detailText}>{item.window_NavLabel}</div>
+                            <div className='icon' style={Active === item.window_navUuid ? activeIcon : detailIcon}>{ICONMapping[item.window_NavIcon]}</div>
+                            <div className='text' style={Active === item.window_navUuid ? activeText : detailText}>{item.window_NavLabel}</div>
                         </div>
                     ))}
                 </div>

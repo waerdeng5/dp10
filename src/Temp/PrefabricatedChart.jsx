@@ -1215,7 +1215,9 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         return defaultDataA01
     }
     if (dataSourceType === 'A02') {
-        const { data_apiName, dataType, data_apiLevel, data_apiData, data_xField, data_yField, data_seriesField } = data
+
+
+        const { data_apiName, dataType, data_apiLevel, data_apiData, data_apiArr } = data
         if (isEmptyObject(UrlData) || !UrlData[data_apiName]) {
             console.log('未获取到接口数据')
             return ([])
@@ -1226,8 +1228,11 @@ const dataSourceTypeFn = (type, data, UrlData) => {
             return mapping
         }
         if (dataType === 'A03') {
-            const mapping = apiData.map(v => ({ xField: v[data_xField], yField: v[data_yField], seriesField: v[data_seriesField] }))
+            const mapping = data_apiArr.flatMap(item =>
+                apiData.map(v => ({ xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+            )
             return mapping
+            return []
         }
         return ([])
     }

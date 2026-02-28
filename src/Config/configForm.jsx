@@ -1263,10 +1263,6 @@ const StartWindowFormList = [
                 span: 12, formType: 'RADIO', name: 'window_NavType', label: '导航样式', rules: true,
                 valueEnum: MappingData.Charts__VChartsDirectionA01, jugde: [{ field: 'window_nav', value: [true] }]
             },
-            // {
-            //     span: 12, formType: 'RADIO', name: 'window_NavOptions', label: '配置方式', rules: true,
-            //     valueEnum: MappingData.Form__LayoutWindowNavOptions
-            // },
             {
                 span: 12, formType: 'NUMBER', name: 'window_navWidth', label: '导航宽度', rules: true,
                 jugde: [{ field: 'window_nav', value: [true] }, { field: 'window_NavType', value: ['vertical'] }]
@@ -1275,6 +1271,8 @@ const StartWindowFormList = [
                 span: 12, formType: 'NUMBER', name: 'window_navHeight', label: '导航高度', rules: true,
                 jugde: [{ field: 'window_nav', value: [true] }, { field: 'window_NavType', value: ['horizontal'] }]
             },
+            { span: 12, formType: 'INPUT', name: 'window_navPadding', label: '导航内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'window_navMargin', label: '导航外间距', rules: true },
             // A01 
             {
                 span: 12, formType: 'GROUP', name: 'window_NavOptions_details', label: '默认样式', collapsible: true, jugde: [{ field: 'window_nav', value: [true] }], children: [
@@ -5045,11 +5043,6 @@ const ChartExtensionMarkCommonFormList = {
                 { span: 12, formType: 'NUMBER', name: 'extensionMark_shadowOffsetY', label: '垂直阴影', rules: true },
                 { span: 12, formType: 'NUMBER', name: 'extensionMark_shadowBlur', label: '阴影扩散', rules: true },
                 { span: 12, formType: 'COLOR', name: 'extensionMark_shadowColor', label: '阴影颜色', rules: true },
-
-                // 起始位置 x y
-                // 超出隐藏 最大宽度  滚动条宽度
-
-                // 字体设置
             ]
         }
     ]
@@ -5079,17 +5072,14 @@ const ChartDataCommonFormList = {
                         { span: 8, formType: 'INPUT', name: 'seriesField', label: '分类' },
                     ]
                 },
+
                 {
-                    span: 8, formType: 'INPUT', name: 'data_xField', label: 'xField', rules: true,
-                    jugde: [{ field: 'dataSourceType', value: ['A02'] }, { field: 'dataType', value: ['A03'] }]
-                },
-                {
-                    span: 8, formType: 'INPUT', name: 'data_yField', label: 'yField', rules: true,
-                    jugde: [{ field: 'dataSourceType', value: ['A02'] }, { field: 'dataType', value: ['A03'] }]
-                },
-                {
-                    span: 8, formType: 'INPUT', name: 'data_seriesField', label: 'seriesField',
-                    jugde: [{ field: 'dataSourceType', value: ['A02'] }, { field: 'dataType', value: ['A03'] }]
+                    span: 24, formType: 'LIST', name: 'data_apiArr', label: '渲染对象', collapsible: true,
+                    jugde: [{ field: 'dataSourceType', value: ['A02'] }, { field: 'dataType', value: ['A03'] }], children: [
+                        { span: 8, formType: 'INPUT', name: 'data_xField', label: 'xField', rules: true },
+                        { span: 8, formType: 'INPUT', name: 'data_yField', label: 'yField', rules: true },
+                        { span: 8, formType: 'INPUT', name: 'data_seriesField', label: 'seriesField' },
+                    ]
                 },
             ]
         },
@@ -6207,8 +6197,9 @@ const PrefabricatedList = [
             },
         ]
     },
-
 ]
+
+
 
 
 
