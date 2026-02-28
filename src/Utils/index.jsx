@@ -720,3 +720,39 @@ export const OpenMenuFunc = async (uuid, pageFunc, body_tabsMax, obj) => {
     updateActive(uuid)
     updateList([...pageList, data])
 }
+
+// TODO 获取随机数
+export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
+
+// TODO 自定义组件统一数据返回处理
+export const DiyDataReturn = (data, apiData, backData, diyKey) => {
+    const { api_source, api_dataType, api_urlName, api_urlLevel, api_urlMapping, } = data
+    if (api_source === 'A01') return backData
+    if (api_source === 'A02') {
+        if (!isEmptyObject(apiData)) return api_urlLevel ? getNestedValue(api_urlMapping, apiData[api_urlName]) : apiData[api_urlName]
+        return []
+    }
+    if (api_source === 'A03') {
+        if (diyKey) {
+            if (diyKey === 'api_diyObj') {
+                const obj = data[diyKey].reduce((acc, item) => {
+                    acc[item.diyData_key] = item.diyData_value
+                    return acc
+                }, {})
+                return obj
+            }
+            if (diyKey === 'api_diyArr') {
+                console.log('组装数组', data[diyKey])
+            }
+
+            return []
+        }
+        else return api_dataType === 'A02' ? data['api_diyObj'] : data['api_diyArr']
+    }
+    return []
+}
+
+// TODO 单位参数结构赋值
+export const SetUnitParams = ({ unit, value }) => {
+
+}

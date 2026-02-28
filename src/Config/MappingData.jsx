@@ -147,10 +147,6 @@ export const MappingData = {
 
 
 
-
-
-
-
     // TODO 数据映射
     Data__GetDataType: [
         { value: '管理公司', label: '管理公司' },
@@ -194,8 +190,9 @@ export const MappingData = {
         { value: 'wrap', label: 'wrap' },
     ],
     Flex_SizeType: [
-        { value: 'flex', label: '比例' },
+        { value: 'flex', label: '弹性' },
         { value: 'px', label: '像素' },
+        { value: 'pct', label: '比例' },
     ],
 
 
@@ -521,6 +518,13 @@ export const MappingData = {
         { value: 'solid', label: '实线' },
         { value: 'dashed', label: '虚线' },
     ],
+    Style__PositionType: [
+        { value: 'top-left', label: '上左' },
+        { value: 'top-right', label: '上右' },
+        { value: 'bottom-left', label: '下左' },
+        { value: 'bottom-right', label: '下右' },
+    ],
+
     Style__FormatTemp: [
         { value: 'icon', label: '图标模板' },
         { value: 'date', label: '时间模板' },
@@ -549,7 +553,6 @@ export const MappingData = {
         { value: 'cards', label: '卡片' },
         // { value: 'creative', label: '创意' },
     ],
-
     // 动画效果
     Animate_type: [
         // 基础动画

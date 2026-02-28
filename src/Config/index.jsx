@@ -908,6 +908,7 @@ export const TemplateParamsMapping = {
     // TODO 自定义模块
     PrefabricatedDiyText: {
         value: 'PrefabricatedDiyText',
+        api_source: 'A01',
         left_img: true,
         right_img: true,
         left_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/indexL.png',
@@ -938,6 +939,7 @@ export const TemplateParamsMapping = {
     // TODO 图文模块
     PrefabricatedImgText: {
         value: 'PrefabricatedImgText',
+        api_source: 'A01',
         render_img: true,
         render_title: true,
         render_data: true,
@@ -947,6 +949,29 @@ export const TemplateParamsMapping = {
     // TODO 列表模块
     PrefabricatedList: {
         value: 'PrefabricatedList',
+        api_source: 'A01',
+        whole_align_items: "center",
+        whole_align_content: "center",
+        whole_justify_content: "center",
+        whole_flex_direction: "row",
+        whole_flex_wrap: "nowrap",
+        whole_padding: '0',
+        whole_margin: '0',
+        item_icon: 'none',
+        item_back: false,
+        item_unit: false,
+        item_widthUnit: 'pct',
+        item_heightUnit: 'px',
+        item_width: 50,
+        item_height: 40,
+        item_padding: '0',
+        item_margin: '0',
+        text_align_items: "center",
+        text_align_content: "center",
+        text_justify_content: "center",
+        text_flex_direction: "row",
+        text_flex_wrap: "nowrap",
+
 
     }
 

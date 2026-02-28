@@ -1,7 +1,19 @@
 import './Prefabricated.scss'
-import { useMount } from 'ahooks'
-import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams, isEmptyObject, getNestedValue } from '../Utils'
 import { useEffect, useState, Fragment } from 'react'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn } from '../Utils'
+
+const temporaryDataA01 = {
+    A01: getRandomInt(1, 1000),
+    A02: getRandomInt(1, 1000),
+    A03: getRandomInt(1, 1000),
+    A04: getRandomInt(1, 1000),
+    A05: getRandomInt(1, 1000),
+    A06: getRandomInt(1, 1000),
+    A07: getRandomInt(1, 1000),
+    A08: getRandomInt(1, 1000),
+    A09: getRandomInt(1, 1000),
+    A10: getRandomInt(1, 1000),
+}
 
 const SoldNumber = ({ template, data, list }) => {
     const parts = template.split(/(\$\{[^}]+\})/)
@@ -38,10 +50,10 @@ const SoldNumber = ({ template, data, list }) => {
 const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     const [Data, setData] = useState()
 
-    const { api_urlName, api_urlLevel, api_urlMapping,
+    const {
         left_img, left_img_url, left_img_width, left_img_height, left_img_margin,
         right_img, right_img_url, right_img_width, right_img_height, right_img_margin,
-        center_width, center_height, center_color, center_deg, center_padding, center_margin,
+        center_width, center_height, center_color, center_deg, center_padding, center_margin, center_flex,
         center_align_content, center_align_items, center_flex_direction, center_flex_wrap, center_justify_content,
         text_list, data_list,
     } = data
@@ -60,7 +72,6 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     }
 
     const centerStyle = {
-        width: center_width,
         height: center_height,
         background: ColorCallBack(center_color, center_deg),
         padding: SpacingCallBack(center_padding),
@@ -72,12 +83,15 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
         '--justifyContent': center_justify_content,
     }
 
+    if (center_flex) centerStyle.flex = 1
+    else centerStyle.width = center_width
+
+
+
     useEffect(() => {
-        if (!isEmptyObject(UrlData)) {
-            const data = api_urlLevel ? getNestedValue(api_urlMapping, UrlData[api_urlName]) : UrlData[api_urlName]
-            setData(data)
-        }
-    }, [UrlData, api_urlName, api_urlMapping, api_urlLevel])
+        const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
+        setData(backData)
+    }, [UrlData, data])
 
 
 

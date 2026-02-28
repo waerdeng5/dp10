@@ -1,6 +1,10 @@
 import './Prefabricated.scss'
 import { useEffect, useState } from 'react'
-import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams, isEmptyObject, getNestedValue } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn } from '../Utils'
+
+const temporaryDataA01 = {
+    A01: getRandomInt(1, 1000),
+}
 
 const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
     const [Data, setData] = useState()
@@ -64,16 +68,10 @@ const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
     if (data_position === 'bottom') dataStyle.bottom = data_btm
 
 
-
-
-
-
     useEffect(() => {
-        if (!isEmptyObject(UrlData)) {
-            const data = api_urlLevel ? getNestedValue(api_urlMapping, UrlData[api_urlName]) : UrlData[api_urlName]
-            setData(data)
-        }
-    }, [UrlData, api_urlName, api_urlMapping, api_urlLevel])
+        const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
+        setData(backData)
+    }, [UrlData, data])
 
 
     return (
