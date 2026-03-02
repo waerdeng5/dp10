@@ -1,14 +1,16 @@
 import './index.scss'
 
-import { useMount } from 'ahooks'
+import { useMount, useEventEmitter } from 'ahooks'
 import { useState, Fragment } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { axios } from '../../Utils/Api'
+import { modelStore } from '../../Router/zustand'
+import { axios, axiosFor } from '../../Utils/Api'
 import { GetIndexedDB } from '../../Utils/IndexedDB'
 import { ICONMapping } from '../../Config/IconMapping'
 import { DevScrollView } from '../../Temp/DevTemplate'
-import { modelStore } from '../../Router/zustand'
+
+
 
 
 const ListA01 = [
@@ -25,13 +27,13 @@ const ListA02 = [
 ]
 
 const ListA03 = [
-    { uuid: 1, title: '公路工程', value: 'A01', unit: '个', img: 'gaosu' },
-    { uuid: 2, title: '公路养护', value: 'A02', unit: '个', img: 'shigong05' },
-    { uuid: 3, title: '市政公用工程', value: 'A03', unit: '个', img: 'gejizhengfu' },
-    { uuid: 4, title: '房屋建筑', value: 'A04', unit: '个', img: 'qiye_mianxing' },
-    { uuid: 5, title: '港口与航道', value: 'A05', unit: '个', img: 'chuanbo' },
-    { uuid: 6, title: '水利水电工程', value: 'A06', unit: '个', img: 'daqiao2' },
-    { uuid: 7, title: '其他类', value: 'A07', unit: '个', img: 'hutonglijiao' },
+    { uuid: 1, title: '公路工程', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b301', unit: '个', img: 'gaosu' },
+    { uuid: 2, title: '公路养护', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b302', unit: '个', img: 'shigong05' },
+    { uuid: 3, title: '市政公用工程', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b303', unit: '个', img: 'gejizhengfu' },
+    { uuid: 4, title: '房屋建筑', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b304', unit: '个', img: 'qiye_mianxing' },
+    { uuid: 5, title: '港口与航道', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b305', unit: '个', img: 'chuanbo' },
+    { uuid: 6, title: '水利水电工程', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b306', unit: '个', img: 'daqiao2' },
+    { uuid: 7, title: '其他工程', value: '45b543c1-b68e-4fc0-8e23-6ed43bb2b307', unit: '个', img: 'hutonglijiao' },
 ]
 
 const ListA04 = [
@@ -41,8 +43,9 @@ const ListA04 = [
 ]
 
 const GJEQHome = () => {
-    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore
+    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const Navigate = useNavigate()
+    const HomeEvent = useEventEmitter()
 
     const [imageUrl, setImageUrl] = useState()
     const [ProjectList, setProjectList] = useState([])
@@ -50,8 +53,19 @@ const GJEQHome = () => {
 
     const [DataA01, setDataA01] = useState({ A01: 0, A02: 0 })
     const [DataA02, setDataA02] = useState({ A01: 0, A02: 0, A03: 0, A04: 0 })
-    const [DataA03, setDataA03] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0 })
+    const [DataA03, setDataA03] = useState([])
     const [DataA04, setDataA04] = useState({ A01: 0, A02: 0, A03: 0 })
+
+
+    const getData = async () => {
+        const APILIST = [
+            { method: 'get', url: 'engineeringProject/WeChatGetEngineeringTypeAndEngineeringProjectList' }
+        ]
+        const [[A03Err, A03Res]] = await axiosFor(APILIST)
+        if (A03Err) return console.log('请求失败')
+        setDataA03(A03Res.data.list)
+    }
+
 
 
     useMount(async () => {
@@ -61,6 +75,9 @@ const GJEQHome = () => {
         if (err) console.log('项目列表获取失败', err)
         setProjectList(res || [])
         setActive(res[0]?.uuid || '')
+
+        getData()
+
     })
 
     const onProject = (e) => {
@@ -88,6 +105,25 @@ const GJEQHome = () => {
         }
     }
 
+
+
+    const onA03Click = (e) => {
+        updateModel({
+            title: '主题设置',
+            type: 'LayoutModel',
+            isStart: true,
+            Event: HomeEvent,
+            modelData: {
+                // json 标识  -> 获取json文件
+                // 布局 - 数据
+            }
+        })
+    }
+
+
+
+
+
     return (
         <div className="GJEQHome">
             <div className='Box Left '>
@@ -103,15 +139,18 @@ const GJEQHome = () => {
                     )}
                 </div>
                 <div className='RenderA02'>
-                    {ListA03.map(v =>
-                        <div key={v.uuid}>
-                            <div>{ICONMapping[v.img]}</div>
-                            <div>
-                                <div>{v.title}</div>
-                                <div>{DataA03[v.value]} {v.unit}</div>
+                    {ListA03.map(v => {
+                        const value = DataA03.find(item => item.uuid === v.value)?.projectCount || 0
+                        return (
+                            <div key={v.uuid} onClick={() => onA03Click(v.value)}>
+                                <div>{ICONMapping[v.img]}</div>
+                                <div>
+                                    <div>{v.title}</div>
+                                    <div>{value} {v.unit}</div>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )
+                    })}
                 </div>
                 <div className='RenderA03'>
                     {ListA04.map(v =>

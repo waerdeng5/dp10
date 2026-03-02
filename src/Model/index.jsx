@@ -1,13 +1,14 @@
 // 弹窗层
+import { Spin, App } from "antd"
+import { CloseOutlined } from '@ant-design/icons'
 import { Popup, ToolbarItem } from 'devextreme-react/popup'
 import { useState, lazy, Suspense, useEffect, memo } from 'react'
 
-import { Spin, App } from "antd";
-import { isEmptyObject } from '../Utils'
+import { Decrypt } from '../Utils/IndexedDB'
 import { modelStore } from '../Router/zustand'
+import { isEmptyObject, ColorCallBack, SetFilderParams, SetBorderParams } from '../Utils'
 
 const PopupTemplate = memo(({ modelConfig, updateModel }) => {
-
     const { message } = App.useApp()
     const {
         isStart = false,
@@ -33,8 +34,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         height: modelConfig.height || '80vh'
     }
 
-
-    const style = {
+    const spinStyle = {
         width: '100%',
         height: '100%',
         display: 'flex',
@@ -44,7 +44,15 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
 
     const [visible, setVisible] = useState(false)
     const [Template, setTemplate] = useState()
+
+    const [StartData, setStartData] = useState({})
+
+    const getWindow = async () => {
+        setStartData(await Decrypt(sessionStorage.getItem('startData')))
+    }
+
     useEffect(() => {
+        if (modelConfig.isStart) getWindow()
         if (isEmptyObject(modelConfig)) {
             setVisible(false)
             setTemplate(null)
@@ -54,8 +62,12 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
             setVisible(true)
         }
     }, [modelConfig])
-
     if (isEmptyObject(modelConfig)) return false
+
+
+    const onClose = () => {
+        updateModel({})
+    }
 
     return (
         <Popup
@@ -71,14 +83,56 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
             resizeEnabled={resizeEnabled}
             shadingColor={shadingColor}
             showCloseButton={showCloseButton}
-            wrapperAttr={{ class: 'devPopupStyle' }}
-            onHiding={() => updateModel({})}
+            wrapperAttr={{ class: isStart ? 'devStartPopup' : 'devPopupStyle' }}
+            onHiding={onClose}
             titleComponent={isStart ? (e) => {
-                console.log(e)
-                return <div>123</div>
+                const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+                    win_back_border, win_back_border_size, win_back_border_type, win_back_border_color,
+                    win_color, win_deg, win_family, win_filed, win_filed_data, win_filed_color,
+                    win_height, win_imageA01, win_imageA02, win_index, win_size, win_style, win_url, win_weight } = StartData
+
+                const style = {
+                    '--titleColor': ColorCallBack(win_color, win_deg),
+                    textIndent: win_index,
+                    fontSize: win_size,
+                    fontFamily: win_family,
+                    fontWeight: win_weight,
+                    fontStyle: win_style,
+                    filter: SetFilderParams(win_filed, win_filed_data, win_filed_color),
+                }
+                return (
+                    <div className='StartTop' style={{ height: win_height }}>
+                        <div className='image'>
+                            <img style={{ width: win_imageA01 }} src={win_url + '01.png'} alt="" />
+                            <img style={{ flex: 1 }} src={win_url + '02.png'} alt="" />
+                            <img style={{ width: win_imageA02 }} src={win_url + '03.png'} alt="" />
+                        </div>
+                        <div>
+                            <div style={style}>{title}</div>
+                            <div><CloseOutlined style={{ fontSize: win_size }} onClick={onClose} /></div>
+                        </div>
+                    </div>
+                )
             } : null
             }
-        // 添加大屏样式
+            contentComponent={(e) => {
+                const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+                    win_back_border, win_back_border_size, win_back_border_type, win_back_border_color } = StartData
+                const back = isStart ? {
+                    '--backColor': ColorCallBack(win_back_color, win_back_deg),
+                    '--backBorder': SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
+                    '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0
+                } : {}
+                return (
+                    <Suspense>
+                        {isStart && <div className="StartBack" style={back} />}
+                        {!isEmptyObject(modelConfig) && Template ?
+                            <Template data={modelData} Event={modelConfig.Event} /> :
+                            <div style={spinStyle}><Spin /></div>
+                        }
+                    </Suspense >
+                )
+            }}
         >
             {
                 options.map((item, index) => {
@@ -102,12 +156,6 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                     )
                 })
             }
-            < Suspense >
-                {!isEmptyObject(modelConfig) && Template ?
-                    <Template data={modelData} Event={modelConfig.Event} /> :
-                    <div style={style}><Spin /></div>
-                }
-            </Suspense >
         </Popup >
     )
 })

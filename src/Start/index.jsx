@@ -113,6 +113,7 @@ const StartIndex = () => {
         const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/START` } })
         if (err) return setLoading(false)
         const startData = await Decrypt(res)
+        sessionStorage.setItem('startData', res)
         setStartData(startData)
         setStatus(false)
         setLoading(false)
