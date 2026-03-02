@@ -1,12 +1,20 @@
 import './StartTemplate.scss'
 import dayjs from 'dayjs'
 import { Radio } from 'antd'
-import { useRafInterval } from 'ahooks'
-import { useState, useEffect } from 'react'
+import { useRafInterval, useSize } from 'ahooks'
+import { useState, useEffect, useRef } from 'react'
+import { Card, Descriptions, Menu } from 'antd'
+import { MailOutlined } from '@ant-design/icons'
+import { ProTable } from '@ant-design/pro-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { ICONMapping } from '../Config/IconMapping'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree } from '../Utils'
+
+
+
+
+
 
 const navMapping = {
     A01: { label: "nav_name", value: "nav_url", children: 'start_navTwo' },
@@ -335,6 +343,8 @@ export const NavTemplate = ({ status, styleData, navList, extra, extraJugde, ext
 const options = [{ label: '首页', value: '/Start' }, { label: '页面', value: '/Start/Page' }]
 
 export const WinTemplate = ({ Config, startType, setStartType, children }) => {
+    const tableBox = useRef(null)
+    const size = useSize(tableBox)
     const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
         win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
@@ -354,7 +364,39 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         border: SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
         backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
     }
-    // animate__animated animate__bounce animate__infinite
+
+    const [key, setKey] = useState('1')
+    const tableListDataSource = Array.from(
+        { length: 50 },
+        (_, i) => ({ key: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
+    )
+
+    const columns = [
+        { title: '序号', dataIndex: 'index', valueType: 'index', width: 280 },
+        { title: '时间字段', key: 'since2', dataIndex: 'createdAt', valueType: 'date', width: 280 },
+        { title: '部署进度', dataIndex: 'progress', valueType: 'progress', width: 280 },
+        { title: '下拉选择', dataIndex: 'progress1', valueType: 'select', valueEnum: { 1: '启用', 2: '禁用' }, width: 280 },
+        { title: '部署进度', dataIndex: 'progress2', valueType: 'progress', width: 280 },
+        { title: '部署进度', dataIndex: 'progress3', valueType: 'progress', width: 280 },
+        { title: '部署进度', dataIndex: 'progress4', valueType: 'progress', width: 280 },
+    ]
+
+    const menuList = [
+        {
+            type: 'group',
+            key: 'g1',
+            label: '核心服务',
+            children: [{ key: '1', label: '用户认证服务' }, { key: '2', label: '订单处理中心' }],
+        },
+        {
+            type: 'group',
+            key: 'g2',
+            label: '基础设施',
+            children: [{ key: '3', label: '支付网关' }, { key: '4', label: '消息推送平台' }],
+        },
+    ]
+
+    { console.log(size) }
     return (
         <div className='SmallWindowBox '>
             <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
@@ -363,13 +405,51 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
             </div>
             <div className='WinBox' style={winBoxStyle}>
                 {startType && setStartType ?
-                    <Radio.Group
-                        options={options}
-                        defaultValue={startType}
-                        optionType="button"
-                        buttonStyle="solid"
-                        onChange={(e) => setStartType(e.target.value)}
-                    /> :
+                    <div className='ConfigPage' >
+                        <Radio.Group
+                            options={options}
+                            defaultValue={startType}
+                            optionType="button"
+                            buttonStyle="solid"
+                            onChange={(e) => setStartType(e.target.value)}
+                        />
+                        <div className='TableStyle' >
+                            <ProTable
+                                columns={columns}
+                                rowKey="key"
+                                pagination={{ showSizeChanger: true }}
+                                tableRender={(_, dom) => (
+                                    <div style={{ display: 'flex', width: '100%' }}>
+                                        <Menu
+                                            onSelect={(e) => setKey(e.key)}
+                                            style={{ width: 256 }}
+                                            defaultSelectedKeys={['1']}
+                                            defaultOpenKeys={['sub1']}
+                                            mode="inline"
+                                            items={menuList}
+                                        />
+                                        <div className='TableContent' style={{ flex: 1 }} ref={tableBox}>{dom}</div>
+                                    </div>
+                                )}
+                                tableExtraRender={(_, data) => (
+                                    <Card>
+                                        <Descriptions size="small" column={5}>
+                                            <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
+                                            <Descriptions.Item label="负责人">书琰</Descriptions.Item>
+                                            <Descriptions.Item label="关联项目"> 智慧零售平台</Descriptions.Item>
+                                            <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
+                                            <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
+                                        </Descriptions>
+                                    </Card>
+                                )}
+                                params={{ key }}
+                                request={async () => ({ success: true, data: tableListDataSource })}
+                                dateFormatter="string"
+                                headerTitle="自定义表格主体"
+                                scroll={{ x: 400, y: size?.height - 167 || 400 }}
+                            />
+                        </div>
+                    </div> :
                     children
                 }
             </div>

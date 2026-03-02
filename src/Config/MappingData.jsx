@@ -145,8 +145,6 @@ export const MappingData = {
         { value: 'A03', label: '数组' },
     ],
 
-
-
     // TODO 数据映射
     Data__GetDataType: [
         { value: '管理公司', label: '管理公司' },
@@ -1469,6 +1467,11 @@ export const MappingData = {
     ApiUrlLevel: [
         { value: false, label: '默认层级' },
         { value: true, label: '指定层级' },
+    ],
+    Model_layoutType: [
+        { value: 'A01', label: '附件窗口' },
+        { value: 'A02', label: '列表窗口' },
+
     ],
 
     // !!! 流程配置

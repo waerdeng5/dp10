@@ -6,10 +6,11 @@ export default {
             include: [
                 './page/*.jsx',
                 '../page/*.jsx',
+                './home/*.jsx',
                 '../home/*.jsx',
                 './theme/*.jsx',
-                '../../Page/Loading/*.jsx',
                 '../Page/Loading/*.jsx',
+                '../../Page/Loading/*.jsx',
             ]
         })
     ]

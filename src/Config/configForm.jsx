@@ -1471,6 +1471,30 @@ const StartWindowFormList = [
     }
 ]
 
+// *** 弹窗设置
+const ModelConfigFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.Start__pageType },
+    { span: 24, formType: 'INPUT', name: 'diyUrl', label: '自订页面路径', rules: true, jugde: [{ field: 'pageType', value: ['DIY'] }] },
+    {
+        span: 24, formType: 'RADIO', name: 'layType', label: '布局页面类型', rules: true,
+        valueEnum: MappingData.Model_layoutType, jugde: [{ field: 'pageType', value: ['LAY'] }]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A02', label: '列表窗口配置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A02'] }], children: [
+
+        ]
+    },
+]
+
+
 
 // *** 字段导入
 const AddFieldsImport = [
@@ -6352,6 +6376,7 @@ export const FormConfig = {
 
     LayoutAPiDataFormList,
     LayoutWindowStyleFormList,
+    ModelConfigFormList,
 
 
     PrefabricatedPlaceEmpty,

@@ -114,15 +114,11 @@ const GJEQHome = () => {
             isStart: true,
             Event: HomeEvent,
             modelData: {
-                // json 标识  -> 获取json文件
-                // 布局 - 数据
+                json: 'HomeA03',
+                // data:{}
             }
         })
     }
-
-
-
-
 
     return (
         <div className="GJEQHome">
