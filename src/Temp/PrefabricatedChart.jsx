@@ -1224,15 +1224,14 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         }
         const apiData = data_apiLevel ? UrlData[data_apiName][data_apiLevel] : UrlData[data_apiName]
         if (dataType === 'A02') {
-            const mapping = data_apiData.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
-            return mapping
+            const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
+            return mapping || []
         }
         if (dataType === 'A03') {
-            const mapping = data_apiArr.flatMap(item =>
-                apiData.map(v => ({ xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+            const mapping = data_apiArr?.flatMap(item =>
+                apiData?.map(v => ({ xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
             )
-            return mapping
-            return []
+            return mapping || []
         }
         return ([])
     }

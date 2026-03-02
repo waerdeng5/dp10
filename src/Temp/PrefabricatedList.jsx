@@ -122,7 +122,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     return (
         <div className='PrefabricatedList' style={wholeStyle}>
-            {ItemList.map((v, i) => {
+            {ItemList?.map((v, i) => {
                 const { alone_back, alone_title, alone_number, alone_unit, alone_icon,
                     data_back, data_backDeg,
                     data_titleColor, data_titleDeg,
