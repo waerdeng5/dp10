@@ -69,6 +69,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         updateModel({})
     }
 
+
     return (
         <Popup
             {...size}
@@ -115,24 +116,26 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                 )
             } : null
             }
-            contentComponent={(e) => {
-                const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
-                    win_back_border, win_back_border_size, win_back_border_type, win_back_border_color } = StartData
-                const back = isStart ? {
-                    '--backColor': ColorCallBack(win_back_color, win_back_deg),
-                    '--backBorder': SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
-                    '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0
-                } : {}
-                return (
-                    <Suspense>
-                        {isStart && <div className="StartBack" style={back} />}
-                        {!isEmptyObject(modelConfig) && Template ?
-                            <Template data={modelData} Event={modelConfig.Event} /> :
-                            <div style={spinStyle}><Spin /></div>
-                        }
-                    </Suspense >
-                )
-            }}
+        // contentComponent={(e) => {
+        //     const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+        //         win_back_border, win_back_border_size, win_back_border_type, win_back_border_color } = StartData
+        //     const back = isStart ? {
+        //         '--backColor': ColorCallBack(win_back_color, win_back_deg),
+        //         '--backBorder': SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
+        //         '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0
+        //     } : {}
+
+
+        //     return (
+        //         <Suspense>
+        //             {isStart && <div className="StartBack" style={back} />}
+        //             {!isEmptyObject(modelConfig) && Template ?
+        //                 <Template data={modelData} Event={modelConfig.Event} /> :
+        //                 <div style={spinStyle}><Spin /></div>
+        //             }
+        //         </Suspense >
+        //     )
+        // }}
         >
             {
                 options.map((item, index) => {
@@ -156,6 +159,25 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                     )
                 })
             }
+            <Suspense>
+                {(() => {
+                    if (isStart) {
+                        const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+                            win_back_border, win_back_border_size, win_back_border_type, win_back_border_color } = StartData
+
+                        const back = {
+                            '--backColor': ColorCallBack(win_back_color, win_back_deg),
+                            '--backBorder': SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
+                            '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0
+                        }
+                        return <div className="StartBack" style={back} />
+                    }
+                })()}
+                {!isEmptyObject(modelConfig) && Template ?
+                    <Template data={modelData} Event={modelConfig.Event} /> :
+                    <div style={spinStyle}><Spin /></div>
+                }
+            </Suspense >
         </Popup >
     )
 })

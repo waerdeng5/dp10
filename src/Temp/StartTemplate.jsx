@@ -11,9 +11,34 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ICONMapping } from '../Config/IconMapping'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree } from '../Utils'
 
+const columns = [
+    { title: '序号', dataIndex: 'index', valueType: 'index', width: 280 },
+    { title: '时间字段', key: 'since2', dataIndex: 'createdAt', valueType: 'date', width: 280 },
+    { title: '部署进度', dataIndex: 'progress', valueType: 'progress', width: 280, search: false },
+    { title: '下拉选择', dataIndex: 'progress1', valueType: 'select', valueEnum: { 1: '启用', 2: '禁用' }, width: 280 },
+    { title: '测试字段', dataIndex: 'progress2', valueType: 'input', width: 280 },
+    { title: '测试字段', dataIndex: 'progress3', valueType: 'progress', width: 280 },
+    { title: '测试字段', dataIndex: 'progress4', valueType: 'progress', width: 280 },
+]
 
+const menuList = [
+    {
+        // type: 'group',
+        key: 'g1',
+        label: '核心服务',
+        children: [{ key: '1', label: '用户认证服务' }, { key: '2', label: '订单处理中心' }],
+    },
+    {
+        key: 'g2',
+        label: '基础设施',
+        children: [{ key: '3', label: '支付网关' }, { key: '4', label: '消息推送平台' }],
+    },
+]
 
-
+const tableListDataSource = Array.from(
+    { length: 50 },
+    (_, i) => ({ key: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
+)
 
 
 const navMapping = {
@@ -345,10 +370,13 @@ const options = [{ label: '首页', value: '/Start' }, { label: '页面', value:
 export const WinTemplate = ({ Config, startType, setStartType, children }) => {
     const tableBox = useRef(null)
     const size = useSize(tableBox)
+    const [key, setKey] = useState('1')
+
     const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
         win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
-        win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt
+        win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt,
+        ...item
     } = Config
     const winTitleStyle = {
         '--titleColor': ColorCallBack(win_color, win_deg),
@@ -365,38 +393,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
     }
 
-    const [key, setKey] = useState('1')
-    const tableListDataSource = Array.from(
-        { length: 50 },
-        (_, i) => ({ key: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
-    )
-
-    const columns = [
-        { title: '序号', dataIndex: 'index', valueType: 'index', width: 280 },
-        { title: '时间字段', key: 'since2', dataIndex: 'createdAt', valueType: 'date', width: 280 },
-        { title: '部署进度', dataIndex: 'progress', valueType: 'progress', width: 280 },
-        { title: '下拉选择', dataIndex: 'progress1', valueType: 'select', valueEnum: { 1: '启用', 2: '禁用' }, width: 280 },
-        { title: '部署进度', dataIndex: 'progress2', valueType: 'progress', width: 280 },
-        { title: '部署进度', dataIndex: 'progress3', valueType: 'progress', width: 280 },
-        { title: '部署进度', dataIndex: 'progress4', valueType: 'progress', width: 280 },
-    ]
-
-    const menuList = [
-        {
-            type: 'group',
-            key: 'g1',
-            label: '核心服务',
-            children: [{ key: '1', label: '用户认证服务' }, { key: '2', label: '订单处理中心' }],
-        },
-        {
-            type: 'group',
-            key: 'g2',
-            label: '基础设施',
-            children: [{ key: '3', label: '支付网关' }, { key: '4', label: '消息推送平台' }],
-        },
-    ]
-
-    { console.log(size) }
     return (
         <div className='SmallWindowBox '>
             <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
@@ -404,54 +400,157 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                 <div>{Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}</div>
             </div>
             <div className='WinBox' style={winBoxStyle}>
-                {startType && setStartType ?
-                    <div className='ConfigPage' >
-                        <Radio.Group
-                            options={options}
-                            defaultValue={startType}
-                            optionType="button"
-                            buttonStyle="solid"
-                            onChange={(e) => setStartType(e.target.value)}
-                        />
-                        <div className='TableStyle' >
-                            <ProTable
-                                columns={columns}
-                                rowKey="key"
-                                pagination={{ showSizeChanger: true }}
-                                tableRender={(_, dom) => (
-                                    <div style={{ display: 'flex', width: '100%' }}>
-                                        <Menu
-                                            onSelect={(e) => setKey(e.key)}
-                                            style={{ width: 256 }}
-                                            defaultSelectedKeys={['1']}
-                                            defaultOpenKeys={['sub1']}
-                                            mode="inline"
-                                            items={menuList}
-                                        />
-                                        <div className='TableContent' style={{ flex: 1 }} ref={tableBox}>{dom}</div>
-                                    </div>
-                                )}
-                                tableExtraRender={(_, data) => (
-                                    <Card>
-                                        <Descriptions size="small" column={5}>
-                                            <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
-                                            <Descriptions.Item label="负责人">书琰</Descriptions.Item>
-                                            <Descriptions.Item label="关联项目"> 智慧零售平台</Descriptions.Item>
-                                            <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
-                                            <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
-                                        </Descriptions>
-                                    </Card>
-                                )}
-                                params={{ key }}
-                                request={async () => ({ success: true, data: tableListDataSource })}
-                                dateFormatter="string"
-                                headerTitle="自定义表格主体"
-                                scroll={{ x: 400, y: size?.height - 167 || 400 }}
+                {startType && setStartType ? (() => {
+                    const {
+                        table_search_title_color, table_search_title_deg, table_search_title_size, table_search_title_family, table_search_title_style,
+                        table_search_title_weight, table_search_title_filed, table_search_title_filed_color, table_search_title_filed_data,
+                        table_search_value_color, table_search_value_deg, table_search_value_size, table_search_value_family, table_search_value_style,
+                        table_search_value_weight, table_search_value_filed, table_search_value_filed_color, table_search_value_filed_data,
+                        table_search_query_border, table_search_query_back, table_search_query_radius, table_search_query_text,
+                        table_search_reset_border, table_search_reset_back, table_search_reset_radius, table_search_reset_text,
+                        table_search_back_color, table_search_back_back, table_search_back_radius,
+                        table_search_back_border, table_search_back_border_color, table_search_back_border_size, table_search_back_border_type,
+                        table_card_number, table_card_back, table_card_deg, table_card_padding, table_card_radius,
+                        table_card_border, table_card_border_color, table_card_border_size, table_card_border_type,
+                        table_card_title_color, table_card_title_deg, table_card_title_size, table_card_title_family, table_card_title_style, table_card_title_weight,
+                        table_card_title_filed, table_card_title_filed_color, table_card_title_filed_data,
+                        table_card_value_color, table_card_value_deg, table_card_value_size, table_card_value_family, table_card_value_style, table_card_value_weight,
+                        table_card_value_filed, table_card_value_filed_color, table_card_value_filed_data,
+
+                        table_menu_width, table_menu_margin, table_menu_back, table_menu_deg,
+                        table_menu_icon, table_menu_icon_size, table_menu_active_back, table_menu_active_backDeg,
+
+                        table_menu_active_color, table_menu_active_deg,
+                        table_menu_active_size, table_menu_active_style, table_menu_active_weight, table_menu_active_family,
+                        table_menu_active_filed, table_menu_active_filed_color, table_menu_active_filed_data,
+
+                        table_menu_default_color, table_menu_default_deg,
+                        table_menu_default_size, table_menu_default_style, table_menu_default_weight, table_menu_default_family,
+                        table_menu_default_filed, table_menu_default_filed_color, table_menu_default_filed_data,
+
+                        ...item
+                    } = Config
+
+                    console.log(item)
+
+                    const SearchStyle = {
+                        '--searchTitleColor': ColorCallBack(table_search_title_color, table_search_title_deg),
+                        '--searchTitleSize': table_search_title_size,
+                        '--searchTitleFamily': table_search_title_family,
+                        '--searchTitleStyle': table_search_title_style,
+                        '--searchTitleWeight': table_search_title_weight,
+                        '--searchTitleFiledColor': SetFilderParams(table_search_title_filed, table_search_title_filed_data, table_search_title_filed_color),
+                        '--searchValueColor': ColorCallBack(table_search_value_color, table_search_value_deg),
+                        '--searchValueSize': table_search_value_size,
+                        '--searchValueFamily': table_search_value_family,
+                        '--searchValueStyle': table_search_value_style,
+                        '--searchValueWeight': table_search_value_weight,
+                        '--searchValueFiledColor': SetFilderParams(table_search_value_filed, table_search_value_filed_data, table_search_value_filed_color),
+                        '--searchQueryRadius': SpacingCallBack(table_search_query_radius),
+                        '--searchQueryBorder': table_search_query_border,
+                        '--searchQueryBack': table_search_query_back,
+                        '--searchQueryText': table_search_query_text,
+                        '--searchResetRadius': SpacingCallBack(table_search_reset_radius),
+                        '--searchResetBorder': table_search_reset_border,
+                        '--searchResetBack': table_search_reset_back,
+                        '--searchResetText': table_search_reset_text,
+                        '--searchBackColor': ColorCallBack(table_search_back_color, table_search_back_back),
+                        '--searchBackRadius': SpacingCallBack(table_search_back_radius),
+                        '--searchBackBorder': SetBorderParams(table_search_back_border, table_search_back_border_size, table_search_back_border_type, table_search_back_border_color)
+                    }
+
+                    const cardStyle = {
+                        background: ColorCallBack(table_card_back, table_card_deg),
+                        padding: SpacingCallBack(table_card_padding),
+                        borderRadius: SpacingCallBack(table_card_radius),
+                        border: SetBorderParams(table_card_border, table_card_border_size, table_card_border_type, table_card_border_color),
+                        '--cardTitleColor': ColorCallBack(table_card_title_color, table_card_title_deg),
+                        '--cardTitleSize': table_card_title_size,
+                        '--cardTitleFamily': table_card_title_family,
+                        '--cardTitleStyle': table_card_title_style,
+                        '--cardTitleWeight': table_card_title_weight,
+                        '--cardTitleFiledColor': SetFilderParams(table_card_title_filed, table_card_title_filed_data, table_card_title_filed_color),
+
+                        '--cardValueColor': ColorCallBack(table_card_value_color, table_card_value_deg),
+                        '--cardValueSize': table_card_value_size,
+                        '--cardValueFamily': table_card_value_family,
+                        '--cardValueStyle': table_card_value_style,
+                        '--cardValueWeight': table_card_value_weight,
+                        '--cardValueFiledColor': SetFilderParams(table_card_value_filed, table_card_value_filed_data, table_card_value_filed_color),
+                    }
+
+                    const MenuStyle = {
+                        width: table_menu_width,
+                        margin: SpacingCallBack(table_menu_margin),
+                        background: ColorCallBack(table_menu_back, table_menu_deg),
+                        '--menuIconColor': table_menu_icon,
+                        '--menuIconSize': table_menu_icon_size,
+                        '--menuActBack': ColorCallBack(table_menu_active_back, table_menu_active_backDeg),
+
+                        '--menuActColor': ColorCallBack(table_menu_active_color, table_menu_active_deg),
+                        '--menuActSize': table_menu_active_size,
+                        '--menuActFamily': table_menu_active_family,
+                        '--menuActStyle': table_menu_active_style,
+                        '--menuActWeight': table_menu_active_weight,
+                        '--menuActFiledColor': SetFilderParams(table_menu_active_filed, table_menu_active_filed_color, table_menu_active_filed_data),
+
+                        '--menuDefColor': ColorCallBack(table_menu_default_color, table_menu_default_deg),
+                        '--menuDefSize': table_menu_default_size,
+                        '--menuDefFamily': table_menu_default_family,
+                        '--menuDefStyle': table_menu_default_style,
+                        '--menuDefWeight': table_menu_default_weight,
+                        '--menuDefFiledColor': SetFilderParams(table_menu_default_filed, table_menu_default_filed_color, table_menu_default_filed_data),
+                    }
+
+                    return (
+                        <div className='ConfigPage'  >
+                            <Radio.Group
+                                options={options}
+                                defaultValue={startType}
+                                optionType="button"
+                                buttonStyle="solid"
+                                onChange={(e) => setStartType(e.target.value)}
                             />
+                            <div className='TableStyle' style={SearchStyle}>
+                                <ProTable
+                                    columns={columns}
+                                    rowKey="key"
+                                    pagination={{ showSizeChanger: true }}
+                                    tableRender={(_, dom) => (
+                                        <div style={{ display: 'flex', width: '100%' }}>
+                                            <Menu
+                                                style={MenuStyle}
+                                                className='TableMenu'
+                                                onSelect={(e) => setKey(e.key)}
+                                                defaultSelectedKeys={['1']}
+                                                defaultOpenKeys={['sub1']}
+                                                mode="inline"
+                                                items={menuList}
+                                            />
+                                            <div className='TableContent' style={{ flex: 1 }} ref={tableBox}>{dom}</div>
+                                        </div>
+                                    )}
+                                    tableExtraRender={(_, data) => (
+                                        <Card className='TableExtra' style={cardStyle}>
+                                            <Descriptions size="small" column={table_card_number}>
+                                                <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
+                                                <Descriptions.Item label="负责人">书琰</Descriptions.Item>
+                                                <Descriptions.Item label="关联项目">智慧零售平台</Descriptions.Item>
+                                                <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
+                                                <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
+                                            </Descriptions>
+                                        </Card>
+                                    )}
+                                    params={{ key }}
+                                    request={async () => ({ success: true, data: tableListDataSource })}
+                                    dateFormatter="string"
+                                    headerTitle="自定义表格主体"
+                                    scroll={{ x: 400, y: size?.height - 167 || 400 }}
+                                />
+                            </div>
                         </div>
-                    </div> :
-                    children
-                }
+                    )
+                })() : children}
             </div>
         </div>
     )

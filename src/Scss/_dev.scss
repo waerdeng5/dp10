@@ -37,7 +37,7 @@
         .dx-popup-content {
             padding: 0;
 
-            &>.StartBack {
+            .StartBack {
                 position: absolute;
                 z-index: -1;
                 left: 0;
@@ -48,10 +48,6 @@
                 border: var(--backBorder);
                 backdrop-filter: blur(var(--backFilter));
             }
-
-
-
-
         }
     }
 
