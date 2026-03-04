@@ -1,3 +1,366 @@
 .ModelTableTemplate {
     padding: 16px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    &>.ant-pro-table {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        overflow: hidden;
+
+        .ant-pro-table-search {
+            .ant-form-item-label {
+                label {
+                    background: var(--searchTitleColor);
+                    font-size: var(--searchTitleSize);
+                    font-family: var(--searchTitleFamily);
+                    font-style: var(--searchTitleStyle);
+                    font-weight: var(--searchTitleWeight);
+                    filter: var(--searchTitleFiledColor);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+                    pointer-events: none;
+                }
+            }
+
+            input.ant-input,
+            .ant-picker-input>input,
+            .ant-select-content-value {
+                background: var(--searchValueColor);
+                font-size: var(--searchValueSize);
+                font-family: var(--searchValueFamily);
+                font-style: var(--searchValueStyle);
+                font-weight: var(--searchValueWeight);
+                filter: var(--searchValueFiledColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .ant-form-item-control-input-content {
+                .ant-space-item:nth-child(1) {
+                    button:first-child {
+                        background: var(--searchQueryBack);
+                        border-color: var(--searchQueryBorder);
+                        color: var(--searchQueryText);
+                        border-radius: var(--searchQueryRadius);
+                    }
+
+                    button:last-child {
+                        background: var(--searchResetBack);
+                        border-color: var(--searchResetBorder);
+                        color: var(--searchResetText);
+                        border-radius: var(--searchResetRadius);
+                    }
+                }
+            }
+
+            .ant-picker,
+            .ant-select,
+            .ant-input-affix-wrapper {
+                background: var(--searchBackColor);
+                border-radius: var(--searchBackRadius);
+                border: var(--searchBackBorder);
+            }
+        }
+
+
+        // 搜索框
+        &>.ant-pro-card {
+            background: transparent;
+
+            .ant-form {
+                padding: 0 16px;
+
+                .ant-pro-query-filter-row {
+                    row-gap: 8px;
+                }
+            }
+        }
+
+        // 额外参数
+        &>.ant-pro-table-extra {
+            &>.ant-card {
+
+                &>.ant-card-body {
+                    padding: 0;
+                }
+            }
+        }
+
+        &>div:last-child {
+            flex: 1;
+            overflow: hidden;
+        }
+    }
+
+    .TableExtra {
+
+        .ant-descriptions-item-label {
+            background: var(--cardTitleColor);
+            font-size: var(--cardTitleSize);
+            font-family: var(--cardTitleFamily);
+            font-style: var(--cardTitleStyle);
+            font-weight: var(--cardTitleWeight);
+            filter: var(--cardTitleFiledColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .ant-descriptions-item-content {
+            background: var(--cardValueColor);
+            font-size: var(--cardValueSize);
+            font-family: var(--cardValueFamily);
+            font-style: var(--cardValueStyle);
+            font-weight: var(--cardValueWeight);
+            filter: var(--cardValueFiledColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    }
+
+    .TableMenu {
+        .ant-menu-submenu-arrow {
+            color: var(--menuIconColor);
+        }
+
+        .ant-menu-submenu-title,
+        .ant-menu-item {
+            &>.ant-menu-title-content {
+                background: var(--menuDefColor);
+                font-size: var(--menuDefSize);
+                font-family: var(--menuDefFamily);
+                font-style: var(--menuDefStyle);
+                font-weight: var(--menuDefWeight);
+                filter: var(--menuDefFiledColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        }
+
+        .ant-menu-submenu-selected>.ant-menu-submenu-title,
+        .ant-menu-item.ant-menu-item-selected {
+            &>.ant-menu-title-content {
+                background: var(--menuActColor);
+                font-size: var(--menuActSize);
+                font-family: var(--menuActFamily);
+                font-style: var(--menuActStyle);
+                font-weight: var(--menuActWeight);
+                filter: var(--menuActFiledColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+        }
+
+        .ant-menu-item-selected {
+            background: var(--menuActBack);
+        }
+
+
+
+    }
+
+    .TableContent {
+        flex: 1;
+        overflow: hidden;
+
+
+        .ant-pagination {
+            &>li:first-child {
+                flex: 1;
+                background: var(--paginTitleColor);
+                font-size: 16px;
+                font-family: var(--paginTitleFamily);
+                font-style: var(--paginTitleStyle);
+                font-weight: var(--paginTitleWeight);
+                filter: var(--paginTitleFiled);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+            }
+
+            .ant-pagination-item {
+                width: 32px;
+            }
+
+            .ant-select {
+                padding: 0 16px;
+            }
+
+            .ant-select,
+            .ant-pagination-item {
+                height: 32px;
+                background: var(--paginDefBack);
+                border: var(--paginDefBorder);
+                border-radius: var(--paginDefRadius);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &>a,
+                &>.ant-select-content {
+                    padding: 0;
+                    margin: 0;
+                    font-size: 20px;
+                    line-height: 20px;
+                    height: 20px;
+                    background: var(--paginDefColor);
+                    font-family: var(--paginDefFamily);
+                    font-style: var(--paginDefStyle);
+                    font-weight: var(--paginDefWeight);
+                    filter: var(--paginDefFiled);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                }
+            }
+
+            .ant-pagination-item-active {
+                background: var(--paginActBack);
+                border: var(--paginActBorder);
+                border-radius: var(--paginActRadius);
+
+                &>a {
+                    background: var(--paginActColor);
+                    font-family: var(--paginActFamily);
+                    font-style: var(--paginActStyle);
+                    font-weight: var(--paginActWeight);
+                    filter: var(--paginActFiled);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                }
+            }
+
+            .ant-pagination-prev,
+            .ant-pagination-next {
+                &>button {
+                    color: var(--paginIconColor);
+                    font-size: var(--paginIconSize);
+                }
+            }
+
+            .ant-pagination-item-container {
+                color: var(--paginIconColor);
+                font-size: var(--paginIconSize);
+
+                &>span {
+                    color: var(--paginIconColor);
+                    font-size: var(--paginIconSize);
+                }
+            }
+        }
+
+        .ant-pro-table-list-toolbar-setting-item {
+            color: var(--extraOptColor);
+            font-size: var(--extraOptSize);
+        }
+
+        .ant-pro-table-list-toolbar-title {
+            background: var(--extraColor);
+            font-size: var(--extraSize);
+            font-family: var(--extraFamily);
+            font-style: var(--extraStyle);
+            font-weight: var(--extraWeight);
+            filter: var(--extraFiled);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .ant-table-placeholder {
+            background: transparent;
+        }
+
+        &>.ant-pro-card {
+            background: transparent;
+        }
+
+        .ant-table {
+            background: transparent;
+            scrollbar-color: var(--scrollThumb) rgba(5, 5, 5, 0.06);
+
+            th {
+                border: none;
+            }
+
+            th.ant-table-cell {
+                background: var(--topBack);
+                color: var(--topColor);
+                font-size: var(--topSize);
+                font-family: var(--topFamily);
+                font-style: var(--topStyle);
+                font-weight: var(--topWeight);
+
+                &::before {
+                    background-color: transparent;
+                }
+            }
+
+            td.ant-table-cell {
+                background: var(--listBack);
+                color: var(--listColor);
+                font-size: var(--listSize);
+                font-family: var(--listFamily);
+                font-style: var(--listStyle);
+                font-weight: var(--listWeight);
+                border-color: var(--listBorder);
+                border-width: var(--listBorderSize);
+
+                .ant-progress-indicator {
+                    color: var(--listColor);
+                    font-size: var(--listSize);
+                    font-family: var(--listFamily);
+                    font-style: var(--listStyle);
+                    font-weight: var(--listWeight);
+                }
+            }
+
+            td.ant-table-cell-row-hover {
+                background: var(--listActBack);
+                color: var(--listActColor);
+                font-size: var(--listActSize);
+                font-family: var(--listActFamily);
+                font-style: var(--listActStyle);
+                font-weight: var(--listActWeight);
+                border-color: var(--listActBorder);
+                border-width: var(--listActBorderSize);
+
+                .ant-progress-indicator {
+                    color: var(--listActColor);
+                    font-size: var(--listActSize);
+                    font-family: var(--listActFamily);
+                    font-style: var(--listActStyle);
+                    font-weight: var(--listActWeight);
+                }
+            }
+
+            td.ant-table-cell-fix {
+                background: var(--optionBack);
+
+                button {
+                    color: var(--optionColor);
+                    font-size: var(--optionSize);
+                    font-family: var(--optionFamily);
+                    font-style: var(--optionStyle);
+                    font-weight: var(--optionWeight);
+                }
+            }
+        }
+    }
 }

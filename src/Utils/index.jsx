@@ -489,7 +489,7 @@ export const SpacingSizeCallBack = (spacing, size, type) => {
 // TODO 边框参数
 export const SetBorderParams = (status, size, type, color) => {
     if (status) return `${size}px ${type} ${color}`
-    return null
+    return 'none'
 }
 
 // TODO 阴影参数

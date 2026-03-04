@@ -115,7 +115,7 @@ const LayoutModel = ({ data, Event }) => {
 
     return (
         <div className='LayoutModel'>
-            {/* <Template config={Config} /> */}
+            <Template config={Config} />
 
             <FloatButton onClick={onFormClick} />;
         </div>
