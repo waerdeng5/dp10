@@ -36,7 +36,8 @@
 
             input.ant-input,
             .ant-picker-input>input,
-            .ant-select-content-value {
+            .ant-select-content-value,
+            .ant-select-placeholder {
                 background: var(--searchValueColor);
                 font-size: var(--searchValueSize);
                 font-family: var(--searchValueFamily);
@@ -352,6 +353,10 @@
 
             td.ant-table-cell-fix {
                 background: var(--optionBack);
+
+                &>div {
+                    flex-wrap: wrap;
+                }
 
                 button {
                     color: var(--optionColor);

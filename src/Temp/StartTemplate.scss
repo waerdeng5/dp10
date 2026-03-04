@@ -204,13 +204,28 @@
                 }
 
                 .TableMenu {
-                    .ant-menu-submenu-arrow {
-                        color: var(--menuIconColor);
+                    width: var(--menuWidth);
+                    margin: var(--menuMargin);
+                    background: var(--menuBack);
+
+                    .ant-tree-switcher {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+                        &>span {
+                            color: var(--menuIconColor);
+                            font-size: var(--menuIconSize);
+                        }
                     }
 
-                    .ant-menu-submenu-title,
-                    .ant-menu-item {
-                        &>.ant-menu-title-content {
+                    .TableTree {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 4px 0;
+
+                        &>.title {
                             background: var(--menuDefColor);
                             font-size: var(--menuDefSize);
                             font-family: var(--menuDefFamily);
@@ -221,29 +236,50 @@
                             background-clip: text;
                             color: transparent;
                         }
-                    }
 
-                    .ant-menu-submenu-selected>.ant-menu-submenu-title,
-                    .ant-menu-item.ant-menu-item-selected {
-                        &>.ant-menu-title-content {
-                            background: var(--menuActColor);
-                            font-size: var(--menuActSize);
-                            font-family: var(--menuActFamily);
-                            font-style: var(--menuActStyle);
-                            font-weight: var(--menuActWeight);
-                            filter: var(--menuActFiledColor);
+                        &>.unit {
+                            background: var(--menuDefUnitColor);
+                            font-size: var(--menuDefUnitSize);
+                            font-family: var(--menuDefUnitFamily);
+                            font-style: var(--menuDefUnitStyle);
+                            font-weight: var(--menuDefUnitWeight);
+                            filter: var(--menuDefUnitFiledColor);
                             -webkit-background-clip: text;
                             background-clip: text;
                             color: transparent;
                         }
+
                     }
 
-                    .ant-menu-item-selected {
+                    .ant-tree-node-selected {
                         background: var(--menuActBack);
+
+                        .TableTree {
+                            &>.title {
+                                background: var(--menuActColor);
+                                font-size: var(--menuActSize);
+                                font-family: var(--menuActFamily);
+                                font-style: var(--menuActStyle);
+                                font-weight: var(--menuActWeight);
+                                filter: var(--menuActFiledColor);
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            }
+
+                            &>.unit {
+                                background: var(--menuActUnitColor);
+                                font-size: var(--menuActUnitSize);
+                                font-family: var(--menuActUnitFamily);
+                                font-style: var(--menuActUnitStyle);
+                                font-weight: var(--menuActUnitWeight);
+                                filter: var(--menuActUnitFiledColor);
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            }
+                        }
                     }
-
-
-
                 }
 
                 .TableContent {

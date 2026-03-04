@@ -29,17 +29,20 @@ import { PrefabricatedPlaceTemplate } from './PrefabricatedPlace'
 import { PrefabricatedDiyTemplate } from './PrefabricatedDiy'
 import { PrefabricatedListTemplate } from './PrefabricatedList'
 import { PrefabricatedImgTextTemplate } from './PrefabricatedImgText'
-import { PlaceTempList, ChartTempList, DIYTempList, ImgAndTextTempList, ListTempList, TemplateParamsMapping } from '../Config'
+import { PrefabricatedTableTemplate } from './PrefabricatedTable'
+
+import { PlaceTempList, ChartTempList, DIYTempList, ImgAndTextTempList, ListTempList, TableTemplate, TemplateParamsMapping } from '../Config'
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
 const { port } = window.location
-const TemplateMapping = [...PlaceTempList, ...ChartTempList, ...DIYTempList, ...ImgAndTextTempList, ...ListTempList]
+const TemplateMapping = [...PlaceTempList, ...ChartTempList, ...DIYTempList, ...ImgAndTextTempList, ...ListTempList, ...TableTemplate]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
     ...PrefabricatedPlaceTemplate,
     ...PrefabricatedDiyTemplate,
     ...PrefabricatedImgTextTemplate,
-    ...PrefabricatedListTemplate
+    ...PrefabricatedListTemplate,
+    ...PrefabricatedTableTemplate
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {

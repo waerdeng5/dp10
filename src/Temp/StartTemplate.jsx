@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { Radio } from 'antd'
 import { useRafInterval, useSize } from 'ahooks'
 import { useState, useEffect, useRef } from 'react'
-import { Card, Descriptions, Menu, Button } from 'antd'
+import { Card, Descriptions, Menu, Button, Tree } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { ProTable } from '@ant-design/pro-components'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -30,8 +30,14 @@ const columns = [
 ]
 
 const menuList = [
-    { key: 'g1', label: '核心服务', children: [{ key: '1', label: '用户认证服务' }, { key: '2', label: '订单处理中心' }] },
-    { key: 'g2', label: '基础设施', children: [{ key: '3', label: '支付网关' }, { key: '4', label: '消息推送平台' }] },
+    {
+        key: '1',
+        title: '总公司',
+        children: [
+            { key: '11', title: '一分公司', children: [{ key: '111', title: '第一项目' }, { key: '112', title: '第二项目' }] },
+            { key: '12', title: '二分公司' },
+        ],
+    },
 ]
 
 const tableListDataSource = Array.from(
@@ -369,7 +375,7 @@ const options = [{ label: '首页', value: '/Start' }, { label: '页面', value:
 export const WinTemplate = ({ Config, startType, setStartType, children }) => {
     const tableBox = useRef(null)
     const size = useSize(tableBox)
-    const [key, setKey] = useState('1')
+    const [key, setKey] = useState(['111'])
 
     const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
@@ -423,6 +429,12 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         table_menu_default_color, table_menu_default_deg,
                         table_menu_default_size, table_menu_default_style, table_menu_default_weight, table_menu_default_family,
                         table_menu_default_filed, table_menu_default_filed_color, table_menu_default_filed_data,
+                        table_menu_active_unit_color, table_menu_active_unit_deg,
+                        table_menu_active_unit_size, table_menu_active_unit_style, table_menu_active_unit_weight, table_menu_active_unit_family,
+                        table_menu_active_unit_filed, table_menu_active_unit_filed_color, table_menu_active_unit_filed_data,
+                        table_menu_default_unit_color, table_menu_default_unit_deg,
+                        table_menu_default_unit_size, table_menu_default_unit_style, table_menu_default_unit_weight, table_menu_default_unit_family,
+                        table_menu_default_unit_filed, table_menu_default_unit_filed_color, table_menu_default_unit_filed_data,
                         table_top_back, table_top_Backdeg, table_top_color,
                         table_top_family, table_top_size, table_top_style, table_top_weight,
                         table_list_back, table_list_deg, table_list_border, table_list_border_size,
@@ -437,8 +449,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         table_pagin_title_color, table_pagin_title_deg,
                         table_pagin_title_family, table_pagin_title_size, table_pagin_title_style, table_pagin_title_weight,
                         table_pagin_title_filed, table_pagin_title_filed_color, table_pagin_title_filed_data,
-
-
                         table_pagin_icon_color, table_pagin_icon_size,
                         table_pagin_default_back, table_pagin_default_backDeg, table_pagin_default_radius,
                         table_pagin_default_border, table_pagin_default_border_color, table_pagin_default_border_size, table_pagin_default_border_type,
@@ -500,12 +510,13 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                     }
 
                     const MenuStyle = {
-                        width: table_menu_width,
-                        margin: SpacingCallBack(table_menu_margin),
-                        background: ColorCallBack(table_menu_back, table_menu_deg),
+                        '--menuWidth': table_menu_width + 'px',
+                        '--menuMargin': SpacingCallBack(table_menu_margin),
+                        '--menuBack': ColorCallBack(table_menu_back, table_menu_deg),
                         '--menuIconColor': table_menu_icon,
                         '--menuIconSize': table_menu_icon_size + 'px',
                         '--menuActBack': ColorCallBack(table_menu_active_back, table_menu_active_backDeg),
+
                         '--menuActColor': ColorCallBack(table_menu_active_color, table_menu_active_deg),
                         '--menuActSize': table_menu_active_size + 'px',
                         '--menuActFamily': table_menu_active_family,
@@ -518,6 +529,19 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         '--menuDefStyle': table_menu_default_style,
                         '--menuDefWeight': table_menu_default_weight,
                         '--menuDefFiledColor': SetFilderParams(table_menu_default_filed, table_menu_default_filed_data, table_menu_default_filed_color),
+
+                        '--menuActUnitColor': ColorCallBack(table_menu_active_unit_color, table_menu_active_unit_deg),
+                        '--menuActUnitSize': table_menu_active_unit_size + 'px',
+                        '--menuActUnitFamily': table_menu_active_unit_family,
+                        '--menuActUnitStyle': table_menu_active_unit_style,
+                        '--menuActUnitWeight': table_menu_active_unit_weight,
+                        '--menuActUnitFiledColor': SetFilderParams(table_menu_active_unit_filed, table_menu_active_unit_filed_data, table_menu_active_unit_filed_color),
+                        '--menuDefUnitColor': ColorCallBack(table_menu_default_unit_color, table_menu_default_unit_deg),
+                        '--menuDefUnitSize': table_menu_default_unit_size + 'px',
+                        '--menuDefUnitFamily': table_menu_default_unit_family,
+                        '--menuDefUnitStyle': table_menu_default_unit_style,
+                        '--menuDefUnitWeight': table_menu_default_unit_weight,
+                        '--menuDefUnitFiledColor': SetFilderParams(table_menu_default_unit_filed, table_menu_default_unit_filed_data, table_menu_default_unit_filed_color),
                     }
 
                     const TableStyle = {
@@ -584,6 +608,7 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         '--paginIconSize': table_pagin_icon_size + 'px',
                     }
 
+
                     return (
                         <div className='ConfigPage'  >
                             <Radio.Group
@@ -599,15 +624,22 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                                     rowKey="key"
                                     pagination={{ showSizeChanger: true }}
                                     tableRender={(_, dom) => (
-                                        <div style={{ display: 'flex', width: '100%' }}>
-                                            <Menu
-                                                style={MenuStyle}
+                                        <div style={{ display: 'flex', width: '100%', ...MenuStyle }}>
+                                            <Tree
                                                 className='TableMenu'
-                                                onSelect={(e) => setKey(e.key)}
-                                                defaultSelectedKeys={['1']}
-                                                defaultOpenKeys={['sub1']}
-                                                mode="inline"
-                                                items={menuList}
+                                                blockNode
+                                                treeData={menuList}
+                                                onSelect={(e) => setKey(e)}
+                                                selectedKeys={key}
+                                                defaultExpandAll
+                                                titleRender={(e) => {
+                                                    return (
+                                                        <div className='TableTree'>
+                                                            <div className='title'>{e.title}</div>
+                                                            <div className='unit'>{e.key}</div>
+                                                        </div>
+                                                    )
+                                                }}
                                             />
                                             <div className='TableContent' style={TableStyle} ref={tableBox}>
                                                 {dom}

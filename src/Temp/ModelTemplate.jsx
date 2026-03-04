@@ -19,7 +19,7 @@ const columns = [
     { title: '测试字段', dataIndex: 'progress3', valueType: 'input', width: 280, align: 'center' },
     { title: '测试字段', dataIndex: 'progress4', valueType: 'input', width: 280, align: 'center' },
     {
-        title: '操作', width: 240, key: 'option', fixed: 'end', valueType: 'option', align: 'center',
+        title: '操作', width: 160, key: 'option', fixed: 'end', valueType: 'option', align: 'center',
         render: () => [
             <Button key="detail" type='link'>详情</Button>,
             <Button key="log" type='link'>日志</Button>,
@@ -102,10 +102,8 @@ export const ModelTableTemplate = ({ config }) => {
         table_options_back, table_options_deg, table_options_color,
         table_options_family, table_options_size, table_options_style, table_options_weight,
         table_pagin_title_color, table_pagin_title_deg,
-        table_pagin_title_family, table_pagin_title_size, table_pagin_title_style, table_pagin_title_weight,
+        table_pagin_title_family, table_pagin_title_style, table_pagin_title_weight,
         table_pagin_title_filed, table_pagin_title_filed_color, table_pagin_title_filed_data,
-
-
         table_pagin_icon_color, table_pagin_icon_size,
         table_pagin_default_back, table_pagin_default_backDeg, table_pagin_default_radius,
         table_pagin_default_border, table_pagin_default_border_color, table_pagin_default_border_size, table_pagin_default_border_type,
@@ -250,39 +248,53 @@ export const ModelTableTemplate = ({ config }) => {
         '--paginIconSize': table_pagin_icon_size + 'px',
     }
 
+
+    //  列表样式配置 ->
+
+    // 字段配置
+
+
+
+
     return (
         <div className='ModelTableTemplate' style={SearchStyle}>
             <ProTable
                 columns={columns}
                 rowKey="key"
                 pagination={{ showSizeChanger: true }}
-                tableRender={(_, dom) => (
-                    <div style={{ display: 'flex', width: '100%' }}>
-                        <Menu
-                            style={MenuStyle}
-                            className='TableMenu'
-                            onSelect={(e) => setKey(e.key)}
-                            defaultSelectedKeys={['1']}
-                            defaultOpenKeys={['sub1']}
-                            mode="inline"
-                            items={menuList}
-                        />
-                        <div className='TableContent' style={TableStyle} ref={tableBox}>
-                            {dom}
+                tableRender={(_, dom) => {
+                    // 判断显示
+                    return (
+                        <div style={{ display: 'flex', width: '100%' }}>
+                            <Menu
+                                style={MenuStyle}
+                                className='TableMenu'
+                                onSelect={(e) => setKey(e.key)}
+                                defaultSelectedKeys={['1']}
+                                defaultOpenKeys={['sub1']}
+                                mode="inline"
+                                items={menuList}
+                            />
+                            <div className='TableContent' style={TableStyle} ref={tableBox}>
+                                {dom}
+                            </div>
                         </div>
-                    </div>
-                )}
-                tableExtraRender={(_, data) => (
-                    <Card className='TableExtra' style={cardStyle}>
-                        <Descriptions size="small" column={table_card_number}>
-                            <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
-                            <Descriptions.Item label="负责人">书琰</Descriptions.Item>
-                            <Descriptions.Item label="关联项目">智慧零售平台</Descriptions.Item>
-                            <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
-                            <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
-                        </Descriptions>
-                    </Card>
-                )}
+                    )
+                }}
+                tableExtraRender={(_, data) => {
+                    // 判断显示
+                    return (
+                        <Card className='TableExtra' style={cardStyle}>
+                            <Descriptions size="small" column={table_card_number}>
+                                <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
+                                <Descriptions.Item label="负责人">书琰</Descriptions.Item>
+                                <Descriptions.Item label="关联项目">智慧零售平台</Descriptions.Item>
+                                <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
+                                <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
+                            </Descriptions>
+                        </Card>
+                    )
+                }}
                 params={{ key }}
                 request={async () => ({ success: true, data: tableListDataSource })}
                 dateFormatter="string"

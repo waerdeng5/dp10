@@ -554,6 +554,9 @@ export const ListTempList = [
     { uuid: 'PrefabricatedList', title: '列表模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
+export const TableTemplate = [
+    { uuid: 'PrefabricatedTable', title: '表单模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
 
 
 
@@ -971,8 +974,10 @@ export const TemplateParamsMapping = {
         text_justify_content: "center",
         text_flex_direction: "row",
         text_flex_wrap: "nowrap",
-
-
+    },
+    // TODO 表单模块
+    PrefabricatedTable: {
+        value: 'PrefabricatedTable',
     }
 
 }

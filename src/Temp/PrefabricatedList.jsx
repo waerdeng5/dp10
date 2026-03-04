@@ -98,9 +98,6 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
             if (api_dataType === 'A02') setItemList(data_obj_config)
         } else setItemList(data_diy_config)
 
-
-
-
         // if (!isEmptyObject(UrlData)) {
         //     const data = api_urlLevel ? getNestedValue(api_urlMapping, UrlData[api_urlName]) : UrlData[api_urlName]
 

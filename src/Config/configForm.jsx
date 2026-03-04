@@ -1277,7 +1277,7 @@ const StartFormList = [
             { span: 12, formType: 'COLOR', name: 'table_menu_active_back', label: '选中背景', rules: true },
             { span: 12, formType: 'NUMBER', name: 'table_menu_active_backDeg', label: '颜色角度', rules: true },
             {
-                span: 12, formType: 'GROUP', name: 'table_menu_default', label: '默认样式', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'table_menu_default', label: '默认文字样式', collapsible: true,
                 children: [
                     { span: 24, formType: 'COLOR', name: 'table_menu_default_color', label: '文字颜色', rules: true },
                     { span: 24, formType: 'NUMBER', name: 'table_menu_default_deg', label: '颜色角度', rules: true },
@@ -1297,7 +1297,7 @@ const StartFormList = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'table_menu_active', label: '选中样式', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'table_menu_active', label: '选中文字样式', collapsible: true,
                 children: [
                     { span: 24, formType: 'COLOR', name: 'table_menu_active_color', label: '文字颜色', rules: true },
                     { span: 24, formType: 'NUMBER', name: 'table_menu_active_deg', label: '颜色角度', rules: true },
@@ -1313,6 +1313,46 @@ const StartFormList = [
                     {
                         span: 24, formType: 'COLOR', name: 'table_menu_active_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
                         jugde: [{ field: 'table_menu_active_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'table_menu_default_unit', label: '默认文字样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_menu_default_unit_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_menu_default_unit_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_menu_default_unit_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_menu_default_unit_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_default_unit_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_default_unit_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_default_unit_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'table_menu_default_unit_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'table_menu_default_unit_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_menu_default_unit_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'table_menu_default_unit_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'table_menu_active_unit', label: '选中文字样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_menu_active_unit_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_menu_active_unit_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_menu_active_unit_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_menu_active_unit_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_active_unit_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_active_unit_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'table_menu_active_unit_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'table_menu_active_unit_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'table_menu_active_unit_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_menu_active_unit_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'table_menu_active_unit_filed', value: [true] }]
                     },
                 ]
             },
@@ -1851,6 +1891,11 @@ const StartWindowFormList = [
         ]
     }
 ]
+
+
+// !!! 弹出层列表页面配置信息
+const TablaConfigFormList = []
+
 
 // *** 弹窗设置
 const ModelConfigFormList = [
@@ -6472,6 +6517,16 @@ const ListConfigList = [
         ]
     },
 ]
+// !!! 表单模块
+// ??? 默认表单
+const TableConfigList = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+
+
+]
+
+
 
 const PrefabricatedList = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -6722,9 +6777,6 @@ const PrefabricatedList = [
             },
         ]
     },
-
-
-
 ]
 
 
@@ -6792,4 +6844,6 @@ export const FormConfig = {
     PrefabricatedImgText,
 
     PrefabricatedList,
+
+    TableConfigList
 }
