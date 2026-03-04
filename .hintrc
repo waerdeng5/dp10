@@ -14,7 +14,9 @@
           "mask-image",
           "overscroll-behavior",
           "overscroll-behavior: none",
-          "-webkit-box-reflect"
+          "-webkit-box-reflect",
+          "scrollbar-color",
+          "scrollbar-width"
         ]
       }
     ]

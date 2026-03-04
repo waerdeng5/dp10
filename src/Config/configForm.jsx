@@ -1161,18 +1161,18 @@ const StartFormList = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'table_search_reset', label: '重置按钮', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'table_search_reset', label: '查询按钮', collapsible: true,
                 children: [
-                    { span: 12, formType: 'INPUT', name: 'table_search_reset_radius', label: '背景圆角', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'table_search_reset_radius', label: '背景圆角', rules: true },
                     { span: 24, formType: 'COLOR', name: 'table_search_reset_back', label: '背景颜色', rules: true, mode: ['single'] },
                     { span: 24, formType: 'COLOR', name: 'table_search_reset_border', label: '边框颜色', rules: true, mode: ['single'] },
                     { span: 24, formType: 'COLOR', name: 'table_search_reset_text', label: '文字颜色', rules: true, mode: ['single'] },
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'table_search_query', label: '查询按钮', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'table_search_query', label: '重置按钮', collapsible: true,
                 children: [
-                    { span: 12, formType: 'INPUT', name: 'table_search_query_radius', label: '背景圆角', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'table_search_query_radius', label: '背景圆角', rules: true },
                     { span: 24, formType: 'COLOR', name: 'table_search_query_back', label: '背景颜色', rules: true, mode: ['single'] },
                     { span: 24, formType: 'COLOR', name: 'table_search_query_border', label: '边框颜色', rules: true, mode: ['single'] },
                     { span: 24, formType: 'COLOR', name: 'table_search_query_text', label: '文字颜色', rules: true, mode: ['single'] },
@@ -1264,9 +1264,9 @@ const StartFormList = [
             },
         ]
     },
-    // defaultCollapsed: true,
+
     {
-        span: 24, formType: 'GROUP', name: 'table_menu', label: '表单-菜单样式', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'table_menu', label: '表单-菜单样式', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 12, formType: 'NUMBER', name: 'table_menu_width', label: '菜单宽度', rules: true },
             { span: 12, formType: 'INPUT', name: 'table_menu_margin', label: '外间距', rules: true },
@@ -1319,15 +1319,182 @@ const StartFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'table_list', label: '表单-表单样式', collapsible: true, defaultCollapsed: true,
+        span: 24, formType: 'GROUP', name: 'table_extra', label: '表单-额外信息', collapsible: true, defaultCollapsed: true,
         children: [
-
+            { span: 12, formType: 'COLOR', name: 'table_extra_opt_color', label: '操作颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'table_extra_opt_size', label: '操作尺寸', rules: true },
+            { span: 12, formType: 'COLOR', name: 'table_scroll_thumb', label: '滚动条-滑块颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'COLOR', name: 'table_extra_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'table_extra_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'table_extra_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'table_extra_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'table_extra_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'table_extra_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'table_extra_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'table_extra_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'table_extra_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'table_extra_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'table_extra_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'table_top', label: '表单-表单头部样式', collapsible: true, defaultCollapsed: true,
+        children: [
+            // 表头样式
+            { span: 12, formType: 'COLOR', name: 'table_top_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'table_top_Backdeg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'table_top_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'table_top_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'table_top_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'table_top_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'table_top_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'table_list', label: '表单-列表样式', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 12, formType: 'GROUP', name: 'table_list_default', label: '表单-列表默认样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_list_back', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_list_border', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_border_size', label: '边框尺寸', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_list_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_list_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_list_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_list_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'table_list_active', label: '表单-列表选中样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_list_act_back', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_act_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_list_act_border', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_act_border_size', label: '边框尺寸', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_list_act_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'table_list_act_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_list_act_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_list_act_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_list_act_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'table_options', label: '表单-操作样式', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'table_options_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'table_options_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'table_options_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'table_options_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'table_options_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'table_options_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'table_options_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
         ]
     },
     {
         span: 24, formType: 'GROUP', name: 'table_pagin', label: '表单-分页器样式', collapsible: true, defaultCollapsed: true,
         children: [
+            {
+                span: 24, formType: 'GROUP', name: 'table_pagin_title', label: '标题设置', collapsible: true,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'table_pagin_title_color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'table_pagin_title_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'table_pagin_title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'table_pagin_title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'table_pagin_title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'table_pagin_title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'table_pagin_title_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'table_pagin_title_filed', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'table_pagin_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'table_pagin_title_filed', value: [true] }]
+                    },
+                ]
+            },
+            { span: 12, formType: 'COLOR', name: 'table_pagin_icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'table_pagin_icon_size', label: '图标尺寸', rules: true },
+            {
+                span: 12, formType: 'GROUP', name: 'table_pagin_default', label: '默认按钮', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_pagin_default_back', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_default_backDeg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_default_radius', label: '背景圆角', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_pagin_default_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_default_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_pagin_default_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_default_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_default_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_default_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'table_pagin_default_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'table_pagin_default_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_pagin_default_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'table_pagin_default_filed', value: [true] }]
+                    },
 
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_default_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'table_pagin_default_border_size', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'table_pagin_default_border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'table_pagin_default_border_type', label: '边框类型', rules: true,
+                        valueEnum: MappingData.Style__BorderType, jugde: [{ field: 'table_pagin_default_border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_pagin_default_border_color', label: '边框颜色', rules: true,
+                        mode: ['single'], jugde: [{ field: 'table_pagin_default_border', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'table_pagin_active', label: '选中按钮', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'table_pagin_active_back', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_active_backDeg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_active_radius', label: '背景圆角', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'table_pagin_active_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'table_pagin_active_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'table_pagin_active_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_active_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_active_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_active_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'table_pagin_active_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'table_pagin_active_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_pagin_active_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'table_pagin_active_filed', value: [true] }]
+                    },
+
+                    { span: 24, formType: 'RADIO', name: 'table_pagin_active_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'table_pagin_active_border_size', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'table_pagin_active_border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'table_pagin_active_border_type', label: '边框类型', rules: true,
+                        valueEnum: MappingData.Style__BorderType, jugde: [{ field: 'table_pagin_active_border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'table_pagin_active_border_color', label: '边框颜色', rules: true,
+                        mode: ['single'], jugde: [{ field: 'table_pagin_active_border', value: [true] }]
+                    },
+                ]
+            },
         ]
     },
 ]
