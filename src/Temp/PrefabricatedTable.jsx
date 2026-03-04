@@ -68,8 +68,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
         // 菜单设置
         // 列表设置
 
-
-
     }, [UrlData, data])
 
     if (!STYLE) return <div className='PrefabricatedTable'><Spin /></div>
