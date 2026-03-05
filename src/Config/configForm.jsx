@@ -6523,9 +6523,13 @@ const PrefabricatedTable = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     // defaultCollapsed: true,
     {
-        span: 24, formType: 'GROUP', name: 'data_config', label: '卡片设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'data_config', label: '数据设置', collapsible: true,
         children: [
-            { span: 24, formType: 'RADIO', name: 'data_type', label: '额外卡片', rules: true, valueEnum: MappingData.dataSourceType },
+            { span: 24, formType: 'RADIO', name: 'data_type', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
+
+
+            // data_type === A02 => 接口信息设置
+
 
         ]
     },
@@ -6534,8 +6538,9 @@ const PrefabricatedTable = [
     // 接口数据 - 添加接口参数
     // 自定义数据 - 添加不同位置的参数配置
 
-    { span: 12, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 12, formType: 'RADIO', name: 'tree', label: '额外菜单', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'INPUT', name: 'headerTitle', label: '额外标题', rules: true },
+    { span: 8, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'tree', label: '额外菜单', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
         span: 24, formType: 'GROUP', name: 'card_config', label: '卡片设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'card', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [

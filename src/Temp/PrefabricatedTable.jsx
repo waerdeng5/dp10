@@ -78,7 +78,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
         data_type, card, card_field, card_renderList,
         tree, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping, tree_start, tree_number, tree_key, tree_title, tree_children,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
-
+        headerTitle,
 
 
         // ...item
@@ -446,32 +446,27 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                 params={tree ? { treeActive } : null}
                 request={async ({ current, pageSize, treeActive }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
-
-                    const params = {
-                        pageIndex: current,
-                        pageSize: pageSize,
-                        ...strOfurlParamsFunc('menuUuid=773e8390-06a3-4b8e-a16f-e3695c0daff9&organizationUuid=40491731-928e-4b02-aa30-f45f4a3a563e')
+                    if (data_type === 'A02') {
+                        const params = {
+                            pageIndex: current,
+                            pageSize: pageSize,
+                            ...strOfurlParamsFunc('menuUuid=773e8390-06a3-4b8e-a16f-e3695c0daff9&organizationUuid=40491731-928e-4b02-aa30-f45f4a3a563e')
+                        }
+                        if (tree && treeActive[0]) params.organizationUuid = treeActive[0]
+                        const [err, res] = await axios({ method: 'get', url: 'engineeringProject', params })
+                        if (err) return console.error('获取失败', err)
+                        const { list, total } = res.data
+                        if (card) {
+                            setCardData(list[0])
+                            // setCardData(getNestedValue(card_field, res))
+                        }
+                        return ({ success: true, data: list, total: total })
                     }
-                    if (tree && treeActive[0]) {
-                        params.organizationUuid = treeActive[0]
-                    }
-
-
-                    const [err, res] = await axios({ method: 'get', url: 'engineeringProject', params })
-                    if (err) return console.error('获取失败', err)
-                    const { list, total } = res.data
-                    if (card) {
-                        setCardData(list[0])
-                        // setCardData(getNestedValue(card_field, res))
-                    }
-
-
-                    return ({ success: true, data: list, total: total })
 
 
                 }}
                 dateFormatter="string"
-                headerTitle="自定义表格主体"
+                headerTitle={headerTitle || '自定义标题'}
                 scroll={{ x: 400, y: size?.height - 167 || 400 }}
             />
         </div>
