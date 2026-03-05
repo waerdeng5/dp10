@@ -8,6 +8,10 @@ import { Decrypt } from '../Utils/IndexedDB'
 import { modelStore } from '../Router/zustand'
 import { isEmptyObject, ColorCallBack, SetFilderParams, SetBorderParams } from '../Utils'
 
+const isInteger = (str) => {
+    return /^-?\d+$/.test(str);
+}
+
 const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     const { message } = App.useApp()
     const {
@@ -30,8 +34,8 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     const size = {
         minHeight: 400,
         minWidth: 400,
-        width: modelConfig.width || '80vw',
-        height: modelConfig.height || '80vh'
+        width: isInteger(modelConfig.width) ? modelConfig.width + 'px' : modelConfig.width || '80vw',
+        height: isInteger(modelConfig.height) ? modelConfig.height + 'px' : modelConfig.height || '80vh'
     }
 
     const spinStyle = {

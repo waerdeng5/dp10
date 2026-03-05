@@ -6519,11 +6519,194 @@ const ListConfigList = [
 ]
 // !!! 表单模块
 // ??? 默认表单
-const TableConfigList = [
+const PrefabricatedTable = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
-    TemplateApiConfig,
+    // defaultCollapsed: true,
+    {
+        span: 24, formType: 'GROUP', name: 'data_config', label: '卡片设置', collapsible: true,
+        children: [
+            { span: 24, formType: 'RADIO', name: 'data_type', label: '额外卡片', rules: true, valueEnum: MappingData.dataSourceType },
+
+        ]
+    },
+
+    // 临时数据 - 无相应配置
+    // 接口数据 - 添加接口参数
+    // 自定义数据 - 添加不同位置的参数配置
+
+    { span: 12, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'tree', label: '额外菜单', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'card_config', label: '卡片设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'card', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
+            { span: 24, formType: 'INPUT', name: 'card_field', label: '数据字段', rules: true, jugde: [{ field: 'data_type', value: ['A02'] }] },
+            {
+                span: 24, formType: 'LIST', name: 'card_diyData', label: '独立单位设置', collapsible: true,
+                jugde: [{ field: 'data_type', value: ['A03'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'key', label: '数据键', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'value', label: '数据值', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'card_renderList', label: '独立单位设置', collapsible: true,
+                children: [
+                    { span: 8, formType: 'INPUT', name: 'label', label: '标题名称', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'value', label: '映射字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'unit', label: '额外单位' },
+                ]
+            },
+        ]
+    },
 
 
+    {
+        span: 24, formType: 'GROUP', name: 'tree_config', label: '菜单设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
+            { span: 12, formType: 'RADIO', name: 'tree_api_source', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
+            {
+                span: 12, formType: 'RADIO', name: 'tree_api_dataType', label: '数据类型', tooltip: '部分组件数据类型为固定类型!',
+                rules: true, valueEnum: MappingData.dataTypeMapping, jugde: [{ field: 'tree_api_source', value: ['A02', 'A03'] }]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'tree_api_http', label: '接口配置', collapsible: true,
+                jugde: [{ field: 'tree_api_source', value: ['A02'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'tree_http_urlName', label: '接口名称', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'tree_http_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'tree_http_urlMapping', label: '接口层级', jugde: [{ field: 'tree_http_urlLevel', value: [true] }] },
+                ]
+            },
+            // 映射设置
+            { span: 12, formType: 'RADIO', name: 'tree_start', label: '是否显示数值', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'tree_number', label: '数值字段', rules: true, jugde: [{ field: 'tree_start', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'tree_key', label: 'key映射' },
+            { span: 12, formType: 'INPUT', name: 'tree_title', label: 'title映射' },
+            { span: 12, formType: 'INPUT', name: 'tree_children', label: 'children映射' },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'columns', label: '字段设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
+
+            {
+                span: 24, formType: 'LIST', name: 'columns_list', label: '字段列表', collapsible: true,
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'dataIndex', label: '字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'title', label: '映射', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'hideInTable', label: '渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'search', label: '搜索', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'align', label: '对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+                    { span: 12, formType: 'RADIO', name: 'copyable', label: '拷贝', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'ellipsis', label: '缩略', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'tooltip', label: '提示' },
+                    { span: 12, formType: 'SELECT', name: 'valueType', label: '类型', rules: true, valueEnum: MappingData.Form__AntdValueType },
+
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_key', label: '映射键', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_value', label: '映射值', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'valueEnum_type', label: '类型', rules: true, valueEnum: MappingData.System__MapType,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }]
+                    },
+                    {
+                        span: 12, formType: 'SELECT', name: 'valueEnum_data', label: '数据映射', rules: true, valueEnum: MappingData.System__MappingEnum,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['DataMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_apiUrl', label: '接口地址', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'SELECT', name: 'valueEnum_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_params', label: '额外参数', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_http', label: '额外地址', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'valueEnum_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'valueEnum_mapping', label: '层级字段', rules: true,
+                        jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] },
+                        { field: 'valueEnum_level', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'RADIO', name: 'options_status', label: '单行操作', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'options_config', label: '操作设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
+        children: [
+            { span: 12, formType: 'INPUT', name: 'options_name', label: '栏位名称', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'options_width', label: '整体宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'options_align', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 12, formType: 'RADIO', name: 'options_fixed', label: '是否固定', rules: true, valueEnum: MappingData.IsEnabledBool }
+        ]
+    },
+
+
+    {
+        span: 24, formType: 'LIST', name: 'options', label: '操作设置', collapsible: true,
+        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
+        children: [
+            { span: 12, formType: 'INPUT', name: 'name', label: '操作名称', rules: true },
+            { span: 12, formType: 'RADIO', name: 'type', label: '操作类型', rules: true, valueEnum: MappingData.System__TableOptionsType },
+            // 弹窗设置
+            {
+                span: 24, formType: 'GROUP', name: 'model_config', label: '弹窗设置', collapsible: true,
+                jugde: [{ field: 'type', value: ['model'] }], children: [
+                    { span: 12, formType: 'TempGenerateUuid', name: 'model_uuid', label: '生成ID', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'model_start', label: '大屏小窗', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'model_level', label: '弹窗层级', rules: true, valueEnum: MappingData.System__TableModelLevel },
+                    { span: 12, formType: 'INPUT', name: 'model_title', label: '弹窗名称', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'model_width', label: '整体宽度', tooltip: 'vw,vh,px,%' },
+                    { span: 12, formType: 'INPUT', name: 'model_height', label: '整体宽度', tooltip: 'vw,vh,px,%' },
+
+
+
+
+                ]
+            },
+            // 跳转设置
+            {
+                span: 24, formType: 'GROUP', name: 'navTo_config', label: '跳转设置', collapsible: true,
+                jugde: [{ field: 'type', value: ['navTo'] }], children: [
+                    { span: 24, formType: 'RADIO', name: 'navTo_type', label: '跳转方式', rules: true, valueEnum: MappingData.System_TableNavToType },
+                    // 站内跳转
+                    { span: 12, formType: 'INPUT', name: 'navTo_int_router', label: '站内路由', rules: true, jugde: [{ field: 'navTo_type', value: ['int'] }] },
+                    { span: 12, formType: 'INPUT', name: 'navTo_int_params', label: '参数字段', jugde: [{ field: 'navTo_type', value: ['int'] }], },
+                    // 外部链接
+                    {
+                        span: 12, formType: 'RADIO', name: 'navTo_ext_type', label: '链接方式', rules: true,
+                        valueEnum: MappingData.System_TableNavToExtType, jugde: [{ field: 'navTo_type', value: ['ext'] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'navTo_ext_url', label: '字段或链接', rules: true, tooltip: '数据字段或站点链接',
+                        jugde: [{ field: 'navTo_type', value: ['ext'] }]
+                    },
+                    { span: 12, formType: 'INPUT', name: 'navTo_ext_value', label: '参数字段', jugde: [{ field: 'navTo_type', value: ['ext'] }] },
+                    { span: 12, formType: 'INPUT', name: 'navTo_ext_field', label: '字段映射', jugde: [{ field: 'navTo_type', value: ['ext'] }] },
+                ]
+            },
+        ]
+    },
 ]
 
 
@@ -6845,5 +7028,5 @@ export const FormConfig = {
 
     PrefabricatedList,
 
-    TableConfigList
+    PrefabricatedTable
 }

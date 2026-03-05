@@ -290,6 +290,7 @@ export const findExtraItemsByUuid = (array1, array2, key = 'uuid') => {
 export const getNestedValue = (hierarchy, res) => {
     if (!hierarchy) return res
     if (typeof hierarchy !== 'string' || typeof res !== 'object' || res === null) {
+        console.log(hierarchy, res)
         console.error('无效输入：层级应为字符串，res应为对象。')
         return undefined
     }

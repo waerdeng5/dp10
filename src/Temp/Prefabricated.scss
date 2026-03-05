@@ -360,6 +360,9 @@
         flex: 1;
         overflow: hidden;
 
+        .ant-table-cell-scrollbar:not([rowspan]) {
+            box-shadow: none;
+        }
 
         .ant-pagination {
             &>li:first-child {
@@ -489,7 +492,7 @@
                 font-weight: var(--topWeight);
 
                 &::before {
-                    background-color: transparent;
+                    background-color: transparent !important;
                 }
             }
 
@@ -503,6 +506,7 @@
                 border-color: var(--listBorder);
                 border-width: var(--listBorderSize);
 
+                .ant-typography,
                 .ant-progress-indicator {
                     color: var(--listColor);
                     font-size: var(--listSize);
@@ -522,6 +526,7 @@
                 border-color: var(--listActBorder);
                 border-width: var(--listActBorderSize);
 
+                .ant-typography,
                 .ant-progress-indicator {
                     color: var(--listActColor);
                     font-size: var(--listActSize);

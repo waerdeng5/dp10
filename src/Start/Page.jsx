@@ -58,7 +58,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
             data[v.api_name] = err ? undefined : res
             if (err) notification.error({ title: '接口请求失败!', description: `${v.api_url} 接口请求失败` })
         })
-        console.log(data)
         setUrlData(data)
     }
 

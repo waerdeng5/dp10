@@ -978,6 +978,9 @@ export const TemplateParamsMapping = {
     // TODO 表单模块
     PrefabricatedTable: {
         value: 'PrefabricatedTable',
+        data_type: 'A01',
+        card: true,
+        tree: true,
     }
 
 }

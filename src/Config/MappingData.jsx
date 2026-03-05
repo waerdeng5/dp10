@@ -504,6 +504,26 @@ export const MappingData = {
         { value: 'text', label: '文字信息' },
         { value: 'one', label: '第一组数据' },
     ],
+    System__TableOptionsType: [
+        { value: 'model', label: '弹窗' },
+        { value: 'navTo', label: '跳转' },
+    ],
+    System__TableModelLevel: [
+        { value: 'updateModel', label: '默认' },
+        { value: 'updateModel1', label: '一级' },
+        { value: 'updateModel2', label: '二级' },
+        { value: 'updateModel3', label: '三级' },
+        { value: 'updateModel4', label: '四级' },
+        { value: 'updateModel5', label: '五级' },
+    ],
+    System_TableNavToType: [
+        { value: 'int', label: '站内' },
+        { value: 'ext', label: '外部' },
+    ],
+    System_TableNavToExtType: [
+        { value: 'field', label: '数据链接' },
+        { value: 'https', label: '外部站点' },
+    ],
 
     // Todo 样式-通用属性
     Style__BoxShadow: [
@@ -981,6 +1001,23 @@ export const MappingData = {
         { value: 'QUARTER', label: '季' },
         { value: 'YEAR', label: '年' },
     ],
+
+    Form__AntdValueType: [
+        { value: 'text', label: '默认' },
+        { value: 'indexBorder', label: '索引' },
+        { value: 'money', label: '金额' },
+        { value: 'digit', label: '千分位' },
+        { value: 'percent', label: '百分比' },
+        { value: 'dateTime', label: '日期时间' },
+        { value: 'date', label: '日期' },
+        { value: 'time', label: '时间' },
+        { value: 'select', label: '下拉' },
+        { value: 'cascader', label: '联级' },
+        { value: 'treeSelect', label: '树多选' },
+        { value: 'code', label: '源码' },
+        { value: 'image', label: '图片' },
+    ],
+
 
     Form__LayoutWindowNavOptions: [
         { value: 'A01', label: '统一配置' },

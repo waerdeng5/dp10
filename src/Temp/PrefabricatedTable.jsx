@@ -5,10 +5,23 @@ import { useState, useEffect, useRef } from 'react'
 import { Card, Descriptions, Tree, Button, Spin } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { ProTable } from '@ant-design/pro-components'
+import { useNavigate } from 'react-router-dom'
 
+
+import { axios, strOfurlParamsFunc } from '../Utils/Api'
 import { Decrypt } from '../Utils/IndexedDB'
+import { MappingData } from '../Config/MappingData'
+import { modelStore } from '../Router/zustand'
 
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, getNestedValue } from '../Utils'
+
+const cardList = [
+    { label: '实例数', value: 375 },
+    { label: '负责人', value: '书琰' },
+    { label: '关联项目', value: '智慧云平台' },
+    { label: '创建时间', value: '2024-01-10' },
+    { label: '上线时间', value: '2024-01-15' },
+]
 
 const columns = [
     { title: '序号', dataIndex: 'index', valueType: 'index', width: 280, align: 'center' },
@@ -19,7 +32,7 @@ const columns = [
     { title: '测试字段', dataIndex: 'progress3', valueType: 'input', width: 280, align: 'center' },
     { title: '测试字段', dataIndex: 'progress4', valueType: 'input', width: 280, align: 'center' },
     {
-        title: '操作', width: 160, key: 'option', fixed: 'end', valueType: 'option', align: 'center',
+        title: '操作', width: 240, key: 'option', fixed: 'end', valueType: 'option', align: 'center',
         render: () => [
             <Button key="detail" type='link'>详情</Button>,
             <Button key="log" type='link'>日志</Button>,
@@ -42,35 +55,135 @@ const menuList = [
 
 const tableListDataSource = Array.from(
     { length: 100 },
-    (_, i) => ({ key: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
+    (_, i) => ({ uuid: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
 )
 
+// 数据返回函数
+const dateBack = (type, api, source, name, level, mapping) => {
+    if (source === 'A01') {
+        if (type === 'card') return cardList
+        if (type === 'tree') return menuList
+    }
+    if (source === 'A02' && api[name]) return level ? getNestedValue(mapping || '', api[name]) : api[name]
+
+
+}
 
 
 // 默认表单组件
 const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
+    const ModelOpen = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
+    const {
+        data_type, card, card_field, card_renderList,
+        tree, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping, tree_start, tree_number, tree_key, tree_title, tree_children,
+        columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
+
+
+
+        // ...item
+    } = data
+
+
+    const Navigate = useNavigate()
     const tableBox = useRef(null)
     const size = useSize(tableBox)
-    const [key, setKey] = useState(['111'])
     const [STYLE, setSTYLE] = useState()
+
+    const [PageSize, setPageSize] = useState(data_type === 'A02' ? 10 : 20)
+    const [treeData, setTreeData] = useState()
+    const [treeActive, setTreeActive] = useState()
+    const [cardData, setCardData] = useState()
+
+    const [columnsData, setColumnsData] = useState()
+
+
+    const onItemClick = (e, data) => {
+        if (e.type === 'navTo') {
+            if (e.navTo_type === 'int') {
+                const { navTo_int_router, navTo_int_params } = e
+                Navigate(`${navTo_int_router}${data[navTo_int_params]}`)
+            }
+            if (e.navTo_type === 'ext') {
+                const { navTo_ext_type, navTo_ext_url, navTo_ext_value, navTo_ext_field } = e
+                const url = navTo_ext_type === 'field' ? data[navTo_ext_url] : navTo_ext_url
+                const params = navTo_ext_value ? `?${navTo_ext_field}=${data[navTo_ext_value]}` : ''
+                window.open(`${data[navTo_ext_url]}?${url}=${params}`)
+            }
+        }
+        if (e.type === 'model') {
+            const { model_level, model_title, model_width, model_height, model_uuid, model_start } = e
+            ModelOpen[model_level]({
+                title: model_title,
+                type: 'LayoutModel',
+                isStart: model_start,
+                width: model_width,
+                height: model_height,
+                Event: LayoutEvent,
+                modelData: { json: model_uuid, data }
+            })
+        }
+    }
 
     const getStyle = async () => {
         const style = await Decrypt(sessionStorage.getItem('startData'))
         setSTYLE(style)
+        if (data_type === 'A01') {
+            setColumnsData(columns)
+            if (tree) {
+                setTreeData(menuList)
+                setTreeActive(['111'])
+            }
+        } else {
+            const columns = columns_list.map(v => {
+                const { valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
+                if (valueEnum_type) {
+                    if (valueEnum_type === 'DataMapping') {
+                        const obj = MappingData[valueEnum_data].reduce((acc, item) => {
+                            acc[item.value] = item.label
+                            return acc
+                        }, {})
+                        item.valueEnum = obj
+                    }
+                }
+                return item
+            })
+
+            if (options_status) {
+
+                const optionsBtn = (data) => options.map((v, i) => {
+                    return (<Button key={i} type='link' onClick={() => onItemClick(v, data)}>{v.name}</Button>)
+                })
+
+                const optArr = {
+                    key: 'option',
+                    valueType: 'option',
+                    title: options_name,
+                    width: options_width,
+                    align: options_align,
+                    fixed: options_fixed ? 'end' : false,
+                    render: (_, e) => optionsBtn(e)
+                }
+                columns.push(optArr)
+            }
+            setColumnsData(columns)
+
+            if (tree) {
+                const treeData = dateBack('tree', UrlData, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping)
+                const key = treeData?.[0][tree_key]
+                setTreeData(treeData)
+                setTreeActive([key])
+            }
+        }
     }
 
     useEffect(() => {
         getStyle()
-        console.log(UrlData, data,)
-
-        // 字段设置
-        // 卡片设置
-        // 菜单设置
-        // 列表设置
 
     }, [UrlData, data])
 
-    if (!STYLE) return <div className='PrefabricatedTable'><Spin /></div>
+    if (!STYLE || !columnsData) return <div className='PrefabricatedTable'><Spin /></div>
+
 
     const {
         table_search_title_color, table_search_title_deg, table_search_title_size, table_search_title_family, table_search_title_style,
@@ -277,51 +390,86 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
     return (
         <div className='PrefabricatedTable' style={SearchStyle}>
             <ProTable
-                columns={columns}
-                rowKey="key"
-                pagination={{ showSizeChanger: true }}
+                columns={columnsData}
+                rowKey="uuid"
+                pagination={{
+                    showSizeChanger: true,
+                    pageSize: PageSize,
+                    onChange: (i, s) => setPageSize(s)
+                }}
                 tableRender={(_, dom) => {
-                    // 判断显示
                     return (
                         <div style={{ display: 'flex', width: '100%', ...MenuStyle }}>
-                            <Tree
-                                className='TableMenu'
-                                blockNode
-                                treeData={menuList}
-                                onSelect={(e) => setKey(e)}
-                                selectedKeys={key}
-                                defaultExpandAll
-                                titleRender={(e) => {
-                                    return (
-                                        <div className='TableTree'>
-                                            <div className='title'>{e.title}</div>
-                                            <div className='unit'>{e.key}</div>
-                                        </div>
-                                    )
-                                }}
-                            />
+                            {treeData && treeActive &&
+                                <Tree
+                                    className='TableMenu'
+                                    blockNode
+                                    treeData={treeData}
+                                    onSelect={(e) => setTreeActive(e)}
+                                    selectedKeys={treeActive}
+                                    defaultExpandAll
+                                    fieldNames={
+                                        data_type === 'A01' ? {} : { key: tree_key || 'key', title: tree_title || 'title', children: tree_children || 'children' }
+                                    }
+                                    titleRender={(e) => {
+                                        return (
+                                            <div className='TableTree'>
+                                                <div className='title'>{data_type === 'A01' ? e.title : e[tree_title]}</div>
+                                                {tree_start && <div className='unit'>{e[tree_number]}</div>}
+                                                {data_type === 'A01' && <div className='unit'>{e.key}</div>}
+                                            </div>
+                                        )
+                                    }}
+                                />
+                            }
                             <div className='TableContent' style={TableStyle} ref={tableBox}>
                                 {dom}
                             </div>
                         </div>
                     )
                 }}
-                tableExtraRender={(_, data) => {
-                    // 判断显示
-                    return (
-                        <Card className='TableExtra' style={cardStyle}>
-                            <Descriptions size="small" column={table_card_number}>
-                                <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
-                                <Descriptions.Item label="负责人">书琰</Descriptions.Item>
-                                <Descriptions.Item label="关联项目">智慧零售平台</Descriptions.Item>
-                                <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
-                                <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
-                            </Descriptions>
-                        </Card>
-                    )
+                tableExtraRender={(_, dom) => {
+                    if (card) {
+                        const status = data_type === 'A01'
+                        const list = status ? cardList : card_renderList
+                        return (
+                            <Card className='TableExtra' style={cardStyle}>
+                                <Descriptions size="small" column={table_card_number}>
+                                    {list.map((v, i) => (
+                                        <Descriptions.Item key={i} label={v.label}>{status ? v.value : cardData?.[v.value] || '-'} {v.unit}</Descriptions.Item>
+                                    ))}
+                                </Descriptions>
+                            </Card>
+                        )
+                    }
                 }}
-                params={{ key }}
-                request={async () => ({ success: true, data: tableListDataSource })}
+                params={tree ? { treeActive } : null}
+                request={async ({ current, pageSize, treeActive }) => {
+                    if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
+
+                    const params = {
+                        pageIndex: current,
+                        pageSize: pageSize,
+                        ...strOfurlParamsFunc('menuUuid=773e8390-06a3-4b8e-a16f-e3695c0daff9&organizationUuid=40491731-928e-4b02-aa30-f45f4a3a563e')
+                    }
+                    if (tree && treeActive[0]) {
+                        params.organizationUuid = treeActive[0]
+                    }
+
+
+                    const [err, res] = await axios({ method: 'get', url: 'engineeringProject', params })
+                    if (err) return console.error('获取失败', err)
+                    const { list, total } = res.data
+                    if (card) {
+                        setCardData(list[0])
+                        // setCardData(getNestedValue(card_field, res))
+                    }
+
+
+                    return ({ success: true, data: list, total: total })
+
+
+                }}
                 dateFormatter="string"
                 headerTitle="自定义表格主体"
                 scroll={{ x: 400, y: size?.height - 167 || 400 }}

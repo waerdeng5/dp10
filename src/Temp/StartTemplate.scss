@@ -287,6 +287,10 @@
                     overflow: hidden;
 
 
+                    .ant-table-cell-scrollbar:not([rowspan]) {
+                        box-shadow: none;
+                    }
+
                     .ant-pagination {
                         &>li:first-child {
                             flex: 1;
@@ -419,6 +423,7 @@
                             }
                         }
 
+
                         td.ant-table-cell {
                             background: var(--listBack);
                             color: var(--listColor);
@@ -429,6 +434,8 @@
                             border-color: var(--listBorder);
                             border-width: var(--listBorderSize);
 
+
+                            .ant-typography,
                             .ant-progress-indicator {
                                 color: var(--listColor);
                                 font-size: var(--listSize);
