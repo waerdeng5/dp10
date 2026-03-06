@@ -192,9 +192,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         }
     }
 
-    useEffect(() => {
-        getStyle()
-    }, [data])
+    useEffect(() => { getStyle() }, [data])
 
     if (!STYLE || !columnsData) return <div className='PrefabricatedTable'><Spin /></div>
 
@@ -468,9 +466,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
-
-                        console.log(res)
-
                         if (card) {
                             setCardData(list[0])
                             // setCardData(getNestedValue(card_field, res))

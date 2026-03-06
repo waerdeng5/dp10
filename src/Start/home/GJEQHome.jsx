@@ -105,8 +105,6 @@ const GJEQHome = () => {
         }
     }
 
-
-
     const onA03Click = (e) => {
         updateModel({
             title: '主题设置',
@@ -116,7 +114,7 @@ const GJEQHome = () => {
             modelData: {
                 json: 'HomeA03',
                 // row: { engineeringType: e }
-                row: { organizationUuid: '40491731-928e-4b02-aa30-f45f4a3a563e' }
+                row: { menuUuid: '773e8390-06a3-4b8e-a16f-e3695c0daff9' }
             }
         })
     }
