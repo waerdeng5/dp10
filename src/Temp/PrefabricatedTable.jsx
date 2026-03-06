@@ -14,6 +14,7 @@ import { MappingData } from '../Config/MappingData'
 import { modelStore } from '../Router/zustand'
 
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, getNestedValue } from '../Utils'
+import { v4 } from 'uuid'
 
 const cardList = [
     { label: '实例数', value: 375 },
@@ -75,10 +76,12 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const ModelOpen = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
     const {
-        data_type, card, card_field, card_renderList,
-        tree, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping, tree_start, tree_number, tree_key, tree_title, tree_children,
+        data_type, card, card_field, card_diyData, card_renderList, data_number, headerTitle,
+        tree, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_params, tree_http_urlMapping,
+        tree_start, tree_number, tree_key, tree_title, tree_children, columns_diyData,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
-        headerTitle,
+        data_api_method, data_api_url, data_api_params, data_api_https, data_api_level, data_api_mapping,
+
 
 
         // ...item
@@ -90,7 +93,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
     const size = useSize(tableBox)
     const [STYLE, setSTYLE] = useState()
 
-    const [PageSize, setPageSize] = useState(data_type === 'A02' ? 10 : 20)
+    const [PageSize, setPageSize] = useState(data_number)
     const [treeData, setTreeData] = useState()
     const [treeActive, setTreeActive] = useState()
     const [cardData, setCardData] = useState()
@@ -148,13 +151,10 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                 }
                 return item
             })
-
             if (options_status) {
-
                 const optionsBtn = (data) => options.map((v, i) => {
                     return (<Button key={i} type='link' onClick={() => onItemClick(v, data)}>{v.name}</Button>)
                 })
-
                 const optArr = {
                     key: 'option',
                     valueType: 'option',
@@ -167,12 +167,20 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                 columns.push(optArr)
             }
             setColumnsData(columns)
-
             if (tree) {
                 const treeData = dateBack('tree', UrlData, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping)
                 const key = treeData?.[0][tree_key]
                 setTreeData(treeData)
                 setTreeActive([key])
+            }
+            if (data_type === 'A03') {
+                if (card) {
+                    const A03Card = card_diyData.reduce((acc, v) => {
+                        acc[v.key] = v.value
+                        return acc
+                    }, {})
+                    setCardData(A03Card)
+                }
             }
         }
     }
@@ -435,35 +443,40 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                         return (
                             <Card className='TableExtra' style={cardStyle}>
                                 <Descriptions size="small" column={table_card_number}>
-                                    {list.map((v, i) => (
-                                        <Descriptions.Item key={i} label={v.label}>{status ? v.value : cardData?.[v.value] || '-'} {v.unit}</Descriptions.Item>
-                                    ))}
+                                    {list.map((v, i) => {
+                                        const value = status ? v.value : cardData?.[v.value] || '-'
+                                        return (<Descriptions.Item key={i} label={v.label}>{value} {v.unit}</Descriptions.Item>)
+                                    })}
                                 </Descriptions>
                             </Card>
                         )
                     }
                 }}
                 params={tree ? { treeActive } : null}
-                request={async ({ current, pageSize, treeActive }) => {
+                request={async ({ current, pageSize, treeActive, ...item }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
                     if (data_type === 'A02') {
-                        const params = {
-                            pageIndex: current,
-                            pageSize: pageSize,
-                            ...strOfurlParamsFunc('menuUuid=773e8390-06a3-4b8e-a16f-e3695c0daff9&organizationUuid=40491731-928e-4b02-aa30-f45f4a3a563e')
-                        }
-                        if (tree && treeActive[0]) params.organizationUuid = treeActive[0]
-                        const [err, res] = await axios({ method: 'get', url: 'engineeringProject', params })
+                        const params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
+                        if (tree && treeActive[0]) params[tree_http_params] = treeActive[0]
+                        const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
-                        const { list, total } = res.data
+                        const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
                         if (card) {
                             setCardData(list[0])
                             // setCardData(getNestedValue(card_field, res))
                         }
                         return ({ success: true, data: list, total: total })
                     }
-
-
+                    if (data_type === 'A03') {
+                        const data = columns_diyData.map(v => {
+                            const obj = v.diyData_item.reduce((a, i) => {
+                                a[i.key] = i.value
+                                return a
+                            }, {})
+                            return ({ uuid: v4(), ...obj })
+                        })
+                        return ({ success: true, data: data })
+                    }
                 }}
                 dateFormatter="string"
                 headerTitle={headerTitle || '自定义标题'}

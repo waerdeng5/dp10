@@ -78,6 +78,10 @@ export const MappingData = {
         { value: true, label: '显示' },
         { value: false, label: '隐藏' },
     ],
+    IsShowBoolNot: [
+        { value: false, label: '显示' },
+        { value: true, label: '隐藏' },
+    ],
     IsEnabledBool: [
         { value: true, label: '启用' },
         { value: false, label: '禁用' },

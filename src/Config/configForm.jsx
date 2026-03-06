@@ -6521,22 +6521,24 @@ const ListConfigList = [
 // ??? 默认表单
 const PrefabricatedTable = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
-    // defaultCollapsed: true,
     {
         span: 24, formType: 'GROUP', name: 'data_config', label: '数据设置', collapsible: true,
         children: [
-            { span: 24, formType: 'RADIO', name: 'data_type', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
-
-
-            // data_type === A02 => 接口信息设置
-
-
+            { span: 12, formType: 'RADIO', name: 'data_type', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
+            { span: 12, formType: 'INPUT', name: 'data_number', label: '默认单页数据数量', rules: true },
+            {
+                span: 24, formType: 'GROUP', name: 'data_api_config', label: '数据设置', collapsible: true,
+                jugde: [{ field: 'data_type', value: ['A02'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'data_api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'data_api_url', label: '请求接口', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'data_api_params', label: '额外参数' },
+                    { span: 12, formType: 'INPUT', name: 'data_api_https', label: '额外地址' },
+                    { span: 12, formType: 'RADIO', name: 'data_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'data_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'data_api_level', value: [true] }] },
+                ]
+            },
         ]
     },
-
-    // 临时数据 - 无相应配置
-    // 接口数据 - 添加接口参数
-    // 自定义数据 - 添加不同位置的参数配置
 
     { span: 8, formType: 'INPUT', name: 'headerTitle', label: '额外标题', rules: true },
     { span: 8, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -6562,8 +6564,6 @@ const PrefabricatedTable = [
             },
         ]
     },
-
-
     {
         span: 24, formType: 'GROUP', name: 'tree_config', label: '菜单设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
@@ -6576,6 +6576,7 @@ const PrefabricatedTable = [
                 span: 24, formType: 'GROUP', name: 'tree_api_http', label: '接口配置', collapsible: true,
                 jugde: [{ field: 'tree_api_source', value: ['A02'] }], children: [
                     { span: 12, formType: 'INPUT', name: 'tree_http_urlName', label: '接口名称', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'tree_http_params', label: '发送字段', rules: true },
                     { span: 12, formType: 'RADIO', name: 'tree_http_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
                     { span: 12, formType: 'INPUT', name: 'tree_http_urlMapping', label: '接口层级', jugde: [{ field: 'tree_http_urlLevel', value: [true] }] },
                 ]
@@ -6591,13 +6592,24 @@ const PrefabricatedTable = [
     {
         span: 24, formType: 'GROUP', name: 'columns', label: '字段设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
-
+            {
+                span: 24, formType: 'LIST', name: 'columns_diyData', label: '自定义列表数据', collapsible: true,
+                jugde: [{ field: 'data_type', value: ['A03'] }], children: [
+                    {
+                        span: 24, formType: 'LIST', name: 'diyData_item', label: '自定义列表数据', collapsible: true,
+                        children: [
+                            { span: 12, formType: 'INPUT', name: 'key', label: '数据键' },
+                            { span: 12, formType: 'INPUT', name: 'value', label: '数据值' },
+                        ]
+                    },
+                ]
+            },
             {
                 span: 24, formType: 'LIST', name: 'columns_list', label: '字段列表', collapsible: true,
                 children: [
                     { span: 12, formType: 'INPUT', name: 'dataIndex', label: '字段', rules: true },
                     { span: 12, formType: 'INPUT', name: 'title', label: '映射', rules: true },
-                    { span: 12, formType: 'RADIO', name: 'hideInTable', label: '渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'hideInTable', label: '渲染', rules: true, valueEnum: MappingData.IsShowBoolNot },
                     { span: 12, formType: 'RADIO', name: 'search', label: '搜索', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
                     { span: 12, formType: 'RADIO', name: 'align', label: '对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
