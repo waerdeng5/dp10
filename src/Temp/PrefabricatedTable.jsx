@@ -462,12 +462,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
                     if (data_type === 'A02') {
                         if (tree && !treeActive) return false
-                        const params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
+                        let params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
                         if (tree && treeActive) params[tree_http_params] = treeActive[0]
-                        if (row) {
-                            console.log(row)
-                        }
-
+                        if (row) params = { ...params, ...row }
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
