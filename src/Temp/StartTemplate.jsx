@@ -646,12 +646,12 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                                             </div>
                                         </div>
                                     )}
-                                    tableExtraRender={(_, data) => (
+                                    tableExtraRender={(_, dom) => (
                                         <Card className='TableExtra' style={cardStyle}>
                                             <Descriptions size="small" column={table_card_number}>
-                                                <Descriptions.Item label="实例数">{data.length}</Descriptions.Item>
-                                                <Descriptions.Item label="负责人">书琰</Descriptions.Item>
-                                                <Descriptions.Item label="关联项目">智慧零售平台</Descriptions.Item>
+                                                <Descriptions.Item label="实例数">{dom.length}</Descriptions.Item>
+                                                <Descriptions.Item label="负责人">饕餮</Descriptions.Item>
+                                                <Descriptions.Item label="关联项目">智慧云平台</Descriptions.Item>
                                                 <Descriptions.Item label="创建时间">2024-01-10</Descriptions.Item>
                                                 <Descriptions.Item label="上线时间">2024-01-15</Descriptions.Item>
                                             </Descriptions>

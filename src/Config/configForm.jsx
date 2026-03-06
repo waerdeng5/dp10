@@ -1893,33 +1893,6 @@ const StartWindowFormList = [
 ]
 
 
-// !!! 弹出层列表页面配置信息
-const TablaConfigFormList = []
-
-
-// *** 弹窗设置
-const ModelConfigFormList = [
-    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
-    { span: 24, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.Start__pageType },
-    { span: 24, formType: 'INPUT', name: 'diyUrl', label: '自订页面路径', rules: true, jugde: [{ field: 'pageType', value: ['DIY'] }] },
-    {
-        span: 24, formType: 'RADIO', name: 'layType', label: '布局页面类型', rules: true,
-        valueEnum: MappingData.Model_layoutType, jugde: [{ field: 'pageType', value: ['LAY'] }]
-    },
-    {
-        span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
-        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
-
-        ]
-    },
-    {
-        span: 24, formType: 'GROUP', name: 'lay_A02', label: '列表窗口配置', collapsible: true,
-        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A02'] }], children: [
-
-        ]
-    },
-]
-
 
 
 // *** 字段导入
@@ -6539,7 +6512,6 @@ const PrefabricatedTable = [
             },
         ]
     },
-
     { span: 8, formType: 'INPUT', name: 'headerTitle', label: '额外标题', rules: true },
     { span: 8, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'RADIO', name: 'tree', label: '额外菜单', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -6567,20 +6539,26 @@ const PrefabricatedTable = [
     {
         span: 24, formType: 'GROUP', name: 'tree_config', label: '菜单设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
-            { span: 12, formType: 'RADIO', name: 'tree_api_source', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
-            {
-                span: 12, formType: 'RADIO', name: 'tree_api_dataType', label: '数据类型', tooltip: '部分组件数据类型为固定类型!',
-                rules: true, valueEnum: MappingData.dataTypeMapping, jugde: [{ field: 'tree_api_source', value: ['A02', 'A03'] }]
-            },
+            { span: 24, formType: 'RADIO', name: 'tree_api_source', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
             {
                 span: 24, formType: 'GROUP', name: 'tree_api_http', label: '接口配置', collapsible: true,
                 jugde: [{ field: 'tree_api_source', value: ['A02'] }], children: [
-                    { span: 12, formType: 'INPUT', name: 'tree_http_urlName', label: '接口名称', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'tree_api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'tree_api_url', label: '请求接口', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'tree_api_params', label: '额外参数' },
+                    { span: 12, formType: 'INPUT', name: 'tree_api_https', label: '额外地址' },
                     { span: 12, formType: 'INPUT', name: 'tree_http_params', label: '发送字段', rules: true },
-                    { span: 12, formType: 'RADIO', name: 'tree_http_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
-                    { span: 12, formType: 'INPUT', name: 'tree_http_urlMapping', label: '接口层级', jugde: [{ field: 'tree_http_urlLevel', value: [true] }] },
+                    { span: 12, formType: 'RADIO', name: 'tree_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'tree_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'tree_api_level', value: [true] }] },
                 ]
             },
+            {
+                span: 24, formType: 'GROUP', name: 'tree_api_diy', label: '自定义菜单', collapsible: true,
+                jugde: [{ field: 'tree_api_source', value: ['A03'] }], children: [
+
+                ]
+            },
+
             // 映射设置
             { span: 12, formType: 'RADIO', name: 'tree_start', label: '是否显示数值', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'INPUT', name: 'tree_number', label: '数值字段', rules: true, jugde: [{ field: 'tree_start', value: [true] }] },
@@ -6591,7 +6569,7 @@ const PrefabricatedTable = [
     },
     {
         span: 24, formType: 'GROUP', name: 'columns', label: '字段设置', collapsible: true, defaultCollapsed: true,
-        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
+        jugde: [{ field: 'data_type', value: ['A02', 'A03'] }], children: [
             {
                 span: 24, formType: 'LIST', name: 'columns_diyData', label: '自定义列表数据', collapsible: true,
                 jugde: [{ field: 'data_type', value: ['A03'] }], children: [
@@ -6665,11 +6643,11 @@ const PrefabricatedTable = [
     },
     {
         span: 24, formType: 'RADIO', name: 'options_status', label: '单行操作', rules: true, valueEnum: MappingData.IsEnabledBool,
-        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }]
+        jugde: [{ field: 'data_type', value: ['A02', 'A03'] }]
     },
     {
         span: 24, formType: 'GROUP', name: 'options_config', label: '操作设置', collapsible: true, defaultCollapsed: true,
-        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
+        jugde: [{ field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
         children: [
             { span: 12, formType: 'INPUT', name: 'options_name', label: '栏位名称', rules: true },
             { span: 12, formType: 'NUMBER', name: 'options_width', label: '整体宽度', rules: true },
@@ -6677,11 +6655,9 @@ const PrefabricatedTable = [
             { span: 12, formType: 'RADIO', name: 'options_fixed', label: '是否固定', rules: true, valueEnum: MappingData.IsEnabledBool }
         ]
     },
-
-
     {
         span: 24, formType: 'LIST', name: 'options', label: '操作设置', collapsible: true,
-        jugde: [{ field: 'tree', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
+        jugde: [{ field: 'data_type', value: ['A02', 'A03'] }, { field: 'options_status', value: [true] }],
         children: [
             { span: 12, formType: 'INPUT', name: 'name', label: '操作名称', rules: true },
             { span: 12, formType: 'RADIO', name: 'type', label: '操作类型', rules: true, valueEnum: MappingData.System__TableOptionsType },
@@ -6695,10 +6671,6 @@ const PrefabricatedTable = [
                     { span: 12, formType: 'INPUT', name: 'model_title', label: '弹窗名称', rules: true },
                     { span: 12, formType: 'INPUT', name: 'model_width', label: '整体宽度', tooltip: 'vw,vh,px,%' },
                     { span: 12, formType: 'INPUT', name: 'model_height', label: '整体宽度', tooltip: 'vw,vh,px,%' },
-
-
-
-
                 ]
             },
             // 跳转设置
@@ -6727,7 +6699,7 @@ const PrefabricatedTable = [
 ]
 
 
-
+// 自定义列表
 const PrefabricatedList = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
@@ -6975,6 +6947,32 @@ const PrefabricatedList = [
                     },
                 ]
             },
+        ]
+    },
+]
+
+
+
+
+// *** 弹窗设置
+const ModelConfigFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
+    { span: 24, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.Start__pageType },
+    { span: 24, formType: 'INPUT', name: 'diyUrl', label: '自订页面路径', rules: true, jugde: [{ field: 'pageType', value: ['DIY'] }] },
+    {
+        span: 24, formType: 'RADIO', name: 'layType', label: '布局页面类型', rules: true,
+        valueEnum: MappingData.Model_layoutType, jugde: [{ field: 'pageType', value: ['LAY'] }]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A02', label: '列表窗口配置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A02'] }], children: [
+            ...PrefabricatedTable,
         ]
     },
 ]

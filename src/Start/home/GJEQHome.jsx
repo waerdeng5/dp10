@@ -115,7 +115,8 @@ const GJEQHome = () => {
             Event: HomeEvent,
             modelData: {
                 json: 'HomeA03',
-                // data:{}
+                // row: { engineeringType: e }
+                row: { organizationUuid: '40491731-928e-4b02-aa30-f45f4a3a563e' }
             }
         })
     }

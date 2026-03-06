@@ -162,6 +162,8 @@
 
         .ant-pro-table-search {
             .ant-form-item-label {
+                flex: 0 0 120px !important;
+
                 label {
                     background: var(--searchTitleColor);
                     font-size: var(--searchTitleSize);

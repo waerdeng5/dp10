@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react'
 import { Card, Descriptions, Tree, Button, Spin } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { ProTable } from '@ant-design/pro-components'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 
 
 import { axios, strOfurlParamsFunc } from '../Utils/Api'
@@ -72,23 +72,23 @@ const dateBack = (type, api, source, name, level, mapping) => {
 
 
 // 默认表单组件
-const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
+const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const ModelOpen = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
     const {
         data_type, card, card_field, card_diyData, card_renderList, data_number, headerTitle,
-        tree, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_params, tree_http_urlMapping,
-        tree_start, tree_number, tree_key, tree_title, tree_children, columns_diyData,
+        tree,
+
+        tree_api_source, tree_start, tree_number, tree_key, tree_title, tree_children, tree_http_params,
+        tree_api_method, tree_api_url, tree_api_params, tree_api_https, tree_api_level, tree_api_mapping,
+
+        columns_diyData,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
         data_api_method, data_api_url, data_api_params, data_api_https, data_api_level, data_api_mapping,
-
-
-
         // ...item
     } = data
 
-
-    const Navigate = useNavigate()
+    // const Navigate = useNavigate()
     const tableBox = useRef(null)
     const size = useSize(tableBox)
     const [STYLE, setSTYLE] = useState()
@@ -105,7 +105,8 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
         if (e.type === 'navTo') {
             if (e.navTo_type === 'int') {
                 const { navTo_int_router, navTo_int_params } = e
-                Navigate(`${navTo_int_router}${data[navTo_int_params]}`)
+                // Navigate(`${navTo_int_router}${data[navTo_int_params]}`)
+                // 弹窗无法执行站内
             }
             if (e.navTo_type === 'ext') {
                 const { navTo_ext_type, navTo_ext_url, navTo_ext_value, navTo_ext_field } = e
@@ -168,13 +169,19 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
             }
             setColumnsData(columns)
             if (tree) {
-                const treeData = dateBack('tree', UrlData, tree_api_source, tree_http_urlName, tree_http_urlLevel, tree_http_urlMapping)
-                const key = treeData?.[0][tree_key]
-                setTreeData(treeData)
-                setTreeActive([key])
+                if (tree_api_source === 'A02') {
+                    const params = strOfurlParamsFunc(tree_api_params)
+                    const [err, res] = await axios({ method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
+                    if (err) return console.error('获取树状结构失败', err)
+                    const treeData = tree_api_level ? getNestedValue(tree_api_mapping || '', res) : res
+                    const key = treeData?.[0][tree_key]
+                    setTreeData(treeData)
+                    setTreeActive([key])
+                }
             }
-            if (data_type === 'A03') {
-                if (card) {
+
+            if (card) {
+                if (data_type === 'A03') {
                     const A03Card = card_diyData.reduce((acc, v) => {
                         acc[v.key] = v.value
                         return acc
@@ -187,11 +194,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     useEffect(() => {
         getStyle()
-
-    }, [UrlData, data])
+    }, [data])
 
     if (!STYLE || !columnsData) return <div className='PrefabricatedTable'><Spin /></div>
-
 
     const {
         table_search_title_color, table_search_title_deg, table_search_title_size, table_search_title_family, table_search_title_style,
@@ -408,7 +413,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                 tableRender={(_, dom) => {
                     return (
                         <div style={{ display: 'flex', width: '100%', ...MenuStyle }}>
-                            {treeData && treeActive &&
+                            {tree && treeData && treeActive &&
                                 <Tree
                                     className='TableMenu'
                                     blockNode
@@ -456,11 +461,19 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent }) => {
                 request={async ({ current, pageSize, treeActive, ...item }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
                     if (data_type === 'A02') {
+                        if (tree && !treeActive) return false
                         const params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
-                        if (tree && treeActive[0]) params[tree_http_params] = treeActive[0]
+                        if (tree && treeActive) params[tree_http_params] = treeActive[0]
+                        if (row) {
+                            console.log(row)
+                        }
+
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
+
+                        console.log(res)
+
                         if (card) {
                             setCardData(list[0])
                             // setCardData(getNestedValue(card_field, res))

@@ -19,17 +19,14 @@ const LayTempMapping = {
     A02: ModelTableTemplate
 }
 
-
-
-
 const LayoutModel = ({ data, Event }) => {
-    const { json } = data
+    const { json, row } = data
     const ModelEvent = useEventEmitter()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [Status, setStatus] = useState({ spin: true, result: true })
     const [componentStatus, setComponentStatus] = useState({ laoding: true, error: null, Template: null })
 
-    const [Config, setConfig] = useState({ uuid: json })
+    const [Config, setConfig] = useState({ json: json })
 
     const getJson = async () => {
         const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MOD_PAGE/${json}` } })
@@ -106,17 +103,10 @@ const LayoutModel = ({ data, Event }) => {
             </div>
         )
     }
-
-    // console.log(Config  layType)
-
     const Template = LayTempMapping[Config.layType]
-
-
-
     return (
         <div className='LayoutModel'>
-            <Template config={Config} />
-
+            <Template config={Config} row={row} Event={Event} />
             <FloatButton onClick={onFormClick} />;
         </div>
     );
