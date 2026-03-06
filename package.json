@@ -16,6 +16,7 @@
     "@dnd-kit/modifiers": "^9.0.0",
     "@dnd-kit/sortable": "^10.0.0",
     "@rollup/plugin-dynamic-import-vars": "^2.1.5",
+    "@turf/turf": "^7.3.4",
     "@visactor/react-vchart": "^2.0.14",
     "ahooks": "^3.9.5",
     "alova": "^3.3.4",
