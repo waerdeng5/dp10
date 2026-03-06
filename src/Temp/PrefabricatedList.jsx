@@ -8,7 +8,7 @@ import {
     SetFilderParams,
     getRandomInt,
     DiyDataReturn,
-    SetUnitParams
+    getNestedValue
 } from '../Utils'
 
 
@@ -44,8 +44,12 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
 
         back_color, back_deg, back_radius, back_border, back_border_size, back_border_type, back_border_color,
         back_position, back_topUnit, back_top, back_btmUnit, back_btm, back_lefUnit, back_lef, back_rigUnit, back_rig,
-        back_widthUnit, back_width, back_heightUnit, back_height
+        back_widthUnit, back_width, back_heightUnit, back_height,
+
+        http_urlName, http_urlLevel, http_urlMapping,
+
     } = data
+
 
     const wholeStyle = {
         padding: SpacingCallBack(whole_padding),
@@ -94,27 +98,18 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
         const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
         setData(backData)
         if (api_source === 'A02') {
-            console.log('数据接口,判断数组和对象.并组装数组', api_dataType)
-            if (api_dataType === 'A02') setItemList(data_obj_config)
+            const data = http_urlLevel ? getNestedValue(http_urlMapping, UrlData[http_urlName]) : UrlData[http_urlName]
+            setItemList(api_dataType === 'A02' ? data_obj_config : data_arr_config)
+            if (api_dataType === 'A02') setData(data)
+            if (api_dataType === 'A03' && data) {
+                const dataMap = data_arr_config.reduce((acc, item) => {
+                    const { data_value, data_field, data_fieldName, data_number } = item
+                    acc[data_value] = data.find(v => v[data_field] === data_fieldName)[data_number]
+                    return acc
+                }, {});
+                setData(dataMap)
+            }
         } else setItemList(data_diy_config)
-
-        // if (!isEmptyObject(UrlData)) {
-        //     const data = api_urlLevel ? getNestedValue(api_urlMapping, UrlData[api_urlName]) : UrlData[api_urlName]
-
-        //     if (data_type === 'A02') {
-        //         setItemList(data_obj_config)
-        //         setData(data)
-        //     }
-        //     if (data_type === 'A03') {
-        //         setItemList(data_arr_config)
-        //         const dataMap = data_arr_config.reduce((acc, item) => {
-        //             const { data_value, data_field, data_fieldName, data_number } = item
-        //             acc[data_value] = data.find(v => v[data_field] === data_fieldName)[data_number]
-        //             return acc
-        //         }, {});
-        //         setData(dataMap)
-        //     }
-        // }
     }, [UrlData, data])
 
     return (

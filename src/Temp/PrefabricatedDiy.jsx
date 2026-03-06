@@ -1,6 +1,8 @@
 import './Prefabricated.scss'
 import { useEffect, useState, Fragment } from 'react'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, AssemblyModelData, AssemblyNavTo } from '../Utils'
+
+import { useTemplateModel } from '../Config/useHooks'
 
 const temporaryDataA01 = {
     A01: getRandomInt(1, 1000),
@@ -48,6 +50,7 @@ const SoldNumber = ({ template, data, list }) => {
 
 
 const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const [Data, setData] = useState()
 
     const {
@@ -94,14 +97,30 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     }, [UrlData, data])
 
 
+    const onClick = (e, v, row) => {
+        e.stopPropagation()
+        const { click_type, model_level } = v
+
+        if (click_type === 'model') {
+            const modelData = AssemblyModelData(v, row, LayoutEvent)
+            openModel[model_level](modelData)
+        }
+        if (click_type === 'navTo') {
+            AssemblyNavTo(v, row, LayoutEvent)
+        }
+    }
+
 
     return (
         <div className='PrefabricatedDiyText' >
             {left_img && <img src={left_img_url} style={leftImgStyle} alt="left_img_url" />}
             <div className='centerBox' style={centerStyle}>
                 {text_list?.map((v, i) => {
-                    const { text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color, text_margin } = v
+                    const { text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color, text_margin,
+                        click_status
+                    } = v
                     const textStyle = {
+                        cursor: click_status ? 'pointer' : 'auto',
                         margin: SpacingCallBack(text_margin),
                         '--titleColor': ColorCallBack(text_color, text_deg),
                         fontSize: text_size,
@@ -110,8 +129,10 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
                         fontStyle: text_style,
                         filter: SetFilderParams(text_filed, text_filed_data, text_filed_color),
                     }
+
+
                     return (
-                        <div key={i} style={textStyle} className='textItem'>
+                        <div key={i} style={textStyle} className='textItem' onClick={(e) => onClick(e, v)}>
                             <SoldNumber template={v.text} data={Data} list={data_list} />
                         </div>
                     )

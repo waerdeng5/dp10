@@ -220,6 +220,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     const startCallBack = e => {
         const { type, data } = e
+        console.log()
         const Mapping = new Map([
             ['onAPIParams', () => onAPIParams(data)],
             ['onWindowParams', () => onWindowParams(data)],
@@ -238,6 +239,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
             ['onSetTemplateParams', () => onSetTemplateParams(data)],
             ['onSetTemplateParamsBack', () => onSetTemplateParamsBack(data)],
             ['onDeleteTemplate', () => onDeleteTemplate(data)],
+            ['setInternalRouting', () => console.log('站内路由', data)]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -255,17 +257,12 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
             <div className='MenuTypeLay_Content' style={pageStyle}>
                 {(() => {
                     if (page_fold) {
-                        console.log(page_fold)
-                        console.log(page)
                         const { fold_position, fold_left, fold_right, fold_top, fold_bottom, fold_width, fold_height, fold_url,
                             fold_open, fold_off, fold_titleColor, fold_titleDeg, fold_titleSize, fold_titleFamily, fold_titleWeight,
                             fold_titleStyle, fold_shadow, fold_filterSize, fold_filterColor, fold_padding
                         } = page
 
-                        const foldStyle = {
-                            width: fold_width,
-                            height: fold_height,
-                        }
+                        const foldStyle = { width: fold_width, height: fold_height }
 
                         const textStyle = {
                             padding: SpacingCallBack(fold_padding),
@@ -276,7 +273,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                             fontStyle: fold_titleStyle,
                             filter: SetFilderParams(fold_shadow, fold_filterSize, fold_filterColor),
                         }
-
                         if (fold_position === 'leftTop') {
                             foldStyle.left = fold_left
                             foldStyle.top = fold_top
@@ -293,7 +289,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                             foldStyle.right = fold_right
                             foldStyle.bottom = fold_bottom
                         }
-
                         return (
                             <div className='FoldContent' style={foldStyle} onClick={() => setFoldStatus(e => (!e))}>
                                 <img src={fold_url} alt="" />

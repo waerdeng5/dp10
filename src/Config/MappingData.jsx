@@ -148,6 +148,10 @@ export const MappingData = {
         { value: 'A02', label: '对象' },
         { value: 'A03', label: '数组' },
     ],
+    paramTypeMapping: [
+        { value: 'data', label: '数据' },
+        { value: 'diys', label: '自定' },
+    ],
 
     // TODO 数据映射
     Data__GetDataType: [

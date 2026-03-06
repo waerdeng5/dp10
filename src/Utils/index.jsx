@@ -290,8 +290,7 @@ export const findExtraItemsByUuid = (array1, array2, key = 'uuid') => {
 export const getNestedValue = (hierarchy, res) => {
     if (!hierarchy) return res
     if (typeof hierarchy !== 'string' || typeof res !== 'object' || res === null) {
-        console.log(hierarchy, res)
-        console.error('无效输入：层级应为字符串，res应为对象。')
+        // console.error('无效输入：层级应为字符串，res应为对象。')
         return undefined
     }
     const keys = hierarchy.split('.')
@@ -753,7 +752,35 @@ export const DiyDataReturn = (data, apiData, backData, diyKey) => {
     return []
 }
 
-// TODO 单位参数结构赋值
-export const SetUnitParams = ({ unit, value }) => {
+// TODO 组装弹出层的数据
+export const AssemblyModelData = (data, row, Event) => {
+    const { model_uuid, model_start, model_title, model_width, model_height, model_params, model_config } = data
+    const rowData = model_params ? model_config.reduce((acc, item) => {
+        acc[item.param_key] = item.param_type === 'diys' ? item.param_value : row[item.param_value]
+        return acc
+    }, {}) : {}
 
+    return ({
+        title: model_title,
+        type: 'LayoutModel',
+        isStart: model_start,
+        width: model_width,
+        height: model_height,
+        Event: Event,
+        modelData: { json: model_uuid, row: rowData }
+    })
+}
+
+// TODO 组件跳转设置
+export const AssemblyNavTo = (data, row, Event) => {
+    if (data.navTo_type === 'int') {
+        const { navTo_int_router, navTo_int_params } = data
+        Event.emit({ type: 'setInternalRouting', data: `${navTo_int_router}${navTo_int_params}` })
+    }
+    if (data.navTo_type === 'ext') {
+        const { navTo_ext_type, navTo_ext_url, navTo_ext_value, navTo_ext_field } = data
+        const url = navTo_ext_type === 'field' ? row[navTo_ext_url] : navTo_ext_url
+        const params = navTo_ext_value ? `?${navTo_ext_field}=${row[navTo_ext_value]}` : ''
+        window.open(`${row[navTo_ext_url]}?${url}=${params}`)
+    }
 }
