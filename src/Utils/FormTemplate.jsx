@@ -85,7 +85,7 @@ const formCallBack = e => {
     return traverse(e)
 }
 
-const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack }) => {
+const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack, onFormBack = 'onFormBack' }) => {
     const formRef = useRef(null)
     const [loading, setLoading] = useState(false)
 
@@ -95,7 +95,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
 
     const onFinish = async (e) => {
         const data = await formCallBack(e)
-        FORMEVENT.emit({ type: 'onFormBack', data: { ...data, onCallBack } })
+        FORMEVENT.emit({ type: onFormBack, data: { ...data, onCallBack } })
         setLoading(NotLoading ? false : true)
     }
 
@@ -103,7 +103,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
         if (detection) run(e)
     }
 
-    const onFormBack = (e) => {
+    const onFormBackFn = (e) => {
         const { type, data } = e
         if (type === 'closeFormLoading') setTimeout(() => setLoading(false), 0)
         if (type === 'onFormReset') {
@@ -111,7 +111,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
             setTimeout(() => setLoading(false), 0)
         }
     }
-    FORMEVENT.useSubscription(onFormBack)
+    FORMEVENT.useSubscription(onFormBackFn)
 
     return (
         <div className='FormTemplateClass01'>

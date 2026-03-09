@@ -29,6 +29,7 @@
     "exceljs": "^4.4.0",
     "file-saver": "^2.0.5",
     "jspdf": "^3.0.4",
+    "lodash": "^4.17.23",
     "mars3d": "^3.11.0",
     "mars3d-cesium": "^1.138.0",
     "react": "^18.3.1",

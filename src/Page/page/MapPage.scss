@@ -5,10 +5,130 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
 
 
     .MapBox {
         width: 100%;
         height: 100%;
+    }
+
+    &>.ConfigBox {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        pointer-events: none;
+
+        &>.Options {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+            height: 80px;
+            background: #26262650;
+            backdrop-filter: blur(8px);
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: auto;
+
+            &>.ParamsList {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &>div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex-direction: column;
+                    margin: 0 8px;
+                    cursor: pointer;
+
+                    &>i {
+                        color: white;
+                        font-size: 32px;
+                    }
+
+                    &>div {
+                        color: white;
+                        font-size: 16px;
+                        font-family: 'HYT';
+                    }
+                }
+
+
+            }
+        }
+
+        &>.Left {
+            pointer-events: auto;
+            position: absolute;
+            left: 0;
+            top: 88px;
+            width: 400px;
+            height: calc(100% - 88px);
+            background: #26262650;
+            backdrop-filter: blur(8px);
+            border-radius: 0 8px 0 0;
+            padding: 8px;
+            overflow: hidden;
+        }
+
+        &>.Right {
+            pointer-events: auto;
+            position: absolute;
+            right: 0;
+            top: 88px;
+            width: 400px;
+            height: calc(100% - 88px);
+            background: #26262650;
+            backdrop-filter: blur(8px);
+            border-radius: 8px 0 0 0;
+            padding: 8px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            overflow: hidden;
+
+            &>.Title {
+                width: 100%;
+                margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                color: white;
+                font-family: 'HYT';
+                font-size: 24px;
+                user-select: none;
+
+                &>div:last-child {
+                    cursor: pointer;
+                }
+
+            }
+
+            &>.FormBox {
+                flex: 1;
+                width: 100%;
+                overflow: hidden;
+
+                .FormList {
+                    width: 100%;
+                    height: 100%;
+                    color: white;
+                }
+            }
+        }
     }
 }

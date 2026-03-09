@@ -42,6 +42,8 @@ const AdminIndex = () => {
     const [userAdd, setUserAdd] = useState()
     const [unLook, setUnLook] = useState()
 
+    const [BtnStatus, setBtnStatus] = useState(true)
+
     useTitle(Config?.fullName || '加载中...')
     useFavicon(Config?.imageUrl + 'Ico.ico')
 
@@ -113,12 +115,14 @@ const AdminIndex = () => {
 
     const adminCallBack = (e) => {
         const { type, data } = e
+
         const Mapping = new Map([
             ['onThemeDetection', () => onThemeDetection(data)],
             ['onSaveTheme', () => onSetTheme(data)],
             ['onActiveMenu', () => onActiveMenu(data)],
             ['onSetDxTheme', () => onSetDxTheme(data)],
-            ['onLookPage', onLookPage]
+            ['onLookPage', onLookPage],
+            ['onHiddenButton', () => setBtnStatus(false)]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -157,15 +161,12 @@ const AdminIndex = () => {
         const pageList = await GetIndexedDB('pageList')
         const data = pageList.find(v => v.uuid === openKey)
         const config = Active[openKey]
-
         if (data.type === 'dev') addConfigData(config)
         if (data.type === 'diy') AdminEvent.emit({ type: 'onOpenSetPage' })
         if (data.type === 'lay') AdminEvent.emit({ type: 'onActivateLayout' })
     }
 
-    const onOpenSetLayout = () => {
-        console.log('布局页面设置')
-    }
+
 
     const addConfigData = async (config) => {
         const { uuid, towUuid, targetUrl, tableName, APIdata, THEdata, OPTdata } = config
@@ -383,7 +384,6 @@ const AdminIndex = () => {
             [0, onOpenProject],
             [1, onOpenSetTheme],
             [2, onOpenSetMenu],
-            [3, onOpenSetLayout]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -434,7 +434,7 @@ const AdminIndex = () => {
                     </div>
                 }
 
-                {(port || userInfo.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') &&
+                {BtnStatus && (port || userInfo.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') &&
                     <HappyProvider>
                         <FloatButton.Group
                             shape="square"

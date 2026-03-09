@@ -1,7 +1,10 @@
 import { useEventEmitter } from 'ahooks'
 import FormTemplate from '../../Utils/FormTemplate'
 import { FormConfig } from '../../Config/configForm'
+import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
+
+const FormList = { ...FormConfig, ...Mars3dFormConfig }
 
 const CommonForm = ({ data, Event }) => {
     const FORMEVENT = useEventEmitter()
