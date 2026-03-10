@@ -108,7 +108,6 @@ const MapPage = ({ data, AdminEvent }) => {
 
     // TODO 操作信息
     const onButtonClick = (uuid) => {
-        console.log('固定操作', uuid)
 
         // console.log('Map', type, data)
         const Mapping = new Map([
@@ -117,8 +116,9 @@ const MapPage = ({ data, AdminEvent }) => {
                     title: '场景设置',
                     type: 'Mars3dModel',
                     Event: MapEvent,
-                    width: '24vw',
+                    width: 600,
                     height: '100vh',
+                    shading: false,
                     position: { my: 'left ', at: 'left ', of: window },
                     modelData: { type: 'A01', MapConfig, ...MpaPar }
                 })
@@ -128,17 +128,36 @@ const MapPage = ({ data, AdminEvent }) => {
                     title: '场景剪裁',
                     type: 'Mars3dModel',
                     Event: MapEvent,
-                    width: '24vw',
+                    width: 600,
                     height: '100vh',
+                    shading: false,
                     position: { my: 'left ', at: 'left ', of: window },
                     modelData: { type: 'A02', MapConfig, ...MpaPar }
                 })
             }],
             [3, () => { // 视角书签
-                console.log('视角书签')
+                updateModel({
+                    title: '视角书签',
+                    type: 'Mars3dModel',
+                    Event: MapEvent,
+                    width: 600,
+                    height: '100vh',
+                    shading: false,
+                    position: { my: 'left ', at: 'left ', of: window },
+                    modelData: { type: 'A03', MapConfig, ...MpaPar }
+                })
             }],
             [4, () => { // 元素列表
-                console.log('元素列表')
+                updateModel({
+                    title: '元素列表',
+                    type: 'Mars3dModel',
+                    Event: MapEvent,
+                    width: 600,
+                    height: '100vh',
+                    shading: false,
+                    position: { my: 'left ', at: 'left ', of: window },
+                    modelData: { type: 'A04', ELEConfig, ...MpaPar }
+                })
             }],
             [5, () => { // 模型列表
                 console.log('模型列表')
@@ -146,10 +165,7 @@ const MapPage = ({ data, AdminEvent }) => {
             [6, () => { // 引入文件
                 console.log('引入文件')
             }],
-            [7, () => { // 保存数据
-                console.log('保存数据')
-                onSaveMap()
-            }],
+            [7, onSaveMap],
         ])
 
         const func = Mapping.get(uuid)
@@ -163,7 +179,8 @@ const MapPage = ({ data, AdminEvent }) => {
         const { type, data } = e
         console.log('Map', type, data)
         const Mapping = new Map([
-            ['onSaveMapConfig', () => setMapConfig(data)]
+            ['onSaveMapConfig', () => setMapConfig(data)],
+            ['onSaveMapElement', () => setELEConfig(data)],
         ])
         const func = Mapping.get(type)
         func?.(data)

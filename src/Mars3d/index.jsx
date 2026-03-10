@@ -1,5 +1,6 @@
 import * as mars3d from "mars3d"
 import { layerList } from './initData'
+import { CommonSceneUrl } from '../Config'
 
 
 const specialMap = [120000, 150000, 340000, 140525, 150223, 150723]
@@ -30,10 +31,8 @@ export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
     RenderElement(gra, ELEMENT)
     RenderOther(map, TILES)
 
-
-    // // 添加剪裁
-    // BoundaryBorderFunction(gra, clip, data)
-
+    // 添加剪裁
+    BoundaryBorderFunction(gra, clip, CONFIG)
 
     // 参数后处理
     map.scene.globe._surface.tileProvider._debug.wireframe = other.wireframe
@@ -92,7 +91,6 @@ const processPositions = (item, callback) => {
 // 通用渲染函数
 const renderCanver = (gra, arr, data, graphicCreator) => {
     const { show, style } = data
-    console.log(style)
     if (!show) return
     arr.forEach(item => {
         processPositions(item, positions => {
@@ -134,7 +132,6 @@ export const BoundaryBorderFunction = (gra, clip, data) => {
     if (!enabled || mapArr.length === 0) return
     Promise.all(mapArr.map(item => GetUrlData(item)))
         .then(results => {
-            console.log(results)
             const allGraphics = results.flatMap(res => mars3d.Util.geoJsonToGraphics(res));
             clipFunc(allGraphics, true, clip);
             CoverCanver(gra, allGraphics, cover);

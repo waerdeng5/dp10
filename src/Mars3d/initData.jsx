@@ -223,7 +223,7 @@ export const sceneParameter = {
         backgroundColor: '#00000000',
         verticalExaggeration: 1,
         orderIndependentTranslucency: false,
-        contextOptions: { webgl: { alpha: true } },
+        contextOptions: { requestWebgl1: true, webgl: { alpha: true } },
     },
     globe: {
         show: true,

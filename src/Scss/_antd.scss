@@ -146,8 +146,9 @@
     z-index: 5;
 }
 
-.ant-tabs-dropdown {
-    z-index: 5000;
+.ant-tabs-dropdown,
+.ant-popover {
+    z-index: 5000 !important;
 
     .ant-tabs-dropdown-menu {
         background-color: rgba(255, 255, 255, 0.55);

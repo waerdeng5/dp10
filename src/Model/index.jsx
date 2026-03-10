@@ -15,6 +15,7 @@ const isInteger = (str) => {
 const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     const { message } = App.useApp()
     const {
+        shading = true,
         isStart = false,
         type = 'DefaultModel',
         title = '...', // 标题
@@ -90,6 +91,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         return (
             <Popup
                 {...SIZE}
+                shading={shading}
                 visible={visible}
                 position={position}
                 title={title}

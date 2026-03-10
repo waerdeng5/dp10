@@ -1,83 +1,25 @@
 import { MappingData } from './MappingData'
 
 
+// TODO 添加视角
+const Mars3donAddCenter = [
+    { span: 24, formType: 'INPUT', name: 'name', label: '视角名称', rules: true, tooltip: '同一名称相互覆盖!' },
+]
+// TODO 添加元素或分组
+const Mars3donAddElement = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '唯一标识', rules: true },
+    { span: 24, formType: 'INPUT', name: 'name', label: '字段名称', rules: true },
+    { span: 24, formType: 'RADIO', name: 'fieldType', label: '数据类型', valueEnum: MappingData.mars3d__fieldsType, rules: true },
+    {
+        span: 24, formType: 'TREE', name: 'elementType', label: '元素类型', valueEnum: MappingData.mars3d__elementType, rules: true,
+        jugde: [{ field: 'fieldType', value: ['element'] }]
+    },
+]
+
+
 // TODO 额外材质
 const materialOptionsMapping = [
     { span: 24, formType: 'SELECT', name: ['style', 'materialType'], label: '元素材质', rules: true, valueEnum: MappingData.mars3d__materialType },
-
-    // //  text
-    // {
-    //     span: 24, formType: 'INPUT', name: ['style', 'materialOptions', 'text'], label: '文字内容', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
-    // },
-    // //  font_size
-    // {
-    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'font_size'], label: '文字字号', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
-    // //  SELECT font_family
-    // {
-    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_family'], label: '文字字体', rules: true,
-    //     valueEnum: MappingData.Font__Family, jugdeField: ['style', 'materialType'],
-    //     jugdeValue: ['Text']
-    // },
-    // //  SELECT font_weight
-    // {
-    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_weight'], label: '文字加粗', rules: true,
-    //     valueEnum: MappingData.Font__WeightStr, jugdeField: ['style', 'materialType'],
-    //     jugdeValue: ['Text']
-    // },
-    // //  SELECT font_style
-    // {
-    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_style'], label: '文字倾斜', rules: true,
-    //     valueEnum: MappingData.Font__Style, jugdeField: ['style', 'materialType'],
-    //     jugdeValue: ['Text']
-    // },
-    // //  RADIO stroke
-    // {
-    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'stroke'], label: '描边文本', rules: true,
-    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
-    // //  strokeColor
-    // {
-    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'strokeColor'], label: '描边颜色', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
-    // },
-    // //  strokeWidth
-    // {
-    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'strokeWidth'], label: '描边宽度', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
-    // //  RADIO outline
-    // {
-    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'outline'], label: '文本边框', rules: true,
-    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
-    // //  outlineColor
-    // {
-    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'outlineColor'], label: '边框颜色', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
-    // },
-    // //  outlineWidth
-    // {
-    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'outlineWidth'], label: '边框宽度', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text','PolylineOutline']
-    // },
-    // //  RADIO background
-    // {
-    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'background'], label: '开启背景', rules: true,
-    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
-    // //  backgroundColor
-    // {
-    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'backgroundColor'], label: '背景颜色', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
-    // },
-    // //  padding
-    // {
-    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'padding'], label: '背景填充', rules: true,
-    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
-    // },
     //  SELECT image
     {
         span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'image'], label: '选择图片', rules: true,
@@ -386,6 +328,8 @@ const materialOptionsMapping = [
 ]
 
 
+
+
 // !!! 基础设置
 // TODO 基础信息
 const Mars3dBaseConfig = [
@@ -532,10 +476,7 @@ const Mars3dBoundaryCoverConfig = [
     {
         span: 24, formType: 'GROUP', name: 'Mars3dBoundaryCoverConfig', label: '覆盖面设置', collapsible: true,
         jugde: [{ field: 'show', value: [true] }], children: [
-            { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '立体高度', rules: true },
-            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
             ...materialOptionsMapping
         ]
     },
@@ -547,10 +488,8 @@ const Mars3dBoundaryLineConfig = [
         span: 24, formType: 'GROUP', name: 'Mars3dBoundaryLineConfig', label: '边界线设置', collapsible: true,
         jugde: [{ field: 'show', value: [true] }], children: [
             { span: 24, formType: 'NUMBER', name: ['style', 'width'], label: '线条宽度', rules: true },
-            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'RADIO', name: ['style', 'closure'], label: '是否闭合', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 24, formType: 'RADIO', name: ['style', 'depthFail'], label: '是否遮挡', rules: true, valueEnum: MappingData.IsEnabledBool },
             ...materialOptionsMapping
         ]
     },
@@ -564,8 +503,6 @@ const Mars3dBoundaryWallConfig = [
             { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙体高度', rules: true, },
             { span: 24, formType: 'NUMBER', name: ['style', 'setHeight'], label: '向下偏移', rules: true, },
             { span: 24, formType: 'RADIO', name: ['style', 'closure'], label: '是否闭合', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
             ...materialOptionsMapping
         ]
     },
@@ -574,6 +511,9 @@ const Mars3dBoundaryWallConfig = [
 
 
 export const Mars3dFormConfig = {
+    Mars3donAddCenter,
+    Mars3donAddElement,
+
     Mars3dBaseConfig,
     Mars3dGlobeConfig,
     Mars3dCameraController,

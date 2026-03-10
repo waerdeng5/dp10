@@ -39,7 +39,7 @@ const CommonForm = ({ data, Event }) => {
         <DevScrollView>
             <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
                 <FormTemplate
-                    formItem={FormConfig[formItem]}
+                    formItem={FormList[formItem]}
                     FORMEVENT={FORMEVENT}
                     Initial={Initial || {}}
                     NotSubmit={NotSubmit}
