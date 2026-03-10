@@ -68,7 +68,6 @@ const initWeather = (weather, map) => {
     }, {})
     Object.entries(weatherObj).forEach(([key, value]) => effectMapping[key](map, value))
 }
-
 const initColour = (colour, map) => {
     const colourObj = Object.entries(colour).reduce((acc, [key, value]) => {
         const [lot, field] = key.split('_');
@@ -78,7 +77,72 @@ const initColour = (colour, map) => {
     Object.entries(colourObj).forEach(([key, value]) => effectMapping[key](map, value))
 }
 
+// !!! 剪裁设置
+// 获取范围数据
+const GetUrlData = async (url) => {
+    return await mars3d.Util.fetchJson({ url: CommonSceneUrl.json + url + '.json' })
+}
 
+// 辅助函数：处理特殊区域的positions
+const processPositions = (item, callback) => {
+    if (specialMap.includes(item.attr.adcode)) item.positions.forEach(pos => callback(pos))
+    else callback(item.positions);
+}
+
+// 通用渲染函数
+const renderCanver = (gra, arr, data, graphicCreator) => {
+    const { show, style } = data
+    console.log(style)
+    if (!show) return
+    arr.forEach(item => {
+        processPositions(item, positions => {
+            const graphic = graphicCreator(positions, style);
+            gra.addGraphic(graphic);
+        });
+    });
+};
+
+// 剪裁函数
+const clipFunc = (arr, isClip, clip) => {
+    clip.clear()
+    if (!isClip) return
+    arr.forEach(item => processPositions(item, positions => clip.addArea(positions)))
+    clip.clipOutSide = true
+}
+
+// 清除图形
+const ClearBaseFunc = (gra, attrValue) => {
+    const graphics = gra.getGraphicsByAttr(attrValue, 'attr')
+    graphics.forEach(graphic => gra.removeGraphic(graphic))
+}
+
+const ClearGra = (gra, clip) => {
+    clip.clear();
+    ['CoverElement', 'LineElement', 'WallElement'].forEach(attr => ClearBaseFunc(gra, attr))
+};
+
+// 各图层渲染函数
+const CoverCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.PolygonPrimitive({ attr: 'CoverElement', positions, style }))
+const LineCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.PolylineEntity({ attr: 'LineElement', positions, style }))
+const WallCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.WallPrimitive({ attr: 'WallElement', positions, style }))
+
+// 主函数
+export const BoundaryBorderFunction = (gra, clip, data) => {
+    const { border, cover, line, wall } = data
+    const { enabled, border: mapArr } = border
+    ClearGra(gra, clip)
+    if (!enabled || mapArr.length === 0) return
+    Promise.all(mapArr.map(item => GetUrlData(item)))
+        .then(results => {
+            console.log(results)
+            const allGraphics = results.flatMap(res => mars3d.Util.geoJsonToGraphics(res));
+            clipFunc(allGraphics, true, clip);
+            CoverCanver(gra, allGraphics, cover);
+            LineCanver(gra, allGraphics, line);
+            WallCanver(gra, allGraphics, wall);
+        })
+        .catch(error => console.error('数据加载失败:', error));
+}
 
 
 

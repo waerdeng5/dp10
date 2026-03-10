@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { GetIndexedDB, IndexedDBClear, PutIndexedDB } from './IndexedDB'
+import _ from 'lodash'
 
 
 // TODO 判断浏览器版本
@@ -666,7 +667,8 @@ export const promiseTo = (promise) => {
 export const checkConditions = (obj, conditions) => {
     return conditions.every(condition => {
         const { field, value } = condition
-        return value.includes(obj[field])
+        const data = _.get(obj, field)
+        return value.includes(data)
     })
 }
 

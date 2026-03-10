@@ -120,15 +120,19 @@ const MapPage = ({ data, AdminEvent }) => {
                     width: '24vw',
                     height: '100vh',
                     position: { my: 'left ', at: 'left ', of: window },
-                    modelData: {
-                        type: 'A01',
-                        MapConfig,
-                        ...MpaPar
-                    }
+                    modelData: { type: 'A01', MapConfig, ...MpaPar }
                 })
             }],
             [2, () => { // 场景剪裁
-                console.log('场景剪裁')
+                updateModel({
+                    title: '场景剪裁',
+                    type: 'Mars3dModel',
+                    Event: MapEvent,
+                    width: '24vw',
+                    height: '100vh',
+                    position: { my: 'left ', at: 'left ', of: window },
+                    modelData: { type: 'A02', MapConfig, ...MpaPar }
+                })
             }],
             [3, () => { // 视角书签
                 console.log('视角书签')
@@ -144,6 +148,7 @@ const MapPage = ({ data, AdminEvent }) => {
             }],
             [7, () => { // 保存数据
                 console.log('保存数据')
+                onSaveMap()
             }],
         ])
 
@@ -152,33 +157,13 @@ const MapPage = ({ data, AdminEvent }) => {
     }
 
 
-    const onBaseBack = (e) => {
-        const { onCallBack, ...data } = e
-        Object.keys(data).forEach(v => { _.set({ ...MapConfig }, `${onCallBack}.${v}`, data[v]) })
-        // setMapConfig({ ...MapConfig })
-        // console.log(MapConfig)
-        setRightConfig({})
-        // Map.setSceneOptions(MapConfig)
 
-
-        const Mapping = new Map([
-            ['scene', () => {
-                // 组装form列表
-                console.log('MapConfig', MapConfig)
-                Map.setSceneOptions(MapConfig.scene)
-            }]
-        ])
-        const func = Mapping.get(onCallBack)
-        func?.()
-
-
-    }
 
     const mapCallBack = (e) => {
         const { type, data } = e
-        // console.log('Map', type, data)
+        console.log('Map', type, data)
         const Mapping = new Map([
-            ['onBaseBack', () => onBaseBack(data)],
+            ['onSaveMapConfig', () => setMapConfig(data)]
         ])
         const func = Mapping.get(type)
         func?.(data)

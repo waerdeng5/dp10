@@ -1,5 +1,392 @@
 import { MappingData } from './MappingData'
 
+
+// TODO 额外材质
+const materialOptionsMapping = [
+    { span: 24, formType: 'SELECT', name: ['style', 'materialType'], label: '元素材质', rules: true, valueEnum: MappingData.mars3d__materialType },
+
+    // //  text
+    // {
+    //     span: 24, formType: 'INPUT', name: ['style', 'materialOptions', 'text'], label: '文字内容', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
+    // },
+    // //  font_size
+    // {
+    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'font_size'], label: '文字字号', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    // //  SELECT font_family
+    // {
+    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_family'], label: '文字字体', rules: true,
+    //     valueEnum: MappingData.Font__Family, jugdeField: ['style', 'materialType'],
+    //     jugdeValue: ['Text']
+    // },
+    // //  SELECT font_weight
+    // {
+    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_weight'], label: '文字加粗', rules: true,
+    //     valueEnum: MappingData.Font__WeightStr, jugdeField: ['style', 'materialType'],
+    //     jugdeValue: ['Text']
+    // },
+    // //  SELECT font_style
+    // {
+    //     span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'font_style'], label: '文字倾斜', rules: true,
+    //     valueEnum: MappingData.Font__Style, jugdeField: ['style', 'materialType'],
+    //     jugdeValue: ['Text']
+    // },
+    // //  RADIO stroke
+    // {
+    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'stroke'], label: '描边文本', rules: true,
+    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    // //  strokeColor
+    // {
+    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'strokeColor'], label: '描边颜色', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
+    // },
+    // //  strokeWidth
+    // {
+    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'strokeWidth'], label: '描边宽度', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    // //  RADIO outline
+    // {
+    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'outline'], label: '文本边框', rules: true,
+    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    // //  outlineColor
+    // {
+    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'outlineColor'], label: '边框颜色', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
+    // },
+    // //  outlineWidth
+    // {
+    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'outlineWidth'], label: '边框宽度', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text','PolylineOutline']
+    // },
+    // //  RADIO background
+    // {
+    //     span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'background'], label: '开启背景', rules: true,
+    //     valueEnum: MappingData.IsEnabledBool, jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    // //  backgroundColor
+    // {
+    //     span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'backgroundColor'], label: '背景颜色', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text'],
+    // },
+    // //  padding
+    // {
+    //     span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'padding'], label: '背景填充', rules: true,
+    //     jugdeField: ['style', 'materialType'], jugdeValue: ['Text']
+    // },
+    //  SELECT image
+    {
+        span: 24, formType: 'SELECT', name: ['style', 'materialOptions', 'image'], label: '选择图片', rules: true,
+        valueEnum: MappingData.mars3d__polylineImage,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlow', 'DigitalFlow', 'WallScroll', 'RectSlide', 'Image'] }]
+    },
+    //  SELECT normalMap
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'normalMap'], label: '水面材质', rules: true,
+        valueEnum: MappingData.mars3d__waterMaterial,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  SELECT specularMap
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'specularMap'], label: '水面材质', rules: true,
+        valueEnum: MappingData.mars3d__waterMaterial,
+        jugde: [{ field: ['style', 'materialType'], value: ['WaterLight'] }]
+    },
+    //  基础色值 color 
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'color'], label: '基础色值', rules: true,
+        jugde: [{
+            field: ['style', 'materialType'], value: ['Color', 'RandomColor', 'PolylineArrow', 'ODLine', 'LineBloom', 'LineTrail', 'LineFlicker',
+                'PolylineGlow', 'LineDashArrow', 'LineFlowColor', 'LineThreeDash', 'PolylineDash', 'LineDotDash', 'LineCross', 'PolylineOutline',
+                'LineFlow', 'DigitalFlow', 'WallScroll', 'RectSlide', 'ScanLine', 'RadarLine', 'RadarWave', 'CircleWave', 'CylinderWave', 'EllipsoidWave',
+                'EllipsoidElectric', 'Grid', 'Image', 'NeonLight', 'PolyAsphalt', 'PolyGradient', 'Text']
+        }]
+    },
+    //  bgColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'bgColor'], label: '背景颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['ODLine', 'LineFlow'] }]
+    },
+    //  outlineColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'outlineColor'], label: '衬色颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolylineOutline'] }]
+    },
+    //  gapColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'gapColor'], label: '虚线颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineDashArrow', 'PolylineDash', 'LineDotDash'] }]
+    },
+    //  sidesColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'sidesColor'], label: '外侧颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineThreeDash'] }]
+    },
+    //  evenColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'evenColor'], label: '主要颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['Checkerboard', 'PolyBlob', 'PolyFacet', 'PolyGrass', 'PolyWood', 'Stripe'] }]
+    },
+    //  oddColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'oddColor'], label: '辅助颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['Checkerboard', 'PolyBlob', 'PolyFacet', 'PolyGrass', 'PolyWood', 'Stripe'] }]
+    },
+    //  baseWaterColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'baseWaterColor'], label: '基础颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  blendColor
+    {
+        span: 24, formType: 'COLOR', name: ['style', 'materialOptions', 'blendColor'], label: '混合颜色', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  速度参数 speed
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'speed'], label: '基础速度', rules: true,
+        jugde: [{
+            field: ['style', 'materialType'], value: ['ODLine', 'LineBloom', 'LineTrail', 'LineFlicker', 'LineFlowColor', 'LineFlow', 'DigitalFlow',
+                'WallScroll', 'RectSlide', 'ScanLine', 'RadarLine', 'RadarWave', 'CircleWave', 'CylinderWave', 'EllipsoidWave', 'EllipsoidElectric', 'Text']
+        }]
+    },
+    //  startTime
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'startTime'], label: '开始时间', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['ODLine', 'LineFlowColor'] }]
+    },
+    //  dashLength
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'dashLength'], label: '虚线间隔', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineDashArrow', 'LineThreeDash', 'PolylineDash', 'LineDotDash', 'LineCross'] }]
+    },
+    //  maskLength
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'maskLength'], label: '间隔长度', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineCross'] }]
+    },
+    //  sidesDashLength
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'sidesDashLength'], label: '外线长度', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineThreeDash'] }]
+    },
+    //  outlineWidth
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'outlineWidth'], label: '衬色宽度', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolylineOutline'] }]
+    },
+    //  repeat_x
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'repeat_x'], label: '横轴重复', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlow', 'Image'] }]
+    },
+    //  repeat_y
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'repeat_y'], label: '纵轴重复', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlow', 'Image'] }]
+    },
+    //  segment
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'segment'], label: '分段数量', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['DigitalFlow'] }]
+    },
+    //  count
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'count'], label: '重复数量', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['WallScroll', 'CircleWave'] }]
+    },
+    //  repeat
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'repeat'], label: '重复数量', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['CylinderWave', 'Checkerboard', 'Stripe'] }]
+    },
+    //  offset
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'offset'], label: '起始位置', rules: true,
+        jugde: [{ field: ['style', 'materialType'], value: ['Stripe'] }]
+    },
+    //  glow
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'glow'], label: '泛光强度', rules: true, min: 0, max: 10, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineBloom', 'DigitalFlow'] }]
+    },
+    //  showRatio
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'showRatio'], label: '线宽比例', rules: true, min: -1, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineBloom'] }]
+    },
+    //  glowPower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'glowPower'], label: '高亮强度', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolylineGlow'] }]
+    },
+    //  taperPower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'taperPower'], label: '渐变效果', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolylineGlow'] }]
+    },
+    //  dashPattern
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'dashPattern'], label: '渐变效果', rules: true, min: 0, max: 255, step: 1,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineDashArrow', 'LineThreeDash', 'PolylineDash', 'LineDotDash', 'LineCross'] }]
+    },
+    //  percent
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'percent'], label: '流动比例', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlowColor'] }]
+    },
+    //  alpha
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'alpha'], label: '透明程度', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlowColor', 'WaterLight'] }]
+    },
+    //  gradient
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'gradient'], label: '透明程度', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['CircleWave'] }]
+    },
+    //  cellAlpha
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'cellAlpha'], label: '透明程度', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['Grid'] }]
+    },
+    //  NUMBER widthRatio
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'widthRatio'], label: '中心比例', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineThreeDash'] }]
+    },
+    //  NUMBER sidesWidthRatio
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'sidesWidthRatio'], label: '外线比例', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineThreeDash'] }]
+    },
+    //  NUMBER centerPower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'centerPower'], label: '中心百分比', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineCross'] }]
+    },
+    //  NUMBER thickness
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'thickness'], label: '宽度比例', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['CylinderWave'] }]
+    },
+    //  NUMBER dashPower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'dashPower'], label: '虚线百分比', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineCross'] }]
+    },
+    //  NUMBER flowGlow
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'flowGlow'], label: '流动高亮', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['DigitalFlow'] }]
+    },
+    //  NUMBER size
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'size'], label: '块大小', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyAsphalt'] }]
+    },
+    //  NUMBER frequency
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'frequency'], label: '混色频率', rules: true, min: 0, max: 100, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyAsphalt', 'PolyBlob', 'PolyFacet', 'PolyGrass', 'PolyWood', 'Water'] }]
+    },
+    //  NUMBER grainFrequency
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'grainFrequency'], label: '颗粒频率', rules: true, min: 0, max: 100, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyWood'] }]
+    },
+    //  NUMBER alphaPower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'alphaPower'], label: '透明度系数', rules: true, min: 0, max: 10, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyGradient'] }]
+    },
+    //  NUMBER diffusePower
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'diffusePower'], label: '漫反射系数', rules: true, min: 0, max: 10, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyGradient'] }]
+    },
+    //  NUMBER animationSpeed
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'animationSpeed'], label: '动画速度', rules: true, min: 0, max: 1, step: 0.01,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  NUMBER amplitude
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'amplitude'], label: '水波振幅', rules: true, min: 0, max: 100, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  NUMBER specularIntensity
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'specularIntensity'], label: '反射强度', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  NUMBER fadeFactor
+    {
+        span: 24, formType: 'NUMBER', name: ['style', 'materialOptions', 'fadeFactor'], label: '衰减因子', rules: true, min: 0, max: 1, step: 0.1,
+        jugde: [{ field: ['style', 'materialType'], value: ['Water'] }]
+    },
+    //  RADIO bidirectional
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'bidirectional'], label: '运行形式', rules: true,
+        valueEnum: MappingData.mars3d__bidirectional,
+        jugde: [{ field: ['style', 'materialType'], value: ['ODLine'] }]
+    },
+    //  RADIO axisY
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'axisY'], label: 'Y轴朝上', rules: true,
+        valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlow', 'WallScroll'] }]
+    },
+    //  RADIO mixt
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'mixt'], label: '颜色混合', rules: true,
+        valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: ['style', 'materialType'], value: ['LineFlow'] }]
+    },
+    //  RADIO reverse
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'reverse'], label: '流动方向', rules: true,
+        valueEnum: MappingData.mars3d__Reverse,
+        jugde: [{ field: ['style', 'materialType'], value: ['WallScroll'] }]
+    },
+    //  RADIO bloom
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'bloom'], label: '是否泛光', rules: true,
+        valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: ['style', 'materialType'], value: ['WallScroll'] }]
+    },
+    //  RADIO pure
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'pure'], label: '是否纯色', rules: true,
+        valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: ['style', 'materialType'], value: ['RectSlide'] }]
+    },
+    //  RADIO transparent
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'transparent'], label: '背景透明', rules: true,
+        valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: ['style', 'materialType'], value: ['Image'] }]
+    },
+    //  RADIO isInner
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'isInner'], label: '渐变方向', rules: true,
+        valueEnum: MappingData.mars3d__Inner,
+        jugde: [{ field: ['style', 'materialType'], value: ['PolyGradient'] }]
+    },
+    //  RADIO orientation
+    {
+        span: 24, formType: 'RADIO', name: ['style', 'materialOptions', 'orientation'], label: '条纹方向', rules: true,
+        valueEnum: MappingData.mars3d__orientation,
+        jugde: [{ field: ['style', 'materialType'], value: ['Stripe'] }]
+    },
+]
+
+
+// !!! 基础设置
 // TODO 基础信息
 const Mars3dBaseConfig = [
     { span: 24, formType: 'RADIO', name: 'sceneMode', label: '场景模式', rules: true, valueEnum: MappingData.Mars3d__Scene },
@@ -13,7 +400,6 @@ const Mars3dBaseConfig = [
     { span: 24, formType: 'COLOR', name: 'backgroundColor', label: '空间背景色', rules: true, mode: ['single'] },
     { span: 24, formType: 'NUMBER', name: 'verticalExaggeration', label: '地形夸张', rules: true, min: 0, max: 100, step: 1 },
 ]
-
 // TODO 地球设置
 const Mars3dGlobeConfig = [
     { span: 24, formType: 'RADIO', name: 'show', label: '显示地球', valueEnum: MappingData.IsEnabledBool },
@@ -24,7 +410,6 @@ const Mars3dGlobeConfig = [
     { span: 24, formType: 'RADIO', name: 'showWaterEffect', label: '水面遮罩', valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: 'showSkirts', label: '地形裙', valueEnum: MappingData.IsEnabledBool },
 ]
-
 // TODO 操作设置
 const Mars3dCameraController = [
     { span: 24, formType: 'RADIO', name: 'enableZoom', label: '缩放地图', valueEnum: MappingData.IsEnabledBool },
@@ -37,7 +422,6 @@ const Mars3dCameraController = [
     { span: 24, formType: 'RADIO', name: 'enableRotate', label: '转换位置(2D和哥伦布视图)', valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: 'enableTranslate', label: '平移地图(2D和3D视图)', valueEnum: MappingData.IsEnabledBool },
 ]
-
 // TODO 瓦片工具
 const Mars3dTerrainConfig = [
     { span: 24, formType: 'RADIO', name: 'show', label: '开启地形', valueEnum: MappingData.IsEnabledBool },
@@ -51,132 +435,140 @@ const Mars3dTerrainConfig = [
     { span: 24, formType: 'RADIO', name: 'locationBar', label: '状态信息', valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: 'distanceLegend', label: '比例尺', valueEnum: MappingData.IsEnabledBool },
 ]
-
 // TODO 天气设置
 const Mars3dWeatherConfig = [
     { span: 24, formType: 'RADIO', name: 'fog_enabled', label: '雾天', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'GROUP', name: 'fog_enabled_group', label: '数据配置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'fog_enabled_group', label: '雾天配置', collapsible: true,
         jugde: [{ field: 'fog_enabled', value: [true] }], children: [
-            { span: 24, formType: 'COLOR', name: 'fog_color', label: '雾气颜色', rules: true },
-            { span: 24, formType: 'NUMBER', name: 'fog_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1 },
+            { span: 24, formType: 'COLOR', name: 'fog_color', label: '雾气颜色', rules: true, tooltip: '#ffffff' },
+            { span: 24, formType: 'NUMBER', name: 'fog_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1, tooltip: '8000' },
         ]
     },
     { span: 24, formType: 'RADIO', name: 'rain_enabled', label: '雨天', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'GROUP', name: 'rain_enabled_group', label: '数据配置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'rain_enabled_group', label: '雨天配置', collapsible: true,
         jugde: [{ field: 'rain_enabled', value: [true] }], children: [
-            { span: 24, formType: 'NUMBER', name: 'rain_size', label: '粒子大小', rules: true, min: 1, max: 100, step: 1 },
-            { span: 24, formType: 'NUMBER', name: 'rain_speed', label: '粒子速度', rules: true, min: 1, max: 100, step: 1 },
-            { span: 24, formType: 'NUMBER', name: 'rain_direction', label: '粒子方向', rules: true, min: -90, max: 90, step: 1 },
-            { span: 24, formType: 'NUMBER', name: 'rain_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1 },
+            { span: 24, formType: 'NUMBER', name: 'rain_size', label: '粒子大小', rules: true, min: 1, max: 100, step: 1, tooltip: '20' },
+            { span: 24, formType: 'NUMBER', name: 'rain_speed', label: '粒子速度', rules: true, min: 1, max: 100, step: 1, tooltip: '10' },
+            { span: 24, formType: 'NUMBER', name: 'rain_direction', label: '粒子方向', rules: true, min: -90, max: 90, step: 1, tooltip: '45' },
+            { span: 24, formType: 'NUMBER', name: 'rain_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1, tooltip: '8000' },
         ]
     },
-
-
-
-    // { formType: 'TempTitle', label: '雪天', name: 'SceneWeatherConfigSnow' },
-    // { span: 24, formType: 'RADIO', name: 'snow_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    // {
-    //     span: 24, formType: 'NUMBER', name: 'snow_scale', label: '粒子大小', rules: true, min: 1, max: 100, step: 1,
-    //     jugde: [{ field: 'snow_enabled', value: [true] }]
-    // },
-    // {
-    //     span: 24, formType: 'NUMBER', name: 'snow_speed', label: '粒子速度', rules: true, min: 1, max: 100, step: 1,
-    //     jugde: [{ field: 'snow_enabled', value: [true] }]
-    // },
-    // {
-    //     span: 24, formType: 'NUMBER', name: 'snow_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1,
-    //     jujugde: [{ field: 'snow_enabled', value: [true] }]
-    // },
-    // { formType: 'TempTitle', label: '积雪', name: 'SceneWeatherConfigSnowCover' },
-    // { span: 24, formType: 'RADIO', name: 'snowCover_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    // {
-    //     span: 24, formType: 'NUMBER', name: 'snowCover_alpha', label: '积雪强度', rules: true, min: 0, max: 1, step: 0.1,
-    //     jujugde: [{ field: 'snowCover_enabled', value: [true] }]
-    // },
-    // {
-    //     span: 24, formType: 'NUMBER', name: 'snowCover_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1,
-    //     jujugde: [{ field: 'snowCover_enabled', value: [true] }]
-    // },
+    { span: 24, formType: 'RADIO', name: 'snow_enabled', label: '雪天', valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'snow_enabled_group', label: '雪天配置', collapsible: true,
+        jugde: [{ field: 'snow_enabled', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: 'snow_scale', label: '粒子大小', rules: true, min: 1, max: 100, step: 1, tooltip: '20' },
+            { span: 24, formType: 'NUMBER', name: 'snow_speed', label: '粒子速度', rules: true, min: 1, max: 100, step: 1, tooltip: '10' },
+            { span: 24, formType: 'NUMBER', name: 'snow_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1, tooltip: '8000' },
+        ]
+    },
+    { span: 24, formType: 'RADIO', name: 'snowCover_enabled', label: '积雪', valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'snowCover_enabled_group', label: '积雪配置', collapsible: true,
+        jugde: [{ field: 'snowCover_enabled', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: 'snowCover_alpha', label: '积雪强度', rules: true, min: 0, max: 1, step: 0.1, tooltip: '0.1' },
+            { span: 24, formType: 'NUMBER', name: 'snowCover_maxHeight', label: '最大高度', rules: true, min: 0, max: 100000, step: 1, tooltip: '8000' },
+        ]
+    }
 ]
 // TODO 色彩设置
 const Mars3dColourConfig = [
-    { formType: 'TempTitle', label: '泛光特效', name: 'SceneColourConfigBloom' },
-    { span: 24, formType: 'RADIO', name: 'bloom_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: 'bloom_enabled', label: '泛光特效', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'NUMBER', name: 'bloom_brightness', label: '亮度', rules: true, min: -0.1, max: 3, step: 0.01,
-        jugdeField: 'bloom_enabled', jugdeValue: [true]
+        span: 24, formType: 'GROUP', name: 'bloom_enabled_group', label: '泛光特效', collapsible: true,
+        jugde: [{ field: 'bloom_enabled', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: 'bloom_brightness', label: '亮度', rules: true, min: -0.1, max: 3, step: 0.01, tooltip: '0' },
+            { span: 24, formType: 'NUMBER', name: 'bloom_contrast', label: '对比度', rules: true, min: -255, max: 255, step: 1, tooltip: '128' },
+            { span: 24, formType: 'NUMBER', name: 'bloom_delta', label: '增量', rules: true, min: 1, max: 5, step: 0.01, tooltip: '1' },
+            { span: 24, formType: 'NUMBER', name: 'bloom_sigma', label: '步长', rules: true, min: 0, max: 7, step: 0.01, tooltip: '3.78' },
+            { span: 24, formType: 'NUMBER', name: 'bloom_stepSize', label: 'Sigma', rules: true, min: 1, max: 10, step: 0.01, tooltip: '5' },
+        ]
     },
+    { span: 24, formType: 'RADIO', name: 'brightness_enabled', label: '亮度特效', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'NUMBER', name: 'bloom_contrast', label: '对比度', rules: true, min: -255, max: 255, step: 1,
-        jugdeField: 'bloom_enabled', jugdeValue: [true]
+        span: 24, formType: 'NUMBER', name: 'brightness_brightness', label: '对比度', rules: true, min: 0, max: 5, step: 0.01, tooltip: '2',
+        jugde: [{ field: 'brightness_enabled', value: [true] }]
     },
+    { span: 24, formType: 'RADIO', name: 'colorCorrection_enabled', label: '颜色校正', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'NUMBER', name: 'bloom_delta', label: '增量', rules: true, min: 1, max: 5, step: 0.01,
-        jugdeField: 'bloom_enabled', jugdeValue: [true]
+        span: 24, formType: 'GROUP', name: 'colorCorrection_enabled_group', label: '颜色校正', collapsible: true,
+        jugde: [{ field: 'colorCorrection_enabled', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: 'colorCorrection_brightness', label: '亮度', rules: true, min: 0, max: 2, step: 0.1, tooltip: '1' },
+            { span: 24, formType: 'NUMBER', name: 'colorCorrection_contrast', label: '对比度', rules: true, min: 0, max: 2, step: 0.1, tooltip: '1' },
+            { span: 24, formType: 'NUMBER', name: 'colorCorrection_hue', label: '色调', rules: true, min: 0, max: 1, step: 0.1, tooltip: '0' },
+            { span: 24, formType: 'NUMBER', name: 'colorCorrection_saturation', label: '饱和度', rules: true, min: 0, max: 2, step: 0.1, tooltip: '1' },
+        ]
     },
+    { span: 24, formType: 'RADIO', name: 'depthOfField_enabled', label: '景深效果', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'NUMBER', name: 'bloom_sigma', label: '步长', rules: true, min: 0, max: 7, step: 0.01,
-        jugdeField: 'bloom_enabled', jugdeValue: [true]
+        span: 24, formType: 'GROUP', name: 'depthOfField_enabled_group', label: '颜色校正', collapsible: true,
+        jugde: [{ field: 'depthOfField_enabled', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: 'depthOfField_focalDistance', label: '焦距', rules: true, min: 1, max: 500, step: 1, tooltip: '87' },
+            { span: 24, formType: 'NUMBER', name: 'depthOfField_delta', label: '增量', rules: true, min: 0.1, max: 2, step: 0.01, tooltip: '1' },
+            { span: 24, formType: 'NUMBER', name: 'depthOfField_stepSize', label: '步长', rules: true, min: 0, max: 7, step: 0.01, tooltip: '3.78' },
+            { span: 24, formType: 'NUMBER', name: 'depthOfField_sigma', label: 'Sigma', rules: true, min: 0.5, max: 5, step: 0.01, tooltip: '2.46' },
+        ]
     },
+    { span: 24, formType: 'RADIO', name: 'blackAndWhite_enabled', label: '黑白效果', valueEnum: MappingData.IsEnabledBool },
     {
-        span: 24, formType: 'NUMBER', name: 'bloom_stepSize', label: 'Sigma', rules: true, min: 1, max: 10, step: 0.01,
-        jugdeField: 'bloom_enabled', jugdeValue: [true]
+        span: 24, formType: 'NUMBER', name: 'blackAndWhite_gradations', label: '渐变', rules: true, min: 1, max: 10, step: 0.01, tooltip: '4',
+        jugde: [{ field: 'blackAndWhite_enabled', value: [true] }]
     },
-    { formType: 'TempTitle', label: '亮度特效', name: 'SceneColourConfigBrightness' },
-    { span: 24, formType: 'RADIO', name: 'brightness_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    {
-        span: 24, formType: 'NUMBER', name: 'brightness_brightness', label: '对比度', rules: true, min: 0, max: 5, step: 0.01,
-        jugdeField: 'brightness_enabled', jugdeValue: [true]
-    },
-    { formType: 'TempTitle', label: '颜色校正', name: 'SceneColourConfigColorCorrection' },
-    { span: 24, formType: 'RADIO', name: 'colorCorrection_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    {
-        span: 24, formType: 'NUMBER', name: 'colorCorrection_brightness', label: '亮度', rules: true, min: 0, max: 2, step: 0.1,
-        jugdeField: 'colorCorrection_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'colorCorrection_contrast', label: '对比度', rules: true, min: 0, max: 2, step: 0.1,
-        jugdeField: 'colorCorrection_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'colorCorrection_hue', label: '色调', rules: true, min: 0, max: 1, step: 0.1,
-        jugdeField: 'colorCorrection_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'colorCorrection_saturation', label: '饱和度', rules: true, min: 0, max: 2, step: 0.1,
-        jugdeField: 'colorCorrection_enabled', jugdeValue: [true]
-    },
-    { formType: 'TempTitle', label: '景深效果', name: 'SceneColourDepthOfField' },
-    { span: 24, formType: 'RADIO', name: 'depthOfField_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    {
-        span: 24, formType: 'NUMBER', name: 'depthOfField_focalDistance', label: '焦距', rules: true, min: 1, max: 500, step: 1,
-        jugdeField: 'depthOfField_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'depthOfField_delta', label: '增量', rules: true, min: 0.1, max: 2, step: 0.01,
-        jugdeField: 'depthOfField_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'depthOfField_stepSize', label: '步长', rules: true, min: 0, max: 7, step: 0.01,
-        jugdeField: 'depthOfField_enabled', jugdeValue: [true]
-    },
-    {
-        span: 24, formType: 'NUMBER', name: 'depthOfField_sigma', label: 'Sigma', rules: true, min: 0.5, max: 5, step: 0.01,
-        jugdeField: 'depthOfField_enabled', jugdeValue: [true]
-    },
-    { formType: 'TempTitle', label: '黑白效果', name: 'SceneColourNightBlackAndWhite' },
-    { span: 24, formType: 'RADIO', name: 'blackAndWhite_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
-    {
-        span: 24, formType: 'NUMBER', name: 'blackAndWhite_gradations', label: '渐变', rules: true, min: 1, max: 10, step: 0.01,
-        jugdeField: 'blackAndWhite_enabled', jugdeValue: [true]
-    },
-    { formType: 'TempTitle', label: '夜视效果', name: 'SceneColourNightVision' },
-    { span: 24, formType: 'RADIO', name: 'nightVision_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: 'nightVision_enabled', label: '夜视效果', valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: 'mosaic_enabled', label: '马赛克', valueEnum: MappingData.IsEnabledBool },
+]
 
-    { formType: 'TempTitle', label: '马赛克', name: 'SceneColourConfigMosaic' },
-    { span: 24, formType: 'RADIO', name: 'mosaic_enabled', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+// !!! 场景剪裁
+// TODO 剪裁区域
+const Mars3dBoundaryBorderConfig = [
+    { span: 24, formType: 'RADIO', name: 'enabled', label: '是否剪裁', valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'TREEM', name: 'border', label: '区域选择', valueEnum: MappingData.mapTiles, jugde: [{ field: 'enabled', value: [true] }] },
+]
+// TODO 覆盖面
+const Mars3dBoundaryCoverConfig = [
+    { span: 24, formType: 'RADIO', name: 'show', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'Mars3dBoundaryCoverConfig', label: '覆盖面设置', collapsible: true,
+        jugde: [{ field: 'show', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '立体高度', rules: true },
+            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            ...materialOptionsMapping
+        ]
+    },
+]
+// TODO 边界线
+const Mars3dBoundaryLineConfig = [
+    { span: 24, formType: 'RADIO', name: 'show', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'Mars3dBoundaryLineConfig', label: '边界线设置', collapsible: true,
+        jugde: [{ field: 'show', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: ['style', 'width'], label: '线条宽度', rules: true },
+            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'closure'], label: '是否闭合', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'depthFail'], label: '是否遮挡', rules: true, valueEnum: MappingData.IsEnabledBool },
+            ...materialOptionsMapping
+        ]
+    },
+]
+// TODO 边界墙
+const Mars3dBoundaryWallConfig = [
+    { span: 24, formType: 'RADIO', name: 'show', label: '是否启用', valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'Mars3dBoundaryWallConfig', label: '边界线设置', collapsible: true,
+        jugde: [{ field: 'show', value: [true] }], children: [
+            { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙体高度', rules: true, },
+            { span: 24, formType: 'NUMBER', name: ['style', 'setHeight'], label: '向下偏移', rules: true, },
+            { span: 24, formType: 'RADIO', name: ['style', 'closure'], label: '是否闭合', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            ...materialOptionsMapping
+        ]
+    },
 ]
 
 
@@ -187,5 +579,11 @@ export const Mars3dFormConfig = {
     Mars3dCameraController,
     Mars3dTerrainConfig,
     Mars3dWeatherConfig,
-    Mars3dColourConfig
+    Mars3dColourConfig,
+
+    Mars3dBoundaryBorderConfig,
+    Mars3dBoundaryCoverConfig,
+    Mars3dBoundaryLineConfig,
+    Mars3dBoundaryWallConfig
+
 }
