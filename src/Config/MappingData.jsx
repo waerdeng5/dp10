@@ -1734,8 +1734,6 @@ export const MappingData = {
         // { value: 'heightMeasure', label: '高度量算对象' },
         // { value: 'heightTriangleMeasure', label: '三角高度量算对象' },
         // { value: 'angleMeasure', label: '角度量算对象' },
-
-
         // { value: 'pointLight', label: '点光源' },
         // { value: 'viewShed', label: '可视域' },
         // { value: 'spotLight', label: '聚光灯' },
@@ -1744,80 +1742,86 @@ export const MappingData = {
         // { value: 'coneVisibility', label: '扇形可视域区域分析' },
         // { value: 'skylineBody', label: '天际线体' },
         // { value: 'viewDome', label: '开敞度分析' },
+        // {
+        //     value: 'A01',
+        //     label: '点',
+        //     selectable: false,
+        //     children: [
+        //         { value: 'pointP', label: '元素点' },
+        //         { value: 'modelP', label: '小模型' },
+        //         { value: 'labelP', label: '文字' },
+        //         { value: 'billboardP', label: '图标点' },
+        //         // { value: 'billboardIndicator', label: '连线点' }, // 官方bug
+        //         { value: 'tetrahedron', label: '四面体' },
+        //         { value: 'div', label: 'DIV点' },
+        //         // { value: 'divPlane', label: '三维DIV面板' }, // 趴地上起来不来了
+        //         { value: 'divLightPoint', label: '扩散DIV点' },
+        //         { value: 'divUpLabel', label: '竖立DIV点' },
+        //         { value: 'divBoderLabel', label: '动态边框DIV点' },
+        //         // { value: 'divGif', label: 'gif图片div点' },
+        //     ]
+        // },
+        // {
+        //     value: 'A02',
+        //     label: '线',
+        //     selectable: false,
+        //     children: [
+        //         { value: 'polylineP', label: '线' },
+        //         { value: 'curve', label: '曲线' },
+        //         // { value: 'polylineVolumeP', label: '管道线' },
+        //         { value: 'corridorP', label: '走廊' },
+        //         { value: 'road', label: '道路' },
+        //         { value: 'wallP', label: '墙' },
+        //         { value: 'diffuseWall', label: '扩散墙' },
+        //         { value: 'thickWall', label: '有厚度的围墙' },
+        //     ]
+        // },
+        // {
+        //     value: 'A03',
+        //     label: '面',
+        //     selectable: false,
+        //     children: [
+        //         // { value: 'planeP', label: '平面' },
+        //         { value: 'polygonP', label: '面' },
+        //         { value: 'rectangleP', label: '矩形' },
+        //         { value: 'attackArrow', label: '攻击箭头' },
+        //         { value: 'attackArrowPW', label: '攻击箭头(平尾)' },
+        //         { value: 'attackArrowYW', label: '攻击箭头(燕尾)' },
+        //         { value: 'doubleArrow', label: '双箭头(钳击)' },
+        //         { value: 'fineArrow', label: '直箭头(2个点)' },
+        //         { value: 'fineArrowYW', label: '燕尾直箭头(2个点)' },
+        //         { value: 'straightArrow', label: '直箭头(3个点)' },
+        //         { value: 'lune', label: '弓形面(3个点)' },
+        //         { value: 'isosTriangle', label: '等腰三角形(3个点)' },
+        //         { value: 'closeVurve', label: '闭合曲面(3个点)' },
+        //         { value: 'gatheringPlace', label: '集结地(3个点)' },
+        //     ]
+        // },
+        // {
+        //     value: 'A04',
+        //     label: '体',
+        //     selectable: false,
+        //     children: [
+        //         { value: 'boxP', label: '盒子' },
+        //         { value: 'cylinderP', label: '圆锥' },
+        //         { value: 'lightCone', label: '光锥体' },
+        //         { value: 'circleP', label: '圆、圆柱' },
+        //         { value: 'ellipsoidP', label: '球体' },
+        //         { value: 'sector', label: '扇形(3个点)' },
+        //         { value: 'regular', label: '正多边形' },
+        //     ]
+        // },
 
         {
             value: 'A01',
-            label: '点',
+            label: '点元素',
             selectable: false,
             children: [
-                { value: 'pointP', label: '元素点' },
-
-
-
-
-                { value: 'modelP', label: '小模型' },
-                { value: 'labelP', label: '文字' },
-                { value: 'billboardP', label: '图标点' },
-                // { value: 'billboardIndicator', label: '连线点' }, // 官方bug
-                { value: 'tetrahedron', label: '四面体' },
-                { value: 'div', label: 'DIV点' },
-                // { value: 'divPlane', label: '三维DIV面板' }, // 趴地上起来不来了
-                { value: 'divLightPoint', label: '扩散DIV点' },
-                { value: 'divUpLabel', label: '竖立DIV点' },
-                { value: 'divBoderLabel', label: '动态边框DIV点' },
-                // { value: 'divGif', label: 'gif图片div点' },
+                { value: 'labelP', label: '文本点' },
+                { value: 'pointP', label: '像素点' },
             ]
         },
-        {
-            value: 'A02',
-            label: '线',
-            selectable: false,
-            children: [
-                { value: 'polylineP', label: '线' },
-                { value: 'curve', label: '曲线' },
-                // { value: 'polylineVolumeP', label: '管道线' },
-                { value: 'corridorP', label: '走廊' },
-                { value: 'road', label: '道路' },
-                { value: 'wallP', label: '墙' },
-                { value: 'diffuseWall', label: '扩散墙' },
-                { value: 'thickWall', label: '有厚度的围墙' },
-            ]
-        },
-        {
-            value: 'A03',
-            label: '面',
-            selectable: false,
-            children: [
-                // { value: 'planeP', label: '平面' },
-                { value: 'polygonP', label: '面' },
-                { value: 'rectangleP', label: '矩形' },
-                { value: 'attackArrow', label: '攻击箭头' },
-                { value: 'attackArrowPW', label: '攻击箭头(平尾)' },
-                { value: 'attackArrowYW', label: '攻击箭头(燕尾)' },
-                { value: 'doubleArrow', label: '双箭头(钳击)' },
-                { value: 'fineArrow', label: '直箭头(2个点)' },
-                { value: 'fineArrowYW', label: '燕尾直箭头(2个点)' },
-                { value: 'straightArrow', label: '直箭头(3个点)' },
-                { value: 'lune', label: '弓形面(3个点)' },
-                { value: 'isosTriangle', label: '等腰三角形(3个点)' },
-                { value: 'closeVurve', label: '闭合曲面(3个点)' },
-                { value: 'gatheringPlace', label: '集结地(3个点)' },
-            ]
-        },
-        {
-            value: 'A04',
-            label: '体',
-            selectable: false,
-            children: [
-                { value: 'boxP', label: '盒子' },
-                { value: 'cylinderP', label: '圆锥' },
-                { value: 'lightCone', label: '光锥体' },
-                { value: 'circleP', label: '圆、圆柱' },
-                { value: 'ellipsoidP', label: '球体' },
-                { value: 'sector', label: '扇形(3个点)' },
-                { value: 'regular', label: '正多边形' },
-            ]
-        },
+
     ],
 
     // TODO 图标点图片

@@ -223,7 +223,7 @@ export const sceneParameter = {
         backgroundColor: '#00000000',
         verticalExaggeration: 1,
         orderIndependentTranslucency: false,
-        contextOptions: { requestWebgl1: true, webgl: { alpha: true } },
+        contextOptions: { webgl: { alpha: true } },
     },
     globe: {
         show: true,
@@ -354,7 +354,9 @@ export const sceneParameter = {
     camera: {
         list: { 默认: { lat: 32.214031, lng: 106.037732, alt: 7993190.3, heading: 359.4, pitch: -87.9 } },
         default: '默认'
-    }
+    },
+    element: [],
+    tiles: []
 }
 
 export const gltfMapping = [
@@ -2043,3 +2045,745 @@ export const gltfMapping = [
         ]
     },
 ]
+
+
+
+// // *** 小模型
+// const modelP = {
+//     show: true,
+//     style: {
+//         url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
+//         scale: 1,
+//         heading: 0,
+//         pitch: 0,
+//         roll: 0,
+//         fill: false,
+//         color: '#ffffff',
+//         silhouette: false,
+//         silhouetteColor: '#ff0000',
+//         silhouetteSize: 2,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         hasShadows: true,
+//         shadows: false,
+//         runAnimations: true,
+//         label
+//     }
+// }
+
+// // *** 点元素
+// const pointP = {
+//     show: true,
+//     style: {
+//         pixelSize: 8,
+//         color: '#fff',
+//         visibleDepth: false,
+//         clampToGround: false,
+//         outline: false,
+//         outlineColor: '#fff',
+//         outlineWidth: 2,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//         label
+//     }
+// }
+
+// // *** 文字
+// const labelP = {
+//     show: true,
+//     style: label
+// }
+
+// // *** 图标点
+// const billboardP = {
+//     show: true,
+//     style: {
+//         image: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/img/route-start.png',
+//         scale: 1,
+//         rotationDegree: 0,
+//         width: 30,
+//         height: 40,
+//         clampToGround: false,
+//         visibleDepth: false,
+//         ...hasPixelOffsetObj,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//         label
+//     }
+// }
+// // ??? 连线图标点 -- 官方还未完善
+// const billboardIndicator = {
+//     show: true,
+//     style: {
+//         rectColor: '#391085',
+//         rectX: 50,
+//         rectY: -50,
+//         autoPoistion: true,
+//         lineWidth: 2,
+//         lineColor: '#fff',
+//         lineDash: '5,5',
+//         pointColor: '#52c41a',
+//         pointSize: 8,
+//         pointOutline: false,
+//         pointOutlineWidth: 2,
+//         pointOutlineColor: '#0958d9',
+//         scale: 1,
+//         rotationDegree: 0,
+//         clampToGround: false,
+//         visibleDepth: false,
+//         ...hasPixelOffsetObj,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//         label,
+//     }
+// }
+
+// // *** 四面体
+// const tetrahedron = {
+//     show: true,
+//     style: {
+//         width: 8,
+//         height: 16,
+//         color: '#13c2c2',
+//         animation: true,
+//         moveHeight: 30,
+//         moveDuration: 4,
+//         rotationAngle: 1,
+//         translucent: false,
+//         closed: true
+//     }
+// }
+
+// // *** div面板
+// const div = {
+//     show: true,
+//     style: {
+//         temp: 'HtmlA01',
+//         text: '测试@数据@模板',
+//         background: '#ff0000',
+//         offsetX: 0,
+//         offsetY: 0,
+//         scale: 1,
+//         clampToGround: false,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//     }
+// }
+
+// // ??? 三维div面板 趴地上起不来
+// const divPlane = {
+//     show: true,
+//     style: {
+//         temp: 'HtmlA02',
+//         text: '测试@数据@模板',
+//         heading: 0,
+//         pitch: 0,
+//         roll: 0,
+//         offsetX: 0,
+//         offsetY: 0,
+//         scale: 1,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//     }
+// }
+
+// // *** 扩散DIV
+// const divLightPoint = {
+//     show: true,
+//     style: {
+//         color: '#531dab',
+//         size: 10,
+//         offsetX: 0,
+//         offsetY: 0,
+//         clampToGround: false,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//         label: {
+//             text: '默认文案',
+//             color: '#fff'
+//         }
+//     }
+// }
+
+// // *** 竖的div
+// const divUpLabel = {
+//     show: true,
+//     style: {
+//         text: '默认文案',
+//         color: '#fff',
+//         font_size: 16,
+//         font_family: '微软雅黑',
+//         lineHeight: 100,
+//         circleSize: 10,
+//         offsetX: 0,
+//         offsetY: 0,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//     }
+// }
+
+// // *** 动态边框Div
+// const divBoderLabel = {
+//     show: true,
+//     style: {
+//         text: '默认文案',
+//         color: '#fff',
+//         font_size: 16,
+//         font_family: '微软雅黑',
+//         boderColor: '#13c2c2',
+//         width: 0,
+//         height: 0,
+//         offsetX: 0,
+//         offsetY: 0,
+//         ...scaleByDistanceObj,
+//         ...distanceDisplayConditionObj,
+//     }
+// }
+
+// // *** 单点盒子
+// const boxP = {
+//     show: true,
+//     style: {
+//         dimensions_x: 100,
+//         dimensions_y: 100,
+//         dimensions_z: 100,
+//         heading: 0,
+//         pitch: 0,
+//         roll: 0,
+//         outline: false,
+//         outlineColor: '#262626',
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 圆锥
+// const cylinderP = {
+//     show: true,
+//     style: {
+//         topRadius: 0,
+//         bottomRadius: 100,
+//         length: 100,
+//         slices: 128,
+//         heading: 0,
+//         pitch: 0,
+//         roll: 0,
+//         outline: false,
+//         outlineColor: '#262626',
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 光锥
+// const lightCone = {
+//     show: true,
+//     style: {
+//         color: '#36cfc9',
+//         radius: 10,
+//         height: 100,
+//     }
+// }
+
+// // *** 球
+// const ellipsoidP = {
+//     show: true,
+//     style: {
+//         radii_x: 100,
+//         radii_y: 100,
+//         radii_z: 100,
+//         innerRadii_x: 0,
+//         innerRadii_y: 0,
+//         innerRadii_z: 0,
+//         minimumClockDegree: 0,
+//         maximumClockDegree: 360,
+//         minimumConeDegree: 0,
+//         maximumConeDegree: 180,
+//         stackPartitions: 64,
+//         slicePartitions: 64,
+//         outline: false,
+//         outlineColor: '#262626',
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+
+// // *** 线
+// const polylineP = {
+//     show: true,
+//     style: {
+//         width: 4,
+//         closure: false,
+//         depthFail: false,
+//         depthFailColor: 'red',
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+
+// // *** 曲线
+// const curve = {
+//     show: true,
+//     style: {
+//         width: 4,
+//         depthFail: false,
+//         depthFailColor: 'red',
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 管道线
+// const polylineVolumeP = {
+//     show: true,
+//     style: {
+//         shape: 'pipeline',
+//         radius: 10,
+//         thicknes: 4,
+//         slices: 0,
+//         startAngle: 0,
+//         endAngle: 360,
+//         vscale: 1,
+//         hscale: 1,
+//         hasShadows: false,
+//         clampToGround: false,
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 走廊
+// const corridorP = {
+//     show: true,
+//     style: {
+//         width: 100,
+//         cornerType: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         hasShadows: false,
+//         clampToGround: false,
+
+//         materialType: 'Color',
+//         materialOptions: {
+//             color: '#13c2c2',
+//             speed: 8,
+//         }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 道路
+// const road = {
+//     show: true,
+//     style: {
+//         image: 'https://data.mars3d.cn/img/textures/road.jpg',
+//         width: 20,
+//         height: 0,
+//         axisY: true,
+//     }
+// }
+
+// // *** 面
+// const polygonP = {
+//     show: true,
+//     style: {
+//         diffHeight: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 矩形
+// const rectangleP = {
+//     show: true,
+//     style: {
+//         diffHeight: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 圆柱
+// const circleP = {
+//     show: true,
+//     style: {
+//         radius: 100,
+//         diffHeight: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         clampToGround: false,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+
+// // *** 扇形
+// const sector = {
+//     show: true,
+//     style: {
+//         diffHeight: 0,
+//         radius: 100,
+//         startAngle: 0,
+//         endAngle: 360,
+//         noCenter: false,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         outlineWidth: 1,
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 正多边形
+// const regular = {
+//     show: true,
+//     style: {
+//         diffHeight: 0,
+//         border: 3,
+//         radius: 50,
+//         startAngle: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         outlineWidth: 1,
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 攻击箭头
+// const attackArrow = {
+//     show: true,
+//     style: {
+//         diffHeight: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         outlineWidth: 1,
+//         hasShadows: false,
+//         clampToGround: false,
+//         ...distanceDisplayConditionObj,
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 平尾/燕尾攻击箭头
+// const attackArrowPW = attackArrow
+// const attackArrowYW = attackArrow
+// // *** 钳形箭头
+// const doubleArrow = attackArrow
+// // *** 直箭头
+// const fineArrow = attackArrow
+// const fineArrowYW = attackArrow
+// const straightArrow = attackArrow
+// // *** 弓形面
+// const lune = attackArrow
+// // *** 等腰三角形
+// const isosTriangle = attackArrow
+// // *** 闭合曲面 
+// const closeVurve = attackArrow
+// // *** 集结地
+// const gatheringPlace = attackArrow
+
+// // *** 平面
+// const planeP = {
+//     show: true,
+//     style: {
+//         plane_normal: 'z',
+//         dimensions_x: 100,
+//         dimensions_y: 100,
+//         heading: 0,
+//         pitch: 0,
+//         roll: 0,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 围墙
+// const wallP = {
+//     show: true,
+//     style: {
+//         diffHeight: 100,
+//         closure: false,
+//         hasShadows: false,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 扩散墙
+// const diffuseWall = {
+//     show: true,
+//     style: {
+//         diffHeight: 100,
+//         color: '#13c2c2',
+//         speed: 10,
+//         maxScale: 1,
+//     }
+// }
+// // *** 厚度墙
+// const thickWall = {
+//     show: true,
+//     style: {
+//         diffHeight: 100,
+//         width: 10,
+//         closure: false,
+//         hasShadows: false,
+//         outline: false,
+//         outlineColor: '#ffffff',
+//         materialType: 'Color',
+//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+//         label,
+//     }
+// }
+// // *** 点光源
+// const pointLight = {
+//     show: true,
+//     style: {
+//         color: '#fff',
+//         intensity: 10,
+//         radius: 1000,
+//         addHeight: 0,
+//     }
+// }
+
+
+// // *** 添加模型
+// const tileset = {
+//     maximumScreenSpaceError: 16,
+//     maxMemory: 1024,
+//     rotation_x: 0,
+//     rotation_y: 0,
+//     rotation_z: 0,
+//     scale: 1,
+//     scaleX: 1,
+//     scaleY: 1,
+//     scaleZ: 1,
+//     show: true,
+//     opacity: 1,
+//     rotation: { x: 0, y: 0, z: 0 },
+//     colorCorrection: { brightness: 1, contrast: 1, hue: 0, saturation: 1 },
+// }
+
+// // *** Geo文件
+// const getJson = {
+
+// }
+
+// // *** KML文件
+// const KML = {
+
+// }
+
+// // 自定义div
+// const DivTemplate = {
+//     HtmlA01: e => {
+//         return `<div class="DivHtmlA01">
+//                     <div class="text">${e.style.text}</div>
+//                 </div>`
+//     },
+//     // 主线@萝嘉界至保兴@54.5km
+//     HtmlA02: e => {
+//         // console.log(e)
+//         const { text, background } = e.style
+//         const [A01, A02, A03] = text.split('@')
+//         return `<div class="DivHtmlA02" style="--color:${background}">
+//                     <div class='Box' >
+//                         <div>${A01}</div>
+//                         <div>${A02}</div>
+//                         ${A03 ? `<div>${A03}</div>` : ''} 
+//                     </div>
+//                 </div>`
+//     },
+// }
+
+// *** 衬色
+const outlineMapping = {
+    outlineColor: '#000000',
+    outlineOpacity: 0.6,
+    outlineWidth: 2.0,
+}
+
+// *** 背景颜色
+const backgroundMapping = {
+    backgroundColor: '#000000',
+    backgroundOpacity: 0.5,
+    backgroundPadding: 4,
+}
+// *** 偏移量
+const hasPixelOffsetMapping = {
+    pixelOffsetX: 0,
+    pixelOffsetY: 0,
+}
+// *** 视距缩放
+const scaleByDistanceMapping = {
+    scaleByDistance_far: 1000000,
+    scaleByDistance_farValue: 0.1,
+    scaleByDistance_near: 1000,
+    scaleByDistance_nearValue: 1,
+}
+// *** 视距显示
+const distanceDisplayConditionMapping = {
+    distanceDisplayCondition_far: 10000000,
+    distanceDisplayCondition_near: 0
+}
+
+
+
+// TODO 文字点
+const label = {
+    text: '默认文字',
+    scale: 1,
+    font_family: 'HYT',
+    font_size: 24,
+    font_weight: 'normal',
+    font_style: 'normal',
+    fill: true,
+    color: '#262626',
+    opacity: 1,
+    clampToGround: true,
+    visibleDepth: false,
+    outline: false,
+    ...outlineMapping,
+    background: false,
+    ...backgroundMapping,
+    hasPixelOffset: false,
+    ...hasPixelOffsetMapping,
+    scaleByDistance: false,
+    ...scaleByDistanceMapping,
+    distanceDisplayCondition: false,
+    ...distanceDisplayConditionMapping,
+}
+
+
+// *** 文字点
+const labelP = {
+    type: 'labelP',
+    show: true,
+    style: { ...label }
+}
+// *** 像素点
+const pointP = {
+    type: 'pointP',
+    show: true,
+    style: {
+        pixelSize: 8,
+        color: '#fff',
+        opacity: 1,
+        clampToGround: true,
+        visibleDepth: false,
+        outline: false,
+        ...outlineMapping,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        labelStatus: false,
+        label: {}
+    },
+}
+
+
+
+
+
+
+export const initStartDraw = {
+    labelP,
+    pointP,
+
+
+
+    // modelP,
+    // labelP,
+    // pointP,
+    // billboardP,
+    // billboardIndicator,
+    // tetrahedron,
+    // div,
+    // divPlane,
+    // divLightPoint,
+    // divUpLabel,
+    // divBoderLabel,
+    // boxP,
+    // cylinderP,
+    // lightCone,
+    // ellipsoidP,
+    // polylineP,
+    // curve,
+    // polylineVolumeP,
+    // corridorP,
+    // road,
+    // polygonP,
+    // rectangleP,
+    // circleP,
+    // sector,
+    // regular,
+    // attackArrow,
+    // attackArrowPW,
+    // attackArrowYW,
+    // doubleArrow,
+    // fineArrow,
+    // fineArrowYW,
+    // straightArrow,
+    // lune,
+    // isosTriangle,
+    // closeVurve,
+    // gatheringPlace,
+    // planeP,
+    // wallP,
+    // diffuseWall,
+    // thickWall,
+    // pointLight,
+    // tileset,
+    // getJson,
+    // DivTemplate
+}

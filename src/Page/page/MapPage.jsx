@@ -94,7 +94,9 @@ const MapPage = ({ data, AdminEvent }) => {
         const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
         const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
         const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
-
+        port && console.log('[---------基础信息---------]', { ...sceneParameter, ...MapConfig })
+        port && console.log('[---------元素信息---------]', ELEConfig)
+        port && console.log('[---------模型信息---------]', TILConfig)
         const apiList = [
             { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
             { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
@@ -156,7 +158,7 @@ const MapPage = ({ data, AdminEvent }) => {
                     height: '100vh',
                     shading: false,
                     position: { my: 'left ', at: 'left ', of: window },
-                    modelData: { type: 'A04', ELEConfig, ...MpaPar }
+                    modelData: { type: 'A04', MapConfig, ELEConfig, ...MpaPar }
                 })
             }],
             [5, () => { // 模型列表
@@ -177,7 +179,7 @@ const MapPage = ({ data, AdminEvent }) => {
 
     const mapCallBack = (e) => {
         const { type, data } = e
-        console.log('Map', type, data)
+        // console.log('Map', type, data)
         const Mapping = new Map([
             ['onSaveMapConfig', () => setMapConfig(data)],
             ['onSaveMapElement', () => setELEConfig(data)],

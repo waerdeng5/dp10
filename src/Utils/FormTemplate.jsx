@@ -105,11 +105,16 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
 
     const onFormBackFn = (e) => {
         const { type, data } = e
-        if (type === 'closeFormLoading') setTimeout(() => setLoading(false), 0)
-        if (type === 'onFormReset') {
-            formRef.current?.resetFields()
-            setTimeout(() => setLoading(false), 0)
-        }
+        const Mapping = new Map([
+            ['closeFormLoading', () => setTimeout(() => setLoading(false), 0)],
+            ['onFormReset', () => {
+                formRef.current?.resetFields()
+                setTimeout(() => setLoading(false), 0)
+            }],
+            ['onUploadInitial', () => formRef?.current?.setFieldsValue(data)]
+        ])
+        const func = Mapping.get(type)
+        func?.(data)
     }
     FORMEVENT.useSubscription(onFormBackFn)
 
@@ -127,7 +132,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
                     onFinish={onFinish}
                     onFinishFailed={e => console.log('表单提交失败', e)}
                     size='large'
-                    submitter={{
+                    submitter={NotSubmit ? false : {
                         render: (props) => {
                             return [
                                 <Button
@@ -1112,7 +1117,7 @@ const TempBackGrund = ({ data, form }) => {
 
 // Todo 带按钮的输入框
 const TempInputLink = ({ data }) => {
-    const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugdeField, jugdeValue = [], urlLink, urlBtn } = data
+    const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde, urlLink, urlBtn } = data
     const onOpenLine = () => {
         new WinBox({
             title: urlBtn,
@@ -1143,7 +1148,8 @@ const TempInputLink = ({ data }) => {
         </div>
 
     )
-    if (jugdeField) return <JudgeTemplate jugdeField={jugdeField} jugdeValue={jugdeValue} Template={Template} />
+
+    if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
 // Todo 密码确认框
@@ -1175,7 +1181,7 @@ const TempPwdConfirm = ({ data }) => {
 }
 // TODO 生成UUId 
 const TempGenerateUuid = ({ data, form, action }) => {
-    const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugdeField, jugdeValue = [] } = data
+    const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
 
     const onClick = () => {
         if (action) action.setCurrentRowData({ [name]: v4() })
@@ -1205,9 +1211,8 @@ const TempGenerateUuid = ({ data, form, action }) => {
                 onClick={onClick}
             />
         </div>
-
     )
-    if (jugdeField) return <JudgeTemplate jugdeField={jugdeField} jugdeValue={jugdeValue} Template={Template} />
+    if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
 
@@ -1254,7 +1259,7 @@ const TemplateMapping = {
     TempICON,
     TempInputLink,
     TempPwdConfirm,
-    TempGenerateUuid,
+    TempGenerateUuid
 
 
     // TempPosition,

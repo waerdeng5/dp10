@@ -74,9 +74,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     if (isEmptyObject(modelConfig)) return false
 
 
-    const onClose = () => {
-        updateModel({})
-    }
+    const onClose = () => updateModel({})
 
     const onResizeEnd = (e) => {
         setSIZE({

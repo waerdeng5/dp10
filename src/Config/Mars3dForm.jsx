@@ -508,6 +508,102 @@ const Mars3dBoundaryWallConfig = [
     },
 ]
 
+// !!! 场景元素
+// *** 衬色边框
+const outlineConfig = {
+    span: 24, formType: 'GROUP', name: 'outline_config', label: '衬色设置', collapsible: true,
+    jugde: [{ field: ['style', 'outline'], value: [true] }], children: [
+        { span: 24, formType: 'COLOR', name: ['style', 'outlineColor'], label: '衬色颜色', rules: true },
+        { span: 24, formType: 'NUMBER', name: ['style', 'outlineWidth'], label: '衬色宽度', rules: true },
+        { span: 24, formType: 'NUMBER', name: ['style', 'outlineOpacity'], label: '衬色透明度', rules: true, min: 0, max: 1, step: 0.1 },
+    ]
+}
+// *** 背景颜色
+const backgroundConfig = {
+    span: 24, formType: 'GROUP', name: 'background_config', label: '背景设置', collapsible: true,
+    jugde: [{ field: ['style', 'background'], value: [true] }], children: [
+        { span: 24, formType: 'COLOR', name: ['style', 'backgroundColor'], label: '背景颜色', rules: true },
+        { span: 24, formType: 'NUMBER', name: ['style', 'backgroundPadding'], label: '背景内边距', rules: true },
+        { span: 24, formType: 'NUMBER', name: ['style', 'backgroundOpacity'], label: '衬色透明度', rules: true, min: 0, max: 1, step: 0.1 },
+    ]
+}
+// *** 偏移量
+const hasPixelOffsetConfig = {
+    span: 24, formType: 'GROUP', name: 'hasPixelOffset_config', label: '偏移设置', collapsible: true,
+    jugde: [{ field: ['style', 'hasPixelOffset'], value: [true] }], children: [
+        { span: 24, formType: 'NUMBER', name: ['style', 'pixelOffsetX'], label: 'X轴偏移', rules: true },
+        { span: 24, formType: 'NUMBER', name: ['style', 'pixelOffsetY'], label: 'Y轴偏移', rules: true },
+    ]
+}
+// *** 视距缩放
+const scaleByDistanceConfig = {
+    span: 24, formType: 'GROUP', name: 'scaleByDistance_config', label: '缩放设置', collapsible: true,
+    jugde: [{ field: ['style', 'scaleByDistance'], value: [true] }], children: [
+        { span: 24, formType: 'NUMBER', name: ['style', 'scaleByDistance_far'], label: '上限', rules: true, min: 0, max: 100000000, step: 1 },
+        { span: 24, formType: 'NUMBER', name: ['style', 'scaleByDistance_farValue'], label: '上限比例', rules: true, min: 0, max: 10, step: 0.1 },
+        { span: 24, formType: 'NUMBER', name: ['style', 'scaleByDistance_near'], label: '下限', rules: true, min: 0, max: 100000000, step: 1 },
+        { span: 24, formType: 'NUMBER', name: ['style', 'scaleByDistance_nearValue'], label: '下限比例', rules: true, min: 0, max: 10, step: 0.1 },
+    ]
+}
+// *** 视距显示
+const distanceDisplayConditionConfig = {
+    span: 24, formType: 'GROUP', name: 'distanceDisplayCondition_config', label: '显示设置', collapsible: true,
+    jugde: [{ field: ['style', 'distanceDisplayCondition'], value: [true] }], children: [
+        { span: 24, formType: 'NUMBER', name: ['style', 'distanceDisplayCondition_far'], label: '最大距离', rules: true, min: 0, max: 100000000, step: 1 },
+        { span: 24, formType: 'NUMBER', name: ['style', 'distanceDisplayCondition_near'], label: '最小距离', rules: true, min: 0, max: 100000000, step: 1 },
+    ]
+}
+
+// TODO 文字点
+const Mars3DlabelPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'INPUT', name: ['style', 'text'], label: '文字内容', rules: true },
+    { span: 24, formType: 'COLOR', name: ['style', 'color'], label: '文字颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'NUMBER', name: ['style', 'font_size'], label: '文字字号', rules: true },
+    { span: 24, formType: 'SELECT', name: ['style', 'font_family'], label: '文字字体', valueEnum: MappingData.Font__Family },
+    { span: 24, formType: 'RADIO', name: ['style', 'font_weight'], label: '是否加粗', rules: true, valueEnum: MappingData.Font__WeightStr },
+    { span: 24, formType: 'RADIO', name: ['style', 'font_style'], label: '是否斜体', rules: true, valueEnum: MappingData.Font__Style },
+    { span: 24, formType: 'NUMBER', name: ['style', 'scale'], label: '缩放比例', rules: true, min: 0, max: 10000, step: 0.1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'opacity'], label: '透明度', rules: true, min: 0, max: 1, step: 0.1 },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsYesBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'visibleDepth'], label: '是否遮挡', rules: true, valueEnum: MappingData.IsYesBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'background'], label: '是否背景', rules: true, valueEnum: MappingData.IsEnabledBool },
+    backgroundConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'hasPixelOffset'], label: '偏移量', rules: true, valueEnum: MappingData.IsEnabledBool },
+    hasPixelOffsetConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'scaleByDistance'], label: '视距缩放', rules: true, valueEnum: MappingData.IsEnabledBool },
+    scaleByDistanceConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    distanceDisplayConditionConfig,
+]
+// TODO 像素点
+const Mars3DpointPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'pixelSize'], label: '像素大小', rules: true },
+    { span: 24, formType: 'COLOR', name: ['style', 'color'], label: '像素颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'NUMBER', name: ['style', 'opacity'], label: '透明度', rules: true, min: 0, max: 1, step: 0.1 },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsYesBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'visibleDepth'], label: '是否遮挡', rules: true, valueEnum: MappingData.IsYesBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'scaleByDistance'], label: '视距缩放', rules: true, valueEnum: MappingData.IsEnabledBool },
+    scaleByDistanceConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    distanceDisplayConditionConfig,
+
+
+
+    //     labelStatus: false,
+    //     label
+]
+
 
 
 export const Mars3dFormConfig = {
@@ -524,6 +620,10 @@ export const Mars3dFormConfig = {
     Mars3dBoundaryBorderConfig,
     Mars3dBoundaryCoverConfig,
     Mars3dBoundaryLineConfig,
-    Mars3dBoundaryWallConfig
+    Mars3dBoundaryWallConfig,
+
+
+    Mars3DlabelPFormList,
+    Mars3DpointPFormList
 
 }

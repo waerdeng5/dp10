@@ -1,4 +1,5 @@
 import './Mars3dModel.scss'
+import * as mars3d from "mars3d"
 
 import { v4 } from 'uuid'
 import { useEffect, useState } from 'react'
@@ -10,8 +11,18 @@ import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
 import { modelStore } from '../../Router/zustand'
-import { onTreeDrop, replaceNodeById } from '../../Utils'
+import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey } from "../../Utils"
 import { ICONMapping } from '../../Config/IconMapping'
+import { initStartDraw } from '../../Mars3d/initData'
+
+// DIV元素
+const divType = ['div', 'divPlane']
+// 单点元素
+const singlePoint = [
+    'modelP', 'pointP', 'labelP', 'billboardP', 'billboardIndicator', 'tetrahedron', 'div', 'divPlane', 'divLightPoint', 'divUpLabel', 'divBoderLabel',
+    'boxP', 'cylinderP', 'lightCone', 'ellipsoidP', 'circleP', 'pointLight'
+]
+const singlePoints = ['regular', 'sector']
 
 const A01TabsList = {
     scene: { label: '基础设置', formItem: Mars3dFormConfig.Mars3dBaseConfig },
@@ -31,7 +42,8 @@ const A02TabsList = {
 
 
 const Mars3dModel = ({ data, Event }) => {
-    const { updateModel5 } = modelStore()
+    const { message, notification } = App.useApp()
+    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { type, MapConfig, ELEConfig, TILConfig, map, gra, clip } = data
     if (type === 'A01') {
         const FORMEVENT = useEventEmitter()
@@ -46,6 +58,7 @@ const Mars3dModel = ({ data, Event }) => {
             const Mapping = new Map([
                 ['onFormBack', () => {
                     const newConfig = { ...MapConfig, [Active]: { ...MapConfig[Active], ...data } }
+                    Event.emit({ type: 'onSaveMapConfig', data: newConfig })
                     const SceneMapping = new Map([
                         ['scene', () => Object.keys(data).forEach(key => map.setSceneOptions({ [key]: data[key] }))],
                         ['globe', () => Object.keys(data).forEach(key => map.setSceneOptions({ globe: { [key]: data[key] } }))],
@@ -63,7 +76,6 @@ const Mars3dModel = ({ data, Event }) => {
                                 if (key === 'locationBar') map.control.locationBar.show = data[key]
                                 if (key === 'distanceLegend') map.control.distanceLegend.show = data[key]
                             })
-                            console.log(map.control)
                         }],
                         ['weather', () => Object.keys(data).forEach(key => {
                             const [lot, field] = key.split('_')
@@ -76,7 +88,6 @@ const Mars3dModel = ({ data, Event }) => {
                     ])
                     const fu = SceneMapping.get(Active)
                     fu?.()
-                    Event.emit({ type: 'onSaveMapConfig', data: newConfig })
                 }]
             ])
             const func = Mapping.get(type)
@@ -102,8 +113,8 @@ const Mars3dModel = ({ data, Event }) => {
             const Mapping = new Map([
                 ['onFormBack', () => {
                     MapConfig[Active] = data
-                    BoundaryBorderFunction(gra, clip, MapConfig)
                     Event.emit({ type: 'onSaveMapConfig', data: MapConfig })
+                    BoundaryBorderFunction(gra, clip, MapConfig)
                 }]
             ])
             const func = Mapping.get(type)
@@ -188,8 +199,9 @@ const Mars3dModel = ({ data, Event }) => {
     if (type === 'A04') {
         gra.isAutoEditing = true
         const FORMEVENT = useEventEmitter()
-        const [TreeData, setTreeData] = useState(ELEConfig)
+        const [TreeData, setTreeData] = useState(MapConfig.element)
 
+        const [Activate, setActivate] = useState()
         // 新增
         const onAdd = () => {
             updateModel5({
@@ -211,24 +223,97 @@ const Mars3dModel = ({ data, Event }) => {
                 modelData: { formItem: 'Mars3donAddElement', eventBack: 'onAddElement', Initial: data }
             })
         }
+        const onDraw = async (e) => {
+            const { uuid, elementType } = e
+            const style = JSON.parse(JSON.stringify(initStartDraw[elementType]))
+            if (divType.includes(elementType)) style.style.html = initStartDraw.DivTemplate[style.style.temp](style)
+            await gra.startDraw({ id: uuid, type: elementType, ...style })
+        }
         const onDelete = (uuid) => {
-            console.log('删除数据', uuid)
+            const ELE = gra.getGraphicById(uuid)
+            if (ELE) {
+                const ele = ELEConfig.filter(v => v.id !== ELE.id)
+                gra.removeGraphic(ELE)
+                Event.emit({ type: 'onSaveMapElement', data: ele })
+            }
+            const data = removeTreeByKey(TreeData, uuid)
+            const list = { ...MapConfig, element: data }
+            Event.emit({ type: 'onSaveMapConfig', data: list })
+            setTreeData(data)
+        }
+        const onShow = (ELE, status) => {
+            ELEConfig.find(v => v.id === ELE.id).show = status
+            ELE.setOptions({ show: status })
+            Event.emit({ type: 'onSaveMapElement', data: ELEConfig })
         }
 
         const CallBackFunc = e => {
             const { type, data } = e
+            // console.log('Mars3d', e)
             const Mapping = new Map([
                 ['onAddElement', () => {
                     const arr = data.uuid ? replaceNodeById(TreeData, data.uuid, data) : [...TreeData, { ...data, uuid: v4() }]
+                    const list = { ...MapConfig, element: arr }
                     setTreeData(arr)
                     updateModel5({})
-                    Event.emit({ type: 'onSaveMapElement', data: arr })
+                    Event.emit({ type: 'onSaveMapConfig', data: list })
+                }],
+                ['onDetection', () => {
+                    const { id } = Activate
+                    const ELE = gra.getGraphicById(id)
+                    if (data.position) {
+                        const position = ELE.coordinate
+                        position[data.position.length - 1] = data.position.at(-1)
+                        ELE.setOptions({ position })
+                    } else ELE.setOptions(data)
                 }]
             ])
             const func = Mapping.get(type)
             func?.(data)
         }
         FORMEVENT.useSubscription(CallBackFunc)
+
+
+        useEffect(() => {
+            gra.on(mars3d.EventType.editStart, (e) => {
+                message.loading({ key: 'element', duration: 0, content: '元素编辑中...' })
+                const data = e.graphic.options
+                if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
+                if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
+                setActivate(data)
+                updateModel5({
+                    title: '元素属性',
+                    type: 'Mars3dForm',
+                    Event: FORMEVENT,
+                    width: 600,
+                    height: '100vh',
+                    shading: false,
+                    position: { my: 'right ', at: 'right ', of: window },
+                    modelData: { type: `Mars3D${e.editType}FormList`, Initial: data }
+                })
+            })
+            gra.on(mars3d.EventType.editStop, (e) => {
+                message.success({ key: 'element', content: '完成元素编辑!' })
+                const data = e.graphic.options
+                if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
+                if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
+                const length = ELEConfig.findIndex(v => v.id === data.id)
+                if (length !== -1) ELEConfig[length] = data
+                else ELEConfig.push(data)
+                gra.stopDraw()
+                setActivate()
+                updateModel5({})
+                Event.emit({ type: 'onSaveMapElement', data: ELEConfig })
+            })
+            gra.on(mars3d.EventType.editMovePoint, (e) => {
+                if (singlePoint.includes(e.editType)) {
+                    const data = { ...e.graphic.options, position: e.graphic.coordinate }
+                    FORMEVENT.emit({ type: 'onUploadInitial', data })
+                }
+            })
+
+            // return () => { gra.isAutoEditing = false }
+        }, [])
 
         return (
             <div className='Mars3dModel A04'>
@@ -240,7 +325,8 @@ const Mars3dModel = ({ data, Event }) => {
                             onDrop={e => {
                                 const data = onTreeDrop(e, TreeData, 'uuid')
                                 setTreeData(data)
-                                Event.emit({ type: 'onSaveMapElement', data: data })
+                                const list = { ...MapConfig, element: data }
+                                Event.emit({ type: 'onSaveMapConfig', data: list })
                             }}
                             selectable={false}
                             treeData={TreeData}
@@ -278,6 +364,13 @@ const Mars3dModel = ({ data, Event }) => {
                                 }
                                 if (fieldType === 'element') {
                                     const ELE = gra.getGraphicById(uuid)
+                                    const show = ELE?.getRealShow() || false
+
+
+                                    // const show = ELE?.show || false
+
+                                    // console.log(ELE.getRealShow(), show)
+
                                     return (
                                         <div className='treeList element'>
                                             <div className='title'>
@@ -287,15 +380,17 @@ const Mars3dModel = ({ data, Event }) => {
                                             <div className='options'>
                                                 {ELE ?
                                                     <>
-                                                        <Tooltip title='显示中...'>
-                                                            <Button type='link' icon={ICONMapping['fasEye']} />
-                                                        </Tooltip>
-                                                        <Tooltip title='隐藏中...'>
-                                                            <Button type='link' danger icon={ICONMapping['fasEyeSlash']} />
-                                                        </Tooltip>
+                                                        {show ?
+                                                            <Tooltip title='显示中...'>
+                                                                <Button type='link' icon={ICONMapping['fasEye']} onClick={() => onShow(ELE, false)} />
+                                                            </Tooltip> :
+                                                            <Tooltip title='隐藏中...'>
+                                                                <Button type='link' danger icon={ICONMapping['fasEyeSlash']} onClick={() => onShow(ELE, true)} />
+                                                            </Tooltip>
+                                                        }
                                                     </> :
                                                     <Tooltip title='图上绘制'>
-                                                        <Button type='link' icon={ICONMapping['fasRoute']} />
+                                                        <Button type='link' icon={ICONMapping['fasRoute']} onClick={() => onDraw(e)} />
                                                     </Tooltip>
                                                 }
                                                 <Tooltip title='编辑'>
@@ -320,7 +415,7 @@ const Mars3dModel = ({ data, Event }) => {
                         />
                     </DevScrollView>
                     <div className='Button'>
-                        <Button type='primary' block onClick={onAdd}>新增</Button>
+                        <Button type='primary' block onClick={onAdd} loading={Activate ? true : false}>新增</Button>
                     </div>
                 </div>
             </div>
