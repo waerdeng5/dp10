@@ -699,9 +699,21 @@ const Mars3DdivFormList = [
     { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
     distanceDisplayConditionConfig,
     // 模板设置
-    { span: 24, formType: 'RADIO', name: ['style', 'template'], label: '显示模板', rules: true, valueEnum: MappingData.mars3d__divTemplate },
-
-
+    { span: 24, formType: 'RADIO', name: ['style', 'temp'], label: '显示模板', rules: true, valueEnum: MappingData.mars3d__divTemplate },
+    {
+        span: 24, formType: 'GROUP', name: 'tempConfig_A01', label: '一号版配置', collapsible: true,
+        jugde: [{ field: ['style', 'temp'], value: ['A01'] }], children: [
+            { span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'background'], label: '填充颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: ['style', 'tempConfig', 'backDeg'], label: '颜色角度', rules: true },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'padding'], label: '内部间距', rules: true },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'radius'], label: '圆角信息', rules: true },
+            {
+                span: 24, formType: 'LIST', name: ['style', 'tempConfig', 'list'], label: '一号版配置', collapsible: true, children: [
+                    { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+                ]
+            }
+        ]
+    },
 
 
 ]

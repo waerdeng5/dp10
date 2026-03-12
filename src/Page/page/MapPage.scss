@@ -1,48 +1,18 @@
 .MapPage {
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
 
     .MapBox {
         width: 100%;
         height: 100%;
         border-radius: 8px;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
-        // .mars3d-locationbar {
-        //     position: relative;
-        //     width: 100%;
-        //     bottom: 32px !important;
+        .mars3d-locationbar-content {
+            font-size: 18px;
+            font-family: 'HYT';
+            filter: drop-shadow(1px 1px 1px #262626);
+        }
 
-        //     .mars3d-locationbar-content {
-        //         width: 100%;
-        //         height: 32px;
-        //         display: flex;
-        //         align-items: center;
-        //         justify-content: flex-end;
-        //         background: #26262650;
-        //         backdrop-filter: blur(8px);
-
-        //         &>div {
-        //             margin: 0 16px;
-        //             color: white;
-        //             font-size: 20px;
-        //             font-family: 'HYT';
-        //             filter: drop-shadow(1px 1px 1px #262626);
-        //         }
-        //     }
-        // }
-
-        // .mars3d-divlayer {
-        //     position: relative;
-        // }
     }
 
     &>.ConfigBox {

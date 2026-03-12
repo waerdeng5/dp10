@@ -5273,12 +5273,12 @@ markdown-table@^3.0.0:
   resolved "https://registry.npmmirror.com/markdown-table/-/markdown-table-3.0.4.tgz#fe44d6d410ff9d6f2ea1797a3f60aa4d2b631c2a"
   integrity sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==
 
-mars3d-cesium@^1.132.1:
+mars3d-cesium@^1.139.0:
   version "1.139.0"
   resolved "https://registry.npmmirror.com/mars3d-cesium/-/mars3d-cesium-1.139.0.tgz#25e12b9b643faf35d43386c51ac98b81047b0165"
   integrity sha512-+mhp/hGynMiNBCl39b2d4681RuIYChdrPxzxVPpV5OK/67M7L11I4HbS4wptmXdQAFyAphBgfriXfIa795gTHA==
 
-mars3d@^3.10.2:
+mars3d@^3.11.0:
   version "3.11.0"
   resolved "https://registry.npmmirror.com/mars3d/-/mars3d-3.11.0.tgz#d07854c9e08d1fc9b3852a982bcb38e2631d75d4"
   integrity sha512-eMhDfAZz/AZiDgct5fBcst9gZmuWZaSSDbYc7MkO0ghAtecskeSgDjJoWZ+ySkI4P2dMpoqWRiKIYORRfIB83g==

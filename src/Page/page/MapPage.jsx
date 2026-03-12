@@ -1,3 +1,5 @@
+import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
+import "mars3d/mars3d.css"
 import './MapPage.scss'
 
 import _ from 'lodash'

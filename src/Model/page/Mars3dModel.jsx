@@ -230,7 +230,6 @@ const Mars3dModel = ({ data, Event }) => {
                 const { temp, tempConfig } = style.style
                 style.style.html = initStartDraw.DivTemplate[temp](tempConfig)
             }
-            console.log({ id: uuid, type: elementType, ...style })
             await gra.startDraw({ id: uuid, type: elementType, ...style })
         }
         const onDelete = (uuid) => {
@@ -276,7 +275,6 @@ const Mars3dModel = ({ data, Event }) => {
             func?.(data)
         }
         FORMEVENT.useSubscription(CallBackFunc)
-
 
         useEffect(() => {
             gra.on(mars3d.EventType.editStart, (e) => {

@@ -154,7 +154,7 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
 
     return (
         <div className='BodyA01' style={TabsStyle}>
-            {/* <Tabs
+            <Tabs
                 items={items}
                 type="editable-card"
                 hideAdd={true}
@@ -171,15 +171,6 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
                         </SortableContext>
                     </DndContext>
                 ) : false}
-            /> */}
-            <Tabs
-                hideAdd
-                items={items}
-                activeKey={pageActive}
-                type="editable-card"
-                onChange={onTabChange}
-                onEdit={onEdit}
-                tabBarExtraContent={pageList.length > 1 ? ExtraContent : null}
             />
         </div>
     );

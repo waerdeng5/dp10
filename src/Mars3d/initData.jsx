@@ -1,5 +1,6 @@
 import './divTemplate.scss'
 import { CommonSceneUrl } from '../Config'
+import { ColorCallBack, SetBorderParams, SpacingCallBack, SetFilderParams } from '../Utils'
 
 const tdtKey = '66157ab348d37d969fdc61d1a6f45c6e'
 const geovisearthToken = "e4964b442b88caaad98477673f5e63fb"
@@ -2735,23 +2736,41 @@ const div = {
         ...distanceDisplayConditionMapping,
         temp: 'A01',
         tempConfig: {
-
+            background: '#13c2c2',
+            backDeg: 0,
+            padding: '8',
+            radius: '8',
+            list: [
+                { text: '文字1' },
+                { text: '文字2' },
+            ]
         }
     }
 }
 // TODO div模板
 const DivTemplate = {
     A01: e => {
+        const { background, backDeg, padding, radius, list } = e
 
-        return `<div class="DivHtmlA01Template">
-                    <div class="text">DIV模板1</div>
-                </div>`
+        const backStyle = {
+            background: ColorCallBack(background, backDeg),
+            padding: SpacingCallBack(padding),
+            'border-radius': SpacingCallBack(radius),
+        }
+        console.log(backStyle)
+
+        const text = '测试@数据@模板'.split('@')
+        const html = text.map((v, i) => {
+            return `<div class="text${i}" style="color:white">${v}</div>`
+        }).join('')
+
+        return `<div class="DivHtmlA01Template" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}"> ${html}</div> `
     },
     A02: e => {
 
-        return `<div class="DivHtmlA02Template">
-                    <div class="text">DIV模板2</div>
-                </div>`
+        return `< div class="DivHtmlA02Template" >
+    <div class="text">DIV模板2</div>
+                </div > `
     },
 }
 
