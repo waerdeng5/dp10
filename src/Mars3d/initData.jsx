@@ -1,3 +1,4 @@
+import './divTemplate.scss'
 import { CommonSceneUrl } from '../Config'
 
 const tdtKey = '66157ab348d37d969fdc61d1a6f45c6e'
@@ -2138,37 +2139,9 @@ export const gltfMapping = [
 //     }
 // }
 
-// // *** 四面体
-// const tetrahedron = {
-//     show: true,
-//     style: {
-//         width: 8,
-//         height: 16,
-//         color: '#13c2c2',
-//         animation: true,
-//         moveHeight: 30,
-//         moveDuration: 4,
-//         rotationAngle: 1,
-//         translucent: false,
-//         closed: true
-//     }
-// }
 
-// // *** div面板
-// const div = {
-//     show: true,
-//     style: {
-//         temp: 'HtmlA01',
-//         text: '测试@数据@模板',
-//         background: '#ff0000',
-//         offsetX: 0,
-//         offsetY: 0,
-//         scale: 1,
-//         clampToGround: false,
-//         ...scaleByDistanceObj,
-//         ...distanceDisplayConditionObj,
-//     }
-// }
+
+
 
 // // ??? 三维div面板 趴地上起不来
 // const divPlane = {
@@ -2623,27 +2596,7 @@ export const gltfMapping = [
 
 // }
 
-// // 自定义div
-// const DivTemplate = {
-//     HtmlA01: e => {
-//         return `<div class="DivHtmlA01">
-//                     <div class="text">${e.style.text}</div>
-//                 </div>`
-//     },
-//     // 主线@萝嘉界至保兴@54.5km
-//     HtmlA02: e => {
-//         // console.log(e)
-//         const { text, background } = e.style
-//         const [A01, A02, A03] = text.split('@')
-//         return `<div class="DivHtmlA02" style="--color:${background}">
-//                     <div class='Box' >
-//                         <div>${A01}</div>
-//                         <div>${A02}</div>
-//                         ${A03 ? `<div>${A03}</div>` : ''} 
-//                     </div>
-//                 </div>`
-//     },
-// }
+
 
 // *** 衬色
 const outlineMapping = {
@@ -2680,14 +2633,14 @@ const distanceDisplayConditionMapping = {
 
 // TODO 文字点
 const label = {
-    text: '默认文字',
+    text: '',
     scale: 1,
     font_family: 'HYT',
     font_size: 24,
     font_weight: 'normal',
     font_style: 'normal',
     fill: true,
-    color: '#262626',
+    color: '#13c2c2',
     opacity: 1,
     clampToGround: true,
     visibleDepth: false,
@@ -2716,7 +2669,7 @@ const pointP = {
     show: true,
     style: {
         pixelSize: 8,
-        color: '#fff',
+        color: '#13c2c2',
         opacity: 1,
         clampToGround: true,
         visibleDepth: false,
@@ -2726,12 +2679,81 @@ const pointP = {
         ...scaleByDistanceMapping,
         distanceDisplayCondition: false,
         ...distanceDisplayConditionMapping,
-        labelStatus: false,
-        label: {}
+        label
     },
 }
+// *** 图标点
+const billboardP = {
+    type: 'billboardP',
+    show: true,
+    style: {
+        image: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/img/route-start.png',
+        scale: 1,
+        opacity: 1,
+        rotationDegree: 0,
+        width: 30,
+        height: 40,
+        clampToGround: false,
+        visibleDepth: false,
+        hasPixelOffset: false,
+        ...hasPixelOffsetMapping,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        label
+    }
+}
+// *** 四面体
+const tetrahedron = {
+    type: 'tetrahedron',
+    show: true,
+    style: {
+        width: 8,
+        height: 16,
+        color: '#13c2c2',
+        animation: true,
+        moveHeight: 30,
+        moveDuration: 4,
+        rotationAngle: 1,
+        translucent: false,
+        closed: true
+    }
+}
+// *** div面板
+const div = {
+    type: 'div',
+    show: true,
+    style: {
+        offsetX: 0,
+        offsetY: 0,
+        scale: 1,
+        clampToGround: false,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        temp: 'A01',
+        tempConfig: {
 
+        }
+    }
+}
+// TODO div模板
+const DivTemplate = {
+    A01: e => {
 
+        return `<div class="DivHtmlA01Template">
+                    <div class="text">DIV模板1</div>
+                </div>`
+    },
+    A02: e => {
+
+        return `<div class="DivHtmlA02Template">
+                    <div class="text">DIV模板2</div>
+                </div>`
+    },
+}
 
 
 
@@ -2739,20 +2761,19 @@ const pointP = {
 export const initStartDraw = {
     labelP,
     pointP,
-
-
-
-    // modelP,
-    // labelP,
-    // pointP,
-    // billboardP,
-    // billboardIndicator,
-    // tetrahedron,
-    // div,
+    billboardP,
+    tetrahedron,
+    div,
     // divPlane,
     // divLightPoint,
     // divUpLabel,
     // divBoderLabel,
+
+
+
+
+    // modelP,
+    // billboardIndicator,
     // boxP,
     // cylinderP,
     // lightCone,
@@ -2785,5 +2806,7 @@ export const initStartDraw = {
     // pointLight,
     // tileset,
     // getJson,
-    // DivTemplate
+
+
+    DivTemplate
 }

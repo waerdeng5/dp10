@@ -1705,55 +1705,14 @@ export const MappingData = {
     //     }
     // ],    
     mars3d__elementType: [
-        // { value: 'ellipse', label: '椭圆、椭圆柱' },
-        // { value: 'particleSystem', label: '粒子效果' },
-        // { value: 'cloud', label: '积云' },
-        // { value: 'arcFrustum', label: '弧形平截头体' },
-        // { value: 'rectangularSensor', label: '相控阵雷达' },
-        // { value: 'brushLine', label: '自由绘制线' },
-        // { value: 'path', label: '路径' },
-        // { value: 'route', label: '轨迹路线' },
-        // { value: 'fixedRoute', label: '历史轨迹路线' },
-        // { value: 'dynamicRiver', label: '动态河流' },
-        // { value: 'scrollWall', label: '走马灯围墙' },
-        // { value: 'water', label: '水域面' },
-        // { value: 'reflectionWater', label: '反射水面' },
-        // { value: 'pit', label: '井' },
-        // { value: 'video2D', label: '视频融合2D' },
-        // { value: 'video3D', label: '视频融合3D' },
-        // { value: 'videoP', label: '视频面' },
-
-        // { value: 'pointMeasure', label: '坐标量算对象' },
-        // { value: 'distanceMeasure', label: '距离量算对象' },
-        // { value: 'distanceSurfaceMeasure', label: '贴地距离量算对象' },
-        // { value: 'sectionMeasure', label: '剖面量算对象' },
-        // { value: 'areaMeasure', label: '面积量算对象' },
-        // { value: 'areaSurfaceMeasure', label: '贴地面积量算对象' },
-        // { value: 'volumeMeasure', label: '体积方量量算对象' },
-        // { value: 'volumeDepthMeasure', label: '基于深度图的体积方量量算对象' },
-        // { value: 'heightMeasure', label: '高度量算对象' },
-        // { value: 'heightTriangleMeasure', label: '三角高度量算对象' },
-        // { value: 'angleMeasure', label: '角度量算对象' },
-        // { value: 'pointLight', label: '点光源' },
-        // { value: 'viewShed', label: '可视域' },
-        // { value: 'spotLight', label: '聚光灯' },
-        // { value: 'volumeCloud', label: '体渲染气象云' },
-        // { value: 'pointVisibility', label: '圆形可视域区域分析' },
-        // { value: 'coneVisibility', label: '扇形可视域区域分析' },
-        // { value: 'skylineBody', label: '天际线体' },
-        // { value: 'viewDome', label: '开敞度分析' },
         // {
         //     value: 'A01',
         //     label: '点',
         //     selectable: false,
         //     children: [
-        //         { value: 'pointP', label: '元素点' },
         //         { value: 'modelP', label: '小模型' },
-        //         { value: 'labelP', label: '文字' },
-        //         { value: 'billboardP', label: '图标点' },
         //         // { value: 'billboardIndicator', label: '连线点' }, // 官方bug
-        //         { value: 'tetrahedron', label: '四面体' },
-        //         { value: 'div', label: 'DIV点' },
+        //         
         //         // { value: 'divPlane', label: '三维DIV面板' }, // 趴地上起来不来了
         //         { value: 'divLightPoint', label: '扩散DIV点' },
         //         { value: 'divUpLabel', label: '竖立DIV点' },
@@ -1819,6 +1778,11 @@ export const MappingData = {
             children: [
                 { value: 'labelP', label: '文本点' },
                 { value: 'pointP', label: '像素点' },
+                { value: 'billboardP', label: '图标点' },
+                { value: 'tetrahedron', label: '四面体' },
+                { value: 'div', label: 'DIV点' },
+
+
             ]
         },
 
@@ -1840,8 +1804,8 @@ export const MappingData = {
     ],
     // TODO 自定义div模板
     mars3d__divTemplate: [
-        { value: 'HtmlA01', label: '一号版' },
-        { value: 'HtmlA02', label: '二号版' },
+        { value: 'A01', label: '一号版' },
+        { value: 'A02', label: '二号版' },
     ],
     // TODO 管道形状
     mars3d__shape: [

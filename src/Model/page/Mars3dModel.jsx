@@ -19,8 +19,8 @@ import { initStartDraw } from '../../Mars3d/initData'
 const divType = ['div', 'divPlane']
 // 单点元素
 const singlePoint = [
-    'modelP', 'pointP', 'labelP', 'billboardP', 'billboardIndicator', 'tetrahedron', 'div', 'divPlane', 'divLightPoint', 'divUpLabel', 'divBoderLabel',
-    'boxP', 'cylinderP', 'lightCone', 'ellipsoidP', 'circleP', 'pointLight'
+    'modelP', 'pointP', 'labelP', 'doubleSidedPlane', 'billboardP', 'billboardIndicator', 'tetrahedron', 'div', 'divPlane', 'divLightPoint',
+    'divUpLabel', 'divBoderLabel', 'boxP', 'cylinderP', 'lightCone', 'ellipsoidP', 'circleP', 'pointLight'
 ]
 const singlePoints = ['regular', 'sector']
 
@@ -226,7 +226,11 @@ const Mars3dModel = ({ data, Event }) => {
         const onDraw = async (e) => {
             const { uuid, elementType } = e
             const style = JSON.parse(JSON.stringify(initStartDraw[elementType]))
-            if (divType.includes(elementType)) style.style.html = initStartDraw.DivTemplate[style.style.temp](style)
+            if (divType.includes(elementType)) {
+                const { temp, tempConfig } = style.style
+                style.style.html = initStartDraw.DivTemplate[temp](tempConfig)
+            }
+            console.log({ id: uuid, type: elementType, ...style })
             await gra.startDraw({ id: uuid, type: elementType, ...style })
         }
         const onDelete = (uuid) => {
@@ -294,7 +298,7 @@ const Mars3dModel = ({ data, Event }) => {
             })
             gra.on(mars3d.EventType.editStop, (e) => {
                 message.success({ key: 'element', content: '完成元素编辑!' })
-                const data = e.graphic.options
+                const data = { ...e.graphic.options, type: e.editType }
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
                 const length = ELEConfig.findIndex(v => v.id === data.id)

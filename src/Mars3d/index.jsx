@@ -154,7 +154,18 @@ const RenderElement = (gra, data) => {
                 const labelP = new mars3d.graphic.LabelPrimitive({ id, position, show, style })
                 gra.addGraphic(labelP)
                 break;
-
+            case 'pointP':
+                const pointP = new mars3d.graphic.PointPrimitive({ id, position, show, style })
+                gra.addGraphic(pointP)
+                break;
+            case 'billboardP':
+                const billboardP = new mars3d.graphic.BillboardPrimitive({ id, position, show, style })
+                gra.addGraphic(billboardP)
+                break;
+            case 'tetrahedron':
+                const tetrahedron = new mars3d.graphic.Tetrahedron({ id, position, show, style })
+                gra.addGraphic(tetrahedron)
+                break;
             default:
                 break;
         }
@@ -172,24 +183,10 @@ const RenderElement = (gra, data) => {
         //                 const modelP = new mars3d.graphic.ModelPrimitive({ id, position, show, style })
         //                 gra.addGraphic(modelP)
         //                 break;
-        //             case 'pointP':
-        //                 const pointP = new mars3d.graphic.PointPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(pointP)
-        //                 break;
-        //             case 'labelP':
-        //                 const labelP = new mars3d.graphic.LabelPrimitive({ id, position, show, style })
 
-        //                 console.log(labelP)
-        //                 gra.addGraphic(labelP)
-        //                 break;
-        //             case 'billboardP':
-        //                 const billboardP = new mars3d.graphic.BillboardPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(billboardP)
-        //                 break;
-        //             case 'tetrahedron':
-        //                 const tetrahedron = new mars3d.graphic.Tetrahedron({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(tetrahedron)
-        //                 break;
+
+
+
         //             case 'div':
         //                 const div = new mars3d.graphic.DivGraphic({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(div)
