@@ -201,6 +201,9 @@ const Mars3dModel = ({ data, Event }) => {
         const FORMEVENT = useEventEmitter()
         const [TreeData, setTreeData] = useState(MapConfig.element)
 
+        const [ELEData, setELEData] = useState(ELEConfig)
+
+
         const [Activate, setActivate] = useState()
         // 新增
         const onAdd = () => {
@@ -235,9 +238,9 @@ const Mars3dModel = ({ data, Event }) => {
         const onDelete = (uuid) => {
             const ELE = gra.getGraphicById(uuid)
             if (ELE) {
-                const ele = ELEConfig.filter(v => v.id !== ELE.id)
-                gra.removeGraphic(ELE)
+                const ele = ELEData.filter(v => v.id !== ELE.id)
                 Event.emit({ type: 'onSaveMapElement', data: ele })
+                gra.removeGraphic(ELE)
             }
             const data = removeTreeByKey(TreeData, uuid)
             const list = { ...MapConfig, element: data }
@@ -245,9 +248,9 @@ const Mars3dModel = ({ data, Event }) => {
             setTreeData(data)
         }
         const onShow = (ELE, status) => {
-            ELEConfig.find(v => v.id === ELE.id).show = status
+            ELEData.find(v => v.id === ELE.id).show = status
             ELE.setOptions({ show: status })
-            Event.emit({ type: 'onSaveMapElement', data: ELEConfig })
+            Event.emit({ type: 'onSaveMapElement', data: ELEData })
         }
 
         const CallBackFunc = e => {
@@ -299,13 +302,16 @@ const Mars3dModel = ({ data, Event }) => {
                 const data = { ...e.graphic.options, type: e.editType }
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
-                const length = ELEConfig.findIndex(v => v.id === data.id)
-                if (length !== -1) ELEConfig[length] = data
-                else ELEConfig.push(data)
+                const length = ELEData.findIndex(v => v.id === data.id)
+                if (length !== -1) ELEData[length] = data
+                else ELEData.push(data)
+
+                // console.log(ELEData)
+
                 gra.stopDraw()
                 setActivate()
                 updateModel5({})
-                Event.emit({ type: 'onSaveMapElement', data: ELEConfig })
+                Event.emit({ type: 'onSaveMapElement', data: ELEData })
             })
             gra.on(mars3d.EventType.editMovePoint, (e) => {
                 if (singlePoint.includes(e.editType)) {
@@ -317,6 +323,8 @@ const Mars3dModel = ({ data, Event }) => {
             // return () => { gra.isAutoEditing = false }
         }, [])
 
+
+        console.log(ELEData)
         return (
             <div className='Mars3dModel A04'>
                 <div className='List'>

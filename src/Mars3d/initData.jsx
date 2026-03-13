@@ -2751,26 +2751,23 @@ const div = {
 const DivTemplate = {
     A01: e => {
         const { background, backDeg, padding, radius, list } = e
-
         const backStyle = {
             background: ColorCallBack(background, backDeg),
             padding: SpacingCallBack(padding),
             'border-radius': SpacingCallBack(radius),
         }
-        console.log(backStyle)
 
-        const text = '测试@数据@模板'.split('@')
-        const html = text.map((v, i) => {
-            return `<div class="text${i}" style="color:white">${v}</div>`
+        console.log(list)
+
+        const html = list.map((v, i) => {
+            return `<div class="text${i}" style="color:white">${v.text}</div>`
         }).join('')
 
         return `<div class="DivHtmlA01Template" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}"> ${html}</div> `
     },
     A02: e => {
 
-        return `< div class="DivHtmlA02Template" >
-    <div class="text">DIV模板2</div>
-                </div > `
+        return `<div class="DivHtmlA02Template" ><div class="text">DIV模板2</div></div > `
     },
 }
 

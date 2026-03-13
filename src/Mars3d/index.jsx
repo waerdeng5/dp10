@@ -165,6 +165,10 @@ const RenderElement = (gra, data) => {
                 const tetrahedron = new mars3d.graphic.Tetrahedron({ id, position, show, style })
                 gra.addGraphic(tetrahedron)
                 break;
+            case 'div':
+                const div = new mars3d.graphic.DivGraphic({ id, position, show, style })
+                gra.addGraphic(div)
+                break;
             default:
                 break;
         }
@@ -186,10 +190,7 @@ const RenderElement = (gra, data) => {
 
 
 
-        //             case 'div':
-        //                 const div = new mars3d.graphic.DivGraphic({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(div)
-        //                 break;
+
         //             case 'divPlane':
         //                 const divPlane = new mars3d.graphic.DivPlane({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(divPlane)

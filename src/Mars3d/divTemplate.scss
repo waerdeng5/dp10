@@ -1,4 +1,7 @@
 .DivHtmlA01Template {
     position: relative;
     transform: translate(-50%, 0);
+    pointer-events: auto;
+    user-select: none;
+    cursor: pointer;
 }
