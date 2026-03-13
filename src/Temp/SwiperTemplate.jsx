@@ -1,15 +1,25 @@
 import 'swiper/css'
-import 'swiper/css/effect-fade'
-import 'swiper/css/scrollbar'
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/effect-fade';
+import 'swiper/css/effect-flip';
+import 'swiper/css/effect-cube';
+import 'swiper/css/effect-creative';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/effect-cards';
+import 'swiper/css/grid';
+
+
 import './SwiperTemplate.scss'
 import { useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { Autoplay, EffectFade, Scrollbar } from 'swiper/modules'
-import { Button } from 'antd'
+import { Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative, Grid } from 'swiper/modules'
+import { Button, Image } from 'antd'
 import { ANIMATIONLIST } from './TemplateAnimation'
 import { HappyProvider } from '@ant-design/happy-work-theme';
 import { axios } from '../Utils/Api'
 import { PutIndexedDB } from '../Utils/IndexedDB'
+import { AttachTemplateA01 } from '../Temp/DevTemplate'
 
 
 // 轮播窗口
@@ -96,6 +106,42 @@ export const SwiperLookAnimation = ({ Initial, userInfo, Event }) => {
                     </SwiperSlide>
                 )
             })}
+        </Swiper>
+    )
+}
+
+// 轮播详情 -B20
+export const SwiperB20Template = ({ data }) => {
+    const { Initial, B20_field, B20_autoPlay, B20_delay, B20_direction, B20_speed, B20_show, B20_row, B20_col, B20_fill,
+        B20_isPagin, B20_paginType, B20_progressbar, B20_bullets, B20_bulletsNumber
+    } = data
+    const list = Initial[B20_field]
+
+    const SwiperParams = {
+        modules: [Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative, Grid],
+        direction: B20_direction,
+        speed: B20_speed,
+        autoplay: B20_autoPlay && { delay: B20_delay },
+        pagination: B20_isPagin && {
+            type: B20_paginType,
+            progressbarOpposite: B20_progressbar,
+            dynamicBullets: B20_bullets,
+            dynamicMainBullets: B20_bulletsNumber,
+        },
+    }
+    if (B20_show === 'A02') {
+        SwiperParams.slidesPerView = B20_col
+        SwiperParams.grid = { fill: B20_fill, rows: B20_row }
+    }
+
+
+    return (
+        <Swiper className='B20_swiper' {...SwiperParams}>
+            {list.map(v => (
+                <SwiperSlide key={v.uuid}>
+                    <Image src={v.url} alt={v.url} />
+                </SwiperSlide>
+            ))}
         </Swiper>
     )
 }

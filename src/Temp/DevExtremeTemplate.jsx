@@ -537,6 +537,9 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
     const B14Func = item => {
         updateModel5({ title: item.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...item, Initial: data } })
     }
+    const B20Func = item => {
+        updateModel5({ title: item.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...item, Initial: data } })
+    }
     const B1501Func = item => {
         updateModel5({ title: item.title, type: 'OptionsModel', Event: DEVEvent, width: 800, modelData: { ...item, Initial: data } })
     }
@@ -596,6 +599,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
         ['B1605', () => B1605Func(item)],
         ['B1606', () => B1606Func(item)],
         ['B17', () => B17Func(item)],
+        ['B20', () => B20Func(item)],
     ])
     const func = Mapping.get(type)
     func?.(item)

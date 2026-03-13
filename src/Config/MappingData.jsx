@@ -408,6 +408,7 @@ export const MappingData = {
         { value: 'B12', label: '数据审核' },
         { value: 'B13', label: '子列表操作' },
         { value: 'B14', label: '数据详情' },
+        { value: 'B20', label: '图片轮播' },
         { value: 'B17', label: '步骤条' },
         {
             value: 'B15',
@@ -578,6 +579,10 @@ export const MappingData = {
         { value: 'flip', label: '翻面' },
         { value: 'cards', label: '卡片' },
         // { value: 'creative', label: '创意' },
+    ],
+    Swiper__SwiperShowType: [
+        { value: 'A01', label: '单页显示' },
+        { value: 'A02', label: '网格显示' },
     ],
     // 动画效果
     Animate_type: [

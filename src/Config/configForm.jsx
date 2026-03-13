@@ -2620,7 +2620,51 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'COLOR', name: 'B17_textShadowC', label: '阴影颜色', rules: true },
         ]
     },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_20_01', label: '轮播设置',
+        jugde: [{ field: 'type', value: ['B20'] }], children: [
+            { span: 24, formType: 'INPUT', name: 'B20_field', label: '图片字段', rules: true },
+            { span: 24, formType: 'RADIO', name: 'B20_autoPlay', label: '自动播放', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'NUMBER', name: 'B20_delay', label: '切换间隔', rules: true, tooltip: '毫秒', jugde: [{ field: 'B20_autoPlay', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'B20_direction', label: '切换方向', rules: true, valueEnum: MappingData.Charts__VChartsDirectionA01 },
+            { span: 24, formType: 'NUMBER', name: 'B20_speed', label: '切换速度', rules: true, tooltip: '毫秒' },
 
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_20_02', label: '分页器设置',
+        jugde: [{ field: 'type', value: ['B20'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'B20_show', label: '显示方式', rules: true, valueEnum: MappingData.Swiper__SwiperShowType },
+            { span: 24, formType: 'NUMBER', name: 'B20_row', label: '显示行数', rules: true, jugde: [{ field: 'B20_show', value: ['A02'] }] },
+            { span: 24, formType: 'NUMBER', name: 'B20_col', label: '每行列数', rules: true, jugde: [{ field: 'B20_show', value: ['A02'] }] },
+            {
+                span: 24, formType: 'RADIO', name: 'B20_fill', label: '排列方式', rules: true,
+                valueEnum: MappingData.DevConfig__DataFieldArea, jugde: [{ field: 'B20_show', value: ['A02'] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_20_03', label: '分页器设置',
+        jugde: [{ field: 'type', value: ['B20'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'B20_isPagin', label: '分页器', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'B20_paginType', label: '分页器类型', rules: true,
+                valueEnum: MappingData.Swiper__SwiperPaginationType, jugde: [{ field: 'B20_isPagin', value: [true] }],
+            },
+            {
+                span: 24, formType: 'RADIO', name: 'B20_progressbar', label: '进度条方向', rules: true, valueEnum: MappingData.mars3d__orientation,
+                jugde: [{ field: 'B20_isPagin', value: [true] }, { field: 'B20_paginType', value: ['progressbar'] }]
+            },
+            {
+                span: 24, formType: 'RADIO', name: 'B20_bullets', label: '自动隐藏', rules: true, valueEnum: MappingData.IsEnabledBool,
+                jugde: [{ field: 'B20_isPagin', value: [true] }, { field: 'B20_paginType', value: ['bullets'] }]
+            },
+            {
+                span: 24, formType: 'NUMBER', name: 'B20_bulletsNumber', label: '主点数量', rules: true,
+                jugde: [{ field: 'B20_isPagin', value: [true] }, { field: 'B20_paginType', value: ['bullets'] }]
+            },
+        ]
+    },
 ]
 
 // ***  添加表单分组

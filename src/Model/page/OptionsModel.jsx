@@ -23,6 +23,7 @@ import {
     ExcelTemplate,
     AttachTemplateA01
 } from '../../Temp/DevTemplate'
+import { SwiperB20Template } from '../../Temp/SwiperTemplate'
 
 const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
 
@@ -719,7 +720,9 @@ const OptionsModel = ({ data, Event }) => {
             )
         } else return <div className='OptionsModelB1501'><Spin /></div>
     }
-
+    if (type === 'B20') {
+        return (<SwiperB20Template data={data} />)
+    }
 
 
     return (
