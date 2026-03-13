@@ -786,3 +786,64 @@ export const AssemblyNavTo = (data, row, Event) => {
         window.open(`${row[navTo_ext_url]}?${url}=${params}`)
     }
 }
+
+// TODO _.set 设置赋值路径
+export const getPathArray = (data) => {
+    let result = { path: [], value: undefined };
+    let found = false;
+
+    function traverse(currentData, currentPath) {
+        if (found) return; // 找到后立即停止
+
+        // 1. 遇到 null 或 undefined，直接跳过（不视为终点，也不继续往下）
+        if (currentData === null || currentData === undefined) {
+            return;
+        }
+
+        // 2. 如果是数组，我们需要遍历它，尝试找到里面第一个有效的元素
+        if (Array.isArray(currentData)) {
+            for (let i = 0; i < currentData.length; i++) {
+                // 递归检查数组的每一项，把索引 i 加入路径
+                traverse(currentData[i], [...currentPath, i]);
+                if (found) return; // 一旦在数组里找到了有效值，立即停止循环
+            }
+            return;
+        }
+
+        // 3. 如果是普通对象
+        if (typeof currentData === 'object') {
+            const keys = Object.keys(currentData);
+
+            // 判断是否为“叶子节点”（即里面不再是对象或数组）
+            // 注意：这里我们假设只要值不是对象/数组，就是我们要找的最终值
+            const isLeaf = keys.every(key =>
+                typeof currentData[key] !== 'object' || currentData[key] === null
+            );
+
+            if (isLeaf && keys.length > 0) {
+                // 这是一个包含具体数据的对象（例如 { text: "..." }）
+                // 我们取第一个属性作为终点
+                const firstKey = keys[0];
+                result.path = [...currentPath, firstKey];
+                result.value = currentData[firstKey]; // 提取出 "文字212"
+                found = true;
+                return;
+            }
+
+            // 如果还不是叶子节点，继续深入对象
+            for (let key of keys) {
+                traverse(currentData[key], [...currentPath, key]);
+                if (found) return;
+            }
+        }
+        // 如果是基本类型（字符串/数字），直接作为值返回
+        else {
+            result.path = [...currentPath];
+            result.value = currentData;
+            found = true;
+        }
+    }
+
+    traverse(data, []);
+    return result;
+}

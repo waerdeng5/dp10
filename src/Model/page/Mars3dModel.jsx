@@ -1,9 +1,10 @@
 import './Mars3dModel.scss'
 import * as mars3d from "mars3d"
+import _ from 'lodash'
 
 import { v4 } from 'uuid'
 import { useEffect, useState } from 'react'
-import { useEventEmitter } from "ahooks"
+import { useEventEmitter, useLatest } from "ahooks"
 import { Tabs, Button, Tree, Dropdown, Tooltip, App, Drawer, Popconfirm } from "antd"
 
 import FormTemplate from '../../Utils/FormTemplate'
@@ -11,7 +12,7 @@ import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
 import { modelStore } from '../../Router/zustand'
-import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey } from "../../Utils"
+import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray } from "../../Utils"
 import { ICONMapping } from '../../Config/IconMapping'
 import { initStartDraw } from '../../Mars3d/initData'
 
@@ -200,9 +201,8 @@ const Mars3dModel = ({ data, Event }) => {
         gra.isAutoEditing = true
         const FORMEVENT = useEventEmitter()
         const [TreeData, setTreeData] = useState(MapConfig.element)
-
         const [ELEData, setELEData] = useState(ELEConfig)
-
+        const latestELE = useLatest(ELEData)
 
         const [Activate, setActivate] = useState()
         // 新增
@@ -241,6 +241,7 @@ const Mars3dModel = ({ data, Event }) => {
                 const ele = ELEData.filter(v => v.id !== ELE.id)
                 Event.emit({ type: 'onSaveMapElement', data: ele })
                 gra.removeGraphic(ELE)
+                setELEData(ele)
             }
             const data = removeTreeByKey(TreeData, uuid)
             const list = { ...MapConfig, element: data }
@@ -271,7 +272,18 @@ const Mars3dModel = ({ data, Event }) => {
                         const position = ELE.coordinate
                         position[data.position.length - 1] = data.position.at(-1)
                         ELE.setOptions({ position })
-                    } else ELE.setOptions(data)
+                        return
+                    }
+                    if (ELE.type === 'div') {
+                        const { style } = ELE.options
+                        const { temp, tempConfig } = style
+                        const { path, value } = getPathArray(data)
+                        _.set(ELE.options, path, value)
+                        style.html = initStartDraw.DivTemplate[temp](tempConfig)
+                        ELE.setOptions({ style })
+                        return
+                    }
+                    ELE.setOptions(data)
                 }]
             ])
             const func = Mapping.get(type)
@@ -302,16 +314,14 @@ const Mars3dModel = ({ data, Event }) => {
                 const data = { ...e.graphic.options, type: e.editType }
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
-                const length = ELEData.findIndex(v => v.id === data.id)
-                if (length !== -1) ELEData[length] = data
-                else ELEData.push(data)
-
-                // console.log(ELEData)
-
+                const length = latestELE.current.findIndex(v => v.id === data.id)
+                if (length !== -1) latestELE.current[length] = data
+                else latestELE.current.push(data)
                 gra.stopDraw()
                 setActivate()
                 updateModel5({})
-                Event.emit({ type: 'onSaveMapElement', data: ELEData })
+                Event.emit({ type: 'onSaveMapElement', data: latestELE.current })
+                setELEData(latestELE.current)
             })
             gra.on(mars3d.EventType.editMovePoint, (e) => {
                 if (singlePoint.includes(e.editType)) {
@@ -321,10 +331,8 @@ const Mars3dModel = ({ data, Event }) => {
             })
 
             // return () => { gra.isAutoEditing = false }
-        }, [])
+        }, [ELEConfig])
 
-
-        console.log(ELEData)
         return (
             <div className='Mars3dModel A04'>
                 <div className='List'>

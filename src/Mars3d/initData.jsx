@@ -2741,8 +2741,19 @@ const div = {
             padding: '8',
             radius: '8',
             list: [
-                { text: '文字1' },
-                { text: '文字2' },
+                {
+                    text: '文字',
+                    margin: '0,8',
+                    color: '#ffffff',
+                    deg: 0,
+                    font_size: 16,
+                    font_family: 'HYT',
+                    font_weight: 'normal',
+                    font_style: 'normal',
+                    filter: true,
+                    filterSize: '1,1,1',
+                    filterColor: '#262626'
+                },
             ]
         }
     }
@@ -2756,10 +2767,21 @@ const DivTemplate = {
             padding: SpacingCallBack(padding),
             'border-radius': SpacingCallBack(radius),
         }
-
-        console.log(list)
-
         const html = list.map((v, i) => {
+
+            // text: '文字',
+            // margin: '0,8',
+            // color: '#ffffff',
+            // deg: 0,
+            // font_size: 16,
+            // font_family: 'HYT',
+            // font_weight: 'normal',
+            // font_style: 'normal',
+            // filter: true,
+            // filterSize: '1,1,1',
+            // filterColor: '#262626'
+
+
             return `<div class="text${i}" style="color:white">${v.text}</div>`
         }).join('')
 

@@ -1,12 +1,19 @@
 import './Test.scss'
-import { Tooltip, Button } from 'antd'
+import { Tooltip, } from 'antd'
 import { ICONMapping } from '../../Config/IconMapping'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MappingData } from '../../Config/MappingData'
 
+import { useMount } from 'ahooks'
+
+
+
+
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
+    useMount(() => {
+    })
 
     return (
         <div className='TestPage'>
