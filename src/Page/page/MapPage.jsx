@@ -5,7 +5,7 @@ import './MapPage.scss'
 import _ from 'lodash'
 import { useMount, useEventEmitter } from 'ahooks'
 import { useState, useRef, useEffect } from 'react'
-import { Spin, Result, Button, FloatButton, Tooltip } from 'antd'
+import { Spin, Result, Button, FloatButton, Tooltip, App } from 'antd'
 import { HappyProvider } from '@ant-design/happy-work-theme';
 
 import {
@@ -50,6 +50,7 @@ const optionsBtnList = [
 
 
 const MapPage = ({ data, AdminEvent }) => {
+    const { message, notification } = App.useApp()
     const { modelConfig, updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { uuid } = data
     const mapBox = useRef()
@@ -93,12 +94,12 @@ const MapPage = ({ data, AdminEvent }) => {
     }
 
     const onSaveMap = async (status) => {
-        const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
-        const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
-        const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
         port && console.log('[---------基础信息---------]', { ...sceneParameter, ...MapConfig })
         port && console.log('[---------元素信息---------]', ELEConfig)
         port && console.log('[---------模型信息---------]', TILConfig)
+        const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
+        const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
+        const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
         const apiList = [
             { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
             { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
@@ -106,13 +107,13 @@ const MapPage = ({ data, AdminEvent }) => {
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)
+        message.success({ key: ' save', content: '保存成功!' })
         status && getMapData()
     }
 
 
     // TODO 操作信息
     const onButtonClick = async (uuid) => {
-        console.log(modelConfig)
 
         // console.log('Map', type, data)
         const Mapping = new Map([

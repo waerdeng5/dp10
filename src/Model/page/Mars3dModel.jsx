@@ -23,7 +23,6 @@ const singlePoint = [
     'modelP', 'pointP', 'labelP', 'doubleSidedPlane', 'billboardP', 'billboardIndicator', 'tetrahedron', 'div', 'divPlane', 'divLightPoint',
     'divUpLabel', 'divBoderLabel', 'boxP', 'cylinderP', 'lightCone', 'ellipsoidP', 'circleP', 'pointLight'
 ]
-const singlePoints = ['regular', 'sector']
 
 const A01TabsList = {
     scene: { label: '基础设置', formItem: Mars3dFormConfig.Mars3dBaseConfig },
@@ -278,9 +277,6 @@ const Mars3dModel = ({ data, Event }) => {
                         const { style } = ELE.options
                         const { temp, tempConfig } = style
                         const { path, value } = getPathArray(data)
-
-                        console.log(data)
-                        console.log(path, value)
                         _.set(ELE.options, path, value)
                         style.html = initStartDraw.DivTemplate[data?.style?.temp || temp](tempConfig)
                         ELE.setOptions({ style })
@@ -299,7 +295,6 @@ const Mars3dModel = ({ data, Event }) => {
                 message.loading({ key: 'element', duration: 0, content: '元素编辑中...' })
                 const data = e.graphic.options
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
-                if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
                 setActivate(data)
                 updateModel5({
                     title: '元素属性',
@@ -316,7 +311,7 @@ const Mars3dModel = ({ data, Event }) => {
                 message.success({ key: 'element', content: '完成元素编辑!' })
                 const data = { ...e.graphic.options, type: e.editType }
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
-                if (singlePoints.includes(e.editType)) data.position = e.graphic.coordinates
+                else data.positions = e.graphic.coordinates
                 const length = latestELE.current.findIndex(v => v.id === data.id)
                 if (length !== -1) latestELE.current[length] = data
                 else latestELE.current.push(data)

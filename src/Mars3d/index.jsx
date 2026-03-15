@@ -146,9 +146,10 @@ export const BoundaryBorderFunction = (gra, clip, data) => {
 const RenderElement = (gra, data) => {
 
     data && data.forEach(item => {
-        const { id, show, position, style, type } = item
+        const { id, show, position, positions, style, type } = item
 
         switch (type) {
+            // !!! 点
             case 'labelP':
                 const labelP = new mars3d.graphic.LabelPrimitive({ id, position, show, style })
                 gra.addGraphic(labelP)
@@ -169,6 +170,47 @@ const RenderElement = (gra, data) => {
                 const div = new mars3d.graphic.DivGraphic({ id, position, show, style })
                 gra.addGraphic(div)
                 break;
+            case 'divLightPoint':
+                const divLightPoint = new mars3d.graphic.DivLightPoint({ id, position, show, style })
+                gra.addGraphic(divLightPoint)
+                break;
+            case 'divUpLabel':
+                const divUpLabel = new mars3d.graphic.DivUpLabel({ id, position, show, style })
+                gra.addGraphic(divUpLabel)
+                break;
+            case 'divBoderLabel':
+                const divBoderLabel = new mars3d.graphic.DivBoderLabel({ id, position, show, style })
+                gra.addGraphic(divBoderLabel)
+                break;
+            case 'modelP':
+                const modelP = new mars3d.graphic.ModelPrimitive({ id, position, show, style })
+                gra.addGraphic(modelP)
+                break;
+            // !!! 线
+            case 'polylineP':
+                const polylineP = new mars3d.graphic.PolylinePrimitive({ id, positions, show, style })
+                gra.addGraphic(polylineP)
+                break;
+            case 'curve':
+                const curve = new mars3d.graphic.CurveEntity({ id, positions, show, style })
+                gra.addGraphic(curve)
+                break;
+            case 'corridorP':
+                const corridorP = new mars3d.graphic.CorridorPrimitive({ id, positions, show, style })
+                gra.addGraphic(corridorP)
+                break;
+            case 'road':
+                const road = new mars3d.graphic.Road({ id, positions, show, style })
+                gra.addGraphic(road)
+                break;
+            case 'wallP':
+                const wallP = new mars3d.graphic.WallPrimitive({ id, positions, show, style })
+                gra.addGraphic(wallP)
+                break;
+            case 'diffuseWall':
+                const diffuseWall = new mars3d.graphic.DiffuseWall({ id, positions, show, style })
+                gra.addGraphic(diffuseWall)
+                break;
             default:
                 break;
         }
@@ -182,10 +224,7 @@ const RenderElement = (gra, data) => {
         //         const { style, show, position, position_lng, position_lat, position_alt, positions } = elementStyle
         //         // style.classificationType = 0
         //         switch (element_type) {
-        //             case 'modelP':
-        //                 const modelP = new mars3d.graphic.ModelPrimitive({ id, position, show, style })
-        //                 gra.addGraphic(modelP)
-        //                 break;
+
 
 
 
@@ -195,18 +234,9 @@ const RenderElement = (gra, data) => {
         //                 const divPlane = new mars3d.graphic.DivPlane({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(divPlane)
         //                 break;
-        //             case 'divLightPoint':
-        //                 const divLightPoint = new mars3d.graphic.DivLightPoint({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(divLightPoint)
-        //                 break;
-        //             case 'divUpLabel':
-        //                 const divUpLabel = new mars3d.graphic.DivUpLabel({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(divUpLabel)
-        //                 break;
-        //             case 'divBoderLabel':
-        //                 const divBoderLabel = new mars3d.graphic.DivBoderLabel({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(divBoderLabel)
-        //                 break;
+
+
+
         //             case 'boxP':
         //                 const boxP = new mars3d.graphic.BoxPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(boxP)
@@ -239,26 +269,14 @@ const RenderElement = (gra, data) => {
         //                 const pointLight = new mars3d.graphic.PointLight({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(pointLight)
         //                 break;
-        //             case 'polylineP':
-        //                 const polylineP = new mars3d.graphic.PolylinePrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(polylineP)
-        //                 break;
-        //             case 'curve':
-        //                 const curve = new mars3d.graphic.CurveEntity({ id, positions, show, style })
-        //                 gra.addGraphic(curve)
-        //                 break;
+
+
         //             case 'polylineVolumeP':
         //                 const polylineVolumeP = new mars3d.graphic.PolylineVolumePrimitive({ id, positions, show, style })
         //                 gra.addGraphic(polylineVolumeP)
         //                 break;
-        //             case 'corridorP':
-        //                 const corridorP = new mars3d.graphic.CorridorPrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(corridorP)
-        //                 break;
-        //             case 'road':
-        //                 const road = new mars3d.graphic.Road({ id, positions, show, style })
-        //                 gra.addGraphic(road)
-        //                 break;
+
+
         //             case 'polygonP':
         //                 const polygonP = new mars3d.graphic.PolygonPrimitive({ id, positions, show, style })
         //                 gra.addGraphic(polygonP)
@@ -315,14 +333,8 @@ const RenderElement = (gra, data) => {
         //                 const planeP = new mars3d.graphic.PlanePrimitive({ id, positions, show, style })
         //                 gra.addGraphic(planeP)
         //                 break;
-        //             case 'wallP':
-        //                 const wallP = new mars3d.graphic.WallPrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(wallP)
-        //                 break;
-        //             case 'diffuseWall':
-        //                 const diffuseWall = new mars3d.graphic.DiffuseWall({ id, positions, show, style })
-        //                 gra.addGraphic(diffuseWall)
-        //                 break;
+
+
         //             case 'thickWall':
         //                 const thickWall = new mars3d.graphic.ThickWall({ id, positions, show, style })
         //                 gra.addGraphic(thickWall)

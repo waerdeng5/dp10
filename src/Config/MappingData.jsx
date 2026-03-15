@@ -1711,33 +1711,11 @@ export const MappingData = {
     // ],    
     mars3d__elementType: [
         // {
-        //     value: 'A01',
-        //     label: '点',
-        //     selectable: false,
-        //     children: [
-        //         { value: 'modelP', label: '小模型' },
-        //         // { value: 'billboardIndicator', label: '连线点' }, // 官方bug
-        //         
-        //         // { value: 'divPlane', label: '三维DIV面板' }, // 趴地上起来不来了
-        //         { value: 'divLightPoint', label: '扩散DIV点' },
-        //         { value: 'divUpLabel', label: '竖立DIV点' },
-        //         { value: 'divBoderLabel', label: '动态边框DIV点' },
-        //         // { value: 'divGif', label: 'gif图片div点' },
-        //     ]
-        // },
-        // {
         //     value: 'A02',
         //     label: '线',
         //     selectable: false,
         //     children: [
-        //         { value: 'polylineP', label: '线' },
-        //         { value: 'curve', label: '曲线' },
-        //         // { value: 'polylineVolumeP', label: '管道线' },
-        //         { value: 'corridorP', label: '走廊' },
-        //         { value: 'road', label: '道路' },
-        //         { value: 'wallP', label: '墙' },
-        //         { value: 'diffuseWall', label: '扩散墙' },
-        //         { value: 'thickWall', label: '有厚度的围墙' },
+
         //     ]
         // },
         // {
@@ -1786,11 +1764,26 @@ export const MappingData = {
                 { value: 'billboardP', label: '图标点' },
                 { value: 'tetrahedron', label: '四面体' },
                 { value: 'div', label: 'DIV点' },
-
-
+                { value: 'divLightPoint', label: '扩散点' },
+                { value: 'divUpLabel', label: '竖向点' },
+                { value: 'divBoderLabel', label: '动态点' },
+                { value: 'modelP', label: '小模型' },
             ]
         },
-
+        {
+            value: 'A02',
+            label: '线元素',
+            selectable: false,
+            children: [
+                { value: 'polylineP', label: '直线' },
+                { value: 'curve', label: '曲线' },
+                { value: 'corridorP', label: '走廊' },
+                { value: 'road', label: '路面' },
+                { value: 'wallP', label: '墙面' },
+                { value: 'diffuseWall', label: '扩散墙' },
+                { value: 'thickWall', label: '有厚度的围墙' },
+            ]
+        }
     ],
 
     // TODO 图标点图片

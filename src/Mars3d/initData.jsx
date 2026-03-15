@@ -2050,28 +2050,7 @@ export const gltfMapping = [
 
 
 
-// // *** 小模型
-// const modelP = {
-//     show: true,
-//     style: {
-//         url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
-//         scale: 1,
-//         heading: 0,
-//         pitch: 0,
-//         roll: 0,
-//         fill: false,
-//         color: '#ffffff',
-//         silhouette: false,
-//         silhouetteColor: '#ff0000',
-//         silhouetteSize: 2,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//         hasShadows: true,
-//         shadows: false,
-//         runAnimations: true,
-//         label
-//     }
-// }
+
 
 // // *** 点元素
 // const pointP = {
@@ -2140,79 +2119,6 @@ export const gltfMapping = [
 //     }
 // }
 
-
-
-
-
-// // ??? 三维div面板 趴地上起不来
-// const divPlane = {
-//     show: true,
-//     style: {
-//         temp: 'HtmlA02',
-//         text: '测试@数据@模板',
-//         heading: 0,
-//         pitch: 0,
-//         roll: 0,
-//         offsetX: 0,
-//         offsetY: 0,
-//         scale: 1,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//     }
-// }
-
-// // *** 扩散DIV
-// const divLightPoint = {
-//     show: true,
-//     style: {
-//         color: '#531dab',
-//         size: 10,
-//         offsetX: 0,
-//         offsetY: 0,
-//         clampToGround: false,
-//         ...scaleByDistanceObj,
-//         ...distanceDisplayConditionObj,
-//         label: {
-//             text: '默认文案',
-//             color: '#fff'
-//         }
-//     }
-// }
-
-// // *** 竖的div
-// const divUpLabel = {
-//     show: true,
-//     style: {
-//         text: '默认文案',
-//         color: '#fff',
-//         font_size: 16,
-//         font_family: '微软雅黑',
-//         lineHeight: 100,
-//         circleSize: 10,
-//         offsetX: 0,
-//         offsetY: 0,
-//         ...scaleByDistanceObj,
-//         ...distanceDisplayConditionObj,
-//     }
-// }
-
-// // *** 动态边框Div
-// const divBoderLabel = {
-//     show: true,
-//     style: {
-//         text: '默认文案',
-//         color: '#fff',
-//         font_size: 16,
-//         font_family: '微软雅黑',
-//         boderColor: '#13c2c2',
-//         width: 0,
-//         height: 0,
-//         offsetX: 0,
-//         offsetY: 0,
-//         ...scaleByDistanceObj,
-//         ...distanceDisplayConditionObj,
-//     }
-// }
 
 // // *** 单点盒子
 // const boxP = {
@@ -2292,46 +2198,9 @@ export const gltfMapping = [
 //     }
 // }
 
-// // *** 线
-// const polylineP = {
-//     show: true,
-//     style: {
-//         width: 4,
-//         closure: false,
-//         depthFail: false,
-//         depthFailColor: 'red',
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
 
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
 
-// // *** 曲线
-// const curve = {
-//     show: true,
-//     style: {
-//         width: 4,
-//         depthFail: false,
-//         depthFailColor: 'red',
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
 
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
 // // *** 管道线
 // const polylineVolumeP = {
 //     show: true,
@@ -2354,35 +2223,7 @@ export const gltfMapping = [
 //         label,
 //     }
 // }
-// // *** 走廊
-// const corridorP = {
-//     show: true,
-//     style: {
-//         width: 100,
-//         cornerType: 0,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         hasShadows: false,
-//         clampToGround: false,
 
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 道路
-// const road = {
-//     show: true,
-//     style: {
-//         image: 'https://data.mars3d.cn/img/textures/road.jpg',
-//         width: 20,
-//         height: 0,
-//         axisY: true,
-//     }
-// }
 
 // // *** 面
 // const polygonP = {
@@ -2519,30 +2360,7 @@ export const gltfMapping = [
 //         label,
 //     }
 // }
-// // *** 围墙
-// const wallP = {
-//     show: true,
-//     style: {
-//         diffHeight: 100,
-//         closure: false,
-//         hasShadows: false,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 扩散墙
-// const diffuseWall = {
-//     show: true,
-//     style: {
-//         diffHeight: 100,
-//         color: '#13c2c2',
-//         speed: 10,
-//         maxScale: 1,
-//     }
-// }
+
 // // *** 厚度墙
 // const thickWall = {
 //     show: true,
@@ -2605,7 +2423,6 @@ const outlineMapping = {
     outlineOpacity: 0.6,
     outlineWidth: 2.0,
 }
-
 // *** 背景颜色
 const backgroundMapping = {
     backgroundColor: '#000000',
@@ -2629,8 +2446,6 @@ const distanceDisplayConditionMapping = {
     distanceDisplayCondition_far: 10000000,
     distanceDisplayCondition_near: 0
 }
-
-
 
 // TODO 文字点
 const label = {
@@ -2656,8 +2471,6 @@ const label = {
     distanceDisplayCondition: false,
     ...distanceDisplayConditionMapping,
 }
-
-
 // *** 文字点
 const labelP = {
     type: 'labelP',
@@ -2787,9 +2600,178 @@ const DivTemplate = {
         return `<div class="DivHtmlA02Template" ><div class="text">DIV模板2</div></div > `
     },
 }
-
-
-
+// *** 扩散DIV
+const divLightPoint = {
+    type: 'divLightPoint',
+    show: true,
+    style: {
+        color: '#13c2c2',
+        size: 10,
+        offsetX: 0,
+        offsetY: 0,
+        clampToGround: false,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        label: {
+            text: '文字',
+            color: '#fff'
+        }
+    }
+}
+// *** 竖的div
+const divUpLabel = {
+    type: 'divUpLabel',
+    show: true,
+    style: {
+        text: '默认文案',
+        color: '#fff',
+        font_size: 16,
+        font_family: '微软雅黑',
+        lineHeight: 100,
+        circleSize: 10,
+        offsetX: 0,
+        offsetY: 0,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+    }
+}
+// *** 动态Div
+const divBoderLabel = {
+    type: 'divBoderLabel',
+    show: true,
+    style: {
+        text: '默认文案',
+        color: '#fff',
+        font_size: 16,
+        font_family: '微软雅黑',
+        boderColor: '#13c2c2',
+        offsetX: 0,
+        offsetY: 0,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+    }
+}
+// *** 小模型
+const modelP = {
+    type: 'modelP',
+    show: true,
+    style: {
+        url: "//data.mars3d.cn/gltf/mars/jingche/jingche.gltf",
+        scale: 1,
+        opacity: 1,
+        heading: 0,
+        pitch: 0,
+        roll: 0,
+        fill: false,
+        color: '#ffffff',
+        silhouette: false,
+        silhouetteColor: '#ff0000',
+        silhouetteSize: 2,
+        clampToGround: false,
+        hasShadows: true,
+        shadows: false,
+        runAnimations: true,
+        scaleByDistance: false,
+        ...scaleByDistanceMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        label
+    }
+}
+// *** 线
+const polylineP = {
+    type: 'polylineP',
+    show: true,
+    style: {
+        width: 4,
+        closure: false,
+        depthFail: false,
+        depthFailColor: 'red',
+        hasShadows: false,
+        clampToGround: false,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label
+    }
+}
+// *** 曲线
+const curve = {
+    type: 'curve',
+    show: true,
+    style: {
+        width: 4,
+        depthFail: false,
+        depthFailColor: 'red',
+        hasShadows: false,
+        clampToGround: false,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 走廊
+const corridorP = {
+    type: 'corridorP',
+    show: true,
+    style: {
+        width: 24,
+        cornerType: 0,
+        outline: false,
+        ...outlineMapping,
+        hasShadows: false,
+        clampToGround: false,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 道路
+const road = {
+    type: 'road',
+    show: true,
+    style: {
+        image: 'https://data.mars3d.cn/img/textures/road.jpg',
+        width: 20,
+        height: 0,
+        axisY: true,
+    }
+}
+// *** 围墙
+const wallP = {
+    type: 'wallP',
+    show: true,
+    style: {
+        diffHeight: 100,
+        closure: false,
+        hasShadows: false,
+        outline: false,
+        outlineColor: '#ffffff',
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
+        label,
+    }
+}
+// *** 扩散墙
+const diffuseWall = {
+    type: 'diffuseWall',
+    show: true,
+    style: {
+        diffHeight: 100,
+        color: '#13c2c2',
+        speed: 10,
+        maxScale: 1,
+    }
+}
 
 export const initStartDraw = {
     labelP,
@@ -2797,25 +2779,26 @@ export const initStartDraw = {
     billboardP,
     tetrahedron,
     div,
-    // divPlane,
-    // divLightPoint,
-    // divUpLabel,
-    // divBoderLabel,
+    divLightPoint,
+    divUpLabel,
+    divBoderLabel,
+    modelP,
+
+    polylineP,
+    curve,
+    corridorP,
+    road,
+    wallP,
+    diffuseWall,
 
 
 
-
-    // modelP,
     // billboardIndicator,
     // boxP,
     // cylinderP,
     // lightCone,
     // ellipsoidP,
-    // polylineP,
-    // curve,
     // polylineVolumeP,
-    // corridorP,
-    // road,
     // polygonP,
     // rectangleP,
     // circleP,
@@ -2833,8 +2816,6 @@ export const initStartDraw = {
     // closeVurve,
     // gatheringPlace,
     // planeP,
-    // wallP,
-    // diffuseWall,
     // thickWall,
     // pointLight,
     // tileset,
