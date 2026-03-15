@@ -90,7 +90,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
     const [loading, setLoading] = useState(false)
 
     const { run } = useDebounceFn((e) => {
-        FORMEVENT.emit({ type: 'onDetection', data: convertMetaColorToHex(e) })
+        FORMEVENT.emit({ type: 'onDetection', data: formCallBack(e) })
     }, { wait: 500 })
 
     const onFinish = async (e) => {

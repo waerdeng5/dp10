@@ -2761,28 +2761,23 @@ const div = {
 // TODO div模板
 const DivTemplate = {
     A01: e => {
-        const { background, backDeg, padding, radius, list } = e
+        const { background, padding, radius, list } = e
         const backStyle = {
-            background: ColorCallBack(background, backDeg),
+            background: ColorCallBack(background),
             padding: SpacingCallBack(padding),
             'border-radius': SpacingCallBack(radius),
         }
         const html = list.map((v, i) => {
-
-            // text: '文字',
-            // margin: '0,8',
-            // color: '#ffffff',
-            // deg: 0,
-            // font_size: 16,
-            // font_family: 'HYT',
-            // font_weight: 'normal',
-            // font_style: 'normal',
-            // filter: true,
-            // filterSize: '1,1,1',
-            // filterColor: '#262626'
-
-
-            return `<div class="text${i}" style="color:white">${v.text}</div>`
+            const textStyle = {
+                margin: SpacingCallBack(v.margin),
+                color: v.color,
+                'font-size': SpacingCallBack(v.font_size),
+                'font-family': v.font_family,
+                'font-weight': v.font_weight,
+                'font-style': v.font_style,
+                'filter': SetFilderParams(v.filter, v.filterSize, v.filterColor),
+            }
+            return `<div class="text text${i}" style="${Object.keys(textStyle).map(k => `${k}:${textStyle[k]}`).join(';')}">${v.text}</div>`
         }).join('')
 
         return `<div class="DivHtmlA01Template" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}"> ${html}</div> `

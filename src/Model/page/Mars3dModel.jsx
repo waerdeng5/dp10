@@ -278,8 +278,11 @@ const Mars3dModel = ({ data, Event }) => {
                         const { style } = ELE.options
                         const { temp, tempConfig } = style
                         const { path, value } = getPathArray(data)
+
+                        console.log(data)
+                        console.log(path, value)
                         _.set(ELE.options, path, value)
-                        style.html = initStartDraw.DivTemplate[temp](tempConfig)
+                        style.html = initStartDraw.DivTemplate[data?.style?.temp || temp](tempConfig)
                         ELE.setOptions({ style })
                         return
                     }

@@ -50,7 +50,7 @@ const optionsBtnList = [
 
 
 const MapPage = ({ data, AdminEvent }) => {
-    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
+    const { modelConfig, updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { uuid } = data
     const mapBox = useRef()
     const [STATUS, setSTATUS] = useState({ loading: true, config: true })
@@ -111,7 +111,8 @@ const MapPage = ({ data, AdminEvent }) => {
 
 
     // TODO 操作信息
-    const onButtonClick = (uuid) => {
+    const onButtonClick = async (uuid) => {
+        console.log(modelConfig)
 
         // console.log('Map', type, data)
         const Mapping = new Map([
@@ -172,8 +173,11 @@ const MapPage = ({ data, AdminEvent }) => {
             [7, onSaveMap],
         ])
 
+        if (!isEmptyObject(modelConfig)) await updateModel({})
         const func = Mapping.get(uuid)
         func?.()
+
+
     }
 
 
