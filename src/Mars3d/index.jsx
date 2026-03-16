@@ -211,6 +211,88 @@ const RenderElement = (gra, data) => {
                 const diffuseWall = new mars3d.graphic.DiffuseWall({ id, positions, show, style })
                 gra.addGraphic(diffuseWall)
                 break;
+            case 'thickWall':
+                const thickWall = new mars3d.graphic.ThickWall({ id, positions, show, style })
+                gra.addGraphic(thickWall)
+                break;
+            // !!! 面
+            case 'polygonP':
+                const polygonP = new mars3d.graphic.PolygonPrimitive({ id, positions, show, style })
+                gra.addGraphic(polygonP)
+                break;
+            case 'rectangleP':
+                const rectangleP = new mars3d.graphic.RectanglePrimitive({ id, positions, show, style })
+                gra.addGraphic(rectangleP)
+                break;
+            case 'circleP':
+                const circleP = new mars3d.graphic.CirclePrimitive({ id, position, show, style })
+                gra.addGraphic(circleP)
+                break;
+            case 'sector':
+                const sector = new mars3d.graphic.Sector({ id, position: positions, show, style })
+                gra.addGraphic(sector)
+                break;
+            case 'attackArrow':
+                const attackArrow = new mars3d.graphic.AttackArrow({ id, positions, show, style })
+                gra.addGraphic(attackArrow)
+                break;
+            case 'attackArrowPW':
+                const attackArrowPW = new mars3d.graphic.AttackArrowPW({ id, positions, show, style })
+                gra.addGraphic(attackArrowPW)
+                break;
+            case 'attackArrowYW':
+                const attackArrowYW = new mars3d.graphic.AttackArrowYW({ id, positions, show, style })
+                gra.addGraphic(attackArrowYW)
+                break;
+            case 'doubleArrow':
+                const doubleArrow = new mars3d.graphic.DoubleArrow({ id, positions, show, style })
+                gra.addGraphic(doubleArrow)
+                break;
+            case 'fineArrow':
+                const fineArrow = new mars3d.graphic.FineArrow({ id, positions, show, style })
+                gra.addGraphic(fineArrow)
+                break;
+            case 'fineArrowYW':
+                const fineArrowYW = new mars3d.graphic.FineArrowYW({ id, positions, show, style })
+                gra.addGraphic(fineArrowYW)
+                break;
+            case 'straightArrow':
+                const straightArrow = new mars3d.graphic.StraightArrow({ id, positions, show, style })
+                gra.addGraphic(straightArrow)
+                break;
+            case 'lune':
+                const lune = new mars3d.graphic.Lune({ id, positions, show, style })
+                gra.addGraphic(lune)
+                break;
+            case 'isosTriangle':
+                const isosTriangle = new mars3d.graphic.IsosTriangle({ id, positions, show, style })
+                gra.addGraphic(isosTriangle)
+                break;
+            case 'closeVurve':
+                const closeVurve = new mars3d.graphic.CloseVurve({ id, positions, show, style })
+                gra.addGraphic(closeVurve)
+                break;
+            case 'gatheringPlace':
+                const gatheringPlace = new mars3d.graphic.GatheringPlace({ id, positions, show, style })
+                gra.addGraphic(gatheringPlace)
+                break;
+            // !!! 体
+            case 'boxP':
+                const boxP = new mars3d.graphic.BoxPrimitive({ id, position, show, style })
+                gra.addGraphic(boxP)
+                break;
+            case 'cylinderP':
+                const cylinderP = new mars3d.graphic.CylinderPrimitive({ id, position, show, style })
+                gra.addGraphic(cylinderP)
+                break;
+            case 'lightCone':
+                const lightCone = new mars3d.graphic.LightCone({ id, position, show, style })
+                gra.addGraphic(lightCone)
+                break;
+            case 'ellipsoidP':
+                const ellipsoidP = new mars3d.graphic.EllipsoidPrimitive({ id, position, show, style })
+                gra.addGraphic(ellipsoidP)
+                break;
             default:
                 break;
         }
@@ -237,34 +319,12 @@ const RenderElement = (gra, data) => {
 
 
 
-        //             case 'boxP':
-        //                 const boxP = new mars3d.graphic.BoxPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(boxP)
-        //                 break;
-        //             case 'cylinderP':
-        //                 const cylinderP = new mars3d.graphic.CylinderPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(cylinderP)
-        //                 break;
-        //             case 'lightCone':
-        //                 const lightCone = new mars3d.graphic.LightCone({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(lightCone)
-        //                 break;
-        //             case 'ellipsoidP':
-        //                 const ellipsoidP = new mars3d.graphic.EllipsoidPrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(ellipsoidP)
-        //                 break;
-        //             case 'circleP':
-        //                 const circleP = new mars3d.graphic.CirclePrimitive({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(circleP)
-        //                 break;
-        //             case 'sector':
-        //                 const sector = new mars3d.graphic.Sector({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(sector)
-        //                 break;
-        //             case 'regular':
-        //                 const regular = new mars3d.graphic.Regular({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(regular)
-        //                 break;
+
+
+
+
+
+
         //             case 'pointLight':
         //                 const pointLight = new mars3d.graphic.PointLight({ id, position: [position_lng, position_lat, position_alt], show, style })
         //                 gra.addGraphic(pointLight)
@@ -277,68 +337,16 @@ const RenderElement = (gra, data) => {
         //                 break;
 
 
-        //             case 'polygonP':
-        //                 const polygonP = new mars3d.graphic.PolygonPrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(polygonP)
-        //                 break;
-        //             case 'rectangleP':
-        //                 const rectangleP = new mars3d.graphic.RectanglePrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(rectangleP)
-        //                 break;
-        //             case 'attackArrow':
-        //                 const attackArrow = new mars3d.graphic.AttackArrow({ id, positions, show, style })
-        //                 gra.addGraphic(attackArrow)
-        //                 break;
-        //             case 'attackArrowPW':
-        //                 const attackArrowPW = new mars3d.graphic.AttackArrowPW({ id, positions, show, style })
-        //                 gra.addGraphic(attackArrowPW)
-        //                 break;
-        //             case 'attackArrowYW':
-        //                 const attackArrowYW = new mars3d.graphic.AttackArrowYW({ id, positions, show, style })
-        //                 gra.addGraphic(attackArrowYW)
-        //                 break;
-        //             case 'doubleArrow':
-        //                 const doubleArrow = new mars3d.graphic.DoubleArrow({ id, positions, show, style })
-        //                 gra.addGraphic(doubleArrow)
-        //                 break;
-        //             case 'fineArrow':
-        //                 const fineArrow = new mars3d.graphic.FineArrow({ id, positions, show, style })
-        //                 gra.addGraphic(fineArrow)
-        //                 break;
-        //             case 'fineArrowYW':
-        //                 const fineArrowYW = new mars3d.graphic.FineArrowYW({ id, positions, show, style })
-        //                 gra.addGraphic(fineArrowYW)
-        //                 break;
-        //             case 'straightArrow':
-        //                 const straightArrow = new mars3d.graphic.StraightArrow({ id, positions, show, style })
-        //                 gra.addGraphic(straightArrow)
-        //                 break;
-        //             case 'lune':
-        //                 const lune = new mars3d.graphic.Lune({ id, positions, show, style })
-        //                 gra.addGraphic(lune)
-        //                 break;
-        //             case 'isosTriangle':
-        //                 const isosTriangle = new mars3d.graphic.IsosTriangle({ id, positions, show, style })
-        //                 gra.addGraphic(isosTriangle)
-        //                 break;
-        //             case 'closeVurve':
-        //                 const closeVurve = new mars3d.graphic.CloseVurve({ id, positions, show, style })
-        //                 gra.addGraphic(closeVurve)
-        //                 break;
-        //             case 'gatheringPlace':
-        //                 const gatheringPlace = new mars3d.graphic.GatheringPlace({ id, positions, show, style })
-        //                 gra.addGraphic(gatheringPlace)
-        //                 break;
+
+
+
         //             case 'planeP':
         //                 const planeP = new mars3d.graphic.PlanePrimitive({ id, positions, show, style })
         //                 gra.addGraphic(planeP)
         //                 break;
 
 
-        //             case 'thickWall':
-        //                 const thickWall = new mars3d.graphic.ThickWall({ id, positions, show, style })
-        //                 gra.addGraphic(thickWall)
-        //                 break;
+
         //             default: break;
         //         }
         //     }

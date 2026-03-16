@@ -895,6 +895,185 @@ const Mars3DdiffuseWallFormList = [
     { span: 24, formType: 'NUMBER', name: ['style', 'speed'], label: '扩散速度', rules: true },
     { span: 24, formType: 'NUMBER', name: ['style', 'maxScale'], label: '扩散比例', rules: true, min: 0, max: 1, step: 0.1 },
 ]
+// Todo 扩散墙
+const Mars3DthickWallFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'width'], label: '墙面厚度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'closure'], label: '是否闭合', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 平面
+const Mars3DpolygonPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'classificationType'], label: '覆盖类型', rules: true, valueEnum: MappingData.mars3d_classificationType },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    distanceDisplayConditionConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 矩形
+const Mars3DrectanglePFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'rotationDegree'], label: '旋转角度', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'classificationType'], label: '覆盖类型', rules: true, valueEnum: MappingData.mars3d_classificationType },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    distanceDisplayConditionConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 圆形
+const Mars3DcirclePFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radius'], label: '半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 扇形
+const Mars3DsectorFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radius'], label: '半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'startAngle'], label: '开始角度', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'endAngle'], label: '结束角度', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'RADIO', name: ['style', 'noCenter'], label: '不连接中心', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 攻击箭头
+const Mars3DattackArrowFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    distanceDisplayConditionConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 攻击箭头(平尾)
+const Mars3DattackArrowPWFormList = Mars3DattackArrowFormList
+// Todo 攻击箭头(燕尾)
+const Mars3DattackArrowYWFormList = Mars3DattackArrowFormList
+// Todo 钳形箭头
+const Mars3DdoubleArrowFormList = Mars3DattackArrowFormList
+// Todo 直箭头
+const Mars3DfineArrowFormList = Mars3DattackArrowFormList
+// Todo 直箭头(燕尾)
+const Mars3DfineArrowYWFormList = Mars3DattackArrowFormList
+// Todo 直箭头(3点)
+const Mars3DstraightArrowFormList = Mars3DattackArrowFormList
+// Todo 弓形面
+const Mars3DluneFormList = Mars3DattackArrowFormList
+// Todo 等腰三角形
+const Mars3DisosTriangleFormList = Mars3DattackArrowFormList
+// Todo 闭合曲面
+const Mars3DcloseVurveFormList = Mars3DattackArrowFormList
+// Todo 集结地
+const Mars3DgatheringPlaceFormList = Mars3DattackArrowFormList
+// Todo 单点盒子
+const Mars3DboxPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'dimensions_x'], label: '长度', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'dimensions_y'], label: '宽度', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'dimensions_z'], label: '高度', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'heading'], label: '方向角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'pitch'], label: '俯仰角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'roll'], label: '翻滚角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 圆锥
+const Mars3DcylinderPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'topRadius'], label: '	顶部半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'bottomRadius'], label: '底部半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'length'], label: '柱面高度', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'slices'], label: '周长边数', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'heading'], label: '方向角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'pitch'], label: '俯仰角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'roll'], label: '翻滚角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
+// Todo 光锥
+const Mars3DlightConeFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'COLOR', name: ['style', 'color'], label: '填充颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radius'], label: '锥底半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'height'], label: '锥体高度', rules: true },
+]
+// Todo 球体
+const Mars3DellipsoidPFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radii_x'], label: 'X轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radii_y'], label: 'Y轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'radii_z'], label: 'Z轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'innerRadii_x'], label: '内部X轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'innerRadii_y'], label: '内部Y轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'innerRadii_z'], label: '内部Z轴半径', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'minimumClockDegree'], label: '最小时钟角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'maximumClockDegree'], label: '最大时钟角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'minimumConeDegree'], label: '最小锥角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'maximumConeDegree'], label: '最大锥角', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: ['style', 'stackPartitions'], label: '竖向划分数量', rules: true },
+    { span: 24, formType: 'NUMBER', name: ['style', 'slicePartitions'], label: '横向划分数量', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    outlineConfig,
+    ...materialOptionsMapping,
+    labelConfig
+]
 
 
 
@@ -928,5 +1107,25 @@ export const Mars3dFormConfig = {
     Mars3DcorridorPFormList,
     Mars3DroadFormList,
     Mars3DwallPFormList,
-    Mars3DdiffuseWallFormList
+    Mars3DdiffuseWallFormList,
+    Mars3DthickWallFormList,
+    Mars3DpolygonPFormList,
+    Mars3DrectanglePFormList,
+    Mars3DcirclePFormList,
+    Mars3DsectorFormList,
+    Mars3DattackArrowFormList,
+    Mars3DattackArrowPWFormList,
+    Mars3DattackArrowYWFormList,
+    Mars3DdoubleArrowFormList,
+    Mars3DfineArrowFormList,
+    Mars3DfineArrowYWFormList,
+    Mars3DstraightArrowFormList,
+    Mars3DluneFormList,
+    Mars3DisosTriangleFormList,
+    Mars3DcloseVurveFormList,
+    Mars3DgatheringPlaceFormList,
+    Mars3DboxPFormList,
+    Mars3DcylinderPFormList,
+    Mars3DlightConeFormList,
+    Mars3DellipsoidPFormList
 }

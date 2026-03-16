@@ -85,7 +85,6 @@ const MapPage = ({ data, AdminEvent }) => {
         setTILConfig(tiles)
         onInitMap(config, element, tiles)
     }
-
     const onInitMap = (data, ele, til) => {
         if (mapBox.current) {
             const { map, gra, clip } = InitMap({ BOX: mapBox.current, CONFIG: data, ELEMENT: ele, TILES: til })
@@ -114,8 +113,6 @@ const MapPage = ({ data, AdminEvent }) => {
 
     // TODO 操作信息
     const onButtonClick = async (uuid) => {
-
-        // console.log('Map', type, data)
         const Mapping = new Map([
             [1, () => { // 场景设置
                 updateModel({

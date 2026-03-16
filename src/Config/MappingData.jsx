@@ -1718,41 +1718,8 @@ export const MappingData = {
 
         //     ]
         // },
-        // {
-        //     value: 'A03',
-        //     label: '面',
-        //     selectable: false,
-        //     children: [
-        //         // { value: 'planeP', label: '平面' },
-        //         { value: 'polygonP', label: '面' },
-        //         { value: 'rectangleP', label: '矩形' },
-        //         { value: 'attackArrow', label: '攻击箭头' },
-        //         { value: 'attackArrowPW', label: '攻击箭头(平尾)' },
-        //         { value: 'attackArrowYW', label: '攻击箭头(燕尾)' },
-        //         { value: 'doubleArrow', label: '双箭头(钳击)' },
-        //         { value: 'fineArrow', label: '直箭头(2个点)' },
-        //         { value: 'fineArrowYW', label: '燕尾直箭头(2个点)' },
-        //         { value: 'straightArrow', label: '直箭头(3个点)' },
-        //         { value: 'lune', label: '弓形面(3个点)' },
-        //         { value: 'isosTriangle', label: '等腰三角形(3个点)' },
-        //         { value: 'closeVurve', label: '闭合曲面(3个点)' },
-        //         { value: 'gatheringPlace', label: '集结地(3个点)' },
-        //     ]
-        // },
-        // {
-        //     value: 'A04',
-        //     label: '体',
-        //     selectable: false,
-        //     children: [
-        //         { value: 'boxP', label: '盒子' },
-        //         { value: 'cylinderP', label: '圆锥' },
-        //         { value: 'lightCone', label: '光锥体' },
-        //         { value: 'circleP', label: '圆、圆柱' },
-        //         { value: 'ellipsoidP', label: '球体' },
-        //         { value: 'sector', label: '扇形(3个点)' },
-        //         { value: 'regular', label: '正多边形' },
-        //     ]
-        // },
+
+
 
         {
             value: 'A01',
@@ -1781,9 +1748,49 @@ export const MappingData = {
                 { value: 'road', label: '路面' },
                 { value: 'wallP', label: '墙面' },
                 { value: 'diffuseWall', label: '扩散墙' },
-                { value: 'thickWall', label: '有厚度的围墙' },
+                { value: 'thickWall', label: '厚度墙' },
             ]
-        }
+        },
+        {
+            value: 'A03',
+            label: '面',
+            selectable: false,
+            children: [
+                // { value: 'planeP', label: '平面' },
+                { value: 'polygonP', label: '平面' },
+                { value: 'rectangleP', label: '矩形' },
+                { value: 'circleP', label: '圆形' },
+                { value: 'sector', label: '扇形' },
+                { value: 'attackArrow', label: '攻击箭头' },
+                { value: 'attackArrowPW', label: '攻击箭头(平尾)' },
+                { value: 'attackArrowYW', label: '攻击箭头(燕尾)' },
+                { value: 'doubleArrow', label: '攻击箭头(钳击)' },
+                { value: 'fineArrow', label: '直箭头' },
+                { value: 'fineArrowYW', label: '直箭头(燕尾)' },
+                { value: 'straightArrow', label: '直箭头(对齐)' },
+                { value: 'lune', label: '弓形面(3个点)' },
+                { value: 'isosTriangle', label: '等腰三角形(3个点)' },
+                { value: 'closeVurve', label: '闭合曲面(3个点)' },
+                { value: 'gatheringPlace', label: '集结地(3个点)' },
+            ]
+        },
+        {
+            value: 'A04',
+            label: '体',
+            selectable: false,
+            children: [
+                { value: 'boxP', label: '盒子' },
+                { value: 'cylinderP', label: '圆锥' },
+                { value: 'lightCone', label: '光锥体' },
+                { value: 'ellipsoidP', label: '球体' },
+                // { value: 'regular', label: '正多边形' },
+            ]
+        },
+    ],
+    mars3d_classificationType: [
+        { label: '只对地形', value: 0 },
+        { label: '只对模型', value: 1 },
+        { label: '两者都有', value: 2 },
     ],
 
     // TODO 图标点图片

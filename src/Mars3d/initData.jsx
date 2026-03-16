@@ -2120,83 +2120,11 @@ export const gltfMapping = [
 // }
 
 
-// // *** 单点盒子
-// const boxP = {
-//     show: true,
-//     style: {
-//         dimensions_x: 100,
-//         dimensions_y: 100,
-//         dimensions_z: 100,
-//         heading: 0,
-//         pitch: 0,
-//         roll: 0,
-//         outline: false,
-//         outlineColor: '#262626',
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 圆锥
-// const cylinderP = {
-//     show: true,
-//     style: {
-//         topRadius: 0,
-//         bottomRadius: 100,
-//         length: 100,
-//         slices: 128,
-//         heading: 0,
-//         pitch: 0,
-//         roll: 0,
-//         outline: false,
-//         outlineColor: '#262626',
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 光锥
-// const lightCone = {
-//     show: true,
-//     style: {
-//         color: '#36cfc9',
-//         radius: 10,
-//         height: 100,
-//     }
-// }
 
-// // *** 球
-// const ellipsoidP = {
-//     show: true,
-//     style: {
-//         radii_x: 100,
-//         radii_y: 100,
-//         radii_z: 100,
-//         innerRadii_x: 0,
-//         innerRadii_y: 0,
-//         innerRadii_z: 0,
-//         minimumClockDegree: 0,
-//         maximumClockDegree: 360,
-//         minimumConeDegree: 0,
-//         maximumConeDegree: 180,
-//         stackPartitions: 64,
-//         slicePartitions: 64,
-//         outline: false,
-//         outlineColor: '#262626',
-//         materialType: 'Color',
-//         materialOptions: {
-//             color: '#13c2c2',
-//             speed: 8,
-//         }, // 材质属性
-//         label,
-//     }
-// }
+
+
+
+
 
 
 
@@ -2225,71 +2153,11 @@ export const gltfMapping = [
 // }
 
 
-// // *** 面
-// const polygonP = {
-//     show: true,
-//     style: {
-//         diffHeight: 0,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 矩形
-// const rectangleP = {
-//     show: true,
-//     style: {
-//         diffHeight: 0,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 圆柱
-// const circleP = {
-//     show: true,
-//     style: {
-//         radius: 100,
-//         diffHeight: 0,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         clampToGround: false,
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
 
-// // *** 扇形
-// const sector = {
-//     show: true,
-//     style: {
-//         diffHeight: 0,
-//         radius: 100,
-//         startAngle: 0,
-//         endAngle: 360,
-//         noCenter: false,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         outlineWidth: 1,
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
+
+
+
+
 // // *** 正多边形
 // const regular = {
 //     show: true,
@@ -2309,39 +2177,9 @@ export const gltfMapping = [
 //         label,
 //     }
 // }
-// // *** 攻击箭头
-// const attackArrow = {
-//     show: true,
-//     style: {
-//         diffHeight: 0,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         outlineWidth: 1,
-//         hasShadows: false,
-//         clampToGround: false,
-//         ...distanceDisplayConditionObj,
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
-// // *** 平尾/燕尾攻击箭头
-// const attackArrowPW = attackArrow
-// const attackArrowYW = attackArrow
-// // *** 钳形箭头
-// const doubleArrow = attackArrow
-// // *** 直箭头
-// const fineArrow = attackArrow
-// const fineArrowYW = attackArrow
-// const straightArrow = attackArrow
-// // *** 弓形面
-// const lune = attackArrow
-// // *** 等腰三角形
-// const isosTriangle = attackArrow
-// // *** 闭合曲面 
-// const closeVurve = attackArrow
-// // *** 集结地
-// const gatheringPlace = attackArrow
+
+
+
 
 // // *** 平面
 // const planeP = {
@@ -2361,21 +2199,7 @@ export const gltfMapping = [
 //     }
 // }
 
-// // *** 厚度墙
-// const thickWall = {
-//     show: true,
-//     style: {
-//         diffHeight: 100,
-//         width: 10,
-//         closure: false,
-//         hasShadows: false,
-//         outline: false,
-//         outlineColor: '#ffffff',
-//         materialType: 'Color',
-//         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
-//         label,
-//     }
-// }
+
 // // *** 点光源
 // const pointLight = {
 //     show: true,
@@ -2755,7 +2579,7 @@ const wallP = {
         closure: false,
         hasShadows: false,
         outline: false,
-        outlineColor: '#ffffff',
+        ...outlineMapping,
         materialType: 'Color',
         materialOptions: { color: '#13c2c2', speed: 8 }, // 材质属性
         label,
@@ -2772,8 +2596,205 @@ const diffuseWall = {
         maxScale: 1,
     }
 }
+// *** 厚度墙
+const thickWall = {
+    type: 'thickWall',
+    show: true,
+    style: {
+        diffHeight: 100,
+        width: 10,
+        closure: false,
+        hasShadows: false,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 面
+const polygonP = {
+    type: 'polygonP',
+    show: true,
+    style: {
+        diffHeight: 0,
+        hasShadows: false,
+        clampToGround: false,
+        outline: false,
+        ...outlineMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        classificationType: 2,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 矩形
+const rectangleP = {
+    type: 'rectangleP',
+    show: true,
+    style: {
+        diffHeight: 0,
+        rotationDegree: 0,
+        hasShadows: false,
+        clampToGround: false,
+        outline: false,
+        ...outlineMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        classificationType: 2,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 圆柱
+const circleP = {
+    type: 'circleP',
+    show: true,
+    style: {
+        radius: 100,
+        diffHeight: 0,
+        clampToGround: false,
+        outline: false,
+        ...outlineMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 扇形
+const sector = {
+    type: 'sector',
+    show: true,
+    style: {
+        diffHeight: 0,
+        radius: 100,
+        startAngle: 0,
+        endAngle: 360,
+        noCenter: false,
+        hasShadows: false,
+        clampToGround: false,
+        outline: false,
+        ...outlineMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 攻击箭头
+const attackArrow = {
+    type: 'attackArrow',
+    show: true,
+    style: {
+        outlineWidth: 1,
+        diffHeight: 0,
+        clampToGround: false,
+        hasShadows: false,
+        outline: false,
+        ...outlineMapping,
+        distanceDisplayCondition: false,
+        ...distanceDisplayConditionMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 平尾箭头
+const attackArrowPW = { ...attackArrow, type: 'attackArrowPW' }
+// *** 燕尾箭头
+const attackArrowYW = { ...attackArrow, type: 'attackArrowYW' }
+// *** 钳形箭头
+const doubleArrow = { ...attackArrow, type: 'doubleArrow' }
+// *** 直箭头
+const fineArrow = { ...attackArrow, type: 'fineArrow' }
+// *** 直箭头(燕尾)
+const fineArrowYW = { ...attackArrow, type: 'fineArrowYW' }
+// *** 直箭头(3点)
+const straightArrow = { ...attackArrow, type: 'straightArrow' }
+// *** 弓形面
+const lune = { ...attackArrow, type: 'lune' }
+// *** 等腰三角形
+const isosTriangle = { ...attackArrow, type: 'isosTriangle' }
+// *** 闭合曲面 
+const closeVurve = { ...attackArrow, type: 'closeVurve' }
+// *** 集结地
+const gatheringPlace = { ...attackArrow, type: 'gatheringPlace' }
+// *** 单点盒子
+const boxP = {
+    type: 'boxP',
+    show: true,
+    style: {
+        dimensions_x: 100,
+        dimensions_y: 100,
+        dimensions_z: 100,
+        heading: 0,
+        pitch: 0,
+        roll: 0,
+        outline: false,
+        ...outlineMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 圆锥
+const cylinderP = {
+    type: 'cylinderP',
+    show: true,
+    style: {
+        topRadius: 0,
+        bottomRadius: 100,
+        length: 100,
+        slices: 128,
+        heading: 0,
+        pitch: 0,
+        roll: 0,
+        outline: false,
+        ...outlineMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
+// *** 光锥
+const lightCone = {
+    type: 'lightCone',
+    show: true,
+    style: {
+        color: '#36cfc9',
+        radius: 10,
+        height: 100,
+    }
+}
+// *** 球
+const ellipsoidP = {
+    type: 'ellipsoidP',
+    show: true,
+    style: {
+        radii_x: 100,
+        radii_y: 100,
+        radii_z: 100,
+        innerRadii_x: 0,
+        innerRadii_y: 0,
+        innerRadii_z: 0,
+        minimumClockDegree: 0,
+        maximumClockDegree: 360,
+        minimumConeDegree: 0,
+        maximumConeDegree: 180,
+        stackPartitions: 64,
+        slicePartitions: 64,
+        outline: false,
+        ...outlineMapping,
+        materialType: 'Color',
+        materialOptions: { color: '#13c2c2' },
+        label,
+    }
+}
 
 export const initStartDraw = {
+    // 点
     labelP,
     pointP,
     billboardP,
@@ -2783,40 +2804,40 @@ export const initStartDraw = {
     divUpLabel,
     divBoderLabel,
     modelP,
-
+    // 线
     polylineP,
     curve,
     corridorP,
     road,
     wallP,
     diffuseWall,
-
-
+    thickWall,
+    // 面
+    polygonP,
+    rectangleP,
+    circleP,
+    sector,
+    attackArrow,
+    attackArrowPW,
+    attackArrowYW,
+    doubleArrow,
+    fineArrow,
+    fineArrowYW,
+    straightArrow,
+    lune,
+    isosTriangle,
+    closeVurve,
+    gatheringPlace,
+    // 体
+    boxP,
+    cylinderP,
+    lightCone,
+    ellipsoidP,
+    // regular,
 
     // billboardIndicator,
-    // boxP,
-    // cylinderP,
-    // lightCone,
-    // ellipsoidP,
     // polylineVolumeP,
-    // polygonP,
-    // rectangleP,
-    // circleP,
-    // sector,
-    // regular,
-    // attackArrow,
-    // attackArrowPW,
-    // attackArrowYW,
-    // doubleArrow,
-    // fineArrow,
-    // fineArrowYW,
-    // straightArrow,
-    // lune,
-    // isosTriangle,
-    // closeVurve,
-    // gatheringPlace,
     // planeP,
-    // thickWall,
     // pointLight,
     // tileset,
     // getJson,

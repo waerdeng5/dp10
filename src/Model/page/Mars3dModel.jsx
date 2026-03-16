@@ -12,7 +12,7 @@ import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
 import { modelStore } from '../../Router/zustand'
-import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray } from "../../Utils"
+import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray, treeValue } from "../../Utils"
 import { ICONMapping } from '../../Config/IconMapping'
 import { initStartDraw } from '../../Mars3d/initData'
 
@@ -252,6 +252,31 @@ const Mars3dModel = ({ data, Event }) => {
             ELE.setOptions({ show: status })
             Event.emit({ type: 'onSaveMapElement', data: ELEData })
         }
+        const onPositioning = (uuid) => {
+            const ELE = gra.getGraphicById(uuid)
+            if (ELE) map.flyToGraphic(ELE)
+        }
+        const onCopy = (e) => {
+            const uuid = v4()
+            // 创建树形分支
+            const treeObj = treeValue(TreeData, e.id)
+            const { name, fieldType, elementType } = treeObj
+            const newTree = { uuid, name, fieldType, elementType }
+            const treeData = [...TreeData, newTree]
+            setTreeData(treeData)
+            // 创建元素基础信息
+            const styleObj = ELEData.find(v => v.id === e.id)
+            const { show, type, style } = styleObj
+            const newStyle = { id: uuid, show, type, style }
+            // console.log('新样式', newStyle)
+            // console.log(ELEData)
+
+
+
+            const mapConfig = { ...MapConfig, element: treeData }
+
+
+        }
 
         const CallBackFunc = e => {
             const { type, data } = e
@@ -291,9 +316,10 @@ const Mars3dModel = ({ data, Event }) => {
         FORMEVENT.useSubscription(CallBackFunc)
 
         useEffect(() => {
-            gra.on(mars3d.EventType.editStart, (e) => {
+            gra.on(mars3d.EventType.editStart, async (e) => {
                 message.loading({ key: 'element', duration: 0, content: '元素编辑中...' })
                 const data = e.graphic.options
+                await 1
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 setActivate(data)
                 updateModel5({
@@ -307,9 +333,10 @@ const Mars3dModel = ({ data, Event }) => {
                     modelData: { type: `Mars3D${e.editType}FormList`, Initial: data }
                 })
             })
-            gra.on(mars3d.EventType.editStop, (e) => {
+            gra.on(mars3d.EventType.editStop, async (e) => {
                 message.success({ key: 'element', content: '完成元素编辑!' })
                 const data = { ...e.graphic.options, type: e.editType }
+                await 1
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 else data.positions = e.graphic.coordinates
                 const length = latestELE.current.findIndex(v => v.id === data.id)
@@ -327,8 +354,7 @@ const Mars3dModel = ({ data, Event }) => {
                     FORMEVENT.emit({ type: 'onUploadInitial', data })
                 }
             })
-
-            // return () => { gra.isAutoEditing = false }
+            return () => { gra.isAutoEditing = false }
         }, [ELEConfig])
 
         return (
@@ -381,15 +407,9 @@ const Mars3dModel = ({ data, Event }) => {
                                 if (fieldType === 'element') {
                                     const ELE = gra.getGraphicById(uuid)
                                     const show = ELE?.getRealShow() || false
-
-
-                                    // const show = ELE?.show || false
-
-                                    // console.log(ELE.getRealShow(), show)
-
                                     return (
                                         <div className='treeList element'>
-                                            <div className='title'>
+                                            <div className='title' onClick={() => onPositioning(uuid)}>
                                                 <div>元素</div>
                                                 <div>{name}</div>
                                             </div>
@@ -404,6 +424,9 @@ const Mars3dModel = ({ data, Event }) => {
                                                                 <Button type='link' danger icon={ICONMapping['fasEyeSlash']} onClick={() => onShow(ELE, true)} />
                                                             </Tooltip>
                                                         }
+                                                        <Tooltip title='复制样式'>
+                                                            <Button type='link' icon={ICONMapping['fasCopy']} onClick={() => onCopy(ELE)} />
+                                                        </Tooltip>
                                                     </> :
                                                     <Tooltip title='图上绘制'>
                                                         <Button type='link' icon={ICONMapping['fasRoute']} onClick={() => onDraw(e)} />
