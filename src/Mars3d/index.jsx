@@ -17,10 +17,11 @@ export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
     scene.globe = globe
     scene.cameraController = cameraController
     terrain.show = other.show
-
     const map = new mars3d.Map(BOX, CONFIG)
     const gra = new mars3d.layer.GraphicLayer()
     const clip = new mars3d.thing.TerrainClip({ czm: false, image: false, splitNum: 80 })
+    console.info('地球初始化成功!')
+
 
     map.addLayer(gra)
     map.addThing(clip)

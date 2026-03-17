@@ -16,6 +16,13 @@ const Mars3donAddElement = [
         jugde: [{ field: 'fieldType', value: ['element'] }]
     },
 ]
+// TODO 天机模型或分组
+const Mars3donAddTiles = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '唯一标识', rules: true },
+    { span: 24, formType: 'INPUT', name: 'name', label: '字段名称', rules: true },
+    { span: 24, formType: 'RADIO', name: 'fieldType', label: '数据类型', valueEnum: MappingData.mars3d__fieldsTypeA02, rules: true },
+    { span: 24, formType: 'INPUT', name: 'tilesUrl', label: '模型地址', rules: true, jugde: [{ field: 'fieldType', value: ['tiles'] }] },
+]
 
 
 // TODO 额外材质
@@ -1080,6 +1087,7 @@ const Mars3DellipsoidPFormList = [
 export const Mars3dFormConfig = {
     Mars3donAddCenter,
     Mars3donAddElement,
+    Mars3donAddTiles,
 
     Mars3dBaseConfig,
     Mars3dGlobeConfig,

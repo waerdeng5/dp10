@@ -1573,7 +1573,7 @@ export const MappingData = {
         { value: 1, label: '哥伦布视图' },
     ],
     mars3d__Basemaps: [
-        { value: '', label: '无瓦片' },
+        { value: false, label: '无瓦片' },
         { value: 'BaseD02', label: '微软影像' },
         { value: 'BaseD03', label: 'ArcGIS影像' },
         { value: 'BaseD04', label: '天地图影像' },
@@ -1694,6 +1694,10 @@ export const MappingData = {
     mars3d__fieldsType: [
         { label: '分组', value: 'group' },
         { label: '元素', value: 'element' },
+    ],
+    mars3d__fieldsTypeA02: [
+        { label: '分组', value: 'group' },
+        { label: '模型', value: 'tiles' },
     ],
 
 

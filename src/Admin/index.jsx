@@ -99,6 +99,7 @@ const AdminIndex = () => {
     }
 
     const onActiveMenu = data => {
+        setBtnStatus(true)
         setActive(e => ({ ...e, [data.uuid]: data }))
     }
 
@@ -115,7 +116,7 @@ const AdminIndex = () => {
 
     const adminCallBack = (e) => {
         const { type, data } = e
-
+        // console.log(e)
         const Mapping = new Map([
             ['onThemeDetection', () => onThemeDetection(data)],
             ['onSaveTheme', () => onSetTheme(data)],

@@ -227,7 +227,9 @@ const Mars3dModel = ({ data, Event }) => {
         }
         const onDraw = async (e) => {
             const { uuid, elementType } = e
-            const style = JSON.parse(JSON.stringify(initStartDraw[elementType]))
+            const status = ELEData.findIndex(v => v.id === uuid) !== -1
+            const STYLE = status ? ELEData.find(v => v.id === uuid) : initStartDraw[elementType]
+            const style = JSON.parse(JSON.stringify(STYLE))
             if (divType.includes(elementType)) {
                 const { temp, tempConfig } = style.style
                 style.style.html = initStartDraw.DivTemplate[temp](tempConfig)
@@ -263,19 +265,15 @@ const Mars3dModel = ({ data, Event }) => {
             const { name, fieldType, elementType } = treeObj
             const newTree = { uuid, name, fieldType, elementType }
             const treeData = [...TreeData, newTree]
+            const newMap = { ...MapConfig, element: treeData }
             setTreeData(treeData)
             // 创建元素基础信息
             const styleObj = ELEData.find(v => v.id === e.id)
             const { show, type, style } = styleObj
             const newStyle = { id: uuid, show, type, style }
-            // console.log('新样式', newStyle)
-            // console.log(ELEData)
-
-
-
-            const mapConfig = { ...MapConfig, element: treeData }
-
-
+            const newEle = [...ELEData, newStyle]
+            setELEData(newEle)
+            Event.emit({ type: 'onSaveMapEle', data: { map: newMap, ele: newEle } })
         }
 
         const CallBackFunc = e => {
@@ -425,7 +423,15 @@ const Mars3dModel = ({ data, Event }) => {
                                                             </Tooltip>
                                                         }
                                                         <Tooltip title='复制样式'>
-                                                            <Button type='link' icon={ICONMapping['fasCopy']} onClick={() => onCopy(ELE)} />
+                                                            <Popconfirm
+                                                                title="复制提醒!"
+                                                                description="是否复制当前元素样式?"
+                                                                onConfirm={() => onCopy(ELE)}
+                                                                okText="复制"
+                                                                cancelText="取消"
+                                                            >
+                                                                <Button type='link' icon={ICONMapping['fasCopy']} />
+                                                            </Popconfirm>
                                                         </Tooltip>
                                                     </> :
                                                     <Tooltip title='图上绘制'>
@@ -460,10 +466,208 @@ const Mars3dModel = ({ data, Event }) => {
             </div>
         )
     }
+    if (type === 'A05') {
+        const FORMEVENT = useEventEmitter()
+        const [TreeData, setTreeData] = useState(MapConfig.tiles)
+        const [TILData, setTILData] = useState(TILConfig)
+        const [Activate, setActivate] = useState()
 
+        const onAdd = () => {
+            updateModel5({
+                title: '新增模型',
+                type: 'CommonForm',
+                width: 480,
+                height: 480,
+                Event: FORMEVENT,
+                modelData: { formItem: 'Mars3donAddTiles', eventBack: 'onAddTiles' }
+            })
+        }
+        const onModify = (data) => {
+            updateModel5({
+                title: '修改模型',
+                type: 'CommonForm',
+                width: 480,
+                height: 480,
+                Event: FORMEVENT,
+                modelData: { formItem: 'Mars3donAddTiles', eventBack: 'onAddTiles', Initial: data }
+            })
+        }
+        const onDelete = (uuid) => {
+            const TIL = map.getLayerById(uuid)
+            if (TIL) {
+                // const ele = ELEData.filter(v => v.id !== ELE.id)
+                // Event.emit({ type: 'onSaveMapElement', data: ele })
+                // gra.removeGraphic(ELE)
+                // setELEData(ele)
+                console.log('删除模型')
+            }
+            const data = removeTreeByKey(TreeData, uuid)
+            const list = { ...MapConfig, tiles: data }
+            Event.emit({ type: 'onSaveMapConfig', data: list })
+            setTreeData(data)
+        }
 
+        const onDraw = (data, status) => {
+            const { tilesUrl } = data
+            if (status) {
+                console.log('加载到当前位置', tilesUrl)
+            } else {
+                console.log('加载到模型位置', tilesUrl)
+            }
+        }
 
-    return (<div> 未知组件 : Mars3dModel - {type}   </div>)
+        const onPositioning = () => {
+            console.log('定位')
+        }
+
+        const onShow = () => {
+            console.log('显示')
+        }
+
+        const CallBackFunc = e => {
+            const { type, data } = e
+            // console.log('Mars3d', e)
+            const Mapping = new Map([
+                ['onAddTiles', () => {
+                    const arr = data.uuid ? replaceNodeById(TreeData, data.uuid, data) : [...TreeData, { ...data, uuid: v4() }]
+                    const list = { ...MapConfig, tiles: arr }
+                    setTreeData(arr)
+                    updateModel5({})
+                    Event.emit({ type: 'onSaveMapConfig', data: list })
+                }],
+                // ['onDetection', () => {
+                //     const { id } = Activate
+                //     const ELE = gra.getGraphicById(id)
+                //     if (data.position) {
+                //         const position = ELE.coordinate
+                //         position[data.position.length - 1] = data.position.at(-1)
+                //         ELE.setOptions({ position })
+                //         return
+                //     }
+                //     if (ELE.type === 'div') {
+                //         const { style } = ELE.options
+                //         const { temp, tempConfig } = style
+                //         const { path, value } = getPathArray(data)
+                //         _.set(ELE.options, path, value)
+                //         style.html = initStartDraw.DivTemplate[data?.style?.temp || temp](tempConfig)
+                //         ELE.setOptions({ style })
+                //         return
+                //     }
+                //     ELE.setOptions(data)
+                // }]
+            ])
+            const func = Mapping.get(type)
+            func?.(data)
+        }
+        FORMEVENT.useSubscription(CallBackFunc)
+
+        return (
+            <div className='Mars3dModel A04'>
+                <div className='List'>
+                    <DevScrollView>
+                        <Tree
+                            draggable
+                            blockNode
+                            onDrop={e => {
+                                const data = onTreeDrop(e, TreeData, 'uuid')
+                                setTreeData(data)
+                                const list = { ...MapConfig, tiles: data }
+                                Event.emit({ type: 'onSaveMapConfig', data: list })
+                            }}
+                            selectable={false}
+                            treeData={TreeData}
+                            defaultExpandAll
+                            fieldNames={{ key: 'uuid' }}
+                            titleRender={e => {
+                                const { uuid, name, fieldType, children } = e
+                                if (fieldType === 'group') {
+                                    return (
+                                        <div className='treeList group'>
+                                            <div className='title'>
+                                                <div>分组</div>
+                                                <div>{name}</div>
+                                            </div>
+                                            <div className='options'>
+                                                <Tooltip title='编辑'>
+                                                    <Button type='link' icon={ICONMapping['fasEdit']} onClick={() => onModify(e)} />
+                                                </Tooltip>
+                                                {(!children || children.length === 0) &&
+                                                    <Tooltip title='删除'>
+                                                        <Popconfirm
+                                                            title="删除提醒!"
+                                                            description="是否删除当前分组,删除后将无法恢复!"
+                                                            onConfirm={() => onDelete(uuid)}
+                                                            okText="删除"
+                                                            cancelText="取消"
+                                                        >
+                                                            <Button type='link' danger icon={ICONMapping['fasTrash']} />
+                                                        </Popconfirm>
+                                                    </Tooltip>
+                                                }
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                                if (fieldType === 'tiles') {
+                                    const TIL = map.getLayerById(uuid)
+                                    const show = TIL?.getRealShow() || false
+                                    return (
+                                        <div className='treeList element'>
+                                            <div className='title' onClick={() => onPositioning(uuid)}>
+                                                <div>模型</div>
+                                                <div>{name}</div>
+                                            </div>
+                                            <div className='options'>
+                                                {TIL ?
+                                                    <>
+                                                        {show ?
+                                                            <Tooltip title='显示中...'>
+                                                                <Button type='link' icon={ICONMapping['fasEye']} onClick={() => onShow(TIL, false)} />
+                                                            </Tooltip> :
+                                                            <Tooltip title='隐藏中...'>
+                                                                <Button type='link' danger icon={ICONMapping['fasEyeSlash']} onClick={() => onShow(TIL, true)} />
+                                                            </Tooltip>
+                                                        }
+                                                    </> :
+                                                    <>
+                                                        <Tooltip title='加载到当前位置'>
+                                                            <Button type='link' icon={ICONMapping['AimOutlined']} onClick={() => onDraw(e, true)} />
+                                                        </Tooltip>
+                                                        <Tooltip title='加载到模型位置'>
+                                                            <Button type='link' icon={ICONMapping['fasThumbtack']} onClick={() => onDraw(e, false)} />
+                                                        </Tooltip>
+                                                    </>
+                                                }
+                                                <Tooltip title='编辑'>
+                                                    <Button type='link' icon={ICONMapping['fasEdit']} onClick={() => onModify(e)} />
+                                                </Tooltip>
+                                                <Tooltip title='删除'>
+                                                    <Popconfirm
+                                                        title="删除提醒!"
+                                                        description="是否删除当前模型,删除后将无法恢复!"
+                                                        onConfirm={() => onDelete(uuid)}
+                                                        okText="删除"
+                                                        cancelText="取消"
+                                                    >
+                                                        <Button type='link' danger icon={ICONMapping['fasTrash']} />
+                                                    </Popconfirm>
+                                                </Tooltip>
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            }}
+                        />
+                    </DevScrollView>
+                    <div className='Button'>
+                        <Button type='primary' block onClick={onAdd} loading={Activate ? true : false}>新增</Button>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+    return (<div className='Mars3dModel'> 未知组件 : Mars3dModel - {type}   </div>)
 };
 
 export default Mars3dModel;

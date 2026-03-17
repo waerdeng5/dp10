@@ -163,7 +163,16 @@ const MapPage = ({ data, AdminEvent }) => {
                 })
             }],
             [5, () => { // 模型列表
-                console.log('模型列表')
+                updateModel({
+                    title: '模型列表',
+                    type: 'Mars3dModel',
+                    Event: MapEvent,
+                    width: 600,
+                    height: '100vh',
+                    shading: false,
+                    position: { my: 'left ', at: 'left ', of: window },
+                    modelData: { type: 'A05', MapConfig, TILConfig, ...MpaPar }
+                })
             }],
             [6, () => { // 引入文件
                 console.log('引入文件')
@@ -174,12 +183,7 @@ const MapPage = ({ data, AdminEvent }) => {
         if (!isEmptyObject(modelConfig)) await updateModel({})
         const func = Mapping.get(uuid)
         func?.()
-
-
     }
-
-
-
 
     const mapCallBack = (e) => {
         const { type, data } = e
@@ -187,6 +191,12 @@ const MapPage = ({ data, AdminEvent }) => {
         const Mapping = new Map([
             ['onSaveMapConfig', () => setMapConfig(data)],
             ['onSaveMapElement', () => setELEConfig(data)],
+            ['onSaveTilConfig', () => setTILConfig(data)],
+
+            ['onSaveMapEle', () => {
+                setMapConfig(data.map)
+                setELEConfig(data.ele)
+            }]
         ])
         const func = Mapping.get(type)
         func?.(data)
