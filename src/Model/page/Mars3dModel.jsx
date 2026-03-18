@@ -495,11 +495,10 @@ const Mars3dModel = ({ data, Event }) => {
         const onDelete = (uuid) => {
             const TIL = map.getLayerById(uuid)
             if (TIL) {
-                // const ele = ELEData.filter(v => v.id !== ELE.id)
-                // Event.emit({ type: 'onSaveMapElement', data: ele })
-                // gra.removeGraphic(ELE)
-                // setELEData(ele)
-                console.log('删除模型')
+                const til = TILData.filter(v => v.id !== TIL.id)
+                Event.emit({ type: 'onSaveTilConfig', data: til })
+                map.removeLayer(TIL)
+                setTILData(til)
             }
             const data = removeTreeByKey(TreeData, uuid)
             const list = { ...MapConfig, tiles: data }
@@ -558,8 +557,6 @@ const Mars3dModel = ({ data, Event }) => {
                 modelData: { type: `Mars3DtilesFormList`, Initial: TIL.options }
             })
         }
-
-
         const CallBackFunc = e => {
             const { type, data } = e
             // console.log('Mars3d', e)

@@ -93,18 +93,18 @@ const MapPage = ({ data, AdminEvent }) => {
         port && console.log('[---------基础信息---------]', { ...sceneParameter, ...MapConfig })
         port && console.log('[---------元素信息---------]', ELEConfig)
         port && console.log('[---------模型信息---------]', TILConfig)
-        const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
-        const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
-        const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
-        const apiList = [
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
-        ]
-        const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
-        if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)
-        message.success({ key: ' save', content: '保存成功!' })
-        status && getMapData()
+        // const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
+        // const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
+        // const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
+        // const apiList = [
+        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
+        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
+        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
+        // ]
+        // const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
+        // if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)
+        // message.success({ key: ' save', content: '保存成功!' })
+        // status && getMapData()
     }
     // TODO 操作信息
     const onButtonClick = async (uuid) => {
