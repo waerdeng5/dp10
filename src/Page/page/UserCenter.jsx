@@ -14,10 +14,11 @@ import { ANIMATIONLIST } from '../../Temp/TemplateAnimation'
 import { modelStore } from '../../Router/zustand'
 
 const UserCenter = () => {
+
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [userAdd, setUserAdd] = useState()
     const [userInfo, setUserInfo] = useState()
-    const [Active, setActive] = useState(1)
+    const [Active, setActive] = useState(2)
     const [COLOR, setCOLOR] = useState('#0a3cff')
     const [Loading, setLoading] = useState(false)
 
@@ -41,14 +42,14 @@ const UserCenter = () => {
     ]
 
     const tabsMapping = [
-        { uuid: 1, title: '积分信息' },
+        // { uuid: 1, title: '积分信息' },
         { uuid: 2, title: '后台名片' },
-        { uuid: 3, title: '登录信息' },
+        { uuid: 3, title: '密码管理' },
         { uuid: 4, title: '锁屏动画' },
     ]
 
     const optionsMapping = [
-        { uuid: 2, title: '名片信息', },
+        { uuid: 2, title: '名片信息' },
         { uuid: 3, title: '修改密码' },
         { uuid: 4, title: '锁屏动画' },
         { uuid: 5, title: '重置密码' },
@@ -91,8 +92,10 @@ const UserCenter = () => {
 
     const formCallBack = e => {
         const { type, data } = e
+        console.log(e)
         const Mapping = new Map([
-            ['onSelectLook', () => setLookAnimation(data)]
+            ['onSelectLook', () => setLookAnimation(data)],
+            ['onFormBack', () => onModifyPwd(data)]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -100,9 +103,18 @@ const UserCenter = () => {
 
     FormEvent.useSubscription(formCallBack)
 
-    const onResetPassword = () => {
-        console.log('重置密码')
+    const onResetPassword = async () => {
+        const [err, res] = await axios({ method: 'post', url: 'users/ResetPassword' })
+        if (err) return console.log('重置失败')
+        console.log('重置成功', res)
     }
+    const onModifyPwd = async (data) => {
+        const [err, res] = await axios({ method: 'post', url: 'users/changePassword', params: data })
+        if (err) return console.log('修改失败')
+        console.log('修改成功', res)
+        FormEvent.emit({ type: 'closeFormLoading' })
+    }
+
 
     const onSwitchAnimation = () => {
         updateModel5({
@@ -125,8 +137,8 @@ const UserCenter = () => {
         setCOLOR(themeColor)
         setUserAdd(userAdd)
         setUserInfo(userInfo)
-        getPoints()
-        getTaskList()
+        // getPoints()
+        // getTaskList()
     })
 
     return (
@@ -236,13 +248,12 @@ const UserCenter = () => {
                     {Active === 3 &&
                         <div className='infoItem pwd'>
                             <div className='modify'>
-                                {/* 密码规则 */}
-                                <Alert type="error" title="密码规则-6位以上，包含字母、数字、特殊字符" banner />
+                                <Alert type="error" title="密码规则-6位以上，包含至少一个大小写字母、数字、特殊字符" banner />
                                 <FormTemplate formItem={FormConfig.ModifyPasswordFormList} FORMEVENT={FormEvent} />
                             </div>
-                            <div className='reset'>
+                            {/* <div className='reset'>
                                 <Button type='primary' onClick={onResetPassword}>重置密码</Button>
-                            </div>
+                            </div> */}
                         </div>
                     }
                     {Active === 4 &&

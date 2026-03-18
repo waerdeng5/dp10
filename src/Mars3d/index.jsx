@@ -297,70 +297,12 @@ const RenderElement = (gra, data) => {
             default:
                 break;
         }
-
-
-
-        // const { type,  id, element_type, style: elementStyle, children } = item
-        // if (type === 'group') RenderElement(gra, children)
-        // else {
-        //     if (elementStyle) {
-        //         const { style, show, position, position_lng, position_lat, position_alt, positions } = elementStyle
-        //         // style.classificationType = 0
-        //         switch (element_type) {
-
-
-
-
-
-
-        //             case 'divPlane':
-        //                 const divPlane = new mars3d.graphic.DivPlane({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(divPlane)
-        //                 break;
-
-
-
-
-
-
-
-
-
-        //             case 'pointLight':
-        //                 const pointLight = new mars3d.graphic.PointLight({ id, position: [position_lng, position_lat, position_alt], show, style })
-        //                 gra.addGraphic(pointLight)
-        //                 break;
-
-
-        //             case 'polylineVolumeP':
-        //                 const polylineVolumeP = new mars3d.graphic.PolylineVolumePrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(polylineVolumeP)
-        //                 break;
-
-
-
-
-
-        //             case 'planeP':
-        //                 const planeP = new mars3d.graphic.PlanePrimitive({ id, positions, show, style })
-        //                 gra.addGraphic(planeP)
-        //                 break;
-
-
-
-        //             default: break;
-        //         }
-        //     }
-        // }
     })
-
 }
 
 const RenderOther = (map, tileset) => {
-    if (tileset.length !== 0) {
-        tileset.forEach(({ position_lng, position_lat, position_alt, ...item }) => {
-            const Tileset = new mars3d.layer.TilesetLayer({ position: [position_lng, position_lat, position_alt], ...item })
-            map.addLayer(Tileset)
-        })
-    }
+    tileset.forEach((v) => {
+        const Tileset = new mars3d.layer.TilesetLayer({ ...v, flyTo: false })
+        map.addLayer(Tileset)
+    })
 }

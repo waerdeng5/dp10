@@ -1082,6 +1082,34 @@ const Mars3DellipsoidPFormList = [
     labelConfig
 ]
 
+// TODO 模型
+const Mars3DtilesFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 0], label: '经度', rules: true },
+    { span: 9, formType: 'NUMBER', name: ['position', 1], label: '纬度', rules: true },
+    { span: 6, formType: 'NUMBER', name: ['position', 2], label: '高程', rules: true },
+    { span: 8, formType: 'NUMBER', name: ['rotation', 'x'], label: 'X轴方向', rules: true, min: 0, max: 360, step: 1 },
+    { span: 8, formType: 'NUMBER', name: ['rotation', 'y'], label: 'Y轴方向', rules: true, min: 0, max: 360, step: 1 },
+    { span: 8, formType: 'NUMBER', name: ['rotation', 'z'], label: 'Z轴方向', rules: true, min: 0, max: 360, step: 1 },
+    { span: 24, formType: 'NUMBER', name: 'maxMemory', label: '最大缓存', rules: true },
+    { span: 24, formType: 'NUMBER', name: 'maximumScreenSpaceError', label: '精细度', rules: true, min: 1, max: 30, step: 1 },
+    { span: 24, formType: 'NUMBER', name: 'scale', label: '整体缩放', rules: true },
+    { span: 24, formType: 'NUMBER', name: 'opacity', label: '透明度', rules: true, min: 0, max: 1, step: 0.1 },
+    { span: 24, formType: 'RADIO', name: ['highlight', 'enabled'], label: '选中高亮', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'highlight_config', label: '高亮设置', collapsible: true,
+        jugde: [{ field: ['highlight', 'enabled'], value: [true] }], children: [
+            { span: 24, formType: 'RADIO', name: ['highlight', 'type'], label: '触发方式', rules: true, valueEnum: MappingData.Charts__VchartsTrigger },
+            { span: 24, formType: 'RADIO', name: ['highlight', 'outlineEffect'], label: '高亮方式', rules: true, valueEnum: MappingData.mars3d__tilesOutlineEffect },
+            {
+                span: 24, formType: 'NUMBER', name: ['highlight', 'width'], label: '描边宽度', rules: true,
+                jugde: [{ field: ['highlight', 'outlineEffect'], value: [true] }]
+            },
+            { span: 24, formType: 'COLOR', name: ['highlight', 'color'], label: '高亮颜色', rules: true, mode: ['single'] },
+        ]
+    }
+]
+
 
 
 export const Mars3dFormConfig = {
@@ -1135,5 +1163,6 @@ export const Mars3dFormConfig = {
     Mars3DboxPFormList,
     Mars3DcylinderPFormList,
     Mars3DlightConeFormList,
-    Mars3DellipsoidPFormList
+    Mars3DellipsoidPFormList,
+    Mars3DtilesFormList
 }

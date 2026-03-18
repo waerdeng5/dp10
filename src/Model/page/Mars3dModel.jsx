@@ -12,7 +12,7 @@ import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
 import { modelStore } from '../../Router/zustand'
-import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray, treeValue } from "../../Utils"
+import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray, treeValue, replaceNodeByIdTwo } from "../../Utils"
 import { ICONMapping } from '../../Config/IconMapping'
 import { initStartDraw } from '../../Mars3d/initData'
 
@@ -506,23 +506,59 @@ const Mars3dModel = ({ data, Event }) => {
             Event.emit({ type: 'onSaveMapConfig', data: list })
             setTreeData(data)
         }
-
         const onDraw = (data, status) => {
-            const { tilesUrl } = data
+            const { uuid, tilesUrl } = data
+            setActivate(data)
+            const tilesData = { ...initStartDraw.tiles, id: uuid, url: tilesUrl, flyTo: true }
+            const tilesLayer = new mars3d.layer.TilesetLayer(tilesData)
+            map.addLayer(tilesLayer)
             if (status) {
-                console.log('加载到当前位置', tilesUrl)
-            } else {
-                console.log('加载到模型位置', tilesUrl)
-            }
+                const { lng, lat, alt } = map.getCenter()
+                tilesData.position = [lng, lat, alt]
+            } else tilesLayer.readyPromise.then(() => {
+                const { lng, lat, alt } = tilesLayer.center
+                tilesData.position = [lng, lat, alt]
+            })
+            updateModel5({
+                title: '模型数据',
+                type: 'Mars3dForm',
+                Event: FORMEVENT,
+                width: 600,
+                height: '100vh',
+                shading: false,
+                position: { my: 'right ', at: 'right ', of: window },
+                modelData: { type: `Mars3DtilesFormList`, Initial: tilesData }
+            })
+            const newTil = [...TILData, tilesData]
+            setTILData(newTil)
+            Event.emit({ type: 'onSaveTilConfig', data: newTil })
+        }
+        const onPositioning = (uuid) => {
+            const TIL = map.getLayerById(uuid)
+            if (!TIL) return
+            TIL.flyTo()
+        }
+        const onShow = (TIL, status) => {
+            TIL.setOptions({ show: status })
+            TILData.find(v => v.id === TIL.id).show = status
+            setTILData([...TILData])
+            Event.emit({ type: 'onSaveTilConfig', data: TILData })
+        }
+        const onModifyModel = (TIL) => {
+            setActivate({ uuid: TIL.id })
+            TIL.flyTo()
+            updateModel5({
+                title: '模型数据',
+                type: 'Mars3dForm',
+                Event: FORMEVENT,
+                width: 600,
+                height: '100vh',
+                shading: false,
+                position: { my: 'right ', at: 'right ', of: window },
+                modelData: { type: `Mars3DtilesFormList`, Initial: TIL.options }
+            })
         }
 
-        const onPositioning = () => {
-            console.log('定位')
-        }
-
-        const onShow = () => {
-            console.log('显示')
-        }
 
         const CallBackFunc = e => {
             const { type, data } = e
@@ -535,26 +571,15 @@ const Mars3dModel = ({ data, Event }) => {
                     updateModel5({})
                     Event.emit({ type: 'onSaveMapConfig', data: list })
                 }],
-                // ['onDetection', () => {
-                //     const { id } = Activate
-                //     const ELE = gra.getGraphicById(id)
-                //     if (data.position) {
-                //         const position = ELE.coordinate
-                //         position[data.position.length - 1] = data.position.at(-1)
-                //         ELE.setOptions({ position })
-                //         return
-                //     }
-                //     if (ELE.type === 'div') {
-                //         const { style } = ELE.options
-                //         const { temp, tempConfig } = style
-                //         const { path, value } = getPathArray(data)
-                //         _.set(ELE.options, path, value)
-                //         style.html = initStartDraw.DivTemplate[data?.style?.temp || temp](tempConfig)
-                //         ELE.setOptions({ style })
-                //         return
-                //     }
-                //     ELE.setOptions(data)
-                // }]
+                ['onDetection', () => {
+                    const TIL = map.getLayerById(Activate.uuid)
+                    const { path, value } = getPathArray(data)
+                    _.set(TIL.options, path, value)
+                    TIL.setOptions(TIL.options)
+                    const newOpt = replaceNodeByIdTwo(TILData, Activate.uuid, TIL.options, 'id')
+                    setTILData(newOpt)
+                    Event.emit({ type: 'onSaveTilConfig', data: newOpt })
+                }]
             ])
             const func = Mapping.get(type)
             func?.(data)
@@ -628,6 +653,9 @@ const Mars3dModel = ({ data, Event }) => {
                                                                 <Button type='link' danger icon={ICONMapping['fasEyeSlash']} onClick={() => onShow(TIL, true)} />
                                                             </Tooltip>
                                                         }
+                                                        <Tooltip title='编辑模型'>
+                                                            <Button type='link' icon={ICONMapping['fasTools']} onClick={() => onModifyModel(TIL)} />
+                                                        </Tooltip>
                                                     </> :
                                                     <>
                                                         <Tooltip title='加载到当前位置'>

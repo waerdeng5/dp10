@@ -1647,6 +1647,10 @@ export const MappingData = {
         { label: '反射材质', value: CommonSceneUrl.img + 'waterNormals.jpg' },
         { label: '蓝光材质', value: CommonSceneUrl.img + 'poly-stone.jpg' },
     ],
+    mars3d__tilesOutlineEffect: [
+        { label: '描边高亮', value: true },
+        { label: '本体高亮', value: false },
+    ],
     mars3d__materialType: [
         { value: 'Color', label: '通用:纯色' },
         { value: 'RandomColor', label: '通用:随机色' },

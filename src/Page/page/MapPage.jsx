@@ -58,12 +58,9 @@ const MapPage = ({ data, AdminEvent }) => {
     const [MpaPar, setMpaPar] = useState({ map: null, gra: null, clip: null })
 
     const MapEvent = useEventEmitter()
-
-
     const [MapConfig, setMapConfig] = useState({})
     const [ELEConfig, setELEConfig] = useState([])
     const [TILConfig, setTILConfig] = useState([])
-
 
     const getMapData = async () => {
         const apiList = [
@@ -109,8 +106,6 @@ const MapPage = ({ data, AdminEvent }) => {
         message.success({ key: ' save', content: '保存成功!' })
         status && getMapData()
     }
-
-
     // TODO 操作信息
     const onButtonClick = async (uuid) => {
         const Mapping = new Map([

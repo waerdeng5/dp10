@@ -1619,7 +1619,6 @@ const StartInitFormList = [
         ]
     }
 ]
-
 // *** 大屏小窗设置
 const StartWindowFormList = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -1891,7 +1890,10 @@ const StartWindowFormList = [
         ]
     }
 ]
-
+// *** 个人中心配置
+const AdminUserInfoPageFormList = [
+    
+]
 
 
 

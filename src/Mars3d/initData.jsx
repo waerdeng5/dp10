@@ -2599,6 +2599,24 @@ const ellipsoidP = {
         label,
     }
 }
+// *** 模型
+const tiles = {
+    show: true,
+    maximumScreenSpaceError: 16,
+    maxMemory: 1024,
+    scale: 1,
+    opacity: 1,
+    rotation: { x: 0, y: 0, z: 0 },
+    highlight: {
+        enabled: false,
+        type: 'click',
+        color: '#ff0000',
+        outlineEffect: true,
+        width: 4,
+    },
+
+
+}
 
 export const initStartDraw = {
     // 点
@@ -2640,5 +2658,8 @@ export const initStartDraw = {
     cylinderP,
     lightCone,
     ellipsoidP,
-    DivTemplate
+    // 自定义div元素
+    DivTemplate,
+    // 模型
+    tiles
 }
