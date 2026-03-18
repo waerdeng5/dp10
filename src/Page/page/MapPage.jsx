@@ -3,6 +3,7 @@ import "mars3d/mars3d.css"
 import './MapPage.scss'
 
 import _ from 'lodash'
+import * as mars3d from "mars3d"
 import { useMount, useEventEmitter } from 'ahooks'
 import { useState, useRef, useEffect } from 'react'
 import { Spin, Result, Button, FloatButton, Tooltip, App } from 'antd'
@@ -93,18 +94,18 @@ const MapPage = ({ data, AdminEvent }) => {
         port && console.log('[---------基础信息---------]', { ...sceneParameter, ...MapConfig })
         port && console.log('[---------元素信息---------]', ELEConfig)
         port && console.log('[---------模型信息---------]', TILConfig)
-        // const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
-        // const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
-        // const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
-        // const apiList = [
-        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
-        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
-        //     { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
-        // ]
-        // const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
-        // if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)
-        // message.success({ key: ' save', content: '保存成功!' })
-        // status && getMapData()
+        const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
+        const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
+        const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
+        const apiList = [
+            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
+            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
+            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
+        ]
+        const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
+        if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)
+        message.success({ key: ' save', content: '保存成功!' })
+        status && getMapData()
     }
     // TODO 操作信息
     const onButtonClick = async (uuid) => {
@@ -170,7 +171,16 @@ const MapPage = ({ data, AdminEvent }) => {
                 })
             }],
             [6, () => { // 引入文件
-                console.log('引入文件')
+                updateModel5({
+                    title: '引入文件',
+                    type: 'CommonForm',
+                    Event: MapEvent,
+                    width: 600,
+                    height: '100vh',
+                    shading: false,
+                    position: { my: 'right ', at: 'right ', of: window },
+                    modelData: { formItem: 'Mars3dFileConfig', eventBack: 'onAddFile' }
+                })
             }],
             [7, onSaveMap],
         ])
@@ -187,10 +197,22 @@ const MapPage = ({ data, AdminEvent }) => {
             ['onSaveMapConfig', () => setMapConfig(data)],
             ['onSaveMapElement', () => setELEConfig(data)],
             ['onSaveTilConfig', () => setTILConfig(data)],
-
             ['onSaveMapEle', () => {
                 setMapConfig(data.map)
                 setELEConfig(data.ele)
+            }],
+            ['onAddFile', () => {
+                const { fileType, fileUrl, symbol } = data
+                const options = { url: fileUrl, symbol, flyTo: true }
+                if (fileType === 'kml') {
+                    const kml = new mars3d.layer.KmlLayer(options)
+                    MpaPar.map.addLayer(kml)
+                }
+                if (fileType === 'geo') {
+                    const geo = new mars3d.layer.GeoJsonLayer(options)
+                    MpaPar.map.addLayer(geo)
+                }
+                updateModel5({})
             }]
         ])
         const func = Mapping.get(type)

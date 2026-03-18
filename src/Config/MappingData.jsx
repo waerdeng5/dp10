@@ -1571,6 +1571,10 @@ export const MappingData = {
     ],
 
     // !!! 地图设置
+    Mars3d__fileType: [
+        { value: 'kml', label: 'KML' },
+        { value: 'geo', label: 'Geo' },
+    ],
     Mars3d__Scene: [
         { value: 3, label: '三维视图' },
         { value: 2, label: '二维视图' },

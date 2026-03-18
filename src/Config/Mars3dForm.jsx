@@ -23,8 +23,6 @@ const Mars3donAddTiles = [
     { span: 24, formType: 'RADIO', name: 'fieldType', label: '数据类型', valueEnum: MappingData.mars3d__fieldsTypeA02, rules: true },
     { span: 24, formType: 'INPUT', name: 'tilesUrl', label: '模型地址', rules: true, jugde: [{ field: 'fieldType', value: ['tiles'] }] },
 ]
-
-
 // TODO 额外材质
 const materialOptionsMapping = [
     { span: 24, formType: 'SELECT', name: ['style', 'materialType'], label: '元素材质', rules: true, valueEnum: MappingData.mars3d__materialType },
@@ -334,10 +332,14 @@ const materialOptionsMapping = [
         jugde: [{ field: ['style', 'materialType'], value: ['Stripe'] }]
     },
 ]
-
-
-
-
+// TODO 添加kml 或geo文件
+const Mars3dFileConfig = [
+    { span: 24, formType: 'INPUT', name: 'fileUrl', label: '文件地址', rules: true },
+    { span: 24, formType: 'RADIO', name: 'fileType', label: '文件类型', rules: true, valueEnum: MappingData.Mars3d__fileType },
+    { span: 24, formType: 'COLOR', name: ['symbol', 'styleOptions', 'color'], label: '颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'NUMBER', name: ['symbol', 'styleOptions', 'width'], label: '宽度', rules: true },
+    { span: 24, formType: 'RADIO', name: ['symbol', 'styleOptions', 'clampToGround'], label: '贴地', rules: true, valueEnum: MappingData.IsYesBool },
+]
 // !!! 基础设置
 // TODO 基础信息
 const Mars3dBaseConfig = [
@@ -426,6 +428,7 @@ const Mars3dWeatherConfig = [
     }
 ]
 // TODO 色彩设置
+
 const Mars3dColourConfig = [
     { span: 24, formType: 'RADIO', name: 'bloom_enabled', label: '泛光特效', valueEnum: MappingData.IsEnabledBool },
     {
@@ -1081,7 +1084,6 @@ const Mars3DellipsoidPFormList = [
     ...materialOptionsMapping,
     labelConfig
 ]
-
 // TODO 模型
 const Mars3DtilesFormList = [
     { span: 24, formType: 'HIDDEN', name: 'id', label: '元素ID', rules: true },
@@ -1111,11 +1113,11 @@ const Mars3DtilesFormList = [
 ]
 
 
-
 export const Mars3dFormConfig = {
     Mars3donAddCenter,
     Mars3donAddElement,
     Mars3donAddTiles,
+    Mars3dFileConfig,
 
     Mars3dBaseConfig,
     Mars3dGlobeConfig,
