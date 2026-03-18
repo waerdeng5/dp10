@@ -13,6 +13,7 @@ export const LayerListMap = (arr) => {
 }
 
 export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
+    mars3d.Log.hasInfo(false)
     const { scene, globe, cameraController, terrain, other, weather, colour, camera } = CONFIG
     scene.globe = globe
     scene.cameraController = cameraController
@@ -20,21 +21,16 @@ export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
     const map = new mars3d.Map(BOX, CONFIG)
     const gra = new mars3d.layer.GraphicLayer()
     const clip = new mars3d.thing.TerrainClip({ czm: false, image: false, splitNum: 80 })
-    console.info('地球初始化成功!')
-
 
     map.addLayer(gra)
     map.addThing(clip)
     initWeather(weather, map)
     initColour(colour, map)
     map.setCameraView(camera.list[camera.default])
-
     RenderElement(gra, ELEMENT)
     RenderOther(map, TILES)
-
     // 添加剪裁
     BoundaryBorderFunction(gra, clip, CONFIG)
-
     // 参数后处理
     map.scene.globe._surface.tileProvider._debug.wireframe = other.wireframe
     map.basemap = other.basemap

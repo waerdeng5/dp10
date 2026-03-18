@@ -14,7 +14,6 @@ import { ANIMATIONLIST } from '../../Temp/TemplateAnimation'
 import { modelStore } from '../../Router/zustand'
 
 const UserCenter = () => {
-
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [userAdd, setUserAdd] = useState()
     const [userInfo, setUserInfo] = useState()
@@ -248,7 +247,7 @@ const UserCenter = () => {
                     {Active === 3 &&
                         <div className='infoItem pwd'>
                             <div className='modify'>
-                                <Alert type="error" title="密码规则-6位以上，包含至少一个大小写字母、数字、特殊字符" banner />
+                                <Alert type="error" title="密码规则-6位以上，包含至少一个大小写字母、数字" banner />
                                 <FormTemplate formItem={FormConfig.ModifyPasswordFormList} FORMEVENT={FormEvent} />
                             </div>
                             {/* <div className='reset'>

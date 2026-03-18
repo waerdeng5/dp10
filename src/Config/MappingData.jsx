@@ -303,7 +303,6 @@ export const MappingData = {
         { value: 'sticky', label: '粘性' },
         { value: 'right', label: '右' },
     ],
-
     System__FlexDirection: [
         { value: 'column', label: '上下' },
         { value: 'column-reverse', label: '左右' },
@@ -533,6 +532,10 @@ export const MappingData = {
         { value: 'field', label: '数据链接' },
         { value: 'https', label: '外部站点' },
     ],
+    System_loginCodeType: [
+        { value: 'A01', label: '拖动拼图' },
+
+    ],
 
     // Todo 样式-通用属性
     Style__BoxShadow: [
@@ -584,6 +587,7 @@ export const MappingData = {
         { value: 'A01', label: '单页显示' },
         { value: 'A02', label: '网格显示' },
     ],
+
     // 动画效果
     Animate_type: [
         // 基础动画

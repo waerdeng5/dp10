@@ -71,6 +71,7 @@ export const SwiperLookAnimation = ({ Initial, userInfo, Event }) => {
             className='SwiperLookAnimation'
             initialSlide={Active}
             modules={[Scrollbar]}
+            loop={true}
             scrollbar={{ draggable: true }}
         >
             {Object.keys(ANIMATIONLIST).map((key, index) => {

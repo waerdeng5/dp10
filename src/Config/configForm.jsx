@@ -1892,7 +1892,7 @@ const StartWindowFormList = [
 ]
 // *** 个人中心配置
 const AdminUserInfoPageFormList = [
-    
+
 ]
 
 
@@ -3458,6 +3458,12 @@ const SetDEVStyleConfig = [
 
 // *** 配置登录页面
 const SetLoginPageConfig = [
+    { span: 12, formType: 'RADIO', name: 'loginCode', label: '登录验证码', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 12, formType: 'RADIO', name: 'loginCodeType', label: '背景类型', rules: true,
+        jugde: [{ field: 'loginCode', value: [true] }], valueEnum: MappingData.System_loginCodeType
+    },
+
     {
         span: 24, formType: 'GROUP', name: 'SetLoginPageConfig_Back', label: '背景层设置', collapsible: true,
         children: [

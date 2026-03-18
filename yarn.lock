@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@alex_xu/react-slider-vertify@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmmirror.com/@alex_xu/react-slider-vertify/-/react-slider-vertify-1.2.0.tgz#0d4635df357285d07336d3556041372fb33b083d"
+  integrity sha512-NOrTnEfBgMHQYzDNOi/6kp6fUdeSuZ1mVImNczqzzzQDPiHHV5Sjwnx/vIhfPA79BWZQiM1qVwgUG/heMPn8zQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+
 "@alova/shared@1.3.2":
   version "1.3.2"
   resolved "https://registry.npmmirror.com/@alova/shared/-/shared-1.3.2.tgz#b12a25ae5e4d9faed6787384d6b5ab704aa0a672"
@@ -303,6 +310,11 @@
   version "7.28.4"
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.28.4.tgz#a70226016fabe25c5783b2f22d3e1c9bc5ca3326"
   integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
+
+"@babel/runtime@^7.15.4":
+  version "7.29.2"
+  resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.29.2.tgz#9a6e2d05f4b6692e1801cd4fb176ad823930ed5e"
+  integrity sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==
 
 "@babel/template@^7.27.2":
   version "7.27.2"

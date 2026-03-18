@@ -313,7 +313,7 @@ const SetPageLogin = ({ data, AdminEvent }) => {
                                         <div style={SmallA02SText}>{smallA02}</div>
                                     </div>
                                 }
-                                <SignDefault className={signBoxClass} style={signBoxStyle} simulated />
+                                <SignDefault className={signBoxClass} style={signBoxStyle} simulated Config={{ loginCode: false }} />
                             </div>
                         </div>
                     </div>

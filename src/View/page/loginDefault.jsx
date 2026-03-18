@@ -258,7 +258,7 @@ const LoginDefault = ({ SingPage }) => {
                                             <div style={SmallA02SText}>{smallA02}</div>
                                         </div>
                                     }
-                                    <SingPage className={signBoxClass} style={signBoxStyle} />
+                                    <SingPage className={signBoxClass} style={signBoxStyle} Config={Config} />
                                 </div>
                             </div>
                         </div>

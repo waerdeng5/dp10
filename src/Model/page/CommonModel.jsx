@@ -598,7 +598,6 @@ const CommonModel = ({ data, Event }) => {
 
     // 锁屏动画
     if (openType === 'LookAnimation') {
-
         return (
             <div className='CommonModelLookAnimation'>
                 <SwiperLookAnimation Initial={data.Initial} userInfo={data.userInfo} Event={Event} />

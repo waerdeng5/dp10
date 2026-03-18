@@ -384,6 +384,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 8px 0;
+            z-index: 5;
+
+            .ant-space-compact {
+                border-radius: 4px;
+                background: rgba(255, 255, 255, 0.35);
+                backdrop-filter: blur(24px);
+            }
 
             .ant-input-underlined {
                 background: transparent;
