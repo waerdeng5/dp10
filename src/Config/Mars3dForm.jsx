@@ -734,7 +734,7 @@ const Mars3DdivFormList = [
             { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'padding'], label: '内部间距', rules: true },
             { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'radius'], label: '圆角信息', rules: true },
             {
-                span: 24, formType: 'LIST', name: ['style', 'tempConfig', 'list'], label: '一号版配置', collapsible: true, children: [
+                span: 24, formType: 'LIST', name: ['style', 'tempConfig', 'list'], label: '字段配置', collapsible: true, children: [
                     { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
                     { span: 24, formType: 'INPUT', name: 'margin', label: '文字间距', rules: true },
                     { span: 24, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
@@ -749,6 +749,55 @@ const Mars3DdivFormList = [
             }
         ]
     },
+    {
+        span: 24, formType: 'GROUP', name: 'tempConfig_A02', label: '二号版配置', collapsible: true,
+        jugde: [{ field: ['style', 'temp'], value: ['A02'] }], children: [
+            {
+                span: 24, formType: 'LIST', name: ['style', 'tempConfig', 'list'], label: '字段配置', collapsible: true, children: [
+                    { span: 24, formType: 'COLOR', name: 'back', label: '背景颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'RADIO', name: 'border', label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'borderSize', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'borderType', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
+                        jugde: [{ field: 'border', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'borderColor', label: '边框颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'border', value: [true] }]
+                    },
+                    { span: 24, formType: 'RADIO', name: 'shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'RADIO', name: 'shadowType', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType,
+                        jugde: [{ field: 'shadow', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'shadowSize', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'shadow', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'shadowColor', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'shadow', value: [true] }]
+                    },
+                    { span: 24, formType: 'INPUT', name: 'radius', label: '圆角', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'margin', label: '外间距', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'font_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'font_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'font_weight', label: '是否加粗', rules: true, valueEnum: MappingData.Font__WeightStr },
+                    { span: 24, formType: 'RADIO', name: 'font_style', label: '是否斜体', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'filter', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 24, formType: 'INPUT', name: 'filterSize', label: '阴影数值', rules: true, jugde: [{ field: 'filter', value: [true] }] },
+                    { span: 24, formType: 'COLOR', name: 'filterColor', label: '阴影颜色', rules: true, mode: ['single'], jugde: [{ field: 'filter', value: [true] }] },
+                ]
+            },
+        ]
+    },
+
 ]
 // Todo 扩散点
 const Mars3DdivLightPointFormList = [

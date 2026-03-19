@@ -1,8 +1,18 @@
-.DivHtmlA01Template {
+.DivHtmlTemplate,
+.DivHtmlTemplate {
     position: relative;
     transform: translate(-50%, 0);
     pointer-events: auto;
     user-select: none;
     cursor: pointer;
 
+
+    &.A02 {
+        &>.text {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+    }
 }

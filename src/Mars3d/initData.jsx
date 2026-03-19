@@ -1,6 +1,6 @@
 import './divTemplate.scss'
 import { CommonSceneUrl } from '../Config'
-import { ColorCallBack, SetBorderParams, SpacingCallBack, SetFilderParams } from '../Utils'
+import { ColorCallBack, SetBorderParams, SpacingCallBack, SetFilderParams, SetShadowParams } from '../Utils'
 
 const tdtKey = '66157ab348d37d969fdc61d1a6f45c6e'
 const geovisearthToken = "e4964b442b88caaad98477673f5e63fb"
@@ -2215,7 +2215,7 @@ const DivTemplate = {
             const textStyle = {
                 margin: SpacingCallBack(v.margin),
                 color: v.color,
-                'font-size': SpacingCallBack(v.font_size),
+                'font-size': v.font_size + 'px',
                 'font-family': v.font_family,
                 'font-weight': v.font_weight,
                 'font-style': v.font_style,
@@ -2224,11 +2224,40 @@ const DivTemplate = {
             return `<div class="text text${i}" style="${Object.keys(textStyle).map(k => `${k}:${textStyle[k]}`).join(';')}">${v.text}</div>`
         }).join('')
 
-        return `<div class="DivHtmlA01Template" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}"> ${html}</div> `
+        return `<div class="DivHtmlTemplate A01" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}">${html}</div> `
     },
     A02: e => {
+        const html = e.list.map((v, i) => {
+            const boxStyle = {
+                background: v.back,
+                border: SetBorderParams(v.border, v.borderSize, v.borderType, v.borderColor),
+                'border-radius': SpacingCallBack(v.radius),
+                padding: SpacingCallBack(v.padding),
+                margin: SpacingCallBack(v.margin),
+                'box-shadow': SetShadowParams(v.shadow, v.shadowSize, v.shadowColor, v.shadowType),
+            }
 
-        return `<div class="DivHtmlA02Template" ><div class="text">DIV模板2</div></div > `
+            const textStyle = {
+                color: v.color,
+                'font-size': v.font_size + 'px',
+                height: v.font_size + 'px',
+                'line-height': v.font_size + 'px',
+                'font-family': v.font_family,
+                'font-weight': v.font_weight,
+                'font-style': v.font_style,
+                'filter': SetFilderParams(v.filter, v.filterSize, v.filterColor),
+            }
+
+            return `<div class="text text${i}" style="${Object.keys(boxStyle).map(k => `${k}:${boxStyle[k]}`).join(';')}">
+                        <div style="${Object.keys(textStyle).map(k => `${k}:${textStyle[k]}`).join(';')}">${v.text}</div>  
+                    </div>`
+        }).join('')
+
+        return `<div class="DivHtmlTemplate A02" ><div class="text">${html}</div></div > `
+    },
+    A03: e => {
+
+        return `<div class="DivHtmlA02Template" ><div class="text">DIV模板3</div></div > `
     },
 }
 // *** 扩散DIV

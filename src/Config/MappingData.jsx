@@ -550,6 +550,11 @@ export const MappingData = {
         { value: '--shadow-2-down', label: '二级阴影' },
         { value: '--shadow-3-down', label: '三级阴影' },
     ],
+    Style__shadowType: [
+        { value: 'inset', label: '内阴影' },
+        { value: 'outline', label: '外阴影' },
+    ],
+
     Style__BorderType: [
         { value: 'solid', label: '实线' },
         { value: 'dashed', label: '虚线' },
@@ -1833,6 +1838,7 @@ export const MappingData = {
     mars3d__divTemplate: [
         { value: 'A01', label: '一号版' },
         { value: 'A02', label: '二号版' },
+        { value: 'A03', label: '三号版' },
     ],
     // TODO 管道形状
     mars3d__shape: [

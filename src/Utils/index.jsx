@@ -494,6 +494,16 @@ export const SetBorderParams = (status, size, type, color) => {
 }
 
 // TODO 阴影参数
+export const SetShadowParams = (status, size, color, type) => {
+
+    if (status) {
+        const [x, y, z] = size.split(',')
+        return `${x}px ${y}px ${z}px ${color} ${type === 'inset' && type}`
+    }
+    return null
+}
+
+// TODO 滤镜参数
 export const SetFilderParams = (status, size, color) => {
     if (status) {
         const [x, y, z] = size.split(',')
