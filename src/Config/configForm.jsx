@@ -1890,19 +1890,11 @@ const StartWindowFormList = [
         ]
     }
 ]
-// *** 个人中心配置
-const AdminUserInfoPageFormList = [
-
-]
-
-
-
 // *** 字段导入
 const AddFieldsImport = [
     { span: 24, formType: 'INPUT', name: 'importSplit', label: '切割字符' },
     { span: 24, formType: 'TEXTAREA', name: 'importField', label: '字段导入', rules: true },
 ]
-
 // *** 新增字段
 const AddFieldsFormList = [
     {
@@ -2456,7 +2448,6 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'B09_rightMapping', label: '映射键名', jugde: [{ field: 'B09_rightUuid', value: [true] }] },
         ]
     },
-
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_09_01', label: '渲染方式',
         jugde: [{ field: 'type', value: ['B09'] }],
@@ -2518,7 +2509,6 @@ const AddRowOptionsFormList = [
             }
         ]
     },
-
     // !!! 11 站内路由
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_11', label: '站内路由',
@@ -2622,6 +2612,7 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'COLOR', name: 'B17_textShadowC', label: '阴影颜色', rules: true },
         ]
     },
+    // !!! 20 图片轮播
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_20_01', label: '轮播设置',
         jugde: [{ field: 'type', value: ['B20'] }], children: [
@@ -2666,6 +2657,15 @@ const AddRowOptionsFormList = [
                 jugde: [{ field: 'B20_isPagin', value: [true] }, { field: 'B20_paginType', value: ['bullets'] }]
             },
         ]
+    },
+    // !!! 各项目独立组件
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1607_01', label: 'AI合同分析',
+        jugde: [{ field: 'type', value: ['B1607'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'B1067_type', label: '分析类型', rules: true, valueEnum: MappingData.System_gjContractAIType },
+            { span: 24, formType: 'INPUT', name: 'B1067_url', label: '文件字段', rules: true },
+            { span: 24, formType: 'INPUT', name: 'B1067_sse', label: 'SSE域名', rules: true },
+        ],
     },
 ]
 

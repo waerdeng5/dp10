@@ -252,6 +252,23 @@ const AdminIndex = () => {
                                     type: 'danger',
                                     onClick: () => AdminEvent.emit({ type: 'onClearFields' })
                                 },
+                                // {
+                                //     visible: true,
+                                //     widget: 'dxButton',
+                                //     location: 'before',
+                                //     icon: 'fas fa-arrow-alt-circle-up',
+                                //     text: '导出完整字段 ',
+                                //     onClick: () => AdminEvent.emit({ type: 'onCopyFields' })
+                                // },
+                                // {
+                                //     visible: true,
+                                //     widget: 'dxButton',
+                                //     location: 'before',
+                                //     icon: 'fas fa-arrow-alt-circle-down',
+                                //     text: '导入完整字段 ',
+                                //     onClick: () => AdminEvent.emit({ type: 'onImportFields' })
+                                // },
+
                                 {
                                     visible: true,
                                     widget: 'dxButton',

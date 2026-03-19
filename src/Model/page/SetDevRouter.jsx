@@ -202,8 +202,17 @@ const SetDevRouter = ({ data, Event }) => {
         onSaveTHE(THEdata)
     }
 
+    const onCopyFields = () => {
+        console.log('拷贝字段', APIdata.fields)
+
+    }
+    const onImportFields = () => {
+        console.log('导入字段')
+    }
+
     const devCallBack = (e) => {
         const { type, data } = e
+        console.log('[----------devCallBack---------]', type, data)
         const Mapping = new Map([
             ['onBackApi', () => onBackApi(data)],
             ['onSaveAPIdata', () => onSaveAPI(data)],
@@ -211,6 +220,8 @@ const SetDevRouter = ({ data, Event }) => {
             ['onBackTemplate', () => onBackTemplate(data)],
             ['onSaveOPTdata', () => onSaveOPT(data)],
             ['onSaveOPTdataA02', () => onSaveOPT(data, true)],
+            ['onCopyFields', onCopyFields],
+            ['onImportFields', onImportFields],
         ])
         const func = Mapping.get(type)
         func?.(data)

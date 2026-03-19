@@ -723,6 +723,54 @@ const OptionsModel = ({ data, Event }) => {
     if (type === 'B20') {
         return (<SwiperB20Template data={data} />)
     }
+    if (type === 'B1607') {
+        const { B1067_type, B1067_url, B1067_sse } = data
+        const [{ url }] = Initial[B1067_url]
+
+        const [ModelList, setModelList] = useState()
+
+        const getModel = async () => {
+            const [err, res] = await axios({ method: 'get', url: 'menuDictionary', params: { MenuDictionaryTypeUuid: '9b3e80b7-1d76-4bd0-9f33-a4a726e56d36' } })
+            if (err) return console.log('获取菜单字失败')
+            setModelList(res.data.list)
+        }
+
+
+
+        const onResult = () => {
+            const sseUrl = B1067_sse
+            console.log(sseUrl)
+        }
+
+
+
+        useEffect(() => {
+            console.log(B1067_type)
+
+            getModel()
+
+
+        }, [B1067_type])
+
+
+        return (
+            <div className='OptionsModelB1607'>
+                <div className='Left'>
+                    文件和已选模板
+                </div>
+                <div className='Right'>
+                    <div className='Content'>
+
+                    </div>
+                    <div className='Options'>
+
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
+
 
 
     return (

@@ -429,6 +429,7 @@ export const MappingData = {
                 { value: 'B1604', label: '整改详情' },
                 { value: 'B1605', label: '题库AI' },
                 { value: 'B1606', label: '题库参数' },
+                { value: 'B1607', label: '交投合同AI' },
             ]
         }
     ],
@@ -534,7 +535,12 @@ export const MappingData = {
     ],
     System_loginCodeType: [
         { value: 'A01', label: '拖动拼图' },
+    ],
 
+    System_gjContractAIType: [
+        { value: 'A01', label: '合同对比' },
+        { value: 'A02', label: '合同审核' },
+        { value: 'A03', label: '合同提取' },
     ],
 
     // Todo 样式-通用属性
