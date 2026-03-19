@@ -18,9 +18,16 @@ export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
     scene.globe = globe
     scene.cameraController = cameraController
     terrain.show = other.show
+    CONFIG.method = {}
+    CONFIG.method.openFlyAnimation = {}
+    CONFIG.method.openFlyAnimation.enabled = false
+    CONFIG.method.openFlyAnimation.duration1 = 10
+    console.log(CONFIG)
     const map = new mars3d.Map(BOX, CONFIG)
     const gra = new mars3d.layer.GraphicLayer()
     const clip = new mars3d.thing.TerrainClip({ czm: false, image: false, splitNum: 80 })
+    // method
+    // openFlyAnimation
 
     map.addLayer(gra)
     map.addThing(clip)
