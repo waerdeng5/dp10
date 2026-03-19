@@ -3458,9 +3458,9 @@ const SetDEVStyleConfig = [
 
 // *** 配置登录页面
 const SetLoginPageConfig = [
-    { span: 12, formType: 'RADIO', name: 'loginCode', label: '登录验证码', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'loginCode', label: '登录校验码', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
-        span: 12, formType: 'RADIO', name: 'loginCodeType', label: '背景类型', rules: true,
+        span: 12, formType: 'RADIO', name: 'loginCodeType', label: '校验码类型', rules: true,
         jugde: [{ field: 'loginCode', value: [true] }], valueEnum: MappingData.System_loginCodeType
     },
 
