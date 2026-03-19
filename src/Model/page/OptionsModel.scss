@@ -194,12 +194,74 @@
 
 
     &>.Left {
-        width: 240px;
+        width: 320px;
         height: 100%;
         padding: 8px;
         margin-right: 8px;
         border-radius: 8px;
         border: 1px solid #ccc;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+
+        &>.selected {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            margin-bottom: 16px;
+
+            &>div:first-child {
+                font-family: ShuHeiTi;
+                font-weight: bold;
+                font-size: 24px;
+                color: #262626;
+            }
+
+            &>div:last-child {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                padding: 8px;
+                cursor: pointer;
+                user-select: none;
+
+                &>div:first-child {
+                    font-size: 40px;
+                    color: #262626;
+                    margin-right: 8px;
+                }
+
+                &>div:last-child {
+                    flex: 1;
+                    font-family: HYT;
+                    font-weight: bold;
+                    font-size: 20px;
+                    color: #383838;
+                }
+
+                &:hover {
+                    border: 1px solid #007bff;
+                }
+            }
+        }
+
+        &>.ModelCodeTITLE {
+            flex: 1;
+            font-family: ShuHeiTi;
+            font-weight: bold;
+            font-size: 24px;
+            color: #262626;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+
+        }
     }
 
     &>.Right {
@@ -221,14 +283,37 @@
                 border-radius: 8px;
                 padding: 8px;
                 background: rgba(255, 0, 0, 0.15);
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+
+                &>button {
+                    margin-top: 16px;
+                }
             }
 
             &.Options {
-                height: 120px;
+                height: 88px;
                 padding: 8px;
                 border-radius: 8px;
                 border: 1px solid #ccc;
+                display: flex;
+                align-items: flex-end;
+                justify-content: space-between;
+                flex-direction: column;
 
+                &>.ant-select {
+                    width: 100%;
+                }
+
+                &>div {
+                    &>button {
+                        margin-left: 16px;
+                    }
+                }
             }
         }
     }

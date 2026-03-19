@@ -2,7 +2,7 @@ import './OptionsModel.scss'
 import { v4 } from 'uuid'
 import { Sortable } from 'devextreme-react/sortable'
 import { useState, useCallback, useEffect } from 'react'
-import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton } from "antd"
+import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select } from "antd"
 import { TreeList, SearchPanel, HeaderFilter, Selection } from 'devextreme-react/tree-list'
 import { DataGrid, Scrolling, FilterRow, Column, Paging } from 'devextreme-react/data-grid'
 
@@ -11,6 +11,7 @@ import { useEventEmitter, useMount } from 'ahooks'
 import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
 import { MappingData } from '../../Config/MappingData'
+import { ICONMapping } from '../../Config/IconMapping'
 import { axios, strOfurlParamsFunc } from '../../Utils/Api'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
 import { addAttr, AssemblySort, replaceNodeById } from '../../Utils'
@@ -24,11 +25,14 @@ import {
     AttachTemplateA01
 } from '../../Temp/DevTemplate'
 import { SwiperB20Template } from '../../Temp/SwiperTemplate'
+import { HappyProvider } from '@ant-design/happy-work-theme';
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm';
 
 const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
 
 const OptionsModel = ({ data, Event }) => {
-    const { updateModel, updateModel5 } = modelStore()
+    const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { message, modal, notification } = App.useApp()
     const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial } = data
     // 类型赋值
@@ -724,10 +728,23 @@ const OptionsModel = ({ data, Event }) => {
         return (<SwiperB20Template data={data} />)
     }
     if (type === 'B1607') {
+        const handleData = (e) => {
+            const parsedData = JSON.parse(e.data)
+            const content = parsedData.content
+            return content
+        };
+        const TitleMapping = { A01: '对比合同', A02: '审核模板', A03: '提取模板' }
+        const OptionsEvent = useEventEmitter()
         const { B1067_type, B1067_url, B1067_sse } = data
         const [{ url }] = Initial[B1067_url]
+        const { tableName } = Initial
+        const [ModelList, setModelList] = useState([])
+        const [ModelCode, setModelCode] = useState()
+        const [SelectValue, setSelectValue] = useState()
+        const [Options, setOptions] = useState([])
+        const [ButtonStatus, setButtonStatus] = useState({ disabled: true, loading: false })
 
-        const [ModelList, setModelList] = useState()
+        const [Result, setResult] = useState('')
 
         const getModel = async () => {
             const [err, res] = await axios({ method: 'get', url: 'menuDictionary', params: { MenuDictionaryTypeUuid: '9b3e80b7-1d76-4bd0-9f33-a4a726e56d36' } })
@@ -735,35 +752,195 @@ const OptionsModel = ({ data, Event }) => {
             setModelList(res.data.list)
         }
 
+        const onOpenContract = (url, type) => {
+            const obj = {
+                type: 'CommonModel',
+                Event: OptionsEvent,
+                width: 600,
+                height: '100vh',
+                shading: false,
+                position: { my: 'left ', at: 'left ', of: window },
+                modelData: { openType: 'attDetail', type: 'pdf', url }
+            }
+            type === 'A01' ? updateModel1({ ...obj, title: '合同文件' }) : updateModel2({ ...obj, title: '对比合同' })
+        }
+        const getA01Options = async () => {
+            const [err, res] = await axios({ method: 'GET', url: 'contractTemplate', params: { pageIndex: 1, pageSize: 10000 } })
+            if (err) return console.log('获取对比合同失败')
+            setOptions(res.data.list)
+        }
+        const getA02Options = async () => {
 
-
-        const onResult = () => {
-            const sseUrl = B1067_sse
-            console.log(sseUrl)
+            const [err, res] = await axios({ method: 'GET', url: 'contractReview/GetContractReviewRulesListByRules', params: { organizationUuid: ORGUUID } })
+            if (err) return console.log('获取审核模板失败')
+            const options = res.data.list.map(item => ({ uuid: item.tablename, tableName: item.tablename }))
+            setOptions(options)
         }
 
+        const onSelect = (e) => {
+            setSelectValue(e)
+            setButtonStatus({ disabled: false, loading: false })
+        }
 
+        const onSelectModel = (e) => {
+            setButtonStatus({ disabled: false, loading: true })
+            const { code, tableName } = e
+            setModelCode(tableName)
+
+            if (B1067_type === 'A01') {
+                const { contractAttachment } = Options.find(v => v.uuid === SelectValue)
+                const [{ url: tgDocxUrl }] = contractAttachment
+                const acDocx = tgDocxUrl.replace(/.pdf/, '.docx')
+                const tgDocx = url.replace(/.pdf/, '.docx')
+                const params = `${B1067_sse}?template_contract_file_url=${acDocx}&target_contract_file_url=${tgDocx}&model=${code}`
+                var eventSource = new EventSource(params)
+                eventSource.onopen = e => { console.log('开始解析') }
+                // eventSource.onmessage = e =>  init.Result = `${init.Result}${handleData(e)}`
+                eventSource.onmessage = e => setResult(data => (data + handleData(e)))
+                eventSource.onerror = (e) => {
+                    eventSource.close()
+                    message.error('解析失败!')
+                    setButtonStatus({ disabled: false, loading: false })
+                }
+                eventSource.addEventListener('completed', (event) => {
+                    eventSource.close()
+                    message.success('解析完成!')
+                    setButtonStatus({ disabled: false, loading: false })
+                })
+            }
+            if (B1067_type === 'A02') {
+                const tgDocx = url.replace(/.pdf/, '.docx')
+                var eventSource = new EventSource(`${B1067_sse}?file_url=${tgDocx}&prompt_str=${SelectValue.join(',')}&model=${code}`)
+                eventSource.onopen = e => { console.log('开始解析') }
+                eventSource.onmessage = e => setResult(data => (data + handleData(e)))
+                eventSource.onerror = (e) => {
+                    eventSource.close()
+                    message.error('解析失败!')
+                    setButtonStatus({ disabled: false, loading: false })
+                }
+                eventSource.addEventListener('completed', (event) => {
+                    eventSource.close()
+                    message.success('解析完成!')
+                    setButtonStatus({ disabled: false, loading: false })
+                })
+            }
+            if (B1067_type === 'A03') {
+                const tgDocx = url.replace(/.pdf/, '.docx')
+                var eventSource = new EventSource(`${B1067_sse}?file_url=${tgDocx}&prompt_str=${SelectValue.join(',')}&model=${code}`)
+                eventSource.onopen = e => { console.log('开始解析') }
+                eventSource.onmessage = e => setResult(data => (data + handleData(e)))
+                eventSource.onerror = (e) => {
+                    eventSource.close()
+                    message.error('解析失败!')
+                    setButtonStatus({ disabled: false, loading: false })
+                }
+                eventSource.addEventListener('completed', (event) => {
+                    eventSource.close()
+                    message.success('解析完成!')
+                    setButtonStatus({ disabled: false, loading: false })
+                })
+            }
+        }
 
         useEffect(() => {
-            console.log(B1067_type)
-
             getModel()
-
-
+            if (B1067_type === 'A01') getA01Options()
+            if (B1067_type === 'A02') getA02Options()
+            if (B1067_type === 'A03') getA02Options()
         }, [B1067_type])
 
 
         return (
             <div className='OptionsModelB1607'>
                 <div className='Left'>
-                    文件和已选模板
+                    <div className='selected'>
+                        <div>合同文件</div>
+                        <div onClick={() => onOpenContract(url, 'A01')}>
+                            <div>{ICONMapping['fasFileWord']}</div>
+                            <div>{tableName}</div>
+                        </div>
+                    </div>
+                    <div className='selected'>
+                        <div>{TitleMapping[B1067_type]}</div>
+                        {(() => {
+                            if (B1067_type === 'A01') {
+                                if (SelectValue) {
+                                    const item = Options.find(v => v.uuid === SelectValue)
+                                    const { tableName, contractAttachment } = item
+                                    const [{ url }] = contractAttachment
+                                    return (
+                                        <div onClick={() => onOpenContract(url, 'A02')}>
+                                            <div>{ICONMapping['fasFileWord']}</div>
+                                            <div>{tableName}</div>
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div>
+                                            <div>{ICONMapping['farFileExcel']}</div>
+                                            <div>请选择对比合同</div>
+                                        </div>
+                                    )
+                                }
+                            }
+                            if (B1067_type === 'A02' || B1067_type === 'A03') {
+                                if (SelectValue && SelectValue.length !== 0) {
+                                    const text = SelectValue.join('、')
+                                    return (
+                                        <div >
+                                            <div>{ICONMapping['fasFileAlt']}</div>
+                                            <div>{text}</div>
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div>
+                                            <div>{ICONMapping['farFileExcel']}</div>
+                                            <div>请选择模板</div>
+                                        </div>
+                                    )
+                                }
+                            }
+                        })()}
+                    </div>
+                    {ModelCode && <div className='ModelCodeTITLE'>{ModelCode} {ButtonStatus.loading ? '解析中...' : '解析完成'}</div>}
                 </div>
                 <div className='Right'>
                     <div className='Content'>
-
+                        <DevScrollView>
+                            <div className='text'>
+                                <ReactMarkdown remarkPlugins={[[remarkGfm, { singleTilde: true }]]}  >
+                                    {Result}
+                                </ReactMarkdown>
+                            </div>
+                        </DevScrollView>
+                        {true && <Button type='primary'>保存分析结果</Button>}
                     </div>
                     <div className='Options'>
-
+                        <Select
+                            mode={B1067_type === 'A01' ? false : 'multiple'}
+                            placement='topLeft'
+                            disabled={ButtonStatus.loading}
+                            options={Options}
+                            variant="underlined"
+                            placeholder={`请选择${TitleMapping[B1067_type]}`}
+                            fieldNames={{ label: 'tableName', value: 'uuid' }}
+                            onChange={onSelect}
+                        />
+                        <div>
+                            {ModelList.map(v => (
+                                <HappyProvider key={v.uuid}>
+                                    <Button
+                                        type='primary'
+                                        disabled={ButtonStatus.disabled}
+                                        loading={ButtonStatus.loading}
+                                        onClick={() => onSelectModel(v)}
+                                    >
+                                        {v.tableName}
+                                    </Button>
+                                </HappyProvider>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
