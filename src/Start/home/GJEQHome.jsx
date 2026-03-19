@@ -9,6 +9,7 @@ import { axios, axiosFor } from '../../Utils/Api'
 import { GetIndexedDB } from '../../Utils/IndexedDB'
 import { ICONMapping } from '../../Config/IconMapping'
 import { DevScrollView } from '../../Temp/DevTemplate'
+import TempMap from '../temp/TempMap'
 
 
 
@@ -118,9 +119,11 @@ const GJEQHome = () => {
             }
         })
     }
-
     return (
         <div className="GJEQHome">
+            <div className='Map'>
+                <TempMap uuid='4ffc55ba-5f56-4f40-bb1e-82846f024faf' />
+            </div>
             <div className='Box Left '>
                 <img src={imageUrl + 'IndexLeft.png'} alt="" />
                 <div className='LeftTitle'>工建智慧建造平台介绍</div>

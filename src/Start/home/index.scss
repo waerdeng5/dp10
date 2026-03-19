@@ -25,6 +25,16 @@
     position: relative;
     z-index: 1;
 
+    &>.Map {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+
     &>.Box {
         width: 625px;
         height: 100%;

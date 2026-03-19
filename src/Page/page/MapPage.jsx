@@ -21,23 +21,13 @@ import {
 } from '@ant-design/icons'
 
 import { InitMap } from '../../Mars3d'
-
-import { axios, axiosFor } from '../../Utils/Api'
-import FormTemplate from '../../Utils/FormTemplate'
+import { axiosFor } from '../../Utils/Api'
 import { sceneParameter } from '../../Mars3d/initData'
-import { ICONMapping } from '../../Config/IconMapping'
 import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
-import { Mars3dFormConfig } from '../../Config/Mars3dForm'
-
-
 import { isEmptyObject } from '../../Utils'
-import { DevScrollView } from '../../Temp/DevTemplate'
 import { modelStore } from '../../Router/zustand'
 
-
-
 const { port } = window.location
-
 
 const optionsBtnList = [
     { uuid: 1, label: '场景设置', icon: <GlobalOutlined /> },
@@ -49,7 +39,6 @@ const optionsBtnList = [
     { uuid: 7, label: '保存数据', icon: <SaveOutlined /> },
 ]
 
-
 const MapPage = ({ data, AdminEvent }) => {
     const { message, notification } = App.useApp()
     const { modelConfig, updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
@@ -57,12 +46,10 @@ const MapPage = ({ data, AdminEvent }) => {
     const mapBox = useRef()
     const [STATUS, setSTATUS] = useState({ loading: true, config: true })
     const [MpaPar, setMpaPar] = useState({ map: null, gra: null, clip: null })
-
     const MapEvent = useEventEmitter()
     const [MapConfig, setMapConfig] = useState({})
     const [ELEConfig, setELEConfig] = useState([])
     const [TILConfig, setTILConfig] = useState([])
-
     const getMapData = async () => {
         const apiList = [
             { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}` } },
