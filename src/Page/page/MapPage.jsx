@@ -206,7 +206,6 @@ const MapPage = ({ data, AdminEvent }) => {
         func?.(data)
     }
 
-
     MapEvent.useSubscription(mapCallBack)
 
     useEffect(() => { getMapData() }, [data])

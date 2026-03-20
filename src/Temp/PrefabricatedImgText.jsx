@@ -1,12 +1,14 @@
 import './Prefabricated.scss'
 import { useEffect, useState } from 'react'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, TemplateClickFn } from '../Utils'
+import { useTemplateModel } from '../Config/useHooks'
 
 const temporaryDataA01 = {
     A01: getRandomInt(1, 1000),
 }
 
 const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const [Data, setData] = useState()
 
     const { api_urlName, api_urlLevel, api_urlMapping,
@@ -20,11 +22,8 @@ const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
         data_position, data_top, data_btm, data_mapping, data_padding, data_text,
         data_align_content, data_align_items, data_flex_direction, data_flex_wrap, data_justify_content,
         data_color, data_deg, data_family, data_size, data_style, data_weight,
-        data_filed, data_filed_color, data_filed_data,
-
-        ...item
+        data_filed, data_filed_color, data_filed_data, click_status
     } = data
-
 
     const imgStyle = {
         padding: SpacingCallBack(img_padding),
@@ -75,13 +74,17 @@ const PrefabricatedImgText = ({ tempId, UrlData, data, LayoutEvent }) => {
 
 
     return (
-        <div className='PrefabricatedImgText'>
+        <div
+            className='PrefabricatedImgText'
+            style={{ cursor: click_status ? 'pointer' : 'auto' }}
+            onClick={(e) => click_status && TemplateClickFn(e, data, Data, LayoutEvent, openModel)}
+        >
             {render_img && <img className='img' style={imgStyle} src={img_url} alt={img_url} />}
             {render_title && <div className='title' style={titleStyle}>{title_text}</div>}
             {render_data && <div className='data' style={dataStyle}>{Data?.[data_text] || ''}</div>}
         </div>
-    );
-};
+    )
+}
 
 export const PrefabricatedImgTextTemplate = {
     PrefabricatedImgText

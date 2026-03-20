@@ -171,8 +171,13 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             if (tree) {
                 if (tree_api_source === 'A02') {
                     const params = strOfurlParamsFunc(tree_api_params)
+
+
+                    console.log('构造组件树', { method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     const [err, res] = await axios({ method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     if (err) return console.error('获取树状结构失败', err)
+
+
                     const treeData = tree_api_level ? getNestedValue(tree_api_mapping || '', res) : res
                     const key = treeData?.[0][tree_key]
                     setTreeData(treeData)
@@ -459,10 +464,12 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                 request={async ({ current, pageSize, treeActive, ...item }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
                     if (data_type === 'A02') {
+
                         if (tree && !treeActive) return false
                         let params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
                         if (tree && treeActive) params[tree_http_params] = treeActive[0]
                         if (row) params = { ...params, ...row }
+                        console.log('构造请求函数', { method: data_api_method, url: data_api_url, path: data_api_https, params })
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res

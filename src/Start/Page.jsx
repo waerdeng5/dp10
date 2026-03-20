@@ -220,7 +220,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     const startCallBack = e => {
         const { type, data } = e
-        console.log()
+        port && console.log('PAGE', e)
         const Mapping = new Map([
             ['onAPIParams', () => onAPIParams(data)],
             ['onWindowParams', () => onWindowParams(data)],

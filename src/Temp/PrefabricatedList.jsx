@@ -8,8 +8,10 @@ import {
     SetFilderParams,
     getRandomInt,
     DiyDataReturn,
-    getNestedValue
+    getNestedValue,
+    TemplateClickFn
 } from '../Utils'
+import { useTemplateModel } from '../Config/useHooks'
 
 
 const temporaryDataA01 = {
@@ -26,6 +28,7 @@ const temporaryDataA01 = {
 }
 
 const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const [Data, setData] = useState()
     const [ItemList, setItemList] = useState([])
 
@@ -120,8 +123,10 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     data_titleColor, data_titleDeg,
                     data_text, data_textDeg,
                     data_unitColor, data_unitDeg,
-                    data_icon_color, data_icon_size
+                    data_icon_color, data_icon_size,
+                    click_status
                 } = v
+
 
                 const backStyle = {
                     background: alone_back ? ColorCallBack(data_back, data_backDeg) : ColorCallBack(back_color, back_deg),
@@ -201,7 +206,12 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                 }
 
                 return (
-                    <div key={i} className='Item' style={itemStyle}>
+                    <div
+                        key={i}
+                        className='Item'
+                        style={{ ...itemStyle, cursor: click_status ? 'pointer' : 'auto' }}
+                        onClick={(e) => click_status && TemplateClickFn(e, v, Data, LayoutEvent, openModel)}
+                    >
                         {item_back && <div className='itemBack' style={backStyle} />}
                         {item_icon === 'img' && <img className='itemImg' style={imgStyle} src={v.data_img} alt={v.data_img} />}
                         {item_icon === 'icon' && <div className='itemIcon' style={iconStyle}>{ICONMapping[v.data_icon || 'farFile']}</div>}

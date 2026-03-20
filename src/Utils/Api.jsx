@@ -98,7 +98,6 @@ const alovaInstance = createAlova({
                     return json
                 }
                 catch (err) {
-                    // console.log('json解析失败', response)
                     throw new Error(err)
                 }
             } else if (contentType.indexOf('text/html') !== -1) {

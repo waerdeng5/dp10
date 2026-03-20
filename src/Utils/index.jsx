@@ -2,7 +2,6 @@ import dayjs from 'dayjs'
 import { GetIndexedDB, IndexedDBClear, PutIndexedDB } from './IndexedDB'
 import _ from 'lodash'
 
-
 // TODO 判断浏览器版本
 export const judgeBrowserVersion = () => {
     const browserVersions = { Chrome: 93, Safari: 530, Firefox: 92, Opera: 80 }
@@ -766,36 +765,51 @@ export const DiyDataReturn = (data, apiData, backData, diyKey) => {
 
 // TODO 组装弹出层的数据
 export const AssemblyModelData = (data, row, Event) => {
-    const { model_uuid, model_start, model_title, model_width, model_height, model_params, model_config } = data
-    const rowData = model_params ? model_config.reduce((acc, item) => {
+    const { click_model_uuid, click_model_start, click_model_title, click_model_width, click_model_height, click_model_params, click_model_config } = data
+    const rowData = click_model_params ? click_model_config.reduce((acc, item) => {
         acc[item.param_key] = item.param_type === 'diys' ? item.param_value : row[item.param_value]
         return acc
     }, {}) : {}
 
     return ({
-        title: model_title,
+        title: click_model_title,
         type: 'LayoutModel',
-        isStart: model_start,
-        width: model_width,
-        height: model_height,
+        isStart: click_model_start,
+        width: click_model_width,
+        height: click_model_height,
         Event: Event,
-        modelData: { json: model_uuid, row: rowData }
+        modelData: { json: click_model_uuid, row: rowData }
     })
 }
 
 // TODO 组件跳转设置
 export const AssemblyNavTo = (data, row, Event) => {
-    if (data.navTo_type === 'int') {
-        const { navTo_int_router, navTo_int_params } = data
-        Event.emit({ type: 'setInternalRouting', data: `${navTo_int_router}${navTo_int_params}` })
+    if (data.click_navTo_type === 'int') {
+        const { click_navTo_int_router, click_navTo_int_params } = data
+        Event.emit({ type: 'setInternalRouting', data: `${click_navTo_int_router}${click_navTo_int_params}` })
     }
-    if (data.navTo_type === 'ext') {
-        const { navTo_ext_type, navTo_ext_url, navTo_ext_value, navTo_ext_field } = data
-        const url = navTo_ext_type === 'field' ? row[navTo_ext_url] : navTo_ext_url
-        const params = navTo_ext_value ? `?${navTo_ext_field}=${row[navTo_ext_value]}` : ''
-        window.open(`${row[navTo_ext_url]}?${url}=${params}`)
+    if (data.click_navTo_type === 'ext') {
+        const { click_navTo_ext_type, click_navTo_ext_url, click_navTo_ext_value, click_navTo_ext_field } = data
+        const url = click_navTo_ext_type === 'field' ? row[click_navTo_ext_url] : click_navTo_ext_url
+        const params = click_navTo_ext_value ? `?${click_navTo_ext_field}=${row[click_navTo_ext_value]}` : ''
+        window.open(`${row[click_navTo_ext_url]}?${url}=${params}`)
     }
 }
+
+
+export const TemplateClickFn = (e, v, row, Event, openModel) => {
+    e.stopPropagation()
+    const { click_type, click_model_level } = v
+    if (click_type === 'model') {
+        const modelData = AssemblyModelData(v, row, Event)
+        openModel[click_model_level](modelData)
+    }
+    if (click_type === 'navTo') {
+        AssemblyNavTo(v, row, Event)
+    }
+}
+
+
 
 // TODO _.set 设置赋值路径
 export const getPathArray = (data) => {

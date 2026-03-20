@@ -1,6 +1,6 @@
 import './Prefabricated.scss'
 import { useEffect, useState, Fragment } from 'react'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, AssemblyModelData, AssemblyNavTo } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, AssemblyModelData, AssemblyNavTo, TemplateClickFn } from '../Utils'
 
 import { useTemplateModel } from '../Config/useHooks'
 
@@ -17,7 +17,8 @@ const temporaryDataA01 = {
     A10: getRandomInt(1, 1000),
 }
 
-const SoldNumber = ({ template, data, list }) => {
+const SoldNumber = ({ template, data, list, Event }) => {
+    const openModel = useTemplateModel()
     const parts = template.split(/(\$\{[^}]+\})/)
     return (
         <>
@@ -27,10 +28,13 @@ const SoldNumber = ({ template, data, list }) => {
                     const key = match[1];
                     const hasA01 = list.some(v => v.data_key === key)
                     if (hasA01) {
+                        const obj = list.find(v => v.data_key === key)
                         const { data_margin, data_color, data_deg, data_size, data_family, data_weight, data_style, data_value,
-                            data_filed, data_filed_color, data_filed_data
-                        } = list.find(v => v.data_key === key)
+                            data_filed, data_filed_color, data_filed_data, click_status
+                        } = obj
+
                         const numberStyle = {
+                            cursor: click_status ? 'pointer' : 'auto',
                             margin: SpacingCallBack(data_margin),
                             '--titleColor': ColorCallBack(data_color, data_deg),
                             fontSize: data_size,
@@ -39,7 +43,16 @@ const SoldNumber = ({ template, data, list }) => {
                             fontStyle: data_style,
                             filter: SetFilderParams(data_filed, data_filed_color, data_filed_data),
                         }
-                        return <div className='textNumber' key={index} style={numberStyle}>{data?.[data_value] || 0}</div>
+                        return (
+                            <div
+                                className='textNumber'
+                                key={index}
+                                style={numberStyle}
+                                onClick={e => click_status && TemplateClickFn(e, obj, data, Event, openModel)}
+                            >
+                                {data?.[data_value] || 0}
+                            </div>
+                        )
                     } else return <div key={index} style={{ fontSize: 40, fontFamily: "DIN", margin: '0 4px' }}> 0 </div>
                 }
                 return <Fragment key={index}>{part}</Fragment>;
@@ -52,7 +65,6 @@ const SoldNumber = ({ template, data, list }) => {
 const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     const openModel = useTemplateModel()
     const [Data, setData] = useState()
-
     const {
         left_img, left_img_url, left_img_width, left_img_height, left_img_margin,
         right_img, right_img_url, right_img_width, right_img_height, right_img_margin,
@@ -60,7 +72,6 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
         center_align_content, center_align_items, center_flex_direction, center_flex_wrap, center_justify_content,
         text_list, data_list,
     } = data
-
 
     const leftImgStyle = {
         width: left_img_width,
@@ -97,18 +108,7 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     }, [UrlData, data])
 
 
-    const onClick = (e, v, row) => {
-        e.stopPropagation()
-        const { click_type, model_level } = v
 
-        if (click_type === 'model') {
-            const modelData = AssemblyModelData(v, row, LayoutEvent)
-            openModel[model_level](modelData)
-        }
-        if (click_type === 'navTo') {
-            AssemblyNavTo(v, row, LayoutEvent)
-        }
-    }
 
 
     return (
@@ -116,8 +116,8 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
             {left_img && <img src={left_img_url} style={leftImgStyle} alt="left_img_url" />}
             <div className='centerBox' style={centerStyle}>
                 {text_list?.map((v, i) => {
-                    const { text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color, text_margin,
-                        click_status
+                    const { text_color, text_deg, text_size, text_family, text_weight, text_style, text_filed, text_filed_data, text_filed_color,
+                        text_margin, click_status
                     } = v
                     const textStyle = {
                         cursor: click_status ? 'pointer' : 'auto',
@@ -129,11 +129,9 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
                         fontStyle: text_style,
                         filter: SetFilderParams(text_filed, text_filed_data, text_filed_color),
                     }
-
-
                     return (
-                        <div key={i} style={textStyle} className='textItem' onClick={(e) => onClick(e, v)}>
-                            <SoldNumber template={v.text} data={Data} list={data_list} />
+                        <div key={i} style={textStyle} className='textItem' onClick={(e) => click_status && TemplateClickFn(e, v, Data, LayoutEvent, openModel)}>
+                            <SoldNumber template={v.text} data={Data} list={data_list} Event={LayoutEvent} />
                         </div>
                     )
                 })}

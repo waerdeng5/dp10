@@ -1215,8 +1215,6 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         return defaultDataA01
     }
     if (dataSourceType === 'A02') {
-
-
         const { data_apiName, dataType, data_apiLevel, data_apiData, data_apiArr } = data
         if (isEmptyObject(UrlData) || !UrlData[data_apiName]) {
             console.log('未获取到接口数据')
@@ -1229,7 +1227,7 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         }
         if (dataType === 'A03') {
             const mapping = data_apiArr?.flatMap(item =>
-                apiData?.map(v => ({ xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+                apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
             )
             return mapping || []
         }
@@ -1310,7 +1308,18 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
     }
     useEffect(() => { SetSpecFn(dataSourceTypeFn('bar', data, UrlData)) }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
-    if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
+    if (Spec) return (
+        <VChart
+            spec={Spec}
+            ref={chartRef}
+            className='ChartsClass'
+            options={optionsData}
+            onClickFilter={{ level: 'mark' }}
+            onClick={e => {
+                console.log(e.datum)
+            }}
+        />
+    )
 };
 // Histogram 直方图
 const PrefabricatedChartHistogram = ({ tempId, data, UrlData, LayoutEvent }) => {
