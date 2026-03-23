@@ -1259,7 +1259,10 @@ const PrefabricatedChartLine = ({ tempId, data, UrlData, LayoutEvent }) => {
     }
     useEffect(() => { SetSpecFn(dataSourceTypeFn('line', data, UrlData)) }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
-    if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
+    if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} onClickFilter={{ level: 'mark' }}
+        onClick={e => {
+            console.log(e.datum)
+        }} />
 }
 // Area 面积图
 const PrefabricatedChartArea = ({ tempId, data, UrlData, LayoutEvent }) => {
