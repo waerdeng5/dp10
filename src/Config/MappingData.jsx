@@ -363,7 +363,6 @@ export const MappingData = {
         { value: 'A06', label: '导出数据' },
         { value: 'A07', label: '批量操作' },
         { value: 'A08', label: '弹出窗口' },
-        { value: 'A12', label: '执行接口' },
         {
             value: 'A09',
             label: 'OLAP操作',
@@ -379,7 +378,7 @@ export const MappingData = {
             children: [
                 { value: 'A1001', label: '菜单排序' },
                 { value: 'A1002', label: '小程序菜单排序' },
-                { value: 'A1103', label: '小程序基础' },
+                { value: 'A1103', label: '小程序设置' },
             ]
         },
         {
@@ -389,6 +388,8 @@ export const MappingData = {
                 { value: 'A1101', label: '题目解析' },
             ]
         },
+        { value: 'A12', label: '执行接口' },
+        { value: 'A13', label: '站内路由' },
     ],
 
     System__RowOptionsType: [

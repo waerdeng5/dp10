@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import { v4 } from 'uuid'
 import { jsPDF } from 'jspdf'
 import { Workbook } from 'exceljs'
 import { useEventEmitter, useMount } from 'ahooks'
@@ -145,6 +146,8 @@ export const DevExtremeHeader = (props) => {
     const { message, modal, notification } = App.useApp()
     const { targetUrl } = data
     const { updateModel, updateModel5 } = modelStore()
+    const { pageActive, pageList, updateActive, updateList } = pageStore()
+    const pageFunc = { pageActive, pageList, updateActive, updateList }
     const [SortData, setSortData] = useState()
     const [SearchData, setSearchData] = useState()
     const [SelectedRowKeys, setSelectedRowKeys] = useState([])
@@ -260,6 +263,16 @@ export const DevExtremeHeader = (props) => {
         }
     }
 
+    const A13Func = async (data) => {
+        const { body_tabsMax } = await GetIndexedDB('theme')
+        const [{ children: menu }] = await GetIndexedDB('menu')
+        const { A13_uuid, A13_url, A13_type, A13_title, A13_Icon } = data
+        const { uuid: towUuid } = treeValue(menu, A13_url, 'targetUrl')
+        const title = A13_title
+        const obj = { uuid: A13_uuid, towUuid, tableName: title, type: A13_type, targetUrl: A13_url, icon: A13_Icon }
+        OpenMenuFunc(A13_uuid, pageFunc, body_tabsMax, obj)
+    }
+
     const onClick = (item) => {
         const { type } = item
         const Mapping = new Map([
@@ -277,6 +290,7 @@ export const DevExtremeHeader = (props) => {
             ['A1002', () => A1002Func(item)],
             ['A1101', () => A1101Func(item)],
             ['A12', () => A12Func(item)],
+            ['A13', () => A13Func(item)],
         ])
         const func = Mapping.get(type)
         func?.(item)
@@ -615,6 +629,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
 // 行内信息
 export const DevExtremeRow = (props) => {
     const { pageActive, pageList, updateActive, updateList } = pageStore()
+    const pageFunc = { pageActive, pageList, updateActive, updateList }
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { data, POWER, APIdata, THEdata, OPTdata, ORGUUID, OTHUUID, DEVEvent } = props
     const { row_show, ...style } = THEdata.style
@@ -623,7 +638,6 @@ export const DevExtremeRow = (props) => {
     const uuidSet = new Set(POWER)
     const filteredArray = row.filter(item => uuidSet.has(item.uuid) && item.showOptions !== 'hid' && item.showOptions !== 'pop')
     const modelFunc = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
-    const pageFunc = { pageActive, pageList, updateActive, updateList }
     const { row_width, row_minWidth, row_alignment, row_allowReordering, row_allowResizing, row_caption, row_fixed, row_fixedPosition } = style
     const { row_icon, row_itemMargin, row_fontSize, row_fontFamily, row_fontStyle, row_fontWeight, row_fontShadowX, row_fontShadowY, row_fontShadowS, row_fontShadowC } = style
     const columnData = {

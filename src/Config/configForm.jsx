@@ -2244,6 +2244,19 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'modelText', label: '弹窗描述', jugde: [{ field: 'isModel', value: [true] }] },
         ]
     },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_13', label: '站内路由',
+        jugde: [{ field: 'type', value: ['A13'] }],
+        children: [
+            { span: 24, formType: 'TempGenerateUuid', name: 'A13_uuid', label: '生成ID', rules: true },
+            { span: 24, formType: 'INPUT', name: 'A13_url', label: '菜单路由', rules: true },
+            { span: 24, formType: 'SELECT', name: 'A13_type', label: '页面类型', rules: true, valueEnum: MappingData.System__MenuType },
+            { span: 24, formType: 'INPUT', name: 'A13_title', label: '菜单标题', rules: true },
+            { span: 24, formType: 'TempICON', name: 'A13_Icon', label: '页面图标' },
+        ]
+    },
+
+
 ]
 
 // *** 添加局部操作
