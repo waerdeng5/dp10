@@ -240,7 +240,7 @@ export const MappingData = {
     ],
     System__WeChatType: [
         { value: 'menu', label: '菜单' },
-        { value: 'btn', label: '按钮' },
+        { value: 'power', label: '权限' },
     ],
     System__FileType: [
         { value: 'img', label: '图片文件' },
@@ -1581,6 +1581,25 @@ export const MappingData = {
         { value: 'rounded', label: '圆角' },
         { value: 'rotundity', label: '圆形' },
     ],
+
+
+    // !!! 小程序配置项
+    WeChat_navigationStyle: [
+        { value: 'default', label: '默认样式' },
+        { value: 'custom', label: '胶囊样式' },
+    ],
+    WeChat_navigationBarTextStyle: [
+        { value: 'black', label: '黑色' },
+        { value: 'white', label: '白色' },
+    ],
+    WeChat_loginTemp: [
+        { value: 'A01', label: '一号版' },
+        { value: 'A02', label: '二号版' },
+        { value: 'A03', label: '三号版' },
+        { value: 'A04', label: '四号版' },
+    ],
+
+
 
     // !!! 地图设置
     Mars3d__fileType: [
