@@ -11,6 +11,7 @@ export const CommonSceneUrl = {
     tiles: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/tiles/',
 }
 export const CommonUrl = 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Common/'
+export const CommonWeChatUrl = 'https://image.ljkjkf.com/intellisiteSystem_TieKe/WeChat/Admin01'
 
 export const UserAvatar = {
     AvatarA01: `${CommonUrl}images/Avatar/AvatarA01.webp`,

@@ -1060,7 +1060,7 @@ const TempICON = ({ data }) => {
                 rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 placeholder={`请选择${label}`}
                 request={() => {
-                    return Object.keys(ICONMapping).map(item => ({ value: item, label: ICONMapping[item], emoji: item }))
+                    return Object.keys(ICONMapping).map(item => ({ value: item, label: ICONMapping[item] }))
                 }}
             />
         </div>

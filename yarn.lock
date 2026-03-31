@@ -311,7 +311,7 @@
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.28.4.tgz#a70226016fabe25c5783b2f22d3e1c9bc5ca3326"
   integrity sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==
 
-"@babel/runtime@^7.15.4":
+"@babel/runtime@^7.15.4", "@babel/runtime@^7.16.5":
   version "7.29.2"
   resolved "https://registry.npmmirror.com/@babel/runtime/-/runtime-7.29.2.tgz#9a6e2d05f4b6692e1801cd4fb176ad823930ed5e"
   integrity sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==
@@ -7158,6 +7158,14 @@ tar-stream@^2.2.0:
     fs-constants "^1.0.0"
     inherits "^2.0.3"
     readable-stream "^3.1.1"
+
+tdesign-icons-react@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.npmmirror.com/tdesign-icons-react/-/tdesign-icons-react-0.6.2.tgz#042be3d1b1665d595a67a5a9c0edf2283a1ab196"
+  integrity sha512-RBaGtgM58Doly/+4Le20scP6WrNCdC/5BRrnWjNfno3Lc/i7chaHItIu5Otuly4I7m0LbTFinQ4yt+0isGybAw==
+  dependencies:
+    "@babel/runtime" "^7.16.5"
+    classnames "^2.2.6"
 
 text-encoding@^0.6.4:
   version "0.6.4"

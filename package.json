@@ -41,6 +41,7 @@
     "remark-gfm": "^4.0.1",
     "sass": "^1.93.2",
     "swiper": "^12.0.3",
+    "tdesign-icons-react": "^0.6.2",
     "uuid": "^13.0.0",
     "vite-plugin-mars3d": "^4.2.2",
     "zustand": "^5.0.8"
