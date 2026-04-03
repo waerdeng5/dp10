@@ -16,6 +16,7 @@ import FormTemplate from '../../Utils/FormTemplate'
 import { WeChatFormConfig } from '../../Config/wechatForm'
 
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
+import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
 
 
 
@@ -43,14 +44,29 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
     const [Date, setDate] = useState(dayjs().format('HH:mm'))
     const clearInterval = useInterval(() => setDate(dayjs().format('HH:mm')), 30000)
     useEffect(() => { return () => { clearInterval() } }, [])
-    const { navigationStyle, headerBack, headerTitle, headerBackground, headerColor } = data[page]
-    const topStyle = {
-        background: headerBackground,
-        color: headerColor,
+    const { navigationStyle,
+        header_back, header_backDeg, header_color, header_deg, header_size, header_famity,
+        header_text, header_weight, header_style, header_filed, header_filed_size, header_filed_color,
+        header_icon_backColor, header_icon_size, header_capsule_back, header_capsule_border, header_icon_homeColor, header_icon_homeSize,
+        header_searchIcon_color, header_searchIcon_size, header_clearIcon_color, header_clearIcon_size,
+        header_input_back, header_input_border, header_input_height, header_input_radius,
+        header_input_size, header_input_color, header_input_famity, header_input_weight, header_input_style,
+        header_image_width, header_image_height, header_image_filed, header_image_size, header_image_color
+    } = data[page]
+
+    const topStyle = { background: ColorCallBack(header_back, header_backDeg) }
+    const titleStyle = {
+        '--titleColor': ColorCallBack(header_color, header_deg),
+        fontSize: `${header_size}px`,
+        fontFamily: header_famity,
+        fontWeight: header_weight,
+        fontStyle: header_style,
+        filter: SetFilderParams(header_filed, header_filed_size, header_filed_color)
     }
+
     return (
         <>
-            <div className='sysTop' style={navigationStyle === 'default' ? topStyle : {}}>
+            <div className='sysTop' >
                 <div>{Date}</div>
                 <div />
                 <div>{ICONMapping['fasWifi']}{ICONMapping['fasBatteryFull']}</div>
@@ -62,7 +78,35 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
                 {ICONMapping['fasEllipsisH']}
                 {ICONMapping['farDotCircle']}
             </div>
-            {navigationStyle === 'default' && <div className='defaultTop' style={topStyle}>{headerTitle || 'WeChat'}</div>}
+            {navigationStyle === 'A02' &&
+                <div className='sysHeader A02' style={topStyle}>
+                    <div className='title' style={titleStyle}>{header_text}</div>
+                </div>
+            }
+            {navigationStyle === 'A03' &&
+                <div className='sysHeader A03' style={topStyle}>
+                    <div className='title' style={titleStyle}>{header_text}</div>
+                </div>}
+            {navigationStyle === 'A04' &&
+                <div className='sysHeader A04' style={topStyle}>
+                    <div className='title' style={titleStyle}>{header_text}</div>
+                </div>
+            }
+            {navigationStyle === 'A05' &&
+                <div className='sysHeader A05' style={topStyle}>
+                    <div className='title' style={titleStyle}>{header_text}</div>
+                </div>
+            }
+            {navigationStyle === 'A06' &&
+                <div className='sysHeader A06' style={topStyle}>
+                    <div style={titleStyle}>各系统头样式A06</div>
+                </div>
+            }
+            {navigationStyle === 'A07' &&
+                <div className='sysHeader A07' style={topStyle}>
+                    <div style={titleStyle}>各系统头样式A07</div>
+                </div>
+            }
         </>
     )
 }
