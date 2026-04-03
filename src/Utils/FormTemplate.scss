@@ -341,7 +341,30 @@
 }
 
 .FormTemplateClass01 {
+    height: 100%;
+    width: 100%;
     padding: 8px;
+    overflow: hidden;
+
+    .ant-spin,
+    .ant-spin-container {
+        height: 100%;
+    }
+
+    .FormScroll {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .dx-button {
+        height: 40px;
+        margin: 16px 16px 0 16px;
+        font-size: 16px;
+    }
 
     .HIDDEN {
         display: none;
@@ -365,10 +388,24 @@
 
     form {
         width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
+        position: relative;
+        z-index: 1;
+
+        &>div:nth-child(2) {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        // &>div:nth-child(2) {
+        //     position: absolute;
+
+        // }
     }
 
     .ant-row {

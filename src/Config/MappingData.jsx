@@ -1585,8 +1585,22 @@ export const MappingData = {
 
     // !!! 小程序配置项
     WeChat_navigationStyle: [
-        { value: 'default', label: '默认样式' },
-        { value: 'custom', label: '胶囊样式' },
+        { value: 'A01', label: '无系统头' },
+        { value: 'A02', label: '正常标头' },
+        { value: 'A05', label: '左侧标头' },
+        { value: 'A03', label: '返回标头' },
+        { value: 'A04', label: '双胶囊头' },
+        { value: 'A06', label: '搜索标头' },
+        { value: 'A07', label: '图片标头' },
+
+        // 无头
+        // 正常标题 
+        // 标题加返回
+        // 双胶囊头
+        // 左标题头
+        // 搜索头
+        // 图片头
+
     ],
     WeChat_navigationBarTextStyle: [
         { value: 'black', label: '黑色' },

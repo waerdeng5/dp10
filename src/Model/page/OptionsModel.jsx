@@ -124,13 +124,8 @@ const OptionsModel = ({ data, Event }) => {
                 setFormItem(formItem)
             })
 
-            if (formItem) {
-                return (
-                    <DevScrollView>
-                        <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} />
-                    </DevScrollView>
-                )
-            } else return <Skeleton active paragraph={{ rows: 16 }} />
+            if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} />
+            else return <Skeleton active paragraph={{ rows: 16 }} />
         }
 
         if (addType === 'excel') {
@@ -171,11 +166,8 @@ const OptionsModel = ({ data, Event }) => {
             }))
             setFormItem(data.filter(v => v).flat())
         })
-        return (
-            <DevScrollView>
-                <FormTemplate formItem={formItem} FORMEVENT={A03Event} Initial={Initial} />
-            </DevScrollView>
-        )
+        return <FormTemplate formItem={formItem} FORMEVENT={A03Event} Initial={Initial} />
+
     }
     // *** 排序
     if (type === 'A04') {
@@ -382,11 +374,7 @@ const OptionsModel = ({ data, Event }) => {
             setFormItem(formItem)
         })
 
-        return (
-            <DevScrollView>
-                <FormTemplate formItem={formItem} FORMEVENT={B02Event} />
-            </DevScrollView>
-        )
+        return (<FormTemplate formItem={formItem} FORMEVENT={B02Event} />)
     }
     // *** 删除
     if (type === 'B03') {
@@ -946,9 +934,6 @@ const OptionsModel = ({ data, Event }) => {
             </div>
         )
     }
-
-
-
 
     return (
         <div className='OptionsModelNone'>

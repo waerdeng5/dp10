@@ -70,15 +70,13 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
 // TODO 表单渲染
 const WeChatForm = ({ page, FormEvent, Initial, LOGIN }) => {
     if (page === 'login' && LOGIN) return (
-        <DevScrollView>
-            <FormTemplate
-                formItem={pageMapping[page].formItem}
-                FORMEVENT={FormEvent}
-                Initial={Initial[page]}
-                NotLoading
-            // detection
-            />
-        </DevScrollView>
+        <FormTemplate
+            formItem={pageMapping[page].formItem}
+            FORMEVENT={FormEvent}
+            Initial={Initial[page]}
+            NotLoading
+        // detection
+        />
     )
 }
 

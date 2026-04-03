@@ -57,6 +57,7 @@ import { ICONMapping } from '../Config/IconMapping'
 import { GetIndexedDB } from '../Utils/IndexedDB'
 
 import { BackGrundTypeConfig } from '../Config/BackGrundType'
+import { DevScrollView } from '../Temp/DevTemplate'
 
 
 const { WinBox } = window
@@ -85,7 +86,7 @@ const formCallBack = e => {
     return traverse(e)
 }
 
-const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack, onFormBack = 'onFormBack' }) => {
+const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack, onFormBack = 'onFormBack', fixed = false }) => {
     const formRef = useRef(null)
     const [loading, setLoading] = useState(false)
 
@@ -159,10 +160,14 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
                         }
                     }}
                 >
-                    {formItem?.map((item) => {
-                        const Template = TemplateMapping[item.formType]
-                        return <Template key={item.name} data={item} form={formRef} init={Initial} />
-                    })}
+                    <DevScrollView>
+                        <div className='FormScroll'>
+                            {formItem?.map((item) => {
+                                const Template = TemplateMapping[item.formType]
+                                return <Template key={item.name} data={item} form={formRef} init={Initial} />
+                            })}
+                        </div>
+                    </DevScrollView>
                 </ProForm>
             </Spin>
         </div>
