@@ -159,9 +159,9 @@ const defaultHeader = [
 
 // TODO 登录页面设置
 const WeChatLoginFormList = [
+    { span: 12, formType: 'RADIO', name: 'wxLogin', label: '直接登录', rules: true, valueEnum: MappingData.IsEnabledBool },
     // 是否显示默认头
     { span: 24, formType: 'RADIO', name: 'navigationStyle', label: '头部样式', rules: true, valueEnum: MappingData.WeChat_navigationStyle },
-    // { span: 12, formType: 'RADIO', name: 'wxLogin', label: '直接登录', rules: true, valueEnum: MappingData.IsEnabledBool },
     ...defaultHeader,
     { span: 24, formType: 'RADIO', name: 'loginTemp', label: '登录页模板', rules: true, valueEnum: MappingData.WeChat_loginTemp },
     // 一号版配置
@@ -177,6 +177,9 @@ const WeChatLoginFormList = [
     {
         span: 24, formType: 'LIST', name: 'loginTemp_A01_Text', label: '一号模板-文字', collapsible: true,
         jugde: [{ field: 'loginTemp', value: ['A01'] }], children: [
+            // 对齐方式 // 内填充
+            { span: 12, formType: 'RADIO', name: 'align', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
             { span: 12, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
             { span: 12, formType: 'NUMBER', name: 'size', label: '文字字号', rules: true, },
             { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, },
@@ -239,19 +242,15 @@ const WeChatLoginFormList = [
             { span: 12, formType: 'COLOR', name: 'filed_color', label: '阴影颜色', rules: true, mode: ['single'], jugde: [{ field: 'filed', value: [true] }] },
         ]
     },
-    { span: 6, formType: 'RADIO', name: 'loginTempA01_formLabel', label: '表单标签', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 6, formType: 'RADIO', name: 'loginTempA01_formIcon', label: '表单图标', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 6, formType: 'RADIO', name: 'loginTempA01_formPwd', label: '切换密码', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 6, formType: 'RADIO', name: 'loginTempA01_formClear', label: '清除按钮', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'loginTempA01_formLabel', label: '表单标签', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'loginTempA01_formIcon', label: '表单图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'loginTempA01_formPwd', label: '切换密码', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
         span: 24, formType: 'GROUP', name: 'loginTemp_A01_05_0', label: '一号模板-输入框', collapsible: true,
         jugde: [{ field: 'loginTemp', value: ['A01'] }], children: [
             { span: 12, formType: 'NUMBER', name: 'loginTempA01_formInput_height', label: '高度', rules: true },
             { span: 12, formType: 'NUMBER', name: 'loginTempA01_formInput_size', label: '文字字号', rules: true },
             { span: 12, formType: 'COLOR', name: 'loginTempA01_formInput_color', label: '文字颜色', rules: true, mode: ['single'] },
-            { span: 12, formType: 'SELECT', name: 'loginTempA01_formInput_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
-            { span: 12, formType: 'RADIO', name: 'loginTempA01_formInput_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-            { span: 12, formType: 'RADIO', name: 'loginTempA01_formInput_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
             { span: 12, formType: 'NUMBER', name: 'loginTempA01_formInput_border', label: '边框宽度', rules: true },
             { span: 12, formType: 'COLOR', name: 'loginTempA01_formInput_fill', label: '边框颜色', rules: true, mode: ['single'] },
 
@@ -304,6 +303,7 @@ const WeChatLoginFormList = [
                 span: 12, formType: 'COLOR', name: 'loginTempA01_btn_remember_color', label: '图标颜色', rules: true, mode: ['single'],
                 jugde: [{ field: 'loginTempA01_btn_remember', value: [true] }]
             },
+
             // 登录按钮设置    
             {
                 span: 24, formType: 'GROUP', name: 'loginTemp_A01_btn_login', label: '登录按钮', collapsible: true,
@@ -372,10 +372,9 @@ const WeChatLoginFormList = [
                     },
                 ]
             },
-            // 微信按钮设置 
             {
                 span: 24, formType: 'GROUP', name: 'loginTemp_A01_btn_weChat', label: '微信按钮', collapsible: true,
-                children: [
+                jugde: [{ field: 'wxLogin', value: [true] }], children: [
                     { span: 12, formType: 'COLOR', name: 'loginTempA01_btnWeChat_back', label: '背景颜色', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'loginTempA01_btnWeChat_backDeg', label: '背景角度', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'loginTempA01_btnWeChat_height', label: '按钮高度', rules: true },

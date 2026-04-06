@@ -17,6 +17,9 @@ import { WeChatFormConfig } from '../../Config/wechatForm'
 
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
+import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons';
+
+
 
 
 
@@ -48,8 +51,8 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
         header_back, header_backDeg, header_color, header_deg, header_size, header_famity,
         header_text, header_weight, header_style, header_filed, header_filed_size, header_filed_color,
         header_icon_backColor, header_icon_size, header_capsule_back, header_capsule_border, header_icon_homeColor, header_icon_homeSize,
-        header_searchIcon_color, header_searchIcon_size, header_clearIcon_color, header_clearIcon_size,
-        header_input_back, header_input_border, header_input_height, header_input_radius,
+        header_searchIcon_color, header_searchIcon_size, header_clearIcon_color, header_clearIcon_size, header_input_placeholder,
+        header_input_back, header_input_border, header_input_height, header_input_radius, header_image_url,
         header_input_size, header_input_color, header_input_famity, header_input_weight, header_input_style,
         header_image_width, header_image_height, header_image_filed, header_image_size, header_image_color
     } = data[page]
@@ -63,6 +66,56 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
         fontStyle: header_style,
         filter: SetFilderParams(header_filed, header_filed_size, header_filed_color)
     }
+
+    const backIcon = {
+        fontSize: header_icon_size,
+        color: header_icon_backColor
+    }
+
+    const capsuleStyle = {
+        background: header_capsule_back,
+        borderColor: header_capsule_border,
+    }
+
+    const homeStyel = {
+        fontSize: header_icon_homeSize,
+        color: header_icon_homeColor,
+    }
+
+    const searchIcon = {
+        fontSize: header_searchIcon_size,
+        color: header_searchIcon_color,
+    }
+
+    const clearIcon = {
+        fontSize: header_clearIcon_size,
+        color: header_clearIcon_color,
+    }
+
+    const searchStyle = {
+        background: header_input_back,
+        borderColor: header_input_border,
+        height: header_input_height,
+        borderRadius: header_input_radius
+    }
+
+    const searchText = {
+        color: header_input_color,
+        fontSize: header_input_size,
+        fontFamily: header_input_famity,
+        fontWeight: header_input_weight,
+        fontStyle: header_input_style,
+        height: header_input_height,
+        lineHeight: header_input_height + 'px',
+    }
+
+    const imageStyle = {
+        width: header_image_width,
+        height: header_image_height,
+        filter: SetFilderParams(header_image_filed, header_image_size, header_image_color)
+    }
+
+
 
     return (
         <>
@@ -85,10 +138,15 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
             }
             {navigationStyle === 'A03' &&
                 <div className='sysHeader A03' style={topStyle}>
+                    <LeftOutlined style={backIcon} />
                     <div className='title' style={titleStyle}>{header_text}</div>
                 </div>}
             {navigationStyle === 'A04' &&
                 <div className='sysHeader A04' style={topStyle}>
+                    <div className='capsule' style={capsuleStyle}>
+                        <LeftOutlined style={backIcon} />
+                        <HomeOutlined style={homeStyel} />
+                    </div>
                     <div className='title' style={titleStyle}>{header_text}</div>
                 </div>
             }
@@ -99,12 +157,16 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
             }
             {navigationStyle === 'A06' &&
                 <div className='sysHeader A06' style={topStyle}>
-                    <div style={titleStyle}>各系统头样式A06</div>
+                    <div className='search' style={searchStyle}>
+                        <SearchOutlined style={searchIcon} />
+                        <div style={searchText}>{header_input_placeholder}</div>
+                        <CloseCircleFilled style={clearIcon} />
+                    </div>
                 </div>
             }
             {navigationStyle === 'A07' &&
                 <div className='sysHeader A07' style={topStyle}>
-                    <div style={titleStyle}>各系统头样式A07</div>
+                    <img className='image' style={imageStyle} src={header_image_url} alt="" />
                 </div>
             }
         </>

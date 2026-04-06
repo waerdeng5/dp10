@@ -156,6 +156,69 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    position: relative;
+                    z-index: 1;
+
+                    &.A03 {
+                        padding-left: 12px;
+
+                        &>span {
+                            position: absolute;
+                        }
+                    }
+
+                    &.A04 {
+                        &>.capsule {
+                            position: absolute;
+                            left: 12px;
+                            width: 88px;
+                            height: 30px;
+                            border-radius: 50px;
+                            border: 1px solid;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            &>span {
+                                flex: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+                        }
+                    }
+
+                    &.A05 {
+                        justify-content: flex-start;
+
+                        &>.title {
+                            margin-left: 12px;
+                        }
+                    }
+
+                    &.A06 {
+                        justify-content: flex-start;
+                        padding-left: 12px;
+
+                        &>.search {
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+                            border: 1px solid;
+                            width: 300px;
+                            padding: 0 12px;
+
+                            &>div {
+                                flex: 1;
+                                padding: 0 8px;
+                            }
+                        }
+                    }
+
+                    &.A07 {
+                        justify-content: flex-start;
+                        padding-left: 12px;
+                    }
 
                     &>.title {
                         background: var(--titleColor);

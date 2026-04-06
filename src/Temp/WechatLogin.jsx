@@ -6,7 +6,8 @@ import { ICONMapping } from '../Config/IconMapping'
 
 export const WechatLoginA01 = ({ data }) => {
 
-    const { wxLogin, loginTemp_A01_Text, loginTempA01_top, loginTempA01_pad, loginTempA01_back, loginTempA01_deg,
+    const { wxLogin,
+        loginTemp_A01_Text, loginTempA01_top, loginTempA01_pad, loginTempA01_back, loginTempA01_deg,
         loginTempA01_img, loginTempA01_imgW, loginTempA01_imgH, loginTempA01_imgP, loginTempA01_imgM,
         loginTempA01_signBack, loginTempA01_signDeg, loginTempA01_signPad, loginTempA01_signMar, loginTempA01_signRaduis,
         loginTempA01_signBorder, loginTempA01_signBorder_size, loginTempA01_signBorder_type, loginTempA01_signBorder_color,
@@ -63,9 +64,6 @@ export const WechatLoginA01 = ({ data }) => {
         height: loginTempA01_formInput_height,
         fontSize: loginTempA01_formInput_size,
         color: loginTempA01_formInput_color,
-        fontFamily: loginTempA01_formInput_famity,
-        fontWeight: loginTempA01_formInput_weight,
-        fontStyle: loginTempA01_formInput_style,
         borderWidth: loginTempA01_formInput_border,
         borderColor: loginTempA01_formInput_fill,
     }
@@ -137,8 +135,12 @@ export const WechatLoginA01 = ({ data }) => {
             <div className='top' style={loginTempA01_top ? { marginTop: 52 } : {}}>
                 <div className='text'>
                     {loginTemp_A01_Text.map((v, i) => {
-                        const { text, size, color, deg, famity, weight, style, filed, filed_size, filed_color } = v
+                        const { text, size, color, deg, famity, weight, style, filed, filed_size, filed_color, align, padding } = v
                         const textStyle = {
+                            margin: SpacingCallBack(padding),
+                            textAlign: align,
+                            height: size,
+                            lineHeight: size + 'px',
                             '--color': ColorCallBack(color, deg),
                             fontSize: size,
                             fontFamily: famity,
@@ -146,6 +148,7 @@ export const WechatLoginA01 = ({ data }) => {
                             fontStyle: style,
                             filter: SetFilderParams(filed, filed_size, filed_color)
                         }
+
                         return (<div key={i} style={textStyle}>{text}</div>)
                     })}
                 </div>
@@ -195,10 +198,12 @@ export const WechatLoginA01 = ({ data }) => {
                         {loginTempA01_btnLogin_icon && <Icon name={loginTempA01_btnLogin_icon_url} style={btnIconStyle} />}
                         <div style={btnTextStyle}>{loginTempA01_btnLogin_text}</div>
                     </div>
-                    <div className='wechatBtn' style={weChatStyle}>
-                        {loginTempA01_btnWeChat_icon && <Icon name={loginTempA01_btnWeChat_icon_url} style={weChatIconStyle} />}
-                        <div style={weChatTextStyle}>{loginTempA01_btnWeChat_text}</div>
-                    </div>
+                    {wxLogin &&
+                        <div className='wechatBtn' style={weChatStyle}>
+                            {loginTempA01_btnWeChat_icon && <Icon name={loginTempA01_btnWeChat_icon_url} style={weChatIconStyle} />}
+                            <div style={weChatTextStyle}>{loginTempA01_btnWeChat_text}</div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
