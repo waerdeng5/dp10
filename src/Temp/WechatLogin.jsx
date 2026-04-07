@@ -1,8 +1,8 @@
 import './WechatLogin.scss'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams } from '../Utils'
-
 import { Icon } from 'tdesign-icons-react';
 import { ICONMapping } from '../Config/IconMapping'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams } from '../Utils'
+
 
 export const WechatLoginA01 = ({ data }) => {
 

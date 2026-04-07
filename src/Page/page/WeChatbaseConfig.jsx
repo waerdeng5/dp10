@@ -16,8 +16,12 @@ import FormTemplate from '../../Utils/FormTemplate'
 import { WeChatFormConfig } from '../../Config/wechatForm'
 
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
+import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
 import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
-import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons';
+import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons'
+
+// 引入首页配置项
+
 
 
 
@@ -27,6 +31,10 @@ const httpPath = 'https://common-api.ljkjkf.com/'
 
 const GetConfig = { method: 'get', url: 'wechats/GetJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate` } }
 const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate`, content: {} } }
+
+const GetHomeConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `WeChat/home` } }
+const PostHomeConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `WeChat/home`, content: {} } }
+
 
 const pageMapping = {
     login: { title: '登录设置', formItem: WeChatFormConfig.WeChatLoginFormList },
@@ -42,7 +50,7 @@ const SegmentedOptions = [
 
 
 // TODO 头部渲染
-const WechatTopBar = ({ page, data, LOGIN }) => {
+const WechatTopBar = ({ page, data }) => {
     // 时间处理
     const [Date, setDate] = useState(dayjs().format('HH:mm'))
     const clearInterval = useInterval(() => setDate(dayjs().format('HH:mm')), 30000)
@@ -115,8 +123,6 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
         filter: SetFilderParams(header_image_filed, header_image_size, header_image_color)
     }
 
-
-
     return (
         <>
             <div className='sysTop' >
@@ -174,30 +180,43 @@ const WechatTopBar = ({ page, data, LOGIN }) => {
 }
 
 // TODO 表单渲染
-const WeChatForm = ({ page, FormEvent, Initial, LOGIN }) => {
+const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME }) => {
     if (page === 'login' && LOGIN) return (
         <FormTemplate
             formItem={pageMapping[page].formItem}
             FORMEVENT={FormEvent}
             Initial={Initial[page]}
             NotLoading
-        // detection
+        />
+    )
+    if (page === 'home' && HOME) return (
+        <FormTemplate
+            formItem={pageMapping[page].formItem}
+            FORMEVENT={FormEvent}
+            Initial={Initial[page]}
+            NotLoading
         />
     )
 }
 
 
 const ContentTemplate = ({ page, data }) => {
-
     if (page === 'login') {
-        const TempMapping = { A01: WechatLoginA01, A02: WechatLoginA02, A03: WechatLoginA03, A04: WechatLoginA04 }
+        const logMapping = { A01: WechatLoginA01, A02: WechatLoginA02, A03: WechatLoginA03, A04: WechatLoginA04 }
         const { loginTemp } = data[page]
-        const LoginTemp = TempMapping[loginTemp]
+        const LoginTemp = logMapping[loginTemp]
         if (LoginTemp) return <LoginTemp data={data[page]} />
     }
     if (page === 'home') {
+        const tabMapping = { A01: WeChatTabBarA01, A02: WeChatTabBarA02, A03: WeChatTabBarA03, A04: WeChatTabBarA04 }
+        const { homeTabBarType } = data[page]
+        const TabTemplate = tabMapping[homeTabBarType]
+
         return (
-            <div>渲染首页</div>
+            <div className='HOME_PAGE'>
+                <div className='LayoutBox'>首页布局</div>
+                {TabTemplate && <TabTemplate data={data[page]} />}
+            </div>
         )
     }
     if (page === 'page') {
@@ -212,22 +231,45 @@ const ContentTemplate = ({ page, data }) => {
 const WeChatbaseConfig = () => {
     const { message, modal, notification } = App.useApp();
     const FormEvent = useEventEmitter()
-    const [page, setPage] = useState('login')
+    const [page, setPage] = useState('home')
+    const [menu, setMenu] = useState([])
 
     const [LOGIN, setLOGIN] = useState(false)
-
-
+    const [HOME, setHOME] = useState(false)
 
     const WeChatInit = useReactive({ login: {}, home: {}, page: {} })
 
 
+    // 获取登录页面配置
     const getLoginData = async () => {
         const [err, res] = await axios(GetConfig)
-        if (err) return console.log('小程序登录页面获取失败!')
-        WeChatInit.login = res
-
-
+        if (err) console.log('小程序登录页面获取失败!')
+        WeChatInit.login = res || {}
         setLOGIN(true)
+    }
+    // 获取小程序首页配置
+    const getWeChatHomeData = async () => {
+        const [err, res] = await axios(GetHomeConfig)
+        if (err) console.log('小程序首页获取失败!')
+        WeChatInit.home = res || {}
+
+
+        const [menuErr, menuRes] = await axios({ method: 'get', url: 'weChatMenu' })
+        if (menuErr) return console.log('小程序菜单获取失败!')
+        const [{ children }] = menuRes.data.list
+        const menu = children.map(v => ({ uuid: v.uuid, tableName: v.tableName }))
+
+        if (WeChatInit.home.tabBarList) {
+            const result = menu.map(configItem => {
+                const dataItem = WeChatInit.home.tabBarList.find(item => item.uuid === configItem.uuid)
+                return dataItem ? { ...dataItem } : { ...configItem }
+            })
+            WeChatInit.home.tabBarList = result
+            setHOME(true)
+        } else {
+            WeChatInit.home.tabBarList = menu
+            setHOME(true)
+        }
     }
 
     const setLoaginData = async () => {
@@ -236,12 +278,13 @@ const WeChatbaseConfig = () => {
         if (err) return console.log('小程序登录页面设置失败!')
         notification.success({ key: 'login', title: '保存成功!', description: '全项目小程序登录页设置成功!' })
     }
-
-    const getBaseData = async () => {
-        const [err, res] = await axios({ method: 'get', url: 'weChatMenu' })
-        if (err) return console.log('小程序菜单获取失败!')
-        // console.log('小程序菜单', res)
+    const setHomeData = async () => {
+        PostHomeConfig.params.content = JSON.stringify(WeChatInit.home)
+        const [err, res] = await axios(PostHomeConfig)
+        if (err) return console.log('小程序登录页面设置失败!')
+        notification.success({ key: 'login', title: '保存成功!', description: '小程序首页设置成功!' })
     }
+
 
     const onSegmentedChange = (e) => {
         setPage(e)
@@ -249,8 +292,7 @@ const WeChatbaseConfig = () => {
 
     useMount(() => {
         getLoginData()
-        // getBaseData()
-        // setLoaginData()
+        getWeChatHomeData()
     })
 
     const formCallBack = (e) => {
@@ -267,6 +309,7 @@ const WeChatbaseConfig = () => {
             ['onFormBack', () => {
                 WeChatInit[page] = data
                 if (page === 'login') setLoaginData()
+                if (page === 'home') setHomeData()
 
             }]
         ])
@@ -292,6 +335,7 @@ const WeChatbaseConfig = () => {
             <div className='options'>
                 <div className='title'>{pageMapping[page].title}</div>
                 {page === 'login' && <WeChatForm page={page} FormEvent={FormEvent} Initial={WeChatInit} LOGIN={LOGIN} />}
+                {page === 'home' && <WeChatForm page={page} FormEvent={FormEvent} Initial={WeChatInit} HOME={HOME} />}
             </div>
         </div>
     );

@@ -441,12 +441,96 @@ const WeChatLoginFormList = [
             },
         ]
     },
-
-    // 二号版配置
 ]
 
 // TODO 首页设置
-const WeChatHomeFormList = []
+const WeChatHomeFormList = [
+    // 默认选中的导航
+    { span: 24, formType: 'INPUT', name: 'tabBar_active', label: '默认选中导航UUID', rules: true },
+    // 是否显示默认头
+    { span: 24, formType: 'RADIO', name: 'navigationStyle', label: '头部样式', rules: true, valueEnum: MappingData.WeChat_navigationStyle },
+    ...defaultHeader,
+    { span: 24, formType: 'RADIO', name: 'homeTabBarType', label: '底部导航', rules: true, valueEnum: MappingData.WeChat__tabBarTemp },
+    // 一号导航模板
+    {
+        span: 24, formType: 'GROUP', name: 'TabBarType_A01_base', label: '基础设置', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
+            { span: 12, formType: 'COLOR', name: 'tabA01_bgColor', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'tabA01_bgDeg', label: '背景角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'tabA01_bgHeight', label: '背景高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'tabA01_bgPadding', label: '内部填充', rules: true },
+            { span: 8, formType: 'SELECT', name: 'tabA01_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'tabA01_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'tabA01_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'tabA01_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'tabA01_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'RADIO', name: 'tabA01_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'tabA01_text', label: '导航文字', rules: true, valueEnum: MappingData.IsEnabledBool },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_default', label: '默认图标', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_icon', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'tabA01_iconD_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'tabA01_iconD_Size', label: '图标尺寸', rules: true },
+            { span: 24, formType: 'INPUT', name: 'tabA01_iconD_Map', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_active', label: '选中图标', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_icon', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'tabA01_iconA_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'tabA01_iconA_Size', label: '图标尺寸', rules: true },
+            { span: 24, formType: 'INPUT', name: 'tabA01_iconA_Map', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_default', label: '默认文字', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_text', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'tabA01_textD_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'tabA01_textD_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'tabA01_textD_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textD_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textD_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textD_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'tabA01_textD_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'tabA01_textD_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'tabA01_textD_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'tabA01_textD_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_active', label: '选中文字', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_text', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'tabA01_textA_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'tabA01_textA_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'tabA01_textA_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textA_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textA_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'tabA01_textA_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'tabA01_textA_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'tabA01_textA_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'tabA01_textA_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'tabA01_textA_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true,
+        jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
+            { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+            { span: 12, formType: 'INPUT', name: 'tableName', label: '导航名称', rules: true, disabled: true },
+            { span: 12, formType: 'INPUT', name: 'iconUrl', label: '图标URL' },
+        ]
+    }
+]
 
 // TODO 页面设置
 const WeChatPageFormList = []

@@ -1592,29 +1592,23 @@ export const MappingData = {
         { value: 'A04', label: '双胶囊头' },
         { value: 'A06', label: '搜索标头' },
         { value: 'A07', label: '图片标头' },
-
-        // 无头
-        // 正常标题 
-        // 标题加返回
-        // 双胶囊头
-        // 左标题头
-        // 搜索头
-        // 图片头
-
     ],
     WeChat_navigationBarTextStyle: [
         { value: 'black', label: '黑色' },
         { value: 'white', label: '白色' },
     ],
     WeChat_loginTemp: [
-        { value: 'A01', label: '一号版' },
-        { value: 'A02', label: '二号版' },
-        { value: 'A03', label: '三号版' },
-        { value: 'A04', label: '四号版' },
+        { value: 'A01', label: '通用登录' },
+        { value: 'A02', label: '开发中...' },
+        { value: 'A03', label: '开发中...' },
+        { value: 'A04', label: '开发中...' },
     ],
-
-
-
+    WeChat__tabBarTemp: [
+        { value: 'A01', label: '通用导航' },
+        { value: 'A02', label: '开发中...' },
+        { value: 'A03', label: '开发中...' },
+        { value: 'A04', label: '开发中...' },
+    ],
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },
