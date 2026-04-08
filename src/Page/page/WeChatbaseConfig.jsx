@@ -15,6 +15,7 @@ import { DevScrollView } from '../../Temp/DevTemplate'
 import FormTemplate from '../../Utils/FormTemplate'
 import { WeChatFormConfig } from '../../Config/wechatForm'
 
+import WeChatHome from '../../Temp/WeChatHome'
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
 import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
@@ -200,7 +201,7 @@ const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME }) => {
 }
 
 
-const ContentTemplate = ({ page, data }) => {
+const ContentTemplate = ({ page, data, FormEvent }) => {
     if (page === 'login') {
         const logMapping = { A01: WechatLoginA01, A02: WechatLoginA02, A03: WechatLoginA03, A04: WechatLoginA04 }
         const { loginTemp } = data[page]
@@ -214,8 +215,8 @@ const ContentTemplate = ({ page, data }) => {
 
         return (
             <div className='HOME_PAGE'>
-                <div className='LayoutBox'>首页布局</div>
-                {TabTemplate && <TabTemplate data={data[page]} />}
+                <WeChatHome data={data[page]} FormEvent={FormEvent} />
+                {TabTemplate && <TabTemplate data={data[page]} FormEvent={FormEvent} />}
             </div>
         )
     }
@@ -252,13 +253,10 @@ const WeChatbaseConfig = () => {
         const [err, res] = await axios(GetHomeConfig)
         if (err) console.log('小程序首页获取失败!')
         WeChatInit.home = res || {}
-
-
         const [menuErr, menuRes] = await axios({ method: 'get', url: 'weChatMenu' })
         if (menuErr) return console.log('小程序菜单获取失败!')
         const [{ children }] = menuRes.data.list
         const menu = children.map(v => ({ uuid: v.uuid, tableName: v.tableName }))
-
         if (WeChatInit.home.tabBarList) {
             const result = menu.map(configItem => {
                 const dataItem = WeChatInit.home.tabBarList.find(item => item.uuid === configItem.uuid)
@@ -278,13 +276,13 @@ const WeChatbaseConfig = () => {
         if (err) return console.log('小程序登录页面设置失败!')
         notification.success({ key: 'login', title: '保存成功!', description: '全项目小程序登录页设置成功!' })
     }
+
     const setHomeData = async () => {
         PostHomeConfig.params.content = JSON.stringify(WeChatInit.home)
         const [err, res] = await axios(PostHomeConfig)
         if (err) return console.log('小程序登录页面设置失败!')
         notification.success({ key: 'login', title: '保存成功!', description: '小程序首页设置成功!' })
     }
-
 
     const onSegmentedChange = (e) => {
         setPage(e)
@@ -328,7 +326,7 @@ const WeChatbaseConfig = () => {
                 <div className='box'>
                     <WechatTopBar page={page} data={WeChatInit} />
                     <div className='content'>
-                        <ContentTemplate page={page} data={WeChatInit} />
+                        <ContentTemplate page={page} data={WeChatInit} FormEvent={FormEvent} />
                     </div>
                 </div>
             </div>
