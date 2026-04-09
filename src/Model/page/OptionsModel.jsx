@@ -37,6 +37,7 @@ const OptionsModel = ({ data, Event }) => {
     const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial } = data
     // 类型赋值
     const valueTypeMapping = async (fields, formFields) => {
+
         const fieldsData = formFields.map(async item => {
             const field = fields.find(v => v.uuid === item.uuid)
             const { valueType } = field
@@ -607,6 +608,48 @@ const OptionsModel = ({ data, Event }) => {
             )
         }
     }
+    // *** 数据审核
+    if (type === 'B12') {
+        const OptionsEvent = useEventEmitter()
+        const [formItem, setFormItem] = useState()
+        const { B08_method, B08_url, B08_params, B08_dataArr, B12Options_list } = data
+        const postData = { method: B08_method, url: B08_url, params: { ...strOfurlParamsFunc(B08_params) } }
+
+        const FORMITEM = async () => {
+            const formITEM = B12Options_list.map(async v => {
+                const { dataField, caption, valueType, mappingType, mappingData, mappingApi, mappingPar, mappingParExtra, mappingJudge,
+                    mappingValue, mappingLable, tooltipStatus, tooltip, rules, judge, judgeData
+                } = v
+                const obj = { dataField, caption, valueType, rules, }
+                if (FlowMenuAPIFieldJugdeValue.includes(valueType)) {
+                    if (mappingType === 'DataMapping') obj.valueEnum = MappingData[mappingData]
+                    if (mappingType === 'ApiMapping') {
+                        const [err, api] = await axios({ method: 'get', url: mappingApi, params: { OrganizationUuid: ORGUUID, ...strOfurlParamsFunc(mappingPar) } })
+                        if (err) return false
+                        obj.valueEnum = addAttr(api.data.list, { label: mappingLable, value: mappingValue, extra: mappingParExtra, judge: mappingJudge })
+                    }
+                }
+
+
+
+                return obj
+            })
+            const results = await Promise.all(formITEM)
+            return results
+        }
+
+
+        useMount(async () => {
+            const data = await FORMITEM()
+            setFormItem(data)
+        })
+
+
+        if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} />
+        else return <Skeleton active paragraph={{ rows: 16 }} />
+    }
+
+
     // *** 数据详情
     if (type === 'B14') {
         const { AddTopOptionsFormList_14, Initial } = data

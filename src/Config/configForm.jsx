@@ -2536,6 +2536,80 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'TempICON', name: 'B11_Icon', label: '页面图标' },
         ]
     },
+    // !!! 12 数据审核
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_12', label: '数据审核',
+        jugde: [{ field: 'type', value: ['B12'] }],
+        children: [
+            { span: 24, formType: 'RADIO', name: 'B08_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 24, formType: 'INPUT', name: 'B08_url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'B08_params', label: '额外参数' },
+            { span: 24, formType: 'NUMBER', name: 'B08_modelWidth', label: '弹窗宽度' },
+            { span: 24, formType: 'NUMBER', name: 'B08_modelHeight', label: '弹窗高度' },
+        ],
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_12_01', label: '主表数据',
+        jugde: [{ field: 'type', value: ['B12'] }],
+        children: [
+            { span: 24, formType: 'RADIO', name: 'B08_isData', label: '是否使用主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'B08_dataArr', label: '额外主表数据', jugde: [{ field: 'B08_isData', value: [true] }],
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'dataKey', label: '使用字段', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'dataMap', label: '映射名称', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'LIST', name: 'B12Options_list', label: '操作数据',
+        jugde: [{ field: 'type', value: ['B12'] }],
+        children: [
+            { span: 24, formType: 'INPUT', name: 'dataField', label: '字段', rules: true },
+            { span: 24, formType: 'INPUT', name: 'caption', label: '映射', rules: true },
+            { span: 24, formType: 'SELECT', name: 'valueType', label: '数据类型', rules: true, valueEnum: MappingData.Form__TypeList },
+            // 映射设置
+            {
+                span: 24, formType: 'RADIO', name: 'mappingType', label: '映射类型', rules: true, tooltip: '将字符映射为中文',
+                valueEnum: MappingData.System__MapType, jugde: [{ field: 'valueType', value: FlowMenuAPIFieldJugdeValue }]
+            },
+            {
+                span: 24, formType: 'SELECT', name: 'mappingData', label: '数据映射', rules: true, tooltip: '将字符映射为中文',
+                valueEnum: MappingData.System__MappingEnum, jugde: [{ field: 'mappingType', value: ['DataMapping'] }]
+            },
+            { span: 24, formType: 'INPUT', name: 'mappingApi', label: '数据接口', rules: true, jugde: [{ field: 'mappingType', value: ['ApiMapping'] }] },
+            { span: 24, formType: 'INPUT', name: 'mappingPar', label: '数据参数', jugde: [{ field: 'mappingType', value: ['ApiMapping'] }] },
+            { span: 24, formType: 'INPUT', name: 'mappingParExtra', label: '额外渲染', jugde: [{ field: 'mappingType', value: ['ApiMapping'] }] },
+            {
+                span: 24, formType: 'RADIO', name: 'mappingJudge', label: '是否判断', tooltip: '根据isEnabled判断是否渲染',
+                valueEnum: MappingData.IsEnabledBool, jugde: [{ field: 'mappingType', value: ['ApiMapping'] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: 'mappingValue', label: '映射键', rules: true,
+                jugde: [{ field: 'valueType', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['DataMapping', 'ApiMapping'] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: 'mappingLable', label: '映射值', rules: true,
+                jugde: [{ field: 'valueType', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['DataMapping', 'ApiMapping'] }]
+            },
+            { span: 24, formType: 'RADIO', name: 'tooltipStatus', label: '提示信息', rules: true, tooltip: '新增修改时提示信息', valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'tooltip', label: '提示内容', rules: true, jugde: [{ field: 'tooltipStatus', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'rules', label: '是否必选', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'judge', label: '是否启用', rules: true, tooltip: '根据数据中某一字段的值判断渲染',
+                valueEnum: MappingData.IsEnabledBool
+            },
+            {
+                span: 24, formType: 'LIST', name: 'judgeData', label: '操作数据', jugde: [{ field: 'judge', value: [true] }],
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'field', label: '判断字段', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'value', label: '字段值', rules: true },
+                ]
+            }
+        ]
+    },
+
     // !!! 14 数据详情
     {
         span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_14', label: '数据详情',

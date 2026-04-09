@@ -543,7 +543,15 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
         OpenMenuFunc(uuid, pageFunc, body_tabsMax, obj)
     }
     const B12Func = item => {
-        console.log('数据审核', item)
+        const { title, B08_modelWidth, B08_modelHeight } = item
+        updateModel5({
+            title: title,
+            type: 'OptionsModel',
+            width: B08_modelWidth,
+            height: B08_modelHeight,
+            Event: DEVEvent,
+            modelData: item
+        })
     }
     const B13Func = item => {
         console.log('子列表操作', item)
