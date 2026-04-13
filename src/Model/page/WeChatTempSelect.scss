@@ -1,0 +1,70 @@
+.WeChatTempSelect {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    &>.ant-tabs {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        .ant-tabs-content,
+        .ant-tabs-tabpane {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .ant-tabs-tab-btn {
+            font-family: ShuHeiTi;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .SelectBox {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+
+            &>.Item {
+                margin: 16px;
+                padding: 8px;
+                width: 375px;
+                height: 240px;
+                border-radius: 8px;
+                border: 1px solid #00000000;
+                box-shadow: var(--shadow-1-down);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                cursor: pointer;
+
+                &>.temp {
+                    flex: 1;
+                    width: 100%;
+                    overflow: hidden;
+                }
+
+                &>.title {
+                    font-family: ShuHeiTi;
+                    font-weight: 600;
+                    font-size: 20px;
+                    color: #000000;
+                    transition: all 0.35s;
+                }
+
+                &:hover {
+                    border: 1px solid #722ed180;
+
+                    &>.title {
+                        color: #722ed1;
+                    }
+                }
+            }
+        }
+    }
+
+}

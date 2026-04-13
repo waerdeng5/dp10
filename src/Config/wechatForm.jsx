@@ -533,7 +533,29 @@ const WeChatHomeFormList = [
 ]
 
 // TODO 页面设置
-const WeChatPageFormList = []
+const WeChatPageFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'i', label: 'UUID', rules: true, disabled: true },
+    { span: 12, formType: 'NUMBER', name: 'height', label: '整体高度', rules: true },
+    { span: 12, formType: 'INPUT', name: 'radius', label: '背景圆角', rules: true },
+    { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
+    { span: 12, formType: 'INPUT', name: 'margin', label: '外间距', rules: true },
+    { span: 12, formType: 'COLOR', name: 'backgroun', label: '背景颜色', rules: true },
+    { span: 12, formType: 'NUMBER', name: 'backDeg', label: '背景角度', rules: true },
+    { span: 12, formType: 'RADIO', name: 'border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+    //  边框 阴影
+
+]
+
+
+
+
+
+
+
+// !!! 页面组件
+const WeChatTempTitleA01 = []
 
 
 
@@ -541,4 +563,7 @@ export const WeChatFormConfig = {
     WeChatLoginFormList,
     WeChatHomeFormList,
     WeChatPageFormList,
+
+
+    WeChatTempTitleA01,
 }

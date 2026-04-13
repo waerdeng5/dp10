@@ -18,7 +18,7 @@ import { WeChatFormConfig } from '../../Config/wechatForm'
 import WeChatHome from '../../Temp/WeChatHome'
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
-import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, isEmptyObject } from '../../Utils'
 import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons'
 
 // 引入首页配置项
@@ -202,17 +202,16 @@ const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME }) => {
 
 
 const ContentTemplate = ({ page, data, FormEvent }) => {
-    if (page === 'login') {
+    if (page === 'login' && !isEmptyObject(data[page])) {
         const logMapping = { A01: WechatLoginA01, A02: WechatLoginA02, A03: WechatLoginA03, A04: WechatLoginA04 }
         const { loginTemp } = data[page]
         const LoginTemp = logMapping[loginTemp]
         if (LoginTemp) return <LoginTemp data={data[page]} />
     }
-    if (page === 'home') {
+    if (page === 'home' && !isEmptyObject(data[page])) {
         const tabMapping = { A01: WeChatTabBarA01, A02: WeChatTabBarA02, A03: WeChatTabBarA03, A04: WeChatTabBarA04 }
         const { homeTabBarType } = data[page]
         const TabTemplate = tabMapping[homeTabBarType]
-
         return (
             <div className='HOME_PAGE'>
                 <WeChatHome data={data[page]} FormEvent={FormEvent} />
@@ -220,7 +219,7 @@ const ContentTemplate = ({ page, data, FormEvent }) => {
             </div>
         )
     }
-    if (page === 'page') {
+    if (page === 'page' && !isEmptyObject(data[page])) {
         return (
             <div>渲染页面</div>
         )
@@ -273,15 +272,15 @@ const WeChatbaseConfig = () => {
     const setLoaginData = async () => {
         PostConfig.params.content = JSON.stringify(WeChatInit.login)
         const [err, res] = await axios(PostConfig)
-        if (err) return console.log('小程序登录页面设置失败!')
-        notification.success({ key: 'login', title: '保存成功!', description: '全项目小程序登录页设置成功!' })
+        if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '登录页面设置失败!' })
+        notification.success({ key: 'weChat', title: '保存成功!', description: '全项目小程序登录页设置成功!' })
     }
 
     const setHomeData = async () => {
         PostHomeConfig.params.content = JSON.stringify(WeChatInit.home)
         const [err, res] = await axios(PostHomeConfig)
-        if (err) return console.log('小程序登录页面设置失败!')
-        notification.success({ key: 'login', title: '保存成功!', description: '小程序首页设置成功!' })
+        if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '首页页面设置失败!' })
+        notification.success({ key: 'weChat', title: '保存成功!', description: '小程序首页设置成功!' })
     }
 
     const onSegmentedChange = (e) => {
@@ -308,7 +307,10 @@ const WeChatbaseConfig = () => {
                 WeChatInit[page] = data
                 if (page === 'login') setLoaginData()
                 if (page === 'home') setHomeData()
-
+            }],
+            ['onSaveHome', () => {
+                WeChatInit.home.pageConfig = data
+                setHomeData()
             }]
         ])
         const func = Mapping.get(type)

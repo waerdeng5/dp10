@@ -629,9 +629,6 @@ const OptionsModel = ({ data, Event }) => {
                         obj.valueEnum = addAttr(api.data.list, { label: mappingLable, value: mappingValue, extra: mappingParExtra, judge: mappingJudge })
                     }
                 }
-
-
-
                 return obj
             })
             const results = await Promise.all(formITEM)
@@ -643,8 +640,6 @@ const OptionsModel = ({ data, Event }) => {
             const data = await FORMITEM()
             setFormItem(data)
         })
-
-
         if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} />
         else return <Skeleton active paragraph={{ rows: 16 }} />
     }
