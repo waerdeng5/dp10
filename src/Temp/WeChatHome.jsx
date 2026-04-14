@@ -11,6 +11,7 @@ import { GridBackground } from "react-grid-layout/extras"
 import { modelStore } from '../Router/zustand'
 import { WeChatFormInit } from '../Config/wechatDefault'
 
+import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
 
 
@@ -127,6 +128,7 @@ const WeChatHome = ({ data, FormEvent }) => {
                     title: '修改模块设置',
                     type: 'CommonForm',
                     Event: WeChatEvent,
+                    width: 1200,
                     modelData: {
                         formItem: 'WeChatTempTitleA01',
                         eventBack: 'onTempBack',
@@ -178,45 +180,30 @@ const WeChatHome = ({ data, FormEvent }) => {
                 <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent }) }}>
                     <div className={`Layout ${START ? 'START' : 'STOP'}`}>
                         {SIZE &&
-                            <>
-                                {START &&
-                                    <GridBackground
-                                        className='LayoutBack'
-                                        cols={12}
-                                        rows={24}
-                                        width={SIZE.width}
-                                        rowHeight={SIZE.height / 24}
-                                        margin={[0, 0]}
-                                        color="#cccccc"
-                                        borderRadius={4}
-                                    />
-                                }
-                                <ReactGridLayout
-                                    resizeConfig={{ enabled: START }}
-                                    dragConfig={{ enabled: START }}
-                                    width={SIZE.width}
-                                    layout={PageLayout[Active]}
-                                    isBounded={true}
-                                    gridConfig={{ cols: 12, rowHeight: SIZE.height / 24, margin: [0, 0] }}
-                                    onLayoutChange={run}
-                                >
-                                    {PageLayout[Active].map(v => {
-                                        const { i } = v
-                                        const { type, ...styleData } = PageConfig[Active][i]
-                                        const Template = TempMapping[type].temp
-
-                                        return (
-                                            <div className={`layoutItem ${START}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
-                                                <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i }) }}>
-                                                    <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
-                                                        <Template styleData={styleData} />
-                                                    </div>
-                                                </Dropdown>
-                                            </div>
-                                        )
-                                    })}
-                                </ReactGridLayout>
-                            </>
+                            <ReactGridLayout
+                                resizeConfig={{ enabled: START }}
+                                dragConfig={{ enabled: START }}
+                                width={SIZE.width}
+                                layout={PageLayout[Active]}
+                                isBounded={true}
+                                gridConfig={{ cols: 12, rowHeight: SIZE.height / 24, margin: [0, 0] }}
+                                onLayoutChange={run}
+                            >
+                                {PageLayout[Active].map(v => {
+                                    const { i } = v
+                                    const { type, ...styleData } = PageConfig[Active][i]
+                                    const Template = TempMapping[type].temp
+                                    return (
+                                        <div className={`layoutItem ${START ? 'START' : 'STOP'}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
+                                            <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i }) }}>
+                                                <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
+                                                    <Template styleData={styleData} />
+                                                </div>
+                                            </Dropdown>
+                                        </div>
+                                    )
+                                })}
+                            </ReactGridLayout>
                         }
                     </div>
                 </Dropdown>

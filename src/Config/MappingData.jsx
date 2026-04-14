@@ -1610,6 +1610,13 @@ export const MappingData = {
         { value: 'A03', label: '开发中...' },
         { value: 'A04', label: '开发中...' },
     ],
+    WeChat__titleOptions: [
+        { value: 'A01', label: '纯展示' },
+        { value: 'A02', label: '跳转' },
+        { value: 'A03', label: '更新接口' },
+    ],
+
+
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },

@@ -21,7 +21,7 @@ const WeChatTempSelect = ({ data, Event }) => {
                                 <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: WeChatTempTitle[v] })}>
                                     <div className='temp'>
                                         <DevScrollView>
-                                            <Template preset />
+                                            <Template />
                                         </DevScrollView>
                                     </div>
 
