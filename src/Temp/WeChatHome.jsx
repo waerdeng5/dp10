@@ -186,7 +186,7 @@ const WeChatHome = ({ data, FormEvent }) => {
                                 width={SIZE.width}
                                 layout={PageLayout[Active]}
                                 isBounded={true}
-                                gridConfig={{ cols: 12, rowHeight: SIZE.height / 24, margin: [0, 0] }}
+                                gridConfig={{ cols: 10, rowHeight: 43, margin: [0, 0] }}
                                 onLayoutChange={run}
                             >
                                 {PageLayout[Active].map(v => {
