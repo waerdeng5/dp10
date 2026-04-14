@@ -208,9 +208,11 @@ const GROUP = ({ data, form, action }) => {
 }
 
 
+// addBtn: false, delBtn: false,
+
 // TODO 数组分组
 const LIST = ({ data, form }) => {
-    const { span, name, label, tooltip, jugde, children } = data
+    const { span, name, label, tooltip, jugde, children, addBtn = true, delBtn = true, copy = true, title = '分组' } = data
     const Template = () => (
         <div className='LIST' style={{ width: `${100 / 24 * span}%` }}>
             <ProFormList
@@ -218,10 +220,11 @@ const LIST = ({ data, form }) => {
                 label={label}
                 tooltip={tooltip}
                 arrowSort={true}
-                copyIconProps={{ Icon: CopyOutlined, tooltipText: '复制此行' }}
-                deleteIconProps={{ Icon: DeleteOutlined, tooltipText: '删除此行' }}
+                creatorButtonProps={addBtn}
+                copyIconProps={copy ? { Icon: CopyOutlined, tooltipText: '复制此行' } : false}
+                deleteIconProps={delBtn ? { Icon: DeleteOutlined, tooltipText: '删除此行' } : false}
                 itemRender={({ listDom, action }, { index }) => {
-                    return (<ProCard bordered='true' collapsible={true} extra={action} title={`分组${index + 1}`}>{listDom}</ProCard>)
+                    return (<ProCard bordered='true' collapsible={true} extra={action} title={`${title}${index + 1}`}>{listDom}</ProCard>)
                 }}
             >
                 {(_, index, action) => {

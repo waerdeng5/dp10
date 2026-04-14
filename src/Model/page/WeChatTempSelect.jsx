@@ -4,6 +4,9 @@ import { Tabs } from 'antd'
 
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { WeChatTempTitle } from '../../Temp/WeChatTempTitle'
+import { WeChatTempHome } from '../../Temp/WeChatTempHome'
+
+
 
 
 const WeChatTempSelect = ({ data, Event }) => {
@@ -37,9 +40,25 @@ const WeChatTempSelect = ({ data, Event }) => {
             key: '2',
             label: '首页大组件',
             children: (
-                <div className='SelectBox A02'>
-                    首页大组件
-                </div>
+                <DevScrollView>
+                    <div className='SelectBox A02'>
+                        {Object.keys(WeChatTempHome).map((v) => {
+                            const { temp, title } = WeChatTempHome[v]
+                            const Template = temp
+                            return (
+                                <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: WeChatTempHome[v] })}>
+                                    <div className='temp'>
+                                        <DevScrollView>
+                                            <Template />
+                                        </DevScrollView>
+                                    </div>
+
+                                    <div className='title'>{title}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </DevScrollView>
             ),
         },
         {

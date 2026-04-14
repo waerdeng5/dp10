@@ -75,9 +75,13 @@ const WeChatTempTitleA01 = {
 }
 
 
+// TODO 大屏模块 - 菜单列表
+const WeChatTempHomeA01 = {}
+
 // }
 
 
 export const WeChatFormInit = {
     WeChatTempTitleA01,
+    WeChatTempHomeA01,
 }

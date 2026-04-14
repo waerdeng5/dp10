@@ -453,7 +453,7 @@ const WeChatHomeFormList = [
     { span: 24, formType: 'RADIO', name: 'homeTabBarType', label: '底部导航', rules: true, valueEnum: MappingData.WeChat__tabBarTemp },
     // 一号导航模板
     {
-        span: 24, formType: 'GROUP', name: 'TabBarType_A01_base', label: '基础设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'TabBarType_A01_base', label: '基础设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
             { span: 12, formType: 'COLOR', name: 'tabA01_bgColor', label: '背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'tabA01_bgDeg', label: '背景角度', rules: true },
@@ -469,7 +469,7 @@ const WeChatHomeFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_default', label: '默认图标', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_default', label: '默认图标', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_icon', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'tabA01_iconD_color', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 24, formType: 'NUMBER', name: 'tabA01_iconD_Size', label: '图标尺寸', rules: true },
@@ -477,7 +477,7 @@ const WeChatHomeFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_active', label: '选中图标', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_icon_active', label: '选中图标', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_icon', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'tabA01_iconA_color', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 24, formType: 'NUMBER', name: 'tabA01_iconA_Size', label: '图标尺寸', rules: true },
@@ -485,7 +485,7 @@ const WeChatHomeFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_default', label: '默认文字', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_default', label: '默认文字', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_text', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'tabA01_textD_color', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 24, formType: 'NUMBER', name: 'tabA01_textD_size', label: '文字字号', rules: true },
@@ -504,7 +504,7 @@ const WeChatHomeFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_active', label: '选中文字', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'TabBarType_A01_text_active', label: '选中文字', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }, { field: 'tabA01_text', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'tabA01_textA_color', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 24, formType: 'NUMBER', name: 'tabA01_textA_size', label: '文字字号', rules: true },
@@ -522,8 +522,9 @@ const WeChatHomeFormList = [
             },
         ]
     },
+
     {
-        span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true,
+        span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true, addBtn: false, delBtn: false, copy: false, title: '导航项',
         jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
             { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
             { span: 12, formType: 'INPUT', name: 'tableName', label: '导航名称', rules: true, disabled: true },
@@ -539,6 +540,7 @@ const WeChatPageFormList = [
 
 
 // !!! 页面组件
+// TODO 标题组件 - A01
 const WeChatTempTitleA01 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
@@ -575,7 +577,7 @@ const WeChatTempTitleA01 = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'title_options', label: '操作按钮', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'title_options', label: '操作按钮', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'options', value: [true] }], children: [
             { span: 12, formType: 'RADIO', name: 'options_type', label: '操作类型', rules: true, valueEnum: MappingData.WeChat__titleOptions },
             {
@@ -603,7 +605,7 @@ const WeChatTempTitleA01 = [
                 jugde: [{ field: 'options_type', value: ['A03'] }]
             },
             {
-                span: 24, formType: 'GROUP', name: 'options__flex', label: '按钮布局', collapsible: true, defaultCollapsed: false, children: [
+                span: 24, formType: 'GROUP', name: 'options__flex', label: '按钮布局', collapsible: true, defaultCollapsed: true, children: [
                     { span: 12, formType: 'RADIO', name: 'options_icon', label: '按钮图标', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'SELECT', name: 'options_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
                     { span: 12, formType: 'SELECT', name: 'options_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
@@ -613,7 +615,7 @@ const WeChatTempTitleA01 = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'options__setIcon', label: '图标设置', collapsible: true, defaultCollapsed: false,
+                span: 24, formType: 'GROUP', name: 'options__setIcon', label: '图标设置', collapsible: true, defaultCollapsed: true,
                 jugde: [{ field: 'options_icon', value: [true] }], children: [
                     { span: 12, formType: 'INPUT', name: 'options_icon_url', label: '图标', rules: true },
                     { span: 12, formType: 'INPUT', name: 'options_icon_margin', label: '图标间距', rules: true },
@@ -686,7 +688,7 @@ const WeChatTempTitleA01 = [
             { span: 12, formType: 'SELECT', name: 'flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
             { span: 12, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
             {
-                span: 24, formType: 'LIST', name: 'textList', label: '标题内容', collapsible: true,
+                span: 24, formType: 'LIST', name: 'textList', label: '标题内容', collapsible: true, title: '标题',
                 children: [
                     { span: 12, formType: 'RADIO', name: 'uppercase', label: '字母大写', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
@@ -707,6 +709,14 @@ const WeChatTempTitleA01 = [
 ]
 
 
+// TODO 首页模板 -A01 - 菜单
+const WeChatTempHomeA01 = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+]
+
+
+
 
 export const WeChatFormConfig = {
     WeChatLoginFormList,
@@ -715,4 +725,5 @@ export const WeChatFormConfig = {
 
 
     WeChatTempTitleA01,
+    WeChatTempHomeA01,
 }

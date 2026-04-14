@@ -13,11 +13,13 @@ import { WeChatFormInit } from '../Config/wechatDefault'
 
 import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
+import { WeChatTempHome } from '../Temp/WeChatTempHome'
 
 
 
 const TempMapping = {
-    ...WeChatTempTitle
+    ...WeChatTempTitle,
+    ...WeChatTempHome,
 }
 
 
