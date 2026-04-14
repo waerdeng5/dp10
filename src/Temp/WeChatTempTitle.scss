@@ -1,13 +1,20 @@
 .WeChatTempTitleA01 {
-    width: 100%;
-    background: yellow;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
     &>.title {
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: var(--alignItems);
+        align-content: var(--alignContent);
+        justify-content: var(--justifyContent);
+        flex-direction: var(--flexDirection);
+        flex-wrap: var(--flexWrap);
+
+        &>div {
+            background: var(--color);
+            background-clip: text;
+            color: transparent;
+        }
     }
 }

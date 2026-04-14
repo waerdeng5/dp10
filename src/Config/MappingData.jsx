@@ -737,6 +737,7 @@ export const MappingData = {
         { value: 'Pixel', label: '机械数字' },
         { value: 'HYT', label: '黄油体' },
         { value: 'R-Spectr', label: '光谱' },
+        { value: 'LogoSCU', label: '加粗数字' },
     ],
     Font__WeightInt: [
         { value: 400, label: '正常' },

@@ -1,14 +1,16 @@
 import { useEventEmitter } from 'ahooks'
 import FormTemplate from '../../Utils/FormTemplate'
-import { FormConfig } from '../../Config/configForm'
-import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
-const FormList = { ...FormConfig, ...Mars3dFormConfig }
+import { FormConfig } from '../../Config/configForm'
+import { Mars3dFormConfig } from '../../Config/Mars3dForm'
+import { WeChatFormConfig } from '../../Config/wechatForm'
+
+const FormList = { ...FormConfig, ...Mars3dFormConfig, ...WeChatFormConfig }
 
 const CommonForm = ({ data, Event }) => {
     const FORMEVENT = useEventEmitter()
-    const { eventBack = 'onCommonFormBack', NotSubmit = false, detection = false, formItem, Initial } = data
+    const { eventBack = 'onCommonFormBack', NotSubmit = false, detection = false, formItem, Initial, NotLoading = false } = data
 
     const onFormBack = (data) => Event.emit({ type: eventBack, data })
 
@@ -43,6 +45,7 @@ const CommonForm = ({ data, Event }) => {
                     FORMEVENT={FORMEVENT}
                     Initial={Initial || {}}
                     NotSubmit={NotSubmit}
+                    NotLoading={NotLoading}
                     detection={detection}
                 />
             </div>

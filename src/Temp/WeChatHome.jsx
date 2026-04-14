@@ -2,8 +2,8 @@
 import './WeChatHome.scss'
 import { v4 } from 'uuid'
 import { useState, useRef, useEffect } from 'react'
-import { useSize, useEventEmitter } from 'ahooks'
-import { Dropdown, App, Button } from 'antd'
+import { useSize, useEventEmitter, useDebounceFn } from 'ahooks'
+import { Dropdown, App, Button, Popconfirm } from 'antd'
 import ReactGridLayout from 'react-grid-layout'
 import { GridBackground } from "react-grid-layout/extras"
 
@@ -15,16 +15,12 @@ import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
 
 
 
-
-
-
 const TempMapping = {
     ...WeChatTempTitle
 }
 
 
-
-const DropdownItem = ({ START, WeChatEvent }) => {
+const DropdownItem = ({ START, WeChatEvent, i }) => {
     return ([
         {
             key: '0-0', type: 'group', label: '全局设置', children: [
@@ -58,6 +54,28 @@ const DropdownItem = ({ START, WeChatEvent }) => {
                 },
             ]
         },
+        START && i && {
+            key: '2-0', type: 'group', label: '模块操作', children: [
+                {
+                    key: '2-1',
+                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetTemp', data: i })}>修改模块</Button>)
+                },
+                {
+                    key: '2-2',
+                    label: (
+                        <Popconfirm
+                            title="删除提醒!"
+                            description="删除后将无法恢复,是否继续删除?"
+                            onConfirm={() => WeChatEvent.emit({ type: 'onDelTemp', data: i })}
+                            okText="删除"
+                            cancelText="取消"
+                        >
+                            <Button type='link' danger>删除模块</Button>
+                        </Popconfirm>
+                    )
+                },
+            ]
+        }
     ])
 }
 
@@ -66,44 +84,67 @@ const DropdownItem = ({ START, WeChatEvent }) => {
 
 
 const WeChatHome = ({ data, FormEvent }) => {
-
-
     const { updateModel } = modelStore()
     const LayoutRef = useRef(null)
     const SIZE = useSize(LayoutRef)
     const WeChatEvent = useEventEmitter()
     const { tabBar_active, tabBarList, pageConfig = {}, pageLayout = {} } = data
     const [Active, setActive] = useState(tabBar_active)
-
     const [PageLayout, setPageLayout] = useState(pageLayout)
     const [PageConfig, setPageConfig] = useState(pageConfig)
-
     const [START, setSTART] = useState(false)
-
-
-
 
 
     const weChatCallBack = (e) => {
         const { type, data } = e
         // console.log(e)
         const Mapping = new Map([
-            ['onSave', () => FormEvent.emit({ type: 'onSaveHome', data: PageConfig })],
+            ['onSave', () => FormEvent.emit({ type: 'onSaveHome', data: { PageLayout, PageConfig } })],
             ['onStart', () => setSTART(true)],
             ['onStop', () => setSTART(false)],
-
-            // 添加组件
+            // 通用设置
+            ['onSetBack', () => {
+                console.log('设置基础背景信息')
+            }],
+            ['onSetApi', () => {
+                console.log('设置基础接口信息')
+            }],
+            // 组件设置
             ['onAdd', () => updateModel({ title: '小程序组件列表', type: 'WeChatTempSelect', Event: WeChatEvent })],
             ['onSelectTemp', () => {
                 const uuid = v4()
                 const { type, layout } = data
-                console.log('添加模块')
-                console.log(uuid)
-                console.log(data)
-                console.log(WeChatFormInit[type])
-
-
+                const layData = PageLayout[Active]
+                const conData = PageConfig[Active]
+                const newLayout = [...layData, { i: uuid, ...layout }]
+                const newConfig = { ...conData, [uuid]: { uuid, type, ...WeChatFormInit[type] } }
+                setPageLayout(v => ({ ...v, [Active]: newLayout }))
+                setPageConfig(v => ({ ...v, [Active]: newConfig }))
                 updateModel({})
+            }],
+            ['onSetTemp', () => {
+                updateModel({
+                    title: '修改模块设置',
+                    type: 'CommonForm',
+                    Event: WeChatEvent,
+                    modelData: {
+                        formItem: 'WeChatTempTitleA01',
+                        eventBack: 'onTempBack',
+                        Initial: PageConfig[Active][data],
+                        NotLoading: true,
+                    }
+                })
+            }],
+            ['onDelTemp', () => {
+                const newLayout = PageLayout[Active].filter(item => item.i !== data)
+                delete PageConfig[Active][data]
+                setPageLayout(v => ({ ...v, [Active]: newLayout }))
+                setPageConfig(v => ({ ...v }))
+            }],
+            ['onTempBack', () => {
+                const { uuid } = data
+                console.log(data)
+                setPageConfig(v => ({ ...v, [Active]: { ...v[Active], [uuid]: data } }))
             }]
         ])
         const func = Mapping.get(type)
@@ -124,10 +165,7 @@ const WeChatHome = ({ data, FormEvent }) => {
     FormEvent.useSubscription(formCallBack)
     WeChatEvent.useSubscription(weChatCallBack)
 
-
-
-
-
+    const { run } = useDebounceFn((e) => { setPageLayout(v => ({ ...v, [Active]: e })) }, { wait: 500 })
 
     useEffect(() => {
         if (!PageLayout[Active]) setPageLayout(e => ({ ...e, [Active]: [] }))   // 初始化布局信息
@@ -160,13 +198,21 @@ const WeChatHome = ({ data, FormEvent }) => {
                                     layout={PageLayout[Active]}
                                     isBounded={true}
                                     gridConfig={{ cols: 12, rowHeight: SIZE.height / 24, margin: [0, 0] }}
-                                    onLayoutChange={e => {
-                                        console.log(e)
-                                    }}
+                                    onLayoutChange={run}
                                 >
                                     {PageLayout[Active].map(v => {
+                                        const { i } = v
+                                        const { type, ...styleData } = PageConfig[Active][i]
+                                        const Template = TempMapping[type].temp
+
                                         return (
-                                            <div key={v.i}>{v.i}</div>
+                                            <div className={`layoutItem ${START}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
+                                                <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i }) }}>
+                                                    <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
+                                                        <Template styleData={styleData} />
+                                                    </div>
+                                                </Dropdown>
+                                            </div>
                                         )
                                     })}
                                 </ReactGridLayout>
