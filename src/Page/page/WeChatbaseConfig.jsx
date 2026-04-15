@@ -301,8 +301,6 @@ const WeChatbaseConfig = () => {
                 const [keys] = Object.keys(data)
                 const [values] = Object.values(data)
                 WeChatInit[page][keys] = values
-                // console.log('WeChatInit', WeChatInit[page])
-
             }],
             ['onFormBack', () => {
                 WeChatInit[page] = data
@@ -310,7 +308,6 @@ const WeChatbaseConfig = () => {
                 if (page === 'home') setHomeData()
             }],
             ['onSaveHome', () => {
-                console.log(123)
                 WeChatInit.home.pageLayout = data.PageLayout
                 WeChatInit.home.pageConfig = data.PageConfig
                 setHomeData()

@@ -15,6 +15,8 @@ import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
 import { WeChatTempHome } from '../Temp/WeChatTempHome'
 import { WeChatTempFixed } from '../Temp/WeChatTempFixed'
+import { WeChatTempReserve } from '../Temp/WeChatTempReserve'
+
 
 
 
@@ -23,6 +25,7 @@ const TempMapping = {
     ...WeChatTempTitle,
     ...WeChatTempHome,
     ...WeChatTempFixed,
+    ...WeChatTempReserve,
 }
 
 
@@ -130,7 +133,7 @@ const WeChatHome = ({ data, FormEvent }) => {
                     Event: WeChatEvent,
                     width: 1200,
                     modelData: {
-                        formItem: 'WeChatTempTitleA01',
+                        formItem: PageConfig[Active][data].type,
                         eventBack: 'onTempBack',
                         Initial: PageConfig[Active][data],
                         NotLoading: true,
@@ -196,6 +199,7 @@ const WeChatHome = ({ data, FormEvent }) => {
                                     <div className={`layoutItem ${START ? 'START' : 'STOP'}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
                                         <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i }) }}>
                                             <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
+                                                {START && <div className='SizeData'>{v.w}0% * {v.h * 8}px</div>}
                                                 <Template styleData={styleData} />
                                             </div>
                                         </Dropdown>

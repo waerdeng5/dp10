@@ -71,6 +71,19 @@ const WeChatTempTitleA01 = {
         }
     ]
 }
+// TODO 占位模块 - 用用A01
+const WeChatTempReserveA01 = {
+    resA01_padding: "8",
+    resA01_back: 'color',
+    resA01_BkColor: "#f5222d80",
+    resA01_BkDeg: 45,
+    resA01_radius: "4",
+    resA01_filed: true,
+    resA01_filed_size: '1,1,1',
+    resA01_filed_color: '#262626',
+    resA01_text: false,
+    resA01_click: false
+}
 
 // TODO 大屏模块 - 菜单列表
 const WeChatTempHomeA01 = {}
@@ -81,6 +94,7 @@ const WeChatTempFixedA01 = {}
 
 export const WeChatFormInit = {
     WeChatTempTitleA01,
+    WeChatTempReserveA01,
     WeChatTempHomeA01,
     WeChatTempFixedA01
 

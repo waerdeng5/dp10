@@ -1,13 +1,15 @@
 import './WeChatTempSelect.scss'
 
-import { Tabs } from 'antd'
+import { Tabs, Alert } from 'antd'
 
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { WeChatTempTitle } from '../../Temp/WeChatTempTitle'
 import { WeChatTempHome } from '../../Temp/WeChatTempHome'
 import { WeChatTempFixed } from '../../Temp/WeChatTempFixed'
+import { WeChatTempReserve } from '../../Temp/WeChatTempReserve'
 
 
+const Common = { ...WeChatTempTitle, ...WeChatTempReserve }
 
 
 const WeChatTempSelect = ({ data, Event }) => {
@@ -18,11 +20,11 @@ const WeChatTempSelect = ({ data, Event }) => {
             children: (
                 <DevScrollView>
                     <div className='SelectBox A01'>
-                        {Object.keys(WeChatTempTitle).map((v) => {
-                            const { temp, title } = WeChatTempTitle[v]
+                        {Object.keys(Common).map((v) => {
+                            const { temp, title } = Common[v]
                             const Template = temp
                             return (
-                                <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: WeChatTempTitle[v] })}>
+                                <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: Common[v] })}>
                                     <div className='temp'>
                                         <DevScrollView>
                                             <Template />
@@ -67,7 +69,7 @@ const WeChatTempSelect = ({ data, Event }) => {
             label: '固定组件',
             children: (
                 <DevScrollView>
-                    <div className='SelectBox A02'>
+                    <div className='SelectBox A03'>
                         {Object.keys(WeChatTempFixed).map((v) => {
                             const { temp, title } = WeChatTempFixed[v]
                             const Template = temp

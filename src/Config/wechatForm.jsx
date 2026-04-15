@@ -712,6 +712,93 @@ const WeChatTempTitleA01 = [
         ]
     },
 ]
+// TODO 占位模块 - A01
+const WeChatTempReserveA01 = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+
+    { span: 12, formType: 'INPUT', name: 'resA01_padding', label: '内部填充', rules: true },
+    { span: 12, formType: 'RADIO', name: 'resA01_back', label: '背景类型', rules: true, valueEnum: MappingData.WeChat__resA01_backType },
+    {
+        span: 24, formType: 'GROUP', name: 'resA01_back_color', label: '背景颜色', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'resA01_back', value: ['color'] }], children: [
+            { span: 12, formType: 'COLOR', name: 'resA01_BkColor', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'resA01_BkDeg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'resA01_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'resA01_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'resA01_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'resA01_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'resA01_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'resA01_filed', value: [true] }]
+            },
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'resA01_back_image', label: '背景图片', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'resA01_back', value: ['image'] }], children: [
+            { span: 12, formType: 'INPUT', name: 'resA01_BkImage', label: '图片地址', rules: true },
+            { span: 12, formType: 'SELECT', name: 'resA01_BkMode', label: '渲染模式', rules: true, valueEnum: MappingData.WeChat__imageMode },
+            { span: 12, formType: 'INPUT', name: 'resA01_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'resA01_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'resA01_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'resA01_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'resA01_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'resA01_filed', value: [true] }]
+            },
+        ]
+    },
+    { span: 12, formType: 'RADIO', name: 'resA01_text', label: '文字信息', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'resA01_click', label: '点击事件', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+    {
+        span: 24, formType: 'GROUP', name: 'resA01_text_config', label: '文字内容', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'resA01_text', value: [true] }], children: [
+            { span: 8, formType: 'SELECT', name: 'align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            {
+                span: 24, formType: 'LIST', name: 'textList', label: '文字内容', collapsible: true, title: '文字',
+                children: [
+                    { span: 12, formType: 'RADIO', name: 'uppercase', label: '字母大写', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'padding', label: '外部间距', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'size', label: '文字字号', rules: true, },
+                    { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, },
+                    { span: 12, formType: 'NUMBER', name: 'deg', label: '文字角度', rules: true, },
+                    { span: 12, formType: 'SELECT', name: 'famity', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'filed_size', label: '阴影数值', rules: true, jugde: [{ field: 'filed', value: [true] }] },
+                    { span: 12, formType: 'COLOR', name: 'filed_color', label: '阴影颜色', rules: true, mode: ['single'], jugde: [{ field: 'filed', value: [true] }] },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'resA01_click_config', label: '点击事件', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'resA01_click', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'resA01_clickType', label: '事件类型', rules: true, valueEnum: MappingData.WeChat__clickType },
+            {
+                span: 24, formType: 'GROUP', name: 'resA01_router', label: '路由事件', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'resA01_clickType', value: ['router'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'resA01_routerType', label: '跳转方式', rules: true, valueEnum: MappingData.WeChat__routerType },
+                    { span: 12, formType: 'INPUT', name: 'resA01_routerUrl', label: '路由地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'resA01_routerpar', label: '路由参数' },
+                ]
+            },
+        ]
+    }
+]
 
 
 // TODO 首页模板 -A01 - 菜单
@@ -736,6 +823,7 @@ export const WeChatFormConfig = {
 
 
     WeChatTempTitleA01,
+    WeChatTempReserveA01,
 
     WeChatTempHomeA01,
 

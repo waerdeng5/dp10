@@ -1618,8 +1618,39 @@ export const MappingData = {
     WeChat__homeDisplay: [
         { value: 'flex', label: '固定' },
         { value: 'grid', label: '自动' },
-
     ],
+    WeChat__resA01_backType: [
+        { value: 'none', label: '无' },
+        { value: 'color', label: '颜色' },
+        { value: 'image', label: '图片' },
+    ],
+    WeChat__imageMode: [
+        { value: 'scaleToFill', label: '缩放模式.(完全拉伸至填满)' },
+        { value: 'aspectFit', label: '缩放模式.(长边能完全显示)' },
+        { value: 'aspectFill', label: '缩放模式.(短边能完全显示)' },
+        { value: 'widthFix', label: '缩放模式.(宽度不变)' },
+        { value: 'heightFix', label: '缩放模式.(高度不变)' },
+        { value: 'top', label: '裁剪模式.(只显示图片的顶部区域)' },
+        { value: 'bottom', label: '裁剪模式.(只显示图片的底部区域)' },
+        { value: 'center', label: '裁剪模式.(只显示图片的中间区域)' },
+        { value: 'left', label: '裁剪模式.(只显示图片的左边区域)' },
+        { value: 'right', label: '裁剪模式.(只显示图片的右边区域)' },
+        { value: 'top left', label: '裁剪模式.(只显示图片的左上边区域)' },
+        { value: 'top right	', label: '裁剪模式.(只显示图片的右上边区域)' },
+        { value: 'bottom left', label: '裁剪模式.(只显示图片的左下边区域)' },
+        { value: 'bottom right', label: '裁剪模式.(只显示图片的右下边区域)' },
+    ],
+    WeChat__clickType: [
+        { value: 'router', label: '路由' },
+    ],
+
+    WeChat__routerType: [
+        { value: 'A01', label: '仅打开' },
+        { value: 'A02', label: '保留当前页' },
+    ],
+
+
+
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },
