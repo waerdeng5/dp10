@@ -109,11 +109,12 @@ const WeChatTempTitleA01 = ({ styleData }) => {
     );
 };
 
+
 export const WeChatTempTitle = {
     WeChatTempTitleA01: {
         type: 'WeChatTempTitleA01',
         title: '通用标题模块',
         temp: WeChatTempTitleA01,
-        layout: { x: 0, y: 0, w: 12, h: 2 },
-    },
+        layout: { x: 0, y: 0, w: 10, h: 5 },
+    }
 }

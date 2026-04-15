@@ -445,11 +445,16 @@ const WeChatLoginFormList = [
 
 // TODO 首页设置
 const WeChatHomeFormList = [
+    { span: 24, formType: 'HIDDEN', name: 'pageLayout', label: 'pageLayout', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'pageConfig', label: 'pageConfig', rules: true, disabled: true },
+
     // 默认选中的导航
     { span: 24, formType: 'INPUT', name: 'tabBar_active', label: '默认选中导航UUID', rules: true },
     // 是否显示默认头
     { span: 24, formType: 'RADIO', name: 'navigationStyle', label: '头部样式', rules: true, valueEnum: MappingData.WeChat_navigationStyle },
     ...defaultHeader,
+
+
     { span: 24, formType: 'RADIO', name: 'homeTabBarType', label: '底部导航', rules: true, valueEnum: MappingData.WeChat__tabBarTemp },
     // 一号导航模板
     {
@@ -524,8 +529,8 @@ const WeChatHomeFormList = [
     },
 
     {
-        span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true, addBtn: false, delBtn: false, copy: false, title: '导航项',
-        jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
+        span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true, addBtn: false, delBtn: false, copy: false, sort: false,
+        title: '导航项', jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
             { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
             { span: 12, formType: 'INPUT', name: 'tableName', label: '导航名称', rules: true, disabled: true },
             { span: 12, formType: 'INPUT', name: 'iconUrl', label: '图标URL' },
@@ -716,6 +721,12 @@ const WeChatTempHomeA01 = [
 ]
 
 
+// TODO 固定组件
+const WeChatTempFixedA01 = [
+
+]
+
+
 
 
 export const WeChatFormConfig = {
@@ -725,5 +736,9 @@ export const WeChatFormConfig = {
 
 
     WeChatTempTitleA01,
+
     WeChatTempHomeA01,
+
+    WeChatTempFixedA01,
+
 }

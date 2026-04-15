@@ -310,6 +310,7 @@ const WeChatbaseConfig = () => {
                 if (page === 'home') setHomeData()
             }],
             ['onSaveHome', () => {
+                console.log(123)
                 WeChatInit.home.pageLayout = data.PageLayout
                 WeChatInit.home.pageConfig = data.PageConfig
                 setHomeData()

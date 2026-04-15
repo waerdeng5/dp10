@@ -1615,8 +1615,11 @@ export const MappingData = {
         { value: 'A02', label: '跳转' },
         { value: 'A03', label: '更新接口' },
     ],
+    WeChat__homeDisplay: [
+        { value: 'flex', label: '固定' },
+        { value: 'grid', label: '自动' },
 
-
+    ],
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },

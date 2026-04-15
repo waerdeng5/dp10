@@ -1,5 +1,3 @@
-
-
 // TODO 标题模块 - 通用A01
 const WeChatTempTitleA01 = {
     backgroun: '#00000000',
@@ -7,7 +5,7 @@ const WeChatTempTitleA01 = {
     height: 32,
     radius: "0",
     padding: "0",
-    margin: "8,16",
+    margin: "4,16",
     after: true,
     options: true,
     border: false,
@@ -74,14 +72,16 @@ const WeChatTempTitleA01 = {
     ]
 }
 
-
 // TODO 大屏模块 - 菜单列表
 const WeChatTempHomeA01 = {}
 
-// }
 
+// TODO 固定组件
+const WeChatTempFixedA01 = {}
 
 export const WeChatFormInit = {
     WeChatTempTitleA01,
     WeChatTempHomeA01,
+    WeChatTempFixedA01
+
 }
