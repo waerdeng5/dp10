@@ -527,13 +527,13 @@ const WeChatHomeFormList = [
             },
         ]
     },
-
     {
         span: 24, formType: 'LIST', name: 'tabBarList', label: '导航项', collapsible: true, addBtn: false, delBtn: false, copy: false, sort: false,
         title: '导航项', jugde: [{ field: 'homeTabBarType', value: ['A01'] }], children: [
             { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
-            { span: 12, formType: 'INPUT', name: 'tableName', label: '导航名称', rules: true, disabled: true },
-            { span: 12, formType: 'INPUT', name: 'iconUrl', label: '图标URL' },
+            { span: 8, formType: 'INPUT', name: 'tableName', label: '导航名称', rules: true, disabled: true },
+            { span: 8, formType: 'INPUT', name: 'iconUrl', label: '图标URL' },
+            { span: 8, formType: 'COLOR', name: 'background', label: '背景颜色', rules: true, mode: ['single'] },
         ]
     }
 ]
@@ -541,6 +541,96 @@ const WeChatHomeFormList = [
 // TODO 页面设置
 const WeChatPageFormList = [
 
+]
+
+// ??? 系统组件
+const WeChatTDesignTabs = [
+    { span: 12, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
+    { span: 12, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true },
+    { span: 12, formType: 'NUMBER', name: 'TDtabs_backDeg', label: '背景角度', rules: true },
+    { span: 24, formType: 'RADIO', name: 'TDtabs_type', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__tabsThemeType },
+    {
+        span: 24, formType: 'GROUP', name: 'TDtabs_type_line', label: '标准导航', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'TDtabs_type', value: ['line'] }], children: [
+            { span: 12, formType: 'RADIO', name: 'TDtabs_line_split', label: '分割线', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'TDtabs_line_active', label: '激活线', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'RADIO', name: 'TDtabs_line_actType', label: '激活线类型', rules: true, valueEnum: MappingData.WeChat__tabsLineType,
+                jugde: [{ field: 'TDtabs_line_active', value: [true] }]
+            },
+            { span: 12, formType: 'COLOR', name: 'TDtabs_line_actColor', label: '激活线颜色', rules: true, jugde: [{ field: 'TDtabs_line_active', value: [true] }] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'TDtabs_type_tag', label: '标签导航', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'TDtabs_type', value: ['tag'] }], children: [
+            { span: 8, formType: 'RADIO', name: 'TDtabs_tag_split', label: '分割线', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'COLOR', name: 'TDtabs_tag_def_back', label: '默认背景', rules: true, mode: ['single'] },
+            { span: 8, formType: 'COLOR', name: 'TDtabs_tag_act_back', label: '激活背景', rules: true, mode: ['single'] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'TDtabs_type_card', label: '卡片导航', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'TDtabs_type', value: ['card'] }], children: [
+            { span: 12, formType: 'COLOR', name: 'TDtabs_card_def_back', label: '默认背景', rules: true, mode: ['single'] },
+            { span: 12, formType: 'COLOR', name: 'TDtabs_card_act_back', label: '激活背景', rules: true, mode: ['single'] },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TDtabs_def_icon', label: '默认图标', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 24, formType: 'NUMBER', name: 'TDtabs_def_icon_size', label: '图标尺寸', rules: true },
+            { span: 24, formType: 'COLOR', name: 'TDtabs_def_icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'INPUT', name: 'TDtabs_def_icon_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TDtabs_act_icon', label: '激活图标', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 24, formType: 'NUMBER', name: 'TDtabs_act_icon_size', label: '图标尺寸', rules: true },
+            { span: 24, formType: 'COLOR', name: 'TDtabs_act_icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'INPUT', name: 'TDtabs_act_icon_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TDtabs_def_text', label: '默认文字', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 24, formType: 'COLOR', name: 'TDtabs_def_text_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'TDtabs_def_text_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'TDtabs_def_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'TDtabs_def_text_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'TDtabs_def_text_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'TDtabs_def_text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'TDtabs_def_text_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'TDtabs_act_text', label: '激活文字', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 24, formType: 'COLOR', name: 'TDtabs_act_text_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'TDtabs_act_text_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'TDtabs_act_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'TDtabs_act_text_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'TDtabs_act_text_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'TDtabs_act_text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'TDtabs_act_text_filed', value: [true] }]
+            },
+        ]
+    },
 ]
 
 
@@ -785,11 +875,11 @@ const WeChatTempReserveA01 = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'resA01_click_config', label: '点击事件', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'resA01_click_config', label: '点击事件', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'resA01_click', value: [true] }], children: [
             { span: 12, formType: 'RADIO', name: 'resA01_clickType', label: '事件类型', rules: true, valueEnum: MappingData.WeChat__clickType },
             {
-                span: 24, formType: 'GROUP', name: 'resA01_router', label: '路由事件', collapsible: true, defaultCollapsed: true,
+                span: 24, formType: 'GROUP', name: 'resA01_router', label: '路由事件', collapsible: true,
                 jugde: [{ field: 'resA01_clickType', value: ['router'] }], children: [
                     { span: 12, formType: 'RADIO', name: 'resA01_routerType', label: '跳转方式', rules: true, valueEnum: MappingData.WeChat__routerType },
                     { span: 12, formType: 'INPUT', name: 'resA01_routerUrl', label: '路由地址', rules: true },
@@ -807,10 +897,120 @@ const WeChatTempHomeA01 = [
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
 ]
 
-
 // TODO 固定组件
 const WeChatTempFixedA01 = [
-
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    { span: 12, formType: 'INPUT', name: 'fixedA01_margin', label: '外间距', rules: true },
+    { span: 12, formType: 'INPUT', name: 'fixedA01_padding', label: '内填充', rules: true },
+    { span: 12, formType: 'RADIO', name: 'fixedA01_nav', label: '显示导航', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'fixedA01_title', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'fixedA01_nav_config', label: '导航配置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'fixedA01_nav', value: [true] }], children: WeChatTDesignTabs
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'fixedA01_title_config', label: '标题配置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'fixedA01_title', value: [true] }], children: [
+            { span: 8, formType: 'RADIO', name: 'fixedA01_title_empty', label: '占位元素', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'NUMBER', name: 'fixedA01_title_height', label: '标题高度', rules: true },
+            { span: 8, formType: 'INPUT', name: 'fixedA01_title_margin', label: '外间距', rules: true },
+            {
+                span: 24, formType: 'GROUP', name: 'fixedA01_title_empty_config', label: '占位元素', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'fixedA01_title_empty', value: [true] }], children: [
+                    { span: 12, formType: 'NUMBER', name: 'fixedA01_title_empty_width', label: '元素宽度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'fixedA01_title_empty_height', label: '元素高度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'fixedA01_title_empty_margin', label: '外间距', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'fixedA01_title_empty_color', label: '元素颜色', rules: true, mode: ['single'] },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'fixedA01_title_zh', label: '标题样式(zh)', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'fixedA01_title_zh_margin', label: '外间距', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'fixedA01_title_zh_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'fixedA01_title_zh_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'fixedA01_title_zh_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'fixedA01_title_zh_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'fixedA01_title_zh_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'fixedA01_title_en', label: '标题样式(en)', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'fixedA01_title_en_margin', label: '外间距', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'fixedA01_title_en_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'fixedA01_title_en_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'fixedA01_title_en_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'fixedA01_title_en_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'fixedA01_title_en_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'menu_style', label: '菜单样式', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'NUMBER', name: 'menu_style_number', label: '单行菜单数量', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'menu_style_spacing', label: '左右菜单间距', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'menu_style_height', label: '菜单高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'menu_style_margin', label: '菜单外间距', rules: true },
+            {
+                span: 24, formType: 'GROUP', name: 'menu_style_text', label: '标题样式', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'menu_style_text_margin', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'menu_style_text_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'menu_style_text_color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'menu_style_text_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'menu_style_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'menu_style_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'menu_style_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'menu_style_text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'menu_style_text_filed_size', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'menu_style_text_filed', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'menu_style_text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'menu_style_text_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'menu_style_theme', label: '主题样式', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'NUMBER', name: 'menu_style_theme_left', label: '左定位', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'menu_style_theme_bottom', label: '下定位', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'menu_style_theme_width', label: '宽度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'menu_style_theme_height', label: '高度', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'group_list', label: '菜单列表', collapsible: true, defaultCollapsed: false,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'MenuGroup', label: '菜单分组', collapsible: true, defaultCollapsed: false, title: '分组',
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'groupZh', label: '分组名称(zh)', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'groupTheme', label: '主题颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'groupCn', label: '分组名称(en)', },
+                    { span: 12, formType: 'INPUT', name: 'groupIcon', label: '导航图标', },
+                    {
+                        span: 24, formType: 'LIST', name: 'GroupList', label: '菜单列表', collapsible: true, defaultCollapsed: false, title: '菜单',
+                        children: [
+                            { span: 24, formType: 'INPUT', name: 'image', label: '背景图片', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'title', label: '菜单名称', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'uuid', label: '菜单UUID', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'router', label: '路由地址', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'params', label: '路由参数' },
+                        ]
+                    },
+                ]
+            },
+        ]
+    },
 ]
 
 

@@ -210,7 +210,7 @@ export const ExcelTemplate = (props) => {
                 excelIo.open(blob, workbookObj => spread.fromJSON(workbookObj))
                 new GC.Spread.Sheets.Designer.Designer(ExcelBox.current, '', spread)
                 const text = decodeURIComponent(response.headers.get('message'))
-                notification.warning({ key: 'fromModify', message: '保存失败', description: text })
+                notification.warning({ key: 'fromModify', title: '保存失败', description: text })
                 setLoading(false)
             }
         })

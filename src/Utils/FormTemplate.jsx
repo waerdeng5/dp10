@@ -87,6 +87,7 @@ const formCallBack = e => {
 }
 
 const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack, onFormBack = 'onFormBack', fixed = false }) => {
+    const { notification } = App.useApp()
     const formRef = useRef(null)
     const [loading, setLoading] = useState(false)
 
@@ -119,6 +120,8 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
     }
     FORMEVENT.useSubscription(onFormBackFn)
 
+    const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
+
     return (
         <div className='FormTemplateClass01'>
             <Spin spinning={loading}>
@@ -131,7 +134,7 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
                     scrollToFirstError={true}
                     onValuesChange={onValuesChange}
                     onFinish={onFinish}
-                    onFinishFailed={e => console.log('表单提交失败', e)}
+                    onFinishFailed={onFinishFailed}
                     size='large'
                     submitter={NotSubmit ? false : {
                         render: (props) => {

@@ -89,7 +89,7 @@ const SetFields = ({ data, Event }) => {
     const onAddFieldsBack = (e) => {
         const status = Data.some(v => v.dataField === e.dataField)
         if (status) {
-            notification.warning({ key: 'GenerateFields', message: '警告!', description: '字段重复!!' })
+            notification.warning({ key: 'GenerateFields', title: '警告!', description: '字段重复!!' })
             FORMEVENT.emit({ type: 'closeFormLoading' })
             return
         }

@@ -710,7 +710,7 @@ const OptionsModel = ({ data, Event }) => {
             const params = roleData.map(item => ({ roleUuid: uuid, [mapping[type].params]: item }))
             const [err, res] = await axios({ method: 'post', url: mapping[type].post, params })
             if (err) return console.log('保存失败')
-            notification.success({ message: '保存成功!', description: '角色权限已更新!' })
+            notification.success({ title: '保存成功!', description: '角色权限已更新!' })
             updateModel5({})
         }
 

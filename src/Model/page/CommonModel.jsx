@@ -107,7 +107,7 @@ const CommonModel = ({ data, Event }) => {
         const onReset = async () => {
             const [err, res] = await axios({ method: 'post', url: 'users/ResetPassword', params: { uuid } })
             if (err) return console.log('重置失败')
-            notification.success({ message: '重置成功!', description: `${tableName}-${fullName} 的密码已重置!` })
+            notification.success({ title: '重置成功!', description: `${tableName}-${fullName} 的密码已重置!` })
             updateModel5({})
         }
 

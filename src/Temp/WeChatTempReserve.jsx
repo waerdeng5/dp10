@@ -15,7 +15,6 @@ const WeChatTempReserveA01 = ({ styleData }) => {
 
 
     const backStyle = {
-        width: '100%',
         height: styleData ? '100%' : 190,
         padding: SpacingCallBack(resA01_padding),
         cursor: resA01_click ? 'pointer' : 'default',

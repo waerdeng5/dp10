@@ -1648,8 +1648,16 @@ export const MappingData = {
         { value: 'A01', label: '仅打开' },
         { value: 'A02', label: '保留当前页' },
     ],
-
-
+    WeChat__tabsThemeType: [
+        { value: 'line', label: '标准' },
+        { value: 'tag', label: '标签' },
+        { value: 'card', label: '卡片' },
+    ],
+    WeChat__tabsLineType: [
+        { value: 'fixed', label: '固定长度' },
+        { value: 'auto', label: '内容长度' },
+        { value: 'full', label: '子项长度' },
+    ],
 
     // !!! 地图设置
     Mars3d__fileType: [

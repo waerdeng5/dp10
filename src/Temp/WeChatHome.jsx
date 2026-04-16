@@ -38,10 +38,6 @@ const DropdownItem = ({ START, WeChatEvent, i }) => {
                     label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSave' })}>保存配置</Button>)
                 },
                 {
-                    key: '0-0',
-                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetBack' })}>背景设置</Button>)
-                },
-                {
                     key: '0-1',
                     label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetApi' })}>接口设置</Button>)
                 },
@@ -109,6 +105,7 @@ const WeChatHome = ({ data, FormEvent }) => {
             // 通用设置
             ['onSetBack', () => {
                 console.log('设置基础背景信息')
+
             }],
             ['onSetApi', () => {
                 console.log('设置基础接口信息')
@@ -160,6 +157,7 @@ const WeChatHome = ({ data, FormEvent }) => {
         // console.log(e)
         const Mapping = new Map([
             ['onTabBarClick', () => {
+                if (data === Active) return
                 setActive(data)
             }]
         ])
@@ -177,10 +175,11 @@ const WeChatHome = ({ data, FormEvent }) => {
     }, [Active])
 
     if (PageConfig[Active]) {
+        const { background } = tabBarList.find(v => v.uuid === Active)
         return (
             <div className='WeChatHome'>
                 <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent }) }}>
-                    <div className={`Layout ${START ? 'START' : 'STOP'}`}>
+                    <div className={`Layout ${START ? 'START' : 'STOP'}`} style={{ background }}>
                         <ReactGridLayout
                             resizeConfig={{ enabled: START }}
                             dragConfig={{ enabled: START }}
