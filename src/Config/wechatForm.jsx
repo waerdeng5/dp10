@@ -949,7 +949,7 @@ const WeChatTempFixedA01 = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'menu_style', label: '菜单样式', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'menu_style', label: '菜单样式', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 12, formType: 'NUMBER', name: 'menu_style_number', label: '单行菜单数量', rules: true },
             { span: 12, formType: 'NUMBER', name: 'menu_style_spacing', label: '左右菜单间距', rules: true },
@@ -988,7 +988,7 @@ const WeChatTempFixedA01 = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'group_list', label: '菜单列表', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'group_list', label: '菜单列表', collapsible: true, defaultCollapsed: true,
         children: [
             {
                 span: 24, formType: 'LIST', name: 'MenuGroup', label: '菜单分组', collapsible: true, defaultCollapsed: false, title: '分组',
@@ -1000,9 +1000,10 @@ const WeChatTempFixedA01 = [
                     {
                         span: 24, formType: 'LIST', name: 'GroupList', label: '菜单列表', collapsible: true, defaultCollapsed: false, title: '菜单',
                         children: [
-                            { span: 24, formType: 'INPUT', name: 'image', label: '背景图片', rules: true },
                             { span: 12, formType: 'INPUT', name: 'title', label: '菜单名称', rules: true },
                             { span: 12, formType: 'INPUT', name: 'uuid', label: '菜单UUID', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'image', label: '背景图片', rules: true },
+                            { span: 12, formType: 'SELECT', name: 'mode', label: '渲染模式', rules: true, valueEnum: MappingData.WeChat__imageMode },
                             { span: 12, formType: 'INPUT', name: 'router', label: '路由地址', rules: true },
                             { span: 12, formType: 'INPUT', name: 'params', label: '路由参数' },
                         ]

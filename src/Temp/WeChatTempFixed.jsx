@@ -3,6 +3,7 @@ import './WeChatTempFixed.scss'
 import { Icon } from 'tdesign-icons-react'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
 import { WeChatFormInit } from '../Config/wechatDefault'
+import { DevScrollView } from '../Temp/DevTemplate'
 
 
 const navList = [
@@ -78,19 +79,16 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         fontStyle: TDtabs_act_text_style,
         filter: SetFilderParams(TDtabs_act_text_filed, TDtabs_act_text_filed_size, TDtabs_act_text_filed_color)
     }
-
     const navTitleStyle = {
         height: fixedA01_title_height,
         margin: SpacingCallBack(fixedA01_title_margin),
     }
-
     const titleEmpty = {
         width: fixedA01_title_empty_width,
         height: fixedA01_title_empty_height,
         margin: SpacingCallBack(fixedA01_title_empty_margin),
         background: fixedA01_title_empty_color,
     }
-
     const zhStyle = {
         margin: SpacingCallBack(fixedA01_title_zh_margin),
         color: fixedA01_title_zh_color,
@@ -101,7 +99,6 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         fontWeight: fixedA01_title_zh_weight,
         fontStyle: fixedA01_title_zh_style,
     }
-
     const enStyle = {
         margin: SpacingCallBack(fixedA01_title_en_margin),
         color: fixedA01_title_en_color,
@@ -112,20 +109,29 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         fontWeight: fixedA01_title_en_weight,
         fontStyle: fixedA01_title_en_style,
     }
-
     const menuStyle = {
         width: `calc(100% / ${menu_style_number} - ${menu_style_spacing}px)`,
         height: menu_style_height,
         margin: SpacingCallBack(menu_style_margin),
     }
 
-    // menu_style_height, menu_style_margin, menu_style_text_margin, menu_style_text_size,
-    // menu_style_text_color, menu_style_text_deg, menu_style_text_famity, menu_style_text_weight, menu_style_text_style,
-    // menu_style_text_filed, menu_style_text_filed_size, menu_style_text_filed_color,
-    // menu_style_theme_left, menu_style_theme_bottom, menu_style_theme_width, menu_style_theme_height,
+    const menuTextStyle = {
+        '--color': ColorCallBack(menu_style_text_color, menu_style_text_deg),
+        margin: SpacingCallBack(menu_style_text_margin),
+        fontSize: menu_style_text_size,
+        height: menu_style_text_size,
+        lineHeight: menu_style_text_size + 'px',
+        fontFamily: menu_style_text_famity,
+        fontWeight: menu_style_text_weight,
+        fontStyle: menu_style_text_style,
+        fitler: SetFilderParams(menu_style_text_filed, menu_style_text_filed_size, menu_style_text_filed_color),
+        '--left': menu_style_theme_left + 'px',
+        '--bottom': menu_style_theme_bottom + 'px',
+        '--width': menu_style_theme_width + 'px',
+        '--height': menu_style_theme_height + 'px',
+    }
 
 
-    console.log(MenuGroup)
 
     return (
         <div className='WeChatTempFixedA01' style={backStyle}>
@@ -185,30 +191,33 @@ const WeChatTempFixedA01 = ({ styleData }) => {
                     )
                 }
             })()}
-            <div className='navList'>
-                {MenuGroup.map((v, i) => {
-                    return (
-                        <div key={i}>
-                            {fixedA01_title &&
-                                <div className='title' style={navTitleStyle}>
-                                    {fixedA01_title_empty && <div style={titleEmpty} />}
-                                    <div style={zhStyle}>{v.groupZh}</div>
-                                    {v.groupCn && <div style={enStyle}>{v.groupCn}</div>}
+            <DevScrollView>
+                <div className='navList'>
+                    {MenuGroup.map((v, i) => {
+                        return (
+                            <div key={i}>
+                                {fixedA01_title &&
+                                    <div className='title' style={navTitleStyle}>
+                                        {fixedA01_title_empty && <div style={titleEmpty} />}
+                                        <div style={zhStyle}>{v.groupZh}</div>
+                                        {v.groupCn && <div style={enStyle}>{v.groupCn}</div>}
+                                    </div>
+                                }
+                                <div className='menuList'>
+                                    {v.GroupList.map((e, k) => {
+                                        return (
+                                            <div key={k} style={{ '--after': v.groupTheme, ...menuStyle }}>
+                                                <div style={menuTextStyle}>{e.title}</div>
+                                                <img src={e.image} alt="" />
+                                            </div>
+                                        )
+                                    })}
                                 </div>
-                            }
-                            <div className='menuList'>
-                                {v.GroupList.map((e, k) => {
-                                    return (
-                                        <div key={k} style={menuStyle}>
-                                            <div>{e.title}</div>
-                                        </div>
-                                    )
-                                })}
                             </div>
-                        </div>
-                    )
-                })}
-            </div>
+                        )
+                    })}
+                </div>
+            </DevScrollView>
         </div>
     )
 }

@@ -55,7 +55,7 @@
 
     }
 
-    &>.navList {
+    .navList {
 
         .title {
             display: flex;
@@ -70,7 +70,41 @@
             flex-wrap: wrap;
 
             &>div {
-                background: yellow;
+                position: relative;
+                z-index: 1;
+                cursor: pointer;
+
+                &>img {
+                    position: absolute;
+                    z-index: -1;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    object-fit: cover;
+                }
+
+                &>div {
+                    position: relative;
+                    z-index: 1;
+                    background: var(--color);
+                    background-clip: text;
+                    color: transparent;
+
+                    &::after {
+                        position: absolute;
+                        z-index: 1;
+                        content: '';
+                        left: var(--left);
+                        bottom: var(--bottom);
+                        width: var(--width);
+                        height: var(--height);
+                        background: var(--after);
+                    }
+                }
+
+
             }
         }
     }
