@@ -16,6 +16,8 @@ import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
 import { WeChatTempHome } from '../Temp/WeChatTempHome'
 import { WeChatTempFixed } from '../Temp/WeChatTempFixed'
 import { WeChatTempReserve } from '../Temp/WeChatTempReserve'
+import { WeChatTempTDesign } from '../Temp/WeChatTempTDesign'
+
 
 
 
@@ -26,7 +28,9 @@ const TempMapping = {
     ...WeChatTempHome,
     ...WeChatTempFixed,
     ...WeChatTempReserve,
+    ...WeChatTempTDesign,
 }
+
 
 
 const DropdownItem = ({ START, WeChatEvent, i }) => {
@@ -86,6 +90,7 @@ const DropdownItem = ({ START, WeChatEvent, i }) => {
 
 
 const WeChatHome = ({ data, FormEvent }) => {
+    const { message, modal, notification } = App.useApp()
     const { updateModel } = modelStore()
     const WeChatEvent = useEventEmitter()
     const { tabBar_active, tabBarList, pageConfig = {}, pageLayout = {} } = data
@@ -145,6 +150,7 @@ const WeChatHome = ({ data, FormEvent }) => {
             }],
             ['onTempBack', () => {
                 const { uuid } = data
+                notification.success({ key: 'onFinishFailed', title: '保存成功', description: '模块信息已更新' })
                 setPageConfig(v => ({ ...v, [Active]: { ...v[Active], [uuid]: data } }))
             }]
         ])

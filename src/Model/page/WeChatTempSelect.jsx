@@ -7,6 +7,7 @@ import { WeChatTempTitle } from '../../Temp/WeChatTempTitle'
 import { WeChatTempHome } from '../../Temp/WeChatTempHome'
 import { WeChatTempFixed } from '../../Temp/WeChatTempFixed'
 import { WeChatTempReserve } from '../../Temp/WeChatTempReserve'
+import { WeChatTempTDesign } from '../../Temp/WeChatTempTDesign'
 
 
 const Common = { ...WeChatTempTitle, ...WeChatTempReserve }
@@ -75,6 +76,31 @@ const WeChatTempSelect = ({ data, Event }) => {
                             const Template = temp
                             return (
                                 <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: WeChatTempFixed[v] })}>
+                                    <div className='temp'>
+                                        <DevScrollView>
+                                            <Template />
+                                        </DevScrollView>
+                                    </div>
+
+                                    <div className='title'>{title}</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </DevScrollView>
+            ),
+        },
+        {
+            key: '4',
+            label: 'TDesign组件',
+            children: (
+                <DevScrollView>
+                    <div className='SelectBox A04'>
+                        {Object.keys(WeChatTempTDesign).map((v) => {
+                            const { temp, title } = WeChatTempTDesign[v]
+                            const Template = temp
+                            return (
+                                <div className='Item' key={v} onClick={() => Event.emit({ type: 'onSelectTemp', data: WeChatTempTDesign[v] })}>
                                     <div className='temp'>
                                         <DevScrollView>
                                             <Template />

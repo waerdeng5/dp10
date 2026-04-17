@@ -992,7 +992,54 @@ const WeChatTempFixedA01 = [
     },
 ]
 
+// TODO TDesign组件
+// *** 选项卡Tabs ***// 
+const WeChatTempTDesignTabs = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    ...WeChatTDesignTabs,
+    // 导航设置
+    {
+        span: 24, formType: 'GROUP', name: 'tabs_list_config', label: '导航信息', collapsible: true, defaultCollapsed: false,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'TabsList', label: '导航分组', collapsible: true, defaultCollapsed: false, title: '导航',
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'uuid', label: '关联id', tooltip: '数据菜单uuid' },
+                    { span: 12, formType: 'INPUT', name: 'name', label: '导航名称', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'icon', label: '导航图标', rules: true },
+                ]
+            }
+        ]
+    }
+]
 
+// *** 轮播图Swiper ***// 
+const WeChatTempTDesignSwiper = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    {
+        span: 24, formType: 'GROUP', name: 'base_config', label: '基础配置', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'backgroun', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'backDeg', label: '背景角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'padding', label: '内填充', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'number', label: '同时显示数量', rules: true },
+            { span: 12, formType: 'RADIO', name: 'direction', label: '滚动方向', rules: true, valueEnum: MappingData.Charts__VChartsDirectionA01 },
+            { span: 12, formType: 'RADIO', name: 'controls', label: '切换按钮', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'autoplay', label: '自动播放', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'loop', label: '循环播放', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'NUMBER', name: 'duration', label: '滑动时长', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'interval', label: '轮播间隔', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'previous', label: '前方间距', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'next', label: '后方间距', rules: true },
+            { span: 12, formType: 'SELECT', name: 'easing', label: '动画效果', rules: true, valueEnum: MappingData.WeChat__swiperEasingType },
+            { span: 12, formType: 'SELECT', name: 'image', label: '图片渲染', rules: true, valueEnum: MappingData.WeChat__imageMode },
+            { span: 12, formType: 'SELECT', name: 'pagination', label: '指示器位置', rules: true, valueEnum: MappingData.WeChat__swiperPagination },
+            { span: 12, formType: 'RADIO', name: 'paginationType', label: '指示器类型', rules: true, valueEnum: MappingData.WeChat__swiperPaginationType },
+        ]
+    },
+]
 
 
 export const WeChatFormConfig = {
@@ -1007,5 +1054,8 @@ export const WeChatFormConfig = {
     WeChatTempHomeA01,
 
     WeChatTempFixedA01,
+
+    WeChatTempTDesignTabs,
+    WeChatTempTDesignSwiper,
 
 }

@@ -1658,6 +1658,27 @@ export const MappingData = {
         { value: 'auto', label: '内容长度' },
         { value: 'full', label: '子项长度' },
     ],
+    WeChat__swiperEasingType: [
+        { value: 'default', label: '默认动画' },
+        { value: 'linear', label: '线性动画' },
+        { value: 'easeInCubic', label: '缓入动画' },
+        { value: 'easeOutCubic', label: '缓出动画' },
+        { value: 'easeInOutCubic', label: '缓入缓出' },
+    ],
+    WeChat__swiperPagination: [
+        { value: 'top', label: '正上' },
+        { value: 'top-left', label: '左上' },
+        { value: 'top-right', label: '右上' },
+        { value: 'bottom', label: '正下' },
+        { value: 'bottom-left', label: '左下' },
+        { value: 'bottom-right', label: '右下' },
+    ],
+    WeChat__swiperPaginationType: [
+        { value: 'dots', label: '点状' },
+        { value: 'dots-bar', label: '点条' },
+        { value: 'fraction', label: '分式' },
+    ],
+
 
     // !!! 地图设置
     Mars3d__fileType: [

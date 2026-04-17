@@ -15,9 +15,6 @@ const navList = [
 
 const WeChatTempFixedA01 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempFixedA01
-
-    console.log(config)
-
     const {
         fixedA01_padding, fixedA01_nav, fixedA01_title,
         TDtabs_icon, TDtabs_height, TDtabs_back, TDtabs_type,
@@ -112,7 +109,6 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         height: menu_style_height,
         margin: SpacingCallBack(menu_style_margin),
     }
-
     const menuTextStyle = {
         '--color': ColorCallBack(menu_style_text_color, menu_style_text_deg),
         margin: SpacingCallBack(menu_style_text_margin),
@@ -128,9 +124,6 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         '--width': menu_style_theme_width + 'px',
         '--height': menu_style_theme_height + 'px',
     }
-
-
-
     return (
         <div className='WeChatTempFixedA01' style={backStyle}>
             {fixedA01_nav && (() => {

@@ -159,12 +159,43 @@ const WeChatTempFixedA01 = {
     menu_style_theme_height: 4,
 }
 
+// TODO  TDesign组件
+const WeChatTempTDesignTabs = {
+    TDtabs_icon: true,
+    TDtabs_height: 44,
+    TDtabs_back: "#ffffff",
+    TDtabs_type: "line",
+    TDtabs_line_split: true,
+    TDtabs_line_active: true,
+    TDtabs_line_actType: "fixed",
+    TDtabs_line_actColor: "#13a8a8",
+    TDtabs_def_icon_size: 20,
+    TDtabs_def_icon_color: "#888888",
+    TDtabs_def_icon_margin: "0,2",
+    TDtabs_act_icon_size: 20,
+    TDtabs_act_icon_color: "#13a8a8",
+    TDtabs_act_icon_margin: "0,2",
+    TDtabs_def_text_color: "#888888",
+    TDtabs_def_text_size: 16,
+    TDtabs_def_text_famity: "ShuHeiTi",
+    TDtabs_def_text_weight: 400,
+    TDtabs_def_text_style: "normal",
+    TDtabs_act_text_color: "#13a8a8",
+    TDtabs_act_text_size: 16,
+    TDtabs_act_text_famity: "汉真广标",
+    TDtabs_act_text_weight: 400,
+    TDtabs_act_text_style: "normal",
+}
 
+const WeChatTempTDesignSwiper = {}
 
 export const WeChatFormInit = {
     WeChatTempTitleA01,
     WeChatTempReserveA01,
     WeChatTempHomeA01,
-    WeChatTempFixedA01
+    WeChatTempFixedA01,
+
+    WeChatTempTDesignTabs,
+    WeChatTempTDesignSwiper
 
 }
