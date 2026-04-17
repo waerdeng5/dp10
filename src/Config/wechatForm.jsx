@@ -545,10 +545,9 @@ const WeChatPageFormList = [
 
 // ??? 系统组件
 const WeChatTDesignTabs = [
-    { span: 12, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 12, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
-    { span: 12, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true },
-    { span: 12, formType: 'NUMBER', name: 'TDtabs_backDeg', label: '背景角度', rules: true },
+    { span: 8, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
+    { span: 8, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true },
     { span: 24, formType: 'RADIO', name: 'TDtabs_type', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__tabsThemeType },
     {
         span: 24, formType: 'GROUP', name: 'TDtabs_type_line', label: '标准导航', collapsible: true, defaultCollapsed: false,
@@ -573,8 +572,7 @@ const WeChatTDesignTabs = [
     {
         span: 24, formType: 'GROUP', name: 'TDtabs_type_card', label: '卡片导航', collapsible: true, defaultCollapsed: false,
         jugde: [{ field: 'TDtabs_type', value: ['card'] }], children: [
-            { span: 12, formType: 'COLOR', name: 'TDtabs_card_def_back', label: '默认背景', rules: true, mode: ['single'] },
-            { span: 12, formType: 'COLOR', name: 'TDtabs_card_act_back', label: '激活背景', rules: true, mode: ['single'] },
+            { span: 24, formType: 'COLOR', name: 'TDtabs_card_act_back', label: '激活背景', rules: true, mode: ['single'] },
         ]
     },
     {
@@ -601,15 +599,6 @@ const WeChatTDesignTabs = [
             { span: 24, formType: 'SELECT', name: 'TDtabs_def_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
             { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
             { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-            { span: 24, formType: 'RADIO', name: 'TDtabs_def_text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
-            {
-                span: 24, formType: 'INPUT', name: 'TDtabs_def_text_filed_size', label: '阴影数值', rules: true,
-                jugde: [{ field: 'TDtabs_def_text_filed', value: [true] }]
-            },
-            {
-                span: 24, formType: 'COLOR', name: 'TDtabs_def_text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
-                jugde: [{ field: 'TDtabs_def_text_filed', value: [true] }]
-            },
         ]
     },
     {
@@ -620,15 +609,6 @@ const WeChatTDesignTabs = [
             { span: 24, formType: 'SELECT', name: 'TDtabs_act_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
             { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
             { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-            { span: 24, formType: 'RADIO', name: 'TDtabs_act_text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
-            {
-                span: 24, formType: 'INPUT', name: 'TDtabs_act_text_filed_size', label: '阴影数值', rules: true,
-                jugde: [{ field: 'TDtabs_act_text_filed', value: [true] }]
-            },
-            {
-                span: 24, formType: 'COLOR', name: 'TDtabs_act_text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
-                jugde: [{ field: 'TDtabs_act_text_filed', value: [true] }]
-            },
         ]
     },
 ]
@@ -824,7 +804,6 @@ const WeChatTempReserveA01 = [
                 span: 12, formType: 'COLOR', name: 'resA01_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
                 jugde: [{ field: 'resA01_filed', value: [true] }]
             },
-
         ]
     },
     {
@@ -901,10 +880,9 @@ const WeChatTempHomeA01 = [
 const WeChatTempFixedA01 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
-    { span: 12, formType: 'INPUT', name: 'fixedA01_margin', label: '外间距', rules: true },
-    { span: 12, formType: 'INPUT', name: 'fixedA01_padding', label: '内填充', rules: true },
-    { span: 12, formType: 'RADIO', name: 'fixedA01_nav', label: '显示导航', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 12, formType: 'RADIO', name: 'fixedA01_title', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'INPUT', name: 'fixedA01_padding', label: '内填充', rules: true },
+    { span: 8, formType: 'RADIO', name: 'fixedA01_nav', label: '显示导航', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'fixedA01_title', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
         span: 24, formType: 'GROUP', name: 'fixedA01_nav_config', label: '导航配置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'fixedA01_nav', value: [true] }], children: WeChatTDesignTabs

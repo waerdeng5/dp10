@@ -16,11 +16,13 @@ const navList = [
 const WeChatTempFixedA01 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempFixedA01
 
+    console.log(config)
+
     const {
-        fixedA01_margin, fixedA01_padding, fixedA01_nav, fixedA01_title,
-        TDtabs_icon, TDtabs_height, TDtabs_back, TDtabs_backDeg, TDtabs_type,
+        fixedA01_padding, fixedA01_nav, fixedA01_title,
+        TDtabs_icon, TDtabs_height, TDtabs_back, TDtabs_type,
         TDtabs_line_split, TDtabs_line_active, TDtabs_line_actType, TDtabs_line_actColor,  // 标准导航
-        TDtabs_tag_split, TDtabs_tag_def_back, TDtabs_tag_act_back, TDtabs_card_def_back, TDtabs_card_act_back,
+        TDtabs_tag_split, TDtabs_tag_def_back, TDtabs_tag_act_back, TDtabs_card_act_back,
         TDtabs_def_icon_size, TDtabs_def_icon_color, TDtabs_def_icon_margin,  // 默认图标
         TDtabs_act_icon_size, TDtabs_act_icon_color, TDtabs_act_icon_margin,  // 激活图标
         TDtabs_def_text_color, TDtabs_def_text_size, TDtabs_def_text_famity, TDtabs_def_text_weight, TDtabs_def_text_style,
@@ -38,16 +40,12 @@ const WeChatTempFixedA01 = ({ styleData }) => {
         MenuGroup
     } = config
 
-
-
-
     const backStyle = {
         padding: SpacingCallBack(fixedA01_padding),
-        margin: SpacingCallBack(fixedA01_margin),
     }
     const navStyle = {
         height: SpacingCallBack(TDtabs_height),
-        background: ColorCallBack(TDtabs_back, TDtabs_backDeg),
+        background: TDtabs_back,
     }
     const iconDef = {
         fontSize: TDtabs_def_icon_size,
@@ -175,13 +173,12 @@ const WeChatTempFixedA01 = ({ styleData }) => {
                     )
                 }
                 if (TDtabs_type === 'card') {// 卡片导航
-                    TDtabs_card_def_back, TDtabs_card_act_back
                     return (
                         <div className='nav card' style={navStyle}>
                             {navList.map(v => {
                                 const status = v.uuid === 2
                                 return (
-                                    <div key={v.uuid} style={{ background: status ? TDtabs_card_act_back : TDtabs_card_def_back }}>
+                                    <div key={v.uuid} style={{ background: status ? TDtabs_card_act_back : 'transparent' }}>
                                         {TDtabs_icon && <Icon name={v.icon} style={status ? iconAct : iconDef} />}
                                         <div style={status ? navTextAlt : navTextDef}>{v.title}</div>
                                     </div>
