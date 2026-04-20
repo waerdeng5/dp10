@@ -34,6 +34,7 @@ const headerTopCommon = [
     }
 ]
 
+
 // ??? 默认头部设置
 const defaultHeader = [
     {
@@ -543,7 +544,41 @@ const WeChatPageFormList = [
 
 ]
 
+// ??? 接口配置
+const WeChatAPIUrl = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    {
+        span: 24, formType: 'LIST', name: 'dataList', label: '数据配置', collapsible: true, children: [
+            { span: 12, formType: 'INPUT', name: 'api_name', label: '接口名称', rules: true },
+            { span: 12, formType: 'RADIO', name: 'dataSource', label: '数据来源', rules: true, valueEnum: MappingData.WeChat__dataSourceType },
+            {
+                span: 24, formType: 'GROUP', name: 'api_config', label: '接口配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'dataSource', value: ['api'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'api_murl', label: '接口地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'api_params', label: '接口参数', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'api_extra', label: '额外域名', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'fix_config', label: '接口配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'dataSource', value: ['fix'] }], children: [
+                    // 接口数据
+                    // 数据名称 - 数据类型 - 自定义数据
+                ]
+            },
+        ]
+    },
+
+
+
+
+
+
+]
+
 // ??? 系统组件
+// tabs 选项卡
 const WeChatTDesignTabs = [
     { span: 8, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
@@ -613,6 +648,7 @@ const WeChatTDesignTabs = [
     },
 ]
 
+// ??? 数据配置
 
 // !!! 页面组件
 // TODO 标题组件 - A01
@@ -1018,12 +1054,22 @@ const WeChatTempTDesignTabs = [
 const WeChatTempTDesignSwiper = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    // 数据来源
     {
-        span: 24, formType: 'GROUP', name: 'base_config', label: '基础配置', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'data_config', label: '数据配置', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'dataSource', label: '数据来源', rules: true, valueEnum: MappingData.WeChat__dataSourceType },
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'base_config', label: '基础配置', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 12, formType: 'COLOR', name: 'backgroun', label: '背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'backDeg', label: '背景角度', rules: true },
-            { span: 12, formType: 'NUMBER', name: 'padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'imageRadius', label: '轮播圆角', rules: true },
+            { span: 12, formType: 'INPUT', name: 'imagePadding', label: '图片间距', rules: true },
             { span: 12, formType: 'NUMBER', name: 'number', label: '同时显示数量', rules: true },
             { span: 12, formType: 'RADIO', name: 'direction', label: '滚动方向', rules: true, valueEnum: MappingData.Charts__VChartsDirectionA01 },
             { span: 12, formType: 'RADIO', name: 'controls', label: '切换按钮', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -1039,6 +1085,32 @@ const WeChatTempTDesignSwiper = [
             { span: 12, formType: 'RADIO', name: 'paginationType', label: '指示器类型', rules: true, valueEnum: MappingData.WeChat__swiperPaginationType },
         ]
     },
+    {
+        span: 24, formType: 'GROUP', name: 'pagination_dots', label: '点状指示器', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'paginationType', value: ['dots'] }], children: [
+            { span: 8, formType: 'NUMBER', name: 'dotsSize', label: '背景角度', rules: true },
+            { span: 8, formType: 'COLOR', name: 'dotsDefault', label: '默认颜色', rules: true, mode: ['single'] },
+            { span: 8, formType: 'COLOR', name: 'dotsActive', label: '激活颜色', rules: true, mode: ['single'] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'pagination_dots-bar', label: '点条指示器', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'paginationType', value: ['dots-bar'] }], children: [
+            { span: 8, formType: 'NUMBER', name: 'dotsSize', label: '背景角度', rules: true },
+            { span: 8, formType: 'COLOR', name: 'dotsDefault', label: '默认颜色', rules: true, mode: ['single'] },
+            { span: 8, formType: 'COLOR', name: 'dotsActive', label: '激活颜色', rules: true, mode: ['single'] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'pagination_fraction', label: '分式指示器', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'paginationType', value: ['fraction'] }], children: [
+            { span: 12, formType: 'COLOR', name: 'fraBack', label: '背景颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'COLOR', name: 'fraColor', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 8, formType: 'NUMBER', name: 'fraHeight', label: '高度', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'fraSize', label: '字号', rules: true },
+            { span: 8, formType: 'SELECT', name: 'fraFamily', label: '字体', rules: true, valueEnum: MappingData.Font__Family },
+        ]
+    },
 ]
 
 
@@ -1047,6 +1119,7 @@ export const WeChatFormConfig = {
     WeChatHomeFormList,
     WeChatPageFormList,
 
+    WeChatAPIUrl,
 
     WeChatTempTitleA01,
     WeChatTempReserveA01,

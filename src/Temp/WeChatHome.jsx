@@ -93,10 +93,11 @@ const WeChatHome = ({ data, FormEvent }) => {
     const { message, modal, notification } = App.useApp()
     const { updateModel } = modelStore()
     const WeChatEvent = useEventEmitter()
-    const { tabBar_active, tabBarList, pageConfig = {}, pageLayout = {} } = data
+    const { tabBar_active, tabBarList, pageConfig = {}, pageLayout = {}, pageApiData = {} } = data
     const [Active, setActive] = useState(tabBar_active)
     const [PageLayout, setPageLayout] = useState(pageLayout)
     const [PageConfig, setPageConfig] = useState(pageConfig)
+    const [PageApiData, setPageApiData] = useState(pageApiData)
     const [START, setSTART] = useState(false)
 
 
@@ -104,18 +105,23 @@ const WeChatHome = ({ data, FormEvent }) => {
         const { type, data } = e
         // console.log(e)
         const Mapping = new Map([
-            ['onSave', () => FormEvent.emit({ type: 'onSaveHome', data: { PageLayout, PageConfig } })],
+            ['onSave', () => FormEvent.emit({ type: 'onSaveHome', data: { PageLayout, PageConfig, PageApiData } })],
             ['onStart', () => setSTART(true)],
             ['onStop', () => setSTART(false)],
-            // 通用设置
-            ['onSetBack', () => {
-                console.log('设置基础背景信息')
-
-            }],
             ['onSetApi', () => {
-                console.log('设置基础接口信息')
+                updateModel({
+                    title: '数据信息',
+                    type: 'CommonForm',
+                    Event: WeChatEvent,
+                    width: 1200,
+                    modelData: {
+                        formItem: 'WeChatAPIUrl',
+                        eventBack: 'onApiBack',
+                        Initial: { uuid: Active, ...PageApiData[Active] },
+                        NotLoading: true,
+                    }
+                })
             }],
-            // 组件设置
             ['onAdd', () => updateModel({ title: '小程序组件列表', type: 'WeChatTempSelect', Event: WeChatEvent })],
             ['onSelectTemp', () => {
                 const uuid = v4()
@@ -152,6 +158,10 @@ const WeChatHome = ({ data, FormEvent }) => {
                 const { uuid } = data
                 notification.success({ key: 'onFinishFailed', title: '保存成功', description: '模块信息已更新' })
                 setPageConfig(v => ({ ...v, [Active]: { ...v[Active], [uuid]: data } }))
+            }],
+            ['onApiBack', () => {
+                const { uuid } = data
+                setPageApiData(v => ({ ...v, [uuid]: data }))
             }]
         ])
         const func = Mapping.get(type)
@@ -178,6 +188,7 @@ const WeChatHome = ({ data, FormEvent }) => {
     useEffect(() => {
         if (!PageLayout[Active]) setPageLayout(e => ({ ...e, [Active]: [] }))   // 初始化布局信息
         if (!PageConfig[Active]) setPageConfig(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
+        if (!pageApiData[Active]) setPageApiData(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
     }, [Active])
 
     if (PageConfig[Active]) {

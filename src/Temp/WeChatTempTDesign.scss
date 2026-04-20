@@ -60,9 +60,84 @@
     width: 100%;
     height: 100%;
 
+    &>video {
+        width: 100%;
+        height: 100%;
+
+    }
+
     &>.swiper {
         width: 100%;
         height: 100%;
-        background: yellow;
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.35);
+        border-radius: 8px;
+
+        &>.controls {
+            position: absolute;
+            z-index: -1;
+            width: calc(100% - 12px);
+            left: 6px;
+            top: calc(50% - 12px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            pointer-events: none;
+
+            &>span {
+                font-size: 24px;
+                color: rgba(0, 0, 0, 0.5);
+                cursor: pointer;
+                pointer-events: auto;
+            }
+        }
+
+        &>.pagination {
+            position: absolute;
+
+            &>.dots {
+                width: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &>div {
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50px;
+
+                    &:nth-child(3) {
+                        background: var(--activeDots) !important;
+                    }
+                }
+            }
+
+            &>.bar {
+                width: 64px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &>div {
+                    border-radius: 50px;
+
+                    &:nth-child(3) {
+                        background: var(--activeDots) !important;
+                        width: 24px !important;
+                    }
+                }
+            }
+
+            &>.frac {
+                height: 24px;
+                padding: 0 8px;
+                background: rgba(0, 0, 0, .5);
+                border-radius: 50px;
+                color: white;
+            }
+
+
+        }
     }
 }

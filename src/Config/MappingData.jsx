@@ -1678,6 +1678,10 @@ export const MappingData = {
         { value: 'dots-bar', label: '点条' },
         { value: 'fraction', label: '分式' },
     ],
+    WeChat__dataSourceType: [
+        { value: 'api', label: '接口数据' },
+        { value: 'fix', label: '固定数据' },
+    ],
 
 
     // !!! 地图设置

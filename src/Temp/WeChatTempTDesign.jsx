@@ -1,8 +1,10 @@
 import './WeChatTempTDesign.scss'
 
 import { Icon } from 'tdesign-icons-react'
+
+import { LeftCircleFilled, RightCircleFilled } from '@ant-design/icons';
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
-import { WeChatFormInit } from '../Config/wechatDefault'
+import { WeChatFormInit, } from '../Config/wechatDefault'
 
 
 const navList = [
@@ -121,31 +123,75 @@ const WeChatTempTDesignTabs = ({ styleData }) => {
 };
 
 
-const imageCdn = 'https://tdesign.gtimg.com/mobile/demos'
-const swiperList = [
-    `${imageCdn}/swiper1.png`,
-    `${imageCdn}/swiper2.png`,
-    `${imageCdn}/swiper1.png`,
-    `${imageCdn}/swiper2.png`,
-    `${imageCdn}/swiper1.png`,
-]
 const WeChatTempTDesignSwiper = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempTDesignSwiper
 
-    const { backgroun, backDeg, padding, number, direction, controls, autoplay, loop, duration, interval, previous, next, easing, image, pagination, paginationType } = config
-
+    const { backgroun, backDeg, padding, controls, pagination, paginationType, imageRadius, dotsSize, dotsDefault, dotsActive,
+        fraBack, fraColor, fraHeight, fraSize, fraFamily
+    } = config
 
     const backStyle = {
         background: ColorCallBack(backgroun, backDeg),
         padding: SpacingCallBack(padding)
     }
 
+    const paginationData = {
+        'top': { top: 6, left: '50%', transform: 'translateX(-50%)' },
+        'top-left': { top: 6, left: 6 }, 'top-right': { top: 6, right: 6 },
+        'bottom': { bottom: 6, left: '50%', transform: 'translateX(-50%)' },
+        'bottom-left': { bottom: 6, left: 6 }, 'bottom-right': { bottom: 6, right: 6 },
+    }
 
+    const swiperStyle = {
+        borderRadius: imageRadius,
+    }
 
+    const dotsStyle = {
+        width: dotsSize,
+        height: dotsSize,
+        background: dotsDefault,
+        '--activeDots': dotsActive
+    }
+
+    const fracStyle = {
+        background: fraBack,
+        color: fraColor,
+        height: fraHeight,
+        fontSize: fraSize,
+        fontFamily: fraFamily,
+    }
+
+    // 
     return (
-        <div className='WeChatTempTDesignSwiper' style={backStyle}>
-            <div className="swiper">
-                {/* 分页器 */}
+        <div className='WeChatTempTDesignSwiper' style={backStyle} >
+            <div className="swiper" style={swiperStyle}>
+                {controls &&
+                    <div className='controls'>
+                        <LeftCircleFilled />
+                        <RightCircleFilled />
+                    </div>
+                }
+                <div className='pagination' style={paginationData[pagination]}>
+                    {paginationType === 'dots' &&
+                        <div className='dots'>
+                            {[...Array(5).keys()].map((v, i) => (
+                                <div key={i} className='dot' style={dotsStyle} />
+                            ))}
+                        </div>
+                    }
+                    {paginationType === 'dots-bar' &&
+                        <div className='bar'>
+                            {[...Array(5).keys()].map((v, i) => (
+                                <div key={i} className='dot' style={dotsStyle} />
+                            ))}
+                        </div>
+                    }
+                    {paginationType === 'fraction' &&
+                        <div className='frac' style={fracStyle}>
+                            <div>3/5</div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     )
