@@ -557,7 +557,7 @@ const WeChatAPIUrl = [
                     { span: 12, formType: 'RADIO', name: 'api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
                     { span: 12, formType: 'INPUT', name: 'api_murl', label: '接口地址', rules: true },
                     { span: 12, formType: 'INPUT', name: 'api_params', label: '接口参数', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'api_extra', label: '额外域名', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'api_extra', label: '额外域名' },
                 ]
             },
             {
@@ -569,12 +569,6 @@ const WeChatAPIUrl = [
             },
         ]
     },
-
-
-
-
-
-
 ]
 
 // ??? 系统组件
@@ -583,7 +577,8 @@ const WeChatTDesignTabs = [
     { span: 8, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
     { span: 8, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true },
-    { span: 24, formType: 'RADIO', name: 'TDtabs_type', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__tabsThemeType },
+    { span: 12, formType: 'RADIO', name: 'TDtabs_type', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__tabsThemeType },
+    { span: 12, formType: 'RADIO', name: 'TDtabs_switch', label: '切换事件', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
         span: 24, formType: 'GROUP', name: 'TDtabs_type_line', label: '标准导航', collapsible: true, defaultCollapsed: false,
         jugde: [{ field: 'TDtabs_type', value: ['line'] }], children: [
@@ -608,6 +603,12 @@ const WeChatTDesignTabs = [
         span: 24, formType: 'GROUP', name: 'TDtabs_type_card', label: '卡片导航', collapsible: true, defaultCollapsed: false,
         jugde: [{ field: 'TDtabs_type', value: ['card'] }], children: [
             { span: 24, formType: 'COLOR', name: 'TDtabs_card_act_back', label: '激活背景', rules: true, mode: ['single'] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'TDtabs_switch_config', label: '切换事件', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'TDtabs_switch', value: [true] }], children: [
+            // 更新接口名称 - 携带参数 参数名称 阐述值
         ]
     },
     {
@@ -1036,10 +1037,10 @@ const WeChatTempTDesignTabs = [
     ...WeChatTDesignTabs,
     // 导航设置
     {
-        span: 24, formType: 'GROUP', name: 'tabs_list_config', label: '导航信息', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'tabs_list_config', label: '导航信息', collapsible: true, defaultCollapsed: true,
         children: [
             {
-                span: 24, formType: 'LIST', name: 'TabsList', label: '导航分组', collapsible: true, defaultCollapsed: false, title: '导航',
+                span: 24, formType: 'LIST', name: 'TabsList', label: '导航分组', collapsible: true, title: '导航',
                 children: [
                     { span: 24, formType: 'INPUT', name: 'uuid', label: '关联id', tooltip: '数据菜单uuid' },
                     { span: 12, formType: 'INPUT', name: 'name', label: '导航名称', rules: true },
@@ -1056,10 +1057,11 @@ const WeChatTempTDesignSwiper = [
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
     // 数据来源
     {
-        span: 24, formType: 'GROUP', name: 'data_config', label: '数据配置', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'data_config', label: '数据配置', collapsible: true, defaultCollapsed: true,
         children: [
-            { span: 12, formType: 'RADIO', name: 'dataSource', label: '数据来源', rules: true, valueEnum: MappingData.WeChat__dataSourceType },
-
+            { span: 8, formType: 'INPUT', name: 'APIName', label: '接口名称', rules: true },
+            { span: 8, formType: 'INPUT', name: 'APILevel', label: '数据层级' },
+            { span: 8, formType: 'INPUT', name: 'APIImage', label: '图片字段' },
         ]
     },
     {
