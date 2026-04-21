@@ -641,7 +641,7 @@ const CommonModel = ({ data, Event }) => {
                     redirect_uri: window.encodeURI('https://common-redirect.ljkjkf.com'),
                     state: state,
                     style: 'black',
-                    href: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/WebTemplate/code.css',
+                    href: 'https://aloss.ljkjkf.com/WebConfigFile/image/WebTemplate/code.css',
                 }
                 var eventSource = new EventSource(get)
                 eventSource.onopen = () => new window.WxLogin(codeData)

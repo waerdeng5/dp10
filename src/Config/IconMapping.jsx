@@ -461,7 +461,7 @@ import {
     DeleteFilled,
 } from '@ant-design/icons'
 
-const MyIcon = createFromIconfontCN({ scriptUrl: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Common/icon.js' })
+const MyIcon = createFromIconfontCN({ scriptUrl: 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/icon.js' })
 
 export const ICONMapping = {
     weixingongzhonghao: <MyIcon type="icon-weixingongzhonghao" />,

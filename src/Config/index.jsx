@@ -1,17 +1,17 @@
-// export const CommonUrl = 'https://image.ljkjkf.com/intellisiteSystem_TieKe/ImageData/'
+// export const CommonUrl = 'https://aloss.ljkjkf.com/WebConfigFile/ImageData/'
 
 // TODO 场景相关
 export const CommonSceneUrl = {
-    forge: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/forge/',
-    gltf: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/gltf/',
-    img: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/img/',
-    json: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/json/',
-    kml: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/kml/',
-    other: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/other/',
-    tiles: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/tiles/',
+    forge: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/forge/',
+    gltf: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/gltf/',
+    img: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/img/',
+    json: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/json/',
+    kml: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/kml/',
+    other: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/other/',
+    tiles: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/tiles/',
 }
-export const CommonUrl = 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Common/'
-export const CommonWeChatUrl = 'https://image.ljkjkf.com/intellisiteSystem_TieKe/WeChat/Admin01'
+export const CommonUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/'
+export const CommonWeChatUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/WeChat/Admin01'
 
 export const UserAvatar = {
     AvatarA01: `${CommonUrl}images/Avatar/AvatarA01.webp`,
@@ -915,11 +915,11 @@ export const TemplateParamsMapping = {
         api_source: 'A01',
         left_img: true,
         right_img: true,
-        left_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/indexL.png',
+        left_img_url: 'https://aloss.ljkjkf.com/WebConfigFile/jtgj/indexL.png',
         left_img_width: 92,
         left_img_height: 270,
         left_img_margin: '0',
-        right_img_url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/jtgj/intelligence.gif',
+        right_img_url: 'https://aloss.ljkjkf.com/WebConfigFile/jtgj/intelligence.gif',
         right_img_width: 320,
         right_img_height: 320,
         right_img_margin: '0',
@@ -1090,7 +1090,7 @@ export const formDefaultInit = {
         logo_flex_direction: "row",
         logo_flex_wrap: "nowrap",
         logo_height: 54,
-        logo_icon: "https://image.ljkjkf.com/intellisiteSystem_TieKe/gjeq/switchLogo.png",
+        logo_icon: "https://aloss.ljkjkf.com/WebConfigFile/gjeq/switchLogo.png",
         logo_icon_margin: "0,8",
         logo_icon_padding: "4",
         logo_icon_shadowC: "#1677ff4d",

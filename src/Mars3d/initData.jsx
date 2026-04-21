@@ -147,7 +147,7 @@ export const layerList = [
     // {
     //     id: 'handMovement',
     //     type: 'kml',
-    //     url: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/kml/同绥平面.kml',
+    //     url: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/kml/同绥平面.kml',
     //     symbol: { styleOptions: { color: 'red', width: 2, clampToGround: true } },
     //     show: true
     // },
@@ -2132,7 +2132,7 @@ const billboardP = {
     type: 'billboardP',
     show: true,
     style: {
-        image: 'https://image.ljkjkf.com/intellisiteSystem_TieKe/Scene/img/route-start.png',
+        image: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/img/route-start.png',
         scale: 1,
         opacity: 1,
         rotationDegree: 0,
