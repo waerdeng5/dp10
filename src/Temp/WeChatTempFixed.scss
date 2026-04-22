@@ -109,3 +109,23 @@
         }
     }
 }
+
+.WeChatTempFixedA02 {
+    &>.divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>div:nth-child(1),
+        &>div:nth-child(3) {
+            flex: 1;
+            height: 1px;
+            border-bottom: 1px var(--type) var(--color);
+        }
+
+        &>div:nth-child(2) {
+            margin: 0 16px;
+        }
+
+    }
+}

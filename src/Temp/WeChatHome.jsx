@@ -20,9 +20,6 @@ import { WeChatTempTDesign } from '../Temp/WeChatTempTDesign'
 
 
 
-
-
-
 const TempMapping = {
     ...WeChatTempTitle,
     ...WeChatTempHome,
@@ -33,7 +30,7 @@ const TempMapping = {
 
 
 
-const DropdownItem = ({ START, WeChatEvent, i }) => {
+const DropdownItem = ({ START, WeChatEvent, i, type }) => {
     return ([
         {
             key: '0-0', type: 'group', label: '全局设置', children: [
@@ -65,6 +62,10 @@ const DropdownItem = ({ START, WeChatEvent, i }) => {
         },
         START && i && {
             key: '2-0', type: 'group', label: '模块操作', children: [
+                type === 'WeChatTempFixedA02' && {
+                    key: '2-list',
+                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetListType', data: i })}>列表样式</Button>)
+                },
                 {
                     key: '2-1',
                     label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetTemp', data: i })}>修改模块</Button>)
@@ -162,6 +163,20 @@ const WeChatHome = ({ data, FormEvent }) => {
             ['onApiBack', () => {
                 const { uuid } = data
                 setPageApiData(v => ({ ...v, [uuid]: data }))
+            }],
+            // 特殊模块额外操作
+            ['onSetListType', () => {
+                updateModel({
+                    title: '选择列表',
+                    type: 'CommonModel',
+                    Event: WeChatEvent,
+                    modelData: { openType: 'WeChatTempList', Initial: data }
+                })
+            }],
+            ['onFixedList', () => {
+                const { uuid, temp } = data
+                PageConfig[Active][uuid].temp = temp
+                setPageConfig({ ...PageConfig })
             }]
         ])
         const func = Mapping.get(type)
@@ -213,7 +228,7 @@ const WeChatHome = ({ data, FormEvent }) => {
                                 const Template = TempMapping[type].temp
                                 return (
                                     <div className={`layoutItem ${START ? 'START' : 'STOP'}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
-                                        <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i }) }}>
+                                        <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i, type }) }}>
                                             <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
                                                 {START && <div className='SizeData'>{v.w}0% * {v.h * 8}px</div>}
                                                 <Template styleData={styleData} />

@@ -362,3 +362,42 @@
         height: 100%;
     }
 }
+
+.WeChatTempList {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+
+    &>.item {
+        width: 430px;
+        height: 640px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        margin: 8px;
+        padding: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+
+        &>div:first-child {
+            flex: 1;
+        }
+
+        &>div:last-child {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            font-family: ShuHeiTi;
+            font-weight: normal;
+            font-size: 20px;
+            color: #101010;
+        }
+    }
+}

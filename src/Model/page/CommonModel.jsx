@@ -24,6 +24,7 @@ import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
 
 import { dxThemeMapping } from '../../Config/themeMapping'
 import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
+import { WeChatTempListType } from '../../Temp/WeChatTempListType'
 
 
 const { port } = window.location
@@ -604,7 +605,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // 微信绑定
     if (openType === 'WeChatBinding') {
         const { head_optionsList } = data.Initial
@@ -674,13 +674,32 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // 公众号绑定
     if (openType === 'OfficialAccount') {
         const { head_optionsList } = data.Initial
         const { wx_image } = head_optionsList.find(v => v.func === 5)
         return <img className='CommonModel_OfficialAccount' src={wx_image} alt="" />
     }
+
+    if (openType === 'WeChatTempList') {
+
+        return (
+            <DevScrollView>
+                <div className='WeChatTempList'>
+                    {Object.keys(WeChatTempListType).map(v => {
+                        const Template = WeChatTempListType[v].temp
+                        return (
+                            <div className='item' key={v} onClick={() => Event.emit({ type: 'onFixedList', data: { uuid: Initial, temp: v } })}>
+                                <Template />
+                                <div>{WeChatTempListType[v].title}</div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </DevScrollView>
+        )
+    }
+
 
     return (
         <div className='CommonModelNone'>

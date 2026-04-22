@@ -5,6 +5,8 @@ import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetSh
 import { WeChatFormInit } from '../Config/wechatDefault'
 import { DevScrollView } from '../Temp/DevTemplate'
 
+import { WeChatTempListType } from './WeChatTempListType'
+
 
 const navList = [
     { uuid: 1, title: '演示', icon: 'ai' },
@@ -12,7 +14,7 @@ const navList = [
     { uuid: 3, title: '智慧', icon: 'cart' },
 ]
 
-
+// 菜单列表
 const WeChatTempFixedA01 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempFixedA01
     const {
@@ -212,11 +214,61 @@ const WeChatTempFixedA01 = ({ styleData }) => {
     )
 }
 
+// 数据列表
+const WeChatTempFixedA02 = ({ styleData }) => {
+    const config = styleData || WeChatFormInit.WeChatTempFixedA02
+
+    const { temp, padding, margin, radius, background, backDeg,
+        divider_color, divider_type, divider_text, divider_size, divider_family
+    } = config
+
+
+
+
+    const backStyle = {
+        background: ColorCallBack(background, backDeg),
+        padding: SpacingCallBack(padding),
+        margin: SpacingCallBack(margin),
+        borderRadius: SpacingCallBack(radius),
+    }
+
+    const lineStyle = {
+        '--type': divider_type,
+        '--color': divider_color,
+    }
+    const dividerStyle = {
+        color: divider_text,
+        fontSize: divider_size,
+        fontFamily: divider_family
+    }
+
+
+    const Template = WeChatTempListType[temp].temp
+    return (
+        <div className='WeChatTempFixedA02' style={backStyle}>
+            <Template styleData={styleData} />
+            <div className='divider'>
+                <div style={lineStyle} />
+                <div style={dividerStyle}>分割线</div>
+                <div style={lineStyle} />
+            </div>
+        </div>
+    )
+
+}
+
+
 export const WeChatTempFixed = {
     WeChatTempFixedA01: {
         type: 'WeChatTempFixedA01',
-        title: '固定累组件',
+        title: '固定菜单',
         temp: WeChatTempFixedA01,
         layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
-    }
+    },
+    WeChatTempFixedA02: {
+        type: 'WeChatTempFixedA02',
+        title: '固定列表',
+        temp: WeChatTempFixedA02,
+        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    },
 }

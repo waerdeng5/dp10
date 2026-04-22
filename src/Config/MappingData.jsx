@@ -1682,6 +1682,10 @@ export const MappingData = {
         { value: 'api', label: '接口数据' },
         { value: 'fix', label: '固定数据' },
     ],
+    WeChat__apiBackDataType: [
+        { value: 'A01', label: '更新' },
+        { value: 'A02', label: '追加' },
+    ],
 
 
     // !!! 地图设置

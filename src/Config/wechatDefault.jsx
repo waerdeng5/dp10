@@ -85,10 +85,49 @@ const WeChatTempReserveA01 = {
     resA01_click: false
 }
 
+
 // TODO 大屏模块 - 菜单列表
 const WeChatTempHomeA01 = {}
 
+// TODO 列表组件
+// *** 列表1
+const WeChatTempListTypeA01 = {
+    A01_padding: "8",
+    A01_margin: "0",
+    A01_radius: "0",
+    A01_background: "#ffffff",
+    A01_backDeg: 0,
+    A01_left: true,
+    A01_right: true,
+    A01_bottom: true,
+    A01_title_field: "1",
+    A01_title_size: 20,
+    A01_title_color: "#262626",
+    A01_title_deg: 0,
+    A01_title_famity: "ShuHeiTi",
+    A01_title_weight: 400,
+    A01_title_style: "normal",
+    A01_title_filed: false,
+    A01_left_field: "1",
+    A01_left_color: "#13a8a8",
+    A01_left_size: 16,
+    A01_left_famity: "PingFang",
+    A01_left_weight: 400,
+    A01_left_style: "normal",
+    A01_right_field: "1",
+    A01_right_color: "#a7a7a7",
+    A01_right_size: 16,
+    A01_right_famity: "DIN",
+    A01_right_weight: 400,
+    A01_right_style: "normal",
+    A01_border_size: 1,
+    A01_border_type: "solid",
+    A01_border_color: "#e7e7e7"
+}
+// *** 列表2
+const WeChatTempListTypeA02 = {
 
+}
 // TODO 固定组件
 const WeChatTempFixedA01 = {
     MenuGroup: [],
@@ -159,6 +198,22 @@ const WeChatTempFixedA01 = {
     menu_style_theme_height: 4,
 }
 
+const WeChatTempFixedA02 = {
+    temp: 'WeChatTempListTypeA01',
+    padding: '0',
+    margin: '0,16',
+    radius: '0',
+    background: '#00000000',
+    backDeg: 0,
+    divider_position: 'center',
+    divider_color: '#e2e2e2',
+    divider_type: 'solid',
+    divider_text: '#cfcfcf',
+    divider_size: 16,
+    divider_family: '汉真广标',
+    ...WeChatTempListTypeA01,
+}
+
 // TODO  TDesign组件
 const WeChatTempTDesignTabs = {
     TDtabs_icon: true,
@@ -189,13 +244,22 @@ const WeChatTempTDesignTabs = {
 
 const WeChatTempTDesignSwiper = {}
 
+
+
+
+
+
+
 export const WeChatFormInit = {
     WeChatTempTitleA01,
     WeChatTempReserveA01,
     WeChatTempHomeA01,
     WeChatTempFixedA01,
+    WeChatTempFixedA02,
 
     WeChatTempTDesignTabs,
-    WeChatTempTDesignSwiper
+    WeChatTempTDesignSwiper,
+    WeChatTempListTypeA01,
+    WeChatTempListTypeA02
 
 }
