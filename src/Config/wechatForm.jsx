@@ -905,6 +905,11 @@ const WeChatTempReserveA01 = [
             {
                 span: 24, formType: 'GROUP', name: 'resA01_router', label: '路由事件', collapsible: true,
                 jugde: [{ field: 'resA01_clickType', value: ['router'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'resA01_routerIsPower', label: '权限验证', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'resA01_routerPower', label: '权限UUID', rules: true,
+                        jugde: [{ field: 'resA01_routerIsPower', value: [true] }]
+                    },
                     { span: 12, formType: 'RADIO', name: 'resA01_routerType', label: '跳转方式', rules: true, valueEnum: MappingData.WeChat__routerType },
                     { span: 12, formType: 'INPUT', name: 'resA01_routerUrl', label: '路由地址', rules: true },
                     { span: 12, formType: 'INPUT', name: 'resA01_routerpar', label: '路由参数' },
@@ -1023,9 +1028,10 @@ const WeChatTempFixedA01 = [
                     {
                         span: 24, formType: 'LIST', name: 'GroupList', label: '菜单列表', collapsible: true, defaultCollapsed: false, title: '菜单',
                         children: [
-                            { span: 12, formType: 'INPUT', name: 'title', label: '菜单名称', rules: true },
+                            { span: 12, formType: 'RADIO', name: 'power', label: '权限验证', rules: true, valueEnum: MappingData.IsEnabledBool },
                             { span: 12, formType: 'INPUT', name: 'uuid', label: '菜单UUID', rules: true },
-                            { span: 12, formType: 'INPUT', name: 'image', label: '背景图片', rules: true },
+                            { span: 24, formType: 'INPUT', name: 'image', label: '背景图片', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'title', label: '菜单名称', rules: true },
                             { span: 12, formType: 'SELECT', name: 'mode', label: '渲染模式', rules: true, valueEnum: MappingData.WeChat__imageMode },
                             { span: 12, formType: 'INPUT', name: 'router', label: '路由地址', rules: true },
                             { span: 12, formType: 'INPUT', name: 'params', label: '路由参数' },
@@ -1109,7 +1115,6 @@ const WeChatTempListTypeA02 = [
 
 ]
 
-
 const WeChatTempFixedA02 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
@@ -1161,9 +1166,81 @@ const WeChatTempFixedA02 = [
             { span: 12, formType: 'COLOR', name: 'divider_text', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 12, formType: 'NUMBER', name: 'divider_size', label: '文字字号', rules: true },
             { span: 12, formType: 'SELECT', name: 'divider_family', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
-
-            // 文字内容  加载中... 加载完成  全部加载
         ]
+    },
+]
+
+const WeChatTempClockInA01 = [
+    { span: 12, formType: 'RADIO', name: 'ClockA01_user', label: '用户信息', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'ClockA01_last', label: '上次记录', rules: true, valueEnum: MappingData.IsEnabledBool },
+    // 用户头像 用户名称 组织机构  打卡记录
+    {
+        span: 12, formType: 'RADIO', name: 'ClockA01_user_avatar', label: '用户头像', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'ClockA01_user', value: [true] }]
+    },
+    {
+        span: 12, formType: 'RADIO', name: 'ClockA01_user_nickName', label: '用户名称', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'ClockA01_user', value: [true] }]
+    },
+    {
+        span: 12, formType: 'RADIO', name: 'ClockA01_user_orgName', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'ClockA01_user', value: [true] }]
+    },
+    {
+        span: 12, formType: 'RADIO', name: 'ClockA01_user_record', label: '打卡记录', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'ClockA01_user', value: [true] }]
+    },
+
+    {
+        span: 24, formType: 'GROUP', name: 'ClockA01_user_avatar_config', label: '用户头像设置', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'ClockA01_user_avatar', value: [true] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'ClockA01_user_nickName_config', label: '用户名称设置', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'ClockA01_user_nickName', value: [true] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'ClockA01_user_orgName_config', label: '组织机构设置', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'ClockA01_user_orgName', value: [true] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'ClockA01_user_record_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'ClockA01_user_record', value: [true] }], children: [
+
+        ]
+    },
+
+
+
+    {
+        span: 24, formType: 'GROUP', name: 'ClockA01_last_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'ClockA01_last', value: [true] }], children: [
+
+        ]
+    },
+
+    // 用户设置
+    // 打开信息设置
+    // 上次打卡信息
+
+]
+
+
+
+// 打卡信息
+const WeChatTempFixedA03 = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'temp', label: 'TEMP', rules: true, disabled: true },
+    {
+        span: 24, formType: 'GROUP', name: 'clock_A01', label: '基础打卡样式', collapsible: true, defaultCollapsed: false,
+        jugde: [{ field: 'temp', value: ['WeChatTempClockInA01'] }], children: WeChatTempClockInA01
     },
 ]
 
@@ -1181,7 +1258,8 @@ const WeChatTempTDesignTabs = [
             {
                 span: 24, formType: 'LIST', name: 'TabsList', label: '导航分组', collapsible: true, title: '导航',
                 children: [
-                    { span: 24, formType: 'INPUT', name: 'uuid', label: '关联id', tooltip: '数据菜单uuid' },
+                    { span: 12, formType: 'INPUT', name: 'uuid', label: '关联id', tooltip: '数据菜单uuid' },
+                    { span: 12, formType: 'RADIO', name: 'power', label: '权限验证', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'INPUT', name: 'name', label: '导航名称', rules: true },
                     { span: 12, formType: 'INPUT', name: 'icon', label: '导航图标', rules: true },
                 ]
@@ -1270,6 +1348,7 @@ export const WeChatFormConfig = {
 
     WeChatTempFixedA01,
     WeChatTempFixedA02,
+    WeChatTempFixedA03,
 
     WeChatTempTDesignTabs,
     WeChatTempTDesignSwiper,

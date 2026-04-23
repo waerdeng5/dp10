@@ -131,6 +131,7 @@ const WeChatTempListTypeA02 = {
 
 }
 // TODO 固定组件
+// 功能菜单
 const WeChatTempFixedA01 = {
     MenuGroup: [],
     fixedA01_padding: "0,8",
@@ -199,7 +200,7 @@ const WeChatTempFixedA01 = {
     menu_style_theme_width: 40,
     menu_style_theme_height: 4,
 }
-
+// 渲染列表
 const WeChatTempFixedA02 = {
     temp: 'WeChatTempListTypeA01',
     padding: '0',
@@ -214,6 +215,10 @@ const WeChatTempFixedA02 = {
     divider_size: 16,
     divider_family: '汉真广标',
     ...WeChatTempListTypeA01,
+}
+// 打卡信息
+const WeChatTempFixedA03 = {
+    temp: 'WeChatTempClockInA01',
 }
 
 // TODO  TDesign组件
@@ -258,6 +263,7 @@ export const WeChatFormInit = {
     WeChatTempHomeA01,
     WeChatTempFixedA01,
     WeChatTempFixedA02,
+    WeChatTempFixedA03,
 
     WeChatTempTDesignTabs,
     WeChatTempTDesignSwiper,

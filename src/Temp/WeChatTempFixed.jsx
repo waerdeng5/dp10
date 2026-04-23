@@ -3,6 +3,9 @@ import './WeChatTempFixed.scss'
 import { Icon } from 'tdesign-icons-react'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
 import { WeChatFormInit } from '../Config/wechatDefault'
+import { WeChatTempClockIn } from './WeChatTempClockIn'
+
+
 import { DevScrollView } from '../Temp/DevTemplate'
 
 import { WeChatTempListType } from './WeChatTempListType'
@@ -222,9 +225,6 @@ const WeChatTempFixedA02 = ({ styleData }) => {
         divider_color, divider_type, divider_text, divider_size, divider_family
     } = config
 
-
-
-
     const backStyle = {
         background: ColorCallBack(background, backDeg),
         padding: SpacingCallBack(padding),
@@ -257,6 +257,19 @@ const WeChatTempFixedA02 = ({ styleData }) => {
 
 }
 
+// 打开操作
+const WeChatTempFixedA03 = ({ styleData }) => {
+    const config = styleData || WeChatFormInit.WeChatTempFixedA03
+    const { temp } = config
+    const Template = WeChatTempClockIn[temp].temp
+
+    return (
+        <div className='WeChatTempFixedA03'>
+            <Template styleData={styleData} />
+        </div>
+    )
+}
+
 
 export const WeChatTempFixed = {
     WeChatTempFixedA01: {
@@ -269,6 +282,12 @@ export const WeChatTempFixed = {
         type: 'WeChatTempFixedA02',
         title: '固定列表',
         temp: WeChatTempFixedA02,
+        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    },
+    WeChatTempFixedA03: {
+        type: 'WeChatTempFixedA03',
+        title: '打卡信息',
+        temp: WeChatTempFixedA03,
         layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
     },
 }

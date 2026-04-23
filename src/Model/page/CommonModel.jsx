@@ -25,6 +25,7 @@ import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
 import { dxThemeMapping } from '../../Config/themeMapping'
 import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
 import { WeChatTempListType } from '../../Temp/WeChatTempListType'
+import { WeChatTempClockIn } from '../../Temp/WeChatTempClockIn'
 
 
 const { port } = window.location
@@ -681,8 +682,8 @@ const CommonModel = ({ data, Event }) => {
         return <img className='CommonModel_OfficialAccount' src={wx_image} alt="" />
     }
 
+    // 小程序选择列表
     if (openType === 'WeChatTempList') {
-
         return (
             <DevScrollView>
                 <div className='WeChatTempList'>
@@ -692,6 +693,24 @@ const CommonModel = ({ data, Event }) => {
                             <div className='item' key={v} onClick={() => Event.emit({ type: 'onFixedList', data: { uuid: Initial, temp: v } })}>
                                 <Template />
                                 <div>{WeChatTempListType[v].title}</div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </DevScrollView>
+        )
+    }
+    // 小程序选择打卡
+    if (openType === 'WeChatTempClockIn') {
+        return (
+            <DevScrollView>
+                <div className='WeChatTempList'>
+                    {Object.keys(WeChatTempClockIn).map(v => {
+                        const Template = WeChatTempClockIn[v].temp
+                        return (
+                            <div className='item' key={v} onClick={() => Event.emit({ type: 'onFixedClock', data: { uuid: Initial, temp: v } })}>
+                                <Template />
+                                <div>{WeChatTempClockIn[v].title}</div>
                             </div>
                         )
                     })}
