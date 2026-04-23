@@ -448,6 +448,7 @@ const WeChatLoginFormList = [
 const WeChatHomeFormList = [
     { span: 24, formType: 'HIDDEN', name: 'pageLayout', label: 'pageLayout', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'pageConfig', label: 'pageConfig', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'pageApiData', label: 'pageApiData', rules: true, disabled: true },
 
     // 默认选中的导航
     { span: 24, formType: 'INPUT', name: 'tabBar_active', label: '默认选中导航UUID', rules: true },
@@ -1049,13 +1050,17 @@ const WeChatTempListTypeA01 = [
     {
         span: 24, formType: 'GROUP', name: 'A01_title_config', label: '标题设置', collapsible: true, defaultCollapsed: false,
         children: [
+
             { span: 12, formType: 'INPUT', name: 'A01_title_field', label: '标题字段', rules: true },
             { span: 12, formType: 'NUMBER', name: 'A01_title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'INPUT', name: 'A01_title_padding', label: '标题内填充', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'A01_title_line', label: '标题行高', rules: true },
             { span: 12, formType: 'COLOR', name: 'A01_title_color', label: '文字颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'A01_title_deg', label: '颜色角度', rules: true },
             { span: 12, formType: 'SELECT', name: 'A01_title_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
             { span: 12, formType: 'RADIO', name: 'A01_title_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
             { span: 12, formType: 'RADIO', name: 'A01_title_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+
             { span: 12, formType: 'RADIO', name: 'A01_title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 12, formType: 'INPUT', name: 'A01_title_filed_size', label: '阴影数值', rules: true,
@@ -1110,7 +1115,27 @@ const WeChatTempFixedA02 = [
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'temp', label: 'TEMP', rules: true, disabled: true },
     {
-        span: 24, formType: 'GROUP', name: 'backgroun_config', label: '背景样式', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'data_config', label: '数据配置', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'INPUT', name: 'APIName', label: '接口名称', rules: true },
+            { span: 12, formType: 'INPUT', name: 'APILevel', label: '数据层级' },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'data_update', label: '更新接口', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'APIUpdate', label: '更新方式', rules: true, valueEnum: MappingData.WeChat__listUpdateType },
+            { span: 12, formType: 'RADIO', name: 'APIBack', label: '回调类型', rules: true, valueEnum: MappingData.WeChat__apiBackDataType },
+            {
+                span: 24, formType: 'INPUT', name: 'APIReset', label: '重置字段', tooltip: '字段值更新时,数据恢复最初状态.',
+                jugde: [{ field: 'APIUpdate', value: ['A02', 'A03'] }]
+            },
+
+        ]
+    },
+
+    {
+        span: 24, formType: 'GROUP', name: 'backgroun_config', label: '背景样式', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 8, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
             { span: 8, formType: 'INPUT', name: 'margin', label: '外边距', rules: true },
@@ -1120,15 +1145,15 @@ const WeChatTempFixedA02 = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'list_A01', label: '默认列表样式', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'list_A01', label: '默认列表样式', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'temp', value: ['WeChatTempListTypeA01'] }], children: WeChatTempListTypeA01
     },
     {
-        span: 24, formType: 'GROUP', name: 'list_A02', label: '多字段列表样式', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'list_A02', label: '多字段列表样式', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'temp', value: ['WeChatTempListTypeA02'] }], children: WeChatTempListTypeA02
     },
     {
-        span: 24, formType: 'GROUP', name: 'divider_config', label: '分割线样式', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'divider_config', label: '分割线样式', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 12, formType: 'COLOR', name: 'divider_color', label: '分割线颜色', rules: true, mode: ['single'] },
             { span: 12, formType: 'SELECT', name: 'divider_type', label: '分割线类型', rules: true, valueEnum: MappingData.Style__BorderType },
@@ -1136,6 +1161,8 @@ const WeChatTempFixedA02 = [
             { span: 12, formType: 'COLOR', name: 'divider_text', label: '文字颜色', rules: true, mode: ['single'] },
             { span: 12, formType: 'NUMBER', name: 'divider_size', label: '文字字号', rules: true },
             { span: 12, formType: 'SELECT', name: 'divider_family', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+
+            // 文字内容  加载中... 加载完成  全部加载
         ]
     },
 ]

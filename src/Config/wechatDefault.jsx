@@ -108,6 +108,8 @@ const WeChatTempListTypeA01 = {
     A01_title_weight: 400,
     A01_title_style: "normal",
     A01_title_filed: false,
+    A01_title_padding: '0,0,8,0',
+    A01_title_line: 24,
     A01_left_field: "1",
     A01_left_color: "#13a8a8",
     A01_left_size: 16,

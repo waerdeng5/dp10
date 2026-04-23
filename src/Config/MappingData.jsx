@@ -1686,6 +1686,12 @@ export const MappingData = {
         { value: 'A01', label: '更新' },
         { value: 'A02', label: '追加' },
     ],
+    WeChat__listUpdateType: [
+        { value: 'A01', label: '不更新' },
+        { value: 'A02', label: '按钮加载' },
+        { value: 'A03', label: '下拉加载' },
+    ],
+
 
 
     // !!! 地图设置

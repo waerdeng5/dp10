@@ -162,6 +162,7 @@ const WeChatHome = ({ data, FormEvent }) => {
             }],
             ['onApiBack', () => {
                 const { uuid } = data
+                notification.success({ key: 'onFinishFailed', title: '保存成功', description: '接口信息已更新' })
                 setPageApiData(v => ({ ...v, [uuid]: data }))
             }],
             // 特殊模块额外操作

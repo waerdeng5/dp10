@@ -11,7 +11,7 @@ const WeChatTempListTypeA01 = ({ styleData }) => {
         A01_title_filed, A01_title_filed_size, A01_title_filed_color,
         A01_left_size, A01_left_color, A01_left_famity, A01_left_weight, A01_left_style,
         A01_right_size, A01_right_color, A01_right_famity, A01_right_weight, A01_right_style,
-        A01_border, A01_border_size, A01_border_type, A01_border_color,
+        A01_border, A01_border_size, A01_border_type, A01_border_color, A01_title_padding, A01_title_line
     } = config
 
     const backStyle = {
@@ -25,8 +25,9 @@ const WeChatTempListTypeA01 = ({ styleData }) => {
 
     const titleStyle = {
         '--color': ColorCallBack(A01_title_color, A01_title_deg),
+        padding: SpacingCallBack(A01_title_padding),
         fontSize: A01_title_size,
-        lineHeight: A01_title_size + 'px',
+        lineHeight: A01_title_line + 'px',
         fontFamily: A01_title_famity,
         fontWeight: A01_title_weight,
         fontStyle: A01_title_style,

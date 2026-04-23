@@ -277,7 +277,7 @@ const WeChatbaseConfig = () => {
     }
 
     const setHomeData = async () => {
-        console.log(WeChatInit.home)
+        console.log('[------保存HOME-------]', WeChatInit.home)
         PostHomeConfig.params.content = JSON.stringify(WeChatInit.home)
         const [err, res] = await axios(PostHomeConfig)
         if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '首页页面设置失败!' })
