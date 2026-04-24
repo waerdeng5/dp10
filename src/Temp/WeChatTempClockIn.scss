@@ -11,22 +11,19 @@
 
     &>.userInfo {
         width: 100%;
-        background: yellow;
-        margin: 8px;
-        padding: 8px;
-        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        &>.userName {
+            flex: 1;
+            padding: 0 8px;
+        }
     }
 
     &>.ClockBox {
         flex: 1;
         width: 100%;
-        background: yellowgreen;
-        margin: 8px;
-        padding: 8px;
-        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -41,26 +38,98 @@
             flex-direction: column;
 
             &>.clockBtn {
-                width: 160px;
-                height: 160px;
-                background: red;
-                border-radius: 50%;
+                flex: 1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+
+                &>div {
+                    width: 160px;
+                    height: 160px;
+                    background: red;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    animation: clockBtn 5s linear infinite;
+                    border: 1px solid;
+                    filter: drop-shadow(2px 2px 5px #262626)
+                }
+
+                @keyframes clockBtn {
+                    0% {
+                        border-radius: 50%;
+                    }
+
+                    10% {
+                        border-radius: var(--r0, 50%) var(--r10, 50%) var(--r20, 50%) var(--r30, 50%) / var(--r40, 50%) var(--r50, 50%) var(--r60, 50%) var(--r70, 50%);
+                    }
+
+                    20% {
+                        border-radius: var(--r1, 50%) var(--r11, 50%) var(--r21, 50%) var(--r31, 50%) / var(--r41, 50%) var(--r51, 50%) var(--r61, 50%) var(--r71, 50%);
+                    }
+
+                    30% {
+                        border-radius: var(--r2, 50%) var(--r12, 50%) var(--r22, 50%) var(--r32, 50%) / var(--r42, 50%) var(--r52, 50%) var(--r62, 50%) var(--r72, 50%);
+                    }
+
+                    40% {
+                        border-radius: var(--r3, 50%) var(--r13, 50%) var(--r23, 50%) var(--r33, 50%) / var(--r43, 50%) var(--r53, 50%) var(--r63, 50%) var(--r73, 50%);
+                    }
+
+                    50% {
+                        border-radius: var(--r4, 50%) var(--r14, 50%) var(--r24, 50%) var(--r34, 50%) / var(--r44, 50%) var(--r54, 50%) var(--r64, 50%) var(--r74, 50%);
+                    }
+
+                    60% {
+                        border-radius: var(--r5, 50%) var(--r15, 50%) var(--r25, 50%) var(--r35, 50%) / var(--r45, 50%) var(--r55, 50%) var(--r65, 50%) var(--r75, 50%);
+                    }
+
+                    70% {
+                        border-radius: var(--r6, 50%) var(--r16, 50%) var(--r26, 50%) var(--r36, 50%) / var(--r46, 50%) var(--r56, 50%) var(--r66, 50%) var(--r76, 50%);
+                    }
+
+                    80% {
+                        border-radius: var(--r7, 50%) var(--r17, 50%) var(--r27, 50%) var(--r37, 50%) / var(--r47, 50%) var(--r57, 50%) var(--r67, 50%) var(--r77, 50%);
+                    }
+
+                    90% {
+                        border-radius: var(--r8, 50%) var(--r18, 50%) var(--r28, 50%) var(--r38, 50%) / var(--r48, 50%) var(--r58, 50%) var(--r68, 50%) var(--r78, 50%);
+                    }
+
+                    100% {
+                        border-radius: 50%;
+                    }
+                }
             }
 
-
             &>.location {
-                padding: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0 16px;
             }
         }
 
         &>.today,
         &>.lastClock {
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        &>.lastClock {
+            &>div {
+                width: 100%;
+                display: flex;
+                align-items: flex-start;
+                justify-content: center;
+
+                &>div:nth-child(2) {
+                    flex: 1;
+                }
+            }
         }
     }
 }

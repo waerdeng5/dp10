@@ -127,9 +127,12 @@ const WeChatTempListTypeA01 = {
     A01_border_color: "#e7e7e7"
 }
 // *** 列表2
-const WeChatTempListTypeA02 = {
+const WeChatTempListTypeA02 = {}
+// TODO 打卡组件
+// *** 打卡组件1
+const WeChatTempClockInA01 = {}
 
-}
+
 // TODO 固定组件
 // 功能菜单
 const WeChatTempFixedA01 = {
@@ -268,6 +271,7 @@ export const WeChatFormInit = {
     WeChatTempTDesignTabs,
     WeChatTempTDesignSwiper,
     WeChatTempListTypeA01,
-    WeChatTempListTypeA02
+    WeChatTempListTypeA02,
+    WeChatTempClockInA01,
 
 }

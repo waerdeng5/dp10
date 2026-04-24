@@ -1691,9 +1691,10 @@ export const MappingData = {
         { value: 'A02', label: '按钮加载' },
         { value: 'A03', label: '下拉加载' },
     ],
-
-
-
+    WeChat__avatarShape: [
+        { value: 'circle', label: '圆形' },
+        { value: 'round', label: '圆角' },
+    ],
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },

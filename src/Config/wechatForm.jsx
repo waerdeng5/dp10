@@ -1138,7 +1138,6 @@ const WeChatTempFixedA02 = [
 
         ]
     },
-
     {
         span: 24, formType: 'GROUP', name: 'backgroun_config', label: '背景样式', collapsible: true, defaultCollapsed: true,
         children: [
@@ -1173,62 +1172,210 @@ const WeChatTempFixedA02 = [
 const WeChatTempClockInA01 = [
     { span: 12, formType: 'RADIO', name: 'ClockA01_user', label: '用户信息', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'RADIO', name: 'ClockA01_last', label: '上次记录', rules: true, valueEnum: MappingData.IsEnabledBool },
-    // 用户头像 用户名称 组织机构  打卡记录
     {
-        span: 12, formType: 'RADIO', name: 'ClockA01_user_avatar', label: '用户头像', rules: true, valueEnum: MappingData.IsEnabledBool,
-        jugde: [{ field: 'ClockA01_user', value: [true] }]
-    },
-    {
-        span: 12, formType: 'RADIO', name: 'ClockA01_user_nickName', label: '用户名称', rules: true, valueEnum: MappingData.IsEnabledBool,
-        jugde: [{ field: 'ClockA01_user', value: [true] }]
-    },
-    {
-        span: 12, formType: 'RADIO', name: 'ClockA01_user_orgName', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool,
-        jugde: [{ field: 'ClockA01_user', value: [true] }]
-    },
-    {
-        span: 12, formType: 'RADIO', name: 'ClockA01_user_record', label: '打卡记录', rules: true, valueEnum: MappingData.IsEnabledBool,
-        jugde: [{ field: 'ClockA01_user', value: [true] }]
-    },
+        span: 24, formType: 'GROUP', name: 'ClockA01_user_config', label: '用户框设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'ClockA01_user', value: [true] }], children: [
+            { span: 12, formType: 'COLOR', name: 'ClockA01_user_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'ClockA01_user_deg', label: '背景角度', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_user_padding', label: '内填充', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_user_margin', label: '外间距', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_user_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_border_config', label: '边框设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_border', value: [true] }], children: [
+                    { span: 8, formType: 'NUMBER', name: 'ClockA01_user_border_size', label: '分割线尺寸', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_user_border_type', label: '分割线类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                    { span: 8, formType: 'COLOR', name: 'ClockA01_user_border_color', label: '分割线颜色', rules: true, mode: ['single'] },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_shadow_config', label: '阴影设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_shadow', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'ClockA01_user_shadow_size', label: '阴影数值', rules: true },
+                    { span: 8, formType: 'COLOR', name: 'ClockA01_user_shadow_color', label: '阴影颜色', rules: true, mode: ['single'] },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_user_shadow_type', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                ]
+            },
 
-    {
-        span: 24, formType: 'GROUP', name: 'ClockA01_user_avatar_config', label: '用户头像设置', collapsible: true, defaultCollapsed: false,
-        jugde: [{ field: 'ClockA01_user_avatar', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_avatar', label: '用户头像', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_record', label: '打卡记录', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_nickName', label: '用户名称', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_user_orgName', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_avatar_config', label: '用户头像设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_avatar', value: [true] }], children: [
+                    { span: 8, formType: 'NUMBER', name: 'ClockA01_user_avatar_size', label: '头像尺寸', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'ClockA01_user_avatar_padding', label: '内填充', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_user_avatar_type', label: '头像圆角', rules: true, valueEnum: MappingData.WeChat__avatarShape },
 
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_record_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_record', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_record_url', label: '图标路径', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_record_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_user_record_color', label: '图标颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_record_size', label: '图标尺寸', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_record_router', label: '路由地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_record_params', label: '路由参数', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_nickName_config', label: '用户名称设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_nickName', value: [true] }], children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_user_nickName_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_nickName_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_user_nickName_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_user_nickName_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_user_nickName_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_user_nickName_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_user_orgName_config', label: '组织机构设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_user_orgName', value: [true] }], children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_user_orgName_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_user_orgName_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_user_orgName_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_user_orgName_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_user_orgName_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_user_orgName_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ClockA01_user_nickName_config', label: '用户名称设置', collapsible: true, defaultCollapsed: false,
-        jugde: [{ field: 'ClockA01_user_nickName', value: [true] }], children: [
+        span: 24, formType: 'GROUP', name: 'ClockA01_back_config', label: '主题设置', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'ClockA01_back_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'ClockA01_back_deg', label: '背景角度', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_back_padding', label: '内填充', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_back_margin', label: '外间距', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ClockA01_back_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_back_shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_back_border_config', label: '边框设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_back_border', value: [true] }], children: [
+                    { span: 8, formType: 'NUMBER', name: 'ClockA01_back_border_size', label: '分割线尺寸', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_back_border_type', label: '分割线类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                    { span: 8, formType: 'COLOR', name: 'ClockA01_back_border_color', label: '分割线颜色', rules: true, mode: ['single'] },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_back_shadow_config', label: '阴影设置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'ClockA01_back_shadow', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'ClockA01_back_shadow_size', label: '阴影数值', rules: true },
+                    { span: 8, formType: 'COLOR', name: 'ClockA01_back_shadow_color', label: '阴影颜色', rules: true, mode: ['single'] },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_back_shadow_type', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                ]
+            },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_today', label: '今日打卡情况', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_address', label: '当前位置信息', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_btn_config', label: '按钮设置', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_btn_back', label: '背景颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_deg', label: '背景角度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_size', label: '按钮尺寸', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_radius', label: '按钮圆角', rules: true },
 
+                    // 按钮尺寸
+                    // 按钮颜色
+                    // 按钮阴影
+                    // 是否执行随机变换
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_today_config', label: '今日打卡情况设置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'ClockA01_today', value: [true] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_today_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_murl', label: '接口地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_params', label: '接口参数' },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_extra', label: '额外域名' },
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_today_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_today_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_today_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_today_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_today_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_address_config', label: '当前位置信息设置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'ClockA01_address', value: [true] }], children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_address_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_address_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_address_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_address_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_address_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_address_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_refresh', label: '刷新按钮', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'ClockA01_refresh_url', label: '按钮图标', rules: true,
+                        jugde: [{ field: 'ClockA01_refresh', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'ClockA01_refresh_color', label: '按钮颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'ClockA01_refresh', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'ClockA01_refresh_size', label: '按钮字号', rules: true,
+                        jugde: [{ field: 'ClockA01_refresh', value: [true] }]
+                    },
+                ]
+            },
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ClockA01_user_orgName_config', label: '组织机构设置', collapsible: true, defaultCollapsed: false,
-        jugde: [{ field: 'ClockA01_user_orgName', value: [true] }], children: [
-
-        ]
-    },
-    {
-        span: 24, formType: 'GROUP', name: 'ClockA01_user_record_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: false,
-        jugde: [{ field: 'ClockA01_user_record', value: [true] }], children: [
-
-        ]
-    },
-
-
-
-    {
-        span: 24, formType: 'GROUP', name: 'ClockA01_last_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'ClockA01_last_config', label: '打卡记录设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'ClockA01_last', value: [true] }], children: [
-
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_last_border', label: '分割线', collapsible: true, defaultCollapsed: true,
+                children: [
+                    { span: 6, formType: 'NUMBER', name: 'ClockA01_last_border_size', label: '分割线尺寸', rules: true },
+                    { span: 9, formType: 'RADIO', name: 'ClockA01_last_border_type', label: '分割线类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                    { span: 9, formType: 'COLOR', name: 'ClockA01_last_border_color', label: '分割线颜色', rules: true, mode: ['single'] },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_last_title', label: '标题设置', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_last_title_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_last_title_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_last_title_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_last_title_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_title_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_title_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_last_time', label: '时间设置', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_last_time_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_last_time_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_last_time_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_last_time_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_time_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_time_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'ClockA01_last_address', label: '地址设置', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'ClockA01_last_address_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'ClockA01_last_address_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'ClockA01_last_address_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'ClockA01_last_address_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_address_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_last_address_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
         ]
     },
-
-    // 用户设置
-    // 打开信息设置
-    // 上次打卡信息
-
 ]
 
 

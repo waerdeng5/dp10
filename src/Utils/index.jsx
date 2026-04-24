@@ -494,10 +494,9 @@ export const SetBorderParams = (status, size, type, color) => {
 
 // TODO 阴影参数
 export const SetShadowParams = (status, size, color, type) => {
-
     if (status) {
         const [x, y, z] = size.split(',')
-        return `${x}px ${y}px ${z}px ${color} ${type === 'inset' && type}`
+        return `${x}px ${y}px ${z}px ${color} ${type === 'inset' ? 'inset' : ''} `
     }
     return null
 }
@@ -506,7 +505,7 @@ export const SetShadowParams = (status, size, color, type) => {
 export const SetFilderParams = (status, size, color) => {
     if (status) {
         const [x, y, z] = size.split(',')
-        return `drop-shadow(${x}px ${y}px ${z}px ${color})`
+        return `drop - shadow(${x}px ${y}px ${z}px ${color})`
     }
     return null
 }
@@ -707,7 +706,7 @@ export const addAttr = (tree, data) => {
 // 组装排序条件
 export const AssemblySort = (arr) => {
     return arr.filter(item => item.A04_type !== 'none').reduce((acc, item, index) => {
-        acc[item.A04_value] = `${item.A04_type}@${index}`
+        acc[item.A04_value] = `${item.A04_type} @${index} `
         return acc
     }, {})
 }
@@ -786,13 +785,13 @@ export const AssemblyModelData = (data, row, Event) => {
 export const AssemblyNavTo = (data, row, Event) => {
     if (data.click_navTo_type === 'int') {
         const { click_navTo_int_router, click_navTo_int_params } = data
-        Event.emit({ type: 'setInternalRouting', data: `${click_navTo_int_router}${click_navTo_int_params}` })
+        Event.emit({ type: 'setInternalRouting', data: `${click_navTo_int_router}${click_navTo_int_params} ` })
     }
     if (data.click_navTo_type === 'ext') {
         const { click_navTo_ext_type, click_navTo_ext_url, click_navTo_ext_value, click_navTo_ext_field } = data
         const url = click_navTo_ext_type === 'field' ? row[click_navTo_ext_url] : click_navTo_ext_url
-        const params = click_navTo_ext_value ? `?${click_navTo_ext_field}=${row[click_navTo_ext_value]}` : ''
-        window.open(`${row[click_navTo_ext_url]}?${url}=${params}`)
+        const params = click_navTo_ext_value ? `? ${click_navTo_ext_field}=${row[click_navTo_ext_value]} ` : ''
+        window.open(`${row[click_navTo_ext_url]}?${url}=${params} `)
     }
 }
 
