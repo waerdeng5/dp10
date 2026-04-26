@@ -42,7 +42,25 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         ClockA01_last_address_famity, ClockA01_last_address_weight, ClockA01_last_address_style,
         ClockA01_today_color, ClockA01_today_padding, ClockA01_today_size, ClockA01_today_famity, ClockA01_today_weight, ClockA01_today_style,
         ClockA01_address_color, ClockA01_address_padding, ClockA01_address_size, ClockA01_address_famity, ClockA01_address_weight, ClockA01_address_style,
-        ClockA01_refresh, ClockA01_refresh_url, ClockA01_refresh_color, ClockA01_refresh_size
+        ClockA01_refresh, ClockA01_refresh_url, ClockA01_refresh_color, ClockA01_refresh_size,
+
+        ClockA01_btn_back, ClockA01_btn_deg, ClockA01_btn_size, ClockA01_btn_radius,
+        ClockA01_btn_border, ClockA01_btn_border_size, ClockA01_btn_border_type, ClockA01_btn_border_color,
+        ClockA01_btn_shadow, ClockA01_btn_shadow_size, ClockA01_btn_shadow_color, ClockA01_btn_shadow_type,
+        ClockA01_btn_filter, ClockA01_btn_filter_size, ClockA01_btn_filter_color,
+        ClockA01_btn_animation, ClockA01_btn_animation_time,
+
+        ClockA01_btn_text_label, ClockA01_btn_text_padding, ClockA01_btn_text_color, ClockA01_btn_text_deg,
+        ClockA01_btn_text_size, ClockA01_btn_text_famity, ClockA01_btn_text_weight, ClockA01_btn_text_style,
+        ClockA01_btn_text_filter, ClockA01_btn_text_filter_size, ClockA01_btn_text_filter_color,
+
+        ClockA01_btn_text_time, ClockA01_btn_time_color, ClockA01_btn_time_deg, ClockA01_btn_time_padding,
+        ClockA01_btn_time_size, ClockA01_btn_time_famity, ClockA01_btn_time_weight, ClockA01_btn_time_style,
+        ClockA01_btn_time_filter, ClockA01_btn_time_filter_size, ClockA01_btn_time_filter_color,
+
+
+
+
     } = config
 
     const userStyle = {
@@ -153,6 +171,39 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         fontSize: ClockA01_refresh_size
     }
 
+    const buttonStyle = {
+        background: ColorCallBack(ClockA01_btn_back, ClockA01_btn_deg),
+        width: ClockA01_btn_size,
+        height: ClockA01_btn_size,
+        borderRadius: SpacingCallBack(ClockA01_btn_radius),
+        border: SetBorderParams(ClockA01_btn_border, ClockA01_btn_border_size, ClockA01_btn_border_type, ClockA01_btn_border_color),
+        boxShadow: SetShadowParams(ClockA01_btn_shadow, ClockA01_btn_shadow_size, ClockA01_btn_shadow_color, ClockA01_btn_shadow_type),
+        filter: SetFilderParams(ClockA01_btn_filter, ClockA01_btn_filter_size, ClockA01_btn_filter_color),
+        animation: ClockA01_btn_animation ? `clockBtn ${ClockA01_btn_animation_time}s linear infinite` : ''
+    }
+
+    const btnTextStyle = {
+        '--color': ColorCallBack(ClockA01_btn_text_color, ClockA01_btn_text_deg),
+        padding: SpacingCallBack(ClockA01_btn_text_padding),
+        fontSize: ClockA01_btn_text_size,
+        lineHeight: ClockA01_btn_text_size + 'px',
+        fontFamily: ClockA01_btn_text_famity,
+        fontWeight: ClockA01_btn_text_weight,
+        fontStyle: ClockA01_btn_text_style,
+        filter: SetFilderParams(ClockA01_btn_text_filter, ClockA01_btn_text_filter_size, ClockA01_btn_text_filter_color),
+    }
+
+    const btnTimeStyle = {
+        '--color': ColorCallBack(ClockA01_btn_time_color, ClockA01_btn_time_deg),
+        padding: SpacingCallBack(ClockA01_btn_time_padding),
+        fontSize: ClockA01_btn_time_size,
+        lineHeight: ClockA01_btn_time_size + 'px',
+        fontFamily: ClockA01_btn_time_famity,
+        fontWeight: ClockA01_btn_time_weight,
+        fontStyle: ClockA01_btn_time_style,
+        filter: SetFilderParams(ClockA01_btn_time_filter, ClockA01_btn_time_filter_size, ClockA01_btn_time_filter_color),
+    }
+
     return (
         <div className='WeChatTempClockInA01'>
             {ClockA01_user &&
@@ -171,7 +222,10 @@ const WeChatTempClockInA01 = ({ styleData }) => {
                 <div className='clockItem'>
                     <div className='today' style={todayStyle}>今日打卡提醒</div>
                     <div className='clockBtn'>
-                        <div style={animationData}>打卡按钮</div>
+                        <div style={{ ...buttonStyle, ...animationData }}>
+                            <div style={btnTextStyle}>{ClockA01_btn_text_label || '打卡文字'}</div>
+                            {ClockA01_btn_text_time && <div style={btnTimeStyle}>{dayjs().format('HH:mm:ss')}</div>}
+                        </div>
                     </div>
                     <div className='location'>
                         <div style={locationStyle}>黑龙江省哈尔滨市xx区xx大道xx路口右拐右拐右拐在右拐</div>

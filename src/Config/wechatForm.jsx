@@ -1282,15 +1282,89 @@ const WeChatTempClockInA01 = [
                     { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_deg', label: '背景角度', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_size', label: '按钮尺寸', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_radius', label: '按钮圆角', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_btn_border', label: '按钮边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_btn_shadow', label: '按钮阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 8, formType: 'RADIO', name: 'ClockA01_btn_filter', label: '按钮滤镜', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'GROUP', name: 'ClockA01_btn_border_config', label: '按钮边框设置', collapsible: true, defaultCollapsed: false,
+                        jugde: [{ field: 'ClockA01_btn_border', value: [true] }], children: [
+                            { span: 8, formType: 'NUMBER', name: 'ClockA01_btn_border_size', label: '分割线尺寸', rules: true },
+                            { span: 8, formType: 'RADIO', name: 'ClockA01_btn_border_type', label: '分割线类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                            { span: 8, formType: 'COLOR', name: 'ClockA01_btn_border_color', label: '分割线颜色', rules: true, mode: ['single'] },
+                        ]
+                    },
+                    {
+                        span: 24, formType: 'GROUP', name: 'ClockA01_btn_shadow_config', label: '按钮阴影设置', collapsible: true, defaultCollapsed: false,
+                        jugde: [{ field: 'ClockA01_btn_shadow', value: [true] }], children: [
+                            { span: 8, formType: 'INPUT', name: 'ClockA01_btn_shadow_size', label: '阴影数值', rules: true },
+                            { span: 8, formType: 'COLOR', name: 'ClockA01_btn_shadow_color', label: '阴影颜色', rules: true, mode: ['single'] },
+                            { span: 8, formType: 'RADIO', name: 'ClockA01_btn_shadow_type', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                        ]
+                    },
+                    {
+                        span: 24, formType: 'GROUP', name: 'ClockA01_btn_filter_config', label: '按钮滤镜设置', collapsible: true, defaultCollapsed: false,
+                        jugde: [{ field: 'ClockA01_btn_filter', value: [true] }], children: [
+                            { span: 12, formType: 'INPUT', name: 'ClockA01_btn_filter_size', label: '阴影数值', rules: true, },
+                            { span: 12, formType: 'COLOR', name: 'ClockA01_btn_filter_color', label: '阴影颜色', rules: true, mode: ['single'] },
+                        ]
+                    },
+                    { span: 12, formType: 'RADIO', name: 'ClockA01_btn_animation', label: '按钮动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'ClockA01_btn_animation_time', label: '动画时长', rules: true,
+                        jugde: [{ field: 'ClockA01_btn_animation', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'GROUP', name: 'ClockA01_btn_text_config', label: '按钮文字', collapsible: true, defaultCollapsed: false,
+                        children: [
+                            { span: 12, formType: 'INPUT', name: 'ClockA01_btn_text_label', label: '文字内容', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'ClockA01_btn_text_padding', label: '内填充', rules: true },
+                            { span: 12, formType: 'COLOR', name: 'ClockA01_btn_text_color', label: '文字颜色', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_text_deg', label: '颜色角度', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_text_size', label: '文字字号', rules: true },
+                            { span: 12, formType: 'SELECT', name: 'ClockA01_btn_text_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_text_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_text_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_text_filter', label: '文字滤镜', rules: true, valueEnum: MappingData.IsEnabledBool },
+                            {
+                                span: 12, formType: 'INPUT', name: 'ClockA01_btn_text_filter_size', label: '阴影数值', rules: true,
+                                jugde: [{ field: 'ClockA01_btn_text_filter', value: [true] }]
+                            },
+                            {
+                                span: 12, formType: 'COLOR', name: 'ClockA01_btn_text_filter_color', label: '阴影颜色', rules: true, mode: ['single'],
+                                jugde: [{ field: 'ClockA01_btn_text_filter', value: [true] }]
+                            },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_text_time', label: '时间提示', rules: true, valueEnum: MappingData.IsEnabledBool },
+                        ]
+                    },
+                    {
+                        span: 24, formType: 'GROUP', name: 'ClockA01_btn_time_config', label: '时间提示', collapsible: true, defaultCollapsed: false,
+                        jugde: [{ field: 'ClockA01_btn_text_time', value: [true] }], children: [
+                            { span: 12, formType: 'COLOR', name: 'ClockA01_btn_time_color', label: '文字颜色', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_time_deg', label: '颜色角度', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'ClockA01_btn_time_padding', label: '内填充', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'ClockA01_btn_time_size', label: '文字字号', rules: true },
+                            { span: 12, formType: 'SELECT', name: 'ClockA01_btn_time_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_time_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_time_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                            { span: 12, formType: 'RADIO', name: 'ClockA01_btn_time_filter', label: '文字滤镜', rules: true, valueEnum: MappingData.IsEnabledBool },
+                            {
+                                span: 12, formType: 'INPUT', name: 'ClockA01_btn_time_filter_size', label: '阴影数值', rules: true,
+                                jugde: [{ field: 'ClockA01_btn_time_filter', value: [true] }]
+                            },
+                            {
+                                span: 12, formType: 'COLOR', name: 'ClockA01_btn_time_filter_color', label: '阴影颜色', rules: true, mode: ['single'],
+                                jugde: [{ field: 'ClockA01_btn_time_filter', value: [true] }]
+                            },
+                        ]
+                    },
 
-                    // 按钮尺寸
-                    // 按钮颜色
-                    // 按钮阴影
-                    // 是否执行随机变换
+
+
+
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'ClockA01_today_config', label: '今日打卡情况设置', collapsible: true, defaultCollapsed: false,
+                span: 24, formType: 'GROUP', name: 'ClockA01_today_config', label: '今日打卡情况设置', collapsible: true, defaultCollapsed: true,
                 jugde: [{ field: 'ClockA01_today', value: [true] }], children: [
                     { span: 12, formType: 'RADIO', name: 'ClockA01_today_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
                     { span: 12, formType: 'INPUT', name: 'ClockA01_today_murl', label: '接口地址', rules: true },
@@ -1305,7 +1379,7 @@ const WeChatTempClockInA01 = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'ClockA01_address_config', label: '当前位置信息设置', collapsible: true, defaultCollapsed: false,
+                span: 24, formType: 'GROUP', name: 'ClockA01_address_config', label: '当前位置信息设置', collapsible: true, defaultCollapsed: true,
                 jugde: [{ field: 'ClockA01_address', value: [true] }], children: [
                     { span: 12, formType: 'COLOR', name: 'ClockA01_address_color', label: '文字颜色', rules: true, mode: ['single'] },
                     { span: 12, formType: 'INPUT', name: 'ClockA01_address_padding', label: '内填充', rules: true },

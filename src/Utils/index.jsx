@@ -505,7 +505,7 @@ export const SetShadowParams = (status, size, color, type) => {
 export const SetFilderParams = (status, size, color) => {
     if (status) {
         const [x, y, z] = size.split(',')
-        return `drop - shadow(${x}px ${y}px ${z}px ${color})`
+        return `drop-shadow(${x}px ${y}px ${z}px ${color})`
     }
     return null
 }
