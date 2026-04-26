@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import { Avatar } from 'antd'
 import { Icon } from 'tdesign-icons-react'
 import { WeChatFormInit } from '../Config/wechatDefault'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams, SpacingSizeCallBack } from '../Utils'
 
 
 const avatarMapping = {
@@ -43,30 +43,24 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         ClockA01_today_color, ClockA01_today_padding, ClockA01_today_size, ClockA01_today_famity, ClockA01_today_weight, ClockA01_today_style,
         ClockA01_address_color, ClockA01_address_padding, ClockA01_address_size, ClockA01_address_famity, ClockA01_address_weight, ClockA01_address_style,
         ClockA01_refresh, ClockA01_refresh_url, ClockA01_refresh_color, ClockA01_refresh_size,
-
         ClockA01_btn_back, ClockA01_btn_deg, ClockA01_btn_size, ClockA01_btn_radius,
         ClockA01_btn_border, ClockA01_btn_border_size, ClockA01_btn_border_type, ClockA01_btn_border_color,
         ClockA01_btn_shadow, ClockA01_btn_shadow_size, ClockA01_btn_shadow_color, ClockA01_btn_shadow_type,
         ClockA01_btn_filter, ClockA01_btn_filter_size, ClockA01_btn_filter_color,
         ClockA01_btn_animation, ClockA01_btn_animation_time,
-
         ClockA01_btn_text_label, ClockA01_btn_text_padding, ClockA01_btn_text_color, ClockA01_btn_text_deg,
         ClockA01_btn_text_size, ClockA01_btn_text_famity, ClockA01_btn_text_weight, ClockA01_btn_text_style,
         ClockA01_btn_text_filter, ClockA01_btn_text_filter_size, ClockA01_btn_text_filter_color,
-
         ClockA01_btn_text_time, ClockA01_btn_time_color, ClockA01_btn_time_deg, ClockA01_btn_time_padding,
         ClockA01_btn_time_size, ClockA01_btn_time_famity, ClockA01_btn_time_weight, ClockA01_btn_time_style,
         ClockA01_btn_time_filter, ClockA01_btn_time_filter_size, ClockA01_btn_time_filter_color,
-
-
-
-
     } = config
 
     const userStyle = {
         background: ColorCallBack(ClockA01_user_back, ClockA01_user_deg),
         padding: SpacingCallBack(ClockA01_user_padding),
         margin: SpacingCallBack(ClockA01_user_margin),
+        width: SpacingSizeCallBack(ClockA01_user_margin, 100),
         borderRadius: SpacingCallBack(ClockA01_user_radius),
         border: SetBorderParams(ClockA01_user_border, ClockA01_user_border_size, ClockA01_user_border_type, ClockA01_user_border_color),
         boxShadow: SetShadowParams(ClockA01_user_shadow, ClockA01_user_shadow_size, ClockA01_user_shadow_color, ClockA01_user_shadow_type),
@@ -107,6 +101,7 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         background: ColorCallBack(ClockA01_back_back, ClockA01_back_deg),
         padding: SpacingCallBack(ClockA01_back_padding),
         margin: SpacingCallBack(ClockA01_back_margin),
+        width: SpacingSizeCallBack(ClockA01_user_margin, 100),
         borderRadius: SpacingCallBack(ClockA01_back_radius),
         border: SetBorderParams(ClockA01_back_border, ClockA01_back_border_size, ClockA01_back_border_type, ClockA01_back_border_color),
         boxShadow: SetShadowParams(ClockA01_back_shadow, ClockA01_back_shadow_size, ClockA01_back_shadow_color, ClockA01_back_shadow_type),
