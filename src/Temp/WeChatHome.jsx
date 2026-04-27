@@ -13,7 +13,6 @@ import { WeChatFormInit } from '../Config/wechatDefault'
 
 import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
-import { WeChatTempHome } from '../Temp/WeChatTempHome'
 import { WeChatTempFixed } from '../Temp/WeChatTempFixed'
 import { WeChatTempReserve } from '../Temp/WeChatTempReserve'
 import { WeChatTempTDesign } from '../Temp/WeChatTempTDesign'
@@ -22,7 +21,6 @@ import { WeChatTempTDesign } from '../Temp/WeChatTempTDesign'
 
 const TempMapping = {
     ...WeChatTempTitle,
-    ...WeChatTempHome,
     ...WeChatTempFixed,
     ...WeChatTempReserve,
     ...WeChatTempTDesign,

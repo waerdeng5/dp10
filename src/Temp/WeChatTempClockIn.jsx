@@ -40,7 +40,7 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         ClockA01_last_time_famity, ClockA01_last_time_weight, ClockA01_last_time_style,
         ClockA01_last_address_color, ClockA01_last_address_padding, ClockA01_last_address_size,
         ClockA01_last_address_famity, ClockA01_last_address_weight, ClockA01_last_address_style,
-        ClockA01_today_color, ClockA01_today_padding, ClockA01_today_size, ClockA01_today_famity, ClockA01_today_weight, ClockA01_today_style,
+        ClockA01_today, ClockA01_today_color, ClockA01_today_padding, ClockA01_today_size, ClockA01_today_famity, ClockA01_today_weight, ClockA01_today_style,
         ClockA01_address_color, ClockA01_address_padding, ClockA01_address_size, ClockA01_address_famity, ClockA01_address_weight, ClockA01_address_style,
         ClockA01_refresh, ClockA01_refresh_url, ClockA01_refresh_color, ClockA01_refresh_size,
         ClockA01_btn_back, ClockA01_btn_deg, ClockA01_btn_size, ClockA01_btn_radius,
@@ -203,7 +203,7 @@ const WeChatTempClockInA01 = ({ styleData }) => {
         <div className='WeChatTempClockInA01'>
             {ClockA01_user &&
                 <div className='userInfo' style={userStyle}>
-                    {ClockA01_user_avatar && <Avatar {...avatarStyle} style={{ padding: SpacingCallBack(ClockA01_user_avatar_padding) }} />}
+                    {ClockA01_user_avatar && <Avatar {...avatarStyle} style={{ margin: SpacingCallBack(ClockA01_user_avatar_padding) }} />}
                     <div className='userName'>
                         {ClockA01_user_nickName && <div style={nickNameStyle}>名称</div>}
                         {ClockA01_user_orgName && <div style={orgNameStyle}>组织机构</div>}
@@ -215,7 +215,7 @@ const WeChatTempClockInA01 = ({ styleData }) => {
             }
             <div className='ClockBox' style={backStyle}>
                 <div className='clockItem'>
-                    <div className='today' style={todayStyle}>今日打卡提醒</div>
+                    {ClockA01_today && <div className='today' style={todayStyle}>今日打卡提醒</div>}
                     <div className='clockBtn'>
                         <div style={{ ...buttonStyle, ...animationData }}>
                             <div style={btnTextStyle}>{ClockA01_btn_text_label || '打卡文字'}</div>

@@ -85,10 +85,6 @@ const WeChatTempReserveA01 = {
     resA01_click: false
 }
 
-
-// TODO 大屏模块 - 菜单列表
-const WeChatTempHomeA01 = {}
-
 // TODO 列表组件
 // *** 列表1
 const WeChatTempListTypeA01 = {
@@ -130,7 +126,131 @@ const WeChatTempListTypeA01 = {
 const WeChatTempListTypeA02 = {}
 // TODO 打卡组件
 // *** 打卡组件1
-const WeChatTempClockInA01 = {}
+const WeChatTempClockInA01 = {
+    ClockA01_user: true,
+    ClockA01_last: true,
+    ClockA01_user_back: "#ffffff",
+    ClockA01_user_deg: 0,
+    ClockA01_user_padding: "8",
+    ClockA01_user_margin: "8",
+    ClockA01_user_radius: "8",
+    ClockA01_user_border: false,
+    ClockA01_user_shadow: true,
+    ClockA01_user_shadow_size: "1,1,2",
+    ClockA01_user_shadow_color: "#26262633",
+    ClockA01_user_shadow_type: "outline",
+    ClockA01_user_avatar: true,
+    ClockA01_user_record: true,
+    ClockA01_user_nickName: true,
+    ClockA01_user_orgName: true,
+    ClockA01_user_avatar_size: 48,
+    ClockA01_user_avatar_padding: "0,8,0,0",
+    ClockA01_user_avatar_type: "round",
+    ClockA01_user_record_url: "calendar-edit",
+    ClockA01_user_record_padding: "8",
+    ClockA01_user_record_color: "#4e4e4e",
+    ClockA01_user_record_size: "40",
+    ClockA01_user_record_router: "1",
+    ClockA01_user_record_params: "1",
+    ClockA01_user_nickName_color: "#262626",
+    ClockA01_user_nickName_padding: "0,0,4,0",
+    ClockA01_user_nickName_size: 20,
+    ClockA01_user_nickName_famity: "ShuHeiTi",
+    ClockA01_user_nickName_weight: 400,
+    ClockA01_user_nickName_style: "normal",
+    ClockA01_user_orgName_color: "#455368",
+    ClockA01_user_orgName_padding: "4,0,0,0",
+    ClockA01_user_orgName_size: 16,
+    ClockA01_user_orgName_famity: "汉真广标",
+    ClockA01_user_orgName_weight: 400,
+    ClockA01_user_orgName_style: "normal",
+    ClockA01_back_back: "#ffffff",
+    ClockA01_back_deg: 0,
+    ClockA01_back_padding: "8",
+    ClockA01_back_margin: "8",
+    ClockA01_back_radius: "8",
+    ClockA01_back_border: false,
+    ClockA01_back_shadow: true,
+    ClockA01_back_shadow_size: "1,1,2",
+    ClockA01_back_shadow_color: "#26262633",
+    ClockA01_back_shadow_type: "outline",
+    ClockA01_btn_back: [{ color: "#0098b8", percent: 0 }, { color: "#00c5da", percent: 100 }],
+    ClockA01_btn_deg: 0,
+    ClockA01_btn_size: 200,
+    ClockA01_btn_radius: 200,
+    ClockA01_btn_border: false,
+    ClockA01_btn_shadow: true,
+    ClockA01_btn_filter: true,
+    ClockA01_btn_shadow_size: "0,0,20",
+    ClockA01_btn_shadow_color: "#0095b680",
+    ClockA01_btn_shadow_type: "inset",
+    ClockA01_btn_filter_size: "0,0,8",
+    ClockA01_btn_filter_color: "#0095b680",
+    ClockA01_btn_animation: false,
+    ClockA01_btn_text_label: "点击打卡",
+    ClockA01_btn_text_padding: "8",
+    ClockA01_btn_text_color: "#ffffff",
+    ClockA01_btn_text_deg: 0,
+    ClockA01_btn_text_size: 24,
+    ClockA01_btn_text_famity: "ShuHeiTi",
+    ClockA01_btn_text_weight: 400,
+    ClockA01_btn_text_style: "normal",
+    ClockA01_btn_text_filter: true,
+    ClockA01_btn_text_filter_size: "1,1,1",
+    ClockA01_btn_text_filter_color: "#262626",
+    ClockA01_btn_text_time: true,
+    ClockA01_btn_time_color: "#ffffff",
+    ClockA01_btn_time_deg: 0,
+    ClockA01_btn_time_padding: "8",
+    ClockA01_btn_time_size: 24,
+    ClockA01_btn_time_famity: "DIN",
+    ClockA01_btn_time_weight: 400,
+    ClockA01_btn_time_style: "normal",
+    ClockA01_btn_time_filter: true,
+    ClockA01_btn_time_filter_size: "1,1,1",
+    ClockA01_btn_time_filter_color: "#262626",
+    ClockA01_today: true,
+    ClockA01_address: true,
+    ClockA01_today_method: "get",
+    ClockA01_today_murl: "1",
+    ClockA01_today_color: "#5b5b5b",
+    ClockA01_today_padding: "8",
+    ClockA01_today_size: 24,
+    ClockA01_today_famity: "HYT",
+    ClockA01_today_weight: 400,
+    ClockA01_today_style: "normal",
+    ClockA01_address_color: "#5e5e5e",
+    ClockA01_address_padding: "8",
+    ClockA01_address_size: 20,
+    ClockA01_address_famity: "ShuHeiTi",
+    ClockA01_address_weight: 400,
+    ClockA01_address_style: "normal",
+    ClockA01_refresh: true,
+    ClockA01_refresh_url: "refresh",
+    ClockA01_refresh_color: "#1677ff",
+    ClockA01_refresh_size: 24,
+    ClockA01_last_border_size: 1,
+    ClockA01_last_border_type: "dashed",
+    ClockA01_last_border_color: "#bfbfbf",
+    ClockA01_last_title_color: "#262626",
+    ClockA01_last_title_padding: "8",
+    ClockA01_last_title_size: 20,
+    ClockA01_last_title_famity: "ShuHeiTi",
+    ClockA01_last_title_weight: 400,
+    ClockA01_last_title_style: "normal",
+    ClockA01_last_time_color: "#898989",
+    ClockA01_last_time_padding: "10,0,8,0",
+    ClockA01_last_time_size: 16,
+    ClockA01_last_time_famity: "DIN",
+    ClockA01_last_time_weight: 400,
+    ClockA01_last_time_style: "normal",
+    ClockA01_last_address_color: "#545454",
+    ClockA01_last_address_padding: "0,0,8,0",
+    ClockA01_last_address_size: 20,
+    ClockA01_last_address_famity: "汉真广标",
+    ClockA01_last_address_weight: 400,
+    ClockA01_last_address_style: "normal"
+}
 
 
 // TODO 固定组件
@@ -222,6 +342,7 @@ const WeChatTempFixedA02 = {
 // 打卡信息
 const WeChatTempFixedA03 = {
     temp: 'WeChatTempClockInA01',
+    ...WeChatTempClockInA01,
 }
 
 // TODO  TDesign组件
@@ -252,18 +373,38 @@ const WeChatTempTDesignTabs = {
     TDtabs_act_text_style: "normal",
 }
 
-const WeChatTempTDesignSwiper = {}
-
-
-
-
-
-
+const WeChatTempTDesignSwiper = {
+    APIName: "swiper",
+    APILevel: "list",
+    APIImage: "fileUrl",
+    backgroun: "#ffffff00",
+    backDeg: 0,
+    padding: "8,16",
+    imageRadius: "4",
+    imagePadding: "0",
+    number: 1,
+    direction: "horizontal",
+    controls: false,
+    autoplay: true,
+    loop: true,
+    duration: 300,
+    interval: 5000,
+    previous: 0,
+    next: 0,
+    easing: "default",
+    image: "scaleToFill",
+    pagination: "bottom-right",
+    paginationType: "fraction",
+    fraBack: "#878787cc",
+    fraColor: "#ffffff",
+    fraHeight: 24,
+    fraSize: 16,
+    fraFamily: "ShuHeiTi"
+}
 
 export const WeChatFormInit = {
     WeChatTempTitleA01,
     WeChatTempReserveA01,
-    WeChatTempHomeA01,
     WeChatTempFixedA01,
     WeChatTempFixedA02,
     WeChatTempFixedA03,

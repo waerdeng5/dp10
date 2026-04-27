@@ -919,13 +919,6 @@ const WeChatTempReserveA01 = [
     }
 ]
 
-
-// TODO 首页模板 -A01 - 菜单
-const WeChatTempHomeA01 = [
-    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
-    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
-]
-
 // TODO 固定组件
 const WeChatTempFixedA01 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
@@ -1273,8 +1266,6 @@ const WeChatTempClockInA01 = [
                     { span: 8, formType: 'RADIO', name: 'ClockA01_back_shadow_type', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
                 ]
             },
-            { span: 12, formType: 'RADIO', name: 'ClockA01_today', label: '今日打卡情况', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 12, formType: 'RADIO', name: 'ClockA01_address', label: '当前位置信息', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'GROUP', name: 'ClockA01_btn_config', label: '按钮设置', collapsible: true, defaultCollapsed: false,
                 children: [
@@ -1363,13 +1354,11 @@ const WeChatTempClockInA01 = [
 
                 ]
             },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_today', label: '今日打卡情况', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'ClockA01_address', label: '当前位置信息', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'GROUP', name: 'ClockA01_today_config', label: '今日打卡情况设置', collapsible: true, defaultCollapsed: true,
                 jugde: [{ field: 'ClockA01_today', value: [true] }], children: [
-                    { span: 12, formType: 'RADIO', name: 'ClockA01_today_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
-                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_murl', label: '接口地址', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_params', label: '接口参数' },
-                    { span: 12, formType: 'INPUT', name: 'ClockA01_today_extra', label: '额外域名' },
                     { span: 12, formType: 'COLOR', name: 'ClockA01_today_color', label: '文字颜色', rules: true, mode: ['single'] },
                     { span: 12, formType: 'INPUT', name: 'ClockA01_today_padding', label: '内填充', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'ClockA01_today_size', label: '文字字号', rules: true },
@@ -1452,19 +1441,17 @@ const WeChatTempClockInA01 = [
     },
 ]
 
-
-
 // 打卡信息
 const WeChatTempFixedA03 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'temp', label: 'TEMP', rules: true, disabled: true },
+    { span: 24, formType: 'INPUT', name: 'fixed_power', label: '权限验证UUID', rules: true },
     {
         span: 24, formType: 'GROUP', name: 'clock_A01', label: '基础打卡样式', collapsible: true, defaultCollapsed: false,
         jugde: [{ field: 'temp', value: ['WeChatTempClockInA01'] }], children: WeChatTempClockInA01
     },
 ]
-
 
 // TODO TDesign组件
 // *** 选项卡Tabs ***// 
@@ -1564,8 +1551,6 @@ export const WeChatFormConfig = {
 
     WeChatTempTitleA01,
     WeChatTempReserveA01,
-
-    WeChatTempHomeA01,
 
     WeChatTempFixedA01,
     WeChatTempFixedA02,

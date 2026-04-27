@@ -28,6 +28,17 @@
             justify-content: flex-start;
             flex-wrap: wrap;
 
+            .dx-scrollview-content {
+                &>div {
+                    min-height: 160px;
+
+                    &>div {
+                        min-height: 160px;
+                    }
+                }
+
+            }
+
             &>.Item {
                 margin: 16px;
                 padding: 8px;
