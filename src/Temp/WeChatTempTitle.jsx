@@ -1,8 +1,8 @@
 import './WeChatTempTitle.scss'
 import { Icon } from 'tdesign-icons-react'
+import { WeChatFormInit } from '../Config/wechatDefault'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
 
-import { WeChatFormInit } from '../Config/wechatDefault'
 
 const WeChatTempTitleA01 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempTitleA01

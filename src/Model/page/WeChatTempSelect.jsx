@@ -4,12 +4,17 @@ import { Tabs, Alert } from 'antd'
 
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { WeChatTempTitle } from '../../Temp/WeChatTempTitle'
-import { WeChatTempFixed } from '../../Temp/WeChatTempFixed'
 import { WeChatTempReserve } from '../../Temp/WeChatTempReserve'
+import { WeChatTempUserInfo } from '../../Temp/WeChatTempUserInfo'
+import { WeChatTempFixed } from '../../Temp/WeChatTempFixed'
 import { WeChatTempTDesign } from '../../Temp/WeChatTempTDesign'
 
 
-const Common = { ...WeChatTempTitle, ...WeChatTempReserve }
+const Common = {
+    ...WeChatTempTitle,
+    ...WeChatTempReserve,
+    ...WeChatTempUserInfo
+}
 
 
 const WeChatTempSelect = ({ data, Event }) => {

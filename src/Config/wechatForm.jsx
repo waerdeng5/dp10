@@ -577,7 +577,7 @@ const WeChatAPIUrl = [
 const WeChatTDesignTabs = [
     { span: 8, formType: 'RADIO', name: 'TDtabs_icon', label: '导航图标', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'NUMBER', name: 'TDtabs_height', label: '导航高度', rules: true },
-    { span: 8, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true },
+    { span: 8, formType: 'COLOR', name: 'TDtabs_back', label: '背景颜色', rules: true, mode: ['single'] },
     { span: 12, formType: 'RADIO', name: 'TDtabs_type', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__tabsThemeType },
     { span: 12, formType: 'RADIO', name: 'TDtabs_switch', label: '数据切换', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
@@ -917,6 +917,120 @@ const WeChatTempReserveA01 = [
             },
         ]
     }
+]
+// TODO 个人信息 - A01 
+const WeChatTempUserInfoA01 = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
+    {
+        span: 24, formType: 'GROUP', name: 'userA01_back_config', label: '背景配置', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 8, formType: 'SELECT', name: 'back_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'back_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'back_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'back_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'back_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 8, formType: 'INPUT', name: 'back_padding', label: '内间距', rules: true },
+            { span: 8, formType: 'INPUT', name: 'back_margin', label: '外填充', rules: true },
+            { span: 8, formType: 'INPUT', name: 'back_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '默认背景', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'back_shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'back_shadow_config', label: '背景阴影配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'back_shadow', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'back_shadowSize', label: '阴影尺寸', rules: true },
+                    { span: 8, formType: 'COLOR', name: 'back_shadowColor', label: '阴影颜色', rules: true, mode: ['single'] },
+                    { span: 8, formType: 'RADIO', name: 'back_shadowType', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'back_border_config', label: '背景边框配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'back_border', value: [true] }], children: [
+                    { span: 8, formType: 'NUMBER', name: 'back_borderSize', label: '边框尺寸', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'back_borderType', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                    { span: 8, formType: 'COLOR', name: 'back_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                ]
+            },
+        ]
+    },
+    { span: 12, formType: 'RADIO', name: 'avatar', label: '显示头像', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'RADIO', name: 'options', label: '额外操作', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'avatar_config', label: '头像设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'avatar', value: [true] }], children: [
+            { span: 12, formType: 'NUMBER', name: 'avatar_width', label: '头像宽度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'avatar_height', label: '头像高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'avatar_radius', label: '头像圆角', rules: true },
+            { span: 12, formType: 'INPUT', name: 'avatar_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'RADIO', name: 'avatar_shadow', label: '头像阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'avatar_border', label: '头像边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'avatar_shadow_config', label: '头像阴影配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'avatar_shadow', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'avatar_shadowSize', label: '阴影尺寸', rules: true },
+                    { span: 8, formType: 'COLOR', name: 'avatar_shadowColor', label: '阴影颜色', rules: true, mode: ['single'] },
+                    { span: 8, formType: 'RADIO', name: 'avatar_shadowType', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'avatar_border_config', label: '头像边框配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'avatar_border', value: [true] }], children: [
+                    { span: 8, formType: 'NUMBER', name: 'avatar_borderSize', label: '边框尺寸', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'avatar_borderType', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                    { span: 8, formType: 'COLOR', name: 'avatar_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'options_config', label: '操作设置', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'options', value: [true] }], children: [
+            { span: 12, formType: 'INPUT', name: 'options_url', label: '图标路径', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'options_size', label: '图标尺寸', rules: true },
+            { span: 12, formType: 'COLOR', name: 'options_color', label: '边框颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'INPUT', name: 'options_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'options_path', label: '路由路径', rules: true },
+            { span: 12, formType: 'INPUT', name: 'options_params', label: '路由参数', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'render_config', label: '渲染配置', collapsible: true, defaultCollapsed: false,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'title', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'NUMBER', name: 'title_width', label: '标题宽度', rules: true, jugde: [{ field: 'title', value: [true] }] },
+            {
+                span: 24, formType: 'GROUP', name: 'title_config', label: '标题配置', collapsible: true, defaultCollapsed: false,
+                jugde: [{ field: 'title', value: [true] }], children: [
+                    { span: 12, formType: 'NUMBER', name: 'title_size', label: '标题字号', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'title_padding', label: '标题内边距', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'title_color', label: '标题颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'SELECT', name: 'title_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'title_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'title_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'text_config', label: '内容配置', collapsible: true, defaultCollapsed: false,
+                children: [
+                    { span: 12, formType: 'NUMBER', name: 'text_size', label: '内容字号', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'text_padding', label: '内容内边距', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'text_color', label: '内容颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'SELECT', name: 'text_famity', label: '内容字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'text_weight', label: '内容加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'text_style', label: '内容倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'renderList', label: '渲染列表', collapsible: true, title: '名称',
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'label', label: '标题' },
+                    { span: 12, formType: 'INPUT', name: 'field', label: '字段', rules: true },
+                ]
+            },
+        ]
+    },
 ]
 
 // TODO 固定组件
@@ -1551,6 +1665,7 @@ export const WeChatFormConfig = {
 
     WeChatTempTitleA01,
     WeChatTempReserveA01,
+    WeChatTempUserInfoA01,
 
     WeChatTempFixedA01,
     WeChatTempFixedA02,

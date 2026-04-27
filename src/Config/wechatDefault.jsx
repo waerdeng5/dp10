@@ -84,6 +84,10 @@ const WeChatTempReserveA01 = {
     resA01_text: false,
     resA01_click: false
 }
+// TODO 用户信息 - 通用A01
+const WeChatTempUserInfoA01 = {
+
+}
 
 // TODO 列表组件
 // *** 列表1
@@ -405,6 +409,9 @@ const WeChatTempTDesignSwiper = {
 export const WeChatFormInit = {
     WeChatTempTitleA01,
     WeChatTempReserveA01,
+    WeChatTempUserInfoA01,
+
+
     WeChatTempFixedA01,
     WeChatTempFixedA02,
     WeChatTempFixedA03,

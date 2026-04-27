@@ -1,29 +1,26 @@
 
 import './WeChatHome.scss'
 import { v4 } from 'uuid'
-import { useState, useRef, useEffect } from 'react'
-import { useSize, useEventEmitter, useDebounceFn } from 'ahooks'
+import { useState, useEffect } from 'react'
+import { useEventEmitter, useDebounceFn } from 'ahooks'
 import { Dropdown, App, Button, Popconfirm } from 'antd'
 import ReactGridLayout from 'react-grid-layout'
-import { GridBackground } from "react-grid-layout/extras"
-
 
 import { modelStore } from '../Router/zustand'
 import { WeChatFormInit } from '../Config/wechatDefault'
 
-import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempTitle } from '../Temp/WeChatTempTitle'
-import { WeChatTempFixed } from '../Temp/WeChatTempFixed'
 import { WeChatTempReserve } from '../Temp/WeChatTempReserve'
+import { WeChatTempUserInfo } from '../Temp/WeChatTempUserInfo'
+import { WeChatTempFixed } from '../Temp/WeChatTempFixed'
 import { WeChatTempTDesign } from '../Temp/WeChatTempTDesign'
-
-
 
 const TempMapping = {
     ...WeChatTempTitle,
     ...WeChatTempFixed,
     ...WeChatTempReserve,
     ...WeChatTempTDesign,
+    ...WeChatTempUserInfo,
 }
 
 
