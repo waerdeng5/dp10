@@ -797,6 +797,61 @@ const Mars3DdivFormList = [
             },
         ]
     },
+    {
+        span: 24, formType: 'GROUP', name: 'tempConfig_A03', label: '三号版配置', collapsible: true,
+        jugde: [{ field: ['style', 'temp'], value: ['A03'] }], children: [
+            { span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'background'], label: '背景颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'padding'], label: '内部间距', rules: true },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'radius'], label: '圆角信息', rules: true },
+            { span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'border'], label: '是否边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'NUMBER', name: ['style', 'tempConfig', 'borderSize'], label: '边框尺寸', rules: true,
+                jugde: [{ field: ['style', 'tempConfig', 'border'], value: [true] }]
+            },
+            {
+                span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'borderType'], label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
+                jugde: [{ field: ['style', 'tempConfig', 'border'], value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'borderColor'], label: '边框颜色', rules: true, mode: ['single'],
+                jugde: [{ field: ['style', 'tempConfig', 'border'], value: [true] }]
+            },
+            { span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'shadow'], label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'shadowType'], label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType,
+                jugde: [{ field: ['style', 'tempConfig', 'shadow'], value: [true] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'shadowSize'], label: '阴影数值', rules: true,
+                jugde: [{ field: ['style', 'tempConfig', 'shadow'], value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'shadowColor'], label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: ['style', 'tempConfig', 'shadow'], value: [true] }]
+            },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'text'], label: '文字内容', rules: true },
+            { span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'color'], label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: ['style', 'tempConfig', 'font_size'], label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: ['style', 'tempConfig', 'font_family'], label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'font_weight'], label: '是否加粗', rules: true, valueEnum: MappingData.Font__WeightStr },
+            { span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'font_style'], label: '是否斜体', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: ['style', 'tempConfig', 'filter'], label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'filterSize'], label: '阴影数值', rules: true,
+                jugde: [{ field: ['style', 'tempConfig', 'filter'], value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'filterColor'], label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: ['style', 'tempConfig', 'filter'], value: [true] }]
+            },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'imgUrl'], label: '图片URL', rules: true },
+            { span: 24, formType: 'NUMBER', name: ['style', 'tempConfig', 'imgWidth'], label: '图片宽度', rules: true },
+            { span: 24, formType: 'NUMBER', name: ['style', 'tempConfig', 'imgHeight'], label: '图片高度', rules: true },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'imgPad'], label: '图片内边距', rules: true },
+            { span: 24, formType: 'INPUT', name: ['style', 'tempConfig', 'imgMar'], label: '图片外边距', rules: true },
+            { span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'after'], label: '泛光颜色', rules: true, mode: ['single'] },
+        ]
+    },
 
 ]
 // Todo 扩散点

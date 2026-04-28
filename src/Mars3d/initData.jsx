@@ -2256,8 +2256,40 @@ const DivTemplate = {
         return `<div class="DivHtmlTemplate A02" ><div class="text">${html}</div></div > `
     },
     A03: e => {
+        const { background, padding, radius, after,
+            border, borderSize, borderType, borderColor,
+            shadow, shadowSize, shadowColor, shadowType,
+            text, color, font_size, font_family, font_weight, font_style, filter, filterSize, filterColor,
+            imgUrl, imgWidth, imgHeight, imgPad, imgMar,
+        } = e
+        const backStyle = {
+            background,
+            padding: SpacingCallBack(padding),
+            'border-radius': SpacingCallBack(radius),
+            border: SetBorderParams(border, borderSize, borderType, borderColor),
+            'box-shadow': SetShadowParams(shadow, shadowSize, shadowColor, shadowType),
+        }
+        const textStyle = {
+            color,
+            'font-size': font_size + 'px',
+            'font-family': font_family,
+            'font-weight': font_weight,
+            'font-style': font_style,
+            'filter': SetFilderParams(filter, filterSize, filterColor),
+        }
+        const imgStyle = {
+            width: imgWidth + 'px',
+            height: imgHeight + 'px',
+            padding: SpacingCallBack(imgPad),
+            margin: SpacingCallBack(imgMar),
+        }
 
-        return `<div class="DivHtmlA02Template" ><div class="text">DIV模板3</div></div > `
+        return `<div class="DivHtmlTemplate A03" style="--after:${after}">
+                    <div class="box" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}">
+                        <div class="text" style="${Object.keys(textStyle).map(k => `${k}:${textStyle[k]}`).join(';')}">${text}</div>
+                    </div>
+                    <img src="${imgUrl}" alt="" style="${Object.keys(imgStyle).map(k => `${k}:${imgStyle[k]}`).join(';')}">
+                </div >`
     },
 }
 // *** 扩散DIV
