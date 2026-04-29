@@ -1033,7 +1033,11 @@ const WeChatTempUserInfoA01 = [
     },
 ]
 
-// TODO 固定组件
+// TODO 固定菜单
+// *** 通用菜单 -1
+const WeChatTempMenuA01 = [
+
+]
 const WeChatTempFixedA01 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
@@ -1150,7 +1154,8 @@ const WeChatTempFixedA01 = [
     },
 ]
 
-// *** 列表样式
+// TODO固定列表
+// *** 列表样式 -1
 const WeChatTempListTypeA01 = [
     { span: 8, formType: 'INPUT', name: 'A01_padding', label: '内填充', rules: true },
     { span: 8, formType: 'INPUT', name: 'A01_margin', label: '外边距', rules: true },
@@ -1217,11 +1222,10 @@ const WeChatTempListTypeA01 = [
     },
 
 ]
-// *** 列表样式
+// *** 列表样式 -2
 const WeChatTempListTypeA02 = [
 
 ]
-
 const WeChatTempFixedA02 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },
@@ -1276,6 +1280,8 @@ const WeChatTempFixedA02 = [
     },
 ]
 
+// TODO打卡信息
+// *** 通用打卡
 const WeChatTempClockInA01 = [
     { span: 12, formType: 'RADIO', name: 'ClockA01_user', label: '用户信息', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'RADIO', name: 'ClockA01_last', label: '上次记录', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -1554,8 +1560,6 @@ const WeChatTempClockInA01 = [
         ]
     },
 ]
-
-// 打卡信息
 const WeChatTempFixedA03 = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'HIDDEN', name: 'type', label: 'TYPE', rules: true, disabled: true },

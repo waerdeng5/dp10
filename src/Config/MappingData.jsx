@@ -1927,6 +1927,14 @@ export const MappingData = {
                 // { value: 'regular', label: '正多边形' },
             ]
         },
+        {
+            value: 'A05',
+            label: '其他',
+            selectable: false,
+            children: [
+
+            ]
+        }
     ],
     mars3d_classificationType: [
         { label: '只对地形', value: 0 },

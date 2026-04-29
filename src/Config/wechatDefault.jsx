@@ -86,7 +86,53 @@ const WeChatTempReserveA01 = {
 }
 // TODO 用户信息 - 通用A01
 const WeChatTempUserInfoA01 = {
-
+    back_align_items: "center",
+    back_align_content: "center",
+    back_justify_content: "space-between",
+    back_flex_direction: "row",
+    back_flex_wrap: "nowrap",
+    back_padding: "0,16",
+    back_margin: "0",
+    back_radius: "0",
+    back_color: "#ffffff",
+    back_deg: 0,
+    back_shadow: false,
+    back_border: false,
+    avatar: true,
+    options: true,
+    title: true,
+    title_width: 48,
+    text_size: 16,
+    text_padding: "8,0",
+    text_color: "#262626",
+    text_famity: "阿里隶书",
+    text_weight: 400,
+    text_style: "normal",
+    avatar_width: 80,
+    avatar_height: 80,
+    avatar_radius: "40",
+    avatar_margin: "0,16,0,0",
+    avatar_shadow: true,
+    avatar_border: false,
+    avatar_shadowSize: "0,0,4",
+    avatar_shadowColor: "#262626",
+    avatar_shadowType: "outline",
+    options_url: "qrcode",
+    options_size: 40,
+    options_color: "#262626",
+    options_margin: "8",
+    options_path: "1",
+    options_params: "1",
+    title_size: 16,
+    title_padding: "8,0",
+    title_color: "#8e8c8c",
+    title_famity: "ShuHeiTi",
+    title_weight: 400,
+    title_style: "normal",
+    renderList: [
+        { label: "机构 :", field: "organizationName" },
+        { label: "姓名 : ", field: "userName" }
+    ]
 }
 
 // TODO 列表组件

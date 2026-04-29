@@ -4,10 +4,7 @@ import { Icon } from 'tdesign-icons-react'
 import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
 import { WeChatFormInit } from '../Config/wechatDefault'
 import { WeChatTempClockIn } from './WeChatTempClockIn'
-
-
 import { DevScrollView } from '../Temp/DevTemplate'
-
 import { WeChatTempListType } from './WeChatTempListType'
 
 
@@ -242,7 +239,6 @@ const WeChatTempFixedA02 = ({ styleData }) => {
         fontFamily: divider_family
     }
 
-
     const Template = WeChatTempListType[temp].temp
     return (
         <div className='WeChatTempFixedA02' style={backStyle}>
@@ -254,7 +250,6 @@ const WeChatTempFixedA02 = ({ styleData }) => {
             </div>
         </div>
     )
-
 }
 
 // 打开操作
