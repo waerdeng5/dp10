@@ -65,6 +65,10 @@ const DropdownItem = ({ START, WeChatEvent, i, type }) => {
                     key: '2-clock',
                     label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetClockIn', data: i })}>打卡信息</Button>)
                 },
+                type === 'WeChatTempFixedA04' && {
+                    key: '2-menu',
+                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetMenuType', data: i })}>菜单类型</Button>)
+                },
                 {
                     key: '2-1',
                     label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSetTemp', data: i })}>修改模块</Button>)
@@ -188,6 +192,19 @@ const WeChatHome = ({ data, FormEvent }) => {
                 })
             }],
             ['onFixedClock', () => {
+                const { uuid, temp } = data
+                PageConfig[Active][uuid].temp = temp
+                setPageConfig({ ...PageConfig })
+            }],
+            ['onSetMenuType', () => {
+                updateModel({
+                    title: '选择列表',
+                    type: 'CommonModel',
+                    Event: WeChatEvent,
+                    modelData: { openType: 'WeChatTempMenu', Initial: data }
+                })
+            }],
+            ['onMenuSelect', () => {
                 const { uuid, temp } = data
                 PageConfig[Active][uuid].temp = temp
                 setPageConfig({ ...PageConfig })

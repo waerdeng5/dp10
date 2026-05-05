@@ -78,6 +78,14 @@ export const stringToObject = (str) => {
     return newStr
 }
 
+// TODO 根据数组相同参数组合数组
+export const combinedArray = (arr1, arr2, key = 'uuid') => {
+    return arr1.map(item1 => {
+        const item2 = arr2.find(item => item[key] === item1[key]);
+        return item2 ? { ...item1, ...item2 } : { ...item1 };
+    });
+}
+
 
 // Todo 用key获取指定数据
 export const findDataByKey = (object, value, key = 'uuid') => {

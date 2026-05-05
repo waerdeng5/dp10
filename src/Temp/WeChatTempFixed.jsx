@@ -6,6 +6,7 @@ import { WeChatFormInit } from '../Config/wechatDefault'
 import { WeChatTempClockIn } from './WeChatTempClockIn'
 import { DevScrollView } from '../Temp/DevTemplate'
 import { WeChatTempListType } from './WeChatTempListType'
+import { WeChatTempMenu } from './WeChatTempMenu'
 
 
 const navList = [
@@ -252,14 +253,25 @@ const WeChatTempFixedA02 = ({ styleData }) => {
     )
 }
 
-// 打开操作
+// 打卡操作
 const WeChatTempFixedA03 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempFixedA03
     const { temp } = config
     const Template = WeChatTempClockIn[temp].temp
-
     return (
         <div className='WeChatTempFixedA03'>
+            <Template styleData={styleData} />
+        </div>
+    )
+}
+
+// 通用固定菜单
+const WeChatTempFixedA04 = ({ styleData }) => {
+    const config = styleData || WeChatFormInit.WeChatTempFixedA04
+    const { temp } = config
+    const Template = WeChatTempMenu[temp].temp
+    return (
+        <div className='WeChatTempFixedA04'>
             <Template styleData={styleData} />
         </div>
     )
@@ -283,6 +295,12 @@ export const WeChatTempFixed = {
         type: 'WeChatTempFixedA03',
         title: '打卡信息',
         temp: WeChatTempFixedA03,
+        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    },
+    WeChatTempFixedA04: {
+        type: 'WeChatTempFixedA04',
+        title: '通用固定菜单',
+        temp: WeChatTempFixedA04,
         layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
     },
 }

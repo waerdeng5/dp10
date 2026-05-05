@@ -26,6 +26,7 @@ import { dxThemeMapping } from '../../Config/themeMapping'
 import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
 import { WeChatTempListType } from '../../Temp/WeChatTempListType'
 import { WeChatTempClockIn } from '../../Temp/WeChatTempClockIn'
+import { WeChatTempMenu } from '../../Temp/WeChatTempMenu'
 
 
 const { port } = window.location
@@ -711,6 +712,24 @@ const CommonModel = ({ data, Event }) => {
                             <div className='item' key={v} onClick={() => Event.emit({ type: 'onFixedClock', data: { uuid: Initial, temp: v } })}>
                                 <Template />
                                 <div>{WeChatTempClockIn[v].title}</div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </DevScrollView>
+        )
+    }
+    // 小程序固定菜单
+    if (openType === 'WeChatTempMenu') {
+        return (
+            <DevScrollView>
+                <div className='WeChatTempList'>
+                    {Object.keys(WeChatTempMenu).map(v => {
+                        const Template = WeChatTempMenu[v].temp
+                        return (
+                            <div className='item' key={v} onClick={() => Event.emit({ type: 'onMenuSelect', data: { uuid: Initial, temp: v } })}>
+                                <Template />
+                                <div>{WeChatTempMenu[v].title}</div>
                             </div>
                         )
                     })}

@@ -395,6 +395,17 @@ const WeChatTempFixedA03 = {
     ...WeChatTempClockInA01,
 }
 
+// TODO 通用固定菜单
+// 固定菜单 A01
+const WeChatTempMenuA01 = {
+
+}
+const WeChatTempFixedA04 = {
+    temp: 'WeChatTempMenuA01',
+
+}
+
+
 // TODO  TDesign组件
 const WeChatTempTDesignTabs = {
     TDtabs_icon: true,
@@ -458,14 +469,17 @@ export const WeChatFormInit = {
     WeChatTempUserInfoA01,
 
 
-    WeChatTempFixedA01,
-    WeChatTempFixedA02,
-    WeChatTempFixedA03,
-
     WeChatTempTDesignTabs,
     WeChatTempTDesignSwiper,
     WeChatTempListTypeA01,
     WeChatTempListTypeA02,
     WeChatTempClockInA01,
+
+
+    WeChatTempFixedA01,
+    WeChatTempFixedA02,
+    WeChatTempFixedA03,
+    WeChatTempFixedA04,
+
 
 }
