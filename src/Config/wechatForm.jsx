@@ -542,7 +542,10 @@ const WeChatHomeFormList = [
 
 // TODO 页面设置
 const WeChatPageFormList = [
-
+    { span: 18, formType: 'INPUT', name: 'menuUuid', label: '关联UUID', rules: true },
+    { span: 6, formType: 'COLOR', name: 'background', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'RADIO', name: 'navigationStyle', label: '头部样式', rules: true, valueEnum: MappingData.WeChat_navigationStyle },
+    ...defaultHeader,
 ]
 
 // ??? 接口配置
@@ -1807,6 +1810,14 @@ const WeChatTempTDesignSwiper = [
 
 
 
+// TODO page
+// *** 创建页面
+const WeChatPageForm = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 24, formType: 'INPUT', name: 'tableName', label: '路由名称', rules: true },
+]
+
+
 export const WeChatFormConfig = {
     WeChatLoginFormList,
     WeChatHomeFormList,
@@ -1824,6 +1835,9 @@ export const WeChatFormConfig = {
     WeChatTempFixedA02,
     WeChatTempFixedA03,
     WeChatTempFixedA04,
+
+
+    WeChatPageForm,
 
 
 }

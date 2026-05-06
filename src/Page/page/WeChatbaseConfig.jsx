@@ -1,40 +1,36 @@
 import './WeChatbaseConfig.scss'
 import dayjs from 'dayjs'
+import { v4 } from 'uuid'
 
-import { Segmented, App } from 'antd'
+
 import { useEffect, useState } from 'react'
+import { Segmented, App, Tree, Button, Popconfirm, Spin, Result } from 'antd'
 import { useInterval, useMount, useEventEmitter, useReactive } from 'ahooks'
+import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled, PlusOutlined, SaveOutlined, DeleteOutlined } from '@ant-design/icons'
+
+
+import { modelStore } from '../../Router/zustand'
+import { DevScrollView } from '../../Temp/DevTemplate'
 
 import { axios } from '../../Utils/Api'
-
-
-import { ICONMapping } from '../../Config/IconMapping'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
-
-import { DevScrollView } from '../../Temp/DevTemplate'
-import FormTemplate from '../../Utils/FormTemplate'
-import { WeChatFormConfig } from '../../Config/wechatForm'
-
 import WeChatHome from '../../Temp/WeChatHome'
+import FormTemplate from '../../Utils/FormTemplate'
+import { ICONMapping } from '../../Config/IconMapping'
+import { WeChatFormConfig } from '../../Config/wechatForm'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, isEmptyObject, onTreeDrop, replaceNodeByIdTwo, removeTreeByKey } from '../../Utils'
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, isEmptyObject } from '../../Utils'
-import { LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons'
-
-// 引入首页配置项
-
-
-
-
-
 
 const httpPath = 'https://common-api.ljkjkf.com/'
-
 const GetConfig = { method: 'get', url: 'wechats/GetJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate` } }
 const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate`, content: {} } }
-
 const GetHomeConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `WeChat/home` } }
 const PostHomeConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `WeChat/home`, content: {} } }
+
+
+const GetPageConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid' }
+const PostPageConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid' }
+
 
 
 const pageMapping = {
@@ -181,7 +177,7 @@ const WechatTopBar = ({ page, data }) => {
 }
 
 // TODO 表单渲染
-const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME }) => {
+const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME, PAGE }) => {
     if (page === 'login' && LOGIN) return (
         <FormTemplate
             formItem={pageMapping[page].formItem}
@@ -198,8 +194,17 @@ const WeChatForm = ({ page, FormEvent, Initial, LOGIN, HOME }) => {
             NotLoading
         />
     )
+    if (page === 'page' && PAGE) {
+        return (
+            <FormTemplate
+                formItem={pageMapping[page].formItem}
+                FORMEVENT={FormEvent}
+                Initial={Initial[page]}
+                NotLoading
+            />
+        )
+    }
 }
-
 
 const ContentTemplate = ({ page, data, FormEvent }) => {
     if (page === 'login' && !isEmptyObject(data[page])) {
@@ -214,31 +219,33 @@ const ContentTemplate = ({ page, data, FormEvent }) => {
         const TabTemplate = tabMapping[homeTabBarType]
         return (
             <div className='HOME_PAGE'>
-                <WeChatHome data={data[page]} FormEvent={FormEvent} />
+                <WeChatHome key={v4()} page={page} data={data[page]} FormEvent={FormEvent} />
                 {TabTemplate && <TabTemplate data={data[page]} FormEvent={FormEvent} />}
             </div>
         )
     }
     if (page === 'page' && !isEmptyObject(data[page])) {
         return (
-            <div>渲染页面</div>
+            <div className='HOME_PAGE'>
+                <WeChatHome key={v4()} page={page} data={data[page]} FormEvent={FormEvent} />
+            </div>
         )
     }
 }
 
-
-
 const WeChatbaseConfig = () => {
-    const { message, modal, notification } = App.useApp();
+    const { updateModel } = modelStore()
+    const { message, modal, notification } = App.useApp()
+    const WeChatInit = useReactive({ login: {}, home: {}, page: {} })
     const FormEvent = useEventEmitter()
     const [page, setPage] = useState('home')
-    const [menu, setMenu] = useState([])
+    const [TreeData, setTreeData] = useState()
 
     const [LOGIN, setLOGIN] = useState(false)
     const [HOME, setHOME] = useState(false)
-
-    const WeChatInit = useReactive({ login: {}, home: {}, page: {} })
-
+    const [PAGE, setPAGE] = useState([])
+    const [PAGELoading, setPAGELoading] = useState(true)
+    const [PAGESTATUS, setPAGESTATUS] = useState({ loading: true, status: false })
 
     // 获取登录页面配置
     const getLoginData = async () => {
@@ -267,6 +274,8 @@ const WeChatbaseConfig = () => {
             WeChatInit.home.tabBarList = menu
             setHOME(true)
         }
+        setTreeData(WeChatInit.home.pageList || [])
+        setPAGELoading(false)
     }
 
     const setLoaginData = async () => {
@@ -284,6 +293,14 @@ const WeChatbaseConfig = () => {
         notification.success({ key: 'weChat', title: '保存成功!', description: '小程序首页设置成功!' })
     }
 
+    const setPageData = async () => {
+        console.log('[------保存PAGE-------]', WeChatInit.page)
+        PostPageConfig.params = { uuid: `WeChat/${PAGE[0]}`, content: JSON.stringify(WeChatInit.page) }
+        const [err, res] = await axios(PostPageConfig)
+        if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '页面设置失败!' })
+        notification.success({ key: 'weChat', title: '保存成功!', description: '首页设置成功!' })
+    }
+
     const onSegmentedChange = (e) => {
         setPage(e)
     }
@@ -293,9 +310,67 @@ const WeChatbaseConfig = () => {
         getWeChatHomeData()
     })
 
+    // 新增页面
+    const onNewPage = () => {
+        updateModel({
+            title: '新增页面',
+            type: 'CommonForm',
+            Event: FormEvent,
+            width: 640,
+            height: 400,
+            modelData: { formItem: 'WeChatPageForm', eventBack: 'onPageBack' }
+        })
+    }
+
+    // 保存页面
+    const onSavePage = () => {
+        WeChatInit.home.pageList = TreeData
+        setHomeData()
+    }
+    // 删除菜单
+    const onPageDelete = (uuid) => {
+        const data = removeTreeByKey(TreeData, uuid)
+        setTreeData([...data])
+        WeChatInit.page = {}
+        setPAGE([])
+        setPAGESTATUS({ loading: true, status: false })
+    }
+    // 修改菜单
+    const onPageModify = (e) => {
+        updateModel({
+            title: '修改页面',
+            type: 'CommonForm',
+            Event: FormEvent,
+            width: 640,
+            height: 400,
+            modelData: { formItem: 'WeChatPageForm', eventBack: 'onPageModifyBack', Initial: e }
+        })
+    }
+
+    // 生成页面配置
+    const onSetPageConfig = async () => {
+        const [uuid] = PAGE
+        const axiosData = { ...PostPageConfig, params: { uuid: `WeChat/${uuid}`, content: JSON.stringify({}) } }
+        const [err, res] = await axios(axiosData)
+        if (err) return console.log(err)
+        setPAGESTATUS({ loading: false, status: false })
+
+    }
+
+    // 选中页面
+    const onSelectPage = async (e) => {
+        setPAGE(e)
+        const [uuid] = e
+        const axiosData = { ...GetPageConfig, params: { uuid: `WeChat/${uuid}` } }
+        const [err, res] = await axios(axiosData)
+        if (err) return setPAGESTATUS({ loading: false, status: true })
+        WeChatInit.page = res
+        setPAGESTATUS({ loading: false, status: false })
+    }
+
+
     const formCallBack = (e) => {
         const { type, data } = e
-        // console.log(e)
         const Mapping = new Map([
             ['onDetection', () => {
                 const [keys] = Object.keys(data)
@@ -303,15 +378,28 @@ const WeChatbaseConfig = () => {
                 WeChatInit[page][keys] = values
             }],
             ['onFormBack', () => {
-                WeChatInit[page] = data
+                WeChatInit[page] = { ...WeChatInit[page], ...data }
                 if (page === 'login') setLoaginData()
                 if (page === 'home') setHomeData()
+                if (page === 'page') setPageData()
             }],
             ['onSaveHome', () => {
                 WeChatInit.home.pageApiData = data.PageApiData
                 WeChatInit.home.pageLayout = data.PageLayout
                 WeChatInit.home.pageConfig = data.PageConfig
                 setHomeData()
+            }],
+            ['onSavePage', () => {
+                console.log('保存page', data)
+            }],
+            ['onPageBack', () => {
+                setTreeData(e => ([...e, { uuid: v4(), ...data }]))
+                updateModel({})
+            }],
+            ['onPageModifyBack', () => {
+                const arr = replaceNodeByIdTwo(TreeData, data.uuid, data)
+                setTreeData([...arr])
+                updateModel({})
             }]
         ])
         const func = Mapping.get(type)
@@ -337,6 +425,76 @@ const WeChatbaseConfig = () => {
                 <div className='title'>{pageMapping[page].title}</div>
                 {page === 'login' && <WeChatForm page={page} FormEvent={FormEvent} Initial={WeChatInit} LOGIN={LOGIN} />}
                 {page === 'home' && <WeChatForm page={page} FormEvent={FormEvent} Initial={WeChatInit} HOME={HOME} />}
+                {page === 'page' &&
+                    <div className='pageData'>
+                        <div className='tree'>
+                            {PAGELoading ?
+                                <Spin /> :
+                                TreeData.length === 0 ?
+                                    <Result status="404" title="暂无页面配置" subTitle="点击下方新增按钮添加新的小程序页面" /> :
+                                    <DevScrollView>
+                                        <Tree
+                                            fieldNames={{ key: 'uuid' }}
+                                            defaultExpandAll
+                                            blockNode
+                                            draggable
+                                            onDrop={e => setTreeData(onTreeDrop(e, TreeData, 'uuid'))}
+                                            treeData={TreeData}
+                                            selectedKeys={PAGE}
+                                            onSelect={(e) => {
+                                                if (e.length === 0) return
+                                                onSelectPage(e)
+                                            }}
+                                            titleRender={e => {
+                                                const { uuid, tableName, children } = e
+                                                return (
+                                                    <div key={uuid} className='TreeItem'>
+                                                        <div className='title'>{tableName}</div>
+                                                        <div className='operation'>
+                                                            <Button type='link' onClick={() => onPageModify(e)} >修改</Button>
+                                                            <Popconfirm
+                                                                title="删除提醒!"
+                                                                description="确认删除菜单吗？"
+                                                                onConfirm={() => onPageDelete(uuid)}
+                                                                okText="删除"
+                                                                cancelText="取消"
+                                                            >
+                                                                <Button danger type='link' disabled={children && children.length !== 0} >删除</Button>
+                                                            </Popconfirm>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            }}
+                                        />
+                                    </DevScrollView>
+                            }
+                            {!PAGELoading &&
+                                <div className='btn'>
+                                    <Button icon={<PlusOutlined />} onClick={onNewPage}>新增页面</Button>
+                                    <Button icon={<SaveOutlined />} type='primary' onClick={onSavePage}>保存配置</Button>
+                                </div>
+                            }
+                        </div>
+                        <div className='form'>
+                            {PAGELoading ? <Spin /> :
+                                <div className='formList'>
+                                    {PAGE.length === 0 ?
+                                        <Result title="请先选择左侧菜单" /> :
+                                        PAGESTATUS.loading ? <Spin /> :
+                                            PAGESTATUS.status ?
+                                                <Result
+                                                    status="403"
+                                                    title="配置文件加载失败!"
+                                                    subTitle="请检测网络波动或重新生成配置文件"
+                                                    extra={<Button type="primary" key="console" onClick={() => onSetPageConfig()}>生成配置文件</Button>}
+                                                /> :
+                                                <WeChatForm page={page} FormEvent={FormEvent} Initial={WeChatInit} PAGE={PAGE} />
+                                    }
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     );

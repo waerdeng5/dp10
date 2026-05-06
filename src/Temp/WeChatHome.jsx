@@ -23,15 +23,17 @@ const TempMapping = {
     ...WeChatTempUserInfo,
 }
 
-
-
-const DropdownItem = ({ START, WeChatEvent, i, type }) => {
+const DropdownItem = ({ page, START, WeChatEvent, i, type }) => {
     return ([
         {
             key: '0-0', type: 'group', label: '全局设置', children: [
-                {
+                page === 'home' && {
                     key: '0-2',
-                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSave' })}>保存配置</Button>)
+                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSaveHome' })}>保存配置</Button>)
+                },
+                page === 'page' && {
+                    key: '0-3',
+                    label: (<Button type='link' onClick={() => WeChatEvent.emit({ type: 'onSavePage' })}>保存配置</Button>)
                 },
                 {
                     key: '0-1',
@@ -93,23 +95,26 @@ const DropdownItem = ({ START, WeChatEvent, i, type }) => {
 }
 
 
-const WeChatHome = ({ data, FormEvent }) => {
+const WeChatHome = ({ page, data, FormEvent }) => {
     const { message, modal, notification } = App.useApp()
     const { updateModel } = modelStore()
     const WeChatEvent = useEventEmitter()
-    const { tabBar_active, tabBarList, pageConfig = {}, pageLayout = {}, pageApiData = {} } = data
-    const [Active, setActive] = useState(tabBar_active)
+    const { menuUuid, tabBar_active, tabBarList, pageConfig = {}, pageLayout = {}, pageApiData = {} } = data
+    const [Active, setActive] = useState(page === 'home' ? tabBar_active : menuUuid)
     const [PageLayout, setPageLayout] = useState(pageLayout)
     const [PageConfig, setPageConfig] = useState(pageConfig)
     const [PageApiData, setPageApiData] = useState(pageApiData)
+
     const [START, setSTART] = useState(false)
+
 
 
     const weChatCallBack = (e) => {
         const { type, data } = e
         // console.log(e)
         const Mapping = new Map([
-            ['onSave', () => FormEvent.emit({ type: 'onSaveHome', data: { PageLayout, PageConfig, PageApiData } })],
+            ['onSaveHome', () => FormEvent.emit({ type: 'onSaveHome', data: { PageLayout, PageConfig, PageApiData } })],
+            ['onSavePage', () => FormEvent.emit({ type: 'onSavePage', data: { PageLayout, PageConfig, PageApiData } })],
             ['onStart', () => setSTART(true)],
             ['onStop', () => setSTART(false)],
             ['onSetApi', () => {
@@ -128,6 +133,7 @@ const WeChatHome = ({ data, FormEvent }) => {
             }],
             ['onAdd', () => updateModel({ title: '小程序组件列表', type: 'WeChatTempSelect', Event: WeChatEvent })],
             ['onSelectTemp', () => {
+                console.log(data)
                 const uuid = v4()
                 const { type, layout } = data
                 const layData = PageLayout[Active]
@@ -238,10 +244,12 @@ const WeChatHome = ({ data, FormEvent }) => {
     }, [Active])
 
     if (PageConfig[Active]) {
-        const { background } = tabBarList.find(v => v.uuid === Active)
+        const background = page === 'page' ? data.background : tabBarList?.find(v => v.uuid === Active)?.background
+
+        console.log('START', START)
         return (
             <div className='WeChatHome'>
-                <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent }) }}>
+                <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ page, START, WeChatEvent }) }}>
                     <div className={`Layout ${START ? 'START' : 'STOP'}`} style={{ background }}>
                         <ReactGridLayout
                             resizeConfig={{ enabled: START }}
@@ -253,13 +261,14 @@ const WeChatHome = ({ data, FormEvent }) => {
                             gridConfig={{ cols: 10, rowHeight: 8, margin: [0, 0] }}
                             onLayoutChange={run}
                         >
-                            {PageLayout[Active].map(v => {
+                            {PageLayout[Active]?.map(v => {
+                                if (!v) return
                                 const { i } = v
                                 const { type, ...styleData } = PageConfig[Active][i]
                                 const Template = TempMapping[type].temp
                                 return (
                                     <div className={`layoutItem ${START ? 'START' : 'STOP'}`} key={i} onContextMenu={(e) => e.stopPropagation()}>
-                                        <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, WeChatEvent, i, type }) }}>
+                                        <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ page, START, WeChatEvent, i, type }) }}>
                                             <div className='layoutBox' onContextMenu={(e) => e.stopPropagation()}>
                                                 {START && <div className='SizeData'>{v.w}0% * {v.h * 8}px</div>}
                                                 <Template styleData={styleData} />
