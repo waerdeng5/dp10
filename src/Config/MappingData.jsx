@@ -1695,6 +1695,13 @@ export const MappingData = {
         { value: 'circle', label: '圆形' },
         { value: 'round', label: '圆角' },
     ],
+    WeChat__navType: [
+        { value: 'tabs', label: '顶部导航' },
+        { value: 'tabBar', label: '底部导航' },
+    ],
+
+
+
     // !!! 地图设置
     Mars3d__fileType: [
         { value: 'kml', label: 'KML' },

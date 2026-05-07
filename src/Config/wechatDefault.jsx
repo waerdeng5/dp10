@@ -1,5 +1,14 @@
-
-
+// TODO 初始化项目信息
+const WeChatInitProjectData = {
+    menuList: [
+        { uuid: '00000000-0000-0000-000000000000', title: '小程序入口' }
+    ],
+    pageAPiData: {},
+    pageNavList: {},
+    pageLayout: {},
+    pageConfig: {},
+    pageHeader: {},
+}
 
 
 
@@ -485,6 +494,9 @@ export const WeChatFormInit = {
     WeChatTempFixedA02,
     WeChatTempFixedA03,
     WeChatTempFixedA04,
+
+
+    WeChatInitProjectData,
 
 
 }

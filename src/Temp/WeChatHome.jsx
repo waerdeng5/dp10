@@ -3,7 +3,7 @@ import './WeChatHome.scss'
 import { v4 } from 'uuid'
 import { useState, useEffect } from 'react'
 import { useEventEmitter, useDebounceFn } from 'ahooks'
-import { Dropdown, App, Button, Popconfirm } from 'antd'
+import { Dropdown, App, Button, Popconfirm, Spin } from 'antd'
 import ReactGridLayout from 'react-grid-layout'
 
 import { modelStore } from '../Router/zustand'
@@ -95,19 +95,17 @@ const DropdownItem = ({ page, START, WeChatEvent, i, type }) => {
 }
 
 
-const WeChatHome = ({ page, data, FormEvent }) => {
+const WeChatHome = ({ page, data, active, FormEvent }) => {
     const { message, modal, notification } = App.useApp()
     const { updateModel } = modelStore()
     const WeChatEvent = useEventEmitter()
-    const { menuUuid, tabBar_active, tabBarList, pageConfig = {}, pageLayout = {}, pageApiData = {} } = data
-    const [Active, setActive] = useState(page === 'home' ? tabBar_active : menuUuid)
-    const [PageLayout, setPageLayout] = useState(pageLayout)
-    const [PageConfig, setPageConfig] = useState(pageConfig)
-    const [PageApiData, setPageApiData] = useState(pageApiData)
+    const { menuUuid, tabBar_active, tabBarList, pageConfig, pageLayout, pageApiData } = data
+    const [Active, setActive] = useState()
+    const [PageLayout, setPageLayout] = useState({})
+    const [PageConfig, setPageConfig] = useState({})
+    const [PageApiData, setPageApiData] = useState({})
 
     const [START, setSTART] = useState(false)
-
-
 
     const weChatCallBack = (e) => {
         const { type, data } = e
@@ -133,7 +131,6 @@ const WeChatHome = ({ page, data, FormEvent }) => {
             }],
             ['onAdd', () => updateModel({ title: '小程序组件列表', type: 'WeChatTempSelect', Event: WeChatEvent })],
             ['onSelectTemp', () => {
-                console.log(data)
                 const uuid = v4()
                 const { type, layout } = data
                 const layData = PageLayout[Active]
@@ -238,15 +235,22 @@ const WeChatHome = ({ page, data, FormEvent }) => {
     const { run } = useDebounceFn((e) => { setPageLayout(v => ({ ...v, [Active]: e })) }, { wait: 500 })
 
     useEffect(() => {
-        if (!PageLayout[Active]) setPageLayout(e => ({ ...e, [Active]: [] }))   // 初始化布局信息
-        if (!PageConfig[Active]) setPageConfig(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
-        if (!pageApiData[Active]) setPageApiData(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
+        if (Active) {
+            if (!pageLayout[Active]) setPageLayout(e => ({ ...e, [Active]: [] }))   // 初始化布局信息
+            if (!pageConfig[Active]) setPageConfig(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
+            if (!pageApiData[Active]) setPageApiData(e => ({ ...e, [Active]: {} }))   // 初始化模块信息
+        }
     }, [Active])
 
-    if (PageConfig[Active]) {
-        const background = page === 'page' ? data.background : tabBarList?.find(v => v.uuid === Active)?.background
 
-        console.log('START', START)
+    useEffect(() => {
+        setActive(page === 'home' ? tabBar_active : menuUuid)
+    }, [page])
+
+
+
+    if (PageConfig[Active] && PageConfig[Active]) {
+        const background = page === 'page' ? data.background : tabBarList?.find(v => v.uuid === Active)?.background
         return (
             <div className='WeChatHome'>
                 <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ page, START, WeChatEvent }) }}>
@@ -280,6 +284,12 @@ const WeChatHome = ({ page, data, FormEvent }) => {
                         </ReactGridLayout>
                     </div>
                 </Dropdown>
+            </div>
+        )
+    } else {
+        return (
+            <div className='WeChatHome Empty'>
+                <Spin />
             </div>
         )
     }

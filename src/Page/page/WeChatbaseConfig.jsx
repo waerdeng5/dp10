@@ -31,8 +31,6 @@ const PostHomeConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', p
 const GetPageConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid' }
 const PostPageConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid' }
 
-
-
 const pageMapping = {
     login: { title: '登录设置', formItem: WeChatFormConfig.WeChatLoginFormList },
     home: { title: '首页设置', formItem: WeChatFormConfig.WeChatHomeFormList },
@@ -219,7 +217,7 @@ const ContentTemplate = ({ page, data, FormEvent }) => {
         const TabTemplate = tabMapping[homeTabBarType]
         return (
             <div className='HOME_PAGE'>
-                <WeChatHome key={v4()} page={page} data={data[page]} FormEvent={FormEvent} />
+                <WeChatHome page={page} data={data[page]} FormEvent={FormEvent} />
                 {TabTemplate && <TabTemplate data={data[page]} FormEvent={FormEvent} />}
             </div>
         )
@@ -227,7 +225,7 @@ const ContentTemplate = ({ page, data, FormEvent }) => {
     if (page === 'page' && !isEmptyObject(data[page])) {
         return (
             <div className='HOME_PAGE'>
-                <WeChatHome key={v4()} page={page} data={data[page]} FormEvent={FormEvent} />
+                <WeChatHome page={page} data={data[page]} FormEvent={FormEvent} />
             </div>
         )
     }
@@ -258,6 +256,7 @@ const WeChatbaseConfig = () => {
     const getWeChatHomeData = async () => {
         const [err, res] = await axios(GetHomeConfig)
         if (err) console.log('小程序首页获取失败!')
+        console.log(res)
         WeChatInit.home = res || {}
         const [menuErr, menuRes] = await axios({ method: 'get', url: 'weChatMenu' })
         if (menuErr) return console.log('小程序菜单获取失败!')
@@ -359,6 +358,7 @@ const WeChatbaseConfig = () => {
 
     // 选中页面
     const onSelectPage = async (e) => {
+        WeChatInit.page = {}
         setPAGE(e)
         const [uuid] = e
         const axiosData = { ...GetPageConfig, params: { uuid: `WeChat/${uuid}` } }
@@ -417,7 +417,7 @@ const WeChatbaseConfig = () => {
                 <div className='box'>
                     <WechatTopBar page={page} data={WeChatInit} />
                     <div className='content'>
-                        <ContentTemplate page={page} data={WeChatInit} FormEvent={FormEvent} />
+                        <ContentTemplate page={page} data={WeChatInit} active FormEvent={FormEvent} />
                     </div>
                 </div>
             </div>
