@@ -163,6 +163,7 @@ const defaultHeader = [
 const WeChatPageForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
     { span: 24, formType: 'INPUT', name: 'title', label: '路由名称', rules: true },
+    { span: 24, formType: 'RADIO', name: 'isEnabled', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledNumber },
 ]
 
 
@@ -571,6 +572,8 @@ const WeChatPeerNav = [
         span: 12, formType: 'RADIO', name: 'navType', label: '导航类型', rules: true, valueEnum: MappingData.WeChat__navType,
         jugde: [{ field: 'status', value: [true] }]
     },
+    { span: 24, formType: 'INPUT', name: 'active', label: '默认导航' },
+
     {
         span: 24, formType: 'GROUP', name: 'tabsConfig', label: '顶部导航设置', collapsible: true,
         jugde: [{ field: 'navType', value: ['tabs'] }], children: [
@@ -671,7 +674,7 @@ const WeChatAPIUrl = [
                 jugde: [{ field: 'dataSource', value: ['api'] }], children: [
                     { span: 12, formType: 'RADIO', name: 'api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
                     { span: 12, formType: 'INPUT', name: 'api_murl', label: '接口地址', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'api_params', label: '接口参数', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'api_params', label: '接口参数' },
                     { span: 12, formType: 'INPUT', name: 'api_extra', label: '额外域名' },
                 ]
             },
@@ -728,7 +731,7 @@ const WeChatTDesignTabs = [
                     { span: 12, formType: 'INPUT', name: 'name', label: '接口名称', rules: true },
                     { span: 12, formType: 'RADIO', name: 'type', label: '回调类型', rules: true, valueEnum: MappingData.WeChat__apiBackDataType },
                     { span: 12, formType: 'INPUT', name: 'params', label: '更新参数', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'other', label: '其他参数', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'other', label: '其他参数' },
                 ]
             },
         ]
@@ -1356,7 +1359,6 @@ const WeChatTempFixedA02 = [
                 span: 24, formType: 'INPUT', name: 'APIReset', label: '重置字段', tooltip: '字段值更新时,数据恢复最初状态.',
                 jugde: [{ field: 'APIUpdate', value: ['A02', 'A03'] }]
             },
-
         ]
     },
     {
@@ -1848,7 +1850,7 @@ const WeChatTempTDesignTabs = [
                     { span: 12, formType: 'INPUT', name: 'uuid', label: '关联id', tooltip: '数据菜单uuid' },
                     { span: 12, formType: 'RADIO', name: 'power', label: '权限验证', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'INPUT', name: 'name', label: '导航名称', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'icon', label: '导航图标', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'icon', label: '导航图标' },
                 ]
             }
         ]

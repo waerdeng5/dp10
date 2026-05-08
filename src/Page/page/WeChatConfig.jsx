@@ -3,8 +3,8 @@ import dayjs from 'dayjs'
 import { v4 } from 'uuid'
 
 import { useEffect, useState } from 'react'
-import { Segmented, App, Tree, Button, Popconfirm, Spin, Result, Tooltip } from 'antd'
-import { useInterval, useMount, useEventEmitter, useReactive } from 'ahooks'
+import { App, Tree, Button, Popconfirm, Spin, Result, Tooltip } from 'antd'
+import { useInterval, useMount, useEventEmitter } from 'ahooks'
 import { EditOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, BarsOutlined, LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons'
 
 import { axios, axiosFor } from '../../Utils/Api'
@@ -13,23 +13,15 @@ import FormTemplate from '../../Utils/FormTemplate'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { ICONMapping } from '../../Config/IconMapping'
 
+
 import { WeChatFormConfig } from '../../Config/wechatForm'
 import { WeChatFormInit } from '../../Config/wechatDefault'
 
+import WeChatHome from '../../Temp/WechatHome'
+
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
-
-import {
-    ColorCallBack,
-    SpacingCallBack,
-    SetFilderParams,
-    isEmptyObject,
-    onTreeDrop,
-    replaceNodeByIdTwo,
-    removeTreeByKey,
-    findParentByChildPath,
-    treeValue
-} from '../../Utils'
+import { ColorCallBack, SetFilderParams, onTreeDrop, replaceNodeByIdTwo, removeTreeByKey, findParentByChildPath, treeValue } from '../../Utils'
 
 const httpPath = 'https://common-api.ljkjkf.com/'
 const initApi = [
@@ -139,11 +131,11 @@ const MenuList = ({ data, HOME, Event }) => {
                         onMenuSelect(e)
                     }}
                     titleRender={e => {
-                        const { uuid, title, children } = e
+                        const { uuid, title, isEnabled, children } = e
                         const init = uuid === initMenu
                         return (
                             <div key={uuid} className='TreeItem'>
-                                <div className='title'>{title}</div>
+                                <div className='title' style={{ color: isEnabled === 1 ? '#262626' : '#888888' }}>{title}</div>
                                 {!init &&
                                     <div className='operation'>
                                         <Tooltip title="添加同组导航">
@@ -315,11 +307,11 @@ const TabsTemplate = ({ data, HOME }) => {
     )
 }
 
-const TabBarTemplate = ({ menu, list, data }) => {
+const TabBarTemplate = ({ menu, list, data, HOME }) => {
     const tabBarMapping = { A01: WeChatTabBarA01, A02: WeChatTabBarA02, A03: WeChatTabBarA03, A04: WeChatTabBarA04 }
     const { tabBar_type } = data
     const Template = tabBarMapping[tabBar_type]
-    return <Template menu={menu} data={data} list={list} />
+    return <Template menu={menu} data={data} list={list} HOME={HOME} />
 }
 
 const ContentTemplate = ({ menu, SIGN, HOME, Event }) => {
@@ -340,7 +332,7 @@ const ContentTemplate = ({ menu, SIGN, HOME, Event }) => {
                 {parentUuid && HOME.pageNavList[parentUuid].navType === 'tabs ' &&
                     <TabsTemplate menu={menu} HOME={HOME} data={HOME.pageNavList[parentUuid]} list={treeValue(HOME.menuList, parentUuid)?.children || []} />
                 }
-                <div className='HOME_PAGE'> 内容页面 {menu} </div>
+                <WeChatHome menu={menu} HOME={HOME} Event={Event} />
                 {parentUuid && HOME.pageNavList[parentUuid].navType === 'tabBar' &&
                     <TabBarTemplate menu={menu} HOME={HOME} data={HOME.pageNavList[parentUuid]} list={treeValue(HOME.menuList, parentUuid)?.children || []} />
                 }
@@ -382,7 +374,6 @@ const FormDataTemp = ({ menu, SIGN, HOME, Event }) => {
         </div>
     )
 }
-
 
 const WeChatConfig = () => {
     const WeChatEvent = useEventEmitter()
@@ -440,15 +431,23 @@ const WeChatConfig = () => {
             ['onMenuSetNav', () => {
                 setHOME(data)
                 updateModel({})
+                onSaveConfig()
             }],
             ['onFormBack', () => {
                 if (SELECT === initMenu) {
-
+                    console.log('初始化页面', initMenu)
                 } else {
                     HOME.pageHeader[SELECT] = data
                     setHOME({ ...HOME })
                     onSaveConfig()
                 }
+            }],
+            ['onSave', () => {
+                HOME.pageLayout = data.PageLayout
+                HOME.pageConfig = data.PageConfig
+                HOME.pageApiData = data.PageApiData
+                setHOME({ ...HOME })
+                onSaveConfig()
             }]
         ])
         const func = Mapping.get(type)

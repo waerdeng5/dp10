@@ -1,11 +1,8 @@
 import { Icon } from 'tdesign-icons-react'
-
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams } from '../Utils'
-import { useState } from 'react';
+import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../Utils'
 
 
-
-export const WeChatTabBarA01 = ({ menu, data, list, FormEvent }) => {
+export const WeChatTabBarA01 = ({ menu, data, list, HOME }) => {
     const { tabA01_bgColor, tabA01_bgDeg, tabA01_bgHeight, tabA01_bgPadding, tabA01_icon, tabA01_text,
         tabA01_align_items, tabA01_align_content, tabA01_justify_content, tabA01_flex_direction, tabA01_flex_wrap,
         tabA01_iconD_color, tabA01_iconD_Size, tabA01_iconD_Map, tabA01_iconA_color, tabA01_iconA_Size, tabA01_iconA_Map,
@@ -14,7 +11,6 @@ export const WeChatTabBarA01 = ({ menu, data, list, FormEvent }) => {
         tabA01_textA_color, tabA01_textA_size, tabA01_textA_famity, tabA01_textA_weight, tabA01_textA_style,
         tabA01_textA_filed, tabA01_textA_filed_size, tabA01_textA_filed_color,
     } = data
-
 
     const backStyle = {
         height: tabA01_bgHeight,
@@ -64,19 +60,13 @@ export const WeChatTabBarA01 = ({ menu, data, list, FormEvent }) => {
         filter: SetFilderParams(tabA01_textA_filed, tabA01_textA_filed_size, tabA01_textA_filed_color),
     }
 
-    const onClick = (e) => {
-        setActive(e)
-        FormEvent.emit({ type: 'onTabBarClick', data: e })
-    }
-
     return (
         <div className='TabBarBox WeChatTabBarA01' style={backStyle}>
             {list.map(v => {
                 const status = menu === v.uuid
-                console.log(v)
                 return (
-                    <div key={v.uuid} style={flexStyle} onClick={() => onClick(v.uuid)}>
-                        {tabA01_icon && <Icon style={status ? iconActiveStyle : iconDefaultStyle} name={v.iconUrl || 'ai-1-filled'} />}
+                    <div key={v.uuid} style={flexStyle} >
+                        {tabA01_icon && <Icon style={status ? iconActiveStyle : iconDefaultStyle} name={HOME.pageHeader[v.uuid].icon || 'ai-1-filled'} />}
                         {tabA01_text && <div style={status ? textActiveStyle : textDefaultStyle}>{v.title}</div>}
                     </div>
                 )

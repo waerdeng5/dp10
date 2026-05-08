@@ -1,9 +1,9 @@
 // TODO 初始化项目信息
 const WeChatInitProjectData = {
     menuList: [
-        { uuid: '00000000-0000-0000-000000000000', title: '小程序入口' }
+        { uuid: '00000000-0000-0000-000000000000', title: '小程序入口', isEnabled: 1 }
     ],
-    pageAPiData: {},
+    pageApiData: {},
     pageNavList: {},
     pageLayout: {},
     pageConfig: {},
@@ -449,9 +449,9 @@ const WeChatTempTDesignTabs = {
 }
 
 const WeChatTempTDesignSwiper = {
-    APIName: "swiper",
-    APILevel: "list",
-    APIImage: "fileUrl",
+    APIName: "",
+    APILevel: "",
+    APIImage: "",
     backgroun: "#ffffff00",
     backDeg: 0,
     padding: "8,16",

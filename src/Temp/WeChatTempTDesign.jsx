@@ -125,8 +125,6 @@ const WeChatTempTDesignTabs = ({ styleData }) => {
 
 const WeChatTempTDesignSwiper = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempTDesignSwiper
-    console.log(config)
-
     const { backgroun, backDeg, padding, controls, pagination, paginationType, imageRadius, dotsSize, dotsDefault, dotsActive,
         fraBack, fraColor, fraHeight, fraSize, fraFamily
     } = config

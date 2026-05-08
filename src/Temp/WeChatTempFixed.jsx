@@ -277,7 +277,6 @@ const WeChatTempFixedA04 = ({ styleData }) => {
     )
 }
 
-
 export const WeChatTempFixed = {
     WeChatTempFixedA01: {
         type: 'WeChatTempFixedA01',
@@ -297,10 +296,10 @@ export const WeChatTempFixed = {
         temp: WeChatTempFixedA03,
         layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
     },
-    WeChatTempFixedA04: {
-        type: 'WeChatTempFixedA04',
-        title: '通用固定菜单',
-        temp: WeChatTempFixedA04,
-        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
-    },
+    // WeChatTempFixedA04: {
+    //     type: 'WeChatTempFixedA04',
+    //     title: '通用固定菜单',
+    //     temp: WeChatTempFixedA04,
+    //     layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    // },
 }
