@@ -21,7 +21,7 @@ import WeChatHome from '../../Temp/WechatHome'
 
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
-import { ColorCallBack, SetFilderParams, onTreeDrop, replaceNodeByIdTwo, removeTreeByKey, findParentByChildPath, treeValue } from '../../Utils'
+import { ColorCallBack, SetFilderParams, onTreeDrop, replaceNodeByIdTwo, removeTreeByKey, findParentNodeFunc, treeValue } from '../../Utils'
 
 const httpPath = 'https://common-api.ljkjkf.com/'
 const initApi = [
@@ -80,7 +80,9 @@ const MenuList = ({ data, HOME, Event }) => {
 
     // 设置同级导航
     const onMenuSetNav = (e) => {
-        const parentUuid = findParentByChildPath(TreeData, e.uuid)?.uuid
+        console.log(e)
+        console.log(findParentNodeFunc(TreeData, e.uuid))
+        const parentUuid = findParentNodeFunc(TreeData, e.uuid)?.uuid
         if (!parentUuid) return notification.error({ key: 'init', title: '设置失败!', description: '小程序菜单结构错误!' })
         const InitNav = pageNavList[parentUuid] || { uuid: parentUuid }
         updateModel({
@@ -135,7 +137,9 @@ const MenuList = ({ data, HOME, Event }) => {
                         const init = uuid === initMenu
                         return (
                             <div key={uuid} className='TreeItem'>
-                                <div className='title' style={{ color: isEnabled === 1 ? '#262626' : '#888888' }}>{title}</div>
+                                <div className='title' style={{ color: isEnabled === 1 ? '#262626' : '#888888' }}>
+                                    {title}
+                                </div>
                                 {!init &&
                                     <div className='operation'>
                                         <Tooltip title="添加同组导航">
@@ -326,14 +330,14 @@ const ContentTemplate = ({ menu, SIGN, HOME, Event }) => {
         if (LoginTemp) return <LoginTemp data={SIGN} />
         return <Spin />
     } else {
-        const parentUuid = findParentByChildPath(HOME.menuList, menu)?.uuid
+        const parentUuid = findParentNodeFunc(HOME.menuList, menu)?.uuid
         return (
             <div className='HOMEBOX'>
-                {parentUuid && HOME.pageNavList[parentUuid].navType === 'tabs ' &&
+                {parentUuid && HOME.pageNavList[parentUuid]?.navType === 'tabs ' &&
                     <TabsTemplate menu={menu} HOME={HOME} data={HOME.pageNavList[parentUuid]} list={treeValue(HOME.menuList, parentUuid)?.children || []} />
                 }
                 <WeChatHome menu={menu} HOME={HOME} Event={Event} />
-                {parentUuid && HOME.pageNavList[parentUuid].navType === 'tabBar' &&
+                {parentUuid && HOME.pageNavList[parentUuid]?.navType === 'tabBar' &&
                     <TabBarTemplate menu={menu} HOME={HOME} data={HOME.pageNavList[parentUuid]} list={treeValue(HOME.menuList, parentUuid)?.children || []} />
                 }
             </div>

@@ -1,7 +1,7 @@
 // TODO 初始化项目信息
 const WeChatInitProjectData = {
     menuList: [
-        { uuid: '00000000-0000-0000-000000000000', title: '小程序入口', isEnabled: 1 }
+        { uuid: '10000000-0000-0000-0000-000000000000', title: '小程序入口', isEnabled: 1 }
     ],
     pageApiData: {},
     pageNavList: {},
@@ -412,11 +412,77 @@ const WeChatTempFixedA03 = {
 // TODO 通用固定菜单
 // 固定菜单 A01
 const WeChatTempMenuA01 = {
-
+    back_margin: "8",
+    back_padding: "8",
+    back_radius: "0",
+    back_color: "#ffffff",
+    back_deg: 0,
+    border: false,
+    shadow: false,
+    filter: false,
+    cell_color: "#ffffff",
+    cell_padding: "8",
+    cell_border_size: 1,
+    cell_border_type: "solid",
+    cell_border_color: "#f4f4f4",
+    cell_title_color: "#787878",
+    cell_title_padding: "8,0",
+    cell_title_size: 20,
+    cell_title_famity: "汉真广标",
+    cell_title_weight: 400,
+    cell_title_style: "normal",
+    cell_icon: true,
+    cell_arrow: true,
+    cell_icon_color: "#1677ff",
+    cell_icon_size: 24,
+    cell_icon_margin: 8,
+    cell_arrow_color: "#bcbcbc",
+    cell_arrow_size: 16,
+    cell_arrow_margin: 8,
+    cell_description: false,
+    cell_note: false,
+    mapping: []
 }
 const WeChatTempFixedA04 = {
     temp: 'WeChatTempMenuA01',
+    list: [],
+    ...WeChatTempMenuA01,
+}
 
+// TODO 附件预览
+const WeChatTempFixedA05 = {
+    show_title: true,
+    show_time: true,
+    show_other: true,
+    title_fidle: "title",
+    title_padding: "8",
+    title_color: "#262626",
+    title_size: 24,
+    title_famity: "汉真广标",
+    title_weight: 400,
+    title_style: "normal",
+    title_filed: false,
+    time_fidle: "time",
+    time_text: "发布时间 : ",
+    time_size: 16,
+    time_padding: "0,8",
+    time_color: "#2f54eb",
+    time_famity: "HYT",
+    time_weight: 400,
+    time_style: "normal",
+    other_fidle: "other",
+    other_text: "数据来源 : ",
+    other_size: 16,
+    other_padding: "0,8",
+    other_color: "#2f54eb",
+    other_famity: "SourceHanSansCN",
+    other_weight: 400,
+    other_style: "normal",
+    attachment_padding: "8",
+    image_mode: "scaleToFill",
+    image_view: true,
+    video_width: 4,
+    video_height: 3
 }
 
 
@@ -488,12 +554,14 @@ export const WeChatFormInit = {
     WeChatTempListTypeA01,
     WeChatTempListTypeA02,
     WeChatTempClockInA01,
+    WeChatTempMenuA01,
 
 
     WeChatTempFixedA01,
     WeChatTempFixedA02,
     WeChatTempFixedA03,
     WeChatTempFixedA04,
+    WeChatTempFixedA05,
 
 
     WeChatInitProjectData,

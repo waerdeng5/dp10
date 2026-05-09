@@ -66,8 +66,8 @@ export const WeChatTabBarA01 = ({ menu, data, list, HOME }) => {
                 const status = menu === v.uuid
                 return (
                     <div key={v.uuid} style={flexStyle} >
-                        {tabA01_icon && <Icon style={status ? iconActiveStyle : iconDefaultStyle} name={HOME.pageHeader[v.uuid].icon || 'ai-1-filled'} />}
-                        {tabA01_text && <div style={status ? textActiveStyle : textDefaultStyle}>{v.title}</div>}
+                        {tabA01_icon && <Icon style={status ? iconActiveStyle : iconDefaultStyle} name={HOME.pageHeader[v.uuid]?.icon || 'ai-1-filled'} />}
+                        {tabA01_text && <div style={status ? textActiveStyle : textDefaultStyle}>{v?.title || '菜单'}</div>}
                     </div>
                 )
             })}

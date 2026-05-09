@@ -182,14 +182,28 @@ export const getTreeKeysTwo = (tree, key = 'key') => {
 export const findParentByChildPath = (routers, childPath, key = 'uuid') => {
     for (const router of routers) {
         if (router.children) {
+            console.log(router.children)
             const foundChild = router.children.find(child => child[key] === childPath)
             if (foundChild) {
-                return router;
+                return router
             }
         }
     }
     return null;
 }
+// TODO 树形结构子找父 
+export const findParentNodeFunc = (tree, targetId, key = 'uuid') => {
+    for (let item of tree) {
+        if (item.children && item.children.some(child => child[key] === targetId)) return item
+        if (item.children && item.children.length > 0) {
+            const found = findParentNodeFunc(item.children, targetId)
+            if (found) return found;
+        }
+    }
+    return null
+}
+
+
 // TODO 判断树形数组是否包含指定值
 export const findInTree = (data, callback, children = 'children') => {
     for (let i = 0; i < data.length; i++) {

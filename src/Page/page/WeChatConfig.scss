@@ -133,10 +133,9 @@
             z-index: 1;
 
             &.A03 {
-                padding-left: 12px;
-
                 &>span {
                     position: absolute;
+                    left: 8px;
                 }
             }
 

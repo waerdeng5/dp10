@@ -272,10 +272,66 @@ const WeChatTempFixedA04 = ({ styleData }) => {
     const Template = WeChatTempMenu[temp].temp
     return (
         <div className='WeChatTempFixedA04'>
-            <Template styleData={styleData} />
+            <Template styleData={config} />
         </div>
     )
 }
+// 附件预览
+const WeChatTempFixedA05 = ({ styleData }) => {
+    const config = styleData || WeChatFormInit.WeChatTempFixedA05
+
+
+    console.log(config)
+    const {
+        show_title, show_time, show_other, attachment_padding,
+        title_fidle, title_padding, title_color, title_size, title_famity, title_weight, title_style, title_filed, title_filed_size, title_filed_color,
+        time_fidle, time_text, time_size, time_padding, time_color, time_famity, time_weight, time_style,
+        other_fidle, other_text, other_size, other_padding, other_color, other_famity, other_weight, other_style
+    } = config
+
+
+    const titleStyle = {
+        color: title_color,
+        fontSize: title_size,
+        fontFamily: title_famity,
+        fontWeight: title_weight,
+        fontStyle: title_style,
+        padding: SpacingCallBack(title_padding),
+        filter: SetFilderParams(title_filed, title_filed_size, title_filed_color)
+    }
+
+    const timeStyle = {
+        color: time_color,
+        fontSize: time_size,
+        fontFamily: time_famity,
+        fontWeight: time_weight,
+        fontStyle: time_style,
+        padding: SpacingCallBack(time_padding)
+    }
+
+    const otherStyle = {
+        color: other_color,
+        fontSize: other_size,
+        fontFamily: other_famity,
+        fontWeight: other_weight,
+        fontStyle: other_style,
+        padding: SpacingCallBack(other_padding)
+    }
+
+    return (
+        <div className='WeChatTempFixedA05'>
+            {show_title && <div className='title' style={titleStyle}>(临时模拟标题)</div>}
+            <div className='content' style={{ justifyContent: show_time && show_other ? 'space-between' : 'center' }}>
+                {show_time && <div className='time' style={timeStyle}>{time_text} 2026-06-06</div>}
+                {show_other && <div className='other' style={otherStyle}>{other_text} 其他</div>}
+            </div>
+            <div className='attachment' style={{ padding: SpacingCallBack(attachment_padding) }}>
+                <img src='https://aloss.ljkjkf.com/WebConfigFile/image/verification/04.png' alt="" />
+            </div>
+        </div>
+    )
+}
+
 
 export const WeChatTempFixed = {
     WeChatTempFixedA01: {
@@ -296,10 +352,18 @@ export const WeChatTempFixed = {
         temp: WeChatTempFixedA03,
         layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
     },
-    // WeChatTempFixedA04: {
-    //     type: 'WeChatTempFixedA04',
-    //     title: '通用固定菜单',
-    //     temp: WeChatTempFixedA04,
-    //     layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
-    // },
+    WeChatTempFixedA04: {
+        type: 'WeChatTempFixedA04',
+        title: '通用固定菜单',
+        temp: WeChatTempFixedA04,
+        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    },
+    WeChatTempFixedA05: {
+        type: 'WeChatTempFixedA05',
+        title: '附件预览页面',
+        temp: WeChatTempFixedA05,
+        layout: { x: 0, y: 0, w: 10, h: 5, minW: 10, maxW: 10 },
+    },
+
+
 }

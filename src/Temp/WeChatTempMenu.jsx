@@ -25,7 +25,6 @@ const WeChatTempMenuA01 = ({ styleData }) => {
 
     const listMapping = list && list.length !== 0 ? combinedArray(list, mapping) : menuMapping
 
-
     const backStyle = {
         margin: SpacingCallBack(back_margin),
         padding: SpacingCallBack(back_padding),

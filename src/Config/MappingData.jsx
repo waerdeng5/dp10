@@ -1643,6 +1643,14 @@ export const MappingData = {
     WeChat__clickType: [
         { value: 'router', label: '路由' },
     ],
+    WeChat__routerLevel: [
+        { value: 'level1', label: '一级路由' },
+        { value: 'level2', label: '二级路由' },
+        { value: 'level3', label: '三级路由' },
+        { value: 'level4', label: '四级路由' },
+        { value: 'level5', label: '五级路由' },
+        { value: 'diyRouter', label: '自定义路由' },
+    ],
 
     WeChat__routerType: [
         { value: 'A01', label: '仅打开' },
