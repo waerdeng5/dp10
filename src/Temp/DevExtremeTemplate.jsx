@@ -111,11 +111,11 @@ export const DevFieldTemplate = memo(({ POWER, OPTdata, Fields }) => {
 
 // 统计组件
 export const SummaryTemplate = memo(({ Fields }) => {
-    const totalArr = Fields.filter(v => v.totalItemStatus)
-    const groupArr = Fields.filter(v => v.groupItemStatus)
+    const totalArr = Fields?.filter(v => v.totalItemStatus)
+    const groupArr = Fields?.filter(v => v.groupItemStatus)
     return (
         <Summary>
-            {totalArr?.length !== 0 && totalArr.map((item, index) => (
+            {totalArr && totalArr.length !== 0 && totalArr.map((item, index) => (
                 <TotalItem
                     key={index}
                     column={item.dataField}
@@ -127,7 +127,7 @@ export const SummaryTemplate = memo(({ Fields }) => {
                 />
             ))}
 
-            {groupArr.length !== 0 && groupArr.map((item, index) =>
+            {groupArr && groupArr.length !== 0 && groupArr.map((item, index) =>
                 <GroupItem
                     key={index}
                     column={item.dataField}
@@ -701,7 +701,7 @@ export const DevExtremeLayout = memo((props) => {
     const pageFunc = { pageActive, pageList, updateActive, updateList }
     const modelFunc = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
     const { orgShow, othShow, orgWidth, orgResize, orgColl, othWidth, othResize, othColl } = APIdata.api
-    const { top_show } = THEdata.style
+    const top_show = THEdata.style.top_show
 
     const orgData = {
         uuid: data.uuid,

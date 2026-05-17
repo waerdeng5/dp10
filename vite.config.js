@@ -11,7 +11,8 @@ export default defineConfig({
       'heyi.ljkjkf.com',
       'gjeqadmin.ljkjkf.com',
       'dibang.lklq.com',
-      'tongjiang.ljkjkf.com'
+      'tongjiang.ljkjkf.com',
+      'nkdq.ljkjkf.com'
     ]
   }
 })

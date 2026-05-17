@@ -279,14 +279,11 @@ const WeChatTempFixedA04 = ({ styleData }) => {
 // 附件预览
 const WeChatTempFixedA05 = ({ styleData }) => {
     const config = styleData || WeChatFormInit.WeChatTempFixedA05
-
-
-    console.log(config)
     const {
         show_title, show_time, show_other, attachment_padding,
-        title_fidle, title_padding, title_color, title_size, title_famity, title_weight, title_style, title_filed, title_filed_size, title_filed_color,
-        time_fidle, time_text, time_size, time_padding, time_color, time_famity, time_weight, time_style,
-        other_fidle, other_text, other_size, other_padding, other_color, other_famity, other_weight, other_style
+        title_padding, title_color, title_size, title_famity, title_weight, title_style, title_filed, title_filed_size, title_filed_color,
+        time_text, time_size, time_padding, time_color, time_famity, time_weight, time_style,
+        other_text, other_size, other_padding, other_color, other_famity, other_weight, other_style
     } = config
 
 

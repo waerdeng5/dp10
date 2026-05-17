@@ -85,9 +85,10 @@ const SignDefault = ({ className, style, simulated, Config }) => {
                 {loginCodeType === 'A01' &&
                     <div className='LoginCodeItem A01' style={boxStyle}>
                         <Vertify
-                            width={320}
-                            height={160}
+                            width={400}
+                            height={300}
                             visible={visible}
+                            imgUrl={'https://aloss.ljkjkf.com/WebConfigFile/image/verification/04.png'}
                             onSuccess={onSuccess}
                         />
                     </div>
