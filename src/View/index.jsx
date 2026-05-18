@@ -4,27 +4,30 @@ import { useMount, useTitle, useFavicon } from "ahooks"
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import { axios } from "../Utils/Api"
-import { formDefaultInit } from '../Config'
 import LoadSvg from '../Page/Loading/LoadSvg'
+import { formDefaultInit, CommonAPIUrl } from '../Config'
 import { pageStore, modelStore, fromStore } from '../Router/zustand'
 import { Encrypt, Decrypt, IndexedDBClear, AddIndexdDB, GetIndexedDB } from '../Utils/IndexedDB'
 
 
 const { hostname, port } = window.location
-const GetProject = { method: 'get', path: 'https://common-api.ljkjkf.com/', url: 'projects/getProjectConfigInfo' }
 
-const GetConfig = { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/THEMEJSON` } }
-const PostConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `COMMON/THEMEJSON` } }
+const GetProject = { method: 'get', path: CommonAPIUrl, url: 'projects/getProjectConfigInfo' }
 
-const NotificationBox = () => {
+
+const NotificationBox = ({ uuid }) => {
     const onReload = () => window.location.reload()
     const onInit = async () => {
-        const params = { uuid: 'COMMON/THEMEJSON', content: JSON.stringify(await Encrypt(formDefaultInit.THEMEinit)) }
-        const [PROevent, PROdata] = await axios({ ...PostConfig, params })
-        if (PROevent) {
-            console.log('初始化失败', PROevent)
-            return false
-        }
+        const [PROevent, PROdata] = await axios({
+            method: 'post',
+            url: 'projects/SaveJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: {
+                uuid: `${uuid}/COMMON/THEMEJSON`,
+                content: JSON.stringify(await Encrypt(formDefaultInit.THEMEinit))
+            }
+        })
+        if (PROevent) return console.log('初始化失败', PROevent)
         onReload()
     }
     return (
@@ -35,13 +38,7 @@ const NotificationBox = () => {
     )
 }
 
-const notificationInfo = {
-    key: 'login',
-    title: '加载错误提醒!',
-    description: '未检测到项目配置信息,请检测当前网络状态或联系管理员 !',
-    duration: 0,
-    actions: <NotificationBox />
-}
+
 
 const LoginIndex = () => {
     const Navigate = useNavigate()
@@ -79,9 +76,16 @@ const LoginIndex = () => {
             await AddIndexdDB('config', configData)
             setConfig(configData)
             sessionStorage.setItem('uuid', key)
-            const [COMerror, COMdata] = await axios({ ...GetConfig, path: configData.apiUrl })
+            const GetConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/COMMON/THEMEJSON` } }
+            const [COMerror, COMdata] = await axios({ ...GetConfig })
             if (COMerror) {
-                notification.info(notificationInfo)
+                notification.info({
+                    key: 'login',
+                    title: '加载错误提醒!',
+                    description: '未检测到项目配置信息,请检测当前网络状态或联系管理员 !',
+                    duration: 0,
+                    actions: <NotificationBox uuid={configData.uuid} />
+                })
                 return false
             }
             const theme = await Decrypt(COMdata)
@@ -92,6 +96,7 @@ const LoginIndex = () => {
         }
         if (pathname === '/Login') {
             const { login, sign } = await GetIndexedDB('theme')
+            if (!login || !sign) return Navigate('/')
             const loginPage = lazy(() => import(`./page/${login}.jsx`))
             const signPage = lazy(() => import(`./page/${sign}.jsx`))
             if (login === 'loginDefault' && sign === 'signDefault') {

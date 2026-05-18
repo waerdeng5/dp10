@@ -23,7 +23,6 @@ import { ANIMATIONLIST } from '../Temp/TemplateAnimation'
 
 
 const LayoutMapping = { LayoutA01, LayoutA02 }
-const { Search } = Input;
 const { port } = window.location
 
 const AdminIndex = () => {
@@ -71,8 +70,11 @@ const AdminIndex = () => {
         themes.current(dxTheme)
         setDxTheme(dxTheme)
         setLookStatus(!!look)
-        // console.log('token', token)
-        // console.log('config', config)
+
+
+        console.log('config', config)
+
+
         // console.log('menu', menu)
         // console.log('user', user)
         // console.log('openKey', openKey)
@@ -166,8 +168,6 @@ const AdminIndex = () => {
         if (data.type === 'diy') AdminEvent.emit({ type: 'onOpenSetPage' })
         if (data.type === 'lay') AdminEvent.emit({ type: 'onActivateLayout' })
     }
-
-
 
     const addConfigData = async (config) => {
         const { uuid, towUuid, targetUrl, tableName, APIdata, THEdata, OPTdata } = config
