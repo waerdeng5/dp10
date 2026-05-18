@@ -86,16 +86,21 @@
         overflow: hidden;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
 
         &>div {
             flex: 1;
             width: 100%;
+            overflow: hidden;
 
             .ant-transfer-section {
                 flex: 1;
                 height: 100%;
+            }
+
+            .ant-transfer-list-body {
+                overflow-y: scroll;
             }
         }
 

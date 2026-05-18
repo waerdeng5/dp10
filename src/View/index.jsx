@@ -9,8 +9,10 @@ import LoadSvg from '../Page/Loading/LoadSvg'
 import { pageStore, modelStore, fromStore } from '../Router/zustand'
 import { Encrypt, Decrypt, IndexedDBClear, AddIndexdDB, GetIndexedDB } from '../Utils/IndexedDB'
 
+
 const { hostname, port } = window.location
 const GetProject = { method: 'get', path: 'https://common-api.ljkjkf.com/', url: 'projects/getProjectConfigInfo' }
+
 const GetConfig = { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/THEMEJSON` } }
 const PostConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `COMMON/THEMEJSON` } }
 

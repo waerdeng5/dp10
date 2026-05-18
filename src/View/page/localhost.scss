@@ -2,183 +2,118 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background: #f5f5f5;
 
-    &>.Box {
-        width: 100%;
-        height: 100%;
+    .ProjectTemp {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
+        padding: 16px;
+        background: #fff;
+        margin: 16px;
+        border-radius: 8px;
+        filter: drop-shadow(0 1px 1px #cccccc);
+        cursor: pointer;
+        user-select: none;
 
-        &>.left {
-            width: 560px;
-            height: 100%;
+
+        &:hover {
+            filter: drop-shadow(2px 2px 2px #262626);
+
+        }
+
+        &>.ProjectLogo {
+            width: 80px;
+            height: 80px;
+            margin-right: 16px;
+            border-radius: 4px;
+            filter: drop-shadow(0 0px 0px #262626);
+        }
+
+        &>.ProjectInfo {
+            flex: 1;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: center;
             flex-direction: column;
 
-            &>div {
-                width: 100%;
-
-                &:nth-child(1) {
-                    flex: 1;
-                    overflow: hidden;
-                }
-
-                &:nth-child(2) {
-                    padding: 16px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-
-                    .addButton {
-                        width: 100%;
-                        height: 48px;
-                        font-size: 16px;
-                        margin: 0 4px;
-
-                        i {
-                            font-size: 24px;
-                            width: 24px;
-                            height: 24px;
-                            color: white;
-                            filter: drop-shadow(0px 0px 1px #262626);
-                        }
-
-                        span {
-                            font-size: 24px;
-                            line-height: 24px;
-                            background: linear-gradient(0deg, #ffffff 0%, #70fff3 100%);
-                            -webkit-background-clip: text;
-                            background-clip: text;
-                            color: transparent;
-                            font-family: ShuHeiTi;
-                            font-weight: bold;
-                            text-align: left;
-                            font-style: normal;
-                            filter: drop-shadow(0px 0px 1px #262626);
-                        }
-                    }
-                }
-            }
-        }
-
-        &>.right {
-            flex: 1;
-            height: 100%;
-            padding: 16px;
-
-            &>.Result {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            &>.Info {
-                width: 100%;
-                height: 100%;
+            &>.ProjectInfoItem {
                 display: flex;
                 align-items: center;
                 justify-content: flex-start;
-                flex-direction: column;
 
-                &>.Top {
-                    width: 100%;
-                    height: 240px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    &>img {
-                        width: 160px;
-                        height: 160px;
-                        object-fit: contain;
-                    }
-
-                    &>.Content {
-                        flex: 1;
-                        padding: 0 16px;
-
-                        &>div:nth-child(1) {
-                            display: flex;
-                            align-items: center;
-                            justify-content: flex-start;
-
-                            &>img {
-                                width: 24px;
-                                height: 24px;
-                                margin-right: 8px;
-                            }
-
-                            &>div {
-                                font-size: 24px;
-                            }
-                        }
-
-                        &>div:nth-child(2) {
-                            font-size: 32px;
-                        }
-
-                        &>div:nth-child(3) {
-                            font-size: 24px;
-                        }
-                    }
-
-                    &>.Options {
-                        width: 120px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        flex-direction: column;
-
-                        &>.addButton {
-                            width: 120px;
-                            height: 120px;
-                            margin-bottom: 16px;
-
-                            .dx-button-text {
-                                font-family: ShuHeiTi;
-                                font-weight: bold;
-                                font-size: 26px;
-                                color: #FFFFFF;
-                                white-space: wrap;
-                                padding: 0 16px;
-                            }
-                        }
-
-                    }
-
+                &>img {
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 8px;
                 }
 
-                &>.TabPanel {
-                    flex: 1;
-                    width: 100%;
+                &>div {
+                    font-family: 汉真广标;
+                    font-size: 20px;
+                    color: #28282A;
+                }
+            }
 
-                    .RightItem {
-                        padding: 16px;
+            &>.ProjectInfoFull {
+                font-family: ShuHeiTi;
+                font-size: 24px;
+                color: #28282A;
+            }
+        }
 
-                        &>.dx-card {
-                            padding: 8px;
+        &>.Btn {
+            button {
+                font-family: inherit;
+                font-size: 20px;
+                background: royalblue;
+                color: white;
+                padding: 0.7em 1em;
+                padding-left: 0.9em;
+                display: flex;
+                align-items: center;
+                border: none;
+                border-radius: 16px;
+                overflow: hidden;
+                transition: all 0.2s;
+                cursor: pointer;
+            }
 
-                            &>div:first-child {
-                                font-family: ShuHeiTi;
-                                font-weight: bold;
-                                font-size: 16px;
-                                color: #515151;
-                                user-select: none;
-                            }
+            button span {
+                display: block;
+                margin-left: 0.3em;
+                transition: all 0.3s ease-in-out;
+            }
 
-                            &>div:last-child {
-                                font-family: ShuHeiTi;
-                                font-weight: bold;
-                                font-size: 24px;
-                                color: #515151;
-                            }
-                        }
-                    }
+            button svg {
+                display: block;
+                transform-origin: center center;
+                transition: transform 0.3s ease-in-out;
+            }
+
+            button:hover .svg-wrapper {
+                animation: fly-1 0.6s ease-in-out infinite alternate;
+            }
+
+            button:hover svg {
+                transform: translateX(1.2em) rotate(45deg) scale(1.1);
+            }
+
+            button:hover span {
+                transform: translateX(5em);
+            }
+
+            button:active {
+                transform: scale(0.95);
+            }
+
+            @keyframes fly-1 {
+                from {
+                    transform: translateY(0.1em);
+                }
+
+                to {
+                    transform: translateY(-0.1em);
                 }
             }
         }

@@ -1,5 +1,3 @@
-// export const CommonUrl = 'https://aloss.ljkjkf.com/WebConfigFile/ImageData/'
-
 // TODO 场景相关
 export const CommonSceneUrl = {
     forge: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/forge/',
@@ -10,6 +8,9 @@ export const CommonSceneUrl = {
     other: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/other/',
     tiles: 'https://aloss.ljkjkf.com/WebConfigFile/Scene/tiles/',
 }
+
+export const CommonAPIUrl = 'https://common-api.ljkjkf.com/'
+export const ImageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/'
 export const CommonUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/'
 export const CommonWeChatUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/WeChat/Admin01'
 
