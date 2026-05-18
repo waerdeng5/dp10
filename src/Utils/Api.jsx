@@ -51,6 +51,7 @@ const noTokenApi = [
     'authLogin/Login',
     'projects/GetJsonInfoByUuid',
     'projects/SaveJsonInfoByUuid',
+
     'dictionary/GetJsonInfoByUuid',
     'dictionary/SaveJsonInfoByUuid',
     'users/GetOrganizationListByUser'
@@ -147,6 +148,7 @@ const alovaInstance = createAlova({
 export const Http = async ({ method, url, params, path, headers, responseType }) => {
     const config = await GetIndexedDB('config')
     const alovaUrl = path ? path + url : `${config.apiUrl}/${url}`
+
     switch (method) {
         case 'get':
         case 'Get':

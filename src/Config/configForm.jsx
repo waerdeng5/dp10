@@ -71,7 +71,7 @@ const ThemeFormList = [
         span: 24, formType: 'GROUP', name: 'ThemeFormList_page', label: '基础页面', collapsible: true,
         children: [
             { span: 12, formType: 'RADIO', name: 'loginType', label: '登录模式', rules: true, valueEnum: MappingData.Theme__loginType },
-            { span: 12, formType: 'SELECT', name: 'devTheme', label: '同步DEV主题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'devTheme', label: '同步DEV主题', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 8, formType: 'SELECT', name: 'loading', label: '加载动画', rules: true, valueEnum: MappingData.Theme__Loading },
             { span: 8, formType: 'SELECT', name: 'login', label: '登录页面', rules: true, valueEnum: MappingData.Theme__LoginPage },
             { span: 8, formType: 'SELECT', name: 'sign', label: '登录窗口', rules: true, valueEnum: MappingData.Theme__SignPage },

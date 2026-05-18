@@ -9,11 +9,9 @@ import { formDefaultInit, CommonAPIUrl } from '../Config'
 import { pageStore, modelStore, fromStore } from '../Router/zustand'
 import { Encrypt, Decrypt, IndexedDBClear, AddIndexdDB, GetIndexedDB } from '../Utils/IndexedDB'
 
-
 const { hostname, port } = window.location
 
 const GetProject = { method: 'get', path: CommonAPIUrl, url: 'projects/getProjectConfigInfo' }
-
 
 const NotificationBox = ({ uuid }) => {
     const onReload = () => window.location.reload()
@@ -38,15 +36,14 @@ const NotificationBox = ({ uuid }) => {
     )
 }
 
-
-
 const LoginIndex = () => {
+    const { updateFromData, updateFromLoad } = fromStore()
+
     const Navigate = useNavigate()
     const { pathname } = useLocation()
-    const { notification } = App.useApp();
+    const { notification } = App.useApp()
     const { updateList } = pageStore()
     const { updateModel } = modelStore()
-    const { updateFromData, updateFromLoad } = fromStore()
     const [Template, setTemplate] = useState()
     const [SingPage, setSingPage] = useState()
     const [Config, setConfig] = useState()
@@ -66,6 +63,7 @@ const LoginIndex = () => {
             updateModel({})
             updateFromData({})
             updateFromLoad(false)
+
             const [PROevent, PROdata] = await axios({ ...GetProject, params: { WebUrl: hostname } })
             if (PROevent) {
                 notification.error({ title: '链接失败!', description: PROevent, key: 'login' })
@@ -73,7 +71,9 @@ const LoginIndex = () => {
             }
             const { config, key } = PROdata
             const [configData] = config
+
             await AddIndexdDB('config', configData)
+
             setConfig(configData)
             sessionStorage.setItem('uuid', key)
             const GetConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/COMMON/THEMEJSON` } }
@@ -96,7 +96,8 @@ const LoginIndex = () => {
         }
         if (pathname === '/Login') {
             const { login, sign } = await GetIndexedDB('theme')
-            if (!login || !sign) return Navigate('/')
+            const menu = await GetIndexedDB('menu')
+            if (menu) return Navigate('/')
             const loginPage = lazy(() => import(`./page/${login}.jsx`))
             const signPage = lazy(() => import(`./page/${sign}.jsx`))
             if (login === 'loginDefault' && sign === 'signDefault') {

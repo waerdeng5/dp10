@@ -2,22 +2,22 @@ import './loginDefault.scss'
 import { useState } from 'react'
 import { useMount } from 'ahooks'
 
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
-
+import { CommonAPIUrl } from '../../Config'
 import { axios } from '../../Utils/Api'
-
 import LoadSvg from '../../Page/Loading/LoadSvg'
-import { SpacingCallBack, ColorCallBack, SpacingSizeCallBack } from '../../Utils'
 import { SwiperLoginBack } from '../../Temp/SwiperTemplate'
 import { VideoTemplateA01 } from '../../Temp/VideoTemplate'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
+import { SpacingCallBack, ColorCallBack, SpacingSizeCallBack } from '../../Utils'
 
 const LoginDefault = ({ SingPage }) => {
     const [Config, setConfig] = useState()
     useMount(async () => {
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/LOGIN` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/COMMON/LOGIN` } })
         if (err) {
-            const params = { uuid: `COMMON/LOGIN`, content: JSON.stringify(await Encrypt({})) }
-            const [errPos, resPos] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+            const params = { uuid: `${uuid}/COMMON/LOGIN`, content: JSON.stringify(await Encrypt({})) }
+            const [errPos, resPos] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
             if (errPos) return false
             return false
         }
@@ -95,7 +95,6 @@ const LoginDefault = ({ SingPage }) => {
 
         const { titleA01_status, titleA01, titleA01_flex, titleA01_padding, titleA01_margin, titleA01_color, titleA01_deg, titleA01_size, titleA01_family, titleA01_weight, titleA01_style, titleA01_shadowX, titleA01_shadowY, titleA01_shadowS, titleA01_shadowC } = Config
 
-
         const imageStyle = {
             padding: SpacingCallBack(backPadding),
             margin: SpacingCallBack(backMargin),
@@ -126,8 +125,6 @@ const LoginDefault = ({ SingPage }) => {
             width: signBackWidth,
             [signBackPosition]: signBackNumber
         }
-
-
 
         const TitleA01Style = {
             padding: SpacingCallBack(titleA01_padding),

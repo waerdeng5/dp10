@@ -1,4 +1,7 @@
+import { openDB } from 'idb'
 import CryptoJS from 'crypto-js'
+import { useState, useEffect } from 'react'
+
 const { indexedDB, mozIndexedDB, webkitIndexedDB, msIndexedDB } = window
 const WebDB = indexedDB || mozIndexedDB || webkitIndexedDB || msIndexedDB
 
@@ -75,9 +78,11 @@ export const AddIndexdDB = async (key, data) => {
     const json = { uuid: await Encrypt(key), data: await Encrypt(data) }
     return new Promise(res => {
         window.webDB.then(db => {
-            const rest = db.transaction(['ClientData'], 'readwrite').objectStore('ClientData').add(json)
-            rest.onsuccess = () => res()
-            rest.onerror = e => console.log('[数据添加失败!]', key, e)
+            if (!db.objectStoreNames.contains(json.uuid)) {
+                const rest = db.transaction(['ClientData'], 'readwrite').objectStore('ClientData').add(json)
+                rest.onsuccess = () => res()
+                rest.onerror = e => console.log('[数据添加失败!]', key, e)
+            }
         })
     })
 }

@@ -3,8 +3,11 @@ import './MenuTypeDev.scss'
 import { Result, Skeleton } from 'antd'
 import { useEventEmitter, useMount } from 'ahooks'
 import { useState, memo, useCallback } from 'react'
-import { Decrypt } from '../../Utils/IndexedDB'
 
+import { CommonAPIUrl } from '../../Config'
+
+
+import { Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MissingTemplate } from '../../Model/page/SetDevRouter'
 import { DevExtremeLayout } from '../../Temp/DevExtremeTemplate'
@@ -45,8 +48,15 @@ const MenuTypeDev = ({ data, AdminEvent }) => {
     }, [data, AdminEvent])
 
     const getData = useCallback(async () => {
-        const url = dataMapping.map(e => ({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `DEV_PAGE/${targetUrl}_${e}` } }))
+        const { uuid: projectUuid } = await GetIndexedDB('config')
+        const url = dataMapping.map(e => ({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${projectUuid}/DEV_PAGE/${targetUrl}_${e}` }
+        }))
         const [[APIerror, APIdata], [THEerror, THEdata], [OPTerror, OPTdata]] = await axiosFor(url)
+
         const apiData = APIdata ? await Decrypt(APIdata) : {}
         const theData = THEdata ? await Decrypt(THEdata) : {}
         const optData = OPTdata ? await Decrypt(OPTdata) : {}

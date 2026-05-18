@@ -7,12 +7,7 @@ import { modelStore } from '../../Router/zustand'
 import { UserAvatar, UserBackboard } from '../../Config'
 import { GetIndexedDB, AddIndexdDB, PutIndexedDB } from '../../Utils/IndexedDB'
 
-const urlMapping = [
-    { method: 'get', url: 'roleMenu/GetRoleMenuListByUserUuid' },
-    { method: 'get', url: 'users/GetUserInfo' },
-    { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } },
-    { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'Theme/DxTheme' } },
-]
+
 
 const homePage = [{ uuid: 'a0b4f6b8-ef44-4b43-925f-85a299eb52cb', tableName: '首页', targetUrl: 'Home', icon: 'shou', closable: true, type: 'lay' }]
 
@@ -35,8 +30,20 @@ const LoginUp = ({ data, Event }) => {
     const onToken = async (config, token) => {
         const userAdd = { nickName: '佚名', backImage: 'BackboardA01', avatar: 'AvatarA01' }
         const DBtoken = await GetIndexedDB('token')
+        const configData = await GetIndexedDB('config')
         if (DBtoken) await PutIndexedDB('token', token)
         else await AddIndexdDB('token', token)
+
+
+        console.log(configData)
+
+        const urlMapping = [
+            { method: 'get', url: 'roleMenu/GetRoleMenuListByUserUuid' },
+            { method: 'get', url: 'users/GetUserInfo' },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', params: { uuid: 'Theme/DxTheme' } },
+        ]
+
         const [[MENUerror, MENUdata], [USERerror, USERdata], [INFOerror, INFOdata], [DEVerror, DEVdata]] = await axiosFor(urlMapping)
         if (MENUerror || USERerror || INFOerror || DEVerror) return updateModel({})
         await AddIndexdDB('menu', MENUdata.data.list)

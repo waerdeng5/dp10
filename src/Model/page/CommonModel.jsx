@@ -1,32 +1,28 @@
 import './CommonModel.scss'
 import { v4 } from 'uuid'
+import remarkGfm from 'remark-gfm'
+import themes from "devextreme/ui/themes"
+import ReactMarkdown from 'react-markdown'
+import { Sortable } from 'devextreme-react/sortable'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { useEventEmitter, useMount, useReactive, useSize } from 'ahooks'
 import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider } from 'antd'
-import { useState, useEffect, useRef, useCallback } from 'react'
-
-import { Sortable } from 'devextreme-react/sortable'
-
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
-import themes from "devextreme/ui/themes";
-
 import Chart, { AdaptiveLayout, CommonSeriesSettings, Size, Tooltip, Export, Label, Format, Legend } from 'devextreme-react/chart'
 
-import { onTreeDrop, ColorCallBack } from '../../Utils'
+import { CommonAPIUrl } from '../../Config'
 import FormTemplate from '../../Utils/FormTemplate'
-import { GetIndexedDB, PutIndexedDB, Encrypt, Decrypt } from '../../Utils/IndexedDB'
 import { DevScrollView } from '../../Temp/DevTemplate'
-import { MappingData } from '../../Config/MappingData'
-import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
-import { modelStore, devChartsStore } from '../../Router/zustand'
-
-import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
-
+import { onTreeDrop, ColorCallBack } from '../../Utils'
 import { dxThemeMapping } from '../../Config/themeMapping'
-import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
-import { WeChatTempListType } from '../../Temp/WeChatTempListType'
-import { WeChatTempClockIn } from '../../Temp/WeChatTempClockIn'
 import { WeChatTempMenu } from '../../Temp/WeChatTempMenu'
+import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
+import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
+import { WeChatTempClockIn } from '../../Temp/WeChatTempClockIn'
+import { modelStore, devChartsStore } from '../../Router/zustand'
+import { WeChatTempListType } from '../../Temp/WeChatTempListType'
+import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
+import { GetIndexedDB, PutIndexedDB, Encrypt, Decrypt } from '../../Utils/IndexedDB'
+
 
 
 const { port } = window.location
@@ -38,7 +34,6 @@ const handleData = (e) => {
 const CommonModel = ({ data, Event }) => {
     const { message, modal, notification } = App.useApp()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
-
 
     const { openType, Initial } = data
     if (openType === 'onTreeSearch') {
@@ -508,11 +503,22 @@ const CommonModel = ({ data, Event }) => {
 
 
         const onDxThemeClick = async (theme) => {
-            const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } })
+            const config = await GetIndexedDB('config')
+            const [err, res] = await axios({
+                method: 'get',
+                url: 'projects/GetJsonInfoByUuid',
+                path: CommonAPIUrl,
+                params: { uuid: `${config.uuid}/UserInfo` }
+            })
             if (err) return console.log(err)
             UserAdd.dxTheme = theme
             const params = JSON.stringify({ ...res, [UserUuid]: UserAdd })
-            const [postErr,] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: 'UserInfo', Content: params } })
+            const [postErr,] = await axios({
+                method: 'post',
+                url: 'projects/SaveJsonInfoByUuid',
+                path: CommonAPIUrl,
+                params: { uuid: `${config.uuid}/UserInfo`, Content: params }
+            })
             if (postErr) return console.log(postErr)
             await PutIndexedDB('userAdd', UserAdd)
             themes.current(theme)
@@ -534,10 +540,17 @@ const CommonModel = ({ data, Event }) => {
         Event.useSubscription(async val => {
             const { type, data } = val
             if (type === 'onSetDxThemeData') {
+
+                const config = await GetIndexedDB('config')
                 const { uuid, ...theme } = data
                 themeData[uuid] = theme
                 const params = JSON.stringify(await Encrypt(themeData))
-                const [err,] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: 'Theme/DxTheme', Content: params } })
+                const [err,] = await axios({
+                    method: 'post',
+                    url: 'projects/SaveJsonInfoByUuid',
+                    path: CommonAPIUrl,
+                    params: { uuid: `${config.uuid}/Theme/DxTheme`, Content: params }
+                })
                 if (err) return console.log(err)
                 setThemeData(themeData)
                 await PutIndexedDB('dxTheme', await Encrypt(themeData))
@@ -552,7 +565,12 @@ const CommonModel = ({ data, Event }) => {
             setActive(userAdd?.dxTheme || 'fluent.blue.light.compact')
             setUserUuid(userUuid)
             setUserAdd(userAdd)
-            const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'Theme/DxTheme' } })
+            const [err, res] = await axios({
+                method: 'get',
+                url: 'projects/GetJsonInfoByUuid',
+                path: CommonAPIUrl,
+                params: { uuid: `${config.uuid}/Theme/DxTheme` }
+            })
             if (err) return console.log(err)
             setThemeData(await Decrypt(res))
         })

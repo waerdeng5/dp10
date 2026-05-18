@@ -1,32 +1,34 @@
 import './SetPageLogin.scss'
-import { modelStore } from '../../Router/zustand'
-import { useEventEmitter, useMount } from 'ahooks';
-import { axios } from '../../Utils/Api'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
 import { useState } from 'react';
 import { Skeleton, Result } from 'antd'
-import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
+import { useEventEmitter, useMount } from 'ahooks'
+
+import { CommonAPIUrl } from '../../Config'
+
+import { axios } from '../../Utils/Api'
+import { modelStore } from '../../Router/zustand'
+import SignDefault from '../../View/page/signDefault'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { SwiperLoginBack } from '../../Temp/SwiperTemplate'
 import { VideoTemplateA01 } from '../../Temp/VideoTemplate'
+import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
 
-import SignDefault from '../../View/page/signDefault'
 
 const SetPageLogin = ({ data, AdminEvent }) => {
     const { updateModel } = modelStore()
-
     const LoginEvent = useEventEmitter()
-
     const [Config, setConfig] = useState()
-
     const getData = async () => {
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/LOGIN` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/COMMON/LOGIN` } })
         if (err) return false
         setConfig(await Decrypt(res))
     }
 
     const saveData = async () => {
-        const params = { uuid: `COMMON/LOGIN`, content: JSON.stringify(await Encrypt(Config)) }
-        const [err, res] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/COMMON/LOGIN`, content: JSON.stringify(await Encrypt(Config)) }
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return false
         updateModel({})
     }

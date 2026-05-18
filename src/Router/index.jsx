@@ -38,7 +38,10 @@ const RouterPage = () => {
         <ConfigProvider locale={zhCN}>
             <App>
                 <Suspense fallback={<Loading />}>
-                    {judgeBrowserVersion() ? <RouterProvider router={router} > </RouterProvider> : <VersionTips />}
+                    {judgeBrowserVersion() ?
+                        <RouterProvider router={router} /> :
+                        <VersionTips />
+                    }
                     <ModelPopup />
                     <ModelPopup1 />
                     <ModelPopup2 />
@@ -48,7 +51,8 @@ const RouterPage = () => {
                 </Suspense>
             </App>
         </ConfigProvider>
-    );
-};
+    )
+
+}
 
 export default RouterPage;

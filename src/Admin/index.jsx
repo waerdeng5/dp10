@@ -11,7 +11,7 @@ import { BackGrundType } from '../Config/BackGrundType'
 import { VideoTemplateA01 } from '../Temp/VideoTemplate'
 import { modelStore, pageStore } from '../Router/zustand'
 import { Encrypt, PutIndexedDB } from '../Utils/IndexedDB'
-import { ThemeBackImageList, formDefaultInit } from '../Config'
+import { ThemeBackImageList, formDefaultInit, CommonAPIUrl } from '../Config'
 
 import LayoutA01 from './page/LayoutA01'
 import LayoutA02 from './page/LayoutA02'
@@ -19,6 +19,9 @@ import themes from "devextreme/ui/themes";
 
 import { HappyProvider } from '@ant-design/happy-work-theme';
 import { ANIMATIONLIST } from '../Temp/TemplateAnimation'
+
+
+
 
 
 
@@ -71,10 +74,6 @@ const AdminIndex = () => {
         setDxTheme(dxTheme)
         setLookStatus(!!look)
 
-
-        console.log('config', config)
-
-
         // console.log('menu', menu)
         // console.log('user', user)
         // console.log('openKey', openKey)
@@ -89,12 +88,11 @@ const AdminIndex = () => {
 
     const onSetTheme = async (e) => {
         console.log('[-- 保存主题 --]', e)
-        const params = { uuid: 'COMMON/THEMEJSON', content: JSON.stringify(await Encrypt(e)) }
-        const [err, res] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
-        if (err) {
-            AdminEvent.emit({ type: 'closeFormLoading' })
-            return console.log('修改失败', err)
-        }
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/COMMON/THEMEJSON`, content: JSON.stringify(await Encrypt(e)) }
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
+        if (err) return AdminEvent.emit({ type: 'closeFormLoading' })
+
         await PutIndexedDB('theme', e)
         setTheme(e)
         updateModel({})

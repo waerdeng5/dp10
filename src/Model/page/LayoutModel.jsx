@@ -7,8 +7,9 @@ import { Spin, Result, Button, FloatButton } from 'antd'
 
 
 import { axios } from '../../Utils/Api'
+import { CommonAPIUrl } from '../../Config'
 import { modelStore } from '../../Router/zustand'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 
 import { ModelAnnexTemplate, ModelTableTemplate } from '../../Temp/ModelTemplate'
 
@@ -29,7 +30,13 @@ const LayoutModel = ({ data, Event }) => {
     const [Config, setConfig] = useState({ json: json })
 
     const getJson = async () => {
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MOD_PAGE/${json}` } })
+        const config = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${config.uuid}/MOD_PAGE/${json}` }
+        })
         if (err) return setStatus({ spin: false, result: true })
         const jsonData = await Decrypt(res)
         setStatus({ spin: false, result: false })
