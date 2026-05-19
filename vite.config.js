@@ -10,6 +10,7 @@ export default defineConfig({
       'glj.ljkjkf.com',
       'heyi.ljkjkf.com',
       'gjeqadmin.ljkjkf.com',
+      'gjeqadmin.hljsjtgj.com',
       'dibang.lklq.com',
       'tongjiang.ljkjkf.com',
       'nkdq.ljkjkf.com'

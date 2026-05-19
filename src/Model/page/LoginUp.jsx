@@ -1,10 +1,10 @@
 
 import './LoginUp.scss'
-import { lazy, Suspense, useState } from 'react'
 import { useMount } from 'ahooks'
+import { lazy, Suspense, useState } from 'react'
 import { axios, axiosFor } from '../../Utils/Api'
 import { modelStore } from '../../Router/zustand'
-import { UserAvatar, UserBackboard } from '../../Config'
+import { UserAvatar, UserBackboard, CommonAPIUrl } from '../../Config'
 import { GetIndexedDB, AddIndexdDB, PutIndexedDB } from '../../Utils/IndexedDB'
 
 
@@ -34,14 +34,11 @@ const LoginUp = ({ data, Event }) => {
         if (DBtoken) await PutIndexedDB('token', token)
         else await AddIndexdDB('token', token)
 
-
-        console.log(configData)
-
         const urlMapping = [
             { method: 'get', url: 'roleMenu/GetRoleMenuListByUserUuid' },
             { method: 'get', url: 'users/GetUserInfo' },
-            { method: 'get', url: 'projects/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } },
-            { method: 'get', url: 'projects/GetJsonInfoByUuid', params: { uuid: 'Theme/DxTheme' } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/UserInfo` } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/Theme/DxTheme` } },
         ]
 
         const [[MENUerror, MENUdata], [USERerror, USERdata], [INFOerror, INFOdata], [DEVerror, DEVdata]] = await axiosFor(urlMapping)

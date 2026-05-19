@@ -11,7 +11,7 @@ import { exportDataGrid as exportPDF } from 'devextreme-react/common/export/pdf'
 import { VerticalAlignTopOutlined, VerticalAlignBottomOutlined } from '@ant-design/icons'
 import { Column, Summary, TotalItem, GroupItem, Lookup } from 'devextreme-react/data-grid'
 
-import { CommonAPIUrl } from '../../Config'
+import { CommonAPIUrl } from '../Config'
 import { DevScrollView } from './DevTemplate'
 import { MappingData } from '../Config/MappingData'
 import { ICONMapping } from '../Config/IconMapping'
