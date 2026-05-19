@@ -51,9 +51,6 @@ const noTokenApi = [
     'authLogin/Login',
     'projects/GetJsonInfoByUuid',
     'projects/SaveJsonInfoByUuid',
-
-    'dictionary/GetJsonInfoByUuid',
-    'dictionary/SaveJsonInfoByUuid',
     'users/GetOrganizationListByUser'
 ]
 

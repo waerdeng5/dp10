@@ -5,7 +5,8 @@ import { useEventEmitter, useMount } from 'ahooks'
 
 import { axios } from '../../Utils/Api'
 import { modelStore } from '../../Router/zustand'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
+import { CommonAPIUrl } from '../../Config'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { VideoTemplateA01 } from '../../Temp/VideoTemplate'
 import { ColorCallBack, SetBorderParams, SpacingCallBack, SetFilderParams } from '../../Utils'
 import { DevScrollView } from '../../Temp/DevTemplate'
@@ -22,7 +23,13 @@ const SetStartPage = ({ data, AdminEvent }) => {
     const StartEvent = useEventEmitter()
 
     const getData = async () => {
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/START` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${uuid}/COMMON/START` }
+        })
         if (err) return setLoading(true)
         setConfig(await Decrypt(res))
         setStatus(true)
@@ -43,8 +50,9 @@ const SetStartPage = ({ data, AdminEvent }) => {
     }
 
     const onSavePage = async (data) => {
-        const params = { uuid: `COMMON/START`, content: JSON.stringify(await Encrypt(data)) }
-        const [err, res] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/COMMON/START`, content: JSON.stringify(await Encrypt(data)) }
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', params })
         if (err) return false
         setConfig(data)
         updateModel({})

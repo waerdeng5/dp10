@@ -1,22 +1,24 @@
 import './index.scss'
 import { v4 } from 'uuid'
-import { memo } from 'react'
-import { useState, useEffect, lazy, Suspense, } from 'react'
+import { useState, useEffect, memo } from 'react'
+import { SettingOutlined } from '@ant-design/icons'
 import { Result, Spin, FloatButton, Tooltip } from 'antd'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { HappyProvider } from '@ant-design/happy-work-theme'
 import { useMount, useSessionStorageState, useTitle, useFavicon, useEventEmitter } from 'ahooks'
-import { axios, axiosFor } from '../Utils/Api'
+
+
+import { axios } from '../Utils/Api'
+import { CommonAPIUrl } from '../../Config'
+import LoadSvg from '../Page/Loading/LoadSvg'
+import { modelStore } from '../Router/zustand'
+import { VideoTemplateA01 } from '../Temp/VideoTemplate'
+import { ColorCallBack, SpacingCallBack } from '../Utils'
 import { Decrypt, Encrypt, GetIndexedDB } from '../Utils/IndexedDB'
 
-import { ColorCallBack, SetBorderParams, SpacingCallBack, SetFilderParams } from '../Utils'
 
-import { VideoTemplateA01 } from '../Temp/VideoTemplate'
-import LoadSvg from '../Page/Loading/LoadSvg'
 
-import { SettingOutlined } from '@ant-design/icons';
 import { TopTemplate, NavTemplate } from '../Temp/StartTemplate'
-import { HappyProvider } from '@ant-design/happy-work-theme';
-import { modelStore } from '../Router/zustand'
 
 const { port } = window.location
 
@@ -28,9 +30,10 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
 
     const getStartData = async (page) => {
         console.log('page', page)
+        const { uuid } = await GetIndexedDB('config')
         const pageParams = page === 'Start' || !page ? 'Home' : page
         setComponentStatus({ loading: true, status: true, error: null, Template: null })
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `STA_PAGE/${pageParams}` } })
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}STA_PAGE/${pageParams}` } })
         if (err) {
             console.log(`[------------错误路由 : ${pathname}---------------] :`, err)
             StartEvent.emit({ type: 'setCurrent', data: {} })
@@ -110,7 +113,8 @@ const StartIndex = () => {
     const [Current, setCurrent] = useState({})
 
     const getStartConfig = async (data) => {
-        const [err, res] = await axios({ method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `COMMON/START` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/COMMON/START` } })
         if (err) return setLoading(false)
         const startData = await Decrypt(res)
         sessionStorage.setItem('startData', res)
@@ -161,8 +165,9 @@ const StartIndex = () => {
 
     const onSaveData = async (data) => {
         console.log('[--保存start页面--]', { ...Current, ...data })
-        const params = { uuid: `STA_PAGE/${data.path}`, content: JSON.stringify(await Encrypt({ ...Current, ...data })) }
-        const [err] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/STA_PAGE/${data.path}`, content: JSON.stringify(await Encrypt({ ...Current, ...data })) }
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
         setPAGEUUID(v4())
         updateModel({})

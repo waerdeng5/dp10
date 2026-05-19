@@ -8,18 +8,19 @@ import 'swiper/css/effect-creative';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/effect-cards';
 import 'swiper/css/grid';
-
-
 import './SwiperTemplate.scss'
+
+
 import { useState } from 'react'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative, Grid } from 'swiper/modules'
 import { Button, Image } from 'antd'
+import { Swiper, SwiperSlide } from 'swiper/react'
 import { ANIMATIONLIST } from './TemplateAnimation'
 import { HappyProvider } from '@ant-design/happy-work-theme';
+import { Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative, Grid } from 'swiper/modules'
+
 import { axios } from '../Utils/Api'
-import { PutIndexedDB } from '../Utils/IndexedDB'
-import { AttachTemplateA01 } from '../Temp/DevTemplate'
+import { CommonAPIUrl } from '../Config'
+import { GetIndexedDB, PutIndexedDB } from '../Utils/IndexedDB'
 
 
 // 轮播窗口
@@ -52,13 +53,19 @@ export const SwiperLookAnimation = ({ Initial, userInfo, Event }) => {
 
     const onSelect = async (index) => {
         setLoading(true)
-        const [getErr, getRes] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } })
+        const { uuid } = await GetIndexedDB('config')
+        const [getErr, getRes] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${uuid}/UserInfo` }
+        })
         if (getErr) return console.log(getErr)
         const { userUuid } = userInfo
         const data = Object.keys(ANIMATIONLIST)[index]
         getRes[userUuid].animation = data
-        const params = { uuid: 'UserInfo', content: JSON.stringify(getRes) }
-        const [postErr] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const params = { uuid: `${uuid}/UserInfo`, content: JSON.stringify(getRes) }
+        const [postErr] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (postErr) return console.log(postErr)
         setActive(index)
         PutIndexedDB('userAdd', getRes[userUuid])

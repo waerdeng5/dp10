@@ -1,4 +1,3 @@
-import { openDB } from 'idb'
 import CryptoJS from 'crypto-js'
 import { useState, useEffect } from 'react'
 

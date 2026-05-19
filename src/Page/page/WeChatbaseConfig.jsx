@@ -13,6 +13,7 @@ import { modelStore } from '../../Router/zustand'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
 import { axios } from '../../Utils/Api'
+import { CommonAPIUrl } from '../../Config'
 import WeChatHome from '../../Temp/WeChatHome'
 import FormTemplate from '../../Utils/FormTemplate'
 import { ICONMapping } from '../../Config/IconMapping'
@@ -21,15 +22,9 @@ import { ColorCallBack, SpacingCallBack, SetFilderParams, isEmptyObject, onTreeD
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
 
-const httpPath = 'https://common-api.ljkjkf.com/'
-const GetConfig = { method: 'get', url: 'wechats/GetJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate` } }
-const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate`, content: {} } }
-const GetHomeConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `WeChat/home` } }
-const PostHomeConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `WeChat/home`, content: {} } }
+const GetConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `common/PARGET/WeChate` } }
+const PostConfig = { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `common/PARGET/WeChate`, content: {} } }
 
-
-const GetPageConfig = { method: 'get', url: 'dictionary/GetJsonInfoByUuid' }
-const PostPageConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid' }
 
 const pageMapping = {
     login: { title: '登录设置', formItem: WeChatFormConfig.WeChatLoginFormList },
@@ -254,6 +249,10 @@ const WeChatbaseConfig = () => {
     }
     // 获取小程序首页配置
     const getWeChatHomeData = async () => {
+        const { uuid } = await GetIndexedDB('config')
+        const GetHomeConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/WeChat/home` } }
+
+
         const [err, res] = await axios(GetHomeConfig)
         if (err) console.log('小程序首页获取失败!')
         console.log(res)
@@ -286,16 +285,29 @@ const WeChatbaseConfig = () => {
 
     const setHomeData = async () => {
         console.log('[------保存HOME-------]', WeChatInit.home)
-        PostHomeConfig.params.content = JSON.stringify(WeChatInit.home)
-        const [err, res] = await axios(PostHomeConfig)
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'post',
+            path: CommonAPIUrl,
+            url: 'projects/SaveJsonInfoByUuid',
+            params: {
+                uuid: `${uuid}/WeChat/home`,
+                content: JSON.stringify(WeChatInit.home)
+            }
+        })
         if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '首页页面设置失败!' })
         notification.success({ key: 'weChat', title: '保存成功!', description: '小程序首页设置成功!' })
     }
 
     const setPageData = async () => {
         console.log('[------保存PAGE-------]', WeChatInit.page)
-        PostPageConfig.params = { uuid: `WeChat/${PAGE[0]}`, content: JSON.stringify(WeChatInit.page) }
-        const [err, res] = await axios(PostPageConfig)
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'post',
+            url: 'projects/SaveJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${uuid}/WeChat/${PAGE[0]}`, content: JSON.stringify(WeChatInit.page) }
+        })
         if (err) return notification.error({ key: 'weChat', title: '保存失败!', description: '页面设置失败!' })
         notification.success({ key: 'weChat', title: '保存成功!', description: '首页设置成功!' })
     }
@@ -349,8 +361,13 @@ const WeChatbaseConfig = () => {
     // 生成页面配置
     const onSetPageConfig = async () => {
         const [uuid] = PAGE
-        const axiosData = { ...PostPageConfig, params: { uuid: `WeChat/${uuid}`, content: JSON.stringify({}) } }
-        const [err, res] = await axios(axiosData)
+        const { uuid: configUuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'post',
+            url: 'projects/SaveJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${configUuid}/WeChat/${uuid}`, content: JSON.stringify({}) }
+        })
         if (err) return console.log(err)
         setPAGESTATUS({ loading: false, status: false })
 
@@ -358,11 +375,16 @@ const WeChatbaseConfig = () => {
 
     // 选中页面
     const onSelectPage = async (e) => {
+        const config = await GetIndexedDB('config')
         WeChatInit.page = {}
         setPAGE(e)
         const [uuid] = e
-        const axiosData = { ...GetPageConfig, params: { uuid: `WeChat/${uuid}` } }
-        const [err, res] = await axios(axiosData)
+        const [err, res] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${config.uuid}/WeChat/${uuid}` }
+        })
         if (err) return setPAGESTATUS({ loading: false, status: true })
         WeChatInit.page = res
         setPAGESTATUS({ loading: false, status: false })

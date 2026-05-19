@@ -30,12 +30,12 @@ const LayoutModel = ({ data, Event }) => {
     const [Config, setConfig] = useState({ json: json })
 
     const getJson = async () => {
-        const config = await GetIndexedDB('config')
+        const { uuid } = await GetIndexedDB('config')
         const [err, res] = await axios({
             method: 'get',
             url: 'projects/GetJsonInfoByUuid',
             path: CommonAPIUrl,
-            params: { uuid: `${config.uuid}/MOD_PAGE/${json}` }
+            params: { uuid: `${uuid}/MOD_PAGE/${json}` }
         })
         if (err) return setStatus({ spin: false, result: true })
         const jsonData = await Decrypt(res)
@@ -63,8 +63,9 @@ const LayoutModel = ({ data, Event }) => {
 
     const onSaveModel = async (data) => {
         console.log('[--保存model页面--]', data)
-        const params = { uuid: `MOD_PAGE/${json}`, content: JSON.stringify(await Encrypt(data)) }
-        const [err] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/MOD_PAGE/${json}`, content: JSON.stringify(await Encrypt(data)) }
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
         updateModel5({})
         getJson()

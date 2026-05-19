@@ -5,31 +5,31 @@ import { v4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import { App, Tree, Button, Popconfirm, Spin, Result, Tooltip } from 'antd'
 import { useInterval, useMount, useEventEmitter } from 'ahooks'
-import { EditOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, BarsOutlined, LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled } from '@ant-design/icons'
+import {
+    EditOutlined, PlusOutlined, SaveOutlined, DeleteOutlined, BarsOutlined, LeftOutlined, HomeOutlined, SearchOutlined, CloseCircleFilled
+} from '@ant-design/icons'
 
+import { CommonAPIUrl } from '../../Config'
 import { axios, axiosFor } from '../../Utils/Api'
 import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { ICONMapping } from '../../Config/IconMapping'
 
+import { GetIndexedDB } from '../../Utils/IndexedDB'
 
 import { WeChatFormConfig } from '../../Config/wechatForm'
 import { WeChatFormInit } from '../../Config/wechatDefault'
 
-import WeChatHome from '../../Temp/WechatHome'
+import WeChatHome from '../../Temp/WeChatHome'
 
 import { WechatLoginA01, WechatLoginA02, WechatLoginA03, WechatLoginA04 } from '../../Temp/WechatLogin'
 import { WeChatTabBarA01, WeChatTabBarA02, WeChatTabBarA03, WeChatTabBarA04 } from '../../Temp/WechatTabBar'
 import { ColorCallBack, SetFilderParams, onTreeDrop, replaceNodeByIdTwo, removeTreeByKey, findParentNodeFunc, treeValue } from '../../Utils'
 
-const httpPath = 'https://common-api.ljkjkf.com/'
-const initApi = [
-    { method: 'get', url: 'wechats/GetJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate` } },
-    { method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `WeChat/config` } },
-]
-const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: httpPath, params: { uuid: `PARGET/WeChate`, content: {} } }
-const PostHomeConfig = { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `WeChat/config`, content: JSON.stringify({}) } }
+
+
+const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `common/PARGET/WeChate`, content: {} } }
 
 const initMenu = '00000000-0000-0000-000000000000'
 
@@ -392,7 +392,11 @@ const WeChatConfig = () => {
 
     // 初始化数据
     const getInit = async () => {
-        const [[comErr, comRes], [configErr, configRes]] = await axiosFor(initApi)
+        const { uuid } = await GetIndexedDB('config')
+        const [[comErr, comRes], [configErr, configRes]] = await axiosFor([
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `common/PARGET/WeChate` } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/WeChat/config` } },
+        ])
         if (comErr) return notification.error({ key: 'init', title: '获取失败!', description: '公共库小程序登录页设置获取失败!' })
         if (configErr) {
             setINIT({ loading: false, status: true })
@@ -406,8 +410,12 @@ const WeChatConfig = () => {
 
     // 生成配置文件
     const onAddPageConfig = async () => {
-        PostHomeConfig.params.content = JSON.stringify(WeChatFormInit.WeChatInitProjectData)
-        const [err, res] = await axios(PostHomeConfig)
+        const [err, res] = await axios({
+            method: 'post',
+            path: CommonAPIUrl,
+            url: 'projects/SaveJsonInfoByUuid',
+            params: { uuid: `WeChat/config`, content: JSON.stringify(WeChatFormInit.WeChatInitProjectData) }
+        })
         if (err) return notification.error({ key: 'init', title: '生成失败!', description: '项目配置文件生成失败!' })
         getInit()
     }
@@ -415,8 +423,12 @@ const WeChatConfig = () => {
     // 保存配置文件
     const onSaveConfig = async () => {
         console.log('[-----------保存配置文件--------------]', HOME)
-        PostHomeConfig.params.content = JSON.stringify(HOME)
-        const [err, res] = await axios(PostHomeConfig)
+        const [err, res] = await axios({
+            method: 'post',
+            path: CommonAPIUrl,
+            url: 'projects/SaveJsonInfoByUuid',
+            params: { uuid: `WeChat/config`, content: JSON.stringify(HOME) }
+        })
         if (err) return notification.error({ key: 'init', title: '生成失败!', description: '项目配置文件生成失败!' })
         notification.success({ key: 'init', title: '保存成功!', description: '项目配置文件保存成功!' })
     }

@@ -8,6 +8,8 @@ import { ICONMapping } from '../../Config/IconMapping'
 import { axios } from '../../Utils/Api'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
+
+import { CommonAPIUrl } from '../../Config'
 import FormTemplate from '../../Utils/FormTemplate'
 import { FormConfig } from '../../Config/configForm'
 import { ANIMATIONLIST } from '../../Temp/TemplateAnimation'
@@ -78,12 +80,18 @@ const UserCenter = () => {
 
     const onSaveUserCard = async () => {
         setLoading(true)
-        const [getErr, getRes] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: 'UserInfo' } })
+        const { uuid } = await GetIndexedDB('config')
+        const [getErr, getRes] = await axios({
+            method: 'get',
+            path: CommonAPIUrl,
+            url: 'projects/GetJsonInfoByUuid',
+            params: { uuid: `${uuid}/UserInfo` }
+        })
         if (getErr) return console.log(getErr)
         const data = { ...getRes[userInfo.userUuid], avatar: userAvatar, backImage: userBack, nickName: userNickName }
         getRes[userInfo.userUuid] = data
-        const params = { uuid: 'UserInfo', content: JSON.stringify(getRes) }
-        const [postErr] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const params = { uuid: `${uuid}/UserInfo`, content: JSON.stringify(getRes) }
+        const [postErr] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (postErr) return console.log(postErr)
         await PutIndexedDB('userAdd', data)
         setLoading(false)

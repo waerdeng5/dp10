@@ -73,15 +73,17 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     }
 
     const getData = async () => {
-        const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `STA_PAGE/${page.path}` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}STA_PAGE/${page.path}` } })
         if (err) return console.log(err)
         setPAGEDate(await Decrypt(res))
     }
 
     const setData = async e => {
         console.log('[--保存lay页面--]', e)
-        const params = { uuid: `STA_PAGE/${e.path}`, content: JSON.stringify(await Encrypt(e)) }
-        const [err] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}STA_PAGE/${e.path}`, content: JSON.stringify(await Encrypt(e)) }
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
         LayoutEvent.emit({ type: 'setCurrent', data: e })
         getData()

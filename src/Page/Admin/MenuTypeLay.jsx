@@ -9,9 +9,9 @@ import { useEventEmitter, useMount, useSize } from 'ahooks'
 import { Button, Result, Skeleton, Dropdown, App } from 'antd'
 
 import { modelStore } from '../../Router/zustand'
-import { LayoutWindowDetailsStyle } from '../../Config'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
+import { LayoutWindowDetailsStyle, CommonAPIUrl } from '../../Config'
 import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { GlobalOperation, SwiperTemplate } from '../../Temp/LayTemplate'
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../../Utils'
 
@@ -48,7 +48,13 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
     }
 
     const getData = async () => {
-        const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `LAY_PAGE/${targetUrl}` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${uuid}/LAY_PAGE/${targetUrl}` }
+        })
         if (err) {
             setLoading(false)
             return console.log(err)
@@ -65,8 +71,9 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
 
     const setData = async (data) => {
         console.log('[--保存lay页面--]', data)
-        const params = { uuid: `LAY_PAGE/${targetUrl}`, content: JSON.stringify(await Encrypt(data)) }
-        const [err] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/LAY_PAGE/${targetUrl}`, content: JSON.stringify(await Encrypt(data)) }
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', params })
         if (err) return console.log(err)
         getData()
     }

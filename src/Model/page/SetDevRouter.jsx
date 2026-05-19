@@ -1,10 +1,12 @@
 import './SetDevRouter.scss'
 import { useState } from 'react'
 import { axios } from '../../Utils/Api'
-import { Encrypt } from '../../Utils/IndexedDB'
+import { CommonAPIUrl } from '../../Config'
 import { modelStore } from '../../Router/zustand'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MappingData } from '../../Config/MappingData'
+import { Encrypt, GetIndexedDB } from '../../Utils/IndexedDB'
+
 
 
 export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => (
@@ -148,8 +150,9 @@ const SetDevRouter = ({ data, Event }) => {
 
     const onSaveAPI = async (data) => {
         console.log('[----------保存API---------]', data)
-        const params = { uuid: `DEV_PAGE/${targetUrl}_API`, content: JSON.stringify(await Encrypt(data)) }
-        const [APIerror, APIdata] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/DEV_PAGE/${targetUrl}_API`, content: JSON.stringify(await Encrypt(data)) }
+        const [APIerror, APIdata] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (APIerror) {
             console.log('保存失败', APIerror)
             return false
@@ -161,8 +164,9 @@ const SetDevRouter = ({ data, Event }) => {
 
     const onSaveTHE = async (data) => {
         console.log('[----------保存THE---------]', data)
-        const params = { uuid: `DEV_PAGE/${targetUrl}_THE`, content: JSON.stringify(await Encrypt(data)) }
-        const [THEerror, THEdata] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/DEV_PAGE/${targetUrl}_THE`, content: JSON.stringify(await Encrypt(data)) }
+        const [THEerror, THEdata] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (THEerror) {
             console.log('保存失败', THEerror)
             return false
@@ -173,11 +177,10 @@ const SetDevRouter = ({ data, Event }) => {
     }
 
     const onSaveOPT = async (data, type) => {
-        // data.top.find(v => v.uuid === '000000000000').uuid = "000000000000"
         console.log('[----------保存OPT---------]', data)
-
-        const params = { uuid: `DEV_PAGE/${targetUrl}_OPT`, content: JSON.stringify(await Encrypt(data)) }
-        const [OPTerror, OPTdata] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/DEV_PAGE/${targetUrl}_OPT`, content: JSON.stringify(await Encrypt(data)) }
+        const [OPTerror, OPTdata] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (OPTerror) return console.log('保存失败', OPTerror)
         const params2 = { menu: uuid, button: [...data.top, ...data.row] }
         const [err] = await axios({ method: 'post', url: 'menu/AddMenuButton', params: { menu: uuid, button: [...data.top, ...data.row] } })

@@ -3,25 +3,26 @@ import { v4 } from 'uuid'
 import { jsPDF } from 'jspdf'
 import { Workbook } from 'exceljs'
 import { useEventEmitter, useMount } from 'ahooks'
-import { Button, Dropdown, Tree, App, Tag, Badge } from "antd"
 import Splitter, { Item } from 'devextreme-react/splitter'
 import { memo, useMemo, useState, useCallback } from 'react'
-import { Column, Summary, TotalItem, GroupItem, Lookup } from 'devextreme-react/data-grid'
+import { Button, Dropdown, Tree, App, Tag, Badge } from "antd"
 import { exportDataGrid as exportExcel } from 'devextreme/excel_exporter'
 import { exportDataGrid as exportPDF } from 'devextreme-react/common/export/pdf'
 import { VerticalAlignTopOutlined, VerticalAlignBottomOutlined } from '@ant-design/icons'
+import { Column, Summary, TotalItem, GroupItem, Lookup } from 'devextreme-react/data-grid'
 
+import { CommonAPIUrl } from '../../Config'
 import { DevScrollView } from './DevTemplate'
-import { modelStore, pageStore } from '../Router/zustand'
+import { MappingData } from '../Config/MappingData'
 import { ICONMapping } from '../Config/IconMapping'
 import DevExtremeDataGrid from './DevExtremeDataGrid'
 import DevExtremeTreeGrid from './DevExtremeTreeGrid'
 import DevExtremeCardGrid from './DevExtremeCardGrid'
 import DevExtremeOLAPGrid from './DevExtremeOLAPGrid'
 import { axios, strOfurlParamsFunc } from '../Utils/Api'
-import { ColorCallBack, SpacingCallBack, OpenMenuFunc, treeValue } from '../Utils'
-import { MappingData } from '../Config/MappingData'
 import { GetIndexedDB, Decrypt } from '../Utils/IndexedDB'
+import { modelStore, pageStore } from '../Router/zustand'
+import { ColorCallBack, SpacingCallBack, OpenMenuFunc, treeValue } from '../Utils'
 
 const DevMapping = { DevExtremeDataGrid, DevExtremeTreeGrid, DevExtremeCardGrid, DevExtremeOLAPGrid }
 
@@ -224,13 +225,20 @@ export const DevExtremeHeader = (props) => {
     }
     const A0901Func = async (data) => {
         const layout = localStorage.getItem(targetUrl)
-        const params = { uuid: `OLAPLayout/${targetUrl}`, content: layout }
-        const [err, res] = await axios({ method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params })
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/OLAPLayout/${targetUrl}`, content: layout }
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return message.error(err.message)
         notification.success({ title: '保存成功!', description: '新OLAP布局保存成功!' })
     }
     const A0902Func = async (data) => {
-        const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `OLAPLayout/${targetUrl}` } })
+        const { uuid } = await GetIndexedDB('config')
+        const [err, res] = await axios({
+            method: 'get',
+            path: CommonAPIUrl,
+            url: 'projects/GetJsonInfoByUuid',
+            params: { uuid: `${uuid}/OLAPLayout/${targetUrl}` }
+        })
         if (err) return message.error(err.message)
         localStorage.setItem(targetUrl, JSON.stringify(res))
         DEVEvent.emit({ type: 'onRefreshData', data: {} })

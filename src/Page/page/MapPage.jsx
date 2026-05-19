@@ -6,8 +6,8 @@ import _ from 'lodash'
 import * as mars3d from "mars3d"
 import { useMount, useEventEmitter } from 'ahooks'
 import { useState, useRef, useEffect } from 'react'
-import { Spin, Result, Button, FloatButton, Tooltip, App } from 'antd'
 import { HappyProvider } from '@ant-design/happy-work-theme';
+import { Spin, Result, Button, FloatButton, Tooltip, App } from 'antd'
 
 import {
     GlobalOutlined,
@@ -22,10 +22,11 @@ import {
 
 import { InitMap } from '../../Mars3d'
 import { axiosFor } from '../../Utils/Api'
-import { sceneParameter } from '../../Mars3d/initData'
-import { Encrypt, Decrypt } from '../../Utils/IndexedDB'
 import { isEmptyObject } from '../../Utils'
+import { CommonAPIUrl } from '../../Config'
 import { modelStore } from '../../Router/zustand'
+import { sceneParameter } from '../../Mars3d/initData'
+import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 
 const { port } = window.location
 
@@ -51,10 +52,11 @@ const MapPage = ({ data, AdminEvent }) => {
     const [ELEConfig, setELEConfig] = useState([])
     const [TILConfig, setTILConfig] = useState([])
     const getMapData = async () => {
+        const { uuid } = await GetIndexedDB('config')
         const apiList = [
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}` } },
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element` } },
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_element` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_tiles` } },
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) {
@@ -84,10 +86,11 @@ const MapPage = ({ data, AdminEvent }) => {
         const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
         const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
         const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
+        const { uuid } = await GetIndexedDB('config')
         const apiList = [
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}`, Content: paramsA01 } },
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
-            { method: 'post', url: 'dictionary/SaveJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
+            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}`, Content: paramsA01 } },
+            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
+            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)

@@ -2,13 +2,13 @@ import './TempMap.scss'
 import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
 import "mars3d/mars3d.css"
 
-import { InitMap } from '../../Mars3d'
-
+import { useMount } from 'ahooks'
 import { useEffect, useRef, useState } from 'react'
-import { useMount, useEventEmitter } from 'ahooks'
 
+import { InitMap } from '../../Mars3d'
 import { axiosFor } from '../../Utils/Api'
-import { Decrypt } from '../../Utils/IndexedDB'
+import { CommonAPIUrl } from '../../Config'
+import { Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 
 const TempMap = ({ uuid }) => {
     const mapBox = useRef()
@@ -21,10 +21,11 @@ const TempMap = ({ uuid }) => {
     }
 
     useMount(async () => {
+        const { uuid: configUuid } = await GetIndexedDB('config')
         const apiList = [
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}` } },
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_element` } },
-            { method: 'get', url: '/dictionary/GetJsonInfoByUuid', params: { uuid: `MAP_PAGE/${uuid}_tiles` } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}` } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_element` } },
+            { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_tiles` } },
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) {

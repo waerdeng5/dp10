@@ -1,22 +1,23 @@
 import { v4 } from 'uuid'
-import { Skeleton, App } from 'antd'
-import { memo, useState, useCallback, useRef, useEffect } from "react"
-import { useDebounceEffect } from "ahooks"
 
 import { Workbook } from 'exceljs'
 import { saveAs } from 'file-saver'
+import { Skeleton, App } from 'antd'
+import { useDebounceEffect } from "ahooks"
 import { exportPivotGrid } from 'devextreme/excel_exporter'
-
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source'
-
+import { memo, useState, useCallback, useRef, useEffect } from "react"
 import { PivotGrid, FieldChooser, FieldPanel, StateStoring, Export, Scrolling } from 'devextreme-react/pivot-grid'
 
-import { AssemblySort } from '../Utils'
-import { axios, strOfurlParamsFunc } from '../Utils/Api'
-import { DevFieldTemplate, SummaryTemplate, DevExtremeRow } from './DevExtremeTemplate'
-import { MappingData } from '../Config/MappingData'
-import { devChartsStore } from '../Router/zustand'
 
+import { AssemblySort } from '../Utils'
+import { CommonAPIUrl } from '../Config'
+import { GetIndexedDB } from '../Utils/IndexedDB'
+import { devChartsStore } from '../Router/zustand'
+import { MappingData } from '../Config/MappingData'
+import { axios, strOfurlParamsFunc } from '../Utils/Api'
+
+import { DevFieldTemplate, SummaryTemplate, DevExtremeRow } from './DevExtremeTemplate'
 
 
 const DevExtremeOLAPGrid = (props) => {
@@ -125,7 +126,13 @@ const DevExtremeOLAPGrid = (props) => {
     const loadState = useCallback(async () => {
         const layout = localStorage.getItem(targetUrl)
         if (!layout) {
-            const [err, res] = await axios({ method: 'get', url: 'dictionary/GetJsonInfoByUuid', params: { uuid: `OLAPLayout/${targetUrl}` } })
+            const { uuid } = await GetIndexedDB('config')
+            const [err, res] = await axios({
+                method: 'get',
+                url: 'projects/GetJsonInfoByUuid',
+                path: CommonAPIUrl,
+                params: { uuid: `${uuid}/OLAPLayout/${targetUrl}` }
+            })
             if (err) return message.info('未获取到布局信息!')
             localStorage.setItem(targetUrl, JSON.stringify(res))
             return res
