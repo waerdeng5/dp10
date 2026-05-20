@@ -52,11 +52,11 @@ const MapPage = ({ data, AdminEvent }) => {
     const [ELEConfig, setELEConfig] = useState([])
     const [TILConfig, setTILConfig] = useState([])
     const getMapData = async () => {
-        const { uuid } = await GetIndexedDB('config')
+        const { uuid: configUuid } = await GetIndexedDB('config')
         const apiList = [
-            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}` } },
-            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_element` } },
-            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_tiles` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_element` } },
+            { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_tiles` } },
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) {
@@ -86,11 +86,20 @@ const MapPage = ({ data, AdminEvent }) => {
         const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
         const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
         const paramsA03 = JSON.stringify(await Encrypt(TILConfig))
-        const { uuid } = await GetIndexedDB('config')
+        const { uuid: configUuid } = await GetIndexedDB('config')
         const apiList = [
-            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}`, Content: paramsA01 } },
-            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_element`, Content: paramsA02 } },
-            { method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/MAP_PAGE/${uuid}_tiles`, Content: paramsA03 } },
+            {
+                method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl,
+                params: { uuid: `${configUuid}/MAP_PAGE/${uuid}`, Content: paramsA01 }
+            },
+            {
+                method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl,
+                params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_element`, Content: paramsA02 }
+            },
+            {
+                method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl,
+                params: { uuid: `${configUuid}/MAP_PAGE/${uuid}_tiles`, Content: paramsA03 }
+            },
         ]
         const [[conErr, conRes], [eleErr, eleRes], [tilErr, tilRes]] = await axiosFor(apiList)
         if (conErr || eleErr || tilErr) return console.error('保存失败', conErr, eleErr, tilErr)

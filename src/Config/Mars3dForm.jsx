@@ -726,7 +726,7 @@ const Mars3DdivFormList = [
     { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
     distanceDisplayConditionConfig,
     // 模板设置
-    { span: 24, formType: 'RADIO', name: ['style', 'temp'], label: '显示模板', rules: true, valueEnum: MappingData.mars3d__divTemplate },
+    { span: 24, formType: 'SELECT', name: ['style', 'temp'], label: '显示模板', rules: true, valueEnum: MappingData.mars3d__divTemplate },
     {
         span: 24, formType: 'GROUP', name: 'tempConfig_A01', label: '一号版配置', collapsible: true,
         jugde: [{ field: ['style', 'temp'], value: ['A01'] }], children: [
@@ -852,7 +852,6 @@ const Mars3DdivFormList = [
             { span: 24, formType: 'COLOR', name: ['style', 'tempConfig', 'after'], label: '泛光颜色', rules: true, mode: ['single'] },
         ]
     },
-
 ]
 // Todo 扩散点
 const Mars3DdivLightPointFormList = [
@@ -888,6 +887,7 @@ const Mars3DdivUpLabelFormList = [
     { span: 24, formType: 'NUMBER', name: ['style', 'circleSize'], label: '圆圈尺寸', rules: true },
     { span: 24, formType: 'NUMBER', name: ['style', 'offsetX'], label: 'X轴偏移', rules: true },
     { span: 24, formType: 'NUMBER', name: ['style', 'offsetY'], label: 'Y轴偏移', rules: true },
+    { span: 24, formType: 'RADIO', name: ['style', 'textAlign'], label: '文字方向', rules: true, valueEnum: MappingData.Charts__VChartsDirectionA01 },
     { span: 24, formType: 'RADIO', name: ['style', 'scaleByDistance'], label: '视距缩放', rules: true, valueEnum: MappingData.IsEnabledBool },
     scaleByDistanceConfig,
     { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },

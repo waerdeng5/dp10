@@ -5,6 +5,9 @@ import adapterFetch from 'alova/fetch'
 
 import { GetIndexedDB } from './IndexedDB'
 
+
+import { App, Button, Space } from 'antd';
+
 export const ContentTypeMapping = [
     'image/png',
     'image/jpeg',
@@ -54,11 +57,11 @@ const noTokenApi = [
     'users/GetOrganizationListByUser'
 ]
 
-
 // ! 抛错机制
 const ErrorModal = (status, data) => {
     const { message } = data
     notification.error({ key: 'apiError', title: codeMessage[status], description: message })
+    return (<App />)
 }
 
 const alovaInstance = createAlova({

@@ -150,7 +150,7 @@ export const BoundaryBorderFunction = (gra, clip, data) => {
 const RenderElement = (gra, data) => {
 
     data && data.forEach(item => {
-        const { id, show, position, positions, style, type } = item
+        const { id, show, position, positions, style, type, textAlign } = item
 
         switch (type) {
             // !!! 点
@@ -179,7 +179,7 @@ const RenderElement = (gra, data) => {
                 gra.addGraphic(divLightPoint)
                 break;
             case 'divUpLabel':
-                const divUpLabel = new mars3d.graphic.DivUpLabel({ id, position, show, style })
+                const divUpLabel = new mars3d.graphic.DivUpLabel({ id, position, show, style, attr: textAlign })
                 gra.addGraphic(divUpLabel)
                 break;
             case 'divBoderLabel':

@@ -2290,7 +2290,7 @@ const DivTemplate = {
                     </div>
                     <img src="${imgUrl}" alt="" style="${Object.keys(imgStyle).map(k => `${k}:${imgStyle[k]}`).join(';')}">
                 </div >`
-    },
+    }
 }
 // *** 扩散DIV
 const divLightPoint = {
@@ -2316,6 +2316,7 @@ const divLightPoint = {
 const divUpLabel = {
     type: 'divUpLabel',
     show: true,
+    textAlign: 'vertical',
     style: {
         text: '默认文案',
         color: '#fff',
