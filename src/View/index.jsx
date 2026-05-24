@@ -3,6 +3,9 @@ import { lazy, Suspense, useState, useEffect } from 'react'
 import { useMount, useTitle, useFavicon } from "ahooks"
 import { useNavigate, useLocation } from 'react-router-dom'
 
+
+import { themeDefault } from '../Config/themeDefault'
+
 import { axios } from "../Utils/Api"
 import LoadSvg from '../Page/Loading/LoadSvg'
 import { formDefaultInit, CommonAPIUrl } from '../Config'
@@ -20,10 +23,7 @@ const NotificationBox = ({ uuid }) => {
             method: 'post',
             url: 'projects/SaveJsonInfoByUuid',
             path: CommonAPIUrl,
-            params: {
-                uuid: `${uuid}/COMMON/THEMEJSON`,
-                content: JSON.stringify(await Encrypt(formDefaultInit.THEMEinit))
-            }
+            params: { uuid: `${uuid}/COMMON/THEME`, content: JSON.stringify(await Encrypt(themeDefault)) }
         })
         if (PROevent) return console.log('初始化失败', PROevent)
         onReload()
@@ -76,7 +76,7 @@ const LoginIndex = () => {
 
             setConfig(configData)
             sessionStorage.setItem('uuid', key)
-            const GetConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/COMMON/THEMEJSON` } }
+            const GetConfig = { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${configData.uuid}/COMMON/THEME` } }
             const [COMerror, COMdata] = await axios({ ...GetConfig })
             if (COMerror) {
                 notification.info({

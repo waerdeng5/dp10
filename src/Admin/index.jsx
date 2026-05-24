@@ -13,20 +13,15 @@ import { modelStore, pageStore } from '../Router/zustand'
 import { Encrypt, PutIndexedDB } from '../Utils/IndexedDB'
 import { ThemeBackImageList, formDefaultInit, CommonAPIUrl } from '../Config'
 
-import LayoutA01 from './page/LayoutA01'
-import LayoutA02 from './page/LayoutA02'
-import themes from "devextreme/ui/themes";
+import TempA01 from './page/TempA01'
+import TempA02 from './page/TempA02'
+import themes from "devextreme/ui/themes"
 
 import { HappyProvider } from '@ant-design/happy-work-theme';
 import { ANIMATIONLIST } from '../Temp/TemplateAnimation'
 
-
-
-
-
-
-const LayoutMapping = { LayoutA01, LayoutA02 }
 const { port } = window.location
+const LayoutMapping = { TempA01, TempA02 }
 
 const AdminIndex = () => {
     const { updateActive, updateList } = pageStore()
@@ -89,13 +84,12 @@ const AdminIndex = () => {
     const onSetTheme = async (e) => {
         console.log('[-- 保存主题 --]', e)
         const { uuid } = await GetIndexedDB('config')
-        const params = { uuid: `${uuid}/COMMON/THEMEJSON`, content: JSON.stringify(await Encrypt(e)) }
+        const params = { uuid: `${uuid}/COMMON/THEME`, content: JSON.stringify(await Encrypt(e)) }
         const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return AdminEvent.emit({ type: 'closeFormLoading' })
 
         await PutIndexedDB('theme', e)
         setTheme(e)
-        updateModel({})
     }
 
     const onActiveMenu = data => {
@@ -407,30 +401,31 @@ const AdminIndex = () => {
     AdminEvent.useSubscription(adminCallBack)
 
     if (Theme && DxThemeMapping) {
+        console.log('Theme', Theme)
         const { layout, themeColor, maskColor, maskBlur,
             backType, backColor, backDeg, backImage,
             backVideo, backVideoStart, backVideoEnd,
             backGrundType, grundStyle, devTheme
         } = Theme
         const maskStyle = { background: maskColor, backdropFilter: `blur(${maskBlur}px)` }
+
+
         const Template = LayoutMapping[layout]
         const DXTHEME = DxTheme.split('.compact')[0]
-        const backColorData = devTheme ? DxThemeMapping[DXTHEME].backColor : backColor
-        const colorPrimary = devTheme ? DxThemeMapping[DXTHEME].themeColor : themeColor
         const ThemeData = devTheme ? { ...Theme, ...DxThemeMapping[DXTHEME] } : Theme
 
         return (
             <div className='AdminIndex'>
                 <div className='BackBox'>
                     <div className='Mask' style={maskStyle} />
-                    {backType === 'Color' && <div className='BackColor' style={{ background: ColorCallBack(backColorData, backDeg) }} />}
+                    {backType === 'Color' && <div className='BackColor' style={{ background: ColorCallBack(backColor, backDeg) }} />}
                     {backType === 'Image' && <img className='BackImage' src={ThemeBackImageList[backImage]} alt="" />}
                     {backType === 'Ground' && grundStyle && <div className='BackGround' style={BackGrundType[backGrundType](grundStyle)} />}
                     {backType === 'Video' && <VideoTemplateA01 url={backVideo} seekTimeStart={backVideoStart} seekTimeEnd={backVideoEnd} />}
                 </div>
 
-                <ConfigProvider theme={{ token: { colorPrimary } }} >
-                    <Template DxTheme={DxTheme} Theme={ThemeData} AdminEvent={AdminEvent} />
+                <ConfigProvider theme={{ token: { themeColor } }} >
+                    <Template Theme={Theme} AdminEvent={AdminEvent} />
                 </ConfigProvider>
 
                 {LookStatus &&

@@ -153,7 +153,7 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
     };
 
     return (
-        <div className='BodyA01' style={TabsStyle}>
+        <div className='Body' style={TabsStyle}>
             <Tabs
                 items={items}
                 type="editable-card"

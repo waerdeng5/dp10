@@ -69,10 +69,10 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         padding: SpacingCallBack(logo_icon_padding),
         margin: SpacingCallBack(logo_icon_margin),
         borderRadius: SpacingCallBack(logo_radius),
-        transform: `translateX(${devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? -logo_width * 2 + 'px' : 0} )`,
-        filter: devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ?
-            `drop-shadow(${logo_width * 2}px 0 #ffffff)` :
-            `drop-shadow(${logo_icon_shadowX}px ${logo_icon_shadowY}px ${logo_icon_shadowS}px ${logo_icon_shadowC})`,
+        // transform: `translateX(${devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? -logo_width * 2 + 'px' : 0} )`,
+        // filter: devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ?
+        //     `drop-shadow(${logo_width * 2}px 0 #ffffff)` :
+        //     `drop-shadow(${logo_icon_shadowX}px ${logo_icon_shadowY}px ${logo_icon_shadowS}px ${logo_icon_shadowC})`,
     }
 
     const TextStyle = {
@@ -87,12 +87,12 @@ const LogoA01 = ({ Theme, DxTheme }) => {
 
 
     // 折叠设置
-    if (layout === 'LayoutA01') {
+    if (layout === 'TempA01') {
         LogoStyle.width = '100%'
         LogoStyle.marginBottom = 8
 
         return (
-            <div className='LogoA01' style={LogoStyle}>
+            <div className='Logo' style={LogoStyle}>
                 <img src={logo_icon} alt="" style={IconStyle} />
                 {!inlineCollapsed && logo_textStatus && <div className='text' style={TextStyle}>{logo_text}</div>}
             </div>
@@ -100,9 +100,9 @@ const LogoA01 = ({ Theme, DxTheme }) => {
     }
 
     // 铺展设置
-    if (layout === 'LayoutA02') {
+    if (layout === 'TempA02') {
         return (
-            <div className='LogoA01' style={LogoStyle}>
+            <div className='Logo' style={LogoStyle}>
                 <img src={logo_icon} alt="" style={IconStyle} />
                 {logo_textStatus && <div className='text' style={TextStyle}>{logo_text}</div>}
             </div>

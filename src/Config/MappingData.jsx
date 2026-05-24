@@ -763,8 +763,9 @@ export const MappingData = {
         { value: 'A02', label: '自由登录' },
     ],
     Theme__Layout: [
-        { value: 'LayoutA01', label: '左右结构' },
-        { value: 'LayoutA02', label: '上下结构' },
+        { value: 'TempA01', label: '左右结构' },
+        { value: 'TempA02', label: '上下结构' },
+
     ],
     Theme__BackType: [
         { label: '纯色背景', value: 'Color' },
@@ -1056,77 +1057,16 @@ export const MappingData = {
         // { value: 'A02', label: '独立配置' },
     ],
 
-
-    // Generic
-    // dx.light.css
-    // dx.dark.css
-    // dx.carmine.css
-    // dx.softblue.css
-    // dx.darkmoon.css
-    // dx.darkviolet.css
-    // dx.greenmist.css
-    // dx.contrast.css
-
-    // Generic Compact
-    // dx.light.compact.css
-    // dx.dark.compact.css
-    // dx.carmine.compact.css
-    // dx.softblue.compact.css
-    // dx.darkmoon.compact.css
-    // dx.darkviolet.compact.css
-    // dx.greenmist.compact.css
-    // dx.contrast.compact.css
-
-    // Material Design
-    // dx.material.blue.light.css
-    // dx.material.blue.dark.css
-    // dx.material.lime.light.css
-    // dx.material.lime.dark.css
-    // dx.material.orange.light.css
-    // dx.material.orange.dark.css
-    // dx.material.purple.light.css
-    // dx.material.purple.dark.css
-    // dx.material.teal.light.css
-    // dx.material.teal.dark.css
-
-    // Material Design Compact
-    // dx.material.blue.light.compact.css
-    // dx.material.blue.dark.compact.css
-    // dx.material.lime.light.compact.css
-    // dx.material.lime.dark.compact.css
-    // dx.material.orange.light.compact.css
-    // dx.material.orange.dark.compact.css
-    // dx.material.purple.light.compact.css
-    // dx.material.purple.dark.compact.css
-    // dx.material.teal.light.compact.css
-    // dx.material.teal.dark.compact.css
-
-    // Fluent
-    // dx.fluent.blue.light.css
-    // dx.fluent.blue.dark.css
-    // dx.fluent.saas.light.css
-    // dx.fluent.saas.dark.css
-
-    // Fluent Compact
-    // dx.fluent.blue.light.compact.css
-    // dx.fluent.blue.dark.compact.css
-    // dx.fluent.saas.light.compact.css
-    // dx.fluent.saas.dark.compact.css
-
-
     // TODO Dev
     DevConfig__ThemeList: [
-        { label: '流畅 - 宽松 - 灰白', value: 'dx.fluent.blue.light.css', color: ['#e0e0e0', '#fafafa'] },
-        { label: '流畅 - 宽松 - 灰黑', value: 'dx.fluent.blue.dark.css', color: ['#e0e0e0', '#1f1f1f'] },
-        { label: '流畅 - 宽松 - 蓝白', value: 'dx.fluent.saas.light.css', color: ['#e5edff', '#ffffff'] },
-        { label: '流畅 - 宽松 - 蓝黑', value: 'dx.fluent.saas.dark.css', color: ['#2d3c4b', '#1e2832'] },
-
-
-        { label: '通用 - 宽松 - 蓝白', value: 'dx.light.css', color: ['#337ab7', '#ffffff'] },
-        { label: '通用 - 紧凑 - 蓝白', value: 'dx.light.compact.css', color: ['#337ab7', '#ffffff'] },
-        { label: '通用 - 宽松 - 蓝黑', value: 'dx.dark.css', color: ['#337ab7', '#2a2a2a'] },
-        { label: '通用 - 紧凑 - 蓝黑', value: 'dx.dark.compact.css', color: ['#337ab7', '#2a2a2a'] },
-
+        { label: '流畅 - 白蓝(宽松)', value: 'dx.fluent.blue.light.css', color: ['#ebf3fc', '#ffffff'] },
+        { label: '流畅 - 白蓝(紧凑)', value: 'dx.fluent.blue.light.compact.css', color: ['#ebf3fc', '#ffffff'] },
+        { label: '流畅 - 白蓝(宽松)', value: 'dx.fluent.saas.light.css', color: ['#eef3ff', '#ffffff'] },
+        { label: '流畅 - 白蓝(紧凑)', value: 'dx.fluent.saas.light.compact.css', color: ['#eef3ff', '#ffffff'] },
+        { label: '流畅 - 黑蓝(宽松)', value: 'dx.fluent.blue.dark.css', color: ['#082338', '#292929'] },
+        { label: '流畅 - 黑蓝(紧凑)', value: 'dx.fluent.blue.dark.compact.css', color: ['#082338', '#292929'] },
+        { label: '流畅 - 黑蓝(宽松)', value: 'dx.fluent.saas.dark.css', color: ['#0a2444', '#1e2832'] },
+        { label: '流畅 - 黑蓝(紧凑)', value: 'dx.fluent.saas.dark.compact.css', color: ['#0a2444', '#1e2832'] },
     ],
 
 

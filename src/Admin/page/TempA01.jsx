@@ -1,15 +1,15 @@
 import React, { memo } from 'react';
 
-import LogoA01 from './LogoA01'
-import HeadA01 from './HeadA01'
-import MenuA01 from './MenuA01'
-import BodyA01 from './BodyA01'
+import Logo from './Logo'
+import Head from './Head'
+import Menu from './Menu'
+import Body from './Body'
 
 
 
 import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
 
-const LayoutA01 = ({ DxTheme, Theme, AdminEvent }) => {
+const TempA01 = ({ DxTheme, Theme, AdminEvent }) => {
     const {
         left_color = "#ffffff33",
         left_width = 240,
@@ -51,17 +51,17 @@ const LayoutA01 = ({ DxTheme, Theme, AdminEvent }) => {
     }
 
     return (
-        <div className='LayoutA01'>
+        <div className='TempA01'>
             <div className='Left' style={LeftStyle}>
-                <LogoA01 Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
-                <MenuA01 Theme={Theme} AdminEvent={AdminEvent} />
+                <Logo Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
+                <Menu Theme={Theme} AdminEvent={AdminEvent} />
             </div>
             <div className='Right' style={RightStyle}>
-                <HeadA01 Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
-                <BodyA01 Theme={Theme} AdminEvent={AdminEvent} />
+                <Head Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
+                <Body Theme={Theme} AdminEvent={AdminEvent} />
             </div>
         </div>
     );
 };
 
-export default memo(LayoutA01);
+export default memo(TempA01)

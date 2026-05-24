@@ -89,8 +89,8 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
         '--textFilter': `drop-shadow(${menu_text_shadowX}px ${menu_text_shadowY}px ${menu_text_shadowS}px ${menu_text_shadowC})`,
     }
 
-    layout === 'LayoutA01' && (BackStyle.flex = 1)
-    layout === 'LayoutA01' && (BackStyle.width = '100%')
+    layout === 'TempA01' && (BackStyle.flex = 1)
+    layout === 'TempA02' && (BackStyle.width = '100%')
 
     const getItem = ({ uuid, isEnabled, other, mapping }) => {
         const { tableName, targetUrl, icon } = other
@@ -143,7 +143,7 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
 
 
     return (
-        <div className='MenuA01' style={BackStyle}>
+        <div className='Menu' style={BackStyle}>
             <DevScrollView>
                 <Menu
                     className={menu_class}

@@ -56,7 +56,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     }
 
     const userStyle = {
-        '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_userColor, head_userDeg),
+        // '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_userColor, head_userDeg),
         maxWidth: head_nameWidth,
         fontSize: head_userSize,
         height: head_userSize,
@@ -68,7 +68,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     }
 
     const roleStyle = {
-        '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_roleColor, head_roleDeg),
+        // '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_roleColor, head_roleDeg),
         maxWidth: head_nameWidth,
         fontSize: head_roleSize,
         height: head_roleSize,
@@ -231,13 +231,17 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     })
 
     return (
-        <div className='HeadA01' style={headStyle}>
+        <div className='Head' style={headStyle}>
             <div className='left' style={titleStyle}>
                 {head_titleType === 'text' ? head_titleText : userInfo ? userInfo?.[head_titleField] : ''}
             </div>
             <div className='right'>
                 <div className='options' style={optionsStyle}>
-                    {head_optionsList.map((item, index) => {
+                    <button onClick={onSetThemeConfig}>主题设置</button>
+
+
+
+                    {/* {head_optionsList.map((item, index) => {
                         const { func, title, color, icon, shadowX, shadowY, shadowS, shadowC, gridClick } = item
                         const itemStyle = {
                             color: devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : color,
@@ -295,7 +299,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                                 </Tooltip>
                             </Dropdown>
                         )
-                    })}
+                    })} */}
                 </div>
                 {userInfo && (
                     <Dropdown menu={{ items }} disabled={head_userClick !== 'dropdown'} trigger={[head_userClickType]} >
