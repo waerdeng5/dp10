@@ -128,6 +128,12 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         })
     }
 
+    const onSetThemeConfig = () => {
+        const page = OtherDiyPageConfig.SetThemeConfig
+        OpenMenuFunc(page.uuid, pageFunc, body_tabsMax, page)
+    }
+
+
     const onItemClick = (key) => {
         if (key === 'admin' || key === 0) return false
         console.log('[onItemClick] --', key)
@@ -140,6 +146,10 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
             ['layout', onOpenLayout],
             ['start', onOpenStart],
             ['window', onOpenWindow],
+
+            ['setTheme', onSetThemeConfig],
+
+
 
             [1, () => Navigate('/Start')],
             [2, onOpenUserCenter],

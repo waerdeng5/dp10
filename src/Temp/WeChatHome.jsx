@@ -224,9 +224,7 @@ const WeChatHome = ({ menu, HOME, Event }) => {
 
     const { run } = useDebounceFn((e) => { setPageLayout(v => ({ ...v, [menu]: e })) }, { wait: 500 })
     const background = ColorCallBack(pageHeader[menu]?.background, pageHeader[menu]?.backDeg) || '#f7f7f7'
-
     useEffect(() => { setSTART(false) }, [menu])
-
     return (
         <div className='HOME_PAGE'>
             <Dropdown trigger={['contextMenu']} menu={{ items: DropdownItem({ START, Event }) }}>

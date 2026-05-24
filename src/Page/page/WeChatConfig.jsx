@@ -31,7 +31,7 @@ import { ColorCallBack, SetFilderParams, onTreeDrop, replaceNodeByIdTwo, removeT
 
 const PostConfig = { method: 'post', url: 'wechats/SaveJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `common/PARGET/WeChate`, content: {} } }
 
-const initMenu = '00000000-0000-0000-000000000000'
+const initMenu = '10000000-0000-0000-0000-000000000000'
 
 // TODO 菜单渲染
 const MenuList = ({ data, HOME, Event }) => {

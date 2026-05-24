@@ -1037,6 +1037,13 @@ export const OtherDiyPageConfig = {
         targetUrl: "SetWindowPage",
         uuid: "00000000-0000-0000-0007-000000000000",
     },
+    SetThemeConfig: {
+        type: "diy",
+        icon: "farCalendar",
+        tableName: "系统配置",
+        targetUrl: "ThemeConfig",
+        uuid: "00000000-0000-0000-them-000000000000",
+    },
 }
 
 export const CONSTYLE = {

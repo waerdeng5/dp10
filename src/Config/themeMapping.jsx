@@ -1,5 +1,14 @@
 export const dxThemeMapping = [
     {
+        title: '流利样式',
+        children: [
+            { title: '白蓝', value: 'fluent.blue.light', background: '#ffffff', color: '#0f6cbd' },
+            { title: '黑蓝', value: 'fluent.blue.dark', background: '#292929', color: '#5486ff' },
+            { title: '白青', value: 'fluent.saas.light', background: '#ffffff', color: '#0f6cbd' },
+            { title: '黑青', value: 'fluent.saas.dark', background: '#1e2832', color: '#5486ff' },
+        ]
+    },
+    {
         title: '通用样式',
         children: [
             { title: '白蓝', value: 'light', background: '#ffffff', color: '#337ab7' },
@@ -25,15 +34,6 @@ export const dxThemeMapping = [
             { title: '黑紫', value: 'material.purple.dark', background: '#363640', color: '#b427b0' },
             { title: '白绿', value: 'material.teal.light', background: '#ffffff', color: '#00968f' },
             { title: '黑绿', value: 'material.teal.dark', background: '#363640', color: '#00968f' },
-        ]
-    },
-    {
-        title: '流利样式',
-        children: [
-            { title: '白蓝', value: 'fluent.blue.light', background: '#ffffff', color: '#0f6cbd' },
-            { title: '黑蓝', value: 'fluent.blue.dark', background: '#292929', color: '#5486ff' },
-            { title: '白青', value: 'fluent.saas.light', background: '#ffffff', color: '#0f6cbd' },
-            { title: '黑青', value: 'fluent.saas.dark', background: '#1e2832', color: '#5486ff' },
         ]
     },
 ]

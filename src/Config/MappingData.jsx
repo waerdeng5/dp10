@@ -868,6 +868,8 @@ export const MappingData = {
         { value: 'test', label: '自定页面测试' },
         { value: 'layout', label: '布局页面测试' },
 
+        { value: 'setTheme', label: '新主题设置' },
+
         { value: 1, label: '切换首页' },
         { value: 2, label: '用户中心' },
         { value: 3, label: '工作台' },
@@ -1055,7 +1057,80 @@ export const MappingData = {
     ],
 
 
+    // Generic
+    // dx.light.css
+    // dx.dark.css
+    // dx.carmine.css
+    // dx.softblue.css
+    // dx.darkmoon.css
+    // dx.darkviolet.css
+    // dx.greenmist.css
+    // dx.contrast.css
+
+    // Generic Compact
+    // dx.light.compact.css
+    // dx.dark.compact.css
+    // dx.carmine.compact.css
+    // dx.softblue.compact.css
+    // dx.darkmoon.compact.css
+    // dx.darkviolet.compact.css
+    // dx.greenmist.compact.css
+    // dx.contrast.compact.css
+
+    // Material Design
+    // dx.material.blue.light.css
+    // dx.material.blue.dark.css
+    // dx.material.lime.light.css
+    // dx.material.lime.dark.css
+    // dx.material.orange.light.css
+    // dx.material.orange.dark.css
+    // dx.material.purple.light.css
+    // dx.material.purple.dark.css
+    // dx.material.teal.light.css
+    // dx.material.teal.dark.css
+
+    // Material Design Compact
+    // dx.material.blue.light.compact.css
+    // dx.material.blue.dark.compact.css
+    // dx.material.lime.light.compact.css
+    // dx.material.lime.dark.compact.css
+    // dx.material.orange.light.compact.css
+    // dx.material.orange.dark.compact.css
+    // dx.material.purple.light.compact.css
+    // dx.material.purple.dark.compact.css
+    // dx.material.teal.light.compact.css
+    // dx.material.teal.dark.compact.css
+
+    // Fluent
+    // dx.fluent.blue.light.css
+    // dx.fluent.blue.dark.css
+    // dx.fluent.saas.light.css
+    // dx.fluent.saas.dark.css
+
+    // Fluent Compact
+    // dx.fluent.blue.light.compact.css
+    // dx.fluent.blue.dark.compact.css
+    // dx.fluent.saas.light.compact.css
+    // dx.fluent.saas.dark.compact.css
+
+
     // TODO Dev
+    DevConfig__ThemeList: [
+        { label: '流畅 - 宽松 - 灰白', value: 'dx.fluent.blue.light.css', color: ['#e0e0e0', '#fafafa'] },
+        { label: '流畅 - 宽松 - 灰黑', value: 'dx.fluent.blue.dark.css', color: ['#e0e0e0', '#1f1f1f'] },
+        { label: '流畅 - 宽松 - 蓝白', value: 'dx.fluent.saas.light.css', color: ['#e5edff', '#ffffff'] },
+        { label: '流畅 - 宽松 - 蓝黑', value: 'dx.fluent.saas.dark.css', color: ['#2d3c4b', '#1e2832'] },
+
+
+        { label: '通用 - 宽松 - 蓝白', value: 'dx.light.css', color: ['#337ab7', '#ffffff'] },
+        { label: '通用 - 紧凑 - 蓝白', value: 'dx.light.compact.css', color: ['#337ab7', '#ffffff'] },
+        { label: '通用 - 宽松 - 蓝黑', value: 'dx.dark.css', color: ['#337ab7', '#2a2a2a'] },
+        { label: '通用 - 紧凑 - 蓝黑', value: 'dx.dark.compact.css', color: ['#337ab7', '#2a2a2a'] },
+
+    ],
+
+
+
     DevConfig__ColumnResizing: [
         { value: 'nextColumn', label: '总宽不变' },
         { value: 'widget', label: '保持宽度' },

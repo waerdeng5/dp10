@@ -5,7 +5,6 @@ import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams } from
 
 
 export const WechatLoginA01 = ({ data }) => {
-
     const { wxLogin,
         loginTemp_A01_Text, loginTempA01_top, loginTempA01_pad, loginTempA01_back, loginTempA01_deg,
         loginTempA01_img, loginTempA01_imgW, loginTempA01_imgH, loginTempA01_imgP, loginTempA01_imgM,

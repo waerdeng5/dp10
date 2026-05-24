@@ -9,7 +9,7 @@ import { useMount, useSessionStorageState, useTitle, useFavicon, useEventEmitter
 
 
 import { axios } from '../Utils/Api'
-import { CommonAPIUrl } from '../../Config'
+import { CommonAPIUrl } from '../Config'
 import LoadSvg from '../Page/Loading/LoadSvg'
 import { modelStore } from '../Router/zustand'
 import { VideoTemplateA01 } from '../Temp/VideoTemplate'

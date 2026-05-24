@@ -465,7 +465,8 @@ const RADIO = ({ data }) => {
 
 // Todo Select单选
 const SELECT = ({ data }) => {
-    const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde } = data
+    const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde, type } = data
+
     const Template = () => (
         <div className='SELECT' style={{ width: `${100 / 24 * span}%` }}>
             <ProFormSelect
@@ -474,7 +475,25 @@ const SELECT = ({ data }) => {
                 label={label}
                 tooltip={tooltip}
                 disabled={disabled}
-                fieldProps={{ variant: "underlined" }}
+                fieldProps={{
+                    variant: "underlined", optionRender: (e) => {
+                        if (type === 'color') {
+                            const { label, data } = e
+                            return (
+                                <span className='SELECTColorModel'>
+                                    <span className='SELECTColorModel_back' style={{ background: data.color[1] }}>
+                                        <span
+                                            className='SELECTColorModel_cont'
+                                            style={{ background: data.color[0], '--color': `${data.color[0]}50` }}
+                                        />
+                                    </span>
+                                    <span>{label}</span>
+                                </span>
+                            )
+                        }
+                        return (<span>{e.label}</span>)
+                    }
+                }}
                 rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 placeholder={placeholder || `请选择${label}`}
                 request={async () => valueEnum || []}

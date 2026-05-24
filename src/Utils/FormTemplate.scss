@@ -520,3 +520,35 @@
     }
 
 }
+
+.SELECTColorModel {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 2px;
+
+    &>.SELECTColorModel_back {
+        width: 32px;
+        height: 32px;
+        border-radius: 50px;
+        margin-right: 8px;
+        filter: drop-shadow(1px 1px 1px #ccc);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &>.SELECTColorModel_cont {
+            width: 16px;
+            height: 16px;
+            border-radius: 50px;
+            transition: all 0.35s;
+            filter: drop-shadow(1px 1px 1px var(--color));
+        }
+
+    }
+
+    &:hover .SELECTColorModel_cont {
+        width: 22px;
+        height: 22px;
+    }
+}
