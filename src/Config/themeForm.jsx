@@ -2,13 +2,6 @@
 import { MappingData } from './MappingData'
 const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
 
-
-
-const logo_icon_config = {
-
-}
-
-
 // ***  项目主题信息
 export const ThemeFormList = [
     {
@@ -217,7 +210,7 @@ export const ThemeFormList = [
         // jugde: [{ field: 'true', value: [true] }],  // 临时隐藏
         children: [
             {
-                span: 24, formType: 'GROUP', name: 'head_back', label: '背景设置', collapsible: true,
+                span: 24, formType: 'GROUP', name: 'head_back', label: '背景设置', collapsible: true, defaultCollapsed: true,
                 children: [
                     { span: 12, formType: 'COLOR', name: 'head_color', label: '背景颜色', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'head_deg', label: '背景角度', rules: true },
@@ -228,7 +221,7 @@ export const ThemeFormList = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'head_layout', label: '布局设置', collapsible: true,
+                span: 24, formType: 'GROUP', name: 'head_layout', label: '布局设置', collapsible: true, defaultCollapsed: true,
                 children: [
                     { span: 8, formType: 'SELECT', name: 'head_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
                     { span: 8, formType: 'SELECT', name: 'head_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
@@ -238,52 +231,57 @@ export const ThemeFormList = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'head_title', label: '标题设置', collapsible: true,
+                span: 24, formType: 'GROUP', name: 'head_title', label: '标题设置', collapsible: true, defaultCollapsed: true,
                 children: [
-                    { span: 24, formType: 'RADIO', name: 'head_titleType', label: '内容类型', rules: true, valueEnum: MappingData.Theme__OptionsLeftType },
-                    { span: 24, formType: 'INPUT', name: 'head_titleText', label: '标题文字', rules: true, jugde: [{ field: 'head_titleType', value: ['text'] }] },
-                    { span: 24, formType: 'INPUT', name: 'head_titleField', label: '标题字段', rules: true, jugde: [{ field: 'head_titleType', value: ['field'] }] },
-                    { span: 24, formType: 'COLOR', name: 'head_titleColor', label: '标题颜色', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_titleDeg', label: '颜色角度', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_titleSize', label: '标题字号', rules: true },
-                    { span: 24, formType: 'SELECT', name: 'head_titleFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
-                    { span: 24, formType: 'RADIO', name: 'head_titleWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-                    { span: 24, formType: 'RADIO', name: 'head_titleStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-                    { span: 24, formType: 'NUMBER', name: 'head_titleShadowX', label: '阴影X轴', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_titleShadowY', label: '阴影Y轴', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_titleShadowS', label: '阴影尺寸', rules: true },
-                    { span: 24, formType: 'COLOR', name: 'head_titleShadowC', label: '阴影颜色', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'head_titleType', label: '内容类型', rules: true, valueEnum: MappingData.Theme__OptionsLeftType },
+                    { span: 12, formType: 'INPUT', name: 'head_titleText', label: '标题文字', rules: true, jugde: [{ field: 'head_titleType', value: ['text'] }] },
+                    { span: 12, formType: 'INPUT', name: 'head_titleField', label: '标题字段', rules: true, jugde: [{ field: 'head_titleType', value: ['field'] }] },
+                    { span: 12, formType: 'COLOR', name: 'head_titleColor', label: '标题颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'head_titleDeg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'head_titleSize', label: '标题字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'head_titleFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'head_titleWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'head_titleStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'head_titleFiled', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'head_titleFiled_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'head_titleFiled', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'head_titleFiled_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'head_titleFiled', value: [true] }]
+                    },
                 ]
             },
             {
                 span: 24, formType: 'GROUP', name: 'head_options', label: '操作栏设置', collapsible: true,
                 children: [
-                    { span: 24, formType: 'INPUT', name: 'head_optionsPadding', label: '内填充', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'head_optionsMargin', label: '外边距', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'head_optionsPadding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'head_optionsMargin', label: '外边距', rules: true },
                     {
                         span: 24, formType: 'GROUP', name: 'head_optionsStyle', label: '操作样式', collapsible: true,
                         children: [
-                            { span: 24, formType: 'INPUT', name: 'head_itemPadding', label: '内填充', rules: true },
-                            { span: 24, formType: 'INPUT', name: 'head_itemMargin', label: '外边距', rules: true },
-                            { span: 24, formType: 'INPUT', name: 'head_itemRadius', label: '圆角', rules: true },
-                            { span: 24, formType: 'COLOR', name: 'head_itemBack', label: '背景颜色', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_itemDeg', label: '背景角度', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_itemIconSize', label: '图标尺寸', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'head_itemPadding', label: '内填充', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'head_itemMargin', label: '外边距', rules: true },
+                            { span: 12, formType: 'COLOR', name: 'head_itemBack', label: '背景颜色', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'head_itemDeg', label: '背景角度', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'head_itemRadius', label: '圆角', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'head_itemIconSize', label: '图标尺寸', rules: true },
                         ]
                     },
                     {
                         span: 24, formType: 'LIST', name: 'head_optionsList', label: '操作列表', rules: true,
                         children: [
-                            { span: 24, formType: 'SELECT', name: 'func', label: '操作列表', rules: true, valueEnum: MappingData.Theme__HeadOptionsList },
-                            { span: 24, formType: 'INPUT', name: 'wx_appid', label: '微信Appid', rules: true, jugde: [{ field: 'func', value: [4] }] },
-                            { span: 24, formType: 'INPUT', name: 'wx_image', label: '公众号二维码', rules: true, jugde: [{ field: 'func', value: [5] }] },
-                            { span: 24, formType: 'INPUT', name: 'title', label: '操作名称', rules: true },
-                            { span: 24, formType: 'TempICON', name: 'icon', label: '图标信息', rules: true },
-                            { span: 24, formType: 'COLOR', name: 'color', label: '图标颜色', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'shadowX', label: '阴影X轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'shadowY', label: '阴影Y轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'shadowS', label: '阴影尺寸', rules: true },
-                            { span: 24, formType: 'COLOR', name: 'shadowC', label: '阴影颜色', rules: true },
+                            { span: 12, formType: 'SELECT', name: 'func', label: '操作列表', rules: true, valueEnum: MappingData.Theme__HeadOptionsList },
+                            { span: 12, formType: 'INPUT', name: 'wx_appid', label: '微信Appid', rules: true, jugde: [{ field: 'func', value: [4] }] },
+                            { span: 12, formType: 'INPUT', name: 'wx_image', label: '公众号二维码', rules: true, jugde: [{ field: 'func', value: [5] }] },
+                            { span: 12, formType: 'INPUT', name: 'title', label: '操作名称', rules: true },
+                            { span: 12, formType: 'TempICON', name: 'icon', label: '图标信息', rules: true },
+                            { span: 12, formType: 'COLOR', name: 'color', label: '图标颜色', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'shadowX', label: '阴影X轴', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'shadowY', label: '阴影Y轴', rules: true },
+                            { span: 12, formType: 'NUMBER', name: 'shadowS', label: '阴影尺寸', rules: true },
+                            { span: 12, formType: 'COLOR', name: 'shadowC', label: '阴影颜色', rules: true },
                             {
                                 span: 24, formType: 'GROUP', name: 'head_gridStyle', label: '宫格样式', rules: true, collapsible: true,
                                 jugde: [{ field: 'func', value: ['admin', 0] }],
@@ -316,105 +314,114 @@ export const ThemeFormList = [
                     },
                 ]
             },
-            {
-                span: 24, formType: 'GROUP', name: 'head_user', label: '用户栏设置', collapsible: true,
-                children: [
-                    { span: 24, formType: 'INPUT', name: 'head_userMargin', label: '外边距', rules: true },
-                    { span: 24, formType: 'RADIO', name: 'head_avatar', label: '显示头像', rules: true, valueEnum: MappingData.IsShowBool },
-                    {
-                        span: 24, formType: 'RADIO', name: 'head_avatarPositon', label: '头像位置', rules: true,
-                        valueEnum: MappingData.System__FlexDirectionTwo, jugde: [{ field: 'head_avatar', value: [true] }]
-                    },
-                    {
-                        span: 24, formType: 'GROUP', name: 'head_userAvatar', label: '用户头像', collapsible: true,
-                        jugde: [{ field: 'head_avatar', value: [true] }],
-                        children: [
-                            { span: 24, formType: 'INPUT', name: 'head_AvatarMargin', label: '外边距', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_AvatarSize', label: '头像尺寸', rules: true },
-                            { span: 24, formType: 'RADIO', name: 'head_AvatarTtpe', label: '头像类型', rules: true, valueEnum: MappingData.Theme__UserInfoShape },
-                        ]
-                    },
-                    { span: 24, formType: 'RADIO', name: 'head_userName', label: '名称一', rules: true, valueEnum: MappingData.IsShowBool },
-                    {
-                        span: 24, formType: 'GROUP', name: 'head_user_userName', label: '名称一', collapsible: true,
-                        jugde: [{ field: 'head_userName', value: [true] }],
-                        children: [
-                            { span: 24, formType: 'SELECT', name: 'head_userFilde', label: '渲染字段', rules: true, valueEnum: MappingData.Theme__UserNickName },
-                            { span: 24, formType: 'COLOR', name: 'head_userColor', label: '标题颜色', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_userDeg', label: '颜色角度', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_userSize', label: '标题字号', rules: true },
-                            { span: 24, formType: 'SELECT', name: 'head_userFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
-                            { span: 24, formType: 'RADIO', name: 'head_userWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-                            { span: 24, formType: 'RADIO', name: 'head_userStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-                            { span: 24, formType: 'NUMBER', name: 'head_userShadowX', label: '阴影X轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_userShadowY', label: '阴影Y轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_userShadowS', label: '阴影尺寸', rules: true },
-                            { span: 24, formType: 'COLOR', name: 'head_userShadowC', label: '阴影颜色', rules: true },
-                        ]
-                    },
-                    {
-                        span: 24, formType: 'RADIO', name: 'head_roleName', label: '名称二', rules: true, valueEnum: MappingData.IsShowBool,
-                        jugde: [{ field: 'head_userName', value: [true] }]
-                    },
-                    {
-                        span: 24, formType: 'GROUP', name: 'head_user_roleName', label: '名称二', collapsible: true,
-                        jugde: [{ field: 'head_roleName', value: [true] }],
-                        children: [
-                            { span: 24, formType: 'SELECT', name: 'head_roleFilde', label: '渲染字段', rules: true, valueEnum: MappingData.Theme__UserNickName },
-                            { span: 24, formType: 'COLOR', name: 'head_roleColor', label: '标题颜色', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_roleDeg', label: '颜色角度', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_roleSize', label: '标题字号', rules: true },
-                            { span: 24, formType: 'SELECT', name: 'head_roleFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
-                            { span: 24, formType: 'RADIO', name: 'head_roleWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-                            { span: 24, formType: 'RADIO', name: 'head_roleStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-                            { span: 24, formType: 'NUMBER', name: 'head_roleShadowX', label: '阴影X轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_roleShadowY', label: '阴影Y轴', rules: true },
-                            { span: 24, formType: 'NUMBER', name: 'head_roleShadowS', label: '阴影尺寸', rules: true },
-                            { span: 24, formType: 'COLOR', name: 'head_roleShadowC', label: '阴影颜色', rules: true },
-                        ]
-                    },
-                    {
-                        span: 24, formType: 'NUMBER', name: 'head_nameWidth', label: '名称最大宽度', rules: true,
-                        jugde: [{ field: 'head_userName', value: [true] }]
-                    },
-                    {
-                        span: 24, formType: 'RADIO', name: 'head_namePositon', label: '名称对齐', rules: true,
-                        valueEnum: MappingData.System__FlexAlignItems,
-                        jugde: [{ field: 'head_userName', value: [true] }, { field: 'head_roleName', value: [true] }]
-                    },
-                    { span: 24, formType: 'RADIO', name: 'head_userClick', label: '操作设置', rules: true, valueEnum: MappingData.Theme__UserCliclType },
-                    {
-                        span: 24, formType: 'RADIO', name: 'head_userClickType', label: '弹出方式', rules: true,
-                        valueEnum: MappingData.Theme__UserInfoTrigger, jugde: [{ field: 'head_userClick', value: ['dropdown'] }]
-                    },
-                    {
-                        span: 24, formType: 'LIST', name: 'head_userOptions', label: '操作列表', rules: true,
-                        jugde: [{ field: 'head_userClick', value: ['dropdown'] }],
-                        children: [
-                            { span: 24, formType: 'SELECT', name: 'func', label: '操作列表', rules: true, valueEnum: MappingData.Theme__HeadOptionsList },
-                            { span: 24, formType: 'INPUT', name: 'title', label: '操作名称', rules: true },
-                            { span: 24, formType: 'RADIO', name: 'status', label: '显示图标', rules: true, valueEnum: MappingData.IsShowBool },
-                            { span: 24, formType: 'TempICON', name: 'icon', label: '图标信息', rules: true, jugde: [{ field: 'status', value: [true] }] },
-                        ]
-                    },
-                ]
-            },
+            // {
+            //     span: 24, formType: 'GROUP', name: 'head_user', label: '用户栏设置', collapsible: true,
+            //     children: [
+            //         // { span: 12, formType: 'INPUT', name: 'head_userMargin', label: '外边距', rules: true },
+            //         { span: 12, formType: 'RADIO', name: 'head_avatar', label: '显示头像', rules: true, valueEnum: MappingData.IsShowBool },
+            //         {
+            //             span: 12, formType: 'RADIO', name: 'head_avatarPositon', label: '头像位置', rules: true,
+            //             valueEnum: MappingData.System__FlexDirectionTwo, jugde: [{ field: 'head_avatar', value: [true] }]
+            //         },
+            //         {
+            //             span: 12, formType: 'GROUP', name: 'head_userAvatar', label: '用户头像', collapsible: true,
+            //             jugde: [{ field: 'head_avatar', value: [true] }],
+            //             children: [
+            //                 { span: 24, formType: 'INPUT', name: 'head_AvatarMargin', label: '外边距', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_AvatarSize', label: '头像尺寸', rules: true },
+            //                 { span: 24, formType: 'RADIO', name: 'head_AvatarTtpe', label: '头像类型', rules: true, valueEnum: MappingData.Theme__UserInfoShape },
+            //             ]
+            //         },
+            //         { span: 12, formType: 'RADIO', name: 'head_userName', label: '名称一', rules: true, valueEnum: MappingData.IsShowBool },
+            //         {
+            //             span: 12, formType: 'GROUP', name: 'head_user_userName', label: '名称一', collapsible: true,
+            //             jugde: [{ field: 'head_userName', value: [true] }],
+            //             children: [
+            //                 { span: 24, formType: 'SELECT', name: 'head_userFilde', label: '渲染字段', rules: true, valueEnum: MappingData.Theme__UserNickName },
+            //                 { span: 24, formType: 'COLOR', name: 'head_userColor', label: '标题颜色', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_userDeg', label: '颜色角度', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_userSize', label: '标题字号', rules: true },
+            //                 { span: 24, formType: 'SELECT', name: 'head_userFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            //                 { span: 24, formType: 'RADIO', name: 'head_userWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            //                 { span: 24, formType: 'RADIO', name: 'head_userStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_userShadowX', label: '阴影X轴', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_userShadowY', label: '阴影Y轴', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_userShadowS', label: '阴影尺寸', rules: true },
+            //                 { span: 24, formType: 'COLOR', name: 'head_userShadowC', label: '阴影颜色', rules: true },
+            //             ]
+            //         },
+            //         {
+            //             span: 24, formType: 'RADIO', name: 'head_roleName', label: '名称二', rules: true, valueEnum: MappingData.IsShowBool,
+            //             jugde: [{ field: 'head_userName', value: [true] }]
+            //         },
+            //         {
+            //             span: 24, formType: 'GROUP', name: 'head_user_roleName', label: '名称二', collapsible: true,
+            //             jugde: [{ field: 'head_roleName', value: [true] }],
+            //             children: [
+            //                 { span: 24, formType: 'SELECT', name: 'head_roleFilde', label: '渲染字段', rules: true, valueEnum: MappingData.Theme__UserNickName },
+            //                 { span: 24, formType: 'COLOR', name: 'head_roleColor', label: '标题颜色', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_roleDeg', label: '颜色角度', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_roleSize', label: '标题字号', rules: true },
+            //                 { span: 24, formType: 'SELECT', name: 'head_roleFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            //                 { span: 24, formType: 'RADIO', name: 'head_roleWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            //                 { span: 24, formType: 'RADIO', name: 'head_roleStyle', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_roleShadowX', label: '阴影X轴', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_roleShadowY', label: '阴影Y轴', rules: true },
+            //                 { span: 24, formType: 'NUMBER', name: 'head_roleShadowS', label: '阴影尺寸', rules: true },
+            //                 { span: 24, formType: 'COLOR', name: 'head_roleShadowC', label: '阴影颜色', rules: true },
+            //             ]
+            //         },
+            //         {
+            //             span: 24, formType: 'NUMBER', name: 'head_nameWidth', label: '名称最大宽度', rules: true,
+            //             jugde: [{ field: 'head_userName', value: [true] }]
+            //         },
+            //         {
+            //             span: 24, formType: 'RADIO', name: 'head_namePositon', label: '名称对齐', rules: true,
+            //             valueEnum: MappingData.System__FlexAlignItems,
+            //             jugde: [{ field: 'head_userName', value: [true] }, { field: 'head_roleName', value: [true] }]
+            //         },
+            //         { span: 24, formType: 'RADIO', name: 'head_userClick', label: '操作设置', rules: true, valueEnum: MappingData.Theme__UserCliclType },
+            //         {
+            //             span: 24, formType: 'RADIO', name: 'head_userClickType', label: '弹出方式', rules: true,
+            //             valueEnum: MappingData.Theme__UserInfoTrigger, jugde: [{ field: 'head_userClick', value: ['dropdown'] }]
+            //         },
+            //         {
+            //             span: 24, formType: 'LIST', name: 'head_userOptions', label: '操作列表', rules: true,
+            //             jugde: [{ field: 'head_userClick', value: ['dropdown'] }],
+            //             children: [
+            //                 { span: 24, formType: 'SELECT', name: 'func', label: '操作列表', rules: true, valueEnum: MappingData.Theme__HeadOptionsList },
+            //                 { span: 24, formType: 'INPUT', name: 'title', label: '操作名称', rules: true },
+            //                 { span: 24, formType: 'RADIO', name: 'status', label: '显示图标', rules: true, valueEnum: MappingData.IsShowBool },
+            //                 { span: 24, formType: 'TempICON', name: 'icon', label: '图标信息', rules: true, jugde: [{ field: 'status', value: [true] }] },
+            //             ]
+            //         },
+            //     ]
+            // },
             {
                 span: 24, formType: 'GROUP', name: 'head_outOff', label: '独立退出', collapsible: true,
                 children: [
                     // 独立的关闭按钮
-                    { span: 24, formType: 'RADIO', name: 'head_offBtn', label: '是否显示', rules: true, valueEnum: MappingData.IsShowBool },
-                    { span: 24, formType: 'TempICON', name: 'head_offIcon', label: '关闭图标', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
-                    { span: 24, formType: 'COLOR', name: 'head_offBorder', label: '边框颜色', rules: true },
-                    { span: 24, formType: 'COLOR', name: 'head_offColor', label: '图标颜色', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_offSize', label: '图标尺寸', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_offShadowX', label: '阴影X轴', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_offShadowY', label: '阴影Y轴', rules: true },
-                    { span: 24, formType: 'NUMBER', name: 'head_offShadowS', label: '阴影尺寸', rules: true },
-                    { span: 24, formType: 'COLOR', name: 'head_offShadowC', label: '阴影颜色', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'head_offBtn', label: '是否显示', rules: true, valueEnum: MappingData.IsShowBool },
+                    { span: 12, formType: 'TempICON', name: 'head_offIcon', label: '关闭图标', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'head_offMargin', label: '外间距', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'head_offPadding', label: '内填充', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    { span: 12, formType: 'COLOR', name: 'head_offBorder', label: '边框颜色', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    { span: 12, formType: 'COLOR', name: 'head_offColor', label: '图标颜色', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    { span: 12, formType: 'NUMBER', name: 'head_offSize', label: '图标尺寸', rules: true, jugde: [{ field: 'head_offBtn', value: [true] }] },
+                    {
+                        span: 12, formType: 'RADIO', name: 'head_offFiled', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool,
+                        jugde: [{ field: 'head_offBtn', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'INPUT', name: 'head_offFiled_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'head_offBtn', value: [true] }, { field: 'head_offFiled', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'head_offFiled_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'head_offBtn', value: [true] }, { field: 'head_offFiled', value: [true] }]
+                    },
                 ]
             },
-
         ]
     },
     // {

@@ -1,23 +1,10 @@
 import { create } from 'zustand'
 
-
 export const menuCollapsedStore = create(set => ({
     inlineCollapsed: false,
     updateMenuCollapsed: e => set(state => ({ inlineCollapsed: e })),
 }))
 
-export const themeStore = create(set => ({
-    theme: {},
-    logo: {},
-    menu: {},
-    head: {},
-    body: {},
-    updateTheme: e => set(state => ({ ...state, theme: e })),
-    updateLogo: e => set(state => ({ ...state, logo: e })),
-    updateMenu: e => set(state => ({ ...state, menu: e })),
-    updateHead: e => set(state => ({ ...state, head: e })),
-    updateBody: e => set(state => ({ ...state, body: e })),
-}))
 
 export const pageStore = create(set => ({
     pageActive: '',

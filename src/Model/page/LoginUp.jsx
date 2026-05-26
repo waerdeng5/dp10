@@ -7,8 +7,6 @@ import { modelStore } from '../../Router/zustand'
 import { UserAvatar, UserBackboard, CommonAPIUrl } from '../../Config'
 import { GetIndexedDB, AddIndexdDB, PutIndexedDB } from '../../Utils/IndexedDB'
 
-
-
 const homePage = [{ uuid: 'a0b4f6b8-ef44-4b43-925f-85a299eb52cb', tableName: '首页', targetUrl: 'Home', icon: 'shou', closable: true, type: 'lay' }]
 
 const LoginUp = ({ data, Event }) => {

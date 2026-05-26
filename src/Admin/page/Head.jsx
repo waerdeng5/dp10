@@ -5,7 +5,7 @@ import { modelStore, pageStore } from '../../Router/zustand'
 import { MappingData } from '../../Config/MappingData'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
 
-import { ColorCallBack, SpacingCallBack, OpenMenuFunc } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, OpenMenuFunc, SetFilderParams } from '../../Utils'
 import { ICONMapping } from '../../Config/IconMapping'
 import { useMount } from 'ahooks';
 
@@ -20,13 +20,15 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { head_color, head_deg, head_padding, head_margin, head_radius, head_shadow, body_tabsMax, devTheme } = Theme
     const { head_align_items, head_align_content, head_justify_content, head_flex_direction, head_flex_wrap } = Theme
-    const { head_offBtn, head_offIcon, head_offSize, head_offColor, head_offBorder, head_offShadowX, head_offShadowY, head_offShadowS, head_offShadowC } = Theme
+    const { head_offBtn, head_offIcon, head_offSize, head_offColor, head_offBorder, head_offMargin, head_offPadding,
+        head_offFiled, head_offFiled_data, head_offFiled_color } = Theme
     const { head_avatar, head_avatarPositon, head_userName, head_roleName, head_namePositon, head_userMargin, head_nameWidth, head_userClick } = Theme
     const { head_AvatarMargin, head_AvatarSize, head_AvatarTtpe, head_userClickType, head_userOptions } = Theme
     const { head_userFilde, head_userColor, head_userDeg, head_userSize, head_userFamily, head_userWeight, head_userStyle, head_userShadowX, head_userShadowY, head_userShadowS, head_userShadowC } = Theme
     const { head_roleFilde, head_roleColor, head_roleDeg, head_roleSize, head_roleFamily, head_roleWeight, head_roleStyle, head_roleShadowX, head_roleShadowY, head_roleShadowS, head_roleShadowC } = Theme
     const { head_optionsPadding, head_optionsMargin, head_itemPadding, head_itemMargin, head_itemRadius, head_itemBack, head_itemDeg, head_itemIconSize, head_optionsList } = Theme
-    const { head_titleType, head_titleText, head_titleField, head_titleColor, head_titleDeg, head_titleSize, head_titleFamily, head_titleWeight, head_titleStyle, head_titleShadowX, head_titleShadowY, head_titleShadowS, head_titleShadowC } = Theme
+    const { head_titleType, head_titleText, head_titleField, head_titleColor, head_titleDeg, head_titleSize, head_titleFamily, head_titleWeight, head_titleStyle, head_titleFiled, head_titleFiled_data, head_titleFiled_color
+    } = Theme
 
     const headStyle = {
         '--logo_align_items': head_align_items,
@@ -44,8 +46,10 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     const offBtnStyle = {
         '--fontSize': head_offSize + 'px',
         color: head_offColor,
+        padding: SpacingCallBack(head_offPadding),
+        margin: SpacingCallBack(head_offMargin),
         borderLeft: `1px solid ${head_offBorder}`,
-        filter: `drop-shadow(${head_offShadowX}px ${head_offShadowY}px ${head_offShadowS}px ${head_offShadowC})`,
+        filter: SetFilderParams(head_offFiled, head_offFiled_data, head_offFiled_color)
     }
 
     const usesBtnStyle = {
@@ -90,8 +94,9 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         fontFamily: head_titleFamily,
         fontStyle: head_titleStyle,
         fontWeight: head_titleWeight,
-        filter: `drop-shadow(${head_titleShadowX}px ${head_titleShadowY}px ${head_titleShadowS}px ${head_titleShadowC})`
+        filter: SetFilderParams(head_titleFiled, head_titleFiled_data, head_titleFiled_color)
     }
+
 
     const [userInfo, setUserInfo] = useState()
 
