@@ -73,7 +73,7 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
         console.log('[--保存lay页面--]', data)
         const { uuid } = await GetIndexedDB('config')
         const params = { uuid: `${uuid}/LAY_PAGE/${targetUrl}`, content: JSON.stringify(await Encrypt(data)) }
-        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', params })
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
         getData()
     }

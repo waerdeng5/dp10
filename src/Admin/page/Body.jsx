@@ -9,7 +9,7 @@ import { arrayMove, horizontalListSortingStrategy, SortableContext, useSortable 
 
 
 import { CONSTYLE } from '../../Config'
-import { ColorCallBack, SpacingCallBack } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams } from '../../Utils'
 
 import { pageStore } from '../../Router/zustand'
 import { ICONMapping } from '../../Config/IconMapping'
@@ -36,8 +36,8 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
     const { body_tabsPopup, body_tabsIsAll, body_tabsClose, body_tabsIsDnd, body_tabsClear } = Theme
     const { body_color, body_deg, body_padding, body_margin, body_radius, body_shadow } = Theme
     const { body_tabsBack, body_tabsActive, body_tabsDeg, body_tabsBorderColor, body_tabsRadio, body_tabsBorderType } = Theme
-    const { body_iconState, body_iconSize, body_iconIndex, body_iconShadowX, body_iconShadowY, body_iconShadowS, body_iconShadowC } = Theme
-    const { body_fontColor, body_fontSize, body_fontFamily, body_fontWeight, body_fontStyle, body_fontShadowX, body_fontShadowY, body_fontShadowS, body_fontShadowC } = Theme
+    const { body_iconState, body_iconSize, body_iconIndex, body_icon_filter, body_icon_filter_data, body_icon_filter_color } = Theme
+    const { body_fontColor, body_fontSize, body_fontFamily, body_fontWeight, body_fontStyle, body_font_filter, body_font_filter_data, body_font_filter_color } = Theme
 
     const TabsStyle = {
         background: ColorCallBack(body_color, body_deg),
@@ -51,13 +51,13 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
         '--tabsRadius': SpacingCallBack(body_tabsRadio),
         '--tabsIconSize': body_iconSize + 'px',
         '--tabsIconIndex': body_iconIndex + 'px',
-        '--tabsIconFilter': `drop-shadow(${body_iconShadowX}px ${body_iconShadowY}px ${body_iconShadowS}px ${body_iconShadowC})`,
+        '--tabsIconFilter': SetFilderParams(body_icon_filter, body_icon_filter_data, body_icon_filter_color),
         '--tabsFontColor': body_fontColor,
         '--tabsFontSize': body_fontSize + 'px',
         '--tabsFontFamily': body_fontFamily,
         '--tabsFontWeight': body_fontWeight,
         '--tabsFontStyle': body_fontStyle,
-        '--tabsFontFilter': `drop-shadow(${body_fontShadowX}px ${body_fontShadowY}px ${body_fontShadowS}px ${body_fontShadowC})`,
+        '--tabsFontFilter': SetFilderParams(body_font_filter, body_font_filter_data, body_font_filter_color),
         '--tabsCloseColor': body_tabsClear,
     }
 
@@ -135,9 +135,9 @@ const BodyA01 = ({ Theme, AdminEvent }) => {
 
 
     useEffect(() => {
-        const [{ tableName, targetUrl, type }] = pageList.filter(v => v.uuid === pageActive)
-        const { title, cssLog } = CONSTYLE[type]
-        console.info(`%c[${title} -- ${tableName} -- ${targetUrl}]`, cssLog)
+        // const [{ tableName, targetUrl, type }] = pageList.filter(v => v.uuid === pageActive)
+        // const { title, cssLog } = CONSTYLE[type]
+        // console.info(`%c[${title} -- ${tableName} -- ${targetUrl}]`, cssLog)
     }, [pageActive])
 
 

@@ -52,7 +52,7 @@ const SetStartPage = ({ data, AdminEvent }) => {
     const onSavePage = async (data) => {
         const { uuid } = await GetIndexedDB('config')
         const params = { uuid: `${uuid}/COMMON/START`, content: JSON.stringify(await Encrypt(data)) }
-        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', params })
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', params, path: CommonAPIUrl })
         if (err) return false
         setConfig(data)
         updateModel({})

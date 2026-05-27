@@ -94,6 +94,10 @@ export const MappingData = {
         { value: true, label: '允许' },
         { value: false, label: '禁止' },
     ],
+    IsNotOpenBool: [
+        { value: true, label: '收起' },
+        { value: false, label: '展开' },
+    ],
     acceptanceStatus: [
         { value: 0, label: '合格 ' },
         { value: 1, label: '不合格' },
@@ -860,16 +864,17 @@ export const MappingData = {
 
     // 后台可用操作
     Theme__HeadOptionsList: [
-        { value: 'admin', label: 'v' },
+        // { value: 'theme', label: '项目主题' },
+
+        { value: 'admin', label: '宫格操作' },
         { value: 'project', label: '项目列表' },
-        { value: 'theme', label: '项目主题' },
+        { value: 'setTheme', label: '主题设置' },
         { value: 'devTheme', label: 'DX主题' },
         { value: 'login', label: '登录页面' },
         { value: 'start', label: '大屏配置' },
         { value: 'test', label: '自定页面测试' },
         { value: 'layout', label: '布局页面测试' },
 
-        { value: 'setTheme', label: '新主题设置' },
 
         { value: 1, label: '切换首页' },
         { value: 2, label: '用户中心' },
@@ -1059,14 +1064,14 @@ export const MappingData = {
 
     // TODO Dev
     DevConfig__ThemeList: [
-        { label: '流畅 - 白蓝(宽松)', value: 'dx.fluent.blue.light.css', color: ['#ebf3fc', '#ffffff'] },
-        { label: '流畅 - 白蓝(紧凑)', value: 'dx.fluent.blue.light.compact.css', color: ['#ebf3fc', '#ffffff'] },
-        { label: '流畅 - 白蓝(宽松)', value: 'dx.fluent.saas.light.css', color: ['#eef3ff', '#ffffff'] },
-        { label: '流畅 - 白蓝(紧凑)', value: 'dx.fluent.saas.light.compact.css', color: ['#eef3ff', '#ffffff'] },
-        { label: '流畅 - 黑蓝(宽松)', value: 'dx.fluent.blue.dark.css', color: ['#082338', '#292929'] },
-        { label: '流畅 - 黑蓝(紧凑)', value: 'dx.fluent.blue.dark.compact.css', color: ['#082338', '#292929'] },
-        { label: '流畅 - 黑蓝(宽松)', value: 'dx.fluent.saas.dark.css', color: ['#0a2444', '#1e2832'] },
-        { label: '流畅 - 黑蓝(紧凑)', value: 'dx.fluent.saas.dark.compact.css', color: ['#0a2444', '#1e2832'] },
+        { label: '流畅 - 白蓝(宽松)', value: 'fluent.blue.light', color: ['#ebf3fc', '#ffffff'] },
+        { label: '流畅 - 白蓝(紧凑)', value: 'fluent.blue.light.compact', color: ['#ebf3fc', '#ffffff'] },
+        { label: '流畅 - 白蓝(宽松)', value: 'fluent.saas.light', color: ['#eef3ff', '#ffffff'] },
+        { label: '流畅 - 白蓝(紧凑)', value: 'fluent.saas.light.compact', color: ['#eef3ff', '#ffffff'] },
+        { label: '流畅 - 黑蓝(宽松)', value: 'fluent.blue.dark', color: ['#082338', '#292929'] },
+        { label: '流畅 - 黑蓝(紧凑)', value: 'fluent.blue.dark.compact', color: ['#082338', '#292929'] },
+        { label: '流畅 - 黑蓝(宽松)', value: 'fluent.saas.dark', color: ['#0a2444', '#1e2832'] },
+        { label: '流畅 - 黑蓝(紧凑)', value: 'fluent.saas.dark.compact', color: ['#0a2444', '#1e2832'] },
     ],
 
 

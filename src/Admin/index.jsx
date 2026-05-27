@@ -1,7 +1,7 @@
 import './index.scss'
 import React, { useEffect, useState } from 'react';
 import { useEventEmitter, useMount, useTitle, useFavicon } from 'ahooks'
-import { FloatButton, Tooltip, ConfigProvider, Input, Space, Button } from 'antd'
+import { FloatButton, Tooltip, ConfigProvider, Input, Space, Button, App } from 'antd'
 import { SettingOutlined, BgColorsOutlined, UnorderedListOutlined } from '@ant-design/icons';
 
 import { axios } from '../Utils/Api'
@@ -24,6 +24,7 @@ const { port } = window.location
 const LayoutMapping = { TempA01, TempA02 }
 
 const AdminIndex = () => {
+    const { message, modal, notification } = App.useApp();
     const { updateActive, updateList } = pageStore()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const AdminEvent = useEventEmitter()
@@ -64,16 +65,9 @@ const AdminIndex = () => {
         updateList(pageList)
         updateActive(openKey)
         setConfig(config)
-        const dxTheme = userAdd?.dxTheme || 'fluent.blue.light.compact'
+        const dxTheme = theme.devTheme || 'fluent.blue.light.compact'
         themes.current(dxTheme)
-        setDxTheme(dxTheme)
         setLookStatus(!!look)
-
-        // console.log('menu', menu)
-        // console.log('user', user)
-        // console.log('openKey', openKey)
-        // console.log('pageList', pageList)
-        // console.log('userAdd', userAdd)
     })
 
     const onThemeDetection = (data) => {
@@ -87,7 +81,8 @@ const AdminIndex = () => {
         const params = { uuid: `${uuid}/COMMON/THEME`, content: JSON.stringify(await Encrypt(e)) }
         const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return AdminEvent.emit({ type: 'closeFormLoading' })
-
+        themes.current(e.devTheme)
+        notification.success({ title: '保存成功!', description: '系统主题保存成功!' })
         await PutIndexedDB('theme', e)
         setTheme(e)
     }
@@ -401,18 +396,13 @@ const AdminIndex = () => {
     AdminEvent.useSubscription(adminCallBack)
 
     if (Theme && DxThemeMapping) {
-        console.log('Theme', Theme)
         const { layout, themeColor, maskColor, maskBlur,
             backType, backColor, backDeg, backImage,
             backVideo, backVideoStart, backVideoEnd,
             backGrundType, grundStyle, devTheme
         } = Theme
         const maskStyle = { background: maskColor, backdropFilter: `blur(${maskBlur}px)` }
-
-
         const Template = LayoutMapping[layout]
-        const DXTHEME = DxTheme.split('.compact')[0]
-        const ThemeData = devTheme ? { ...Theme, ...DxThemeMapping[DXTHEME] } : Theme
 
         return (
             <div className='AdminIndex'>

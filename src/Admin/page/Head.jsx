@@ -18,17 +18,23 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     const { pageActive, pageList, updateActive, updateList } = pageStore()
     const pageFunc = { pageActive, pageList, updateActive, updateList }
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
-    const { head_color, head_deg, head_padding, head_margin, head_radius, head_shadow, body_tabsMax, devTheme } = Theme
-    const { head_align_items, head_align_content, head_justify_content, head_flex_direction, head_flex_wrap } = Theme
-    const { head_offBtn, head_offIcon, head_offSize, head_offColor, head_offBorder, head_offMargin, head_offPadding,
-        head_offFiled, head_offFiled_data, head_offFiled_color } = Theme
-    const { head_avatar, head_avatarPositon, head_userName, head_roleName, head_namePositon, head_userMargin, head_nameWidth, head_userClick } = Theme
-    const { head_AvatarMargin, head_AvatarSize, head_AvatarTtpe, head_userClickType, head_userOptions } = Theme
-    const { head_userFilde, head_userColor, head_userDeg, head_userSize, head_userFamily, head_userWeight, head_userStyle, head_userShadowX, head_userShadowY, head_userShadowS, head_userShadowC } = Theme
-    const { head_roleFilde, head_roleColor, head_roleDeg, head_roleSize, head_roleFamily, head_roleWeight, head_roleStyle, head_roleShadowX, head_roleShadowY, head_roleShadowS, head_roleShadowC } = Theme
-    const { head_optionsPadding, head_optionsMargin, head_itemPadding, head_itemMargin, head_itemRadius, head_itemBack, head_itemDeg, head_itemIconSize, head_optionsList } = Theme
-    const { head_titleType, head_titleText, head_titleField, head_titleColor, head_titleDeg, head_titleSize, head_titleFamily, head_titleWeight, head_titleStyle, head_titleFiled, head_titleFiled_data, head_titleFiled_color
+
+    const {
+        head_color, head_deg, head_padding, head_margin, head_radius, head_shadow, body_tabsMax,
+        head_align_items, head_align_content, head_justify_content, head_flex_direction, head_flex_wrap,
+        head_offBtn, head_offIcon, head_offSize, head_offColor, head_offBorder, head_offMargin, head_offPadding,
+        head_offFiled, head_offFiled_data, head_offFiled_color,
+        head_avatar, head_avatarPositon, head_userName, head_roleName, head_namePositon, head_userMargin, head_nameWidth, head_userClick,
+        head_AvatarMargin, head_AvatarSize, head_AvatarTtpe, head_userClickType, head_userOptions,
+        head_userColor, head_userDeg, head_userFilde, head_userSize, head_userFamily, head_userWeight, head_userStyle,
+        head_userFiled, head_userFiled_data, head_userFiled_color,
+        head_roleColor, head_roleDeg, head_roleFilde, head_roleSize, head_roleFamily, head_roleWeight, head_roleStyle,
+        head_roleFiled, head_roleFiled_data, head_roleFiled_color,
+        head_optionsPadding, head_optionsMargin, head_itemPadding, head_itemMargin, head_itemRadius, head_itemBack, head_itemDeg, head_itemIconSize, head_optionsList, head_itemFiled, head_itemFiled_data, head_itemFiled_color, head_titleType, head_titleText,
+        head_titleField, head_titleColor, head_titleDeg, head_titleSize, head_titleFamily, head_titleWeight, head_titleStyle,
+        head_titleFiled, head_titleFiled_data, head_titleFiled_color, head_status
     } = Theme
+
 
     const headStyle = {
         '--logo_align_items': head_align_items,
@@ -60,7 +66,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
     }
 
     const userStyle = {
-        // '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_userColor, head_userDeg),
+        '--color': ColorCallBack(head_userColor, head_userDeg),
         maxWidth: head_nameWidth,
         fontSize: head_userSize,
         height: head_userSize,
@@ -68,11 +74,11 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         fontFamily: head_userFamily,
         fontStyle: head_userStyle,
         fontWeight: head_userWeight,
-        filter: `drop-shadow(${head_userShadowX}px ${head_userShadowY}px ${head_userShadowS}px ${head_userShadowC})`
+        filter: SetFilderParams(head_userFiled, head_userFiled_data, head_userFiled_color)
     }
 
     const roleStyle = {
-        // '--background': ColorCallBack(devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : head_roleColor, head_roleDeg),
+        '--color': ColorCallBack(head_roleColor, head_roleDeg),
         maxWidth: head_nameWidth,
         fontSize: head_roleSize,
         height: head_roleSize,
@@ -80,7 +86,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         fontFamily: head_roleFamily,
         fontStyle: head_roleStyle,
         fontWeight: head_roleWeight,
-        filter: `drop-shadow(${head_roleShadowX}px ${head_roleShadowY}px ${head_roleShadowS}px ${head_roleShadowC})`
+        filter: SetFilderParams(head_roleFiled, head_roleFiled_data, head_roleFiled_color)
     }
 
     const optionsStyle = {
@@ -242,14 +248,10 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
             </div>
             <div className='right'>
                 <div className='options' style={optionsStyle}>
-                    <button onClick={onSetThemeConfig}>主题设置</button>
-
-
-
-                    {/* {head_optionsList.map((item, index) => {
-                        const { func, title, color, icon, shadowX, shadowY, shadowS, shadowC, gridClick } = item
+                    {head_optionsList && head_optionsList.map((item, index) => {
+                        const { func, title, color, icon, gridClick } = item
                         const itemStyle = {
-                            color: devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? '#ffffff' : color,
+                            color,
                             width: head_itemIconSize + 8,
                             height: head_itemIconSize + 8,
                             fontSize: head_itemIconSize,
@@ -257,7 +259,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                             margin: SpacingCallBack(head_itemMargin),
                             borderRadius: SpacingCallBack(head_itemRadius),
                             background: ColorCallBack(head_itemBack, head_itemDeg),
-                            '--filter': `drop-shadow(${shadowX}px ${shadowY}px ${shadowS}px ${shadowC})`,
+                            '--filter': SetFilderParams(head_itemFiled, head_itemFiled_data, head_itemFiled_color),
                         }
                         if (func === 'admin' && userInfo?.userUuid !== '1e99e116-6ec0-425c-87b4-64dd2ce458e2') return false
                         return (
@@ -268,17 +270,18 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                                 disabled={func !== 'admin' && func !== 0}
                                 trigger={[gridClick]}
                                 popupRender={() => {
-                                    const { gridNumber, gridSize, gridList, gridIconSize, gridTextFamily, gridTextSize, gridTextStyle, gridTextWeight } = item
+                                    const { gridNumber, gridSize, gridList, gridIconSize, gridTextFamily, gridTextSize, gridTextStyle, gridTextWeight,
+                                        gridFiled, gridFiled_data, gridFiled_color } = item
                                     const gridStyle = { minWidth: gridSize + 16, minHeight: gridSize + 16, maxWidth: gridSize * gridNumber + 16 }
                                     return (
                                         <div className='DropdownGrid' style={gridStyle}>
                                             {gridList.map((item, index) => {
-                                                const { func, title, icon, color, shadowX, shadowY, shadowS, shadowC } = item
+                                                const { func, title, icon, color, } = item
                                                 const divStyle = { width: gridSize, height: gridSize }
                                                 const IconStyle = {
                                                     color,
                                                     '--size': gridIconSize + 'px',
-                                                    '--filter': `drop-shadow(${shadowX}px ${shadowY}px ${shadowS}px ${shadowC})`,
+                                                    '--filter': SetFilderParams(gridFiled, gridFiled_data, gridFiled_color),
                                                 }
                                                 const TextStyle = {
                                                     fontSize: gridTextSize,
@@ -297,16 +300,16 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                                     )
                                 }}
                             >
-                                <Tooltip placement="bottom" title={title}>
+                                <Tooltip placement="left" title={title}>
                                     <div style={itemStyle} onClick={() => onItemClick(func)}>
                                         {ICONMapping[icon]}
                                     </div>
                                 </Tooltip>
                             </Dropdown>
                         )
-                    })} */}
+                    })}
                 </div>
-                {userInfo && (
+                {userInfo && head_status && (
                     <Dropdown menu={{ items }} disabled={head_userClick !== 'dropdown'} trigger={[head_userClickType]} >
                         <div className='usesBtn' style={usesBtnStyle} onClick={onUserClick}>
                             {head_avatar && <Avatar shape={head_AvatarTtpe} size={head_AvatarSize} src={UserAvatar[userInfo.avatar]} />}

@@ -144,6 +144,8 @@
             &.menuDefault {
                 .ant-menu-submenu-selected {
                     &>.ant-menu-submenu-title {
+                        padding-left: 8px !important;
+
                         .ant-menu-title-content {
                             color: var(--active);
                         }
@@ -156,6 +158,7 @@
 
                     &>.ant-menu-submenu-title,
                     .ant-menu-item-selected {
+
                         background: linear-gradient(90deg, rgba(255, 255, 255, 0), var(--active50));
                         position: relative;
                         z-index: 1;
@@ -349,7 +352,7 @@
                     user-select: none;
 
                     &>div {
-                        background: var(--background);
+                        background: var(--color);
                         -webkit-background-clip: text;
                         background-clip: text;
                         color: transparent;

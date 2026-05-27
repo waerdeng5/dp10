@@ -7,7 +7,7 @@ import { ICONMapping } from '../../Config/IconMapping'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
 
 import { menuCollapsedStore, pageStore } from '../../Router/zustand'
-import { ColorCallBack, SpacingCallBack, treeValue, OpenMenuFunc } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, treeValue, OpenMenuFunc, SetFilderParams } from '../../Utils'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
 import { HappyProvider } from '@ant-design/happy-work-theme';
@@ -35,26 +35,27 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
         menu_icon_color = "#1677ff",
         menu_icon_size = 24,
         menu_icon_index = 8,
-        menu_icon_shadowX = 1,
-        menu_icon_shadowY = 1,
-        menu_icon_shadowS = 1,
-        menu_icon_shadowC = "#262626",
+        // menu_icon_shadowX = 1,
+        // menu_icon_shadowY = 1,
+        // menu_icon_shadowS = 1,
+        // menu_icon_shadowC = "#262626",
+        menu_icon_filter,
+        menu_icon_filter_data,
+        menu_icon_filter_color,
         menu_text_color = "#262626",
         menu_text_active = "#262626",
         menu_text_size = 20,
         menu_text_family = "ShuHeiTi",
         menu_text_style = "normal",
         menu_text_weight = 400,
-        menu_text_shadowX = 0,
-        menu_text_shadowY = 0,
-        menu_text_shadowS = 0,
-        menu_text_shadowC = "#00000000",
+        menu_text_filter,
+        menu_text_filter_data,
+        menu_text_filter_color,
         menu_fold_color = "#1677ff",
-        menu_fold_shadowC = "#262626",
-        menu_fold_shadowS = 1,
-        menu_fold_shadowX = 1,
-        menu_fold_shadowY = 1,
         menu_fold_size = 20,
+        menu_fold_filter,
+        menu_fold_filter_data,
+        menu_fold_filter_color
     } = Theme
 
     const [MENU, setMENU] = useState([])
@@ -68,7 +69,7 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
         boxShadow: `var(${menu_shadow})`,
         '--foltColor': menu_fold_color,
         '--foltSize': menu_fold_size + 'px',
-        '--foltFilter': `drop-shadow(${menu_fold_shadowX}px ${menu_fold_shadowY}px ${menu_fold_shadowS}px ${menu_fold_shadowC})`,
+        '--foltFilter': SetFilderParams(menu_fold_filter, menu_fold_filter_data, menu_fold_filter_color),
         '--activeBack': ColorCallBack(menu_class_active, menu_deg),
     }
 
@@ -79,14 +80,14 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
         '--iconColor': menu_icon_color,
         '--iconSize': menu_icon_size + 'px',
         '--iconIndex': menu_icon_index + 'px',
-        '--iconFilter': `drop-shadow(${menu_icon_shadowX}px ${menu_icon_shadowY}px ${menu_icon_shadowS}px ${menu_icon_shadowC})`,
+        '--iconFilter': SetFilderParams(menu_icon_filter, menu_icon_filter_data, menu_icon_filter_color),
         '--textColor': menu_text_color,
         '--textActive': menu_text_active,
         '--textSize': menu_text_size + 'px',
         '--textFamily': menu_text_family,
         '--textStyle': menu_text_style,
         '--textWeight': menu_text_weight,
-        '--textFilter': `drop-shadow(${menu_text_shadowX}px ${menu_text_shadowY}px ${menu_text_shadowS}px ${menu_text_shadowC})`,
+        '--textFilter': SetFilderParams(menu_text_filter, menu_text_filter_data, menu_text_filter_color),
     }
 
     layout === 'TempA01' && (BackStyle.flex = 1)

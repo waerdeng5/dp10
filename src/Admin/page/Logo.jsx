@@ -2,7 +2,7 @@
 import { useMount } from 'ahooks';
 import { menuCollapsedStore } from '../../Router/zustand'
 
-import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack, SetFilderParams } from '../../Utils'
 import { memo } from 'react';
 
 const LogoA01 = ({ Theme, DxTheme }) => {
@@ -11,13 +11,11 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         devTheme,
         logo_textStatus,
         layout,
-
         logo_align_items = 'center',
         logo_align_content = 'center',
         logo_justify_content = 'center',
         logo_flex_direction = "row",
         logo_flex_wrap = "nowrap",
-
         logo_color = "#ffffff00",
         logo_deg = 0,
         logo_margin = "0",
@@ -30,10 +28,9 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         logo_height = 80,
         logo_icon_padding,
         logo_icon_margin,
-        logo_icon_shadowX,
-        logo_icon_shadowY,
-        logo_icon_shadowS,
-        logo_icon_shadowC,
+        logo_icon_filter,
+        logo_icon_filter_data,
+        logo_icon_filter_color,
 
         logo_text,
         logo_text_color,
@@ -42,10 +39,10 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         logo_text_family,
         logo_text_style,
         logo_text_weight,
-        logo_text_shadowX,
-        logo_text_shadowY,
-        logo_text_shadowS,
-        logo_text_shadowC,
+        logo_text_filter,
+        logo_text_filter_data,
+        logo_text_filter_color
+
     } = Theme
 
     const LogoStyle = {
@@ -54,7 +51,6 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         '--logo_justify_content': logo_justify_content,
         '--logo_flex_direction': logo_flex_direction,
         '--logo_flex_wrap': logo_flex_wrap,
-
         background: ColorCallBack(logo_color, logo_deg),
         padding: SpacingCallBack(logo_padding),
         margin: SpacingCallBack(logo_margin),
@@ -69,11 +65,9 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         padding: SpacingCallBack(logo_icon_padding),
         margin: SpacingCallBack(logo_icon_margin),
         borderRadius: SpacingCallBack(logo_radius),
-        // transform: `translateX(${devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ? -logo_width * 2 + 'px' : 0} )`,
-        // filter: devTheme && (DxTheme.includes('dark') || DxTheme.includes('contrast')) ?
-        //     `drop-shadow(${logo_width * 2}px 0 #ffffff)` :
-        //     `drop-shadow(${logo_icon_shadowX}px ${logo_icon_shadowY}px ${logo_icon_shadowS}px ${logo_icon_shadowC})`,
+        filter: SetFilderParams(logo_icon_filter, logo_icon_filter_data, logo_icon_filter_color)
     }
+
 
     const TextStyle = {
         '--background': ColorCallBack(logo_text_color, logo_text_deg),
@@ -81,7 +75,7 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         fontFamily: logo_text_family,
         fontStyle: logo_text_style,
         fontWeight: logo_text_weight,
-        filter: `drop-shadow(${logo_text_shadowX}px ${logo_text_shadowY}px ${logo_text_shadowS}px ${logo_text_shadowC})`
+        filter: SetFilderParams(logo_text_filter, logo_text_filter_data, logo_text_filter_color)
     }
 
 
