@@ -1,37 +1,33 @@
 import './index.scss'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react'
+import { SettingOutlined } from '@ant-design/icons'
+import { HappyProvider } from '@ant-design/happy-work-theme'
 import { useEventEmitter, useMount, useTitle, useFavicon } from 'ahooks'
-import { FloatButton, Tooltip, ConfigProvider, Input, Space, Button, App } from 'antd'
-import { SettingOutlined, BgColorsOutlined, UnorderedListOutlined } from '@ant-design/icons';
+import { FloatButton, Tooltip, ConfigProvider, Input, Space, App } from 'antd'
 
 import { axios } from '../Utils/Api'
-import { GetIndexedDB, Decrypt } from '../Utils/IndexedDB'
-import { ColorCallBack, debuggerFun } from '../Utils'
-import { BackGrundType } from '../Config/BackGrundType'
-import { VideoTemplateA01 } from '../Temp/VideoTemplate'
-import { modelStore, pageStore } from '../Router/zustand'
-import { Encrypt, PutIndexedDB } from '../Utils/IndexedDB'
-import { ThemeBackImageList, formDefaultInit, CommonAPIUrl } from '../Config'
-
 import TempA01 from './page/TempA01'
 import TempA02 from './page/TempA02'
+import { ColorCallBack } from '../Utils'
 import themes from "devextreme/ui/themes"
-
-import { HappyProvider } from '@ant-design/happy-work-theme';
+import { BackGrundType } from '../Config/BackGrundType'
+import { VideoTemplateA01 } from '../Temp/VideoTemplate'
 import { ANIMATIONLIST } from '../Temp/TemplateAnimation'
+import { modelStore, pageStore } from '../Router/zustand'
+import { ThemeBackImageList, formDefaultInit, CommonAPIUrl } from '../Config'
+import { Encrypt, PutIndexedDB, GetIndexedDB, Decrypt } from '../Utils/IndexedDB'
 
 const { port } = window.location
 const LayoutMapping = { TempA01, TempA02 }
 
 const AdminIndex = () => {
-    const { message, modal, notification } = App.useApp();
+    const { notification } = App.useApp();
     const { updateActive, updateList } = pageStore()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const AdminEvent = useEventEmitter()
     const [Theme, setTheme] = useState()
     const [Active, setActive] = useState()
     const [Config, setConfig] = useState()
-    const [DxTheme, setDxTheme] = useState()
     const [DxThemeMapping, setDxThemeMapping] = useState()
 
     const [userInfo, setUserInfo] = useState()
@@ -92,12 +88,6 @@ const AdminIndex = () => {
         setActive(e => ({ ...e, [data.uuid]: data }))
     }
 
-    const onSetDxTheme = async (data) => {
-        const dxThemeMapping = await GetIndexedDB('dxTheme')
-        setDxThemeMapping(await Decrypt(dxThemeMapping))
-        setDxTheme(data)
-    }
-
     const onLookPage = async () => {
         setLookStatus(true)
         await PutIndexedDB('look', true)
@@ -110,7 +100,6 @@ const AdminIndex = () => {
             ['onThemeDetection', () => onThemeDetection(data)],
             ['onSaveTheme', () => onSetTheme(data)],
             ['onActiveMenu', () => onActiveMenu(data)],
-            ['onSetDxTheme', () => onSetDxTheme(data)],
             ['onLookPage', onLookPage],
             ['onHiddenButton', () => setBtnStatus(false)]
         ])
@@ -120,8 +109,6 @@ const AdminIndex = () => {
 
     const onOpenProject = () => {
         console.log('返回项目选择')
-
-
     }
 
     const onUnLookFn = async () => {
