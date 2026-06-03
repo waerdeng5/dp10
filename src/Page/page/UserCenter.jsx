@@ -19,7 +19,7 @@ const UserCenter = () => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [userAdd, setUserAdd] = useState()
     const [userInfo, setUserInfo] = useState()
-    const [Active, setActive] = useState(2)
+    const [Active, setActive] = useState(5)
     const [COLOR, setCOLOR] = useState('#0a3cff')
     const [Loading, setLoading] = useState(false)
 
@@ -47,6 +47,7 @@ const UserCenter = () => {
         { uuid: 2, title: '后台名片' },
         { uuid: 3, title: '密码管理' },
         { uuid: 4, title: '锁屏动画' },
+        { uuid: 5, title: '表单主题' },
     ]
 
     const optionsMapping = [
@@ -274,6 +275,14 @@ const UserCenter = () => {
                             </div>
                             <div className='switch'>
                                 <Button type='link' icon={<i className="fas fa-exchange-alt" />} onClick={onSwitchAnimation}>切换动画</Button>
+                            </div>
+                        </div>
+                    }
+                    {Active === 5 &&
+                        <div className='infoItem dev'>
+                            <div>可选主题</div>
+                            <div>
+                                表单样式
                             </div>
                         </div>
                     }

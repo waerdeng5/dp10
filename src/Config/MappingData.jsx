@@ -810,7 +810,7 @@ export const MappingData = {
     ],
     Theme__Loading: [
         { value: 'LoadSvg', label: '懵娜丽啥' },
-        { value: 'LoadA01', label: '加载测试' },
+        { value: ' ', label: '加载测试' },
         { value: 'LoadA02', label: '交投加载' },
         { value: 'LoadA03', label: '交投SVG' },
     ],
