@@ -491,6 +491,20 @@ const SELECT = ({ data }) => {
                                 </span>
                             )
                         }
+                        if (type === 'sign') {
+                            const { label, data } = e
+                            return (
+                                <span className='SELECTColorModel'>
+                                    <span className='SELECTColorModel_back' onClick={e => {
+                                        e.stopPropagation()
+                                        console.log('预览信息')
+                                    }} >
+                                        预览
+                                    </span>
+                                    <span>{label}</span>
+                                </span>
+                            )
+                        }
                         return (<span>{e.label}</span>)
                     }
                 }}
