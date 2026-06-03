@@ -4,7 +4,7 @@ import { MappingData } from './MappingData'
 // ***  项目主题信息
 export const ThemeFormList = [
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_page', label: '基础页面', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_page', label: '基础配置', collapsible: true,
         children: [
             { span: 12, formType: 'RADIO', name: 'loginType', label: '登录模式', rules: true, valueEnum: MappingData.Theme__loginType },
             { span: 12, formType: 'COLOR', name: 'themeColor', label: '主题颜色', rules: true, mode: ['single'] },
@@ -35,7 +35,7 @@ export const ThemeFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_layout', label: '布局信息', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_layout', label: '布局配置', collapsible: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'layout', label: '布局框架', rules: true, valueEnum: MappingData.Theme__Layout },
             {
@@ -93,7 +93,7 @@ export const ThemeFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_logo', label: '图标设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_logo', label: '图标配置', collapsible: true,
         children: [
             {
                 span: 24, formType: 'GROUP', name: 'logo_back', label: '背景设置', collapsible: true,
@@ -204,7 +204,7 @@ export const ThemeFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_head', label: '头部设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_head', label: '头部配置', collapsible: true,
         children: [
             {
                 span: 24, formType: 'GROUP', name: 'head_back', label: '背景设置', collapsible: true, defaultCollapsed: false,
@@ -460,7 +460,7 @@ export const ThemeFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_menu', label: '菜单设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_menu', label: '菜单配置', collapsible: true,
         children: [
             {
                 span: 24, formType: 'GROUP', name: 'menu_back', label: '背景设置', collapsible: true,
@@ -536,7 +536,7 @@ export const ThemeFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'ThemeFormList_body', label: '主体设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'ThemeFormList_body', label: '主体配置', collapsible: true,
         children: [
             {
                 span: 24, formType: 'GROUP', name: 'body_back', label: '背景设置', collapsible: true,

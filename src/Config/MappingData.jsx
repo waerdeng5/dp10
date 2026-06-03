@@ -864,17 +864,13 @@ export const MappingData = {
 
     // 后台可用操作
     Theme__HeadOptionsList: [
-        // { value: 'theme', label: '项目主题' },
-
         { value: 'admin', label: '宫格操作' },
         { value: 'project', label: '项目列表' },
         { value: 'setTheme', label: '主题设置' },
-        { value: 'devTheme', label: 'DX主题' },
         { value: 'login', label: '登录页面' },
         { value: 'start', label: '大屏配置' },
         { value: 'test', label: '自定页面测试' },
         { value: 'layout', label: '布局页面测试' },
-
 
         { value: 1, label: '切换首页' },
         { value: 2, label: '用户中心' },

@@ -112,15 +112,33 @@ export const themeDefault = {
                 },
                 {
                     func: "setTheme",
-                    title: "主题设置",
+                    title: "主题配置",
                     icon: "fasPalette",
                     color: "#eb2f96"
                 },
                 {
                     func: "login",
-                    title: "登录设置",
+                    title: "登录配置",
                     icon: "fasFingerprint",
                     color: "#fadb14"
+                },
+                {
+                    func: "start",
+                    title: "大屏配置",
+                    icon: "fasTv",
+                    color: "#1677ff"
+                },
+                {
+                    func: "layout",
+                    title: "布局页面",
+                    icon: "fasEraser",
+                    color: "#f5222d"
+                },
+                {
+                    func: "test",
+                    title: "测试页面",
+                    icon: "fasMagic",
+                    color: "#52c41a"
                 }
             ]
         }
