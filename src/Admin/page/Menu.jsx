@@ -90,9 +90,6 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
         '--textFilter': SetFilderParams(menu_text_filter, menu_text_filter_data, menu_text_filter_color),
     }
 
-    layout === 'TempA01' && (BackStyle.flex = 1)
-    layout === 'TempA02' && (BackStyle.width = '100%')
-
     const getItem = ({ uuid, isEnabled, other, mapping }) => {
         const { tableName, targetUrl, icon } = other
         return { key: uuid, label: mapping[uuid] || tableName, icon: icon ? ICONMapping[icon] : null, enabled: isEnabled, url: targetUrl }

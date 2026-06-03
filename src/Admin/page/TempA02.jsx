@@ -8,7 +8,8 @@ import Body from './Body'
 import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
 
 
-const TempA02 = ({ DxTheme, Theme, AdminEvent }) => {
+const TempA02 = ({ Theme, AdminEvent }) => {
+    console.log('theme', Theme)
     const {
         top_color = '#ffffff33',
         top_deg = 0,
@@ -25,7 +26,6 @@ const TempA02 = ({ DxTheme, Theme, AdminEvent }) => {
         btm_radius = '8',
         btm_shadow = '--shadow-1-down'
     } = Theme
-
 
     const TopStyle = {
         background: ColorCallBack(top_color, top_deg),
@@ -52,8 +52,8 @@ const TempA02 = ({ DxTheme, Theme, AdminEvent }) => {
     return (
         <div className='TempA02'>
             <div className='Top' style={TopStyle}>
-                <Logo Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
-                <Head Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
+                <Logo Theme={Theme} AdminEvent={AdminEvent} />
+                <Head Theme={Theme} AdminEvent={AdminEvent} />
             </div>
             <div className='Btm' style={BtmStyle}>
                 <Menu Theme={Theme} AdminEvent={AdminEvent} />

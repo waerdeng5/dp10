@@ -5,45 +5,27 @@ import { menuCollapsedStore } from '../../Router/zustand'
 import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack, SetFilderParams } from '../../Utils'
 import { memo } from 'react';
 
-const LogoA01 = ({ Theme, DxTheme }) => {
+const LogoA01 = ({ Theme }) => {
     const { inlineCollapsed } = menuCollapsedStore()
     const {
-        devTheme,
-        logo_textStatus,
-        layout,
-        logo_align_items = 'center',
-        logo_align_content = 'center',
-        logo_justify_content = 'center',
-        logo_flex_direction = "row",
-        logo_flex_wrap = "nowrap",
-        logo_color = "#ffffff00",
-        logo_deg = 0,
-        logo_margin = "0",
-        logo_padding = "0",
-        logo_radius = "0",
-        logo_shadow = "--shadow-none",
+        logo_textStatus, logo_shrink_status,
+        logo_align_items, logo_align_content, logo_justify_content, logo_flex_direction, logo_flex_wrap,
+        logo_color, logo_deg, logo_margin, logo_padding, logo_radius, logo_shadow,
 
-        logo_icon,
-        logo_width = 80,
-        logo_height = 80,
-        logo_icon_padding,
-        logo_icon_margin,
-        logo_icon_filter,
-        logo_icon_filter_data,
-        logo_icon_filter_color,
+        logo_icon, logo_width, logo_height, logo_icon_padding, logo_icon_margin,
+        logo_icon_filter, logo_icon_filter_data, logo_icon_filter_color,
 
-        logo_text,
-        logo_text_color,
-        logo_text_deg,
-        logo_text_size,
-        logo_text_family,
-        logo_text_style,
-        logo_text_weight,
-        logo_text_filter,
-        logo_text_filter_data,
-        logo_text_filter_color
+        logo_icon_shrink, logo_width_shrink, logo_height_shrink, logo_icon_padding_shrink, logo_icon_margin_shrink,
+        logo_icon_filter_shrink, logo_icon_filter_shrink_data, logo_icon_filter_shrink_color,
 
+        logo_text, logo_text_color, logo_text_deg, logo_text_size, logo_text_family, logo_text_style, logo_text_weight,
+        logo_text_filter, logo_text_filter_data, logo_text_filter_color,
+
+        logo_text_shrink, logo_text_shrink_color, logo_text_shrink_deg, logo_text_shrink_size, logo_text_shrink_family,
+        logo_text_shrink_weight, logo_text_shrink_style, logo_text_shrink_filter,
+        logo_text_filter_shrink_data, logo_text_filter_shrink_color
     } = Theme
+
 
     const LogoStyle = {
         '--logo_align_items': logo_align_items,
@@ -58,16 +40,21 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         boxShadow: `var(${logo_shadow})`,
     }
 
-
     const IconStyle = {
         width: logo_width,
         height: logo_height,
         padding: SpacingCallBack(logo_icon_padding),
         margin: SpacingCallBack(logo_icon_margin),
-        borderRadius: SpacingCallBack(logo_radius),
         filter: SetFilderParams(logo_icon_filter, logo_icon_filter_data, logo_icon_filter_color)
     }
 
+    const IconShrinkStyle = {
+        width: logo_width_shrink,
+        height: logo_height_shrink,
+        padding: SpacingCallBack(logo_icon_padding_shrink),
+        margin: SpacingCallBack(logo_icon_margin_shrink),
+        filter: SetFilderParams(logo_icon_filter_shrink, logo_icon_filter_shrink_data, logo_icon_filter_shrink_color)
+    }
 
     const TextStyle = {
         '--background': ColorCallBack(logo_text_color, logo_text_deg),
@@ -78,30 +65,30 @@ const LogoA01 = ({ Theme, DxTheme }) => {
         filter: SetFilderParams(logo_text_filter, logo_text_filter_data, logo_text_filter_color)
     }
 
-
-
-    // 折叠设置
-    if (layout === 'TempA01') {
-        LogoStyle.width = '100%'
-        LogoStyle.marginBottom = 8
-
-        return (
-            <div className='Logo' style={LogoStyle}>
-                <img src={logo_icon} alt="" style={IconStyle} />
-                {!inlineCollapsed && logo_textStatus && <div className='text' style={TextStyle}>{logo_text}</div>}
-            </div>
-        );
+    const TextShrinkStyle = {
+        '--background': ColorCallBack(logo_text_shrink_color, logo_text_shrink_deg),
+        fontSize: logo_text_shrink_size,
+        fontFamily: logo_text_shrink_family,
+        fontStyle: logo_text_shrink_style,
+        fontWeight: logo_text_shrink_weight,
+        filter: SetFilderParams(logo_text_shrink_filter, logo_text_filter_shrink_data, logo_text_filter_shrink_color)
     }
 
-    // 铺展设置
-    if (layout === 'TempA02') {
-        return (
-            <div className='Logo' style={LogoStyle}>
-                <img src={logo_icon} alt="" style={IconStyle} />
-                {logo_textStatus && <div className='text' style={TextStyle}>{logo_text}</div>}
-            </div>
-        )
-    }
+    return (
+        <div className='Logo' style={LogoStyle}>
+            <img
+                style={logo_shrink_status && inlineCollapsed ? IconShrinkStyle : IconStyle}
+                src={logo_shrink_status && inlineCollapsed ? logo_icon_shrink : logo_icon}
+                alt=""
+            />
+            {logo_textStatus &&
+                <div className='text' style={logo_shrink_status && inlineCollapsed ? TextShrinkStyle : TextStyle}>
+                    {logo_shrink_status && inlineCollapsed ? logo_text_shrink : logo_text}
+                </div>
+            }
+        </div>
+    );
+
 
 
 

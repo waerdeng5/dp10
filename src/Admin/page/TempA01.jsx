@@ -9,7 +9,7 @@ import Body from './Body'
 
 import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils'
 
-const TempA01 = ({ DxTheme, Theme, AdminEvent }) => {
+const TempA01 = ({ Theme, AdminEvent }) => {
     const {
         left_color = "#ffffff33",
         left_width = 240,
@@ -53,11 +53,11 @@ const TempA01 = ({ DxTheme, Theme, AdminEvent }) => {
     return (
         <div className='TempA01'>
             <div className='Left' style={LeftStyle}>
-                <Logo Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
+                <Logo Theme={Theme} AdminEvent={AdminEvent} />
                 <Menu Theme={Theme} AdminEvent={AdminEvent} />
             </div>
             <div className='Right' style={RightStyle}>
-                <Head Theme={Theme} AdminEvent={AdminEvent} DxTheme={DxTheme} />
+                <Head Theme={Theme} AdminEvent={AdminEvent} />
                 <Body Theme={Theme} AdminEvent={AdminEvent} />
             </div>
         </div>

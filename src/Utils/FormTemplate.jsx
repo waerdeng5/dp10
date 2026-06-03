@@ -465,7 +465,7 @@ const RADIO = ({ data }) => {
 
 // Todo Select单选
 const SELECT = ({ data }) => {
-    const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde, type } = data
+    const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, placeholder, jugde, type } = data
 
     const Template = () => (
         <div className='SELECT' style={{ width: `${100 / 24 * span}%` }}>
@@ -1000,7 +1000,7 @@ const beforeUpload = (file, fileType, fileSize, message) => {
 // Todo 上传附件 - 数组形式
 const UPLOAD = ({ data, form }) => {
     const { message } = App.useApp()
-    const { span, name, label, tooltip, max = 1, fileType, fileSize = 1, rules = false, disabled = false, jugdeField, jugdeValue = [], fileData = {} } = data
+    const { span, name, label, tooltip, max = 1, fileType, fileSize = 1, rules = false, disabled = false, jugde, fileData = {} } = data
     const API = sessionStorage.getItem('API')
     const Template = () => {
         const [action, setAction] = useState('')
@@ -1066,7 +1066,7 @@ const UPLOAD = ({ data, form }) => {
             </>
         )
     }
-    if (jugdeField) return <JudgeTemplate jugdeField={jugdeField} jugdeValue={jugdeValue} Template={Template} />
+    if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
 
@@ -1229,7 +1229,7 @@ const TempGenerateUuid = ({ data, form, action }) => {
                 name={name}
                 label={label}
                 tooltip={tooltip}
-                disabled={true}
+                disabled={disabled}
                 rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 placeholder={placeholder || `请输入${label}`}
                 fieldProps={{ variant: "underlined", allowClear: false }}
