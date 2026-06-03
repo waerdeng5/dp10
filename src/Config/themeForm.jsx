@@ -9,7 +9,7 @@ export const ThemeFormList = [
             { span: 12, formType: 'RADIO', name: 'loginType', label: '登录模式', rules: true, valueEnum: MappingData.Theme__loginType },
             { span: 12, formType: 'COLOR', name: 'themeColor', label: '主题颜色', rules: true, mode: ['single'] },
             { span: 12, formType: 'SELECT', name: 'devTheme', label: 'DEV主题', rules: true, valueEnum: MappingData.DevConfig__ThemeList, type: 'color' },
-            { span: 12, formType: 'SELECT', name: 'loading', label: '加载动画', rules: true, valueEnum: MappingData.Theme__Loading },
+            { span: 12, formType: 'SELECT', name: 'loading', label: '加载动画', rules: true, valueEnum: MappingData.Theme__Loading, type: 'sign' },
             { span: 12, formType: 'SELECT', name: 'login', label: '登录页面', rules: true, valueEnum: MappingData.Theme__LoginPage },
             { span: 12, formType: 'SELECT', name: 'sign', label: '登录窗口', rules: true, valueEnum: MappingData.Theme__SignPage },
             { span: 12, formType: 'COLOR', name: 'maskColor', label: '遮罩色', rules: true, mode: ['single'] },
