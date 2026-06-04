@@ -17711,43 +17711,30 @@ export const Dev_data = [
     },
 ];
 
-export const dxThemeMapping = [
-    {
-        title: '流利样式',
-        children: [
-            { title: '白蓝', value: 'fluent.blue.light', background: '#ffffff', color: '#0f6cbd' },
-            { title: '黑蓝', value: 'fluent.blue.dark', background: '#292929', color: '#5486ff' },
-            { title: '白青', value: 'fluent.saas.light', background: '#ffffff', color: '#0f6cbd' },
-            { title: '黑青', value: 'fluent.saas.dark', background: '#1e2832', color: '#5486ff' },
-        ]
-    },
-    {
-        title: '通用样式',
-        children: [
-            { title: '白蓝', value: 'light', background: '#ffffff', color: '#337ab7' },
-            { title: '白青', value: 'softblue', background: '#ffffff', color: '#7ab8eb' },
-            { title: '白橙', value: 'carmine', background: '#ffffff', color: '#f05b41' },
-            { title: '白绿', value: 'greenmist', background: '#ffffff', color: '#3debd3' },
-            { title: '灰绿', value: 'darkmoon', background: '#465672', color: '#3debd3' },
-            { title: '黑蓝', value: 'dark', background: '#2a2a2a', color: '#1ca8dd' },
-            { title: '黑紫', value: 'darkviolet', background: '#181820', color: '#9c63ff' },
-            { title: '黑粉', value: 'contrast', background: '#000000', color: '#cf00d7' },
-        ]
-    },
-    {
-        title: '材质样式',
-        children: [
-            { title: '白蓝', value: 'material.blue.light', background: '#ffffff', color: '#03b1f6' },
-            { title: '黑蓝', value: 'material.blue.dark', background: '#363640', color: '#03b1f6' },
-            { title: '白黄', value: 'material.lime.light', background: '#ffffff', color: '#cddc39' },
-            { title: '黑黄', value: 'material.lime.dark', background: '#363640', color: '#cddc39' },
-            { title: '白橙', value: 'material.orange.light', background: '#ffffff', color: '#ff5c44' },
-            { title: '黑橙', value: 'material.orange.dark', background: '#363640', color: '#ff5c44' },
-            { title: '白紫', value: 'material.purple.light', background: '#ffffff', color: '#b427b0' },
-            { title: '黑紫', value: 'material.purple.dark', background: '#363640', color: '#b427b0' },
-            { title: '白绿', value: 'material.teal.light', background: '#ffffff', color: '#00968f' },
-            { title: '黑绿', value: 'material.teal.dark', background: '#363640', color: '#00968f' },
-        ]
-    },
+export const Dev_theme = [
+    // 流利
+    { value: 'fluent.blue.light', label: '流利 白蓝', color: ['#ffffff', '#0f6cbd'] },
+    { value: 'fluent.blue.dark', label: '流利 黑蓝', color: ['#292929', '#5486ff'] },
+    { value: 'fluent.saas.light', label: '流利 白青', color: ['#ffffff', '#0f6cbd'] },
+    { value: 'fluent.saas.dark', label: '流利 黑青', color: ['#1e2832', '#5486ff'] },
+    // 通用
+    { value: 'light', label: '通用 白蓝', color: ['#ffffff', '#337ab7'] },
+    { value: 'softblue', label: '通用 白青', color: ['#ffffff', '#7ab8eb'] },
+    { value: 'carmine', label: '通用 白橙', color: ['#ffffff', '#f05b41'] },
+    { value: 'greenmist', label: '通用 白绿', color: ['#ffffff', '#3debd3'] },
+    { value: 'darkmoon', label: '通用 灰绿', color: ['#465672', '#3debd3'] },
+    { value: 'dark', label: '通用 黑蓝', color: ['#2a2a2a', '#1ca8dd'] },
+    { value: 'darkviolet', label: '通用 黑紫', color: ['#181820', '#9c63ff'] },
+    { value: 'contrast', label: '通用 黑粉', color: ['#000000', '#cf00d7'] },
+    // 材质
+    { value: 'material.blue.light', label: '材质 白蓝', color: ['#ffffff', '#03b1f6'] },
+    { value: 'material.blue.dark', label: '材质 黑蓝', color: ['#363640', '#03b1f6'] },
+    { value: 'material.lime.light', label: '材质 白黄', color: ['#ffffff', '#cddc39'] },
+    { value: 'material.lime.dark', label: '材质 黑黄', color: ['#363640', '#cddc39'] },
+    { value: 'material.orange.light', label: '材质 白橙', color: ['#ffffff', '#ff5c44'] },
+    { value: 'material.orange.dark', label: '材质 黑橙', color: ['#363640', '#ff5c44'] },
+    { value: 'material.purple.light', label: '材质 白紫', color: ['#ffffff', '#b427b0'] },
+    { value: 'material.purple.dark', label: '材质 黑紫', color: ['#363640', '#b427b0'] },
+    { value: 'material.teal.light', label: '材质 白绿', color: ['#ffffff', '#00968f'] },
+    { value: 'material.teal.dark', label: '材质 黑绿', color: ['#363640', '#00968f'] },
 ]
-

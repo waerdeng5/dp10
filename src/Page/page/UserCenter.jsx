@@ -1,7 +1,7 @@
 import './UserCenter.scss'
 import { useState } from 'react'
-import { Button, Input, Alert } from 'antd'
 import { useEventEmitter, useMount } from 'ahooks'
+import { Button, Input, Alert, Select } from 'antd'
 
 import { axios } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
@@ -11,12 +11,12 @@ import { FormConfig } from '../../Config/configForm'
 import { ICONMapping } from '../../Config/IconMapping'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { ANIMATIONLIST } from '../../Temp/TemplateAnimation'
+import { Dev_data, Dev_theme } from '../../Router/devMapping'
 import { UserAvatar, UserBackboard } from '../../Config/index'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
-import { Dev_data, dxThemeMapping } from '../../Router/devMapping'
 
 import themes from "devextreme/ui/themes"
-import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel } from 'devextreme-react/data-grid';
+import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel, Selection } from 'devextreme-react/data-grid';
 
 const UserCenter = () => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
@@ -33,6 +33,7 @@ const UserCenter = () => {
     const [userAvatar, setUserAvatar] = useState()
     const [userNickName, setUserNickName] = useState()
     const [LookAnimation, setLookAnimation] = useState()
+    const [DXTheme, setDXTheme] = useState()
 
     const FormEvent = useEventEmitter()
 
@@ -126,7 +127,6 @@ const UserCenter = () => {
         FormEvent.emit({ type: 'closeFormLoading' })
     }
 
-
     const onSwitchAnimation = () => {
         updateModel5({
             title: '锁屏动画',
@@ -135,7 +135,6 @@ const UserCenter = () => {
             modelData: { openType: 'LookAnimation', Initial: LookAnimation, userInfo }
         })
     }
-
 
     useMount(async () => {
         const userAdd = await GetIndexedDB('userAdd')
@@ -148,6 +147,7 @@ const UserCenter = () => {
         setCOLOR(themeColor)
         setUserAdd(userAdd)
         setUserInfo(userInfo)
+        setDXTheme(userAdd.dxTheme)
         // getPoints()
         // getTaskList()
     })
@@ -284,12 +284,36 @@ const UserCenter = () => {
                     {Active === 5 &&
                         <div className='infoItem dev'>
                             <div className='Select'>
-                                可选主题
-
-                                {console.log(dxThemeMapping)}
+                                <Select
+                                    style={{ width: '100%' }}
+                                    options={Dev_theme}
+                                    value={DXTheme}
+                                    variant="underlined"
+                                    optionRender={e => {
+                                        const { label, data } = e
+                                        return (
+                                            <span className='SELECTColorModel'>
+                                                <span className='SELECTColorModel_back' style={{ background: data.color[1] }}>
+                                                    <span
+                                                        className='SELECTColorModel_cont'
+                                                        style={{ background: data.color[0], '--color': `${data.color[0]}50` }}
+                                                    />
+                                                </span>
+                                                <span>{label}</span>
+                                            </span>
+                                        )
+                                    }}
+                                    onChange={e => {
+                                        themes.current(e)
+                                        setDXTheme(e)
+                                        // 保存个人配置
+                                        // 修改系统配置
+                                    }}
+                                />
                             </div>
                             <div className='Table'>
-                                <DataGrid dataSource={Dev_data} keyExpr="Id" showBorders={true} width="100%" height="100%">
+                                <DataGrid dataSource={Dev_data} keyExpr="Id" showBorders={true} width="100%" height="100%" hoverStateEnabled={true}>
+                                    <Selection mode="single" />
                                     <GroupPanel visible={true} />
                                     <SearchPanel visible={true} highlightCaseSensitive={true} />
                                     <Grouping autoExpandAll={false} />
