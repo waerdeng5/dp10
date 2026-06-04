@@ -1,19 +1,22 @@
 import './UserCenter.scss'
-import { useEventEmitter, useMount } from 'ahooks'
-import { Button, Input, Alert } from 'antd'
-import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
 import { useState } from 'react'
-import { UserAvatar, UserBackboard } from '../../Config/index'
-import { ICONMapping } from '../../Config/IconMapping'
+import { Button, Input, Alert } from 'antd'
+import { useEventEmitter, useMount } from 'ahooks'
+
 import { axios } from '../../Utils/Api'
-import { DevScrollView } from '../../Temp/DevTemplate'
-
-
 import { CommonAPIUrl } from '../../Config'
+import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
 import { FormConfig } from '../../Config/configForm'
+import { ICONMapping } from '../../Config/IconMapping'
+import { DevScrollView } from '../../Temp/DevTemplate'
 import { ANIMATIONLIST } from '../../Temp/TemplateAnimation'
-import { modelStore } from '../../Router/zustand'
+import { UserAvatar, UserBackboard } from '../../Config/index'
+import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
+import { Dev_data, dxThemeMapping } from '../../Router/devMapping'
+
+import themes from "devextreme/ui/themes"
+import DataGrid, { Column, Grouping, GroupPanel, Pager, Paging, SearchPanel } from 'devextreme-react/data-grid';
 
 const UserCenter = () => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
@@ -280,9 +283,27 @@ const UserCenter = () => {
                     }
                     {Active === 5 &&
                         <div className='infoItem dev'>
-                            <div>可选主题</div>
-                            <div>
-                                表单样式
+                            <div className='Select'>
+                                可选主题
+
+                                {console.log(dxThemeMapping)}
+                            </div>
+                            <div className='Table'>
+                                <DataGrid dataSource={Dev_data} keyExpr="Id" showBorders={true} width="100%" height="100%">
+                                    <GroupPanel visible={true} />
+                                    <SearchPanel visible={true} highlightCaseSensitive={true} />
+                                    <Grouping autoExpandAll={false} />
+                                    <Column dataField="Product" />
+                                    <Column dataField="Amount" caption="Sale Amount" dataType="number" />
+                                    <Column dataField="Discount" caption="Discount" dataType="number" />
+                                    <Column dataField="SaleDate" dataType="date" />
+                                    <Column dataField="Region" dataType="string" />
+                                    <Column dataField="Sector" dataType="string" />
+                                    <Column dataField="Channel" dataType="string" />
+                                    <Column dataField="Customer" dataType="string" width={150} />
+                                    <Pager visible={true} allowedPageSizes={10} showPageSizeSelector={true} />
+                                    <Paging defaultPageSize={10} />
+                                </DataGrid>
                             </div>
                         </div>
                     }

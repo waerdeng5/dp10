@@ -13,7 +13,6 @@ import { CommonAPIUrl } from '../../Config'
 import FormTemplate from '../../Utils/FormTemplate'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { onTreeDrop, ColorCallBack } from '../../Utils'
-import { dxThemeMapping } from '../../Config/themeMapping'
 import { WeChatTempMenu } from '../../Temp/WeChatTempMenu'
 import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
 import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
@@ -494,128 +493,6 @@ const CommonModel = ({ data, Event }) => {
         )
     }
 
-    // 主题选择
-    if (openType === 'DxTheme') {
-        const [UserUuid, setUserUuid] = useState()
-        const [UserAdd, setUserAdd] = useState()
-        const [Active, setActive] = useState('')
-        const [themeData, setThemeData] = useState({})
-
-
-        const onDxThemeClick = async (theme) => {
-            const config = await GetIndexedDB('config')
-            const [err, res] = await axios({
-                method: 'get',
-                url: 'projects/GetJsonInfoByUuid',
-                path: CommonAPIUrl,
-                params: { uuid: `${config.uuid}/UserInfo` }
-            })
-            if (err) return console.log(err)
-            UserAdd.dxTheme = theme
-            const params = JSON.stringify({ ...res, [UserUuid]: UserAdd })
-            const [postErr,] = await axios({
-                method: 'post',
-                url: 'projects/SaveJsonInfoByUuid',
-                path: CommonAPIUrl,
-                params: { uuid: `${config.uuid}/UserInfo`, Content: params }
-            })
-            if (postErr) return console.log(postErr)
-            await PutIndexedDB('userAdd', UserAdd)
-            themes.current(theme)
-            setActive(theme)
-            Event.emit({ type: 'onSetDxTheme', data: theme })
-        }
-
-        const onSetTheme = (value) => {
-            const theme = value.split('.compact')[0]
-            const Initial = { ...themeData[theme], uuid: theme }
-            updateModel4({
-                title: '主题参数设置',
-                type: 'CommonForm',
-                Event: Event,
-                modelData: { formItem: 'DxThemeConfig', eventBack: 'onSetDxThemeData', Initial }
-            })
-        }
-
-        Event.useSubscription(async val => {
-            const { type, data } = val
-            if (type === 'onSetDxThemeData') {
-
-                const config = await GetIndexedDB('config')
-                const { uuid, ...theme } = data
-                themeData[uuid] = theme
-                const params = JSON.stringify(await Encrypt(themeData))
-                const [err,] = await axios({
-                    method: 'post',
-                    url: 'projects/SaveJsonInfoByUuid',
-                    path: CommonAPIUrl,
-                    params: { uuid: `${config.uuid}/Theme/DxTheme`, Content: params }
-                })
-                if (err) return console.log(err)
-                setThemeData(themeData)
-                await PutIndexedDB('dxTheme', await Encrypt(themeData))
-                if (Active === uuid) Event.emit({ type: 'onSetDxTheme', data: uuid })
-                updateModel4({})
-            }
-        })
-
-        useMount(async () => {
-            const { userUuid } = await GetIndexedDB('user')
-            const userAdd = await GetIndexedDB('userAdd')
-            setActive(userAdd?.dxTheme || 'fluent.blue.light.compact')
-            setUserUuid(userUuid)
-            setUserAdd(userAdd)
-            const [err, res] = await axios({
-                method: 'get',
-                url: 'projects/GetJsonInfoByUuid',
-                path: CommonAPIUrl,
-                params: { uuid: `${config.uuid}/Theme/DxTheme` }
-            })
-            if (err) return console.log(err)
-            setThemeData(await Decrypt(res))
-        })
-
-        return (
-            <div className='CommonModelDxTheme'>
-                <DevScrollView>
-                    <div className='Box'>
-                        {dxThemeMapping.map(item => {
-                            const { title, children } = item
-                            return (
-                                <div key={title}>
-                                    <Divider titlePlacement="start">{title}</Divider>
-                                    {children.map(key => {
-                                        const { value, background, color } = key
-                                        const status = Active === value
-                                        return (
-                                            <div className={`Item ${status ? 'active' : ''}`} key={value}>
-                                                <div style={{ background }}>
-                                                    <div style={{ background: color }} />
-                                                </div>
-                                                <div>
-                                                    <Button
-                                                        type='link'
-                                                        className={Active === value ? 'active' : ''}
-                                                        onClick={() => onDxThemeClick(value)}
-                                                    > 宽松 </Button>
-                                                    <Button
-                                                        type='link'
-                                                        className={Active === `${value}.compact` ? 'active' : ''}
-                                                        onClick={() => onDxThemeClick(`${value}.compact`)}
-                                                    > 紧凑 </Button>
-                                                    {port && <Button type='link' onClick={() => onSetTheme(value)}>设置</Button>}
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            )
-                        })}
-                    </div>
-                </DevScrollView>
-            </div>
-        )
-    }
 
     // 锁屏动画
     if (openType === 'LookAnimation') {
