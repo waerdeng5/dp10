@@ -16,7 +16,10 @@
           "overscroll-behavior: none",
           "-webkit-box-reflect",
           "scrollbar-color",
-          "scrollbar-width"
+          "scrollbar-width",
+          "overflow: clip",
+          "rx",
+          "ry"
         ]
       }
     ]

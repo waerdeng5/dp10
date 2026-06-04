@@ -17,15 +17,12 @@ import {
     ProFormText,
     ProFormUploadButton,
     ProFormUploadDragger,
-
     ProFormTextArea,
     ProFormCaptcha,
     ProFormTreeSelect,
-
     ProFormDependency,
     ProFormList,
     ProCard,
-
     ProFormDateMonthRangePicker,
     ProFormDatePicker,
     ProFormDateQuarterRangePicker,
@@ -35,34 +32,26 @@ import {
     ProFormDateWeekRangePicker,
     ProFormDateYearRangePicker,
     ProFormTimePicker,
-
     ProConfigProvider
 } from '@ant-design/pro-components';
 
+import { flushSync } from 'react-dom'
+import { Spin, Image, App } from "antd"
+import { useDebounceFn, useMount } from 'ahooks'
+import { memo, useCallback, useRef, useState, } from 'react'
 import { DeleteOutlined, CopyOutlined } from '@ant-design/icons'
 import ValueTypeToComponentMap from '@ant-design/pro-components/es/field/ValueTypeToComponent';
 
-
-import { flushSync } from 'react-dom'
-import { memo, useCallback, useRef, useState, } from 'react'
-import { Spin, Form, Image, App } from "antd"
-import { useDebounceFn, useMount } from 'ahooks'
-
-
+import { checkConditions } from '.'
+import { modelStore } from '../Router/zustand'
 import { Button } from 'devextreme-react/button'
-
-import { checkConditions, convertMetaColorToHex } from '.'
-
-import { ICONMapping } from '../Config/IconMapping'
 import { GetIndexedDB } from '../Utils/IndexedDB'
-
-import { BackGrundTypeConfig } from '../Config/BackGrundType'
+import { ICONMapping } from '../Config/IconMapping'
 import { DevScrollView } from '../Temp/DevTemplate'
-
+import { BackGrundTypeConfig } from '../Config/BackGrundType'
 
 const { WinBox } = window
 const { RangePicker } = ProFormTimePicker
-
 
 const formCallBack = e => {
     const toColor = (co) => {
@@ -210,9 +199,6 @@ const GROUP = ({ data, form, action }) => {
     else return <Template />
 }
 
-
-// addBtn: false, delBtn: false,
-
 // TODO 数组分组
 const LIST = ({ data, form }) => {
     const { span, name, label, tooltip, jugde, children, addBtn = true, delBtn = true, copy = true, title = '分组', sort = true } = data
@@ -260,6 +246,7 @@ const HIDDEN = ({ data }) => {
         </div>
     )
 }
+
 // Todo 文本框
 const INPUT = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -279,6 +266,7 @@ const INPUT = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 密码框
 const PASSWORD = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -298,6 +286,7 @@ const PASSWORD = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 富文本
 const TEXTAREA = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -317,6 +306,7 @@ const TEXTAREA = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 数字框
 const NUMBER = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, min, max, step, jugde } = data
@@ -338,6 +328,7 @@ const NUMBER = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 范围框
 const RANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -359,6 +350,7 @@ const RANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 滑动条
 const SLIDER = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, marks, min, max, step, jugde } = data
@@ -382,6 +374,7 @@ const SLIDER = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 评分框
 const RATE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, jugde } = data
@@ -400,6 +393,7 @@ const RATE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 颜色选择
 const COLOR = memo(({ data, form, action }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, jugde, mode = ['single', 'gradient'] } = data
@@ -465,7 +459,13 @@ const RADIO = ({ data }) => {
 
 // Todo Select单选
 const SELECT = ({ data }) => {
+    const { updateModel } = modelStore()
     const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, placeholder, jugde, type } = data
+
+    const onSignClick = (e, data) => {
+        e.stopPropagation()
+        updateModel({ title: '加载预览', type: 'PreviewModel', width: 600, height: 600, modelData: { key: data.key, type: 'loading' } })
+    }
 
     const Template = () => (
         <div className='SELECT' style={{ width: `${100 / 24 * span}%` }}>
@@ -495,10 +495,7 @@ const SELECT = ({ data }) => {
                             const { label, data } = e
                             return (
                                 <span className='SELECTColorModel'>
-                                    <span className='SELECTColorModel_back' onClick={e => {
-                                        e.stopPropagation()
-                                        console.log('预览信息')
-                                    }} >
+                                    <span className='SELECTColorModel_back' onClick={e => onSignClick(e, data)} >
                                         预览
                                     </span>
                                     <span>{label}</span>
@@ -517,6 +514,7 @@ const SELECT = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo Select多选
 const SELECTM = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde } = data
@@ -543,6 +541,7 @@ const SELECTM = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 树形单选
 const TREE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde } = data
@@ -574,6 +573,7 @@ const TREE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 树形多选
 const TREEM = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde } = data
@@ -608,6 +608,7 @@ const TREEM = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 联级选择
 const CASCADER = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, valueEnum, request, placeholder, jugde } = data
@@ -653,6 +654,7 @@ const TIME = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 日期
 const DATE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -672,6 +674,7 @@ const DATE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 日期时间
 const DATETIME = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -699,6 +702,7 @@ const DATETIME = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 周
 const WEEK = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -727,6 +731,7 @@ const WEEK = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 月
 const MONTH = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -754,6 +759,7 @@ const MONTH = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 季
 const QUARTER = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -782,6 +788,7 @@ const QUARTER = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 年
 const YEAR = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -809,6 +816,7 @@ const YEAR = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 时间区间
 const TIMERANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -828,6 +836,7 @@ const TIMERANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 日期区间
 const DATERANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -847,6 +856,7 @@ const DATERANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 日期时间区间
 const DATETIMERANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -874,6 +884,7 @@ const DATETIMERANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 周区间
 const WEEKRANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -901,6 +912,7 @@ const WEEKRANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 月区间
 const MONTHRANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -928,6 +940,7 @@ const MONTHRANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 季区间
 const QUARTERRANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -955,6 +968,7 @@ const QUARTERRANGE = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 年区间
 const YEARRANGE = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -1115,6 +1129,7 @@ const TempICON = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 背景墙设置
 const TempBackGrund = ({ data, form }) => {
     const { name, jugde } = data
@@ -1198,6 +1213,7 @@ const TempInputLink = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // Todo 密码确认框
 const TempPwdConfirm = ({ data }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde, confirm } = data
@@ -1225,6 +1241,7 @@ const TempPwdConfirm = ({ data }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
+
 // TODO 生成UUId 
 const TempGenerateUuid = ({ data, form, action }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, placeholder, jugde } = data
@@ -1261,7 +1278,6 @@ const TempGenerateUuid = ({ data, form, action }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
-
 
 const TemplateMapping = {
     GROUP,
