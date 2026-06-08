@@ -370,7 +370,7 @@ const Mars3dModel = ({ data, Event }) => {
                             }}
                             selectable={false}
                             treeData={TreeData}
-                            defaultExpandAll
+                            // defaultExpandAll
                             fieldNames={{ key: 'uuid' }}
                             titleRender={e => {
                                 const { uuid, name, fieldType, children } = e
