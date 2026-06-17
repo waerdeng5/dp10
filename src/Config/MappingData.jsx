@@ -1066,6 +1066,13 @@ export const MappingData = {
         { value: 'code', label: '源码' },
         { value: 'image', label: '图片' },
     ],
+    From_AntdDatePicker: [
+        { value: 'year', label: '年度' },
+        { value: 'quarter', label: '季度' },
+        { value: 'month', label: '月份' },
+        { value: 'week', label: '周期' },
+        { value: 'date', label: '日期' },
+    ],
 
 
     Form__LayoutWindowNavOptions: [

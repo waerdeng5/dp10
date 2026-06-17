@@ -672,8 +672,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                 })() : children}
 
                 {win_image_status && win_image_list.map((v, i) => {
-                    console.log(v)
-
                     const Style = {
                         width: v.width,
                         height: v.height,

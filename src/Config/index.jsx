@@ -561,6 +561,12 @@ export const TableTemplate = [
 ]
 
 
+export const SelectTemplate = [
+    { uuid: 'PrefabricatedSelect', title: '下拉选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedDateSelect', title: '时间选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+
 
 export const TemplateParamsMapping = {
     // TODO 占位组件
@@ -940,7 +946,6 @@ export const TemplateParamsMapping = {
         center_flex_wrap: "nowrap",
         center_justify_content: "center",
     },
-
     // TODO 图文模块
     PrefabricatedImgText: {
         value: 'PrefabricatedImgText',
@@ -983,8 +988,16 @@ export const TemplateParamsMapping = {
         data_type: 'A01',
         card: true,
         tree: true,
-    }
+    },
+    // TODO 选择器
+    PrefabricatedSelect: {
+        value: 'PrefabricatedSelect',
 
+    },
+    PrefabricatedDateSelect: {
+        value: 'PrefabricatedDateSelect',
+
+    },
 }
 
 export const OtherDiyPageConfig = {

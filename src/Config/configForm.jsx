@@ -6362,7 +6362,6 @@ const PrefabricatedChartCorrelation = [
     ChartDataCommonFormList,
     ChartCorrelationFormList,
 ]
-
 // TODO 水球图
 const ChartLiquidFormList = {
     span: 24, formType: 'GROUP', name: 'ChartCommon_Liquid', label: '水球图', collapsible: true,
@@ -6429,6 +6428,7 @@ const PrefabricatedChartCandlestick = [
     ChartCandlestickFormList,
 ]
 
+// TODO 数据配置
 const TemplateApiConfig = {
     span: 24, formType: 'GROUP', name: 'api_config', label: '数据配置', collapsible: true,
     children: [
@@ -7046,7 +7046,6 @@ const PrefabricatedList = [
         ]
     },
 ]
-
 // !!! 表单模块
 // ??? 默认表单
 const PrefabricatedTable = [
@@ -7254,7 +7253,55 @@ const PrefabricatedTable = [
         ]
     },
 ]
+// !!! 选择器
+// ??? 下拉选择器
+const PrefabricatedSelect = [
 
+]
+// ??? 时间选择器
+const PrefabricatedDateSelect = [
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA01', label: '基础设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'allowClear', label: '清除按钮', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'picker', label: '日期类型', rules: true, valueEnum: MappingData.From_AntdDatePicker },
+            { span: 8, formType: 'RADIO', name: 'defaultDate', label: '默认日期', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 8, formType: 'RADIO', name: 'specifiedDate', label: '指定默认日期', rules: true, valueEnum: MappingData.IsEnabledBool,
+                jugde: [{ field: 'defaultDate', value: [true] }]
+            },
+            {
+                span: 8, formType: 'DATETIME', name: 'valueDate', label: '日期默认值', rules: true,
+                jugde: [{ field: 'defaultDate', value: [true] }, { field: 'specifiedDate', value: [true] }]
+            },
+        ]
+    },
+    // 背景设置
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA02', label: '背景样式', collapsible: true,
+        children: [
+            // 背景颜色
+            // 背景角度
+            // 内外边距
+            // 圆角
+            // 边框
+            // 阴影
+        ]
+    },
+    // 组件样式
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA03', label: '组件样式', collapsible: true,
+        children: [
+            // 文字设置
+            // 图标设置
+            // 额外尾缀
+        ]
+    },
+
+
+
+]
+{/* <DatePicker allowClear={false} picker="year"  value={dateValue} /> */ }
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
@@ -7277,6 +7324,8 @@ const ModelConfigFormList = [
         ]
     },
 ]
+
+
 
 export const FormConfig = {
     TextClassList,
@@ -7305,7 +7354,6 @@ export const FormConfig = {
     LayoutAPiDataFormList,
     LayoutWindowStyleFormList,
     ModelConfigFormList,
-
 
     PrefabricatedPlaceEmpty,
     PrefabricatedChartLine,
@@ -7340,5 +7388,8 @@ export const FormConfig = {
 
     PrefabricatedList,
 
-    PrefabricatedTable
+    PrefabricatedTable,
+
+    PrefabricatedSelect,
+    PrefabricatedDateSelect
 }
