@@ -8,6 +8,8 @@ import { HappyProvider } from '@ant-design/happy-work-theme'
 import { useMount, useSessionStorageState, useTitle, useFavicon, useEventEmitter } from 'ahooks'
 
 
+
+
 import { axios } from '../Utils/Api'
 import { CommonAPIUrl } from '../Config'
 import LoadSvg from '../Page/Loading/LoadSvg'
@@ -33,7 +35,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
         const { uuid } = await GetIndexedDB('config')
         const pageParams = page === 'Start' || !page ? 'Home' : page
         setComponentStatus({ loading: true, status: true, error: null, Template: null })
-        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}STA_PAGE/${pageParams}` } })
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/STA_PAGE/${pageParams}` } })
         if (err) {
             console.log(`[------------错误路由 : ${pathname}---------------] :`, err)
             StartEvent.emit({ type: 'setCurrent', data: {} })

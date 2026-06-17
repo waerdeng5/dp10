@@ -44,7 +44,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
         text_title_filed, text_title_filed_color, text_title_filed_data,
         text_value_color, text_value_deg, text_value_family, text_value_margin, text_value_size, text_value_style, text_value_weight,
         text_value_filed, text_value_filed_color, text_value_filed_data,
-
+        back_image, back_image_url, back_image_padding, back_image_margin, back_image_width, back_image_height,
         back_color, back_deg, back_radius, back_border, back_border_size, back_border_type, back_border_color,
         back_position, back_topUnit, back_top, back_btmUnit, back_btm, back_lefUnit, back_lef, back_rigUnit, back_rig,
         back_widthUnit, back_width, back_heightUnit, back_height,
@@ -86,7 +86,13 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
         height: image_height,
         margin: SpacingCallBack(image_margin),
         filter: SetFilderParams(image_filed, image_filed_data, image_filed_color),
+    }
 
+    const backImageStyle = {
+        width: back_image_width ? back_image_width : '100%',
+        height: back_image_height ? back_image_height : '100%',
+        margin: SpacingCallBack(back_image_margin),
+        padding: SpacingCallBack(back_image_padding),
     }
 
     const textStyle = {
@@ -205,6 +211,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     filter: SetFilderParams(icon_filed, icon_filed_color, icon_filed_data),
                 }
 
+
                 return (
                     <div
                         key={i}
@@ -225,6 +232,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     </div>
                 )
             })}
+            {back_image && <img className='BackImage' style={backImageStyle} src={back_image_url} alt='背景图片' />}
         </div>
     );
 };

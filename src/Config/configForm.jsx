@@ -915,7 +915,7 @@ const StartFormList = [
         span: 24, formType: 'GROUP', name: 'win_samll', label: '小窗信息', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'start_type', value: ['A02'] }], children: [
             {
-                span: 24, formType: 'GROUP', name: 'win_top', label: '头部标题设置', collapsible: true, children: [
+                span: 24, formType: 'GROUP', name: 'win_top', label: '头部标题', collapsible: true, children: [
                     { span: 12, formType: 'INPUT', name: 'win_title', label: '小窗标题', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_height', label: '标题高度', rules: true },
                     { span: 24, formType: 'INPUT', name: 'win_url', label: '图片地址', rules: true },
@@ -940,7 +940,7 @@ const StartFormList = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'win_win', label: '窗口背景设置', collapsible: true, children: [
+                span: 24, formType: 'GROUP', name: 'win_win', label: '窗口背景', collapsible: true, children: [
                     { span: 12, formType: 'COLOR', name: 'win_back_color', label: '背景颜色', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_back_deg', label: '颜色角度', rules: true },
                     { span: 12, formType: 'RADIO', name: 'win_back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -963,7 +963,54 @@ const StartFormList = [
                         ]
                     },
                 ]
-            }
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'win_image', label: '图片背景', collapsible: true, children: [
+                    { span: 24, formType: 'RADIO', name: 'win_image_status', label: '背景图层', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'LIST', name: 'win_image_list', label: '图片列表', collapsible: true, title: '图片',
+                        jugde: [{ field: 'win_image_status', value: [true] }], children: [
+                            { span: 12, formType: 'INPUT', name: 'image_url', label: '图片地址', rules: true },
+                            { span: 12, formType: 'RADIO', name: 'back_position', label: '背景定位方式', rules: true, valueEnum: MappingData.Style__PositionType },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_topUnit', label: '顶部定位单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'back_position', value: ['top-left', 'top-right'] }]
+                            },
+                            {
+                                span: 12, formType: 'NUMBER', name: 'back_top', label: '顶部距离', rules: true,
+                                jugde: [{ field: 'back_position', value: ['top-left', 'top-right'] }]
+                            },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_btmUnit', label: '底部定位单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'back_position', value: ['bottom-left', 'bottom-right'] }]
+                            },
+                            {
+                                span: 12, formType: 'NUMBER', name: 'back_btm', label: '底部距离', rules: true,
+                                jugde: [{ field: 'back_position', value: ['bottom-left', 'bottom-right'] }]
+                            },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_lefUnit', label: '左侧定位单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'back_position', value: ['top-left', 'bottom-left'] }]
+                            },
+                            {
+                                span: 12, formType: 'NUMBER', name: 'back_lef', label: '左侧距离', rules: true,
+                                jugde: [{ field: 'back_position', value: ['top-left', 'bottom-left'] }]
+                            },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_rigUnit', label: '右侧定位单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'back_position', value: ['top-right', 'bottom-right'] }]
+                            },
+                            {
+                                span: 12, formType: 'NUMBER', name: 'back_rig', label: '右侧距离', rules: true,
+                                jugde: [{ field: 'back_position', value: ['top-right', 'bottom-right'] }]
+                            },
+                            { span: 8, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
+                            { span: 8, formType: 'NUMBER', name: 'height', label: '高度', rules: true },
+                            { span: 8, formType: 'NUMBER', name: 'rotate', label: '旋转度', rules: true },
+                        ]
+                    },
+                ]
+            },
         ]
     },
     {
@@ -5545,6 +5592,14 @@ const ChartIndicatorCommonFormList = {
                         { span: 12, formType: 'SELECT', name: 'indicator_title_Family', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
                         { span: 12, formType: 'RADIO', name: 'indicator_title_Weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
                         { span: 12, formType: 'RADIO', name: 'indicator_title_Style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                        {
+                            span: 12, formType: 'RADIO', name: 'indicator_title_percent', label: '渲染占比', rules: true,
+                            valueEnum: MappingData.IsEnabledBool
+                        },
+                        {
+                            span: 12, formType: 'RADIO', name: 'indicator_title_percentData', label: '占比计算方式 ', rules: true,
+                            jugde: [{ field: 'indicator_title_percent', value: [true] }], valueEnum: MappingData.Charts__percentData
+                        },
                     ]
                 },
                 { span: 24, formType: 'RADIO', name: 'indicator_content', label: '渲染内容 ', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -6725,11 +6780,16 @@ const PrefabricatedList = [
         ]
     },
     {
-        span: 24, formType: 'LIST', name: 'data_diy_config', label: '自定义数据', collapsible: true,
-        jugde: [{ field: 'api_source', value: ['A01', 'A03'] }], children: [
-            { span: 12, formType: 'INPUT', name: 'data_title', label: '标题名称', rules: true },
-            { span: 12, formType: 'INPUT', name: 'data_value', label: '映射字段', rules: true },
-            ...ListConfigList,
+        span: 24, formType: 'GROUP', name: 'data_diy_config_group', label: '自定义数据', collapsible: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'data_diy_config', label: '自定义数据', collapsible: true,
+                jugde: [{ field: 'api_source', value: ['A01', 'A03'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'data_title', label: '标题名称', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'data_value', label: '映射字段', rules: true },
+                    ...ListConfigList,
+                ]
+            },
         ]
     },
     {
@@ -6761,6 +6821,28 @@ const PrefabricatedList = [
             { span: 12, formType: 'SELECT', name: 'whole_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
             { span: 12, formType: 'INPUT', name: 'whole_padding', label: '内填充', rules: true },
             { span: 12, formType: 'INPUT', name: 'whole_margin', label: '外间距', rules: true },
+            // 背景图片
+            { span: 12, formType: 'RADIO', name: 'back_image', label: '背景图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'back_image_url', label: '图片地址', rules: true,
+                jugde: [{ field: 'back_image', value: [true] }]
+            },
+            {
+                span: 12, formType: 'INPUT', name: 'back_image_padding', label: '图片内填充', rules: true,
+                jugde: [{ field: 'back_image', value: [true] }]
+            },
+            {
+                span: 12, formType: 'INPUT', name: 'back_image_margin', label: '图片外边距', rules: true,
+                jugde: [{ field: 'back_image', value: [true] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'back_image_width', label: '图片宽度',
+                jugde: [{ field: 'back_image', value: [true] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'back_image_height', label: '图片高度',
+                jugde: [{ field: 'back_image', value: [true] }]
+            },
         ]
     },
     {

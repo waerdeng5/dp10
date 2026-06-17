@@ -746,12 +746,16 @@ const indicatorFn = (data, values, type) => {
         indicator_title_Size, indicator_title_Height, indicator_title_Family, indicator_title_Weight, indicator_title_Style,
         indicator_content, indicator_content_init, indicator_content_field, indicator_content_af, indicator_content_bf, indicator_content_fill,
         indicator_content_Size, indicator_content_Height, indicator_content_Family, indicator_content_Weight, indicator_content_Style,
-        indicator_content_percent, indicator_content_percentData
+        indicator_content_percent, indicator_content_percentData, indicator_title_percent, indicator_title_percentData
     } = data
-    const percentData = (value) => {
-        if (indicator_content_percent) {
+    const percentData = (value, type) => {
+        if (type === 'content' && indicator_content_percent) {
             if (indicator_content_percentData === 'A01') return `${value}%`
             if (indicator_content_percentData === 'A02') return `${parseInt(value * 10000) / 100}%`
+        }
+        if (type === 'title' && indicator_title_percent) {
+            if (indicator_title_percentData === 'A01') return `${value}%`
+            if (indicator_title_percentData === 'A02') return `${parseInt(value * 10000) / 100}%`
         }
         return value
     }
@@ -767,9 +771,9 @@ const indicatorFn = (data, values, type) => {
             visible: indicator_title,
             style: {
                 text: e => {
-                    if (type === 'liquid' || type === 'gauge') return indicator_title_init
-                    if (e) return indicator_title_af + (e[indicator_title_field] ?? e[0][indicator_title_field]) + indicator_title_bf || indicator_title_init
-                    if (indicator_firstData && firstData) return indicator_title_af + firstData[indicator_title_field] + indicator_title_bf || indicator_title_init
+                    if (type === 'liquid' || type === 'gauge') return percentData(values[0][indicator_title_field], 'title')
+                    if (e) return indicator_title_af + percentData(e[indicator_title_field] ?? e[0][indicator_title_field], 'title') + indicator_title_bf || indicator_title_init
+                    if (indicator_firstData && firstData) return indicator_title_af + percentData(firstData[indicator_title_field], 'title') + indicator_title_bf || indicator_title_init
                     return indicator_title_init
                 },
                 fill: indicator_title_fill,
@@ -784,9 +788,9 @@ const indicatorFn = (data, values, type) => {
             visible: indicator_content,
             style: {
                 text: e => {
-                    if (type === 'liquid' || type === 'gauge') return percentData(values[0][indicator_content_field])
-                    if (e) return indicator_content_af + percentData(e[indicator_content_field] ?? e[0][indicator_content_field]) + indicator_content_bf || indicator_content_init
-                    if (indicator_firstData && firstData) return indicator_content_af + percentData(firstData[indicator_content_field]) + indicator_content_bf || indicator_content_init
+                    if (type === 'liquid' || type === 'gauge') return percentData(values[0][indicator_content_field], 'content')
+                    if (e) return indicator_content_af + percentData(e[indicator_content_field] ?? e[0][indicator_content_field], 'content') + indicator_content_bf || indicator_content_init
+                    if (indicator_firstData && firstData) return indicator_content_af + percentData(firstData[indicator_content_field], 'content') + indicator_content_bf || indicator_content_init
                     return indicator_content_init
                 },
                 fill: indicator_content_fill,

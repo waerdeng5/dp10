@@ -60,6 +60,8 @@
         flex: 1;
         width: 100%;
         overflow: hidden;
+        position: relative;
+        z-index: 1;
 
         .ConfigPage {
             padding: 8px;
@@ -486,6 +488,11 @@
                     }
                 }
             }
+        }
+
+        &>.WinBoxBackImage {
+            position: absolute;
+            z-index: -1;
         }
     }
 }

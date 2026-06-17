@@ -14,8 +14,8 @@ import { GridBackground } from "react-grid-layout/extras"
 
 import { modelStore } from '../Router/zustand'
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
-import { Decrypt, Encrypt } from '../Utils/IndexedDB'
-import { PageLayoutWindowDetailsStyle } from '../Config'
+import { Decrypt, Encrypt, GetIndexedDB } from '../Utils/IndexedDB'
+import { PageLayoutWindowDetailsStyle, CommonAPIUrl } from '../Config'
 import { GlobalOperation, SwiperTemplate } from '../Temp/LayTemplate'
 import { ColorCallBack, SetBorderParams, SetFilderParams, SpacingCallBack } from '../Utils'
 
@@ -74,15 +74,14 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     const getData = async () => {
         const { uuid } = await GetIndexedDB('config')
-        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}STA_PAGE/${page.path}` } })
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${uuid}/STA_PAGE/${page.path}` } })
         if (err) return console.log(err)
         setPAGEDate(await Decrypt(res))
     }
-
     const setData = async e => {
         console.log('[--保存lay页面--]', e)
         const { uuid } = await GetIndexedDB('config')
-        const params = { uuid: `${uuid}STA_PAGE/${e.path}`, content: JSON.stringify(await Encrypt(e)) }
+        const params = { uuid: `${uuid}/STA_PAGE/${e.path}`, content: JSON.stringify(await Encrypt(e)) }
         const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
         LayoutEvent.emit({ type: 'setCurrent', data: e })
@@ -193,6 +192,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     // 模块编辑
     const onSetTemplateParams = (data) => {
         const { form, tempId } = data
+        console.log(data)
         updateModel5({
             title: '模块设置',
             type: 'CommonForm',

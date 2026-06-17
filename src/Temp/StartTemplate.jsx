@@ -381,6 +381,7 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
         win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
         win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt,
+        win_image_status, win_image_list,
         ...item
     } = Config
     const winTitleStyle = {
@@ -397,6 +398,8 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         border: SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
         backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
     }
+
+
 
     return (
         <div className='SmallWindowBox '>
@@ -667,6 +670,34 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         </div>
                     )
                 })() : children}
+
+                {win_image_status && win_image_list.map((v, i) => {
+                    console.log(v)
+
+                    const Style = {
+                        width: v.width,
+                        height: v.height,
+                        transform: `rotate(${v.rotate}deg)`
+                    }
+                    const positionMap = {
+                        'top-left': { top: v.back_top, right: null, bottom: null, left: v.back_lef, topUnit: v.back_topUnit, leftUnit: v.back_lefUnit },
+                        'top-right': { top: v.back_top, right: v.back_rig, bottom: null, left: null, topUnit: v.back_topUnit, rightUnit: v.back_rigUnit },
+                        'bottom-left': { top: null, right: null, bottom: v.back_btm, left: v.back_lef, bottomUnit: v.back_btmUnit, leftUnit: v.back_lefUnit },
+                        'bottom-right': { top: null, right: v.back_rig, bottom: v.back_btm, left: null, bottomUnit: v.back_btmUnit, rightUnit: v.back_rigUnit },
+                    };
+                    const posConfig = positionMap[v.back_position];
+                    Object.entries(posConfig).forEach(([key, value]) => {
+                        if (value !== null) {
+                            if (key.endsWith('Unit')) return
+                            const unitKey = key + 'Unit'
+                            const unit = posConfig[unitKey]
+                            Style[key] = unit === 'pct' ? `${value}%` : value + unit
+                        }
+                    })
+                    return (
+                        <img className='WinBoxBackImage' key={i} src={v.image_url} alt={v.image_url} style={Style} />
+                    )
+                })}
             </div>
         </div>
     )
