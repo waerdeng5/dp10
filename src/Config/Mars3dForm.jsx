@@ -947,6 +947,7 @@ const Mars3DpolylinePFormList = [
     { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: ['style', 'depthFail'], label: '遮挡显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'classificationType'], label: '覆盖类型', rules: true, valueEnum: MappingData.mars3d_classificationType },
     depthFailConfig,
     { span: 24, formType: 'RADIO', name: ['style', 'distanceDisplayCondition'], label: '视距显示', rules: true, valueEnum: MappingData.IsEnabledBool },
     distanceDisplayConditionConfig,
