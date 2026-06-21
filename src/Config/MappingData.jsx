@@ -459,6 +459,11 @@ export const MappingData = {
         { value: 'txt', label: '文字' },
         { value: 'att', label: '附件' },
     ],
+    System__textOrImage: [
+        { value: 'none', label: '禁用' },
+        { value: 'text', label: '文字' },
+        { value: 'icon', label: '图标' },
+    ],
 
     System__OptionsStatus: [
         { value: 'top', label: '全局操作' },

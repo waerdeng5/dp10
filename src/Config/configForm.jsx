@@ -7260,6 +7260,7 @@ const PrefabricatedSelect = [
 ]
 // ??? 时间选择器
 const PrefabricatedDateSelect = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA01', label: '基础设置', collapsible: true,
         children: [
@@ -7280,28 +7281,132 @@ const PrefabricatedDateSelect = [
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA02', label: '背景样式', collapsible: true,
         children: [
-            // 背景颜色
-            // 背景角度
-            // 内外边距
-            // 圆角
-            // 边框
-            // 阴影
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_width', label: '窗体宽度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'back_shadow', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'GROUP', name: 'back_border_config', label: '边框样式', collapsible: true,
+                jugde: [{ field: 'back_border', value: [true] }], children: [
+                    { span: 24, formType: 'COLOR', name: 'back_border_color', label: '边框颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'back_border_size', label: '边框尺寸', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'back_border_type', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'back_shadow_config', label: '阴影样式', collapsible: true,
+                jugde: [{ field: 'back_shadow', value: [true] }], children: [
+                    { span: 24, formType: 'COLOR', name: 'back_shadow_color', label: '阴影颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'back_shadow_size', label: '阴影数值', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'back_shadow_type', label: '阴影类型', rules: true, valueEnum: MappingData.Style__shadowType },
+                ]
+            }
         ]
     },
     // 组件样式
     {
-        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA03', label: '组件样式', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA03', label: '字体样式', collapsible: true,
         children: [
-            // 文字设置
-            // 图标设置
-            // 额外尾缀
+            { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'title_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
         ]
     },
-
-
-
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA04', label: '图标样式', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'prefix', label: '前缀', rules: true, valueEnum: MappingData.System__textOrImage },
+            { span: 12, formType: 'RADIO', name: 'suffix', label: '后缀', rules: true, valueEnum: MappingData.System__textOrImage },
+            {
+                span: 12, formType: 'GROUP', name: 'prefix_text_config', label: '前缀文字', collapsible: true,
+                jugde: [{ field: 'prefix', value: ['text'] }], children: [
+                    { span: 24, formType: 'INPUT', name: 'prefix_text', label: '文字内容', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'prefix_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'prefix_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'prefix_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'prefix_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'prefix_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'prefix_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'prefix_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'prefix_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'prefix_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'prefix_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'prefix_icon_config', label: '前缀图标', collapsible: true,
+                jugde: [{ field: 'prefix', value: ['icon'] }], children: [
+                    { span: 24, formType: 'TempICON', name: 'prefix_icon', label: '图标选择', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'prefix_icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'prefix_icon_size', label: '图标尺寸', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'prefix_icon_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'prefix_icon_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'prefix_icon_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'prefix_icon_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'prefix_icon_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'suffix_text_config', label: '后缀设置', collapsible: true,
+                jugde: [{ field: 'suffix', value: ['text'] }], children: [
+                    { span: 24, formType: 'INPUT', name: 'suffix_text', label: '文字内容', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'suffix_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'suffix_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'suffix_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'suffix_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'suffix_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'suffix_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'suffix_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'suffix_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'suffix_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'suffix_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'suffix_icon_config', label: '后缀设置', collapsible: true,
+                jugde: [{ field: 'suffix', value: ['icon'] }], children: [
+                    { span: 24, formType: 'TempICON', name: 'suffix_icon', label: '图标选择', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'suffix_icon_color', label: '图标颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'suffix_icon_size', label: '图标尺寸', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'suffix_icon_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'suffix_icon_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'suffix_icon_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'suffix_icon_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'suffix_icon_filed', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    }
 ]
-{/* <DatePicker allowClear={false} picker="year"  value={dateValue} /> */ }
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },

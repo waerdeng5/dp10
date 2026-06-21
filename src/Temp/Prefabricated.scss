@@ -578,4 +578,27 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    .ant-picker-input {
+        width: var(--width);
+
+        &>input {
+            color: var(--textColor);
+            font-size: var(--textSize);
+            font-family: var(--textFamily);
+            font-weight: var(--textWeight);
+            font-style: var(--textStyle);
+            filter: var(--textFiled);
+        }
+
+    }
+
+    .ant-picker-prefix {
+        margin: 0 16px;
+    }
+
+    .ant-picker-suffix {
+        margin: 0 16px;
+
+    }
 }
