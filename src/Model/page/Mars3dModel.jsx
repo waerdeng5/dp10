@@ -319,7 +319,6 @@ const Mars3dModel = ({ data, Event }) => {
             gra.on(mars3d.EventType.editStart, async (e) => {
                 message.loading({ key: 'element', duration: 0, content: '元素编辑中...' })
                 const data = e.graphic.options
-                await 1
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 setActivate(data)
                 updateModel5({
@@ -336,7 +335,6 @@ const Mars3dModel = ({ data, Event }) => {
             gra.on(mars3d.EventType.editStop, async (e) => {
                 message.success({ key: 'element', content: '完成元素编辑!' })
                 const data = { ...e.graphic.options, type: e.editType }
-                await 1
                 if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
                 else data.positions = e.graphic.coordinates
                 const length = latestELE.current.findIndex(v => v.id === data.id)
