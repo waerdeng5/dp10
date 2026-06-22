@@ -191,7 +191,6 @@ const RenderElement = (gra, data) => {
                 break;
             // !!! 线
             case 'polylineP':
-
                 const polylineP = new mars3d.graphic.PolylinePrimitive({ id, positions, show, style })
                 gra.addGraphic(polylineP)
                 break;

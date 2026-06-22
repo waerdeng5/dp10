@@ -1027,6 +1027,7 @@ const Mars3DpolygonPFormList = [
     { span: 24, formType: 'HIDDEN', name: 'type', label: '元素类型', rules: true },
     { span: 24, formType: 'NUMBER', name: ['style', 'diffHeight'], label: '墙面高度', rules: true },
     { span: 24, formType: 'RADIO', name: ['style', 'clampToGround'], label: '是否贴地', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'RADIO', name: ['style', 'classificationType'], label: '覆盖类型', rules: true, valueEnum: MappingData.mars3d_classificationType },
     { span: 24, formType: 'RADIO', name: ['style', 'hasShadows'], label: '是否阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 24, formType: 'RADIO', name: ['style', 'classificationType'], label: '覆盖类型', rules: true, valueEnum: MappingData.mars3d_classificationType },
     { span: 24, formType: 'RADIO', name: ['style', 'outline'], label: '是否衬色', rules: true, valueEnum: MappingData.IsEnabledBool },

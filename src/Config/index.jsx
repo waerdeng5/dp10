@@ -14,6 +14,10 @@ export const ImageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/'
 export const CommonUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/'
 export const CommonWeChatUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/WeChat/Admin01'
 
+// 模型操作图标
+export const moveImg = `https://aloss.ljkjkf.com/WebConfigFile/Scene/img/ModelMove.png`
+export const rotateImg = `https://aloss.ljkjkf.com/WebConfigFile/Scene/img/ModelRotate.png`
+
 export const UserAvatar = {
     AvatarA01: `${CommonUrl}images/Avatar/AvatarA01.webp`,
     AvatarA02: `${CommonUrl}images/Avatar/AvatarA02.webp`,

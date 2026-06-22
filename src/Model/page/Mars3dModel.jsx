@@ -5,16 +5,18 @@ import _ from 'lodash'
 import { v4 } from 'uuid'
 import { useEffect, useState } from 'react'
 import { useEventEmitter, useLatest } from "ahooks"
-import { Tabs, Button, Tree, Dropdown, Tooltip, App, Drawer, Popconfirm } from "antd"
+import { Tabs, Button, Tree, Tooltip, App, Popconfirm } from "antd"
 
-import FormTemplate from '../../Utils/FormTemplate'
-import { Mars3dFormConfig } from '../../Config/Mars3dForm'
-import { DevScrollView } from '../../Temp/DevTemplate'
-import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
+import { moveImg, rotateImg } from '../../Config'
 import { modelStore } from '../../Router/zustand'
-import { onTreeDrop, replaceNodeById, removeTreeByKey, updateTreeByKey, getPathArray, treeValue, replaceNodeByIdTwo } from "../../Utils"
-import { ICONMapping } from '../../Config/IconMapping'
+import FormTemplate from '../../Utils/FormTemplate'
 import { initStartDraw } from '../../Mars3d/initData'
+import { TilesEditor } from '../../Utils/TilesEditor'
+import { DevScrollView } from '../../Temp/DevTemplate'
+import { ICONMapping } from '../../Config/IconMapping'
+import { Mars3dFormConfig } from '../../Config/Mars3dForm'
+import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
+import { onTreeDrop, replaceNodeById, removeTreeByKey, getPathArray, treeValue, replaceNodeByIdTwo } from "../../Utils"
 
 // DIV元素
 const divType = ['div', 'divPlane']
@@ -472,6 +474,9 @@ const Mars3dModel = ({ data, Event }) => {
         const [TILData, setTILData] = useState(TILConfig)
         const [Activate, setActivate] = useState()
 
+        // const [Editor] = useState(new TilesEditor({ map, moveImg, rotateImg }))
+
+
         const onAdd = () => {
             updateModel5({
                 title: '新增模型',
@@ -483,6 +488,7 @@ const Mars3dModel = ({ data, Event }) => {
             })
         }
         const onModify = (data) => {
+            console.log('修改模型 -> 地图拖拽')
             updateModel5({
                 title: '修改模型',
                 type: 'CommonForm',
@@ -543,7 +549,9 @@ const Mars3dModel = ({ data, Event }) => {
             setTILData([...TILData])
             Event.emit({ type: 'onSaveTilConfig', data: TILData })
         }
+
         const onModifyModel = (TIL) => {
+            // Editor.enabled = true
             setActivate({ uuid: TIL.id })
             TIL.flyTo()
             updateModel5({
@@ -556,7 +564,9 @@ const Mars3dModel = ({ data, Event }) => {
                 position: { my: 'right ', at: 'right ', of: window },
                 modelData: { type: `Mars3DtilesFormList`, Initial: TIL.options }
             })
+
         }
+
         const CallBackFunc = e => {
             const { type, data } = e
             // console.log('Mars3d', e)
