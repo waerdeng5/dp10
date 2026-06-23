@@ -3,6 +3,7 @@ import * as mars3d from "mars3d"
 import _ from 'lodash'
 
 import { v4 } from 'uuid'
+import copy from 'copy-to-clipboard'
 import { useEffect, useState } from 'react'
 import { useEventEmitter, useLatest } from "ahooks"
 import { Tabs, Button, Tree, Tooltip, App, Popconfirm } from "antd"
@@ -278,6 +279,29 @@ const Mars3dModel = ({ data, Event }) => {
             Event.emit({ type: 'onSaveMapEle', data: { map: newMap, ele: newEle } })
         }
 
+        const onCopyPositions = (e) => {
+            const { type, coordinate, coordinates } = e
+            if (singlePoint.includes(type)) {
+                const success = copy(JSON.stringify(coordinate))
+                if (success) {
+                    console.log('复制成功！');
+                } else {
+                    console.log('复制失败，请重试！');
+                }
+            } else {
+                const success = copy(JSON.stringify(coordinates))
+                if (success) {
+                    console.log('复制成功！');
+                } else {
+                    console.log('复制失败，请重试！');
+                }
+            }
+        }
+
+        const onCoverPositions = () => {
+            console.log('覆盖')
+        }
+
         const CallBackFunc = e => {
             const { type, data } = e
             // console.log('Mars3d', e)
@@ -431,6 +455,28 @@ const Mars3dModel = ({ data, Event }) => {
                                                                 cancelText="取消"
                                                             >
                                                                 <Button type='link' icon={ICONMapping['fasCopy']} />
+                                                            </Popconfirm>
+                                                        </Tooltip>
+                                                        <Tooltip title='复制参数'>
+                                                            <Popconfirm
+                                                                title="复制提醒!"
+                                                                description="是否复制当前元素位置信息?"
+                                                                onConfirm={() => onCopyPositions(ELE)}
+                                                                okText="复制"
+                                                                cancelText="取消"
+                                                            >
+                                                                <Button type='link' icon={ICONMapping['fasMapMarkerAlt']} />
+                                                            </Popconfirm>
+                                                        </Tooltip>
+                                                        <Tooltip title='覆盖参数'>
+                                                            <Popconfirm
+                                                                title="覆盖提醒!"
+                                                                description="是否覆盖当前元素位置信息?"
+                                                                onConfirm={() => onCoverPositions(ELE)}
+                                                                okText="覆盖"
+                                                                cancelText="取消"
+                                                            >
+                                                                <Button type='link' icon={ICONMapping['fasMapMarkerAlt']} />
                                                             </Popconfirm>
                                                         </Tooltip>
                                                     </> :
