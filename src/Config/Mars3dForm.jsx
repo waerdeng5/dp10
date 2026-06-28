@@ -16,6 +16,11 @@ const Mars3donAddElement = [
         jugde: [{ field: 'fieldType', value: ['element'] }]
     },
 ]
+// TODO 覆盖参数信息
+const Mars3donCoverPositions = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '唯一标识', rules: true },
+    { span: 24, formType: 'TEXTAREA', name: 'positions', label: '参数信息', rules: true },
+]
 // TODO 天机模型或分组
 const Mars3donAddTiles = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '唯一标识', rules: true },
@@ -1222,6 +1227,7 @@ const Mars3DtilesFormList = [
 export const Mars3dFormConfig = {
     Mars3donAddCenter,
     Mars3donAddElement,
+    Mars3donCoverPositions,
     Mars3donAddTiles,
     Mars3dFileConfig,
 

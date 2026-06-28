@@ -83,6 +83,7 @@ const MapPage = ({ data, AdminEvent }) => {
         port && console.log('[---------基础信息---------]', { ...sceneParameter, ...MapConfig })
         port && console.log('[---------元素信息---------]', ELEConfig)
         port && console.log('[---------模型信息---------]', TILConfig)
+        message.loading({ key: ' save', content: '保存中...', duration: 0 })
         const paramsA01 = JSON.stringify(await Encrypt({ ...sceneParameter, ...MapConfig }))
         const paramsA02 = JSON.stringify(await Encrypt(ELEConfig))
         const paramsA03 = JSON.stringify(await Encrypt(TILConfig))

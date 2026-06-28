@@ -17,7 +17,7 @@ import { DevScrollView } from '../../Temp/DevTemplate'
 import { ICONMapping } from '../../Config/IconMapping'
 import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { LayerListMap, BoundaryBorderFunction } from '../../Mars3d'
-import { onTreeDrop, replaceNodeById, removeTreeByKey, getPathArray, treeValue, replaceNodeByIdTwo } from "../../Utils"
+import { onTreeDrop, replaceNodeById, removeTreeByKey, getPathArray, treeValue, replaceNodeByIdTwo, is2DArray } from "../../Utils"
 
 // DIV元素
 const divType = ['div', 'divPlane']
@@ -283,23 +283,25 @@ const Mars3dModel = ({ data, Event }) => {
             const { type, coordinate, coordinates } = e
             if (singlePoint.includes(type)) {
                 const success = copy(JSON.stringify(coordinate))
-                if (success) {
-                    console.log('复制成功！');
-                } else {
-                    console.log('复制失败，请重试！');
-                }
+                if (success) message.success('复制成功！')
+                else message.error('复制失败！')
             } else {
                 const success = copy(JSON.stringify(coordinates))
-                if (success) {
-                    console.log('复制成功！');
-                } else {
-                    console.log('复制失败，请重试！');
-                }
+                if (success) message.success('复制成功！')
+                else message.error('复制失败！')
             }
         }
 
-        const onCoverPositions = () => {
-            console.log('覆盖')
+        const onCoverPositions = (data) => {
+            // 打开弹出层添加经纬度信息
+            updateModel5({
+                title: '覆盖参数信息',
+                type: 'CommonForm',
+                width: 480,
+                height: 480,
+                Event: FORMEVENT,
+                modelData: { formItem: 'Mars3donCoverPositions', eventBack: 'onCoverPositions', Initial: { uuid: data.id } }
+            })
         }
 
         const CallBackFunc = e => {
@@ -332,6 +334,17 @@ const Mars3dModel = ({ data, Event }) => {
                         return
                     }
                     ELE.setOptions(data)
+                }],
+                ['onCoverPositions', () => {
+                    const { uuid, positions } = data
+                    const ELE = gra.getGraphicById(uuid)
+                    const positionData = JSON.parse(positions)
+                    const obj = { [is2DArray(positionData) ? 'positions' : 'position']: positionData }
+                    ELE.setOptions(obj)  // 修改地图
+                    // 修改参数
+                    ELEData.find(v => v.id === uuid)[is2DArray(positionData) ? 'positions' : 'position'] = positionData
+                    message.success('覆盖成功！')
+                    updateModel5({})
                 }]
             ])
             const func = Mapping.get(type)
@@ -458,26 +471,10 @@ const Mars3dModel = ({ data, Event }) => {
                                                             </Popconfirm>
                                                         </Tooltip>
                                                         <Tooltip title='复制参数'>
-                                                            <Popconfirm
-                                                                title="复制提醒!"
-                                                                description="是否复制当前元素位置信息?"
-                                                                onConfirm={() => onCopyPositions(ELE)}
-                                                                okText="复制"
-                                                                cancelText="取消"
-                                                            >
-                                                                <Button type='link' icon={ICONMapping['fasMapMarkerAlt']} />
-                                                            </Popconfirm>
+                                                            <Button type='link' onClick={() => onCopyPositions(ELE)} icon={ICONMapping['fasMapMarkerAlt']} />
                                                         </Tooltip>
                                                         <Tooltip title='覆盖参数'>
-                                                            <Popconfirm
-                                                                title="覆盖提醒!"
-                                                                description="是否覆盖当前元素位置信息?"
-                                                                onConfirm={() => onCoverPositions(ELE)}
-                                                                okText="覆盖"
-                                                                cancelText="取消"
-                                                            >
-                                                                <Button type='link' icon={ICONMapping['fasMapMarkerAlt']} />
-                                                            </Popconfirm>
+                                                            <Button type='link' onClick={() => onCoverPositions(ELE)} icon={ICONMapping['fasVectorSquare']} />
                                                         </Tooltip>
                                                     </> :
                                                     <Tooltip title='图上绘制'>
@@ -750,3 +747,4 @@ const Mars3dModel = ({ data, Event }) => {
 };
 
 export default Mars3dModel;
+

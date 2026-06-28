@@ -892,3 +892,9 @@ export const getPathArray = (data) => {
     traverse(data, []);
     return result;
 }
+
+// TODO 判断是否为二维数组
+export const is2DArray = (arr) => {
+    return Array.isArray(arr) && arr.length > 0 && Array.isArray(arr[0]);
+}
+

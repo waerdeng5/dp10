@@ -13,7 +13,8 @@ export default defineConfig({
       'gjeqadmin.hljsjtgj.com',
       'dibang.lklq.com',
       'tongjiang.ljkjkf.com',
-      'nkdq.ljkjkf.com'
+      'nkdq.ljkjkf.com',
+      'nk6j.ljkjkf.com'
     ]
   }
 })
