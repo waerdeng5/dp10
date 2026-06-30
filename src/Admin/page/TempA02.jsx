@@ -9,7 +9,6 @@ import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack } from '../../Utils
 
 
 const TempA02 = ({ Theme, AdminEvent }) => {
-    console.log('theme', Theme)
     const {
         top_color = '#ffffff33',
         top_deg = 0,

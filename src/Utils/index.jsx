@@ -1,6 +1,15 @@
 import dayjs from 'dayjs'
+import { App, notification } from 'antd'
 import { GetIndexedDB, IndexedDBClear, PutIndexedDB } from './IndexedDB'
 import _ from 'lodash'
+
+const ANTDALTER = (data) => {
+    const { message, modal, notification } = App.useApp();
+    notification.error(data)
+    return (<App />)
+}
+
+
 
 // TODO 判断浏览器版本
 export const judgeBrowserVersion = () => {
@@ -733,6 +742,9 @@ export const AssemblySort = (arr) => {
     }, {})
 }
 
+
+
+
 // 打开菜单
 export const OpenMenuFunc = async (uuid, pageFunc, body_tabsMax, obj) => {
     const { updateActive, pageList, updateList } = pageFunc
@@ -744,7 +756,7 @@ export const OpenMenuFunc = async (uuid, pageFunc, body_tabsMax, obj) => {
     }
     // 判断打开数量
     if (body_tabsMax !== 0 && pageList.length + 1 > body_tabsMax) {
-        return alter({ title: '菜单打开最大限制', description: `左侧菜单最大打开 ${body_tabsMax} 个` })
+        return notification.error({ title: '菜单打开最大限制', description: `左侧菜单最大打开 ${body_tabsMax} 个`, key: 'maxOpen' })
     }
     const data = obj || treeValue(await GetIndexedDB('menu'), uuid)
     await PutIndexedDB('openKey', uuid)

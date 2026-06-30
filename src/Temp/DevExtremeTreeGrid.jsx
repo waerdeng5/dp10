@@ -24,6 +24,7 @@ import {
 import { AssemblySort } from '../Utils'
 import { axios, strOfurlParamsFunc } from '../Utils/Api'
 import { DevFieldTemplate, SummaryTemplate, DevExtremeRow, onExporting } from './DevExtremeTemplate'
+import { useEffect } from 'react'
 
 const DevExtremeTreeGrid = (props) => {
     const { data, APIdata, THEdata, OPTdata, ORGUUID, OTHUUID, DEVEvent, POWER } = props
@@ -47,10 +48,7 @@ const DevExtremeTreeGrid = (props) => {
     const getData = async () => {
         const uuidSet = new Set(POWER)
         const filteredArray = OPTdata.top.filter(item => uuidSet.has(item.uuid)).findIndex(v => v.type === 'A01')
-        if (filteredArray === -1) {
-            setLoading(false)
-            return false
-        }
+        if (filteredArray === -1) return setLoading(false)
         const { uuid, towUuid } = data
         const { method, apiUrl: url, params: apiParams, othShow, othUuid, isMenuUuid, uuidParams } = api
         const params = {
@@ -65,10 +63,7 @@ const DevExtremeTreeGrid = (props) => {
         if (isMenuUuid) params[uuidParams] = uuid
         if (othShow && othUuid) params[othUuid] = OTHUUID
         const [err, res] = await axios({ method, url, params })
-        if (err) {
-            console.log(err)
-            return false
-        }
+        if (err) return console.log(err)
         setLoading(false)
         setDataSource(res.data.list)
         setTotal(res.data.total)
@@ -76,9 +71,12 @@ const DevExtremeTreeGrid = (props) => {
         DEVEvent.emit({ type: 'onFocusedRowChanged', data: null })
     }
 
-    useDebounceEffect(() => {
-        if (ORGUUID && PageIndex) getData()
-    }, [ORGUUID, OTHUUID, PageIndex, PageSize, SortData, SearchData], { wait: 500 })
+    useEffect(() => {
+        if (ORGUUID && PageIndex && POWER.length > 0) {
+            setLoading(true)
+            getData()
+        }
+    }, [ORGUUID, OTHUUID, PageIndex, PageSize, SortData, SearchData, POWER])
 
 
     const onFocusedRowChanged = (data) => {
