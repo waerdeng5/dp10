@@ -1,6 +1,6 @@
 import './MenuTypeDev.scss'
 
-import { Result, Skeleton } from 'antd'
+import { Result, Skeleton, App } from 'antd'
 import { useEventEmitter, useMount } from 'ahooks'
 import { useState, memo, useCallback } from 'react'
 
@@ -18,6 +18,8 @@ const dataMapping = ['API', 'THE', 'OPT']
 
 const MenuTypeDev = ({ data, AdminEvent }) => {
     const { uuid, towUuid, targetUrl, menuType, } = data
+    const { message, modal, notification } = App.useApp();
+
     const DEVEvent = useEventEmitter()
     const [Show, setShow] = useState(false)
     const [Status, setStatus] = useState(true)
@@ -32,7 +34,8 @@ const MenuTypeDev = ({ data, AdminEvent }) => {
     const getPower = useCallback(async (e, optData) => {
         setORGUUID(e)
         const [err, res] = await axios({ method: 'get', url: 'menu/GetMenuByButton', params: { uuid: towUuid || uuid, organizationUuid: e } })
-        if (err) return console.log(err)
+        if (err) return notification.error({ title: '获取失败!', description: '未能及时获取您当前页面权限,请刷新或联系管理员' })
+        if (res.length === 0) return notification.error({ title: '权限不足!', description: '您的权限不能浏览当前页面,请联系管理员获取权限' })
         const options = optData || OPTdata
         const permissionSet = new Set(options.top);
         const hasPermission = res.some(item => permissionSet.has(item.uuid))
