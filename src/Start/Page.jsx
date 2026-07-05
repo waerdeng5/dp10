@@ -45,15 +45,32 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [WindowData, setWindowData] = useState()
     const [ParamsData, setParamsData] = useState()
     const [LayoutStatus, setLayoutStatus] = useState(false)
+
     const [UrlData, setUrlData] = useState({})
 
     const [FoldStatus, setFoldStatus] = useState(false)
 
-    const getApiData = async (list) => {
+    const getApiData = (params) => {
+        const apiParams = Object.values(page.params).reduce((acc, v) => {
+            if (v.value === 'PrefabricatedDateSelect' && v.isParams) acc.push(...(v.isParamsConfig || []))
+            return acc
+        }, [])
+        const mapping = page.api.map((apiItem) => {
+            const matchedParams = apiParams.filter(e => e.apiName === apiItem.api_name)
+            const dynamicParams = matchedParams.reduce((acc, item) => {
+                acc[item.apiParams] = item.apiData
+                return acc
+            }, {})
+            const finalParams = { ...strOfurlParamsFunc(apiItem.api_params), ...dynamicParams, ...(params ? dynamicParams : {}) }
+            return { method: apiItem.api_method, url: apiItem.api_url, path: apiItem.api_https, params: finalParams }
+        })
+        getApiDataParams(mapping)
+    }
+
+    const getApiDataParams = async (mapping) => {
         let data = {}
-        const mapping = list.map(v => ({ method: v.api_method, url: v.api_url, path: v.api_https, params: strOfurlParamsFunc(v.api_params) }))
         const api = await axiosFor(mapping)
-        list.forEach((v, i) => {
+        page.api.forEach((v, i) => {
             const [err, res] = api[i]
             data[v.api_name] = err ? undefined : res
             if (err) notification.error({ title: '接口请求失败!', description: `${v.api_url} 接口请求失败` })
@@ -65,7 +82,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     const setPAGEDate = e => {
         const { api = [], layout = [], params = {}, window = {} } = e
-        getApiData(api)
+        getApiData()
         setApiData(api)
         setLayoutData(layout)
         setWindowData(window)
@@ -240,7 +257,8 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
             ['onSetTemplateParams', () => onSetTemplateParams(data)],
             ['onSetTemplateParamsBack', () => onSetTemplateParamsBack(data)],
             ['onDeleteTemplate', () => onDeleteTemplate(data)],
-            ['setInternalRouting', () => console.log('站内路由', data)]
+            ['setInternalRouting', () => console.log('站内路由', data)],
+            ['onAPIParamsSelect', () => getApiData(data)],
         ])
         const func = Mapping.get(type)
         func?.(data)

@@ -2,7 +2,7 @@ import './Prefabricated.scss'
 import { useRef, useState } from 'react'
 import { VChart } from '@visactor/react-vchart'
 import { useEffect } from 'react'
-import { isEmptyObject, getRandomInt } from '../Utils'
+import { isEmptyObject, getRandomInt, getNestedValue } from '../Utils'
 
 const defaultDataA00 = [{ xField: 'China', yField: 0.4 }]
 const defaultDataA02 = [
@@ -1211,6 +1211,7 @@ const SetSpecDataFn = (data, type, values) => {
 }
 
 const dataSourceTypeFn = (type, data, UrlData) => {
+
     const { dataSourceType, data_diyData } = data
     if (dataSourceType === 'A03') return data_diyData
     if (dataSourceType === 'A01') {
@@ -1225,16 +1226,21 @@ const dataSourceTypeFn = (type, data, UrlData) => {
             return ([])
         }
         const apiData = data_apiLevel ? UrlData[data_apiName][data_apiLevel] : UrlData[data_apiName]
-        if (dataType === 'A02') {
-            const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
-            return mapping || []
-        }
-        if (dataType === 'A03') {
-            const mapping = data_apiArr?.flatMap(item =>
-                apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
-            )
-            return mapping || []
-        }
+
+
+
+        // const { list, total } = data_apiLevel ? getNestedValue(data_api_mapping, res) : res
+
+        // if (dataType === 'A02') {
+        //     const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
+        //     return mapping || []
+        // }
+        // if (dataType === 'A03') {
+        //     const mapping = data_apiArr?.flatMap(item =>
+        //         apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+        //     )
+        //     return mapping || []
+        // }
         return ([])
     }
 }
@@ -1289,7 +1295,10 @@ const PrefabricatedChartArea = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
         setSpec(spec)
     }
-    useEffect(() => { SetSpecFn(dataSourceTypeFn('area', data, UrlData)) }, [data, UrlData])
+    useEffect(() => {
+        console.log('dataSourceTypeFn', dataSourceTypeFn('area', data, UrlData))
+        SetSpecFn(dataSourceTypeFn('area', data, UrlData))
+    }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
     if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
 };

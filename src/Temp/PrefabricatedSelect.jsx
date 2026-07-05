@@ -27,14 +27,17 @@ const PrefabricatedSelect = () => {
     )
 }
 
-
-
-
-
-
 const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const dateMapping = {
+        'year': 'YYYY',
+        'quarter': 'YYYY-MM',
+        'month': 'YYYY-MM',
+        'week': 'YYYY-MM-DD',
+        'date': 'YYYY-MM-DD',
+    }
     const [dateValue, setDateValue] = useState()
-    const { allowClear, picker, defaultDate, specifiedDate, valueDate,
+    const { isParams, isParamsConfig,
+        allowClear, picker, defaultDate, specifiedDate, valueDate,
         back_color, back_deg, back_width, back_radius,
         back_border, back_border_color, back_border_size, back_border_type,
         back_shadow, back_shadow_color, back_shadow_size, back_shadow_type,
@@ -130,6 +133,20 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
         }
     }
 
+
+    const onChange = (e) => {
+        setDateValue(e)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                v.apiData = e.format(dateMapping[picker])
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+
+
+
     return (
         <div className='PrefabricatedDateSelect' style={backStyle}>
             <DatePicker
@@ -140,7 +157,7 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
                 value={dateValue}
                 prefix={<PrefixTemp />}
                 suffixIcon={<SuffixTemp />}
-                onChange={e => setDateValue(e)}
+                onChange={onChange}
             />
         </div>
     )

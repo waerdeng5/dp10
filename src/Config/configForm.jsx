@@ -7261,6 +7261,15 @@ const PrefabricatedSelect = [
 // ??? 时间选择器
 const PrefabricatedDateSelect = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+        jugde: [{ field: 'isParams', value: [true] }], children: [
+            { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+        ]
+    },
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedDateSelectA01', label: '基础设置', collapsible: true,
         children: [
