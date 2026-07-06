@@ -6627,6 +6627,117 @@ const PrefabricatedDiyText = [
         ]
     }
 ]
+// 组织机构
+const PrefabricatedDiyOrgA01 = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    { span: 24, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+        jugde: [{ field: 'isParams', value: [true] }], children: [
+            { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_Red', label: '渲染设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'INPUT', name: 'renderLabel', label: '渲染标签', rules: true },
+            { span: 12, formType: 'INPUT', name: 'renderValue', label: '渲染值', rules: true },
+            { span: 24, formType: 'RADIO', name: 'renderDefault', label: '默认选中', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'renderDefValue', label: '默认值', rules: true, jugde: [{ field: 'renderDefault', value: [true] }] },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_BACK', label: '背景设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'INPUT', name: 'backPadding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'backMapping', label: '外间距', rules: true },
+            { span: 24, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.Start__backType },
+            { span: 12, formType: 'COLOR', name: 'backColor', label: '背景颜色', rules: true, jugde: [{ field: 'backType', value: ['color'] }] },
+            { span: 12, formType: 'NUMBER', name: 'backDeg', label: '背景角度', rules: true, jugde: [{ field: 'backType', value: ['color'] }] },
+            { span: 24, formType: 'INPUT', name: 'backImage', label: '背景图片', rules: true, jugde: [{ field: 'backType', value: ['image'] }] },
+            { span: 24, formType: 'INPUT', name: 'backVideo', label: '背景视频', rules: true, jugde: [{ field: 'backType', value: ['video'] }] },
+            { span: 12, formType: 'NUMBER', name: 'backVideoStart', label: '视频开始时间', rules: true, jugde: [{ field: 'backType', value: ['video'] }] },
+            { span: 12, formType: 'NUMBER', name: 'backVideoEnd', label: '视频结束时间', rules: true, jugde: [{ field: 'backType', value: ['video'] }] },
+        ],
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_CELL', label: '单元格设置', collapsible: true,
+        children: [
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_CELL_def', label: '默认状态', collapsible: true,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'cellDefPadding', label: '内填充', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'cellDefMapping', label: '外间距', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'cellDefHeight', label: '高度', rules: true, },
+                    { span: 24, formType: 'RADIO', name: 'cellDefAlign', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+                    { span: 24, formType: 'COLOR', name: 'cellDefColor', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'cellDefDeg', label: '背景角度', rules: true },
+                ],
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_CELL_act', label: '选中状态', collapsible: true,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'cellActPadding', label: '内填充', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'cellActMapping', label: '外间距', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'cellActHeight', label: '高度', rules: true, },
+                    { span: 24, formType: 'RADIO', name: 'cellActAlign', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+                    { span: 24, formType: 'COLOR', name: 'cellActColor', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'cellActDeg', label: '背景角度', rules: true },
+                ],
+            },
+        ],
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_TEXT', label: '文字设置', collapsible: true,
+        children: [
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_TEXT_def', label: '默认状态', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'textDefColor', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'textDefDeg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'textDefSize', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'textDefFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'textDefWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'textDefStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'textDefFiled', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'textDefFiled_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'textDefFiled', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'textDefFiled_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'textDefFiled', value: [true] }]
+                    },
+                ],
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyOrgA01_TEXT_act', label: '选中状态', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'textActColor', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'textActDeg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'textActSize', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'textActFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'textActWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'textActStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'textActFiled', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'textActFiled_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'textActFiled', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'textActFiled_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'textActFiled', value: [true] }]
+                    },
+
+                ],
+            },
+
+        ],
+    }
+]
 
 // !!! 图文模块
 // 默认图文
@@ -6725,8 +6836,9 @@ const ListConfigList = [
     { span: 12, formType: 'TempICON', name: 'data_icon', label: '图标选择' },
     { span: 12, formType: 'INPUT', name: 'data_unit', label: '单位信息' },
 
-    { span: 12, formType: 'RADIO', name: 'alone_back', label: '单独背景设置', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 12, formType: 'RADIO', name: 'alone_title', label: '单独标题设置', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'alone_back', label: '单独背景设置', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'alone_back_image', label: '单独背景图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'alone_title', label: '单独标题设置', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'RADIO', name: 'alone_number', label: '单独数值设置', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'RADIO', name: 'alone_unit', label: '单独单位设置', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'RADIO', name: 'alone_icon', label: '单独图标设置', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -6736,6 +6848,12 @@ const ListConfigList = [
         jugde: [{ field: 'alone_back', value: [true] }], children: [
             { span: 12, formType: 'COLOR', name: 'data_back', label: '背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'data_backDeg', label: '颜色角度', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'alone_back_image_group', label: '独立背景图片', collapsible: true,
+        jugde: [{ field: 'alone_back_image', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'alone_back_image_url', label: '图片地址', rules: true },
         ]
     },
     {
@@ -6967,6 +7085,11 @@ const PrefabricatedList = [
                     {
                         span: 12, formType: 'COLOR', name: 'back_border_color', label: '边框颜色', rules: true, mode: ['single'],
                         jugde: [{ field: 'back_border', value: [true] }]
+                    },
+                    { span: 12, formType: 'RADIO', name: 'back_backImage', label: '背景图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'back_backImage_url', label: '背景图片URL', rules: true,
+                        jugde: [{ field: 'back_backImage', value: [true] }]
                     },
                 ]
             },
@@ -7497,6 +7620,7 @@ export const FormConfig = {
     PrefabricatedChartCandlestick,
 
     PrefabricatedDiyText,
+    PrefabricatedDiyOrgA01,
 
     PrefabricatedImgText,
 

@@ -550,6 +550,7 @@ export const ChartTempList = [
 
 export const DIYTempList = [
     { uuid: 'PrefabricatedDiyText', title: '数据文字', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedDiyOrgA01', title: '组织机构1', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const ImgAndTextTempList = [
@@ -949,6 +950,10 @@ export const TemplateParamsMapping = {
         center_flex_direction: "column",
         center_flex_wrap: "nowrap",
         center_justify_content: "center",
+    },
+    PrefabricatedDiyOrgA01: {
+        value: 'PrefabricatedDiyOrgA01',
+
     },
     // TODO 图文模块
     PrefabricatedImgText: {

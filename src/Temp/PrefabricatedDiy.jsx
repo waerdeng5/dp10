@@ -1,6 +1,6 @@
 import './Prefabricated.scss'
 import { useEffect, useState, Fragment } from 'react'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, AssemblyModelData, AssemblyNavTo, TemplateClickFn } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, TemplateClickFn, getNestedValue } from '../Utils'
 
 import { useTemplateModel } from '../Config/useHooks'
 
@@ -107,10 +107,6 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
         setData(backData)
     }, [UrlData, data])
 
-
-
-
-
     return (
         <div className='PrefabricatedDiyText' >
             {left_img && <img src={left_img_url} style={leftImgStyle} alt="left_img_url" />}
@@ -142,8 +138,98 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
 }
 
 
+const PrefabricatedDiyOrgA01 = ({ tempId, UrlData, data, LayoutEvent }) => {
+
+    const [Data, setData] = useState([])
+    const [Active, setActive] = useState()
+    const { http_urlName, http_urlLevel, http_urlMapping, isParams, isParamsConfig,
+        renderLabel, renderValue, renderDefault, renderDefValue,
+        backPadding, backMapping, backType, backColor, backDeg, backImage, backVideo, backVideoStart, backVideoEnd,
+        cellDefPadding, cellDefMapping, cellDefHeight, cellDefAlign, cellDefColor, cellDefDeg,
+        cellActPadding, cellActMapping, cellActHeight, cellActAlign, cellActColor, cellActDeg,
+        textDefColor, textDefDeg, textDefSize, textDefFamily, textDefWeight, textDefStyle, textDefFiled, textDefFiled_data, textDefFiled_color,
+        textActColor, textActDeg, textActSize, textActFamily, textActWeight, textActStyle, textActFiled, textActFiled_data, textActFiled_color,
+    } = data
+
+    const backStyle = {
+        padding: SpacingCallBack(backPadding),
+        margin: SpacingCallBack(backMapping),
+    }
+
+    const cellDef = {
+        padding: SpacingCallBack(cellDefPadding),
+        margin: SpacingCallBack(cellDefMapping),
+        height: cellDefHeight,
+        textAlign: cellDefAlign,
+        background: ColorCallBack(cellDefColor, cellDefDeg),
+    }
+    const cellAct = {
+        padding: SpacingCallBack(cellActPadding),
+        margin: SpacingCallBack(cellActMapping),
+        height: cellActHeight,
+        textAlign: cellActAlign,
+        background: ColorCallBack(cellActColor, cellActDeg),
+    }
+    const textDef = {
+        '--titleColor': ColorCallBack(textDefColor, textDefDeg),
+        fontSize: textDefSize,
+        fontFamily: textDefFamily,
+        fontWeight: textDefWeight,
+        fontStyle: textDefStyle,
+        filter: SetFilderParams(textDefFiled, textDefFiled_data, textDefFiled_color),
+    }
+    const textAct = {
+        '--titleColor': ColorCallBack(textActColor, textActDeg),
+        fontSize: textActSize,
+        fontFamily: textActFamily,
+        fontWeight: textActWeight,
+        fontStyle: textActStyle,
+        filter: SetFilderParams(textActFiled, textActFiled_data, textActFiled_color),
+    }
+
+
+    useEffect(() => {
+        const apiData = http_urlLevel ? getNestedValue(http_urlMapping, UrlData[http_urlName]) : UrlData[http_urlName]
+        setData(apiData || [])
+        if (renderDefault && !Active) setActive(renderDefValue)
+    }, [UrlData, data])
+
+    const onClick = (e) => {
+        setActive(e)
+
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                v.apiData = e
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+
+    return (
+        <div className='PrefabricatedDiyOrgA01' style={backStyle}>
+            {backType === 'color' && <div className='backColor' style={{ background: ColorCallBack(backColor, backDeg) }} />}
+            {backType === 'image' && <img className='backImage' src={backImage} alt="" />}
+            {Data.map(v => {
+                const status = Active === v[renderValue]
+                return (
+                    <div
+                        key={v[renderValue]}
+                        className={`cellItem ${status ? 'active' : ''}`}
+                        style={status ? cellAct : cellDef}
+                        onClick={() => onClick(v[renderValue])}
+                    >
+                        <div style={status ? textAct : textDef}>{v[renderLabel]}</div>
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
 
 
 export const PrefabricatedDiyTemplate = {
     PrefabricatedDiyText,
+    PrefabricatedDiyOrgA01,
 }

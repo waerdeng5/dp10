@@ -22,6 +22,10 @@ import { ColorCallBack, SetBorderParams, SetFilderParams, SpacingCallBack } from
 import { WinTemplate } from '../Temp/StartTemplate'
 
 
+const PARAMSMAPPING = [
+    'PrefabricatedDateSelect',
+    'PrefabricatedDiyOrgA01'
+]
 
 
 const { port } = window.location
@@ -52,7 +56,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     const getApiData = (params) => {
         const apiParams = Object.values(page.params).reduce((acc, v) => {
-            if (v.value === 'PrefabricatedDateSelect' && v.isParams) acc.push(...(v.isParamsConfig || []))
+            if (PARAMSMAPPING.includes(v.value) && v.isParams) acc.push(...(v.isParamsConfig || []))
             return acc
         }, [])
         const mapping = page.api.map((apiItem) => {

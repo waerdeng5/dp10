@@ -48,7 +48,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
         back_color, back_deg, back_radius, back_border, back_border_size, back_border_type, back_border_color,
         back_position, back_topUnit, back_top, back_btmUnit, back_btm, back_lefUnit, back_lef, back_rigUnit, back_rig,
         back_widthUnit, back_width, back_heightUnit, back_height,
-
+        back_backImage, back_backImage_url,
         http_urlName, http_urlLevel, http_urlMapping,
 
     } = data
@@ -130,7 +130,8 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     data_text, data_textDeg,
                     data_unitColor, data_unitDeg,
                     data_icon_color, data_icon_size,
-                    click_status
+                    click_status,
+                    alone_back_image, alone_back_image_url,
                 } = v
 
 
@@ -173,7 +174,6 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     fontFamily: text_title_family,
                     fontWeight: text_title_weight,
                     fontStyle: text_title_style,
-                    height: text_title_size,
                     lineHeight: text_title_size + 'px',
                     filter: SetFilderParams(text_title_filed, text_title_filed_data, text_title_filed_color),
                 }
@@ -211,6 +211,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                     filter: SetFilderParams(icon_filed, icon_filed_color, icon_filed_data),
                 }
 
+                const realText = v.data_title.replace(/\\n/g, '\n')
 
                 return (
                     <div
@@ -219,11 +220,15 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
                         style={{ ...itemStyle, cursor: click_status ? 'pointer' : 'auto' }}
                         onClick={(e) => click_status && TemplateClickFn(e, v, Data, LayoutEvent, openModel)}
                     >
-                        {item_back && <div className='itemBack' style={backStyle} />}
+                        {item_back && (
+                            <div className='itemBack' style={backStyle}>
+                                {back_backImage && <img src={alone_back_image ? alone_back_image_url : back_backImage_url} alt="" />}
+                            </div>
+                        )}
                         {item_icon === 'img' && <img className='itemImg' style={imgStyle} src={v.data_img} alt={v.data_img} />}
                         {item_icon === 'icon' && <div className='itemIcon' style={iconStyle}>{ICONMapping[v.data_icon || 'farFile']}</div>}
                         <div className='itemText' style={textStyle}>
-                            <div className='title' style={titleStyle}>{v.data_title}</div>
+                            <div className='title' style={titleStyle}>{realText}</div>
                             <div className='value'>
                                 <div className='text' style={valueStyle}>{Data?.[v.data_value] || 0}</div>
                                 {item_unit && <div className='unit' style={unitStyle}>{v.data_unit}</div>}

@@ -740,6 +740,7 @@ const labelFn = (data) => {
 
 }
 const indicatorFn = (data, values, type) => {
+    if (values.length === 0) return {}
     const [firstData] = values
     const { indicator_firstData, indicator_visible, indicator_fixed, indicator_trigger, indicator_offsetX, indicator_offsetY, indicator_limitRatio,
         indicator_title, indicator_title_init, indicator_title_field, indicator_title_af, indicator_title_bf, indicator_title_fill,
@@ -1225,22 +1226,17 @@ const dataSourceTypeFn = (type, data, UrlData) => {
             console.log('未获取到接口数据')
             return ([])
         }
-        const apiData = data_apiLevel ? UrlData[data_apiName][data_apiLevel] : UrlData[data_apiName]
-
-
-
-        // const { list, total } = data_apiLevel ? getNestedValue(data_api_mapping, res) : res
-
-        // if (dataType === 'A02') {
-        //     const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
-        //     return mapping || []
-        // }
-        // if (dataType === 'A03') {
-        //     const mapping = data_apiArr?.flatMap(item =>
-        //         apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
-        //     )
-        //     return mapping || []
-        // }
+        const apiData = getNestedValue(data_apiLevel, UrlData[data_apiName])
+        if (dataType === 'A02') {
+            const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
+            return mapping || []
+        }
+        if (dataType === 'A03') {
+            const mapping = data_apiArr?.flatMap(item =>
+                apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+            )
+            return mapping || []
+        }
         return ([])
     }
 }
@@ -1296,7 +1292,6 @@ const PrefabricatedChartArea = ({ tempId, data, UrlData, LayoutEvent }) => {
         setSpec(spec)
     }
     useEffect(() => {
-        console.log('dataSourceTypeFn', dataSourceTypeFn('area', data, UrlData))
         SetSpecFn(dataSourceTypeFn('area', data, UrlData))
     }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
@@ -1322,7 +1317,10 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
         setSpec(spec)
     }
-    useEffect(() => { SetSpecFn(dataSourceTypeFn('bar', data, UrlData)) }, [data, UrlData])
+    useEffect(() => {
+        console.log(dataSourceTypeFn('bar', data, UrlData))
+        SetSpecFn(dataSourceTypeFn('bar', data, UrlData))
+    }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
     if (Spec) return (
         <VChart
