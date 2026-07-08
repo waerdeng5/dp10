@@ -120,7 +120,6 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
             }
         } else setItemList(data_diy_config)
     }, [UrlData, data])
-
     return (
         <div className='PrefabricatedList' style={wholeStyle}>
             {ItemList?.map((v, i) => {

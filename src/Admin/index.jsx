@@ -38,6 +38,8 @@ const AdminIndex = () => {
 
     const [BtnStatus, setBtnStatus] = useState(true)
 
+    console.log(Config?.imageUrl)
+
     useTitle(Config?.fullName || '加载中...')
     useFavicon(Config?.imageUrl + 'Ico.ico')
 
