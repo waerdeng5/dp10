@@ -2,7 +2,7 @@ import './SetDevRouter.scss'
 import { useState } from 'react'
 import { axios } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
-import { modelStore } from '../../Router/zustand'
+import { modelStore, pageStore } from '../../Router/zustand'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MappingData } from '../../Config/MappingData'
 import { Encrypt, GetIndexedDB } from '../../Utils/IndexedDB'
@@ -141,7 +141,9 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => (
 )
 
 const SetDevRouter = ({ data, Event }) => {
+    const { pageActive } = pageStore()
     const { updateModel1, updateModel4 } = modelStore()
+
     const { uuid, targetUrl } = data
 
     const [APIdata, setAPIdata] = useState(data.APIdata)
@@ -182,8 +184,8 @@ const SetDevRouter = ({ data, Event }) => {
         const params = { uuid: `${uuid}/DEV_PAGE/${targetUrl}_OPT`, content: JSON.stringify(await Encrypt(data)) }
         const [OPTerror, OPTdata] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (OPTerror) return console.log('保存失败', OPTerror)
-        const params2 = { menu: uuid, button: [...data.top, ...data.row] }
-        const [err] = await axios({ method: 'post', url: 'menu/AddMenuButton', params: { menu: uuid, button: [...data.top, ...data.row] } })
+        const params2 = { menu: pageActive, button: [...data.top, ...data.row] }
+        const [err] = await axios({ method: 'post', url: 'menu/AddMenuButton', params: params2 })
         if (err) return console.log(err)
         Event.emit({ type: 'onRefresh' })
         setOPTdata(data)
