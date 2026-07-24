@@ -132,6 +132,11 @@
             border-inline-end: none;
             user-select: none;
 
+            .ant-menu-item-icon {
+                width: var(--iconSize);
+                text-align: center;
+            }
+
             .ant-menu-item-icon,
             .ant-menu-submenu-arrow {
                 font-size: var(--iconSize);
