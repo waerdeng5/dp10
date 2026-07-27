@@ -546,11 +546,14 @@ export const MappingData = {
     System_loginCodeType: [
         { value: 'A01', label: '拖动拼图' },
     ],
-
     System_gjContractAIType: [
         { value: 'A01', label: '合同对比' },
         { value: 'A02', label: '合同审核' },
         { value: 'A03', label: '合同提取' },
+    ],
+    System_fileUrlType: [
+        { value: 'A01', label: '数据字段' },
+        { value: 'A02', label: '接口数据' },
     ],
 
     // Todo 样式-通用属性

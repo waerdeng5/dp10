@@ -260,10 +260,9 @@ const CommonModel = ({ data, Event }) => {
                             <Timeline
                                 items={(() => {
                                     const data = Data.map(i => {
-                                        console.log(statusMapping)
                                         return ({
                                             color: statusMapping[i[B17_status]]?.color,
-                                            children: (
+                                            content: (
                                                 <div className='TimelineData'>
                                                     <div>
                                                         <div style={titleStyle}>当前状态 : </div>

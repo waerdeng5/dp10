@@ -2377,6 +2377,47 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'B03_subTitle', label: '删除描述' },
         ]
     },
+    // !!! 04 查看附件
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_04_01', label: '数据来源',
+        jugde: [{ field: 'type', value: ['B04'] }],
+        children: [
+            { span: 24, formType: 'RADIO', name: 'B04_urlType', label: '附件地址', rules: true, valueEnum: MappingData.System_fileUrlType },
+            // 接口地址
+            {
+                span: 24, formType: 'RADIO', name: 'B04_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
+                jugde: [{ field: 'B04_urlType', value: ['A02'] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: 'B04_url', label: '接口地址', rules: true,
+                jugde: [{ field: 'B04_urlType', value: ['A02'] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: 'B04_params', label: '额外参数',
+                jugde: [{ field: 'B04_urlType', value: ['A02'] }]
+            },
+            {
+                span: 24, formType: 'RADIO', name: 'B04_isData', label: '是否使用主数据', rules: true, valueEnum: MappingData.IsEnabledBool,
+                jugde: [{ field: 'B04_urlType', value: ['A02'] }]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'B04_dataArr', label: '额外主表数据',
+                jugde: [{ field: 'B04_isData', value: [true] }, { field: 'B04_urlType', value: ['A02'] }], children: [
+                    { span: 24, formType: 'INPUT', name: 'value', label: '使用字段', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'label', label: '映射名称', rules: true },
+                ]
+            },
+            // 数据字段
+            { span: 24, formType: 'INPUT', name: 'B04_field', label: '数据字段', rules: true },
+
+
+
+
+
+
+        ]
+    },
+
     // !!! B06 打开Excel
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_05', label: 'Excel参数',

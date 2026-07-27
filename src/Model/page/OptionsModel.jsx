@@ -14,7 +14,7 @@ import { MappingData } from '../../Config/MappingData'
 import { ICONMapping } from '../../Config/IconMapping'
 import { axios, strOfurlParamsFunc } from '../../Utils/Api'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
-import { addAttr, AssemblySort, replaceNodeById } from '../../Utils'
+import { addAttr, AssemblySort, replaceNodeById, getNestedValue } from '../../Utils'
 import {
     DevScrollView,
     filterOption,
@@ -22,9 +22,9 @@ import {
     TableTransfer,
     TreeTransfer,
     ExcelTemplate,
-    AttachTemplateA01
+    AttachTemplateA01,
 } from '../../Temp/DevTemplate'
-import { SwiperB20Template } from '../../Temp/SwiperTemplate'
+import { SwiperB20Template, SwiperAnnexTemplate } from '../../Temp/SwiperTemplate'
 import { HappyProvider } from '@ant-design/happy-work-theme';
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm';
@@ -412,6 +412,39 @@ const OptionsModel = ({ data, Event }) => {
             </div>
         )
     }
+    // *** 查看附件
+    if (type == 'B04') {
+        const { B04_urlType, B04_field, Initial } = data
+        const [laoding, setLoading] = useState(true)
+        const [LIST, setLIST] = useState([])
+
+        const getData = (res) => {
+            const urlData = getNestedValue(B04_field, res)
+            const TYPEOF = typeof urlData
+            if (TYPEOF === 'string') setLIST([{ uuid: v4(), url: urlData }])
+            else setLIST(urlData)
+            setLoading(false)
+        }
+
+        const getApiData = async () => {
+            const { B04_method, B04_url, B04_params, B04_isData, B04_dataArr } = data
+            const params = strOfurlParamsFunc(B04_params)
+            if (B04_isData) B04_dataArr.forEach(item => params[item.label] = Initial[item.value])
+            const [err, res] = await axios({ method: B04_method, url: B04_url, params })
+            if (err) return console.log('数据获取失败')
+            getData(res)
+        }
+
+
+        useEffect(() => {
+            if (B04_urlType === 'A01') getData(Initial)
+            else getApiData()
+        }, [B04_urlType])
+
+
+        if (laoding) return <div className='OptionsModelB09'><Spin /></div>
+        return <SwiperAnnexTemplate data={LIST} />
+    }
     // *** Excel
     if (type === 'B05') {
         const { Initial, DEVEvent, B05_method, B05_url, B05_params, B05_isMaster, B05_field, B05_mapping } = data
@@ -643,8 +676,6 @@ const OptionsModel = ({ data, Event }) => {
         if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} />
         else return <Skeleton active paragraph={{ rows: 16 }} />
     }
-
-
     // *** 数据详情
     if (type === 'B14') {
         const { AddTopOptionsFormList_14, Initial } = data
@@ -972,7 +1003,6 @@ const OptionsModel = ({ data, Event }) => {
             </div>
         )
     }
-
     return (
         <div className='OptionsModelNone'>
             <Result status="403" title={`OptionsModel - 未找到功能项 - ${type}`} />

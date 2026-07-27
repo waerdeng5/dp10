@@ -16,11 +16,27 @@ import { Button, Image } from 'antd'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ANIMATIONLIST } from './TemplateAnimation'
 import { HappyProvider } from '@ant-design/happy-work-theme';
-import { Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative, Grid } from 'swiper/modules'
+import {
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+    Autoplay,
+    EffectFade,
+    EffectCube,
+    EffectFlip,
+    EffectCoverflow,
+    EffectCards,
+    EffectCreative,
+    Grid
+} from 'swiper/modules'
 
 import { axios } from '../Utils/Api'
 import { CommonAPIUrl } from '../Config'
+import { getFileTypeFromUrl } from '../Utils'
 import { GetIndexedDB, PutIndexedDB } from '../Utils/IndexedDB'
+import { VideoTemplateA02 } from './VideoTemplate'
+
 
 
 // 轮播窗口
@@ -152,4 +168,43 @@ export const SwiperB20Template = ({ data }) => {
             ))}
         </Swiper>
     )
+}
+
+// 附件预览
+export const SwiperAnnexTemplate = ({ data }) => {
+    console.log(data)
+
+    return (
+        <Swiper
+            className='B20_swiper'
+            modules={[Navigation, Pagination, Scrollbar, A11y]}
+            loop={true}
+            speed={500}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+        >
+            {data.map(v => (
+                <SwiperSlide key={v.uuid}>
+                    {(() => {
+                        if (!v.url) return false
+                        const type = getFileTypeFromUrl(v.url)
+                        switch (type) {
+                            case 'image': return <Image width={'100%'} height={'100%'} src={v.url} />
+                            case 'video': return <VideoTemplateA02 url={v.url} />
+                            case 'pdf': return <embed src={v.url} type="application/pdf" width="100%" height="100%" />
+                            case 'word': return <div>word</div>
+                            case 'excel': return <div>excel</div>
+                            case 'md': return <div>md</div>
+                            case 'txt': return <div>txt</div>
+                            case 'edge': return <div>edge</div>
+                            default: return <div>未知附件</div>
+                        }
+                    })()}
+                </SwiperSlide>
+            ))}
+        </Swiper>
+    )
+
+
 }

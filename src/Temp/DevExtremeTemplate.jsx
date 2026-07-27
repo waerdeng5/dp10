@@ -481,7 +481,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
         updateModel5({ title: item.title, type: 'OptionsModel', width: 640, height: 400, Event: DEVEvent, modelData: { ...item, APIdata, Initial: data, targetUrl } })
     }
     const B04Func = item => {
-        console.log('查看附件', item)
+        updateModel5({ title: item.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...item, APIdata, ORGUUID, OTHUUID, Initial: data, targetUrl } })
     }
     const B05Func = item => {
         updateModel5({ title: item.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...item, Initial: data, DEVEvent } })
