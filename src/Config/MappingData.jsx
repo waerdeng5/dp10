@@ -38,9 +38,17 @@ export const MappingData = {
         { value: 'confirmed', label: '确认(0:未确认 1:已确认)' },
         { value: 'weekStatus', label: '确认(0:未提交 1:已提交 2:迟交)' },
         { value: 'PassedOrNotNumber', label: '通过(0:未通过 1:已通过 )' },
-
         { value: 'LoginType', label: '登录类型(0:全部 1:大屏 2:后台 )' },
         { value: 'LoginMode', label: '登录模式(0:新版 1:旧版 )' },
+
+
+        { value: 'Common_mapping_A01', label: '人工费 材料费 机械费' },
+    ],
+
+    Common_mapping_A01: [
+        { value: '人工费', label: '人工费' },
+        { value: '材料费', label: '材料费' },
+        { value: '机械费', label: '机械费' },
     ],
 
     LoginType: [

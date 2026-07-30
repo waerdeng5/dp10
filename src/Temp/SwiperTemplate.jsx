@@ -12,7 +12,7 @@ import './SwiperTemplate.scss'
 
 
 import { useState } from 'react'
-import { Button, Image } from 'antd'
+import { Button, Image, Result } from 'antd'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ANIMATIONLIST } from './TemplateAnimation'
 import { HappyProvider } from '@ant-design/happy-work-theme';
@@ -174,6 +174,12 @@ export const SwiperB20Template = ({ data }) => {
 export const SwiperAnnexTemplate = ({ data }) => {
     console.log(data)
 
+    if (!data)
+        return (
+            <div className='SwiperCenter'>
+                <Result status="404" title="404" subTitle="未检测到附件信息" />
+            </div>
+        )
     return (
         <Swiper
             className='B20_swiper'
