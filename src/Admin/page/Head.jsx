@@ -157,17 +157,12 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
             ['layout', onOpenLayout],
             ['start', onOpenStart],
             ['window', onOpenWindow],
-
             ['setTheme', onSetThemeConfig],
-
-
-
             [1, () => Navigate('/Start')],
             [2, onOpenUserCenter],
             [3, onWorkstation],
             [4, onWeChatBinding],
             [5, onOfficialAccount],
-
             [7, () => AdminEvent.emit({ type: 'onLookPage' })],
             [8, () => Navigate('/')],
         ])
@@ -241,6 +236,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         setItems(data)
     })
 
+
     return (
         <div className='Head' style={headStyle}>
             <div className='left' style={titleStyle}>
@@ -262,7 +258,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                             '--filter': SetFilderParams(head_itemFiled, head_itemFiled_data, head_itemFiled_color),
                         }
                         // if (func === 'admin' && userInfo?.userUuid !== '1e99e116-6ec0-425c-87b4-64dd2ce458e2') return false
-                        if (!port) return false
+                        if (func === 'admin' && !port) return false
                         return (
                             <Dropdown
                                 key={index}
