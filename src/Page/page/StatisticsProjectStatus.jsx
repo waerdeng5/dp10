@@ -30,7 +30,7 @@ const StatisticsProjectStatus = () => {
     }
 
     useMount(async () => {
-        const [err, res] = await axios({ method: 'get', url: 'organization' })
+        const [err, res] = await axios({ method: 'get', url: 'organization', params: { menuType: '8abf83a4-8cee-4d14-b3d6-c5fe9f857ea9' } })
         if (err) return err
         setOrgTree(res.data.list)
         setSelectedKeys([res.data.list[0].value])
