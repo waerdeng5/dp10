@@ -147,7 +147,17 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
                                     stylingMode="contained"
                                     width={200}
                                     onClick={() => props.form?.submit?.()}
-                                />
+                                />,
+                                <Button
+                                    key='123'
+                                    disabled={false}
+                                    text="AI录入"
+                                    icon='refresh'
+                                    type="normal"
+                                    stylingMode="contained"
+                                    width={200}
+                                    onClick={() => FORMEVENT.emit({ type: 'onOpenAI' })}
+                                />,
                             ]
                         }
                     }}

@@ -86,7 +86,7 @@ const SetOptions = ({ data, Event }) => {
                     icon: 'add',
                     text: '添加分组',
                     onClick: () => {
-                        updateModel5({
+                        updateModel2({
                             title: '添加表单分组',
                             type: 'CommonForm',
                             Event: Event,

@@ -24,6 +24,7 @@ import {
     ExcelTemplate,
     AttachTemplateA01,
 } from '../../Temp/DevTemplate'
+import { AITemplateA01 } from '../../Temp/AITemplate'
 import { SwiperB20Template, SwiperAnnexTemplate } from '../../Temp/SwiperTemplate'
 import { HappyProvider } from '@ant-design/happy-work-theme';
 import ReactMarkdown from 'react-markdown'
@@ -83,6 +84,7 @@ const OptionsModel = ({ data, Event }) => {
         const { api, fields } = APIdata
         const { addType } = data
         if (addType === 'form') {
+            const [AIvisible, setAIvisible] = useState(true)
             const { form, group, formMethod, formUrl, formPath, formParams } = data
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
@@ -113,7 +115,8 @@ const OptionsModel = ({ data, Event }) => {
             const EventCallBack = (e) => {
                 const { type, data } = e
                 const Mapping = new Map([
-                    ['onFormBack', () => onFormBack(data)]
+                    ['onFormBack', () => onFormBack(data)],
+                    ['onOpenAI', () => setAIvisible(true)],
                 ])
                 const func = Mapping.get(type)
                 func?.(data)
@@ -125,7 +128,16 @@ const OptionsModel = ({ data, Event }) => {
                 setFormItem(formItem)
             })
 
-            if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} />
+            if (formItem) return (
+                <div className='OptionsModel__Form'>
+                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} />
+                    {AIvisible &&
+                        <div className='OptionsModel__Form__AI'>
+                            <AITemplateA01 />
+                        </div>
+                    }
+                </div>
+            )
             else return <Skeleton active paragraph={{ rows: 16 }} />
         }
 

@@ -1,0 +1,18 @@
+.AITemplateA01 {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &>div {
+        width: 100%;
+    }
+
+    .AITemplateA01__content {
+        flex: 1;
+        overflow: hidden;
+    }
+}

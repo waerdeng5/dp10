@@ -150,7 +150,7 @@ const List = ({ data, list, index, onTaskDrop, Event }) => {
 }
 
 const SetFormList = ({ data, Event }) => {
-    const { updateModel2 } = modelStore()
+    const { updateModel2, updateModel5 } = modelStore()
     const { uuid, form, group, APIdata, OPTdata } = data
     const { fields } = APIdata
 
@@ -201,17 +201,19 @@ const SetFormList = ({ data, Event }) => {
             const data = replaceNodeById(FormList, uuid, e)
             setFormList(data)
             updateModel2({})
+            updateModel5({})
         } else {
             setData(data => ([...data, []]))
             setFormList(data => ([...data, { ...e, uuid: v4() }]))
             updateModel2({})
+            updateModel5({})
         }
     }
 
     const onDeleteFormGroup = (uuid) => {
         const index = FormList.findIndex(item => item.uuid === uuid)
         const list = removeTreeByKey(FormList, uuid)
-        const data = Data.filter((_, i) => i !== index)
+        const data = Data.filter((_, i) => i !== index + 1)
         setFormList(list)
         setData(data)
     }

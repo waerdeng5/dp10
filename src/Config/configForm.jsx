@@ -2139,6 +2139,7 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'tips', label: '补充说明' },
         ]
     },
+    // 新增选项
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02', label: '新增选项',
         jugde: [{ field: 'type', value: ['A02'] }],
@@ -2173,6 +2174,15 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'excelSaveParams', label: '保存时额外参数', jugde: [{ field: 'addType', value: ['excel'] }] },
         ]
     },
+    // 新增-ai配置
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai', label: 'ai选项',
+        jugde: [{ field: 'type', value: ['A02'] }],
+        children: [
+            // 添加ai分析路径
+        ]
+    },
+    // 查询字段
     {
         span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_03', label: '查询字段',
         jugde: [{ field: 'type', value: ['A03'] }],
@@ -2182,6 +2192,7 @@ const AddTopOptionsFormList = [
             { span: 8, formType: 'SELECT', name: 'A03_type', label: '操作类型', rules: true, valueEnum: MappingData.Form__SearchType },
         ]
     },
+    // 排序字段
     {
         span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_04', label: '排序字段',
         jugde: [{ field: 'type', value: ['A04'] }],
@@ -2191,6 +2202,7 @@ const AddTopOptionsFormList = [
             { span: 8, formType: 'RADIO', name: 'A04_type', label: '操作类型', rules: true, valueEnum: MappingData.System__SortOrderNot },
         ]
     },
+    // 刷新
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_05', label: '刷新选项',
         jugde: [{ field: 'type', value: ['A05'] }],
@@ -2199,6 +2211,7 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'RADIO', name: 'A05_sort', label: '保留排序条件', rules: true, valueEnum: MappingData.IsYesBool },
         ]
     },
+    // 导出
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_06', label: '导出参数',
         jugde: [{ field: 'type', value: ['A06'] }],
@@ -2211,6 +2224,7 @@ const AddTopOptionsFormList = [
             // { span: 24, formType: 'INPUT', name: 'saveParams', label: '额外参数' },
         ]
     },
+    // 批操
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_07', label: '批量操作',
         jugde: [{ field: 'type', value: ['A07'] }],
@@ -2264,6 +2278,7 @@ const AddTopOptionsFormList = [
             },
         ]
     },
+    // 弹窗
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_08', label: '弹出窗口',
         jugde: [{ field: 'type', value: ['A08'] }],
@@ -2273,6 +2288,7 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'openType', label: '打开类型', rules: true },
         ],
     },
+    // 执行接口
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_12', label: '执行接口',
         jugde: [{ field: 'type', value: ['A12'] }],
@@ -2291,6 +2307,7 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'modelText', label: '弹窗描述', jugde: [{ field: 'isModel', value: [true] }] },
         ]
     },
+    // 站内路由
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_13', label: '站内路由',
         jugde: [{ field: 'type', value: ['A13'] }],
