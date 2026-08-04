@@ -1,9 +1,8 @@
 import './AITemplate.scss'
-import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons';
-import { Attachments, Sender } from '@ant-design/x';
-import { App, Button, Flex } from 'antd';
-
+import { App, Button, Flex } from 'antd'
 import { useState, useRef } from 'react'
+import { Attachments, Sender, Welcome, Think } from '@ant-design/x'
+import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons'
 
 
 export const AITemplateA01 = () => {
@@ -12,6 +11,8 @@ export const AITemplateA01 = () => {
     const [text, setText] = useState('')
     const attachmentsRef = useRef(null)
     const senderRef = useRef(null)
+
+    const [callList, setCallList] = useState([])
 
     const senderHeader = (
         <Sender.Header
@@ -29,11 +30,7 @@ export const AITemplateA01 = () => {
                 placeholder={type =>
                     type === 'drop' ?
                         { title: 'Drop file here' } :
-                        {
-                            icon: <CloudUploadOutlined />,
-                            title: '附件上传',
-                            description: '点击或拖动文件到此处上传',
-                        }
+                        { icon: <CloudUploadOutlined />, title: '附件上传', description: '点击或拖动文件到此处上传' }
                 }
                 getDropContainer={() => {
                     var _a;
@@ -46,7 +43,21 @@ export const AITemplateA01 = () => {
     return (
         <div className='AITemplateA01'>
             <div className='AITemplateA01__content'>
-                内容信息
+
+
+
+                {/* 
+                <DevScrollView>
+                    <div className='AITemplateA01__content__title'>
+                        <Welcome
+                            icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
+                            title="欢迎使用AI助手"
+                            description="基于xxxx,打造更卓越的智能视觉体验~"
+                        />
+                        <Think blink={true} loading={true} title={'模型分析中...'}>{'问题分析结果...'}</Think>
+                    </div>
+                </DevScrollView> */}
+
             </div>
             <Flex style={{ height: 220 }} align="end">
                 <Sender

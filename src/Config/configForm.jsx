@@ -2144,6 +2144,8 @@ const AddTopOptionsFormList = [
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02', label: '新增选项',
         jugde: [{ field: 'type', value: ['A02'] }],
         children: [
+            // AI分析
+            { span: 24, formType: 'RADIO', name: 'isAI', label: '是否启用AI分析', rules: true, valueEnum: MappingData.IsEnabledBool },
             // 主数据字段
             { span: 24, formType: 'RADIO', name: 'isData', label: '是否使用菜单UUID', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
@@ -2176,10 +2178,33 @@ const AddTopOptionsFormList = [
     },
     // 新增-ai配置
     {
-        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai', label: 'ai选项',
-        jugde: [{ field: 'type', value: ['A02'] }],
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_render', label: 'AI页面渲染',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
         children: [
-            // 添加ai分析路径
+            // 按钮类型     type
+            // 按钮样式     stylingMode
+            // 按钮信息     text
+
+            // 上传附件
+            // 音频输入
+            // 默认提示
+
+            // 欢迎头
+
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_data', label: 'AI数据信息',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
+        children: [
+            // ai接口
+            // 接口方式
+            // 对应参数
+
+            // 对应接口
+            // 返回类型
+            // 返回模式
+            // 返回内容操作
         ]
     },
     // 查询字段

@@ -84,8 +84,8 @@ const OptionsModel = ({ data, Event }) => {
         const { api, fields } = APIdata
         const { addType } = data
         if (addType === 'form') {
-            const [AIvisible, setAIvisible] = useState(true)
-            const { form, group, formMethod, formUrl, formPath, formParams } = data
+            const [AIvisible, setAIvisible] = useState(false)
+            const { form, group, formMethod, formUrl, formPath, formParams, isAI } = data
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
             const onFormBack = async (e) => {
@@ -116,7 +116,7 @@ const OptionsModel = ({ data, Event }) => {
                 const { type, data } = e
                 const Mapping = new Map([
                     ['onFormBack', () => onFormBack(data)],
-                    ['onOpenAI', () => setAIvisible(true)],
+                    ['onOpenAI', () => setAIvisible(!AIvisible)],
                 ])
                 const func = Mapping.get(type)
                 func?.(data)
@@ -130,7 +130,7 @@ const OptionsModel = ({ data, Event }) => {
 
             if (formItem) return (
                 <div className='OptionsModel__Form'>
-                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} />
+                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} AI={isAI} />
                     {AIvisible &&
                         <div className='OptionsModel__Form__AI'>
                             <AITemplateA01 />

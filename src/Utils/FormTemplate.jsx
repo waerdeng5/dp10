@@ -75,7 +75,18 @@ const formCallBack = e => {
     return traverse(e)
 }
 
-const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading, detection, onCallBack, onFormBack = 'onFormBack', fixed = false }) => {
+const FormTemplate = ({
+    formItem,
+    FORMEVENT,
+    Initial = {},
+    NotSubmit,
+    NotLoading,
+    detection,
+    onCallBack,
+    onFormBack = 'onFormBack',
+    fixed = false,
+    AI = false,
+}) => {
     const { notification } = App.useApp()
     const formRef = useRef(null)
     const [loading, setLoading] = useState(false)
@@ -148,11 +159,11 @@ const FormTemplate = ({ formItem, FORMEVENT, Initial = {}, NotSubmit, NotLoading
                                     width={200}
                                     onClick={() => props.form?.submit?.()}
                                 />,
-                                <Button
-                                    key='123'
+                                AI && <Button
+                                    key='ai'
                                     disabled={false}
                                     text="AI录入"
-                                    icon='refresh'
+                                    icon='fas fa-paper-plane'
                                     type="normal"
                                     stylingMode="contained"
                                     width={200}
