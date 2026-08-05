@@ -2181,16 +2181,14 @@ const AddTopOptionsFormList = [
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_render', label: 'AI页面渲染',
         jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
         children: [
-            // 按钮类型     type
-            // 按钮样式     stylingMode
-            // 按钮信息     text
-
-            // 上传附件
-            // 音频输入
-            // 默认提示
-
-            // 欢迎头
-
+            { span: 24, formType: 'NUMBER', name: 'A02_ai_window', label: '窗口宽度', rules: true },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_btn_type', label: '按钮类型', rules: true, valueEnum: MappingData.DevConfig__BtnType },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_btn_mode', label: '按钮样式', rules: true, valueEnum: MappingData.DevConfig__BtnMode },
+            { span: 24, formType: 'INPUT', name: 'A02_ai_btn_text', label: '按钮名称', rules: true },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_annex', label: '上传附件', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_audio', label: '音频输入', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_welcome', label: '头部信息', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'A02_ai_default_text', label: '默认信息' },
         ]
     },
     {
@@ -2207,6 +2205,66 @@ const AddTopOptionsFormList = [
             // 返回内容操作
         ]
     },
+
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_annex', label: '附件设置',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }, { field: 'A02_ai_annex', value: [true] }],
+        children: [
+            // 上传图标
+            // 内容1
+            // 内容2
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_top', label: '头部信息',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }, { field: 'A02_ai_welcome', value: [true] }],
+        children: [
+            // 图标
+            // 内容1
+            // 内容2
+        ]
+    },
+
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_user', label: '用户信息',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
+        children: [
+            { span: 24, formType: 'RADIO', name: 'ai_urser_typing', label: '打印输出', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_avatar', label: '用户头像', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'TempICON', name: 'ai_urser_avatar_url', label: '页面图标', rules: true, jugde: [{ field: 'ai_urser_avatar', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_header', label: '用户标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'ai_urser_header_text', label: '标题内容', rules: true, jugde: [{ field: 'ai_urser_header', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_placement', label: '气泡位置', rules: true, valueEnum: MappingData.AIRender_placement },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_variant', label: '气泡类型', rules: true, valueEnum: MappingData.AIRender_variant },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_shape', label: '气泡形状', rules: true, valueEnum: MappingData.AIRender_shape },
+            { span: 24, formType: 'RADIO', name: 'ai_urser_footer', label: '底部操作', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'ai_urser_footerPlacement', label: '操作位置', rules: true,
+                valueEnum: MappingData.AIRender_footerPlacement, jugde: [{ field: 'ai_urser_footer', value: [true] }]
+            },
+            // 操作内容
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_ai', label: 'AI信息',
+        jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
+        children: [
+            { span: 24, formType: 'RADIO', name: 'ai_text_typing', label: '打印输出', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: 'ai_text_avatar', label: '用户头像', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'TempICON', name: 'ai_text_avatar_url', label: '页面图标', rules: true, jugde: [{ field: 'ai_text_avatar', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'ai_text_header', label: '用户标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'ai_text_header_text', label: '标题内容', rules: true, jugde: [{ field: 'ai_text_header', value: [true] }] },
+            { span: 24, formType: 'RADIO', name: 'ai_text_placement', label: '气泡位置', rules: true, valueEnum: MappingData.AIRender_placement },
+            { span: 24, formType: 'RADIO', name: 'ai_text_variant', label: '气泡类型', rules: true, valueEnum: MappingData.AIRender_variant },
+            { span: 24, formType: 'RADIO', name: 'ai_text_shape', label: '气泡形状', rules: true, valueEnum: MappingData.AIRender_shape },
+            { span: 24, formType: 'RADIO', name: 'ai_text_footer', label: '底部操作', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'ai_text_footerPlacement', label: '操作位置', rules: true,
+                valueEnum: MappingData.AIRender_footerPlacement, jugde: [{ field: 'ai_text_footer', value: [true] }]
+            },
+        ]
+    },
+
     // 查询字段
     {
         span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_03', label: '查询字段',

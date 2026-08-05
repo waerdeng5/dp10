@@ -1107,9 +1107,6 @@ export const MappingData = {
         { label: '流畅 - 黑蓝(宽松)', value: 'fluent.saas.dark', color: ['#0a2444', '#1e2832'] },
         { label: '流畅 - 黑蓝(紧凑)', value: 'fluent.saas.dark.compact', color: ['#0a2444', '#1e2832'] },
     ],
-
-
-
     DevConfig__ColumnResizing: [
         { value: 'nextColumn', label: '总宽不变' },
         { value: 'widget', label: '保持宽度' },
@@ -1194,6 +1191,40 @@ export const MappingData = {
         { label: '百分比', value: 'percent' },
         { label: '货币符', value: 'currency' },
     ],
+    DevConfig__BtnType: [
+        { label: '普通', value: 'normal' },
+        { label: '确认', value: 'success' },
+        { label: '默认', value: 'default' },
+        { label: '警告', value: 'danger' },
+    ],
+    DevConfig__BtnMode: [
+        { label: '填充', value: 'contained' },
+        { label: '边框', value: 'outlined' },
+        { label: '文字', value: 'text' },
+    ],
+    // TODO AI设置
+    AIRender_placement: [
+        { label: 'start', value: 'start' },
+        { label: 'end', value: 'end' },
+    ],
+    AIRender_variant: [
+        { label: 'filled', value: 'filled' },
+        { label: 'outlined', value: 'outlined' },
+        { label: 'shadow', value: 'shadow' },
+        { label: 'borderless', value: 'borderless' },
+    ],
+    AIRender_shape: [
+        { label: 'default', value: 'default' },
+        { label: 'round', value: 'round' },
+        { label: 'corner', value: 'corner' },
+    ],
+    AIRender_footerPlacement: [
+        { label: 'outer-start', value: 'outer-start' },
+        { label: 'outer-end', value: 'outer-end' },
+        { label: 'inner-start', value: 'inner-start' },
+        { label: 'inner-end', value: 'inner-end' },
+    ],
+
     // TODO Charts参数
     Charts__renderField: [
         { label: 'xField', value: 'xField' },

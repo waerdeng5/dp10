@@ -86,6 +86,7 @@ const FormTemplate = ({
     onFormBack = 'onFormBack',
     fixed = false,
     AI = false,
+    AIconfig
 }) => {
     const { notification } = App.useApp()
     const formRef = useRef(null)
@@ -119,9 +120,7 @@ const FormTemplate = ({
         func?.(data)
     }
     FORMEVENT.useSubscription(onFormBackFn)
-
     const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
-
     return (
         <div className='FormTemplateClass01'>
             <Spin spinning={loading}>
@@ -162,10 +161,10 @@ const FormTemplate = ({
                                 AI && <Button
                                     key='ai'
                                     disabled={false}
-                                    text="AI录入"
+                                    text={AIconfig.A02_ai_btn_text}
                                     icon='fas fa-paper-plane'
-                                    type="normal"
-                                    stylingMode="contained"
+                                    type={AIconfig.A02_ai_btn_type}
+                                    stylingMode={AIconfig.A02_ai_btn_text}
                                     width={200}
                                     onClick={() => FORMEVENT.emit({ type: 'onOpenAI' })}
                                 />,

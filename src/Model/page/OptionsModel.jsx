@@ -83,9 +83,12 @@ const OptionsModel = ({ data, Event }) => {
     if (type === 'A02' || type === 'B01') {
         const { api, fields } = APIdata
         const { addType } = data
+
         if (addType === 'form') {
             const [AIvisible, setAIvisible] = useState(false)
-            const { form, group, formMethod, formUrl, formPath, formParams, isAI } = data
+            const { form, group, formMethod, formUrl, formPath, formParams, isAI, A02_ai_window } = data
+
+
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
             const onFormBack = async (e) => {
@@ -130,10 +133,10 @@ const OptionsModel = ({ data, Event }) => {
 
             if (formItem) return (
                 <div className='OptionsModel__Form'>
-                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} AI={isAI} />
+                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} AI={isAI} AIconfig={data} />
                     {AIvisible &&
-                        <div className='OptionsModel__Form__AI'>
-                            <AITemplateA01 />
+                        <div className='OptionsModel__Form__AI' style={{ width: A02_ai_window }}>
+                            <AITemplateA01 AIconfig={data} />
                         </div>
                     }
                 </div>
