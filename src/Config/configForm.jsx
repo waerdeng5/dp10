@@ -4275,8 +4275,9 @@ const LayoutWindowStyleFormList = [
             { span: 12, formType: 'RADIO', name: 'window_title', label: '小窗标题', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'COLOR', name: 'window_backColor', label: '背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'window_backDeg', label: '背景角度', rules: true },
-            { span: 12, formType: 'INPUT', name: 'window_radius', label: '背景圆角', rules: true },
             { span: 12, formType: 'INPUT', name: 'window_padding', label: '背景内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'window_margin', label: '背景外边距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'window_radius', label: '背景圆角', rules: true },
             { span: 12, formType: 'RADIO', name: 'window_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 12, formType: 'NUMBER', name: 'window_borderSize', label: '边框尺寸', rules: true,
@@ -4298,8 +4299,8 @@ const LayoutWindowStyleFormList = [
     {
         span: 24, formType: 'GROUP', name: 'LayoutWindowStyleFormList_02', label: '标题设置', collapsible: true, jugde: [{ field: 'window_title', value: [true] }],
         children: [
-            { span: 12, formType: 'INPUT', name: 'window_titleMar', label: '内填充', rules: true },
-            { span: 12, formType: 'INPUT', name: 'window_titlePad', label: '外边距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'window_titleMar', label: '外边距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'window_titlePad', label: '内填充', rules: true },
             { span: 12, formType: 'INPUT', name: 'window_titleTxt', label: '标题内容', rules: true },
             { span: 12, formType: 'COLOR', name: 'window_titleColor', label: '标题颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'window_titleDeg', label: '颜色角度', rules: true },

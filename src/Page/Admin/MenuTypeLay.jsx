@@ -13,7 +13,7 @@ import { LayoutWindowDetailsStyle, CommonAPIUrl } from '../../Config'
 import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
 import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { GlobalOperation, SwiperTemplate } from '../../Temp/LayTemplate'
-import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../../Utils'
+import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams, SpacingSizeCallBack } from '../../Utils'
 
 const { port } = window.location
 const initData = { api: [], layout: [], window: {}, params: {} }
@@ -300,7 +300,7 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
                                         const {
                                             // 基础信息
                                             window_title,
-                                            window_backColor, window_backDeg, window_padding, window_radius,
+                                            window_backColor, window_backDeg, window_padding, window_margin, window_radius,
                                             window_border, window_borderColor, window_borderSize, window_borderType,
                                             window_filter, window_filterColor, window_filterSize,
                                             // 标题设置
@@ -311,8 +311,11 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
                                         } = ParamsData[item.i]
                                         // 基础信息
                                         const style = {
+                                            width: SpacingSizeCallBack(window_margin, 100),
+                                            height: SpacingSizeCallBack(window_margin, 100, true),
                                             background: ColorCallBack(window_backColor, window_backDeg),
                                             padding: SpacingCallBack(window_padding),
+                                            margin: SpacingCallBack(window_margin),
                                             borderRadius: SpacingCallBack(window_radius),
                                             border: SetBorderParams(window_border, window_borderSize, window_borderType, window_borderColor),
                                             filter: SetFilderParams(window_filter, window_filterSize, window_filterColor),

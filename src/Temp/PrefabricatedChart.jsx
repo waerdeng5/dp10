@@ -1213,6 +1213,8 @@ const SetSpecDataFn = (data, type, values) => {
 
 const dataSourceTypeFn = (type, data, UrlData) => {
 
+
+    console.log(type, data, UrlData)
     const { dataSourceType, data_diyData } = data
     if (dataSourceType === 'A03') return data_diyData
     if (dataSourceType === 'A01') {
@@ -1317,10 +1319,7 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
         setSpec(spec)
     }
-    useEffect(() => {
-        console.log(dataSourceTypeFn('bar', data, UrlData))
-        SetSpecFn(dataSourceTypeFn('bar', data, UrlData))
-    }, [data, UrlData])
+    useEffect(() => { SetSpecFn(dataSourceTypeFn('bar', data, UrlData)) }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
     if (Spec) return (
         <VChart

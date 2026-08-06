@@ -511,9 +511,9 @@ export const SpacingCallBack = (spacing) => {
 export const SpacingSizeCallBack = (spacing, size, type) => {
     const str = String(spacing).split(',').map(item => (Number(item)))
     let spac = 0
-    if (str.length === 1) spac = str[0] * 2
-    if (str.length === 2 || str.length === 3) spac = type ? str[0] * 2 : str[1] * 2
-    if (str.length === 4) spac = type ? str[0] + str[2] : str[1] + str[3]
+    if (str.length === 1) spac = str[0] * 2 || 0
+    if (str.length === 2 || str.length === 3) spac = type ? str[0] * 2 || 0 : str[1] * 2 || 0
+    if (str.length === 4) spac = type ? str[0] + str[2] || 0 : str[1] + str[3] || 0
     return `calc(${size}% - ${spac}px)`
 }
 

@@ -1517,6 +1517,7 @@ export const LayoutWindowDetailsStyle = {
     window_backDeg: 0,
     window_radius: 4,
     window_padding: 8,
+    window_margin: 8,
     window_border: true,
     window_borderSize: 1,
     window_borderType: 'solid',
