@@ -1,7 +1,18 @@
 import './Prefabricated.scss'
 import { useEffect, useState, Fragment } from 'react'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, getRandomInt, DiyDataReturn, TemplateClickFn, getNestedValue } from '../Utils'
+import {
+    ColorCallBack,
+    SpacingCallBack,
+    SetFilderParams,
+    getRandomInt,
+    DiyDataReturn,
+    TemplateClickFn,
+    getNestedValue,
+    UnitCallBack,
+    SetPositionParams
+} from '../Utils'
 
+import { ICONMapping } from '../Config/IconMapping'
 import { useTemplateModel } from '../Config/useHooks'
 
 const temporaryDataA01 = {
@@ -60,7 +71,6 @@ const SoldNumber = ({ template, data, list, Event }) => {
         </>
     )
 }
-
 
 const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
     const openModel = useTemplateModel()
@@ -136,7 +146,6 @@ const PrefabricatedDiyText = ({ tempId, UrlData, data, LayoutEvent }) => {
         </div>
     )
 }
-
 
 const PrefabricatedDiyOrgA01 = ({ tempId, UrlData, data, LayoutEvent }) => {
 
@@ -227,9 +236,128 @@ const PrefabricatedDiyOrgA01 = ({ tempId, UrlData, data, LayoutEvent }) => {
     )
 }
 
+const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const {
+        align_items, calign_content, justify_content, flex_direction, flex_wrap, padding, margin, color, deg,
+        progress_widthUnit, progress_width, progress_heightUnit, progress_height, back_color, back_deg,
+        progress_color, progress_deg, back_radius, progress_radius, progress_isAfter, progress_isBefore, progress_icon,
+        after_position, after_topUnit, after_top, after_btmUnit, after_btm, after_lefUnit, after_lef, after_rigUnit, after_rig,
+        after_widthUnit, after_width, after_heightUnit, after_height, after_color, after_deg,
+        before_position, before_topUnit, before_top, before_btmUnit, before_btm, before_lefUnit, before_lef, before_rigUnit, before_rig,
+        before_widthUnit, before_width, before_heightUnit, before_height, before_color, before_deg,
+        icon_url, icon_color, icon_size, icon_top, PrefabricatedDiyProgress_list,
+        params_align_items, params_calign_content, params_justify_content, params_flex_direction, params_flex_wrap,
+        params_padding, params_margin, params_color, params_deg, params_widthUnit, params_width, params_heightUnit, params_height
+    } = data
+
+    const layoutStyle = {
+        '--align_items': align_items,
+        '--align_content': calign_content,
+        '--justify_content': justify_content,
+        '--flex_direction': flex_direction,
+        '--flex_wrap': flex_wrap,
+        padding: SpacingCallBack(padding),
+        margin: SpacingCallBack(margin),
+        background: ColorCallBack(color, deg),
+    }
+
+    const backStyle = {
+        width: UnitCallBack(progress_widthUnit, progress_width),
+        height: UnitCallBack(progress_heightUnit, progress_height),
+        background: ColorCallBack(back_color, back_deg),
+        borderRadius: SpacingCallBack(back_radius),
+    }
+
+    const afterMap = {
+        'top-left': { top: after_top, right: null, bottom: null, left: after_lef, topUnit: after_topUnit, leftUnit: after_lefUnit },
+        'top-right': { top: after_top, right: after_rig, bottom: null, left: null, topUnit: after_topUnit, rightUnit: after_rigUnit },
+        'bottom-left': { top: null, right: null, bottom: after_btm, left: after_lef, bottomUnit: after_btmUnit, leftUnit: after_lefUnit },
+        'bottom-right': { top: null, right: after_rig, bottom: after_btm, left: null, bottomUnit: after_btmUnit, rightUnit: after_rigUnit },
+    };
+
+    const beforeMap = {
+        'top-left': { top: before_top, right: null, bottom: null, left: before_lef, topUnit: before_topUnit, leftUnit: before_lefUnit },
+        'top-right': { top: before_top, right: before_rig, bottom: null, left: null, topUnit: before_topUnit, rightUnit: before_rigUnit },
+        'bottom-left': { top: null, right: null, bottom: before_btm, left: before_lef, bottomUnit: before_btmUnit, leftUnit: before_lefUnit },
+        'bottom-right': { top: null, right: before_rig, bottom: before_btm, left: null, bottomUnit: before_btmUnit, rightUnit: before_rigUnit },
+    };
+
+    const afterStyle = {
+        ...SetPositionParams(afterMap, after_position),
+        background: ColorCallBack(after_color, after_deg),
+        width: UnitCallBack(after_widthUnit, after_width),
+        height: UnitCallBack(after_heightUnit, after_height),
+    }
+
+    const beforeStyle = {
+        ...SetPositionParams(beforeMap, before_position),
+        background: ColorCallBack(before_color, before_deg),
+        width: UnitCallBack(before_widthUnit, before_width),
+        height: UnitCallBack(before_heightUnit, before_height),
+    }
+
+    const iconStyle = {
+        left: '62%',
+        color: icon_color,
+        fontSize: icon_size,
+        top: icon_top,
+        height: icon_size,
+    }
+
+    const progressStyle = {
+        width: '62%',
+        background: ColorCallBack(progress_color, progress_deg),
+        borderRadius: SpacingCallBack(progress_radius),
+    }
+
+    const paramsStyle = {
+        width: UnitCallBack(params_widthUnit, params_width),
+        height: UnitCallBack(params_heightUnit, params_height),
+        padding: SpacingCallBack(params_padding),
+        margin: SpacingCallBack(params_margin),
+        background: ColorCallBack(params_color, params_deg),
+        '--params_align_items': params_align_items,
+        '--params_align_content': params_calign_content,
+        '--params_justify_content': params_justify_content,
+        '--params_flex_direction': params_flex_direction,
+        '--params_flex_wrap': params_flex_wrap,
+    }
+
+    return (
+        <div className='PrefabricatedDiyProgress' style={layoutStyle}>
+            <div className='progressBack' style={backStyle}>
+                <div className='progressBar' style={progressStyle} />
+                {progress_icon && <span className='progressIcon' style={iconStyle}>{ICONMapping[icon_url]}</span>}
+                {progress_isAfter && <span className='progressAfter' style={afterStyle} />}
+                {progress_isBefore && <span className='progressBefore' style={beforeStyle} />}
+            </div>
+            <div className='params' style={paramsStyle}>
+                {PrefabricatedDiyProgress_list.map((v, i) => {
+                    const { render, render_text, render_field, color, deg, size, family, weight, style, filed, filed_data, filed_color, percent, percentData } = v
+                    const itemStyle = {
+                        color: ColorCallBack(color, deg),
+                        fontSize: size,
+                        fontWeight: weight,
+                        fontFamily: family,
+                        style: style,
+                        filter: SetFilderParams(filed, filed_data, filed_color)
+                    }
+                    const textRend = render === 'A01' ? render_text : render_field
+                    const percentRend = percent ? Number(textRend) * (percentData === 'A01' ? 1 : 100) + '%' : textRend
+                    return (
+                        <div className='params_item' key={i}>
+                            <div style={itemStyle}>{percentRend}</div>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
+}
 
 
 export const PrefabricatedDiyTemplate = {
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,
+    PrefabricatedDiyProgress
 }

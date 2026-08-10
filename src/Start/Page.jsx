@@ -24,7 +24,8 @@ import { WinTemplate } from '../Temp/StartTemplate'
 
 const PARAMSMAPPING = [
     'PrefabricatedDateSelect',
-    'PrefabricatedDiyOrgA01'
+    'PrefabricatedDiyOrgA01',
+    'PrefabricatedDiyProgress'
 ]
 
 

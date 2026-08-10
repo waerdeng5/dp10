@@ -383,7 +383,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt, window_backImg, window_backImgUrl,
         win_image_status, win_image_list
     } = Config
-    console.log(Config)
     const winTitleStyle = {
         '--titleColor': ColorCallBack(win_color, win_deg),
         fontSize: win_size,

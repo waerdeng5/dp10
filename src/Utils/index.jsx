@@ -518,10 +518,27 @@ export const SpacingSizeCallBack = (spacing, size, type) => {
 }
 // TODO 单位换算
 export const UnitCallBack = (unit, value) => {
-    if (unit === 'px') return Number(value)
+    if (unit === 'px') return `${Number(value)}px`
     if (unit === 'pct') return `${Number(value)}%`
     if (unit === 'calc') return `calc(${value})`
     return Number(value)
+}
+
+// TODO 定位参数设置
+export const SetPositionParams = (data, position) => {
+    const obj = {}
+    const config = data[position];
+    if (config) {
+        Object.entries(config).forEach(([key, value]) => {
+            if (value !== null) {
+                if (key.endsWith('Unit')) return
+                const unitKey = key + 'Unit'
+                const unit = config[unitKey]
+                obj[key] = UnitCallBack(unit, value)
+            }
+        })
+    }
+    return obj
 }
 
 // TODO 边框参数

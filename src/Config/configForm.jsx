@@ -6891,6 +6891,180 @@ const PrefabricatedDiyOrgA01 = [
         ],
     }
 ]
+// 横向进度
+const PrefabricatedDiyProgress = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyProgress_layout', label: '布局参数', collapsible: true, children: [
+            { span: 8, formType: 'SELECT', name: 'align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'calign_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'margin', label: '外间距', rules: true },
+            { span: 12, formType: 'COLOR', name: 'color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'deg', label: '颜色角度', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyProgress_progress', label: '进度条参数', collapsible: true, children: [
+            { span: 12, formType: 'RADIO', name: 'progress_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'progress_width', label: '单项宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'progress_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'progress_height', label: '单项高度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '进度背景色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'progress_color', label: '进度条颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'progress_deg', label: '进度角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'INPUT', name: 'progress_radius', label: '进度圆角', rules: true },
+            { span: 8, formType: 'RADIO', name: 'progress_isAfter', label: 'after渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'RADIO', name: 'progress_isBefore', label: 'before渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'RADIO', name: 'progress_icon', label: '图标渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyProgress_isAfter', label: 'after参数', collapsible: true,
+                jugde: [{ field: 'progress_isAfter', value: [true] }], children: [
+                    { span: 24, formType: 'RADIO', name: 'after_position', label: '定位方式', rules: true, valueEnum: MappingData.Style__PositionType },
+                    {
+                        span: 24, formType: 'RADIO', name: 'after_topUnit', label: '顶部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'after_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'after_top', label: '顶部距离', rules: true,
+                        jugde: [{ field: 'after_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'after_btmUnit', label: '底部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'after_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'after_btm', label: '底部距离', rules: true,
+                        jugde: [{ field: 'after_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'after_lefUnit', label: '左侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'after_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'after_lef', label: '左侧距离', rules: true,
+                        jugde: [{ field: 'after_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'after_rigUnit', label: '右侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'after_position', value: ['top-right', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'after_rig', label: '右侧距离', rules: true,
+                        jugde: [{ field: 'after_position', value: ['top-right', 'bottom-right'] }]
+                    },
+                    { span: 24, formType: 'RADIO', name: 'after_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+                    { span: 24, formType: 'NUMBER', name: 'after_width', label: '背景宽度', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'after_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+                    { span: 24, formType: 'NUMBER', name: 'after_height', label: '背景高度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'after_color', label: '进度条颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'after_deg', label: '进度角度', rules: true },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyProgress_isBefore', label: 'before参数', collapsible: true,
+                jugde: [{ field: 'progress_isBefore', value: [true] }], children: [
+                    { span: 24, formType: 'RADIO', name: 'before_position', label: '定位方式', rules: true, valueEnum: MappingData.Style__PositionType },
+                    {
+                        span: 24, formType: 'RADIO', name: 'before_topUnit', label: '顶部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'before_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'before_top', label: '顶部距离', rules: true,
+                        jugde: [{ field: 'before_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'before_btmUnit', label: '底部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'before_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'before_btm', label: '底部距离', rules: true,
+                        jugde: [{ field: 'before_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'before_lefUnit', label: '左侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'before_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'before_lef', label: '左侧距离', rules: true,
+                        jugde: [{ field: 'before_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'before_rigUnit', label: '右侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'before_position', value: ['top-right', 'bottom-right'] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'before_rig', label: '右侧距离', rules: true,
+                        jugde: [{ field: 'before_position', value: ['top-right', 'bottom-right'] }]
+                    },
+                    { span: 24, formType: 'RADIO', name: 'before_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+                    { span: 24, formType: 'NUMBER', name: 'before_width', label: '背景宽度', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'before_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+                    { span: 24, formType: 'NUMBER', name: 'before_height', label: '背景高度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'before_color', label: '进度条颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'before_deg', label: '进度角度', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedDiyProgress_icon', label: '图标参数', collapsible: true,
+                jugde: [{ field: 'progress_icon', value: [true] }], children: [
+                    { span: 12, formType: 'TempICON', name: 'icon_url', label: '图标选择', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'icon_color', label: '图标颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'icon_size', label: '图标尺寸', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'icon_top', label: '顶部距离', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyProgress_params', label: '数值设置', collapsible: true, children: [
+            { span: 8, formType: 'SELECT', name: 'params_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'params_calign_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'params_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'params_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'params_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'INPUT', name: 'params_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'params_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'COLOR', name: 'params_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'params_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'params_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'params_width', label: '单项宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'params_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'params_height', label: '单项高度', rules: true },
+
+            {
+                span: 24, formType: 'LIST', name: 'PrefabricatedDiyProgress_list', label: '数值设置', collapsible: true, children: [
+                    { span: 12, formType: 'RADIO', name: 'render', label: '显示文字', rules: true, valueEnum: MappingData.System_fileUrlType2 },
+                    { span: 12, formType: 'INPUT', name: 'render_text', label: '渲染内容', rules: true, jugde: [{ field: 'render', value: ['A01'] }] },
+                    { span: 12, formType: 'INPUT', name: 'render_field', label: '渲染字段', rules: true, jugde: [{ field: 'render', value: ['A02'] }] },
+                    { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'filed_data', label: '阴影数值', rules: true, jugde: [{ field: 'filed', value: [true] }] },
+                    {
+                        span: 12, formType: 'COLOR', name: 'filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'filed', value: [true] }]
+                    },
+                    { span: 12, formType: 'RADIO', name: 'percent', label: '渲染占比', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'RADIO', name: 'percentData', label: '占比计算方式 ', rules: true,
+                        jugde: [{ field: 'percent', value: [true] }], valueEnum: MappingData.Charts__percentData
+                    },
+                ]
+            },
+        ]
+    },
+]
 
 // !!! 图文模块
 // 默认图文
@@ -7774,6 +7948,7 @@ export const FormConfig = {
 
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,
+    PrefabricatedDiyProgress,
 
     PrefabricatedImgText,
 
