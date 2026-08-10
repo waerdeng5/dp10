@@ -516,6 +516,13 @@ export const SpacingSizeCallBack = (spacing, size, type) => {
     if (str.length === 4) spac = type ? str[0] + str[2] || 0 : str[1] + str[3] || 0
     return `calc(${size}% - ${spac}px)`
 }
+// TODO 单位换算
+export const UnitCallBack = (unit, value) => {
+    if (unit === 'px') return Number(value)
+    if (unit === 'pct') return `${Number(value)}%`
+    if (unit === 'calc') return `calc(${value})`
+    return Number(value)
+}
 
 // TODO 边框参数
 export const SetBorderParams = (status, size, type, color) => {

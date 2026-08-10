@@ -55,6 +55,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [FoldStatus, setFoldStatus] = useState(false)
 
     const getApiData = (params) => {
+        if (!params || !page.params) return
         const apiParams = Object.values(page.params).reduce((acc, v) => {
             if (PARAMSMAPPING.includes(v.value) && v.isParams) acc.push(...(v.isParamsConfig || []))
             return acc
@@ -412,7 +413,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                                                                     />
                                                                 </div>
                                                             </div> :
-                                                            <WinTemplate Config={{ ...data, window_titleTxt, setClass }} >
+                                                            <WinTemplate Config={{ ...data, ...ParamsData[item.i], setClass }} >
                                                                 <div className='WindowContent' >
                                                                     {LayoutStatus && <div className='SCALE'>window : {item.w}*{item.h}</div>}
                                                                     <div className='WindowNavSwiper' style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}>

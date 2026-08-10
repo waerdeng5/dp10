@@ -957,11 +957,10 @@ const StartFormList = [
                         ]
                     },
                     {
-                        span: 12, formType: 'GROUP', name: 'win_back_filter_data', label: '背景模糊', collapsible: true,
-                        jugde: [{ field: 'win_back_filter', value: [true] }], children: [
-                            { span: 24, formType: 'NUMBER', name: 'win_back_filter_size', label: '模糊数值', rules: true, },
-                        ]
+                        span: 12, formType: 'NUMBER', name: 'win_back_filter_size', label: '模糊数值', rules: true,
+                        jugde: [{ field: 'win_back_filter', value: [true] }]
                     },
+
                 ]
             },
             {
@@ -1004,9 +1003,17 @@ const StartFormList = [
                                 span: 12, formType: 'NUMBER', name: 'back_rig', label: '右侧距离', rules: true,
                                 jugde: [{ field: 'back_position', value: ['top-right', 'bottom-right'] }]
                             },
-                            { span: 8, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
-                            { span: 8, formType: 'NUMBER', name: 'height', label: '高度', rules: true },
-                            { span: 8, formType: 'NUMBER', name: 'rotate', label: '旋转度', rules: true },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_widthUnit', label: '宽度单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType,
+                            },
+                            { span: 12, formType: 'INPUT', name: 'width', label: '宽度', rules: true },
+                            {
+                                span: 12, formType: 'RADIO', name: 'back_heightUnit', label: '高度单位', rules: true,
+                                valueEnum: MappingData.Flex_SizeType,
+                            },
+                            { span: 12, formType: 'INPUT', name: 'height', label: '高度', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'rotate', label: '旋转度', rules: true },
                         ]
                     },
                 ]
@@ -1673,6 +1680,10 @@ const StartWindowFormList = [
     { span: 12, formType: 'RADIO', name: 'window_nav', label: '小窗导航', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'RADIO', name: 'window_title', label: '小窗标题', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'INPUT', name: 'window_titleTxt', label: '标题内容', rules: true, jugde: [{ field: 'window_title', value: [true] }] },
+    { span: 12, formType: 'RADIO', name: 'window_backImg', label: '背景图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 12, formType: 'INPUT', name: 'window_backImgUrl', label: '图片地址', rules: true, jugde: [{ field: 'window_backImg', value: [true] }] },
+
+
     {
         span: 24, formType: 'GROUP', name: 'LayoutWindowStyleFormList_01', label: '样式设置', collapsible: true,
         jugde: [{ field: 'window_style', value: ['DIY'] }], children: [

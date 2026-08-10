@@ -211,6 +211,7 @@ export const MappingData = {
         { value: 'flex', label: '弹性' },
         { value: 'px', label: '像素' },
         { value: 'pct', label: '比例' },
+        { value: 'calc', label: '计算' },
     ],
 
 

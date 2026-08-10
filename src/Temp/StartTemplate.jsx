@@ -9,7 +9,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { ICONMapping } from '../Config/IconMapping'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, UnitCallBack } from '../Utils'
 
 const columns = [
     { title: '序号', dataIndex: 'index', valueType: 'index', width: 280, align: 'center' },
@@ -380,10 +380,10 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
     const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
         win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
-        win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt,
-        win_image_status, win_image_list,
-        ...item
+        win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt, window_backImg, window_backImgUrl,
+        win_image_status, win_image_list
     } = Config
+    console.log(Config)
     const winTitleStyle = {
         '--titleColor': ColorCallBack(win_color, win_deg),
         fontSize: win_size,
@@ -399,8 +399,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
     }
 
-
-
     return (
         <div className='SmallWindowBox '>
             <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
@@ -408,6 +406,7 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                 <div>{Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}</div>
             </div>
             <div className='WinBox' style={winBoxStyle}>
+                {window_backImg && <img className='WinBackImg' src={window_backImgUrl} alt="window_backImgUrl" />}
                 {startType && setStartType ? (() => {
                     const {
                         table_search_title_color, table_search_title_deg, table_search_title_size, table_search_title_family, table_search_title_style,
@@ -611,7 +610,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                         '--paginIconSize': table_pagin_icon_size + 'px',
                     }
 
-
                     return (
                         <div className='ConfigPage'  >
                             <Radio.Group
@@ -673,9 +671,9 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
 
                 {win_image_status && win_image_list.map((v, i) => {
                     const Style = {
-                        width: v.width,
-                        height: v.height,
-                        transform: `rotate(${v.rotate}deg)`
+                        width: UnitCallBack(v.back_widthUnit, v.width),
+                        height: UnitCallBack(v.back_heightUnit, v.height),
+                        transform: `rotate3d(${v.rotate}) `
                     }
                     const positionMap = {
                         'top-left': { top: v.back_top, right: null, bottom: null, left: v.back_lef, topUnit: v.back_topUnit, leftUnit: v.back_lefUnit },
