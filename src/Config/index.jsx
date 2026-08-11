@@ -573,7 +573,10 @@ export const SelectTemplate = [
 
 export const SwiperTemplatePage = [
     { uuid: 'PrefabricatedSwiperBox', title: '轮播信息', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
 
+export const VisualTemplatePage = [
+    { uuid: 'PrefabricatedVisualMonitoring', title: '视频监控', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 
@@ -1048,6 +1051,10 @@ export const TemplateParamsMapping = {
     // TODO 轮播模块
     PrefabricatedSwiperBox: {
         value: 'PrefabricatedSwiperBox',
+    },
+    // TODO 视频监控模块
+    PrefabricatedVisualMonitoring: {
+        value: 'PrefabricatedVisualMonitoring',
     }
 }
 

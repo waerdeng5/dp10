@@ -8008,6 +8008,107 @@ const PrefabricatedSwiperBox = [
         ]
     },
 ]
+
+
+
+// !!! 监控模块
+const PrefabricatedVisualMonitoring = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options', label: '操作设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'left_options', label: '左侧操作列表', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'top_options', label: '头部操作列表', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left', label: '左侧列表', collapsible: true,
+                jugde: [{ field: 'left_options', value: [true] }], children: [
+                    { span: 12, formType: 'NUMBER', name: 'left_width', label: '操作宽度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'left_radius', label: '背景圆角', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'left_color', label: '背景颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'left_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'left_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'left_margin', label: '外间距', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'left_orga', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'left_type', label: '监控类型', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'left_posi', label: '监控部位', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'left_nums', label: '显示方式', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'left_orga_api', label: '组织机构接口', rules: true, jugde: [{ field: 'left_orga', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'left_orga_params', label: '组织机构参数', jugde: [{ field: 'left_orga', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'left_type_api', label: '监控类型接口', rules: true, jugde: [{ field: 'left_type', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'left_type_params', label: '监控类型参数', jugde: [{ field: 'left_type', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'left_posi_api', label: '监控部位接口', rules: true, jugde: [{ field: 'left_posi', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'left_posi_params', label: '监控部位参数', jugde: [{ field: 'left_posi', value: [true] }] },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_title', label: '标题样式', collapsible: true,
+                jugde: [{ field: 'left_options', value: [true] }], children: [
+                    { span: 24, formType: 'COLOR', name: 'left_label_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'left_label_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'left_label_padding', label: '文字填充', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'left_label_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'left_label_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'left_label_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'left_label_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'left_label_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'left_label_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'left_label_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'left_label_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'left_label_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_select', label: '下拉样式', collapsible: true,
+                jugde: [{ field: 'left_options', value: [true] }], children: [
+                    { span: 24, formType: 'NUMBER', name: 'left_select_height', label: '窗体高度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'left_select_back', label: '背景颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'left_select_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'left_select_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'left_select_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'left_select_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'left_select_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'left_select_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'COLOR', name: 'left_select_border', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'COLOR', name: 'left_select_icon', label: '图标颜色', rules: true, mode: ['single'] },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_number', label: '显示方式', collapsible: true,
+                jugde: [{ field: 'left_options', value: [true] }], children: [
+                    // 
+                ]
+            },
+
+
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_top', label: '头部列表', collapsible: true,
+                jugde: [{ field: 'top_options', value: [true] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'top_orga', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'top_type', label: '监控类型', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'top_posi', label: '监控部位', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'top_nums', label: '显示方式', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    // 操作高度
+                    // 背景颜色
+                    // 背景角度
+                    // 外间距
+                    // 内填充
+                    // 各接口信息 -> 项目 类型 位置
+                    // 标题样式
+                    // 下拉样式
+                ]
+            },
+        ]
+    },
+
+]
+
+
+
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
@@ -8100,6 +8201,7 @@ export const FormConfig = {
 
     PrefabricatedSelect,
     PrefabricatedDateSelect,
+    PrefabricatedVisualMonitoring,
 
     PrefabricatedSwiperBox
 }

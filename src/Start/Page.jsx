@@ -106,9 +106,10 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         const { uuid } = await GetIndexedDB('config')
         const params = { uuid: `${uuid}/STA_PAGE/${e.path}`, content: JSON.stringify(await Encrypt(e)) }
         const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
-        if (err) return console.log(err)
+        if (err) return notification.error({ title: '保存失败!', description: '参数保存失败!' })
         LayoutEvent.emit({ type: 'setCurrent', data: e })
         getData()
+        notification.success({ title: '保存成功!', description: '参数保存成功!' })
     }
 
     // !!! 全局设置

@@ -10,6 +10,7 @@ import {
     TableTemplate,
     SelectTemplate,
     SwiperTemplatePage,
+    VisualTemplatePage,
 } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
@@ -95,6 +96,15 @@ const LayoutTemplate = ({ data, Event }) => {
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
                         <ItemTemplate name='Legend' layId={data.layId} data={SwiperTemplatePage} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '9', label: '独立模块', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
                     </DevScrollView>
                 </div>
             )

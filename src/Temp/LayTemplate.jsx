@@ -32,6 +32,8 @@ import { PrefabricatedImgTextTemplate } from './PrefabricatedImgText'
 import { PrefabricatedTableTemplate } from './PrefabricatedTable'
 import { PrefabricatedSelectTemplate } from './PrefabricatedSelect'
 import { PrefabricatedSwiperTemplate } from './PrefabricatedSwiper'
+import { PrefabricatedVisualTemplate } from './PrefabricatedVisual'
+
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
 import {
@@ -43,7 +45,8 @@ import {
     TableTemplate,
     TemplateParamsMapping,
     SelectTemplate,
-    SwiperTemplatePage
+    SwiperTemplatePage,
+    VisualTemplatePage,
 } from '../Config'
 
 const { port } = window.location
@@ -55,7 +58,8 @@ const TemplateMapping = [
     ...ListTempList,
     ...TableTemplate,
     ...SelectTemplate,
-    ...SwiperTemplatePage
+    ...SwiperTemplatePage,
+    ...VisualTemplatePage
 ]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
@@ -65,7 +69,8 @@ const TemplateComponentMapping = {
     ...PrefabricatedListTemplate,
     ...PrefabricatedTableTemplate,
     ...PrefabricatedSelectTemplate,
-    ...PrefabricatedSwiperTemplate
+    ...PrefabricatedSwiperTemplate,
+    ...PrefabricatedVisualTemplate
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {
