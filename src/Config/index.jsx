@@ -566,10 +566,14 @@ export const TableTemplate = [
     { uuid: 'PrefabricatedTable', title: '表单模块', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
-
 export const SelectTemplate = [
     { uuid: 'PrefabricatedSelect', title: '下拉选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDateSelect', title: '时间选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+export const SwiperTemplatePage = [
+    { uuid: 'PrefabricatedSwiperBox', title: '轮播信息', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+
 ]
 
 
@@ -1041,6 +1045,10 @@ export const TemplateParamsMapping = {
         suffix_icon_filed_data: "1,1,1",
         suffix_icon_filed_color: "#262626"
     },
+    // TODO 轮播模块
+    PrefabricatedSwiperBox: {
+        value: 'PrefabricatedSwiperBox',
+    }
 }
 
 export const OtherDiyPageConfig = {

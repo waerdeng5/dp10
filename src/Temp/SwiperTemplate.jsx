@@ -45,12 +45,13 @@ export const SwiperLoginBack = ({ data = '', speed = 500, delay = 5000 }) => {
     return (
         <Swiper
             className='SwiperLoginBack'
-            modules={[Autoplay, EffectFade]}
+            modules={[Autoplay, EffectFade, Scrollbar]}
             loop={true}
             speed={speed}
             effect="fade"
             spaceBetween={30}
             allowTouchMove={false}
+            scrollbar={{ draggable: true }}
             autoplay={{ delay, disableOnInteraction: false }}
         >
             {ImageList.map((url, index) =>
@@ -172,8 +173,6 @@ export const SwiperB20Template = ({ data }) => {
 
 // 附件预览
 export const SwiperAnnexTemplate = ({ data }) => {
-    console.log(data)
-
     if (!data)
         return (
             <div className='SwiperCenter'>

@@ -8,7 +8,7 @@ import {
     DiyDataReturn,
     TemplateClickFn,
     getNestedValue,
-    UnitCallBack,
+    UnitCallBackStruct,
     SetPositionParams
 } from '../Utils'
 
@@ -262,8 +262,8 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
     }
 
     const backStyle = {
-        width: UnitCallBack(progress_widthUnit, progress_width),
-        height: UnitCallBack(progress_heightUnit, progress_height),
+        ...UnitCallBackStruct(progress_widthUnit, progress_width, 'width'),
+        ...UnitCallBackStruct(progress_heightUnit, progress_height, 'height'),
         background: ColorCallBack(back_color, back_deg),
         borderRadius: SpacingCallBack(back_radius),
     }
@@ -285,15 +285,15 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
     const afterStyle = {
         ...SetPositionParams(afterMap, after_position),
         background: ColorCallBack(after_color, after_deg),
-        width: UnitCallBack(after_widthUnit, after_width),
-        height: UnitCallBack(after_heightUnit, after_height),
+        ...UnitCallBackStruct(after_widthUnit, after_width, 'width'),
+        ...UnitCallBackStruct(after_heightUnit, after_height, 'height'),
     }
 
     const beforeStyle = {
         ...SetPositionParams(beforeMap, before_position),
         background: ColorCallBack(before_color, before_deg),
-        width: UnitCallBack(before_widthUnit, before_width),
-        height: UnitCallBack(before_heightUnit, before_height),
+        ...UnitCallBackStruct(before_widthUnit, before_width, 'width'),
+        ...UnitCallBackStruct(before_heightUnit, before_height, 'height'),
     }
 
     const iconStyle = {
@@ -311,8 +311,8 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
     }
 
     const paramsStyle = {
-        width: UnitCallBack(params_widthUnit, params_width),
-        height: UnitCallBack(params_heightUnit, params_height),
+        ...UnitCallBackStruct(params_widthUnit, params_width, 'width'),
+        ...UnitCallBackStruct(params_heightUnit, params_height, 'height'),
         padding: SpacingCallBack(params_padding),
         margin: SpacingCallBack(params_margin),
         background: ColorCallBack(params_color, params_deg),

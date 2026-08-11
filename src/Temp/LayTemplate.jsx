@@ -31,12 +31,32 @@ import { PrefabricatedListTemplate } from './PrefabricatedList'
 import { PrefabricatedImgTextTemplate } from './PrefabricatedImgText'
 import { PrefabricatedTableTemplate } from './PrefabricatedTable'
 import { PrefabricatedSelectTemplate } from './PrefabricatedSelect'
-
-import { PlaceTempList, ChartTempList, DIYTempList, ImgAndTextTempList, ListTempList, TableTemplate, TemplateParamsMapping, SelectTemplate } from '../Config'
+import { PrefabricatedSwiperTemplate } from './PrefabricatedSwiper'
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
+import {
+    PlaceTempList,
+    ChartTempList,
+    DIYTempList,
+    ImgAndTextTempList,
+    ListTempList,
+    TableTemplate,
+    TemplateParamsMapping,
+    SelectTemplate,
+    SwiperTemplatePage
+} from '../Config'
+
 const { port } = window.location
-const TemplateMapping = [...PlaceTempList, ...ChartTempList, ...DIYTempList, ...ImgAndTextTempList, ...ListTempList, ...TableTemplate, ...SelectTemplate]
+const TemplateMapping = [
+    ...PlaceTempList,
+    ...ChartTempList,
+    ...DIYTempList,
+    ...ImgAndTextTempList,
+    ...ListTempList,
+    ...TableTemplate,
+    ...SelectTemplate,
+    ...SwiperTemplatePage
+]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
     ...PrefabricatedPlaceTemplate,
@@ -44,7 +64,8 @@ const TemplateComponentMapping = {
     ...PrefabricatedImgTextTemplate,
     ...PrefabricatedListTemplate,
     ...PrefabricatedTableTemplate,
-    ...PrefabricatedSelectTemplate
+    ...PrefabricatedSelectTemplate,
+    ...PrefabricatedSwiperTemplate
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {
@@ -332,7 +353,7 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
         centeredSlides: true,
         direction: window_swiperDirection,
         speed: window_swiperSpeed,
-        noSwiping: status ? true : window_swiperNoSwiping,
+        noSwiping: status ? true : window_swiperNoSwiping || false,
         loop: window_swiperLoop,
         autoplay: window_swiperAutoplay && { delay: window_swiperDelay },
         watchOverflow: true,
@@ -341,7 +362,7 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
             clickable: window_swiperPaginationClickable,
             progressbarOpposite: window_swiperPaginationOpposite,
             dynamicBullets: window_swiperPaginationDynamicBullets,
-            window_swiperPaginationDynamicBullets: window_swiperPaginationDynamicBulletsNumber,
+            dynamicMainBullets: window_swiperPaginationDynamicBulletsNumber,
         },
         scrollbar: window_swiperScrollbar && {
             hide: window_swiperScrollbarHide,
@@ -370,8 +391,6 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
             slideShadows: window_swiperCardsSlideShadows,
             //transformEl:'.text',
         },
-
-
         onSlideChange: (e) => setActive(window_NavList.length !== 0 ? window_NavList[e.activeIndex].window_navUuid : 0),
         onSwiper: setSWIPER
     }
@@ -410,7 +429,7 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
                 </div>
             }
             <div className='WindowSwiper' >
-                <Swiper  {...SwiperParams}>
+                <Swiper {...SwiperParams} >
                     {window_NavList && window_NavList.map(item => {
                         const { window_navUuid } = item
                         const layoutStyle = STATUS === window_navUuid
@@ -418,14 +437,10 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
                             <SwiperSlide key={window_navUuid}>
                                 <Dropdown
                                     trigger={['contextMenu']}
-                                    menu={{
-                                        items: (port && status) ?
-                                            GlobalOperation({ type: 'layout', winId: data.i, layId: window_navUuid, actId: STATUS, LayoutEvent }) :
-                                            []
-                                    }}
+                                    menu={{ items: (port && status) ? GlobalOperation({ type: 'layout', winId: data.i, layId: window_navUuid, actId: STATUS, LayoutEvent }) : [] }}
                                 >
                                     <div
-                                        className={`WindowSwiperItem swiper-no-swiping ${layoutStyle ? 'Edit' : 'Preview'}`}
+                                        className={`WindowSwiperItem ${SwiperParams.noSwiping || layoutStyle ? 'swiper-no-swiping' : ''} ${layoutStyle ? 'Edit' : 'Preview'}`}
                                         onContextMenu={(e) => e.stopPropagation()}
                                         onMouseDown={(e) => STATUS ? e.stopPropagation() : null}
                                     >

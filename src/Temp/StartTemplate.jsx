@@ -9,7 +9,7 @@ import { ProTable } from '@ant-design/pro-components'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { ICONMapping } from '../Config/IconMapping'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, UnitCallBack } from '../Utils'
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, UnitCallBackStruct } from '../Utils'
 
 const columns = [
     { title: '序号', dataIndex: 'index', valueType: 'index', width: 280, align: 'center' },
@@ -670,8 +670,8 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
 
                 {win_image_status && win_image_list.map((v, i) => {
                     const Style = {
-                        width: UnitCallBack(v.back_widthUnit, v.width),
-                        height: UnitCallBack(v.back_heightUnit, v.height),
+                        ...UnitCallBackStruct(v.back_widthUnit, v.width, 'width'),
+                        ...UnitCallBackStruct(v.back_heightUnit, v.height, 'height'),
                         transform: `rotate3d(${v.rotate}) `
                     }
                     const positionMap = {

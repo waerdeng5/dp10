@@ -710,3 +710,47 @@
         flex-wrap: var(--params_flex_wrap);
     }
 }
+
+.PrefabricatedSwiperBox {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .SwiperBox {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+
+        .SwiperSlideItem {
+            display: flex;
+            align-items: var(--alignItems);
+            align-content: var(--alignContent);
+            justify-content: var(--justifyContent);
+            flex-direction: var(--flexDirection);
+            flex-wrap: var(--flexWrap);
+            overflow: hidden;
+
+            .SwiperSlideItemImg {
+                overflow: hidden;
+            }
+
+            .SwiperSlideItemText {
+                display: flex;
+                align-items: var(--itemAlignItems);
+                align-content: var(--itemAlignContent);
+                justify-content: var(--itemJustifyContent);
+                flex-direction: var(--itemFlexDirection);
+                flex-wrap: var(--itemFlexWrap);
+
+                .itemText {
+                    background: var(--color);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+                    white-space: pre-line;
+                }
+            }
+        }
+    }
+}

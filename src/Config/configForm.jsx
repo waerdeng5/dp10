@@ -7866,6 +7866,148 @@ const PrefabricatedDateSelect = [
         ]
     }
 ]
+// !!! 轮播模块
+const PrefabricatedSwiperBox = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_swiper', label: '轮播设置', collapsible: true,
+        children: [
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_swiper_params', label: '切换参数', collapsible: true,
+                children: [
+                    { span: 12, formType: 'RADIO', name: 'swiper_direction', label: '轮播方向', rules: true, valueEnum: MappingData.Charts__VChartsDirectionA01 },
+                    { span: 12, formType: 'NUMBER', name: 'swiper_speed', label: '切换速度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'swiper_slidesPerView', label: '单页数量', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'swiper_spaceBetween', label: '单页间距', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'swiper_allowTouchMove', label: '自由拖动', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_mousewheel', label: '鼠标滚动', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_freeMode', label: '自由模式', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_loop', label: '无限循环', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_navigation', label: '导航模块', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_pagination', label: '分页模块', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_scrollbar', label: '滚动条模块', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'swiper_autoPlay', label: '自动切换', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'swiper_delay', label: '切换延迟', rules: true,
+                        jugde: [{ field: 'swiper_autoPlay', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_swiper_pagination', label: '分页模块设置', collapsible: true,
+                jugde: [{ field: 'swiper_pagination', value: [true] }], children: [
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_pagination_clickable', label: '点击切换', rules: true,
+                        valueEnum: MappingData.IsEnabledBool
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_pagination_type', label: '分页器类型', rules: true,
+                        valueEnum: MappingData.Swiper__SwiperPaginationType
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_pagination_opposite', label: '进度条方向', rules: true,
+                        valueEnum: MappingData.mars3d__orientation, jugde: [{ field: 'swiper_pagination_type', value: ['progressbar'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_pagination_dynamicBullets', label: '自动隐藏', rules: true,
+                        valueEnum: MappingData.IsEnabledBool, jugde: [{ field: 'swiper_pagination_type', value: ['bullets'] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'swiper_pagination_dynamicBulletsNumber', label: '主点数量', rules: true,
+                        jugde: [{ field: 'swiper_pagination_type', value: ['bullets'] }]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_swiper_scrollbar', label: '滚动条模块设置', collapsible: true,
+                jugde: [{ field: 'swiper_scrollbar', value: [true] }], children: [
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_scrollbar_draggable', label: '点击切换', rules: true,
+                        valueEnum: MappingData.IsEnabledBool, jugde: [{ field: 'swiper_scrollbar', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'swiper_scrollbar_hide', label: '自动隐藏', rules: true,
+                        valueEnum: MappingData.IsEnabledBool, jugde: [{ field: 'swiper_scrollbar', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_item', label: '单项布局', collapsible: true,
+        children: [
+            // 整体布局
+            { span: 8, formType: 'SELECT', name: 'align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'margin', label: '外间距', rules: true },
+            { span: 12, formType: 'RADIO', name: 'isImage', label: '显示图片', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'isText', label: '显示文本', rules: true, valueEnum: MappingData.IsEnabledBool },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_item_image', label: '图片信息', collapsible: true,
+        jugde: [{ field: 'isImage', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'img_type', label: '地址类型', rules: true, valueEnum: MappingData.System_fileUrlType2 },
+            { span: 12, formType: 'INPUT', name: 'img_url', label: '图片地址/字段', rules: true },
+            { span: 12, formType: 'RADIO', name: 'img_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'img_width', label: '图片宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'img_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'img_height', label: '图片高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'img_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'RADIO', name: 'img_objectFit', label: '图片拉伸方式', rules: true, valueEnum: MappingData.Start__imgObjectFit },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_item_text', label: '文本信息', collapsible: true,
+        jugde: [{ field: 'isText', value: [true] }], children: [
+            // 局部布局
+            { span: 12, formType: 'RADIO', name: 'item_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'item_width', label: '图片宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'item_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'item_height', label: '图片高度', rules: true },
+            { span: 8, formType: 'SELECT', name: 'item_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'item_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'item_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'item_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'item_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'COLOR', name: 'item_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'item_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'item_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'item_margin', label: '外间距', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedSwiperBox_item_list', label: '文字列表', collapsible: true,
+        jugde: [{ field: 'isText', value: [true] }], children: [
+            {
+                span: 24, formType: 'LIST', name: 'list', label: '文字列表', collapsible: true, children: [
+                    { span: 12, formType: 'RADIO', name: 'type', label: '文字类型', rules: true, valueEnum: MappingData.System_fileUrlType2 },
+                    { span: 12, formType: 'INPUT', name: 'field', label: '文字内容/字段', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'padding', label: '文字填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'filed_data', label: '阴影数值', rules: true, jugde: [{ field: 'filed', value: [true] }] },
+                    {
+                        span: 12, formType: 'COLOR', name: 'filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'filed', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    },
+]
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
@@ -7957,5 +8099,7 @@ export const FormConfig = {
     PrefabricatedTable,
 
     PrefabricatedSelect,
-    PrefabricatedDateSelect
+    PrefabricatedDateSelect,
+
+    PrefabricatedSwiperBox
 }

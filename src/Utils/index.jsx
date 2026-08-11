@@ -524,6 +524,15 @@ export const UnitCallBack = (unit, value) => {
     return Number(value)
 }
 
+// TODO 单位结构赋值
+export const UnitCallBackStruct = (unit, value, key) => {
+    if (unit === 'flex') return { flex: value }
+    if (unit === 'px') return { [key]: `${Number(value)}px` }
+    if (unit === 'pct') return { [key]: `${Number(value)}%` }
+    if (unit === 'calc') return { [key]: `calc(${value})` }
+}
+
+
 // TODO 定位参数设置
 export const SetPositionParams = (data, position) => {
     const obj = {}
