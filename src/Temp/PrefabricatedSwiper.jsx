@@ -49,7 +49,8 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
         padding, margin, back_color, back_deg, isImage, isText,
         img_type, img_url, img_widthUnit, img_width, img_heightUnit, img_height, img_margin, img_objectFit,
         item_widthUnit, item_width, item_heightUnit, item_height, item_color, item_deg, item_padding, item_margin,
-        item_align_items, item_align_content, item_justify_content, item_flex_direction, item_flex_wrap, list
+        item_align_items, item_align_content, item_justify_content, item_flex_direction, item_flex_wrap, list,
+        swiper_cover, swiper_cover_url
     } = data
 
     const SWIPER_CONFIG = {
@@ -116,6 +117,8 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     return (
         <div className="PrefabricatedSwiperBox">
+            {swiper_cover && <img className='SwiperCover' src={swiper_cover_url} alt="" />}
+
             <Swiper
                 className='SwiperBox'
                 {...SWIPER_CONFIG}

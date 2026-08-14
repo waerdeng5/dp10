@@ -294,7 +294,6 @@ const axesFn = (data) => {
                         },
                     },
                 }
-
                 if (item.axes_label_autoHide) obj.label.autoHideSeparation = item.axes_label_autoHideSeparation
                 if (item.axes_hover) {
                     if (item.axes_domainLine) {
@@ -360,13 +359,10 @@ const axesFn = (data) => {
                         obj.tick.state.select.lineWidth = item.axes_tick_style_selected_lineWidth
                     }
                 }
-
-
                 return obj
             }
             return null
         })
-
         return axesArr
 
 
