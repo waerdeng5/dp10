@@ -163,7 +163,7 @@ export const TableTransfer = _a => {
 // Excel表格
 export const ExcelTemplate = (props) => {
     const { notification, message } = App.useApp()
-    const { data, DEVEvent, getData, saveData, saveParams } = props
+    const { data, Event, DEVEvent, getData, saveData, saveParams } = props
     const ExcelBox = useRef()
     const WorkBox = useRef()
     const [spread, setSpread] = useState()
@@ -189,7 +189,6 @@ export const ExcelTemplate = (props) => {
 
     const onSave = () => {
         setLoading(true)
-        const { B05_saveMaster, B05_saveParams, B05_saveField, B05_saveMapping } = saveParams
         const excelIo = new GC.Spread.Excel.IO()
         excelIo.save(spread.toJSON(), async e => {
             const forms = new FormData()
@@ -197,12 +196,14 @@ export const ExcelTemplate = (props) => {
             const file = new File([e], ExcelName, { type })
             forms.append('File', file)
             forms.append('FileType', 3)
-            if (B05_saveMaster) forms.append(B05_saveMapping, data[B05_saveField])
+            if (saveData?.params) Object.keys(saveData.params).forEach(key => forms.append(key, saveData.params[key]))
+            if (saveParams?.B05_saveMaster) forms.append(saveParams?.B05_saveMapping, data[saveParams?.B05_saveField])
             const [err, res] = await axios({ ...saveData, params: forms })
             if (err) message.warning(err.message)
             if (res?.code) {
                 notification.success({ key: 'fromModify', title: '保存成功', description: res.message })
-                DEVEvent.emit({ type: 'onSaveSuccess' })
+                if (Event) Event.emit({ type: 'onSaveSuccess' })
+                if (DEVEvent) DEVEvent.emit({ type: 'onSaveSuccess' })
                 setLoading(false)
             } else {
                 const { blob, filename, response } = res

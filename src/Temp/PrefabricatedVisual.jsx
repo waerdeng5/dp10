@@ -1,10 +1,16 @@
 import { Select } from 'antd'
-import { useState } from 'react';
+import { Pagination, ConfigProvider } from 'antd'
+import { useState, useEffect } from 'react'
 
-
-
-
-import { SpacingCallBack, ColorCallBack, SpacingSizeCallBack, SetFilderParams, UnitCallBackStruct, SetBorderParams } from '../Utils'
+import {
+    SpacingCallBack,
+    ColorCallBack,
+    SpacingSizeCallBack,
+    SetFilderParams,
+    UnitCallBackStruct,
+    SetBorderParams,
+    SetPositionParams
+} from '../Utils'
 
 const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) => {
 
@@ -27,18 +33,21 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         left_options_active_text_color, left_options_active_text_deg, left_options_active_text_size, left_options_active_text_family,
         left_options_active_text_weight, left_options_active_text_style, left_options_active_text_filed,
         left_options_active_text_filed_data, left_options_active_text_filed_color,
-
         top_height, top_radius, top_color, top_deg, top_padding, top_margin, top_orga, top_type, top_posi, top_nums,
         top_orga_api, top_orga_params, top_type_api, top_type_params, top_posi_api, top_posi_params, top_list,
         top_label_color, top_label_deg, top_label_padding, top_label_size, top_label_family, top_label_weight, top_label_style,
         top_label_filed, top_label_filed_data, top_label_filed_color,
-
         top_select_width, top_select_height, top_select_back, top_select_deg, top_select_color, top_select_size,
         top_select_family, top_select_weight, top_select_style, top_select_border, top_select_icon,
+        video_align_items, video_align_content, video_justify_content, video_flex_direction, video_flex_wrap,
+        video_back, video_deg, video_padding, video_title, item_back, item_deg, item_padding, item_margin, item_list,
+        title_position, title_topUnit, title_top, title_btmUnit, title_btm, title_lefUnit, title_lef, title_rigUnit, title_rig,
+        title_field, title_size, title_color, title_deg, title_family, title_weight, title_style,
+        title_filed, title_filed_data, title_filed_color,
 
+        pagination_back, pagination_deg, pagination_padding, pagination_margin
     } = data
 
-    console.log(data)
 
 
     const [orgaList, setOrgaList] = useState([{ label: '全部', value: '' }])
@@ -49,6 +58,9 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
     const [typeValue, setTypeValue] = useState('')
     const [posiValue, setPosiValue] = useState('')
     const [numsValue, setNumsValue] = useState(1)
+
+    const [RenderList, setRenderList] = useState()
+    const [VideoList, setVideoList] = useState([{}, {}, {}, {}])
 
     const leftStyle = {
         width: left_width,
@@ -158,6 +170,55 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         '--iconColor': top_select_icon,
     }
 
+    const videoStyle = {
+        '--video_align-items': video_align_items,
+        '--video_align-content': video_align_content,
+        '--video_justify-content': video_justify_content,
+        '--video_flex-direction': video_flex_direction,
+        '--video_flex-wrap': video_flex_wrap,
+        background: ColorCallBack(video_back, video_deg),
+        padding: SpacingCallBack(video_padding),
+    }
+
+    const videoItemStyle = {
+        background: ColorCallBack(item_back, item_deg),
+        padding: SpacingCallBack(item_padding),
+        margin: SpacingCallBack(item_margin),
+    }
+    const titlePosition = {
+        'top-left': { top: title_top, right: null, bottom: null, left: title_lef, topUnit: title_topUnit, leftUnit: title_lefUnit },
+        'top-right': { top: title_top, right: title_rig, bottom: null, left: null, topUnit: title_topUnit, rightUnit: title_rigUnit },
+        'bottom-left': { top: null, right: null, bottom: title_btm, left: title_lef, bottomUnit: title_btmUnit, leftUnit: title_lefUnit },
+        'bottom-right': { top: null, right: title_rig, bottom: title_btm, left: null, bottomUnit: title_btmUnit, rightUnit: title_rigUnit },
+    };
+
+    const videoTitleStyle = {
+        ...SetPositionParams(titlePosition, title_position),
+        '--video_title_color': ColorCallBack(title_color, title_deg),
+        fontSize: title_size,
+        fontFamily: title_family,
+        fontWeight: title_weight,
+        fontStyle: title_style,
+        filter: SetFilderParams(title_filed, title_filed_data, title_filed_color),
+    }
+
+    const paginationStyle = {
+        width: SpacingSizeCallBack(pagination_margin, 100),
+        background: ColorCallBack(pagination_back, pagination_deg),
+        padding: SpacingCallBack(pagination_padding),
+        margin: SpacingCallBack(pagination_margin),
+    }
+
+    useEffect(() => {
+        const listData = item_list.reduce((acc, v) => {
+            const { total, row, col } = v
+            acc[total] = { width: Math.floor(100 / col), height: Math.floor(100 / row) }
+            return acc
+        }, {})
+        setRenderList(listData)
+    }, [item_list])
+
+    const showTotal = total => `Total ${total} items`;
 
     return (
         <div className="PrefabricatedVisualMonitoring">
@@ -265,11 +326,39 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
                         }
                     </div>
                 }
-                <div className="monitoring">
-                    监控参数设置
+                <div className="monitoring" style={videoStyle}>
+                    {RenderList && VideoList.map((v, i) => {
+                        const { length } = VideoList
+                        const { width, height } = RenderList[length]
+                        const itemStyle = {
+                            ...videoItemStyle,
+                            width: SpacingSizeCallBack(item_margin, width),
+                            height: SpacingSizeCallBack(item_margin, height, true),
+                        }
+                        return (
+                            <div className='video_item' key={i} style={itemStyle}>
+                                {video_title && <div className='video_title' style={videoTitleStyle}>标题</div>}
+                            </div>
+                        )
+                    })}
                 </div>
-                <div className="pagination">
-                    分页
+                <div className="pagination" style={paginationStyle}>
+                    <ConfigProvider
+                        theme={{
+                            components: {
+                                Pagination: {
+                                    itemActiveBg: '#ffffff',
+                                    itemActiveBgDisabled: 'rgba(0,0,0,0.15)',
+                                    itemActiveColor: '#1677ff',
+                                    itemActiveColorDisabled: 'rgba(0,0,0,0.25)',
+                                    itemActiveColorHover: '#4096ff',
+                                    itemBg: '#ffffff',
+                                    itemSize: 32
+                                },
+                            },
+                        }}>
+                        <Pagination total={50} showTotal={showTotal} />
+                    </ConfigProvider>
                 </div>
             </div>
         </div>
@@ -279,4 +368,4 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
 
 export const PrefabricatedVisualTemplate = {
     PrefabricatedVisualMonitoring
-};
+}

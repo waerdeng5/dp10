@@ -2520,12 +2520,6 @@ const AddRowOptionsFormList = [
             },
             // 数据字段
             { span: 24, formType: 'INPUT', name: 'B04_field', label: '数据字段', rules: true },
-
-
-
-
-
-
         ]
     },
 
@@ -8193,7 +8187,7 @@ const PrefabricatedVisualMonitoring = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_number_list', label: '显示列表', collapsible: true,
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_number_list_A01', label: '显示列表', collapsible: true,
                 jugde: [{ field: 'left_options', value: [true] }, { field: 'left_nums', value: [true] }], children: [
                     {
                         span: 24, formType: 'LIST', name: 'left_list', label: '显示列表', collapsible: true, children: [
@@ -8262,7 +8256,7 @@ const PrefabricatedVisualMonitoring = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_number_list', label: '显示列表', collapsible: true,
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_left_number_list_A02', label: '显示列表', collapsible: true,
                 jugde: [{ field: 'top_options', value: [true] }, { field: 'top_nums', value: [true] }], children: [
                     {
                         span: 24, formType: 'LIST', name: 'top_list', label: '显示列表', collapsible: true, children: [
@@ -8277,9 +8271,102 @@ const PrefabricatedVisualMonitoring = [
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_render', label: '渲染设置', collapsible: true,
         children: [
-            // 单项的背景色
-            // 间距
-            // 
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_render_video', label: '整体样式', collapsible: true,
+                children: [
+                    { span: 8, formType: 'SELECT', name: 'video_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+                    { span: 8, formType: 'SELECT', name: 'video_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+                    { span: 8, formType: 'SELECT', name: 'video_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+                    { span: 12, formType: 'SELECT', name: 'video_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+                    { span: 12, formType: 'SELECT', name: 'video_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+                    { span: 12, formType: 'COLOR', name: 'video_back', label: '背景颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'video_deg', label: '背景角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'video_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'video_title', label: '监控标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_render_item', label: '单项样式', collapsible: true,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'item_back', label: '单项背景颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'item_deg', label: '单项背景角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'item_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'item_margin', label: '外间距', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_render_title', label: '标题样式', collapsible: true,
+                jugde: [{ field: 'video_title', value: [true] }], children: [
+                    { span: 24, formType: 'RADIO', name: 'title_position', label: '标题定位方式', rules: true, valueEnum: MappingData.Style__PositionType },
+                    {
+                        span: 12, formType: 'RADIO', name: 'title_topUnit', label: '顶部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'title_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'title_top', label: '顶部距离', rules: true,
+                        jugde: [{ field: 'title_position', value: ['top-left', 'top-right'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'title_btmUnit', label: '底部定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'title_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'title_btm', label: '底部距离', rules: true,
+                        jugde: [{ field: 'title_position', value: ['bottom-left', 'bottom-right'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'title_lefUnit', label: '左侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'title_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'title_lef', label: '左侧距离', rules: true,
+                        jugde: [{ field: 'title_position', value: ['top-left', 'bottom-left'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'title_rigUnit', label: '右侧定位单位', rules: true,
+                        valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'title_position', value: ['top-right', 'bottom-right'] }]
+                    },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'title_rig', label: '右侧距离', rules: true,
+                        jugde: [{ field: 'title_position', value: ['top-right', 'bottom-right'] }]
+                    },
+
+                    { span: 12, formType: 'INPUT', name: 'title_field', label: '文字字段', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'title_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'title_filed', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'title_filed', value: [true] }]
+                    },
+
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'item_list', label: '渲染参数', collapsible: true, title: '数量',
+                children: [
+                    { span: 8, formType: 'NUMBER', name: 'total', label: '总数', rules: true },
+                    { span: 8, formType: 'NUMBER', name: 'row', label: '行数', rules: true },
+                    { span: 8, formType: 'NUMBER', name: 'col', label: '列数', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_pagination', label: '分页样式', collapsible: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'pagination_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'pagination_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'pagination_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'pagination_margin', label: '外边距', rules: true },
         ]
     },
 
