@@ -144,7 +144,7 @@ const SetDevRouter = ({ data, Event }) => {
     const { pageActive } = pageStore()
     const { updateModel1, updateModel4 } = modelStore()
 
-    const { uuid, targetUrl } = data
+    const { uuid: menuUuid, targetUrl } = data
 
     const [APIdata, setAPIdata] = useState(data.APIdata)
     const [THEdata, setTHEdata] = useState(data.THEdata)
@@ -184,7 +184,7 @@ const SetDevRouter = ({ data, Event }) => {
         const params = { uuid: `${uuid}/DEV_PAGE/${targetUrl}_OPT`, content: JSON.stringify(await Encrypt(data)) }
         const [OPTerror, OPTdata] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (OPTerror) return console.log('保存失败', OPTerror)
-        const params2 = { menu: pageActive, button: [...data.top, ...data.row] }
+        const params2 = { menu: menuUuid, button: [...data.top, ...data.row] }
         const [err] = await axios({ method: 'post', url: 'menu/AddMenuButton', params: params2 })
         if (err) return console.log(err)
         Event.emit({ type: 'onRefresh' })

@@ -101,7 +101,7 @@ const LayoutTemplate = ({ data, Event }) => {
             )
         },
         {
-            key: '9', label: '独立模块', children: (
+            key: '9', label: '视频模块', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
                         <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />

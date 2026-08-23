@@ -121,6 +121,10 @@ const FormTemplate = ({
     }
     FORMEVENT.useSubscription(onFormBackFn)
     const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
+
+
+
+
     return (
         <div className='FormTemplateClass01'>
             <Spin spinning={loading}>
@@ -1055,10 +1059,12 @@ const UPLOAD = ({ data, form }) => {
         const [visible, setVisible] = useState(false)
         const [ImageUrl, setImageUrl] = useState(false)
         const [fileList, setFileList] = useState([])
-
+        const [token, setToken] = useState()
 
         useMount(async () => {
+            const token = await GetIndexedDB('token')
             const config = await GetIndexedDB('config')
+            setToken(token)
             setAction(config.apiUrl + '/attachments')
             setFileList(form.current?.getFieldValue(name))
         })
@@ -1079,6 +1085,7 @@ const UPLOAD = ({ data, form }) => {
                         listType: 'picture-card',
                         fileList,
                         data: fileData,
+                        headers: { Authorization: token },
                         beforeUpload: e => beforeUpload(e, fileType, fileSize, message),
                         onPreview: e => {
                             setVisible(true)
@@ -1090,8 +1097,8 @@ const UPLOAD = ({ data, form }) => {
                             setFileList(fileList)
                             if (status === 'done') {
                                 fileList.pop()
-                                const { uuid, fileUrl } = file.response.data
-                                fileList.push({ uuid, url: fileUrl })
+                                const { uuid, fileUrl, originalName } = file.response.data
+                                fileList.push({ uuid, url: fileUrl, originalName })
                                 setFileList(fileList)
                             } else if (!status) {
                                 fileList.pop()

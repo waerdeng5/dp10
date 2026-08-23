@@ -35,7 +35,7 @@ const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM
 const OptionsModel = ({ data, Event }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { message, modal, notification } = App.useApp()
-    const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial } = data
+    const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial, menuData, isMenuData, isMenuList } = data
     // 类型赋值
     const valueTypeMapping = async (fields, formFields) => {
 
@@ -96,7 +96,7 @@ const OptionsModel = ({ data, Event }) => {
                 if (formPath) HttpData.path = formPath
                 const params = { OrganizationUuid: ORGUUID, ...e, ...strOfurlParamsFunc(formParams) }
                 if (api.othIsAdd) params[api.addParams] = OTHUUID
-
+                if (isMenuData) isMenuList.forEach(v => { params[v.dataMapping] = menuData[v.dataField] })
                 const [err, res] = await axios({ ...HttpData, params })
                 if (err) {
                     notification.error({ title: '保存失败!', key: 'OptionsModel' })
@@ -104,7 +104,7 @@ const OptionsModel = ({ data, Event }) => {
                     return false
                 }
                 notification.success({ title: '保存成功!', key: 'OptionsModel' })
-                // targetUrl
+
                 if (targetUrl === 'AdministratorsMenu') {
                     const [err, res] = await axios({ method: 'get', url: 'menu' })
                     if (err) return false

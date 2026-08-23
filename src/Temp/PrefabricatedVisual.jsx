@@ -45,7 +45,12 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         title_field, title_size, title_color, title_deg, title_family, title_weight, title_style,
         title_filed, title_filed_data, title_filed_color,
 
-        pagination_back, pagination_deg, pagination_padding, pagination_margin
+        pagination_back, pagination_deg, pagination_padding, pagination_margin,
+        itemActiveBg, itemActiveBgDisabled, itemActiveColor, itemActiveColorDisabled, itemActiveColorHover, itemBg, itemSize,
+        itemShowTotal, itemShowTotal_page, itemShowTotal_total, total_filed, total_filed_data, total_filed_color,
+        total_size, total_color, total_deg, total_family, total_weight, total_style,
+
+
     } = data
 
 
@@ -57,7 +62,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
     const [orgaValue, setOrgaValue] = useState('')
     const [typeValue, setTypeValue] = useState('')
     const [posiValue, setPosiValue] = useState('')
-    const [numsValue, setNumsValue] = useState(1)
+    const [numsValue, setNumsValue] = useState(6)
 
     const [RenderList, setRenderList] = useState()
     const [VideoList, setVideoList] = useState([{}, {}, {}, {}])
@@ -218,7 +223,27 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         setRenderList(listData)
     }, [item_list])
 
-    const showTotal = total => `Total ${total} items`;
+    const showTotal = (total, range) => {
+        const totalStyle = {
+            '--totalColor': ColorCallBack(total_color, total_deg),
+            fontSize: total_size,
+            fontFamily: total_family,
+            fontWeight: total_weight,
+            fontStyle: total_style,
+            filter: SetFilderParams(total_filed, total_filed_data, total_filed_color)
+        }
+
+        if (itemShowTotal) {
+            return (
+                <div className='itemShowTotal' style={totalStyle}>
+                    {itemShowTotal_page && ` 第 ${range[0]}-${range[1]} 条 `}
+                    {itemShowTotal_page && itemShowTotal_total && ','}
+                    {itemShowTotal_total && ` 共 ${total} 条 `}
+                </div>
+            )
+        }
+
+    }
 
     return (
         <div className="PrefabricatedVisualMonitoring">
@@ -347,17 +372,21 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
                         theme={{
                             components: {
                                 Pagination: {
-                                    itemActiveBg: '#ffffff',
-                                    itemActiveBgDisabled: 'rgba(0,0,0,0.15)',
-                                    itemActiveColor: '#1677ff',
-                                    itemActiveColorDisabled: 'rgba(0,0,0,0.25)',
-                                    itemActiveColorHover: '#4096ff',
-                                    itemBg: '#ffffff',
-                                    itemSize: 32
+                                    itemActiveBg,
+                                    itemActiveBgDisabled,
+                                    itemActiveColor,
+                                    itemActiveColorDisabled,
+                                    itemActiveColorHover,
+                                    itemBg,
+                                    itemSize,
                                 },
                             },
                         }}>
-                        <Pagination total={50} showTotal={showTotal} />
+                        <Pagination
+                            pageSize={numsValue}
+                            total={50}
+                            showTotal={showTotal}
+                        />
                     </ConfigProvider>
                 </div>
             </div>

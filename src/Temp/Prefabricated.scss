@@ -81,6 +81,70 @@
 
 }
 
+.PrefabricatedDiyFolder {
+    width: 100%;
+    height: 100%;
+    // display: flex;
+    // align-items: flex-start;
+    // justify-content: flex-start;
+    // align-content: flex-start;
+    // flex-wrap: wrap;
+
+    .PrefabricatedDiyFolder_box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &>.box_title {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>.box_text {
+                flex: 1;
+                background: var(--title_color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+
+            &>.box_suffix_text {
+                background: var(--suffix_text_color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+
+            &>.box_suffix_icon {
+                transition: all 0.3s ease-in-out;
+            }
+        }
+
+        &>.box_list {
+            width: 100%;
+
+            &>.box_list_item {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                &:last-child {
+                    border: none !important;
+                }
+            }
+
+        }
+
+
+    }
+}
+
 .PrefabricatedImgText {
     width: 100%;
     height: 100%;
@@ -900,6 +964,15 @@
 
             ul>li:nth-child(1) {
                 flex: 1;
+
+                .itemShowTotal {
+                    background: var(--totalColor);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+                    white-space: pre-line;
+                }
             }
         }
     }

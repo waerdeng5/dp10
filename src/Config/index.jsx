@@ -552,6 +552,7 @@ export const DIYTempList = [
     { uuid: 'PrefabricatedDiyText', title: '数据文字', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyOrgA01', title: '组织机构', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyProgress', title: '横向进度', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedDiyFolder', title: '文件夹', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const ImgAndTextTempList = [
@@ -964,6 +965,9 @@ export const TemplateParamsMapping = {
     },
     PrefabricatedDiyProgress: {
         value: 'PrefabricatedDiyProgress',
+    },
+    PrefabricatedDiyFolder: {
+        value: 'PrefabricatedDiyFolder',
     },
     // TODO 图文模块
     PrefabricatedImgText: {

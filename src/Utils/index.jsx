@@ -507,7 +507,7 @@ export const ColorCallBack = (color, deg = '90') => {
 export const SpacingCallBack = (spacing) => {
     return String(spacing).split(',').map(num => num + 'px').join(' ')
 }
-// TODO 外间距数值处理
+// TODO 宽高换算
 export const SpacingSizeCallBack = (spacing, size, type) => {
     const str = String(spacing).split(',').map(item => (Number(item)))
     let spac = 0

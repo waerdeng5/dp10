@@ -1,4 +1,5 @@
 import './Prefabricated.scss'
+import { Masonry } from 'antd'
 import { useEffect, useState, Fragment } from 'react'
 import {
     ColorCallBack,
@@ -9,11 +10,14 @@ import {
     TemplateClickFn,
     getNestedValue,
     UnitCallBackStruct,
-    SetPositionParams
+    SpacingSizeCallBack,
+    SetPositionParams,
+    SetBorderParams
 } from '../Utils'
 
 import { ICONMapping } from '../Config/IconMapping'
 import { useTemplateModel } from '../Config/useHooks'
+import { DevScrollView } from './DevTemplate'
 
 const temporaryDataA01 = {
     A01: getRandomInt(1, 1000),
@@ -355,9 +359,166 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
     )
 }
 
+// 树形文件夹
+const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
+
+    const { back_color, back_deg, back_padding, back_column, back_gutter, isOpenClose, isOpenDefaultl,
+        isBtmBorder, btm_size, btm_type, btm_color,
+        isPrefix, prefix_icon, prefix_color, prefix_size, prefix_padding,
+        isSuffix, suffix_type, suffix_diy, suffix_field, suffix_icon, suffix_icon_color, suffix_icon_size,
+        suffix_text_color, suffix_text_deg, suffix_text_size, suffix_text_family, suffix_text_weight, suffix_text_style,
+        suffix_text_filed, suffix_text_filed_data, suffix_text_filed_color,
+        title_type, title_field, title_color, title_deg, title_size, title_family, title_weight, title_style,
+        title_filed, title_filed_data, title_filed_color,
+        list_color, list_deg, list_padding, list_margin,
+        item_color, item_deg, item_padding, item_margin, item_border, item_border_size, item_border_type, item_border_color
+
+
+
+    } = data
+
+
+    const [Open, setOpen] = useState([])
+
+    const backStyle = {
+        background: ColorCallBack(back_color, back_deg),
+        padding: SpacingCallBack(back_padding),
+    }
+
+    const prefixStyle = {
+        color: prefix_color,
+        fontSize: prefix_size,
+        padding: SpacingCallBack(prefix_padding),
+    }
+
+    const suffixIconStyle = {
+        color: suffix_icon_color,
+        fontSize: suffix_icon_size,
+    }
+
+    const suffixTextStyle = {
+        '--suffix_text_color': ColorCallBack(suffix_text_color, suffix_text_deg),
+        fontSize: suffix_text_size,
+        fontWeight: suffix_text_weight,
+        fontFamily: suffix_text_family,
+        fontStyle: suffix_text_style,
+        filter: SetFilderParams(suffix_text_filed, suffix_text_filed_data, suffix_text_filed_color),
+    }
+
+    const titleStyle = {
+        '--title_color': ColorCallBack(title_color, title_deg),
+        fontSize: title_size,
+        fontWeight: title_weight,
+        fontFamily: title_family,
+        fontStyle: title_style,
+        filter: SetFilderParams(title_filed, title_filed_data, title_filed_color),
+
+    }
+    // 
+    const textData = [
+        { key: 1, data: '1', list: [{ key: 11, data: '1' }, { key: 2, data: '2' }, { key: 3, data: '3' }] },
+        { key: 2, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 3, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 4, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 5, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 6, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 7, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 8, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 9, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 10, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 11, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 12, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 13, data: '1', list: [{ key: 11, data: '11' }] },
+        { key: 14, data: '1', },
+        { key: 15, data: '1', },
+        { key: 16, data: '1', },
+    ]
+
+    const listStyle = {
+        width: SpacingSizeCallBack(list_margin, 100),
+        background: ColorCallBack(list_color, list_deg),
+        padding: SpacingCallBack(list_padding),
+        margin: SpacingCallBack(list_margin),
+    }
+
+    const itemStyle = {
+        width: SpacingSizeCallBack(item_margin, 100),
+        background: ColorCallBack(item_color, item_deg),
+        padding: SpacingCallBack(item_padding),
+        margin: SpacingCallBack(item_margin),
+        borderBottom: SetBorderParams(item_border, item_border_size, item_border_type, item_border_color)
+
+    }
+
+
+    const onOpen = (e) => {
+        if (!isOpenClose) return false
+        setOpen(Open.includes(e) ? Open.filter(item => item !== e) : [...Open, e])
+    }
+
+
+    useEffect(() => {
+        if (data.isOpenDefault) setOpen(textData.map(item => item.key))
+        else setOpen([])
+    }, [data])
+
+    return (
+        <DevScrollView>
+            <div className='PrefabricatedDiyFolder' style={backStyle}>
+                <Masonry
+                    columns={back_column}
+                    gutter={back_gutter}
+                    items={textData}
+                    fresh={false}
+                    itemRender={(e) => {
+                        const { key, data, list } = e
+                        const boxStyle = {
+                            cursor: isOpenClose ? 'pointer' : 'default',
+                            borderBottom: SetBorderParams(isBtmBorder, btm_size, btm_type, btm_color)
+                        }
+                        return (
+                            <div className='PrefabricatedDiyFolder_box' style={boxStyle}>
+                                <div className='box_title' onClick={() => onOpen(key)}>
+                                    {isPrefix && <div className='box_prefix' style={prefixStyle}>{ICONMapping[prefix_icon]}</div>}
+                                    <div className='box_text' style={titleStyle}>{title_field} - {key}</div>
+                                    {isSuffix && (suffix_type === 'A01' || suffix_type === "A02") &&
+                                        <div className='box_suffix_text' style={suffixTextStyle}>{suffix_diy || suffix_field}</div>
+                                    }
+                                    {isSuffix && suffix_type === 'A03' &&
+                                        <div
+                                            className='box_suffix_icon'
+                                            style={{ ...suffixIconStyle, transform: `rotate(${Open.includes(key) ? 180 : 0}deg` }}
+                                        >
+                                            {ICONMapping[suffix_icon]}
+                                        </div>
+                                    }
+                                </div>
+                                {list && Open.includes(key) &&
+                                    <div className='box_list' style={listStyle}>
+                                        {list.map(v => {
+                                            return (
+                                                <div className='box_list_item' key={v.key} style={itemStyle}>
+                                                    <div className='box_list_item_text'>{v.data}</div>
+                                                    <div className='box_list_item_extra'>{v.data}</div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                }
+                            </div>
+                        )
+                    }}
+                />
+            </div>
+        </DevScrollView>
+    )
+}
+
+
 
 export const PrefabricatedDiyTemplate = {
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,
-    PrefabricatedDiyProgress
+    PrefabricatedDiyProgress,
+    PrefabricatedDiyFolder
 }

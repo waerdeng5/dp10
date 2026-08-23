@@ -568,6 +568,11 @@ export const MappingData = {
         { value: 'A01', label: '自定内容' },
         { value: 'A02', label: '接口字段' },
     ],
+    System_fileUrlType3: [
+        { value: 'A01', label: '自定内容' },
+        { value: 'A02', label: '接口字段' },
+        { value: 'A03', label: '折叠图标' },
+    ],
 
     // Todo 样式-通用属性
     Style__BoxShadow: [

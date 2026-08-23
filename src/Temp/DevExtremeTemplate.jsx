@@ -199,8 +199,9 @@ export const DevExtremeHeader = (props) => {
         filter: `drop-shadow(${top_fontShadowX}px ${top_fontShadowY}px ${top_fontShadowS}px ${top_fontShadowB})`
     }
 
-    const A02Func = (data) => {
-        updateModel5({ title: data.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...data, APIdata, ORGUUID, OTHUUID, targetUrl } })
+    const A02Func = (options) => {
+        const menuData = { ...options, menuData: data }
+        updateModel5({ title: data.title, type: 'OptionsModel', Event: DEVEvent, modelData: { ...menuData, APIdata, ORGUUID, OTHUUID, targetUrl } })
     }
 
     const A03Func = (data) => {
