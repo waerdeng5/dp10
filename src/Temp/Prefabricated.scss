@@ -137,6 +137,30 @@
                 &:last-child {
                     border: none !important;
                 }
+
+                &>.box_list_item_text {
+                    flex: 1;
+                    background: var(--item_title_color);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: var(--item_title_row);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+
+                &>.box_list_item_extra {
+                    margin-left: 16px;
+                    background: var(--item_title_extra);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+                }
             }
 
         }
@@ -363,6 +387,8 @@
 
         // 额外参数
         &>.ant-pro-table-extra {
+            margin: 0;
+
             &>.ant-card {
 
                 &>.ant-card-body {

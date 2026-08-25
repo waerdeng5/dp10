@@ -1091,6 +1091,7 @@ export const MappingData = {
         { value: 'treeSelect', label: '树多选' },
         { value: 'code', label: '源码' },
         { value: 'image', label: '图片' },
+        { value: 'tag', label: '标签' },
     ],
     From_AntdDatePicker: [
         { value: 'year', label: '年度' },

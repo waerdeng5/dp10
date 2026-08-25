@@ -4,13 +4,13 @@ import "react-grid-layout/css/styles.css"
 import "react-resizable/css/styles.css"
 import { v4 } from 'uuid'
 import { useSize } from 'ahooks'
+import copy from 'copy-to-clipboard'
+import ReactGridLayout from 'react-grid-layout'
 import { FloatButton, Dropdown, App } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'
 import { useEffect, useState, useRef } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
-
-import ReactGridLayout from 'react-grid-layout'
 import { GridBackground } from "react-grid-layout/extras"
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { modelStore } from '../Router/zustand'
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
@@ -37,7 +37,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const { pathname } = useLocation()
 
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
-    const { notification } = App.useApp()
+    const { notification, message } = App.useApp()
 
     const { path } = data
     const ContentBoxRef = useRef()
@@ -211,7 +211,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         setParamsData(ParamsData)
         setWindowData(WindowData)
     }
-
     // !!! 模块操作
     // 模块编辑
     const onSetTemplateParams = (data) => {
@@ -224,7 +223,44 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                 formItem: form,
                 eventBack: 'onSetTemplateParamsBack',
                 Initial: { uuid: tempId, ...ParamsData[tempId] }
-            }
+            },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'before',
+                    text: '复制参数',
+                    type: 'default',
+                    onClick: () => {
+                        const success = copy(JSON.stringify(ParamsData[tempId]))
+                        if (success) message.success('复制成功！')
+                        else message.error('复制失败！')
+                    }
+                },
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    text: '导入参数',
+                    type: 'default',
+                    onClick: () => {
+                        updateModel4({
+                            title: '模块设置',
+                            type: 'CommonForm',
+                            width: 640,
+                            height: 640,
+                            Event: LayoutEvent,
+                            modelData: {
+                                formItem: 'PrefabricatedPasteWindow',
+                                eventBack: 'onSetPasteWindowData',
+                                Initial: { uuid: tempId }
+                            },
+                        })
+
+                        // PrefabricatedPasteWindow
+                    }
+                }
+            ]
         })
     }
     const onSetTemplateParamsBack = (e) => {
@@ -232,6 +268,14 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         ParamsData[uuid] = { ...ParamsData[uuid], ...data }
         setParamsData(ParamsData)
         updateModel5({})
+    }
+
+    const onSetPasteWindowData = (e) => {
+        const initData = JSON.parse(e.paste)
+        ParamsData[e.uuid] = initData
+        setParamsData(ParamsData)
+        updateModel5({})
+        updateModel4({})
     }
 
     // 删除模块
@@ -263,6 +307,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
             ['onDeleteLayout', () => onDeleteLayout(data)],
             ['onSetTemplateParams', () => onSetTemplateParams(data)],
             ['onSetTemplateParamsBack', () => onSetTemplateParamsBack(data)],
+            ['onSetPasteWindowData', () => onSetPasteWindowData(data)],
             ['onDeleteTemplate', () => onDeleteTemplate(data)],
             ['setInternalRouting', () => console.log('站内路由', data)],
             ['onAPIParamsSelect', () => getApiData(data)],

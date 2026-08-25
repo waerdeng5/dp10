@@ -190,9 +190,19 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
                 formItem: form,
                 eventBack: 'onSetTemplateParamsBack',
                 Initial: { uuid: tempId, ...ParamsData[tempId] }
-            }
+            },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    text: '复制参数',
+                    type: 'default'
+                }
+            ]
         })
     }
+
     const onSetTemplateParamsBack = (e) => {
         const { uuid, ...data } = e
         ParamsData[uuid] = { ...ParamsData[uuid], ...data }

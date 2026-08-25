@@ -370,11 +370,12 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         suffix_text_filed, suffix_text_filed_data, suffix_text_filed_color,
         title_type, title_field, title_color, title_deg, title_size, title_family, title_weight, title_style,
         title_filed, title_filed_data, title_filed_color,
-        list_color, list_deg, list_padding, list_margin,
-        item_color, item_deg, item_padding, item_margin, item_border, item_border_size, item_border_type, item_border_color
-
-
-
+        list_color, list_deg, list_padding, list_margin, item_hidden, item_row,
+        item_color, item_deg, item_padding, item_margin, item_border, item_border_size, item_border_type, item_border_color,
+        item_title_type, item_title_field, item_title_color, item_title_deg, item_title_size, item_title_family, item_title_weight,
+        item_title_style, item_title_filed, item_title_filed_data, item_title_filed_color,
+        extra_title_type, extra_title_field, extra_title_color, extra_title_deg, extra_title_size, extra_title_family, extra_title_weight,
+        extra_title_style, extra_title_filed, extra_title_filed_data, extra_title_filed_color,
     } = data
 
 
@@ -447,8 +448,29 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         padding: SpacingCallBack(item_padding),
         margin: SpacingCallBack(item_margin),
         borderBottom: SetBorderParams(item_border, item_border_size, item_border_type, item_border_color)
-
     }
+
+    const itemTitleStyle = {
+        '--item_title_color': ColorCallBack(item_title_color, item_title_deg),
+        '--item_title_row': item_hidden ? item_row : 'none',
+        fontSize: item_title_size,
+        fontWeight: item_title_weight,
+        fontFamily: item_title_family,
+        fontStyle: item_title_style,
+        filter: SetFilderParams(item_title_filed, item_title_filed_data, item_title_filed_color),
+    }
+
+
+    const itemExtraStyle = {
+        '--item_title_extra': ColorCallBack(extra_title_color, extra_title_deg),
+        fontSize: extra_title_size,
+        fontWeight: extra_title_weight,
+        fontFamily: extra_title_family,
+        fontStyle: extra_title_style,
+        filter: SetFilderParams(extra_title_filed, extra_title_filed_data, extra_title_filed_color),
+    }
+
+    console.log(itemTitleStyle)
 
 
     const onOpen = (e) => {
@@ -498,8 +520,14 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
                                         {list.map(v => {
                                             return (
                                                 <div className='box_list_item' key={v.key} style={itemStyle}>
-                                                    <div className='box_list_item_text'>{v.data}</div>
-                                                    <div className='box_list_item_extra'>{v.data}</div>
+                                                    <div className='box_list_item_text' style={itemTitleStyle}>
+                                                        {/* {v.data} */}
+                                                        {item_title_field}
+                                                    </div>
+                                                    <div className='box_list_item_extra' style={itemExtraStyle}>
+                                                        {/* {v.data} */}
+                                                        {extra_title_field}
+                                                    </div>
                                                 </div>
                                             )
                                         })}

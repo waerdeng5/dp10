@@ -7524,9 +7524,12 @@ const PrefabricatedTable = [
             },
         ]
     },
-    { span: 8, formType: 'INPUT', name: 'headerTitle', label: '额外标题', rules: true },
+    { span: 8, formType: 'INPUT', name: 'headerTitle', label: '额外标题' },
     { span: 8, formType: 'RADIO', name: 'card', label: '额外卡片', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 8, formType: 'RADIO', name: 'tree', label: '额外菜单', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'searchBox', label: '搜索栏', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'extraBox', label: '功能栏', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'paginaBox', label: '分页栏', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
         span: 24, formType: 'GROUP', name: 'card_config', label: '卡片设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'card', value: [true] }, { field: 'data_type', value: ['A02', 'A03'] }], children: [
@@ -7579,21 +7582,10 @@ const PrefabricatedTable = [
             { span: 12, formType: 'INPUT', name: 'tree_children', label: 'children映射' },
         ]
     },
+
     {
-        span: 24, formType: 'GROUP', name: 'columns', label: '字段设置', collapsible: true, defaultCollapsed: true,
+        span: 24, formType: 'GROUP', name: 'columns_field', label: '字段设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'data_type', value: ['A02', 'A03'] }], children: [
-            {
-                span: 24, formType: 'LIST', name: 'columns_diyData', label: '自定义列表数据', collapsible: true,
-                jugde: [{ field: 'data_type', value: ['A03'] }], children: [
-                    {
-                        span: 24, formType: 'LIST', name: 'diyData_item', label: '自定义列表数据', collapsible: true,
-                        children: [
-                            { span: 12, formType: 'INPUT', name: 'key', label: '数据键' },
-                            { span: 12, formType: 'INPUT', name: 'value', label: '数据值' },
-                        ]
-                    },
-                ]
-            },
             {
                 span: 24, formType: 'LIST', name: 'columns_list', label: '字段列表', collapsible: true,
                 children: [
@@ -7608,6 +7600,18 @@ const PrefabricatedTable = [
                     { span: 12, formType: 'INPUT', name: 'tooltip', label: '提示' },
                     { span: 12, formType: 'SELECT', name: 'valueType', label: '类型', rules: true, valueEnum: MappingData.Form__AntdValueType },
 
+                    {
+                        span: 24, formType: 'RADIO', name: 'valueEnum_variant', label: '标签变体', rules: true, valueEnum: MappingData.System__TagType,
+                        jugde: [{ field: 'valueType', value: ['tag'] }]
+                    },
+                    {
+                        span: 24, formType: 'LIST', name: 'valueEnum_variant_list', label: '字段设置', collapsible: true, defaultCollapsed: true,
+                        jugde: [{ field: 'valueType', value: ['tag'] }], children: [
+                            { span: 8, formType: 'COLOR', name: 'color', label: '标签颜色', rules: true, mode: ['single'] },
+                            { span: 8, formType: 'INPUT', name: 'field', label: '数据值', rules: true },
+                            { span: 8, formType: 'INPUT', name: 'mapping', label: '映射名称', rules: true },
+                        ]
+                    },
                     {
                         span: 12, formType: 'INPUT', name: 'valueEnum_key', label: '映射键', rules: true,
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }]
@@ -7651,6 +7655,24 @@ const PrefabricatedTable = [
                     },
                 ]
             },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'columns_data', label: '自定义数据', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'data_type', value: ['A03'] }], children: [
+            {
+                span: 24, formType: 'LIST', name: 'columns_diyData', label: '自定义列表数据', collapsible: true,
+                children: [
+                    {
+                        span: 24, formType: 'LIST', name: 'diyData_item', label: '自定义列表数据', collapsible: true,
+                        children: [
+                            { span: 12, formType: 'INPUT', name: 'key', label: '数据键' },
+                            { span: 12, formType: 'INPUT', name: 'value', label: '数据值' },
+                        ]
+                    },
+                ]
+            },
+
         ]
     },
     {
@@ -8021,8 +8043,6 @@ const PrefabricatedSwiperBox = [
         ]
     },
 ]
-
-
 
 // !!! 监控模块
 const PrefabricatedVisualMonitoring = [
@@ -8562,22 +8582,30 @@ const PrefabricatedDiyFolder = [
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedDiyFolder_listItem', label: '列表样式', collapsible: true,
         children: [
-            { span: 12, formType: 'COLOR', name: 'item_color', label: '背景颜色', rules: true },
-            { span: 12, formType: 'NUMBER', name: 'item_deg', label: '颜色角度', rules: true },
-            { span: 12, formType: 'INPUT', name: 'item_padding', label: '内填充', rules: true },
-            { span: 12, formType: 'INPUT', name: 'item_margin', label: '外间距', rules: true },
-            { span: 12, formType: 'RADIO', name: 'item_border', label: '底边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+
             {
-                span: 12, formType: 'NUMBER', name: 'item_border_size', label: '边框尺寸', rules: true,
-                jugde: [{ field: 'item_border', value: [true] }]
-            },
-            {
-                span: 12, formType: 'RADIO', name: 'item_border_type', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
-                jugde: [{ field: 'item_border', value: [true] }]
-            },
-            {
-                span: 12, formType: 'COLOR', name: 'item_border_color', label: '边框颜色', rules: true, mode: ['single'],
-                jugde: [{ field: 'item_border', value: [true] }]
+                span: 24, formType: 'GROUP', name: 'PrefabricatedDiyFolder_list_box', label: '单行样式', collapsible: true,
+                children: [
+                    { span: 12, formType: 'RADIO', name: 'item_hidden', label: '标题行数', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'NUMBER', name: 'item_row', label: '标题行数', rules: true, jugde: [{ field: 'item_hidden', value: [true] }] },
+                    { span: 12, formType: 'COLOR', name: 'item_color', label: '背景颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'item_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'item_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'item_margin', label: '外间距', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'item_border', label: '底边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'NUMBER', name: 'item_border_size', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'item_border', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'item_border_type', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
+                        jugde: [{ field: 'item_border', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'item_border_color', label: '边框颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'item_border', value: [true] }]
+                    },
+                ]
             },
             {
                 span: 12, formType: 'GROUP', name: 'PrefabricatedDiyFolder_item_titel', label: '标题样式', collapsible: true,
@@ -8602,19 +8630,30 @@ const PrefabricatedDiyFolder = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'PrefabricatedDiyFolder_item_extra', label: '额外样式', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'PrefabricatedDiyFolder_item_extra', label: '额外样式', collapsible: true,
                 children: [
-
+                    { span: 24, formType: 'RADIO', name: 'extra_title_type', label: '文字类型', rules: true, valueEnum: MappingData.System_fileUrlType2 },
+                    { span: 24, formType: 'INPUT', name: 'extra_title_field', label: '文字内容/字段', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'extra_title_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'extra_title_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'extra_title_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'extra_title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'extra_title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'extra_title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'extra_title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'extra_title_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'extra_title_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'extra_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'extra_title_filed', value: [true] }]
+                    },
                 ]
             },
         ]
     },
-
-
-    // 列表样式    - 列表样式 文件名称  其他字段(人员/时间/日期) 布局信息 底边框
 ]
-
-
 
 // *** 弹窗设置
 const ModelConfigFormList = [
@@ -8637,6 +8676,15 @@ const ModelConfigFormList = [
             ...PrefabricatedTable,
         ]
     },
+]
+
+
+
+
+// *** 模块参数粘贴窗口
+const PrefabricatedPasteWindow = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'TEXTAREA', name: 'paste', label: '粘贴内容', rules: true },
 ]
 
 
@@ -8712,5 +8760,6 @@ export const FormConfig = {
     PrefabricatedVisualMonitoring,
 
     PrefabricatedSwiperBox,
+    PrefabricatedPasteWindow
 
 }

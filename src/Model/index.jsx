@@ -33,7 +33,6 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         position = { my: 'center', at: 'center', of: window }
     } = modelConfig
 
-
     const [SIZE, setSIZE] = useState()
 
 

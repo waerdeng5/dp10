@@ -2,7 +2,7 @@ import './Prefabricated.scss'
 
 import { useSize } from 'ahooks'
 import { useState, useEffect, useRef } from 'react'
-import { Card, Descriptions, Tree, Button, Spin } from 'antd'
+import { Card, Descriptions, Tree, Button, Spin, Tag } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
 import { ProTable } from '@ant-design/pro-components'
 // import { useNavigate } from 'react-router-dom'
@@ -77,16 +77,15 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
     const ModelOpen = { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 }
     const {
         data_type, card, card_field, card_diyData, card_renderList, data_number, headerTitle,
-        tree,
-
+        tree, extraBox = true, paginaBox = true, searchBox = true,
         tree_api_source, tree_start, tree_number, tree_key, tree_title, tree_children, tree_http_params,
         tree_api_method, tree_api_url, tree_api_params, tree_api_https, tree_api_level, tree_api_mapping,
-
         columns_diyData,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
         data_api_method, data_api_url, data_api_params, data_api_https, data_api_level, data_api_mapping,
-        // ...item
+        ...item
     } = data
+
 
     // const Navigate = useNavigate()
     const tableBox = useRef(null)
@@ -140,7 +139,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             }
         } else {
             const columns = columns_list.map(v => {
-                const { valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
+                const { valueType, valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
                 if (valueEnum_type) {
                     if (valueEnum_type === 'DataMapping') {
                         const obj = MappingData[valueEnum_data].reduce((acc, item) => {
@@ -149,6 +148,18 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         }, {})
                         item.valueEnum = obj
                     }
+                }
+                if (valueType === 'tag') {
+                    const { valueEnum_variant, valueEnum_variant_list } = v
+                    const mapping = valueEnum_variant_list.reduce((acc, k) => {
+                        acc[k.field] = { color: k.color, text: k.mapping }
+                        return acc
+                    }, {})
+                    item.render = (_, record) => (
+                        <Tag variant={valueEnum_variant} color={mapping[record[v.dataIndex]].color}>
+                            {mapping[record[v.dataIndex]].text}
+                        </Tag>
+                    )
                 }
                 return item
             })
@@ -171,13 +182,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             if (tree) {
                 if (tree_api_source === 'A02') {
                     const params = strOfurlParamsFunc(tree_api_params)
-
-
                     console.log('构造组件树', { method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     const [err, res] = await axios({ method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     if (err) return console.error('获取树状结构失败', err)
-
-
                     const treeData = tree_api_level ? getNestedValue(tree_api_mapping || '', res) : res
                     const key = treeData?.[0][tree_key]
                     setTreeData(treeData)
@@ -402,17 +409,21 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         '--paginIconSize': table_pagin_icon_size + 'px',
     }
 
+    const proTableConfig = {
+        rowKey: "uuid",
+        dateFormatter: "string",
+        search: searchBox,
+        scroll: { x: 400, y: size?.height - 56 - (extraBox ? 64 : 0) - (paginaBox ? 48 : 0) || 200 }
+    }
+    if (!extraBox) proTableConfig.toolBarRender = false
+    if (headerTitle) proTableConfig.headerTitle = headerTitle
 
     return (
         <div className='PrefabricatedTable' style={SearchStyle}>
             <ProTable
+                {...proTableConfig}
                 columns={columnsData}
-                rowKey="uuid"
-                pagination={{
-                    showSizeChanger: true,
-                    pageSize: PageSize,
-                    onChange: (i, s) => setPageSize(s)
-                }}
+                pagination={paginaBox ?? { showSizeChanger: true, pageSize: PageSize, onChange: (i, s) => setPageSize(s) }}
                 tableRender={(_, dom) => {
                     return (
                         <div style={{ display: 'flex', width: '100%', ...MenuStyle }}>
@@ -490,9 +501,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         return ({ success: true, data: data })
                     }
                 }}
-                dateFormatter="string"
-                headerTitle={headerTitle || '自定义标题'}
-                scroll={{ x: 400, y: size?.height - 167 || 400 }}
             />
         </div>
     );

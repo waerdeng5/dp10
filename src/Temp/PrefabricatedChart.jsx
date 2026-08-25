@@ -1208,9 +1208,6 @@ const SetSpecDataFn = (data, type, values) => {
 }
 
 const dataSourceTypeFn = (type, data, UrlData) => {
-
-
-    console.log(type, data, UrlData)
     const { dataSourceType, data_diyData } = data
     if (dataSourceType === 'A03') return data_diyData
     if (dataSourceType === 'A01') {
