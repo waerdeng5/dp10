@@ -1,6 +1,6 @@
 import './DevTemplate.scss'
-import { useMount } from 'ahooks'
-import { useRef, useState } from 'react'
+import { useMount, useSize } from 'ahooks'
+import { useEffect, useRef, useState } from 'react'
 import { App, Transfer, Tree, Table, Button, Image } from 'antd'
 import { ScrollView } from 'devextreme-react/scroll-view'
 
@@ -30,7 +30,6 @@ export const DevScrollView = ({ children, Event }) => {
         </ScrollView>
     )
 }
-
 
 // Todo 穿梭框搭配函数
 export const filterOption = (input, item) => {
@@ -268,4 +267,30 @@ export const AttachTemplateA01 = ({ data }) => {
             })}
         </div>
     )
+}
+
+// 监控数据
+export const MonitorTemplateA01 = ({ data }) => {
+    const { deviceSerial, channelNo, tableName, tableName1, token, cameraFactory, playUrl, hD, ptz } = data
+    const BoxHeight = useRef()
+    const size = useSize(BoxHeight)
+    const [Url, setUrl] = useState('')
+    const [OptionsCall, setOptionsCall] = useState()
+    const [CameraFactory, setCameraFactory] = useState(cameraFactory)
+
+    const iframeUrl = 'https://yingshi.ljkjkf.com/webvideo.html?url=ezopen://open.ys7.com/'
+
+    useEffect(() => {
+        if (cameraFactory === 1 && size) {
+            setUrl(`${iframeUrl}${deviceSerial}/${channelNo}${hD ? '.hd' : ''}.live&token=${token}&width=${size.width}&height=${size.height}`)
+        }
+    }, [data, size])
+
+    if (cameraFactory === 1) {
+        return (
+            <div className='MonitorTemplateA01' ref={BoxHeight}>
+                {Url && <iframe title="Video" src={Url} width="100%" height="100%" scrolling="no" frameBorder="0" allowFullScreen={true} />}
+            </div>
+        )
+    }
 }

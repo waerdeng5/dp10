@@ -1,6 +1,6 @@
-import { Select } from 'antd'
-import { Pagination, ConfigProvider } from 'antd'
+
 import { useState, useEffect } from 'react'
+import { Select, TreeSelect, Pagination, ConfigProvider, Spin, Result } from 'antd'
 
 import {
     SpacingCallBack,
@@ -9,14 +9,19 @@ import {
     SetFilderParams,
     UnitCallBackStruct,
     SetBorderParams,
-    SetPositionParams
+    SetPositionParams,
+    DiyDataReturn
 } from '../Utils'
 
+import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
+
+import { MonitorTemplateA01 } from './DevTemplate'
+
+// 监控视频
 const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) => {
 
-    const { left_options, top_options,
-        left_width, left_radius, left_color, left_deg, left_padding, left_margin, left_orga, left_type, left_posi, left_nums,
-        left_orga_api, left_orga_params, left_type_api, left_type_params, left_posi_api, left_posi_params, left_list,
+    const { isParams, isParamsConfig, left_options, top_options,
+        left_width, left_radius, left_color, left_deg, left_padding, left_margin, left_list,
         left_label_color, left_label_deg, left_label_padding, left_label_size, left_label_family, left_label_weight, left_label_style,
         left_label_filed, left_label_filed_data, left_label_filed_color,
         left_select_height, left_select_back, left_select_deg, left_select_color,
@@ -33,9 +38,8 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         left_options_active_text_color, left_options_active_text_deg, left_options_active_text_size, left_options_active_text_family,
         left_options_active_text_weight, left_options_active_text_style, left_options_active_text_filed,
         left_options_active_text_filed_data, left_options_active_text_filed_color,
-        top_height, top_radius, top_color, top_deg, top_padding, top_margin, top_orga, top_type, top_posi, top_nums,
-        top_orga_api, top_orga_params, top_type_api, top_type_params, top_posi_api, top_posi_params, top_list,
-        top_label_color, top_label_deg, top_label_padding, top_label_size, top_label_family, top_label_weight, top_label_style,
+        top_height, top_radius, top_color, top_deg, top_padding, top_margin,
+        top_list, top_label_color, top_label_deg, top_label_padding, top_label_size, top_label_family, top_label_weight, top_label_style,
         top_label_filed, top_label_filed_data, top_label_filed_color,
         top_select_width, top_select_height, top_select_back, top_select_deg, top_select_color, top_select_size,
         top_select_family, top_select_weight, top_select_style, top_select_border, top_select_icon,
@@ -50,22 +54,25 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         itemShowTotal, itemShowTotal_page, itemShowTotal_total, total_filed, total_filed_data, total_filed_color,
         total_size, total_color, total_deg, total_family, total_weight, total_style,
 
-
+        isOrga, isType, isPosi, isNums,
+        orga_api, orga_params, type_api, type_params, posi_api, posi_params,
+        orga_field, type_field, posi_field, index_field, size_field,
+        defautl_org, defautl_type, defautl_posi, defautl_num, defautl_index,
     } = data
 
+    const [orgaList, setOrgaList] = useState([])
+    const [typeList, setTypeList] = useState([])
+    const [posiList, setPosiList] = useState([])
 
-
-    const [orgaList, setOrgaList] = useState([{ label: '全部', value: '' }])
-    const [typeList, setTypeList] = useState([{ label: '全部', value: '' }])
-    const [posiList, setPosiList] = useState([{ label: '全部', value: '' }])
-
-    const [orgaValue, setOrgaValue] = useState('')
-    const [typeValue, setTypeValue] = useState('')
-    const [posiValue, setPosiValue] = useState('')
-    const [numsValue, setNumsValue] = useState(6)
+    const [orgaValue, setOrgaValue] = useState(defautl_org)
+    const [typeValue, setTypeValue] = useState(defautl_type)
+    const [posiValue, setPosiValue] = useState(defautl_posi)
+    const [indexValue, setIndexValue] = useState(defautl_index)
+    const [numsValue, setNumsValue] = useState(defautl_num)
 
     const [RenderList, setRenderList] = useState()
-    const [VideoList, setVideoList] = useState([{}, {}, {}, {}])
+    const [VideoList, setVideoList] = useState()
+    const [Total, setTotal] = useState(0)
 
     const leftStyle = {
         width: left_width,
@@ -214,6 +221,16 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         margin: SpacingCallBack(pagination_margin),
     }
 
+    const PaginationTheme = {
+        itemActiveBg,
+        itemActiveBgDisabled,
+        itemActiveColor,
+        itemActiveColorDisabled,
+        itemActiveColorHover,
+        itemBg,
+        itemSize,
+    }
+
     useEffect(() => {
         const listData = item_list.reduce((acc, v) => {
             const { total, row, col } = v
@@ -223,6 +240,102 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         setRenderList(listData)
     }, [item_list])
 
+    const getOptionsData = async () => {
+        if (isOrga) {
+            const [err, res] = await axios({ method: 'get', url: orga_api, params: strOfurlParamsFunc(orga_params) })
+            if (err) return console.log('组织机构获取失败')
+            setOrgaList([{ label: '全部', value: '00000000-0000-0000-0000-000000000000' }, ...res.data.list])
+            setOrgaValue(defautl_org)
+        } else setOrgaValue(defautl_org)
+        if (isType) {
+            const [err, res] = await axios({ method: 'get', url: type_api, params: strOfurlParamsFunc(type_params) })
+            if (err) return console.log('组织机构获取失败')
+            setTypeList([{ tableName: '全部', uuid: '00000000-0000-0000-0000-000000000000' }, ...res.data.list])
+            setTypeValue(defautl_type)
+        } else setTypeValue(defautl_type)
+        if (isPosi) {
+            const [err, res] = await axios({ method: 'get', url: posi_api, params: strOfurlParamsFunc(posi_params) })
+            if (err) return console.log('组织机构获取失败')
+            setPosiList([{ tableName: '全部', uuid: '00000000-0000-0000-0000-000000000000' }, ...res.data.list])
+            setPosiValue(defautl_posi)
+        } else setPosiValue(defautl_posi)
+    }
+
+    useEffect(() => {
+        getOptionsData()
+    }, [data])
+
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, {}, 'api_diyObj', { list: 0, total: [] })
+        const { list, total } = backData
+        setVideoList(list)
+        setTotal(total)
+    }, [UrlData, data])
+
+
+    const onOrgSelect = (e) => {
+        setOrgaValue(e)
+        setIndexValue(1)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === orga_field) v.apiData = e
+                if (v.apiParams === index_field) v.apiData = 1
+                if (v.apiParams === size_field) v.apiData = numsValue
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+    const onTypeSelect = (e) => {
+        setTypeValue(e)
+        setIndexValue(1)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === type_field) v.apiData = e
+                if (v.apiParams === index_field) v.apiData = 1
+                if (v.apiParams === size_field) v.apiData = numsValue
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+    const onPosiSelect = (e) => {
+        setPosiValue(e)
+        setIndexValue(1)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === posi_field) v.apiData = e
+                if (v.apiParams === index_field) v.apiData = 1
+                if (v.apiParams === size_field) v.apiData = numsValue
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+    const onNumSelect = (e) => {
+        setNumsValue(e)
+        setIndexValue(1)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === index_field) v.apiData = 1
+                if (v.apiParams === size_field) v.apiData = e
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+    const onPaginationChange = (e) => {
+        setIndexValue(e)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === index_field) v.apiData = e
+                if (v.apiParams === size_field) v.apiData = numsValue
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
     const showTotal = (total, range) => {
         const totalStyle = {
             '--totalColor': ColorCallBack(total_color, total_deg),
@@ -232,7 +345,6 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
             fontStyle: total_style,
             filter: SetFilderParams(total_filed, total_filed_data, total_filed_color)
         }
-
         if (itemShowTotal) {
             return (
                 <div className='itemShowTotal' style={totalStyle}>
@@ -249,37 +361,51 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         <div className="PrefabricatedVisualMonitoring">
             {left_options &&
                 <div className="left_options" style={leftStyle}>
-                    {left_orga &&
+                    {isOrga &&
                         <div className='left_options_item'>
                             <div className="left_options_item_label" style={leftLabelStyle}>组织机构 : </div>
-                            <Select
+                            <TreeSelect
+                                showSearch
+                                treeNodeFilterProp="label"
+                                treeDefaultExpandAll
                                 value={orgaValue}
-                                options={orgaList}
-                                style={leftSelectStyle}
+                                treeData={orgaList}
+                                style={topSelectStyle}
+                                onChange={onOrgSelect}
                             />
                         </div>
                     }
-                    {left_type &&
+                    {isType &&
                         <div className='left_options_item'>
                             <div className="left_options_item_label" style={leftLabelStyle}>监控类型 : </div>
-                            <Select
+                            <TreeSelect
+                                showSearch
+                                treeNodeFilterProp="tableName"
+                                treeDefaultExpandAll
+                                fieldNames={{ label: 'tableName', value: 'uuid' }}
                                 value={typeValue}
-                                options={typeList}
-                                style={leftSelectStyle}
+                                treeData={typeList}
+                                style={topSelectStyle}
+                                onChange={onTypeSelect}
                             />
                         </div>
                     }
-                    {left_posi &&
+                    {isPosi &&
                         <div className='left_options_item'>
                             <div className="left_options_item_label" style={leftLabelStyle}>监控位置 : </div>
-                            <Select
+                            <TreeSelect
+                                showSearch
+                                treeNodeFilterProp="tableName"
+                                treeDefaultExpandAll
+                                fieldNames={{ label: 'tableName', value: 'uuid' }}
                                 value={posiValue}
-                                options={posiList}
-                                style={leftSelectStyle}
+                                treeData={posiList}
+                                style={topSelectStyle}
+                                onChange={onPosiSelect}
                             />
                         </div>
                     }
-                    {left_nums &&
+                    {isNums &&
                         <div className='left_options_item'>
                             <div className="left_options_item_label" style={leftLabelStyle}>显示方式 : </div>
                             <div className='left_options_item_snums' style={numberStyle}>
@@ -309,50 +435,75 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
             <div className="right_box">
                 {top_options &&
                     <div className="top_options" style={topStyle}>
-                        {top_orga &&
+                        {isOrga &&
                             <div className='top_options_item'>
                                 <div className="top_options_item_label" style={topLabelStyle}>组织机构 : </div>
-                                <Select
+                                <TreeSelect
+                                    showSearch
+                                    treeNodeFilterProp="label"
+                                    treeDefaultExpandAll
                                     value={orgaValue}
-                                    options={orgaList}
+                                    treeData={orgaList}
                                     style={topSelectStyle}
+                                    onChange={onOrgSelect}
                                 />
                             </div>
                         }
-                        {top_type &&
+                        {isType &&
                             <div className='top_options_item'>
                                 <div className="top_options_item_label" style={topLabelStyle}>监控类型 : </div>
-                                <Select
+                                <TreeSelect
+                                    showSearch
+                                    treeNodeFilterProp="tableName"
+                                    treeDefaultExpandAll
+                                    fieldNames={{ label: 'tableName', value: 'uuid' }}
                                     value={typeValue}
-                                    options={typeList}
+                                    treeData={typeList}
                                     style={topSelectStyle}
+                                    onChange={onTypeSelect}
                                 />
                             </div>
                         }
-                        {top_posi &&
+                        {isPosi &&
                             <div className='top_options_item'>
                                 <div className="top_options_item_label" style={topLabelStyle}>监控位置 : </div>
-                                <Select
+                                <TreeSelect
+                                    showSearch
+                                    treeNodeFilterProp="tableName"
+                                    treeDefaultExpandAll
+                                    fieldNames={{ label: 'tableName', value: 'uuid' }}
                                     value={posiValue}
-                                    options={posiList}
+                                    treeData={posiList}
                                     style={topSelectStyle}
+                                    onChange={onPosiSelect}
                                 />
                             </div>
                         }
-                        {top_nums &&
+                        {isNums &&
                             <div className='top_options_item'>
                                 <div className="top_options_item_label" style={topLabelStyle}>显示方式 : </div>
                                 <Select
                                     value={numsValue}
                                     options={top_list}
                                     style={topSelectStyle}
+                                    onChange={onNumSelect}
                                 />
                             </div>
                         }
                     </div>
                 }
                 <div className="monitoring" style={videoStyle}>
-                    {RenderList && VideoList.map((v, i) => {
+                    {!RenderList || !VideoList &&
+                        <div className='monitoring_loading'>
+                            <Spin />
+                        </div>
+                    }
+                    {RenderList && VideoList && VideoList.length === 0 &&
+                        <div className='monitoring_loading'>
+                            <Result status="404" title="暂无数据" />
+                        </div>
+                    }
+                    {RenderList && VideoList && VideoList.length !== 0 && VideoList.map((v, i) => {
                         const { length } = VideoList
                         const { width, height } = RenderList[length]
                         const itemStyle = {
@@ -363,29 +514,19 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
                         return (
                             <div className='video_item' key={i} style={itemStyle}>
                                 {video_title && <div className='video_title' style={videoTitleStyle}>标题</div>}
+                                <MonitorTemplateA01 data={v} />
                             </div>
                         )
                     })}
                 </div>
                 <div className="pagination" style={paginationStyle}>
-                    <ConfigProvider
-                        theme={{
-                            components: {
-                                Pagination: {
-                                    itemActiveBg,
-                                    itemActiveBgDisabled,
-                                    itemActiveColor,
-                                    itemActiveColorDisabled,
-                                    itemActiveColorHover,
-                                    itemBg,
-                                    itemSize,
-                                },
-                            },
-                        }}>
+                    <ConfigProvider theme={{ components: { Pagination: PaginationTheme } }}>
                         <Pagination
+                            total={Total}
+                            current={indexValue}
                             pageSize={numsValue}
-                            total={50}
                             showTotal={showTotal}
+                            onChange={onPaginationChange}
                         />
                     </ConfigProvider>
                 </div>
@@ -394,7 +535,47 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
     );
 };
 
+// 无人机航拍
+const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => {
+
+    return (
+        <div>
+            无人机航拍
+
+
+            newsRelease
+            moduleType=
+
+            coverUrlList
+            articleAttachment
+
+            线上安全技术交底--792e061a-8725-4a58-886f-ba888ce748cd
+            安全责任书签订--6cf70c08-5b16-4533-b7cf-9701a7af1a7f
+            风险告知--49aad8e4-8c60-4cf5-9147-7aa453d32bb9
+            专项施工方案--7f9f31f2-0997-484f-95f6-50cc7f36e193
+            危大工程方案--8510387b-0187-4620-9d68-b2ad26dcba7b
+
+
+            交底管理--6d97e414-d2ad-451a-b4d0-50ef5dd2f22c
+            原材料抽样管控--d3773470-c86e-445f-a017-56b119db428d
+            关键工序验收--3ba72de7-f04a-4103-9717-b8a9e0b5b057
+            旁站监督--f2a8f0ad-cafe-4a65-a19c-847701815cc4
+
+            企业新闻--62db9761-9bdf-4470-a48d-933bb6b274de
+
+            publishStatus
+            newsRelease/UpdateNewsReleaseStatus
+            ActionType
+
+            ff434970-a0b3-40dc-8adb-d26da0564ef3	草稿
+            d8f1cd7e-8979-497c-ae3d-40f1a92c4127	发布
+            e4074e43-44ce-4f43-85aa-93b0377414f1	下架
+        </div>
+    )
+}
+
 
 export const PrefabricatedVisualTemplate = {
-    PrefabricatedVisualMonitoring
+    PrefabricatedVisualMonitoring,
+    PrefabricatedVisualRecorded
 }

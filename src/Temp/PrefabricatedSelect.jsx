@@ -1,13 +1,18 @@
 import dayjs from 'dayjs'
-import { Select, DatePicker } from 'antd'
+import { Select, DatePicker, Tree } from 'antd'
 import { useState, useEffect } from 'react'
-
-
-
 import { ICONMapping } from '../Config/IconMapping'
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, SetShadowParams } from '../Utils'
+import {
+    ColorCallBack,
+    SpacingCallBack,
+    SetFilderParams,
+    SetBorderParams,
+    SetShadowParams,
+    SpacingSizeCallBack,
+    getNestedValue
+} from '../Utils'
 
-
+import { axios, strOfurlParamsFunc } from '../Utils/Api'
 
 const PrefabricatedSelect = () => {
     return (
@@ -133,7 +138,6 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
         }
     }
 
-
     const onChange = (e) => {
         setDateValue(e)
         if (isParams) {
@@ -144,8 +148,6 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
             LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
         }
     }
-
-
 
     return (
         <div className='PrefabricatedDateSelect' style={backStyle}>
@@ -163,8 +165,91 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
     )
 }
 
+const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const { isParams, isParamsConfig,
+        data_source, data_type, api_method, api_url, api_params, api_https, api_level, api_mapping, api_default,
+        fieldNames_key, fieldNames_title, fieldNames_children, tree_selectable, tree_expandAll, tree_blockNode, tree_switcher,
+        box_back, back_deg, back_padding, back_margin, back_radius,
+        title_size, title_color, title_deg, title_family, title_weight, title_style, title_filed, title_filed_data, title_filed_color,
+        active_back_color, active_back_deg, active_color, active_deg, active_size, active_family, active_weight, active_style,
+        active_filed, active_filed_data, active_filed_color, active_back_padding
+    } = data
+
+    const [treeData, setTreeData] = useState()
+    const [selectedKeys, setSelectedKeys] = useState([])
+
+    const boxStyle = {
+        width: SpacingSizeCallBack(back_margin, 100),
+        height: SpacingSizeCallBack(back_margin, 100, true),
+        background: ColorCallBack(box_back, back_deg),
+        padding: SpacingCallBack(back_padding),
+        margin: SpacingCallBack(back_margin),
+        borderRadius: SpacingCallBack(back_radius),
+        '--tree-switcher': tree_switcher ? 'block' : 'none',
+        '--title-size': title_size + 'px',
+        '--title-color': ColorCallBack(title_color, title_deg),
+        '--title-family': title_family,
+        '--title-weight': title_weight,
+        '--title-style': title_style,
+        '--title-filed': SetFilderParams(title_filed, title_filed_data, title_filed_color),
+        '--active-back': ColorCallBack(active_back_color, active_back_deg),
+        '--active-padding': SpacingCallBack(active_back_padding),
+        '--active-color': ColorCallBack(active_color, active_deg),
+        '--active-size': active_size + 'px',
+        '--active-family': active_family,
+        '--active-weight': active_weight,
+        '--active-style': active_style,
+        '--active-filed': SetFilderParams(active_filed, active_filed_data, active_filed_color),
+    }
+
+    const getTreeDataApi = async () => {
+        const [err, res] = await axios({ method: api_method, url: api_url, path: api_https, params: strOfurlParamsFunc(api_params) })
+        if (err) return false
+        const data = api_level ? getNestedValue(api_mapping, res) : res
+        setTreeData(data)
+        setSelectedKeys([api_default])
+    }
+
+    useEffect(() => {
+        if (data_source === 'A01') getTreeDataApi()
+
+    }, [data_source])
+
+    const onTreeSelect = (e) => {
+        if (e.length === 0) return
+        setSelectedKeys(e)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                v.apiData = e[0]
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+
+
+
+
+    return (
+        <div className='PrefabricatedTreeData' style={boxStyle}>
+            {treeData &&
+                <Tree
+                    selectedKeys={selectedKeys}
+                    treeData={treeData}
+                    fieldNames={{ key: fieldNames_key, title: fieldNames_title, children: fieldNames_children }}
+                    defaultExpandAll={tree_expandAll}
+                    blockNode={tree_blockNode}
+                    selectable={tree_selectable}
+                    onSelect={onTreeSelect}
+                />
+            }
+        </div>
+    )
+}
 
 export const PrefabricatedSelectTemplate = {
     PrefabricatedSelect,
-    PrefabricatedDateSelect
+    PrefabricatedDateSelect,
+    PrefabricatedTreeData,
+
 };

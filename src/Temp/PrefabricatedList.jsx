@@ -32,7 +32,7 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
     const [Data, setData] = useState()
     const [ItemList, setItemList] = useState([])
 
-    const { api_source, api_dataType, item_back, item_icon, item_unit, data_obj_config, data_arr_config, data_diy_config,
+    const { api_source, api_dataType, item_back, item_icon, item_unit, data_obj_config, data_arr_config, data_diy_config, api_diyObj,
         whole_align_content, whole_align_items, whole_flex_direction, whole_flex_wrap, whole_justify_content, whole_margin, whole_padding,
         item_align_content, item_align_items, item_flex_direction, item_flex_wrap, item_justify_content, item_margin, item_padding,
         item_widthUnit, item_heightUnit, item_width, item_height,
@@ -105,20 +105,23 @@ const PrefabricatedList = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
-        setData(backData)
         if (api_source === 'A02') {
-            const data = http_urlLevel ? getNestedValue(http_urlMapping, UrlData[http_urlName]) : UrlData[http_urlName]
             setItemList(api_dataType === 'A02' ? data_obj_config : data_arr_config)
-            if (api_dataType === 'A02') setData(data)
-            if (api_dataType === 'A03' && data) {
+            if (api_dataType === 'A02') setData(backData)
+            if (api_dataType === 'A03' && backData) {
                 const dataMap = data_arr_config.reduce((acc, item) => {
                     const { data_value, data_field, data_fieldName, data_number } = item
-                    acc[data_value] = data.find(v => v[data_field] === data_fieldName)[data_number]
+                    acc[data_value] = backData.find(v => v[data_field] === data_fieldName)[data_number]
                     return acc
                 }, {});
                 setData(dataMap)
             }
-        } else setItemList(data_diy_config)
+        } else if (api_source === 'A03') {
+            setItemList(data_diy_config)
+            setData(backData)
+        } else {
+            setItemList(data_diy_config)
+        }
     }, [UrlData, data])
     return (
         <div className='PrefabricatedList' style={wholeStyle}>

@@ -802,12 +802,15 @@ export const OpenMenuFunc = async (uuid, pageFunc, body_tabsMax, obj) => {
 export const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min
 
 // TODO 自定义组件统一数据返回处理
-export const DiyDataReturn = (data, apiData, backData, diyKey) => {
-    const { api_source, api_dataType, api_urlName, api_urlLevel, api_urlMapping, } = data
+export const DiyDataReturn = (data, apiData, backData, diyKey, back = []) => {
+    const { api_source, api_dataType, http_urlName, http_urlLevel, http_urlMapping, } = data
     if (api_source === 'A01') return backData
     if (api_source === 'A02') {
-        if (!isEmptyObject(apiData)) return api_urlLevel ? getNestedValue(api_urlMapping, apiData[api_urlName]) : apiData[api_urlName]
-        return []
+        if (!isEmptyObject(apiData)) {
+            const data = http_urlLevel ? getNestedValue(http_urlMapping, apiData[http_urlName]) : apiData[http_urlName]
+            return data
+        }
+        return back
     }
     if (api_source === 'A03') {
         if (diyKey) {

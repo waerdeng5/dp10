@@ -542,11 +542,18 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
     )
 }
 
+// 天气组件
+const PrefabricatedDiyWeather = () => {
+    return (
+        <div>天气信息</div>
+    )
+}
 
 
 export const PrefabricatedDiyTemplate = {
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,
     PrefabricatedDiyProgress,
-    PrefabricatedDiyFolder
+    PrefabricatedDiyFolder,
+    PrefabricatedDiyWeather
 }

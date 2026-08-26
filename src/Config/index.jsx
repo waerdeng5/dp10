@@ -553,6 +553,7 @@ export const DIYTempList = [
     { uuid: 'PrefabricatedDiyOrgA01', title: '组织机构', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyProgress', title: '横向进度', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyFolder', title: '文件夹', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedDiyWeather', title: '天气信息', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const ImgAndTextTempList = [
@@ -570,6 +571,7 @@ export const TableTemplate = [
 export const SelectTemplate = [
     { uuid: 'PrefabricatedSelect', title: '下拉选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDateSelect', title: '时间选择', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedTreeData', title: '树形结构', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const SwiperTemplatePage = [
@@ -578,6 +580,7 @@ export const SwiperTemplatePage = [
 
 export const VisualTemplatePage = [
     { uuid: 'PrefabricatedVisualMonitoring', title: '视频监控', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedVisualRecorded', title: '录播视频', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 
@@ -969,6 +972,9 @@ export const TemplateParamsMapping = {
     PrefabricatedDiyFolder: {
         value: 'PrefabricatedDiyFolder',
     },
+    PrefabricatedDiyWeather: {
+        value: 'PrefabricatedDiyWeather',
+    },
     // TODO 图文模块
     PrefabricatedImgText: {
         value: 'PrefabricatedImgText',
@@ -1052,6 +1058,9 @@ export const TemplateParamsMapping = {
         suffix_icon_filed_data: "1,1,1",
         suffix_icon_filed_color: "#262626"
     },
+    PrefabricatedTreeData: {
+        value: 'PrefabricatedTreeData',
+    },
     // TODO 轮播模块
     PrefabricatedSwiperBox: {
         value: 'PrefabricatedSwiperBox',
@@ -1059,6 +1068,9 @@ export const TemplateParamsMapping = {
     // TODO 视频监控模块
     PrefabricatedVisualMonitoring: {
         value: 'PrefabricatedVisualMonitoring',
+    },
+    PrefabricatedVisualRecorded: {
+        value: 'PrefabricatedVisualRecorded',
     }
 }
 

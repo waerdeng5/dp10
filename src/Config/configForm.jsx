@@ -7573,7 +7573,6 @@ const PrefabricatedTable = [
 
                 ]
             },
-
             // 映射设置
             { span: 12, formType: 'RADIO', name: 'tree_start', label: '是否显示数值', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'INPUT', name: 'tree_number', label: '数值字段', rules: true, jugde: [{ field: 'tree_start', value: [true] }] },
@@ -7894,6 +7893,110 @@ const PrefabricatedDateSelect = [
         ]
     }
 ]
+// ??? 树形可选列表
+const PrefabricatedTreeData = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_params_data', label: '接口参数', collapsible: true,
+        children: [
+            { span: 24, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+                jugde: [{ field: 'isParams', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+                ]
+            },
+        ]
+    },
+    { span: 12, formType: 'RADIO', name: 'data_source', label: '数据来源', valueEnum: MappingData.dataSourceTypeA02 },
+    { span: 12, formType: 'RADIO', name: 'data_type', label: '数据类型', valueEnum: MappingData.dataType, jugde: [{ field: 'data_source', value: ['A01'] }] },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_apiData', label: '接口设置', collapsible: true,
+        jugde: [{ field: 'data_source', value: ['A01'] }], children: [
+            { span: 12, formType: 'RADIO', name: 'api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 12, formType: 'INPUT', name: 'api_url', label: '请求接口', rules: true },
+            { span: 12, formType: 'INPUT', name: 'api_params', label: '额外参数' },
+            { span: 12, formType: 'INPUT', name: 'api_https', label: '额外地址' },
+            { span: 12, formType: 'INPUT', name: 'api_default', label: '默认值' },
+            { span: 12, formType: 'RADIO', name: 'api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+            { span: 12, formType: 'INPUT', name: 'api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'api_level', value: [true] }] },
+
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_fieldNames', label: '字段映射', collapsible: true,
+                children: [
+                    { span: 8, formType: 'INPUT', name: 'fieldNames_key', label: 'key', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'fieldNames_title', label: 'title', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'fieldNames_children', label: 'children', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_diyData', label: '手动数据', collapsible: true,
+        jugde: [{ field: 'data_source', value: ['A02'] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_box', label: '整体设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'box_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_margin', label: '外间距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_radius', label: '圆角半径', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'title_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'title_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_tree', label: '树设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'tree_expandAll', label: '全部展开', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'tree_blockNode', label: '占据满行', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'tree_selectable', label: '是否可选', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'tree_switcher', label: '折叠图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_select', label: '选中设置', collapsible: true,
+        jugde: [{ field: 'tree_selectable', value: [true] }], children: [
+            { span: 12, formType: 'COLOR', name: 'active_back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'active_back_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'active_back_padding', label: '背景填充', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'active_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'active_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'active_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'active_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'active_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'active_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'active_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'active_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'active_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'active_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'active_filed', value: [true] }]
+            },
+        ]
+    }
+]
 // !!! 轮播模块
 const PrefabricatedSwiperBox = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -8046,8 +8149,47 @@ const PrefabricatedSwiperBox = [
 
 // !!! 监控模块
 const PrefabricatedVisualMonitoring = [
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_params_data', label: '接口参数', collapsible: true,
+        children: [
+            { span: 24, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+                jugde: [{ field: 'isParams', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+                ]
+            },
+        ]
+    },
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_default_data', label: '数据参数', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'isOrga', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'isType', label: '监控类型', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'isPosi', label: '监控部位', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'isNums', label: '显示方式', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'orga_api', label: '组织机构接口', rules: true, jugde: [{ field: 'isOrga', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'orga_params', label: '组织机构参数', jugde: [{ field: 'isOrga', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'type_api', label: '监控类型接口', rules: true, jugde: [{ field: 'isType', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'type_params', label: '监控类型参数', jugde: [{ field: 'isType', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'posi_api', label: '监控部位接口', rules: true, jugde: [{ field: 'isPosi', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'posi_params', label: '监控部位参数', jugde: [{ field: 'isPosi', value: [true] }] },
+            { span: 12, formType: 'INPUT', name: 'orga_field', label: '机构字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'defautl_org', label: '默认机构' },
+            { span: 12, formType: 'INPUT', name: 'type_field', label: '类型字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'defautl_type', label: '默认类型' },
+            { span: 12, formType: 'INPUT', name: 'posi_field', label: '位置字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'defautl_posi', label: '默认位置' },
+            { span: 12, formType: 'INPUT', name: 'index_field', label: '页码字段', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'defautl_index', label: '默认页码', rules: true },
+            { span: 12, formType: 'INPUT', name: 'size_field', label: '页数字段', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'defautl_num', label: '默认数量', rules: true },
+        ],
+    },
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options', label: '操作设置', collapsible: true,
         children: [
@@ -8062,16 +8204,6 @@ const PrefabricatedVisualMonitoring = [
                     { span: 12, formType: 'NUMBER', name: 'left_deg', label: '颜色角度', rules: true },
                     { span: 12, formType: 'INPUT', name: 'left_padding', label: '内填充', rules: true },
                     { span: 12, formType: 'INPUT', name: 'left_margin', label: '外间距', rules: true },
-                    { span: 12, formType: 'RADIO', name: 'left_orga', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'left_type', label: '监控类型', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'left_posi', label: '监控部位', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'left_nums', label: '显示方式', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'INPUT', name: 'left_orga_api', label: '组织机构接口', rules: true, jugde: [{ field: 'left_orga', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'left_orga_params', label: '组织机构参数', jugde: [{ field: 'left_orga', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'left_type_api', label: '监控类型接口', rules: true, jugde: [{ field: 'left_type', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'left_type_params', label: '监控类型参数', jugde: [{ field: 'left_type', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'left_posi_api', label: '监控部位接口', rules: true, jugde: [{ field: 'left_posi', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'left_posi_params', label: '监控部位参数', jugde: [{ field: 'left_posi', value: [true] }] },
                 ]
             },
             {
@@ -8238,16 +8370,6 @@ const PrefabricatedVisualMonitoring = [
                     { span: 12, formType: 'NUMBER', name: 'top_deg', label: '颜色角度', rules: true },
                     { span: 12, formType: 'INPUT', name: 'top_padding', label: '内填充', rules: true },
                     { span: 12, formType: 'INPUT', name: 'top_margin', label: '外间距', rules: true },
-                    { span: 12, formType: 'RADIO', name: 'top_orga', label: '组织机构', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'top_type', label: '监控类型', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'top_posi', label: '监控部位', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'RADIO', name: 'top_nums', label: '显示方式', rules: true, valueEnum: MappingData.IsEnabledBool },
-                    { span: 12, formType: 'INPUT', name: 'top_orga_api', label: '组织机构接口', rules: true, jugde: [{ field: 'top_orga', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'top_orga_params', label: '组织机构参数', jugde: [{ field: 'top_orga', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'top_type_api', label: '监控类型接口', rules: true, jugde: [{ field: 'top_type', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'top_type_params', label: '监控类型参数', jugde: [{ field: 'top_type', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'top_posi_api', label: '监控部位接口', rules: true, jugde: [{ field: 'top_posi', value: [true] }] },
-                    { span: 12, formType: 'INPUT', name: 'top_posi_params', label: '监控部位参数', jugde: [{ field: 'top_posi', value: [true] }] },
                 ]
             },
             {
@@ -8274,7 +8396,7 @@ const PrefabricatedVisualMonitoring = [
             {
                 span: 12, formType: 'GROUP', name: 'PrefabricatedVisualMonitoring_options_top_select', label: '下拉样式', collapsible: true,
                 jugde: [{ field: 'top_options', value: [true] }], children: [
-                    { span: 24, formType: 'NUMBER', name: 'top_select_width', label: '窗体高度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'top_select_width', label: '窗体宽度', rules: true },
                     { span: 24, formType: 'NUMBER', name: 'top_select_height', label: '窗体高度', rules: true },
                     { span: 24, formType: 'COLOR', name: 'top_select_back', label: '背景颜色', rules: true },
                     { span: 24, formType: 'NUMBER', name: 'top_select_deg', label: '颜色角度', rules: true },
@@ -8441,6 +8563,11 @@ const PrefabricatedVisualMonitoring = [
             },
         ]
     },
+]
+// !!! 无人机航拍
+const PrefabricatedVisualRecorded = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
 ]
 
 // !!! 文件夹
@@ -8757,7 +8884,9 @@ export const FormConfig = {
 
     PrefabricatedSelect,
     PrefabricatedDateSelect,
+    PrefabricatedTreeData,
     PrefabricatedVisualMonitoring,
+    PrefabricatedVisualRecorded,
 
     PrefabricatedSwiperBox,
     PrefabricatedPasteWindow

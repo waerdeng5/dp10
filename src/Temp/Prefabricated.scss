@@ -969,6 +969,21 @@
             flex-direction: var(--video_flex-direction);
             flex-wrap: var(--video_flex-wrap);
 
+            &>.monitoring_loading {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                .ant-result-title {
+                    color: white;
+                    filter: drop-shadow(1px 1px 1px #262626);
+                }
+
+            }
+
             .video_item {
                 position: relative;
                 z-index: 1;
@@ -1002,5 +1017,54 @@
             }
         }
     }
+}
 
+.PrefabricatedTreeData {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    .ant-tree {
+        background: transparent;
+
+        .ant-tree-switcher {
+            display: var(--tree-switcher);
+        }
+
+        .ant-tree-title {
+            font-size: var(--title-size);
+            font-family: var(--title-family);
+            font-weight: var(--title-weight);
+            font-style: var(--title-style);
+            filter: var(--title-filed);
+            background: var(--title-color);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            white-space: pre-line;
+        }
+
+
+        .ant-tree-node-selected {
+            background: var(--active-back);
+            padding: var(--active-padding);
+
+            .ant-tree-title {
+                font-size: var(--active-size);
+                font-family: var(--active-family);
+                font-weight: var(--active-weight);
+                font-style: var(--active-style);
+                filter: var(--active-filed);
+                background: var(--active-color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+                white-space: pre-line;
+            }
+        }
+    }
 }

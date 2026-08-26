@@ -156,6 +156,10 @@ export const MappingData = {
         { value: 'A02', label: '接口信息' },
         { value: 'A03', label: '自定义' },
     ],
+    dataSourceTypeA02: [
+        { value: 'A01', label: '接口信息' },
+        { value: 'A02', label: '手动数据' },
+    ],
     dataTypeMapping: [
         { value: 'A02', label: '对象' },
         { value: 'A03', label: '数组' },

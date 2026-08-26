@@ -25,7 +25,9 @@ import { WinTemplate } from '../Temp/StartTemplate'
 const PARAMSMAPPING = [
     'PrefabricatedDateSelect',
     'PrefabricatedDiyOrgA01',
-    'PrefabricatedDiyProgress'
+    'PrefabricatedDiyProgress',
+    'PrefabricatedVisualMonitoring',
+    'PrefabricatedTreeData'
 ]
 
 
@@ -56,7 +58,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [FoldStatus, setFoldStatus] = useState(false)
 
     const getApiData = (params) => {
-        if (!params || !page.params) return
+        if (!params && !page.params) return
         const apiParams = Object.values(page.params).reduce((acc, v) => {
             if (PARAMSMAPPING.includes(v.value) && v.isParams) acc.push(...(v.isParamsConfig || []))
             return acc
