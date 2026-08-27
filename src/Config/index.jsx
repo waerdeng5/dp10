@@ -545,8 +545,10 @@ export const ChartTempList = [
     // { uuid: 'PrefabricatedChartVenn', title: '韦恩图', img: `${CommonUrl}images/Avatar/AvatarA23.webp`, x: 0, y: 0, w: 12, h: 12 },
     // { uuid: 'PrefabricatedChartMosaic', title: '马赛克图', img: `${CommonUrl}images/Avatar/AvatarA24.webp`, x: 0, y: 0, w: 12, h: 12 },
     // { uuid: 'PrefabricatedChartCandlestick', title: '蜡烛图', img: `${CommonUrl}images/Avatar/AvatarA25.webp`, x: 0, y: 0, w: 12, h: 12 },
-]
+    { uuid: 'PrefabricatedChartGantt', title: '甘特图', img: `${CommonUrl}images/Avatar/AvatarA25.webp`, x: 0, y: 0, w: 12, h: 12 },
 
+
+]
 
 export const DIYTempList = [
     { uuid: 'PrefabricatedDiyText', title: '数据文字', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
@@ -932,6 +934,9 @@ export const TemplateParamsMapping = {
         dataSourceType: 'A01',
         ...ChartBackCommonData,
         ...ChartTitleCommonData,
+    },
+    PrefabricatedChartGantt: {
+        value: 'PrefabricatedChartGantt',
     },
     // TODO 自定义模块
     PrefabricatedDiyText: {

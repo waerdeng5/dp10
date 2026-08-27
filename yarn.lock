@@ -3625,6 +3625,16 @@
     "@visactor/vutils" "~1.0.12"
     react-is "^18.2.0"
 
+"@visactor/react-vtable@^1.26.7":
+  version "1.26.7"
+  resolved "https://registry.npmmirror.com/@visactor/react-vtable/-/react-vtable-1.26.7.tgz#12b509721b7e6a91cd7f8651e59a802bdff741bc"
+  integrity sha512-lG+OSQyzmdI3VY7tDAWnYcllHL41/b4EEH6Ye0HfaG8LLWgrzqhUT5BtSUG5+EQRsFoxO4k0jltzlXnPJeHaAA==
+  dependencies:
+    "@visactor/vtable" "1.26.7"
+    "@visactor/vutils" "~1.0.17"
+    react-is "^18.2.0"
+    react-reconciler "0.29.0"
+
 "@visactor/vchart-extension@2.0.14":
   version "2.0.14"
   resolved "https://registry.npmmirror.com/@visactor/vchart-extension/-/vchart-extension-2.0.14.tgz#399707462a3acc8037c64361560ea265b4ac6580"
@@ -3677,6 +3687,29 @@
     simplify-geojson "^1.0.4"
     topojson-client "^3.1.0"
 
+"@visactor/vdataset@~1.0.17", "@visactor/vdataset@~1.0.23":
+  version "1.0.23"
+  resolved "https://registry.npmmirror.com/@visactor/vdataset/-/vdataset-1.0.23.tgz#d0085ef5c20efe96a582dff45642890ec755b904"
+  integrity sha512-zrLk9FBUWJoW6b30XnPKzXwAXl8USdLDfed6QZLsmdkylRU8V7yZeXE2aKwU8Lg1U4HmQngqmqOx7/QlbX44Tg==
+  dependencies:
+    "@turf/flatten" "^6.5.0"
+    "@turf/helpers" "^6.5.0"
+    "@turf/rewind" "^6.5.0"
+    "@visactor/vutils" "1.0.23"
+    d3-dsv "^2.0.0"
+    d3-geo "^1.12.1"
+    d3-hexbin "^0.2.2"
+    d3-hierarchy "^3.1.1"
+    eventemitter3 "^4.0.7"
+    geobuf "^3.0.1"
+    geojson-dissolve "^3.1.0"
+    path-browserify "^1.0.1"
+    pbf "^3.2.1"
+    point-at-length "^1.1.0"
+    simple-statistics "^7.7.3"
+    simplify-geojson "^1.0.4"
+    topojson-client "^3.1.0"
+
 "@visactor/vlayouts@~1.0.12":
   version "1.0.21"
   resolved "https://registry.npmmirror.com/@visactor/vlayouts/-/vlayouts-1.0.21.tgz#434069cbab7f8cb725402100e8b03981a5513e79"
@@ -3694,6 +3727,25 @@
   integrity sha512-u8iNccWTlszdVoGFqHjLRXiVjHefZKcnQIGod0xrNx4/vaV/OCJZD/+7EvUUyoFYLZPCqafOcBtZh9jRr8cAYQ==
   dependencies:
     "@visactor/vrender-core" "1.0.39"
+    "@visactor/vutils" "~1.0.12"
+
+"@visactor/vrender-animate@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-animate/-/vrender-animate-1.1.4.tgz#bf653c325523b97b6947908b7c7ad90de0c86a31"
+  integrity sha512-XBaCXMLSNw9E+htAEaqjby28mdINyVokNkLjKJ/ukmGobi3XX8siekXTNzCfe9M9UG4QGRTqyph848sxLB02Tw==
+  dependencies:
+    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vutils" "~1.0.12"
+
+"@visactor/vrender-components@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-components/-/vrender-components-1.1.4.tgz#7288aa932a8a26d42cca6096e8450a2b1d8ade50"
+  integrity sha512-N1bnIuefe6Lms7Ij8NGjKfNUYQpZ+M8RYsnjBR2So0wmnxAnXUTgqbpWDT9DiXzRF17qYSkF0HZJIdS/wN2o3Q==
+  dependencies:
+    "@visactor/vrender-animate" "1.1.4"
+    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vrender-kits" "1.1.4"
+    "@visactor/vscale" "~1.0.12"
     "@visactor/vutils" "~1.0.12"
 
 "@visactor/vrender-components@~1.0.39":
@@ -3715,6 +3767,14 @@
     "@visactor/vutils" "~1.0.12"
     color-convert "2.0.1"
 
+"@visactor/vrender-core@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-core/-/vrender-core-1.1.4.tgz#f93f18b7b65c3e3ad80b0418835ab60742603416"
+  integrity sha512-AyMKFohr/iK1Wc5jxvE/04MLcFI0VAR5qleDy+b2WwLi7UoeXn0tBhtzz72xIOKU1OrzvmflWsVmdnlh6ittwg==
+  dependencies:
+    "@visactor/vutils" "~1.0.12"
+    color-convert "2.0.1"
+
 "@visactor/vrender-kits@1.0.39", "@visactor/vrender-kits@~1.0.39":
   version "1.0.39"
   resolved "https://registry.npmmirror.com/@visactor/vrender-kits/-/vrender-kits-1.0.39.tgz#8c5356b5064d2aa79622b5419c4d624167ccfcfd"
@@ -3727,12 +3787,77 @@
     lottie-web "^5.12.2"
     roughjs "4.6.6"
 
+"@visactor/vrender-kits@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-kits/-/vrender-kits-1.1.4.tgz#59c9384cbd4367f32457601ac8888845828b5a59"
+  integrity sha512-YD1y2TWh5yl6AzpW47HPcYogk0d6KntuwUrGocXqSkLXwzsGnYntE9RvAEGTu4ketdeahh+8/0w34d6BU0Hzig==
+  dependencies:
+    "@resvg/resvg-js" "2.4.1"
+    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vutils" "~1.0.12"
+    gifuct-js "2.1.2"
+    lottie-web "^5.12.2"
+    roughjs "4.6.6"
+
+"@visactor/vrender@1.1.4":
+  version "1.1.4"
+  resolved "https://registry.npmmirror.com/@visactor/vrender/-/vrender-1.1.4.tgz#2fa22dde3c35dbfd49893dd48c3bb0142b0d10b7"
+  integrity sha512-+T09pS5EJ2HizxMCa3r8MuvgcWnoJpGUK2ykLZLcR6w+5kfpfbu2B8uQzetTOKn1CVIhDbuO05monfI7mCYGQA==
+  dependencies:
+    "@visactor/vrender-animate" "1.1.4"
+    "@visactor/vrender-components" "1.1.4"
+    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vrender-kits" "1.1.4"
+
 "@visactor/vscale@1.0.21", "@visactor/vscale@~1.0.12":
   version "1.0.21"
   resolved "https://registry.npmmirror.com/@visactor/vscale/-/vscale-1.0.21.tgz#e35b67eac71cf24da4292bd9458995d634ca952d"
   integrity sha512-TIc5QyCfH/cvRMi6Mxi+D6KIUMIOfI9WsWidSKSCh3T1gNw2CdwiLLasayQyxqNdMbRjGzGV06A8g4TsjVHxEA==
   dependencies:
     "@visactor/vutils" "1.0.21"
+
+"@visactor/vscale@~1.0.17":
+  version "1.0.23"
+  resolved "https://registry.npmmirror.com/@visactor/vscale/-/vscale-1.0.23.tgz#94920b16073b36fd2f6a64ca8ef7281ee5afd22e"
+  integrity sha512-XePhYuRoNAp+8MeSMuEOOvhVAlOwvM1sDT2yFxE6zdwVB2GjZk8mH+5N2xQGQWk75YmGJjlJASFtgwjlb1yWxw==
+  dependencies:
+    "@visactor/vutils" "1.0.23"
+
+"@visactor/vtable-editors@1.26.7":
+  version "1.26.7"
+  resolved "https://registry.npmmirror.com/@visactor/vtable-editors/-/vtable-editors-1.26.7.tgz#fc154befc164fdfcffa5812181e20cf369e734ce"
+  integrity sha512-BQChgCgFMqiv/PUdfjAtOK10PVH9ZEViwjZsKL6RMisDVFmQnHQvXl5Y5xpNOYipiGtCaVMpQOGq0WPwhXtaMA==
+
+"@visactor/vtable-gantt@^1.26.7":
+  version "1.26.7"
+  resolved "https://registry.npmmirror.com/@visactor/vtable-gantt/-/vtable-gantt-1.26.7.tgz#707f6f97d0f57c38494d6fb4ef51cf530b7c253d"
+  integrity sha512-Ek1eYGCFI6uOVDKE04tpKEZBNZmoM9OQ7L9LzkkhXzkDOKwTZiyD3KGchPlyWpx8XBZ+V8nYUkRC0dQp2+TQkQ==
+  dependencies:
+    "@visactor/vdataset" "~1.0.17"
+    "@visactor/vscale" "~1.0.17"
+    "@visactor/vtable" "1.26.7"
+    "@visactor/vtable-editors" "1.26.7"
+    "@visactor/vutils" "~1.0.17"
+    cssfontparser "^1.2.1"
+
+"@visactor/vtable@1.26.7":
+  version "1.26.7"
+  resolved "https://registry.npmmirror.com/@visactor/vtable/-/vtable-1.26.7.tgz#d1f42196fb975aafd1bd5befd88c27176599edcd"
+  integrity sha512-PAm1oSPg4MWFgrNkuvJd1CYYuy7R5hrlcN2FJnz3YIEqurAn+G6+T5iGkA999LCztDTtP5s1tU7xpbndPGrj6w==
+  dependencies:
+    "@visactor/vdataset" "~1.0.17"
+    "@visactor/vrender" "1.1.4"
+    "@visactor/vrender-animate" "1.1.4"
+    "@visactor/vrender-components" "1.1.4"
+    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vrender-kits" "1.1.4"
+    "@visactor/vscale" "~1.0.17"
+    "@visactor/vtable-editors" "1.26.7"
+    "@visactor/vutils" "~1.0.17"
+    "@visactor/vutils-extension" "~2.0.12"
+    cssfontparser "^1.2.1"
+    gifuct-js "2.1.2"
+    lodash "4.17.21"
 
 "@visactor/vutils-extension@2.0.14":
   version "2.0.14"
@@ -3742,10 +3867,27 @@
     "@visactor/vdataset" "~1.0.12"
     "@visactor/vutils" "~1.0.12"
 
+"@visactor/vutils-extension@~2.0.12":
+  version "2.0.22"
+  resolved "https://registry.npmmirror.com/@visactor/vutils-extension/-/vutils-extension-2.0.22.tgz#52d8c2d2ffded6701341c43880105145de6fd3c0"
+  integrity sha512-PRxjplZF1/Qdsflb1hYh9DGGJdblq91yIG7CCC6MIlMMSlDYEAMJzJ9y2clnR1MgWa2AsAtMtuu+MSdG3DctUA==
+  dependencies:
+    "@visactor/vdataset" "~1.0.23"
+    "@visactor/vutils" "~1.0.23"
+
 "@visactor/vutils@1.0.21", "@visactor/vutils@~1.0.12":
   version "1.0.21"
   resolved "https://registry.npmmirror.com/@visactor/vutils/-/vutils-1.0.21.tgz#b34fdbfc470cd4dfa2a8d70ec0d774ffc8c33178"
   integrity sha512-mZ9pu53zI961RAwTBUd9BXpczE0Mk22zNX2x9ALX6iy0Uhlmw+vtewJiDWBeY73W+rVCHz7ziAKOVnv3LIo+Gw==
+  dependencies:
+    "@turf/helpers" "^6.5.0"
+    "@turf/invariant" "^6.5.0"
+    eventemitter3 "^4.0.7"
+
+"@visactor/vutils@1.0.23", "@visactor/vutils@~1.0.17", "@visactor/vutils@~1.0.23":
+  version "1.0.23"
+  resolved "https://registry.npmmirror.com/@visactor/vutils/-/vutils-1.0.23.tgz#75f9abfea5842c3f0b19a8551d70eeb5553f474c"
+  integrity sha512-M8SLqgdHhKN8QmQKTWD1gzEaHptpIV9pvMYvC6+VeOsqYvZZ6UdhSCAAczTYVo+m/uwcEC2JHSUspbrs8rzlRQ==
   dependencies:
     "@turf/helpers" "^6.5.0"
     "@turf/invariant" "^6.5.0"
@@ -4378,6 +4520,11 @@ css-line-break@^2.1.0:
   integrity sha512-FHcKFCZcAha3LwfVBhCQbW2nCNbkZXn7KVUJcsT5/P8YmfsVja0FMPJr0B903j/E69HUphKiV9iQArX8SDYA4w==
   dependencies:
     utrie "^1.0.2"
+
+cssfontparser@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.npmmirror.com/cssfontparser/-/cssfontparser-1.2.1.tgz#f4022fc8f9700c68029d542084afbaf425a3f3e3"
+  integrity sha512-6tun4LoZnj7VN6YeegOVb67KBX/7JJsqvj+pv3ZA7F878/eN33AbGa5b/S/wXxS/tcp8nc40xRUrsPlxIyNUPg==
 
 csstype@^3.0.2, csstype@^3.1.2, csstype@^3.1.3, csstype@^3.2.2:
   version "3.2.3"
@@ -5968,7 +6115,7 @@ lodash.uniq@^4.5.0:
   resolved "https://registry.npmmirror.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
   integrity sha512-xfBaXQd9ryd9dlSDvnvI0lvxfLJlYAZzXomUYzLKtUeOQvOP5piqAWuGtrhWeqaXK9hhoM/iyJc5AV+XfsX3HQ==
 
-lodash@^4.17.21:
+lodash@4.17.21, lodash@^4.17.21:
   version "4.17.21"
   resolved "https://registry.npmmirror.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
@@ -7363,6 +7510,14 @@ react-markdown@^8.0.7:
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
 
+react-reconciler@0.29.0:
+  version "0.29.0"
+  resolved "https://registry.npmmirror.com/react-reconciler/-/react-reconciler-0.29.0.tgz#ee769bd362915076753f3845822f2d1046603de7"
+  integrity sha512-wa0fGj7Zht1EYMRhKWwoo1H9GApxYLBuhoAuXN0TlltESAjDssB+Apf0T/DngVqaMyPypDmabL37vw/2aRM98Q==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "^0.23.0"
+
 react-refresh@^0.18.0:
   version "0.18.0"
   resolved "https://registry.npmmirror.com/react-refresh/-/react-refresh-0.18.0.tgz#2dce97f4fe932a4d8142fa1630e475c1729c8062"
@@ -7719,7 +7874,7 @@ saxes@^5.0.1:
   dependencies:
     xmlchars "^2.2.0"
 
-scheduler@^0.23.2:
+scheduler@^0.23.0, scheduler@^0.23.2:
   version "0.23.2"
   resolved "https://registry.npmmirror.com/scheduler/-/scheduler-0.23.2.tgz#414ba64a3b282892e944cf2108ecc078d115cdc3"
   integrity sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==
