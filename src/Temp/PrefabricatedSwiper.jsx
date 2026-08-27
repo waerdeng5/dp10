@@ -31,16 +31,23 @@ import {
 } from 'swiper/modules'
 
 
-import { ColorCallBack, SpacingCallBack, SpacingSizeCallBack, UnitCallBackStruct, SetFilderParams } from '../Utils'
+import {
+    ColorCallBack,
+    SpacingCallBack,
+    SpacingSizeCallBack,
+    UnitCallBackStruct,
+    SetFilderParams,
+    DiyDataReturn
+} from '../Utils'
+import { useEffect, useState } from 'react';
 
-
+const testList = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
 
 const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
-    const dataList = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
-
-
+    const [dataList, setDataList] = useState()
 
     const {
+        api_source, api_dataType,
         swiper_direction, swiper_speed, swiper_slidesPerView, swiper_spaceBetween, swiper_allowTouchMove, swiper_freeMode,
         swiper_mousewheel, swiper_loop, swiper_navigation, swiper_pagination, swiper_scrollbar, swiper_autoPlay, swiper_delay,
         swiper_pagination_clickable, swiper_pagination_type, swiper_pagination_opposite, swiper_pagination_dynamicBullets,
@@ -115,19 +122,29 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
         '--itemFlexWrap': item_flex_wrap,
     }
 
+
+    useEffect(() => {
+        if (api_source === 'A01') setDataList(testList)
+        if (api_source === 'A02') {
+            const backData = DiyDataReturn(data, UrlData, [{}, {}, {}, {}, {}, {}, {}, {}, {}], 'api_diyObj')
+            setDataList(backData)
+        }
+    }, [data, UrlData])
+
+
+
     return (
         <div className="PrefabricatedSwiperBox">
             {swiper_cover && <img className='SwiperCover' src={swiper_cover_url} alt="" />}
-
             <Swiper
                 className='SwiperBox'
                 {...SWIPER_CONFIG}
             >
-                {dataList.map((v, i) =>
+                {dataList && dataList.map((v, i) =>
                     <SwiperSlide key={i}>
                         <div className='SwiperSlideItem' style={backStyle} onClick={() => console.log(i)}>
                             {isImage &&
-                                <img className='SwiperSlideItemImg' style={imgStyle} src={img_type === 'A01' ? img_url : v.image} alt={img_type} />
+                                <img className='SwiperSlideItemImg' style={imgStyle} src={img_type === 'A01' ? img_url : v[img_url]} alt={img_type} />
                             }
                             {isText &&
                                 <div className='SwiperSlideItemText' style={itemStyle}>

@@ -1203,6 +1203,7 @@ const SetSpecDataFn = (data, type, values) => {
 }
 const dataSourceTypeFn = (type, data, UrlData) => {
     const { dataSourceType, data_diyData } = data
+
     if (dataSourceType === 'A03') return data_diyData
     if (dataSourceType === 'A01') {
         if (type === 'liquid' || type === 'linearProgress') return defaultDataA00
@@ -1212,12 +1213,12 @@ const dataSourceTypeFn = (type, data, UrlData) => {
     if (dataSourceType === 'A02') {
         const { data_apiName, dataType, data_apiLevel, data_apiData, data_apiArr } = data
         if (isEmptyObject(UrlData) || !UrlData[data_apiName]) {
-            console.log('未获取到接口数据')
+            console.log('未获取到接口数据---111')
             return ([])
         }
         const apiData = getNestedValue(data_apiLevel, UrlData[data_apiName])
         if (dataType === 'A02') {
-            const mapping = data_apiData?.map(v => ({ xField: v.yField, yField: apiData[v.xField], seriesField: v.seriesField }))
+            const mapping = data_apiData?.map(v => ({ xField: v.xField, yField: apiData[v.yField], seriesField: v.seriesField }))
             return mapping || []
         }
         if (dataType === 'A03') {
@@ -1362,7 +1363,11 @@ const PrefabricatedChartPie = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
         setSpec(spec)
     }
-    useEffect(() => { SetSpecFn(dataSourceTypeFn('pie', data, UrlData)) }, [data, UrlData])
+
+    useEffect(() => {
+        SetSpecFn(dataSourceTypeFn('pie', data, UrlData))
+        console.log(dataSourceTypeFn('pie', data, UrlData))
+    }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
     if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
 };
@@ -1592,16 +1597,35 @@ const PrefabricatedChartCandlestick = ({ tempId, data, UrlData, LayoutEvent }) =
 
 // gantt 甘特图
 const PrefabricatedChartGantt = () => {
-    const GanttRef = useRef()
+    const GanttRef = useRef(null)
+    const ganttInstance = useRef(null)
     const records = [
+        // {
+        //     id: '23',
+        //     title: "项目 #1",
+        //     type: "project",
+        //     children: [
+        //         { id: '232', title: "子任务 #1", start: "2023-04-12", end: "2023-04-15" },
+        //         { id: '233', title: "里程碑", type: "milestone", start: "2023-04-14" }
+        //     ]
+        // },
+        {
+            id: '12',
+            title: '项目启动会议',
+            start: '07/24/2024',
+            type: 'milestone',
+            progress: 100,
+            parent: '0'
+        },
         {
             id: 1,
             title: 'Task 1',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-24',
-            end: '2024-07-26',
-            progress: 31,
-            priority: 'P0'
+            // type: "project",
+            hierarchyState: 'expand',
+            children: [
+                { id: '232', title: "子任务 #1", start: "07/24/2024", end: "07/30/2024", progress: 60, priority: 'P0' },
+                { id: '233', title: "里程碑", type: "milestone", start: "07/24/2024" }
+            ]
         },
         {
             id: 2,
@@ -1653,35 +1677,20 @@ const PrefabricatedChartGantt = () => {
     const columns = [
         {
             field: 'title',
-            title: 'title',
-            width: 'auto',
+            title: '标题',
+            width: 300,
             sort: true,
             tree: true,
             editor: 'input'
         },
-        {
-            field: 'start',
-            title: 'start',
-            width: 'auto',
-            sort: true,
-            editor: 'date-input'
-        },
-        {
-            field: 'end',
-            title: 'end',
-            width: 'auto',
-            sort: true,
-            editor: 'date-input'
-        }
     ];
     const option = {
-        overscrollBehavior: 'none',
-        records,
-        taskListTable: {
-            columns,
-            tableWidth: 250,
-            minTableWidth: 100,
-            maxTableWidth: 600,
+        records,   // 数据项
+        taskListTable: {   // 左侧任务列表表格
+            columns,     // 列
+            tableWidth: 300,  // 自动宽度
+            minTableWidth: 100,  // 最小宽度
+            maxTableWidth: 600,  // 最大宽度
             theme: {
                 headerStyle: {
                     borderColor: '#e1e4e8',
@@ -1698,58 +1707,77 @@ const PrefabricatedChartGantt = () => {
                     color: '#4D4D4D',
                     bgColor: '#FFF'
                 }
-            }
-            //rightFrozenColCount: 1
+            },
+            // rightFrozenColCount: 1
         },
-        frame: {
-            outerFrameStyle: {
-                borderLineWidth: 2,
-                borderColor: '#e1e4e8',
-                cornerRadius: 8
-            },
-            verticalSplitLine: {
-                lineColor: '#e1e4e8',
-                lineWidth: 3
-            },
-            horizontalSplitLine: {
-                lineColor: '#e1e4e8',
-                lineWidth: 3
-            },
-            verticalSplitLineMoveable: true,
-            verticalSplitLineHighlight: {
-                lineColor: 'green',
-                lineWidth: 3
-            }
-        },
-        grid: {
-            verticalLine: {
+        timelineHeader: {  // 时间刻度配置
+            colWidth: 100,  //列宽。
+            hideWeekend: false, // 是否隐藏周末。
+            weekendColWidth: 100,     // 周末列宽。
+            backgroundColor: '#EEF1F500',  // 时间刻度背景颜色。
+            horizontalLine: {  // 水平线。
                 lineWidth: 1,
-                lineColor: '#e1e4e8'
+                lineColor: '#e1e4e8',
+                lineDash: [10, 5]
             },
-            horizontalLine: {
+            verticalLine: {  // 垂直线。
                 lineWidth: 1,
-                lineColor: '#e1e4e8'
-            }
-        },
-        headerRowHeight: 40,
-        rowHeight: 40,
-        taskBar: {
-            startDateField: 'start',
-            endDateField: 'end',
-            progressField: 'progress',
-            resizable: true,
-            moveable: true,
-            hoverBarStyle: {
-                barOverlayColor: 'rgba(99, 144, 0, 0.4)'
+                lineColor: '#e1e4e8',
+                lineDash: [10, 5]
             },
-            labelText: '{title}  complete {progress}%',
-            labelTextStyle: {
-                fontFamily: 'Arial',
+            scales: [  // 时间刻度。
+                {
+                    visible: true,  // 是否显示时间刻度
+                    rowHeight: 44, // 行高
+                    unit: 'day', // 时间单位
+                    step: 1,     // 步长
+                    startOfWeek: 'sunday', // 周一 or 周日
+                    format(date) {
+                        return `day ${date.dateIndex}`;  // 格式化时间刻度
+                    },
+                    style: {  // 时间刻度样式
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: '#262626',
+                        strokeColor: 'black',
+                        textAlign: 'right',
+                        textBaseline: 'bottom',
+                        backgroundColor: '#EEF1F550',
+                        textStick: true
+                        // padding: [0, 30, 0, 20]
+                    }
+                },
+                // {
+                //     unit: 'day',
+                //     step: 1,
+                //     format(date) {
+                //         return date.dateIndex.toString();
+                //     },
+                //     style: {
+                //         fontSize: 20,
+                //         fontWeight: 'bold',
+                //         color: 'white',
+                //         strokeColor: 'black',
+                //         textAlign: 'right',
+                //         textBaseline: 'bottom',
+                //         backgroundColor: '#EEF1F5'
+                //     }
+                // }
+            ],
+        },
+        taskBar: {  // 任务条配置
+            startDateField: 'start',  // 开始日期字段
+            endDateField: 'end',  // 结束日期字段
+            progressField: 'progress',  // 进度字段
+            labelText: '{title}  完成 {progress}%',  // 任务条标签格式
+            labelTextStyle: {  // 任务条标签样式
+                color: '#262626',
+                fontFamily: 'DIN',
                 fontSize: 16,
-                textAlign: 'left',
+                textAlign: 'right',
                 textOverflow: 'ellipsis'
             },
-            barStyle: {
+            barStyle: {  // 任务条样式
                 width: 20,
                 /** 任务条的颜色 */
                 barColor: '#ee8800',
@@ -1760,73 +1788,126 @@ const PrefabricatedChartGantt = () => {
                 /** 任务条的边框 */
                 borderLineWidth: 1,
                 /** 边框颜色 */
-                borderColor: 'black'
-            }
+                borderColor: 'red',
+            },
+            milestoneStyle: {
+                width: 16,
+                fillColor: value => (value.record.progress >= 100 ? '#597ef7' : '#d6e4ff'),
+                borderColor: '#597ef7',
+                borderLineWidth: 0,
+                labelText: '{title}',
+                labelTextStyle: {
+                    fontSize: 16,
+                    color: 'rgb(1, 43, 75)'
+                }
+            },
+            resizable: false,  // 是否可调整大小。
+            moveable: false, // 是否可移动。
+            progressAdjustable: false, // 是否可调整进度。
+            hoverBarStyle: {  // 悬停任务条样式
+                cornerRadius: 0,
+                barOverlayColor: 'rgba(99, 144, 0, 0.4)'
+            },
+
+            selectable: true,
+            selectedBarStyle: { // 选中状态
+                borderLineWidth: 10
+                // shadowBlur?: number; //阴影宽度
+                // shadowOffsetX?: number; //x方向偏移
+                // shadowOffsetY?: number; //Y方向偏移
+                // shadowColor?: string; //阴影颜色
+                // borderColor?: string; //边框颜色
+                // borderLineWidth?: number;
+            },
+            locateIcon: true, // 是否显示定位图标
+            // scheduleCreation: { // 创建任务条按钮
+            //     buttonStyle: {
+            //         lineWidth: 1,
+            //         // lineColor?: string;
+            //         // lineWidth?: number;
+            //         // lineDash?: number[];
+            //         // cornerRadius?: number;
+            //         // backgroundColor?: string;
+            //     },
+            //     // customLayout: true, // 是否自定义布局
+            // },
         },
-        timelineHeader: {
-            colWidth: 100,
-            weekendColWidth: 20,
-            backgroundColor: '#EEF1F5',
+        // tasksShowMode: 'Sub_Tasks_Separate',
+        taskKeyField: 'id', // 任务条唯一标识字段
+
+        dependency: { // 依赖关系配置
+
+        },
+        grid: { // 网格配置
+            backgroundColor: '#ff00ff00', // 背景颜色
+            weekendBackgroundColor: '#f0ff0000', // 周末背景颜色
+            verticalLineDependenceOnTimeScale: 'week',
+            verticalLine: {
+                lineWidth: 1,
+                lineColor: '#e1e4e8',
+                lineDash: [4, 4],
+            },
             horizontalLine: {
                 lineWidth: 1,
                 lineColor: '#e1e4e8'
-            },
-            verticalLine: {
-                lineWidth: 1,
-                lineColor: '#e1e4e8'
-            },
-            scales: [
-                {
-                    unit: 'week',
-                    step: 1,
-                    startOfWeek: 'sunday',
-                    format(date) {
-                        return `Week ${date.dateIndex}`;
-                    },
-                    style: {
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: 'white',
-                        strokeColor: 'black',
-                        textAlign: 'right',
-                        textBaseline: 'bottom',
-                        backgroundColor: '#EEF1F5',
-                        textStick: true
-                        // padding: [0, 30, 0, 20]
-                    }
-                },
-                {
-                    unit: 'day',
-                    step: 1,
-                    format(date) {
-                        return date.dateIndex.toString();
-                    },
-                    style: {
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: 'white',
-                        strokeColor: 'black',
-                        textAlign: 'right',
-                        textBaseline: 'bottom',
-                        backgroundColor: '#EEF1F5'
-                    }
-                }
-            ]
+            }
         },
         markLine: [
             {
-                date: '2024/8/02',
-                scrollToMarkLine: true,
-                position: 'left',
-                style: {
+                date: '2024/8/02', // 标记线日期
+                scrollToMarkLine: true, // 是否滚动到标记线
+                position: 'left', // 标记线位置
+                style: {     // 标记线样式
                     lineColor: 'red',
-                    lineWidth: 1
-                }
+                    lineWidth: 1,
+                    lineDash: [4, 4],
+                },
+                content: '1123',
+                contentStyle: {
+                    color: 'red',
+                    fontSize: 16
+                    // color?: string;
+                    // fontSize?: string;
+                    // fontWeight?: string;
+                    // lineHeight?: string;
+                    // backgroundColor?: string;
+                    // cornerRadius?: string;
+                },
             }
         ],
-        rowSeriesNumber: {
+        frame: { // 整个外边框及横纵分割线配置。
+            outerFrameStyle: {   // 外框样式
+                borderLineWidth: 1,
+                borderColor: '#00ff00',
+                cornerRadius: 0
+            },
+            verticalSplitLine: { // 垂直分割线样式
+                lineColor: '#e1e4e8',
+                lineWidth: 3
+            },
+            horizontalSplitLine: { // 水平分割线样式
+                lineColor: '#e1e4e8',
+                lineWidth: 3
+            },
+            verticalSplitLineMoveable: true, // 是否可移动垂直分割线
+            verticalSplitLineHighlight: { // 垂直分割线高亮样式
+                lineColor: 'green',
+                lineWidth: 3,
+                lineDash: [4, 4],
+            }
+        },
+
+        // minDate: '2024/8/01', // 最小日期
+        // maxDate: '2024/8/31', // 最大日期
+
+        headerRowHeight: 40, // 头行高度
+        rowHeight: 40, // 行高
+
+        rowSeriesNumber: { // 行号配置
             title: '行号',
-            dragOrder: true,
+            // field:'rowNumber', // 行号字段
+            dragOrder: false, // 是否可拖动行号
+            disableColumnResize: false, // 是否禁用调整列宽
             headerStyle: {
                 bgColor: '#EEF1F5',
                 borderColor: '#e1e4e8'
@@ -1835,22 +1916,40 @@ const PrefabricatedChartGantt = () => {
                 borderColor: '#e1e4e8'
             }
         },
+
+        overscrollBehavior: 'none', // 涅出滚动行为
+        dateFormat: 'yyyy-MM-dd', // 日期格式
+        underlayBackgroundColor: '#f00f0000', // 背景颜色
+
         scrollStyle: {
+            hoverOn: true,
+            barToSide: false,
+            ignoreFrozenCols: false,
             scrollRailColor: 'RGBA(246,246,246,0.5)',
-            visible: 'scrolling',
-            width: 6,
+            visible: 'focus',
+            width: 16,
             scrollSliderCornerRadius: 2,
             scrollSliderColor: '#5cb85c'
         }
     };
 
     useEffect(() => {
-        if (GanttRef.current) new Gantt(GanttRef.current, option)
-    }, [GanttRef.current, option])
+        if (GanttRef.current && !ganttInstance.current) {
+            ganttInstance.current = new Gantt(GanttRef.current, option)
+        }
+        return () => {
+            if (ganttInstance.current) {
+                ganttInstance.current.release()
+                ganttInstance.current = null
+            }
+        }
+    }, [])
 
 
     return (
-        <div style={{ width: '100%', height: '100%' }} ref={GanttRef} />
+        <div className='PrefabricatedChartGantt' >
+            <div ref={GanttRef} />
+        </div>
     )
 }
 
