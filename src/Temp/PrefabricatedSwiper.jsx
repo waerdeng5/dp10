@@ -45,7 +45,6 @@ const testList = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
 
 const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
     const [dataList, setDataList] = useState()
-
     const {
         api_source, api_dataType,
         swiper_direction, swiper_speed, swiper_slidesPerView, swiper_spaceBetween, swiper_allowTouchMove, swiper_freeMode,

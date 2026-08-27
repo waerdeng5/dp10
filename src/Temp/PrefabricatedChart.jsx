@@ -744,7 +744,8 @@ const indicatorFn = (data, values, type) => {
         indicator_title_Size, indicator_title_Height, indicator_title_Family, indicator_title_Weight, indicator_title_Style,
         indicator_content, indicator_content_init, indicator_content_field, indicator_content_af, indicator_content_bf, indicator_content_fill,
         indicator_content_Size, indicator_content_Height, indicator_content_Family, indicator_content_Weight, indicator_content_Style,
-        indicator_content_percent, indicator_content_percentData, indicator_title_percent, indicator_title_percentData
+        indicator_content_percent, indicator_content_percentData, indicator_title_percent, indicator_title_percentData,
+        indicator_titleNumber, indicator_contentNumber,
     } = data
     const percentData = (value, type) => {
         if (type === 'content' && indicator_content_percent) {
@@ -757,6 +758,7 @@ const indicatorFn = (data, values, type) => {
         }
         return value
     }
+
 
     return ({
         visible: indicator_visible,
@@ -772,6 +774,10 @@ const indicatorFn = (data, values, type) => {
                     if (type === 'liquid' || type === 'gauge') return percentData(values[0][indicator_title_field], 'title')
                     if (e) return indicator_title_af + percentData(e[indicator_title_field] ?? e[0][indicator_title_field], 'title') + indicator_title_bf || indicator_title_init
                     if (indicator_firstData && firstData) return indicator_title_af + percentData(firstData[indicator_title_field], 'title') + indicator_title_bf || indicator_title_init
+                    if (indicator_titleNumber) {
+                        const totalNumber = values.reduce((acc, cur) => acc + Number(cur[indicator_title_field]), 0)
+                        return totalNumber
+                    }
                     return indicator_title_init
                 },
                 fill: indicator_title_fill,
@@ -789,6 +795,10 @@ const indicatorFn = (data, values, type) => {
                     if (type === 'liquid' || type === 'gauge') return percentData(values[0][indicator_content_field], 'content')
                     if (e) return indicator_content_af + percentData(e[indicator_content_field] ?? e[0][indicator_content_field], 'content') + indicator_content_bf || indicator_content_init
                     if (indicator_firstData && firstData) return indicator_content_af + percentData(firstData[indicator_content_field], 'content') + indicator_content_bf || indicator_content_init
+                    if (indicator_contentNumber) {
+                        const totalNumber = values.reduce((acc, cur) => acc + Number(cur[indicator_title_field]), 0)
+                        return totalNumber
+                    }
                     return indicator_content_init
                 },
                 fill: indicator_content_fill,
@@ -1366,7 +1376,6 @@ const PrefabricatedChartPie = ({ tempId, data, UrlData, LayoutEvent }) => {
 
     useEffect(() => {
         SetSpecFn(dataSourceTypeFn('pie', data, UrlData))
-        console.log(dataSourceTypeFn('pie', data, UrlData))
     }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
     if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
@@ -1601,84 +1610,84 @@ const PrefabricatedChartGantt = () => {
     const ganttInstance = useRef(null)
     const records = [
         // {
-        //     id: '23',
-        //     title: "项目 #1",
-        //     type: "project",
-        //     children: [
-        //         { id: '232', title: "子任务 #1", start: "2023-04-12", end: "2023-04-15" },
-        //         { id: '233', title: "里程碑", type: "milestone", start: "2023-04-14" }
-        //     ]
+        //     id: '12',
+        //     title: '土方工程',
+        //     start: '07/24/2024',
+        //     type: 'milestone',
+        //     progress: 100,
+        //     parent: '0'
         // },
-        {
-            id: '12',
-            title: '项目启动会议',
-            start: '07/24/2024',
-            type: 'milestone',
-            progress: 100,
-            parent: '0'
-        },
         {
             id: 1,
             title: 'Task 1',
-            // type: "project",
             hierarchyState: 'expand',
             children: [
-                { id: '232', title: "子任务 #1", start: "07/24/2024", end: "07/30/2024", progress: 60, priority: 'P0' },
-                { id: '233', title: "里程碑", type: "milestone", start: "07/24/2024" }
+                { id: 11, title: "子任务 #1", start: "2024-08-01", end: "2024-08-10", progress: 60, priority: 'P0' },
+                { id: 12, title: "里程碑", type: "milestone", start: "2024-08-8" }
             ]
         },
-        {
-            id: 2,
-            title: 'Task 2',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '07/24/2024',
-            end: '08/04/2024',
-            progress: 60,
-            priority: 'P0'
-        },
-        {
-            id: 3,
-            title: 'Task 3',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-08-04',
-            end: '2024-08-04',
-            progress: 100,
-            priority: 'P1'
-        },
-        {
-            id: 4,
-            title: 'Task 4',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-26',
-            end: '2024-07-28',
-            progress: 31,
-            priority: 'P0'
-        },
-        {
-            id: 5,
-            title: 'Task 5',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-26',
-            end: '2024-07-28',
-            progress: 60,
-            priority: 'P0'
-        },
-        {
-            id: 6,
-            title: 'Task 6',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-29',
-            end: '2024-08-11',
-            progress: 100,
-            priority: 'P1'
-        }
+        // {
+        //     id: 2,
+        //     title: 'Task 2',
+        //     hierarchyState: 'expand',
+        //     children: [
+        //         { id: 21, title: "子任务 #1", start: "07/24/2024", end: "07/30/2024", progress: 60, priority: 'P0' },
+        //         { id: 22, title: "里程碑", type: "milestone", start: "07/31/2024" }
+        //     ]
+        // },
+        { id: 3, title: "子任务 #1", start: "2024-08-01", end: "2024-08-11", progress: 60, priority: 'P0' },
+        // {
+        //     id: 2,
+        //     title: 'Task 2',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '07/24/2024',
+        //     end: '08/04/2024',
+        //     progress: 60,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 3,
+        //     title: 'Task 3',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-08-04',
+        //     end: '2024-08-04',
+        //     progress: 100,
+        //     priority: 'P1'
+        // },
+        // {
+        //     id: 4,
+        //     title: 'Task 4',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-26',
+        //     end: '2024-07-28',
+        //     progress: 31,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 5,
+        //     title: 'Task 5',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-26',
+        //     end: '2024-07-28',
+        //     progress: 60,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 6,
+        //     title: 'Task 6',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-29',
+        //     end: '2024-08-11',
+        //     progress: 100,
+        //     priority: 'P1'
+        // }
     ];
 
     const columns = [
         {
             field: 'title',
             title: '标题',
-            width: 300,
+            width: 'auto',
             sort: true,
             tree: true,
             editor: 'input'
@@ -1688,7 +1697,7 @@ const PrefabricatedChartGantt = () => {
         records,   // 数据项
         taskListTable: {   // 左侧任务列表表格
             columns,     // 列
-            tableWidth: 300,  // 自动宽度
+            tableWidth: 'auto',  // 自动宽度
             minTableWidth: 100,  // 最小宽度
             maxTableWidth: 600,  // 最大宽度
             theme: {
@@ -1729,11 +1738,11 @@ const PrefabricatedChartGantt = () => {
                 {
                     visible: true,  // 是否显示时间刻度
                     rowHeight: 44, // 行高
-                    unit: 'day', // 时间单位
+                    unit: 'week', // 时间单位
                     step: 1,     // 步长
                     startOfWeek: 'sunday', // 周一 or 周日
                     format(date) {
-                        return `day ${date.dateIndex}`;  // 格式化时间刻度
+                        return `week ${date.dateIndex}`;  // 格式化时间刻度
                     },
                     style: {  // 时间刻度样式
                         fontSize: 20,
@@ -1747,22 +1756,22 @@ const PrefabricatedChartGantt = () => {
                         // padding: [0, 30, 0, 20]
                     }
                 },
-                // {
-                //     unit: 'day',
-                //     step: 1,
-                //     format(date) {
-                //         return date.dateIndex.toString();
-                //     },
-                //     style: {
-                //         fontSize: 20,
-                //         fontWeight: 'bold',
-                //         color: 'white',
-                //         strokeColor: 'black',
-                //         textAlign: 'right',
-                //         textBaseline: 'bottom',
-                //         backgroundColor: '#EEF1F5'
-                //     }
-                // }
+                {
+                    unit: 'day',
+                    step: 1,
+                    format(date) {
+                        return date.dateIndex.toString();
+                    },
+                    style: {
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                        color: 'white',
+                        strokeColor: 'black',
+                        textAlign: 'right',
+                        textBaseline: 'bottom',
+                        backgroundColor: '#EEF1F5'
+                    }
+                }
             ],
         },
         taskBar: {  // 任务条配置
@@ -1855,7 +1864,7 @@ const PrefabricatedChartGantt = () => {
         markLine: [
             {
                 date: '2024/8/02', // 标记线日期
-                scrollToMarkLine: true, // 是否滚动到标记线
+                scrollToMarkLine: false, // 是否滚动到标记线
                 position: 'left', // 标记线位置
                 style: {     // 标记线样式
                     lineColor: 'red',
@@ -1889,10 +1898,10 @@ const PrefabricatedChartGantt = () => {
                 lineColor: '#e1e4e8',
                 lineWidth: 3
             },
-            verticalSplitLineMoveable: true, // 是否可移动垂直分割线
+            verticalSplitLineMoveable: false, // 是否可移动垂直分割线
             verticalSplitLineHighlight: { // 垂直分割线高亮样式
                 lineColor: 'green',
-                lineWidth: 3,
+                lineWidth: 0,
                 lineDash: [4, 4],
             }
         },
@@ -1903,23 +1912,23 @@ const PrefabricatedChartGantt = () => {
         headerRowHeight: 40, // 头行高度
         rowHeight: 40, // 行高
 
-        rowSeriesNumber: { // 行号配置
-            title: '行号',
-            // field:'rowNumber', // 行号字段
-            dragOrder: false, // 是否可拖动行号
-            disableColumnResize: false, // 是否禁用调整列宽
-            headerStyle: {
-                bgColor: '#EEF1F5',
-                borderColor: '#e1e4e8'
-            },
-            style: {
-                borderColor: '#e1e4e8'
-            }
-        },
+        // rowSeriesNumber: { // 行号配置
+        //     title: '行号',
+        //     // field:'rowNumber', // 行号字段
+        //     dragOrder: false, // 是否可拖动行号
+        //     disableColumnResize: false, // 是否禁用调整列宽
+        //     headerStyle: {
+        //         bgColor: '#EEF1F5',
+        //         borderColor: '#e1e4e8'
+        //     },
+        //     style: {
+        //         borderColor: '#e1e4e8'
+        //     }
+        // },
 
         overscrollBehavior: 'none', // 涅出滚动行为
         dateFormat: 'yyyy-MM-dd', // 日期格式
-        underlayBackgroundColor: '#f00f0000', // 背景颜色
+        underlayBackgroundColor: '#f7f7f7', // 背景颜色
 
         scrollStyle: {
             hoverOn: true,
@@ -1952,11 +1961,6 @@ const PrefabricatedChartGantt = () => {
         </div>
     )
 }
-
-// ? 散点图
-// ? 热图
-// ? 甘特图
-// ? 3D图
 
 
 

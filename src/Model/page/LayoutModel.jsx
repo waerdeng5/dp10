@@ -62,7 +62,6 @@ const LayoutModel = ({ data, Event }) => {
     }
 
     const onSaveModel = async (data) => {
-        console.log('[--保存model页面--]', data)
         const { uuid } = await GetIndexedDB('config')
         const params = { uuid: `${uuid}/MOD_PAGE/${json}`, content: JSON.stringify(await Encrypt(data)) }
         const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })

@@ -5737,7 +5737,8 @@ const ChartIndicatorCommonFormList = {
                 { span: 12, formType: 'NUMBER', name: 'indicator_offsetY', label: 'Y轴偏移', rules: true },
                 { span: 12, formType: 'NUMBER', name: 'indicator_limitRatio', label: '渲染占比', rules: true },
                 { span: 12, formType: 'RADIO', name: 'indicator_firstData', label: '渲染第一组数据', rules: true, valueEnum: MappingData.IsEnabledBool },
-                { span: 24, formType: 'RADIO', name: 'indicator_title', label: '渲染标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+                { span: 12, formType: 'RADIO', name: 'indicator_title', label: '渲染标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+                { span: 12, formType: 'RADIO', name: 'indicator_titleNumber', label: '渲染总数', rules: true, valueEnum: MappingData.IsEnabledBool },
                 {
                     span: 24, formType: 'GROUP', name: 'Indicator_options_title', label: '标题设置', collapsible: true,
                     jugde: [{ field: 'indicator_title', value: [true] }], children: [
@@ -5761,7 +5762,8 @@ const ChartIndicatorCommonFormList = {
                         },
                     ]
                 },
-                { span: 24, formType: 'RADIO', name: 'indicator_content', label: '渲染内容 ', rules: true, valueEnum: MappingData.IsEnabledBool },
+                { span: 12, formType: 'RADIO', name: 'indicator_content', label: '渲染内容 ', rules: true, valueEnum: MappingData.IsEnabledBool },
+                { span: 12, formType: 'RADIO', name: 'indicator_contentNumber', label: '渲染总数', rules: true, valueEnum: MappingData.IsEnabledBool },
                 {
                     span: 24, formType: 'GROUP', name: 'Indicator_options_content', label: '内容设置', collapsible: true,
                     jugde: [{ field: 'indicator_content', value: [true] }], children: [
@@ -6650,7 +6652,7 @@ const rowClickFormList = [
         jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }, { field: 'click_model_params', value: [true] }],
         children: [
             { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
-            { span: 8, formType: 'INPUT', name: 'param_key', label: '参数建', rules: true },
+            { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
             { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
             { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
         ]
@@ -8785,16 +8787,34 @@ const PrefabricatedDiyFolder = [
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
-    { span: 24, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.Start__pageType },
-    { span: 24, formType: 'INPUT', name: 'diyUrl', label: '自订页面路径', rules: true, jugde: [{ field: 'pageType', value: ['DIY'] }] },
+    { span: 12, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.Start__pageType },
+    { span: 12, formType: 'INPUT', name: 'diyUrl', label: '自订页面路径', rules: true, jugde: [{ field: 'pageType', value: ['DIY'] }] },
     {
-        span: 24, formType: 'RADIO', name: 'layType', label: '布局页面类型', rules: true,
+        span: 12, formType: 'RADIO', name: 'layType', label: '布局页面类型', rules: true,
         valueEnum: MappingData.Model_layoutType, jugde: [{ field: 'pageType', value: ['LAY'] }]
     },
     {
         span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
         jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'annex_type', label: '附件来源', rules: true, valueEnum: MappingData.System_fileUrlType },
+            {
+                span: 24, formType: 'GROUP', name: 'annex_fields', label: '数据设置', collapsible: true,
+                jugde: [{ field: 'annex_type', value: ['A01'] }], children: [
 
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'annex_api', label: '接口设置', collapsible: true,
+                jugde: [{ field: 'annex_type', value: ['A02'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'annex_api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'annex_api_url', label: '请求接口', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'annex_api_params', label: '额外参数' },
+                    { span: 12, formType: 'INPUT', name: 'annex_api_https', label: '额外地址' },
+                    { span: 12, formType: 'RADIO', name: 'annex_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'annex_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'annex_api_level', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'annex_api_fields', label: '附件字段' },
+                ]
+            },
         ]
     },
     {

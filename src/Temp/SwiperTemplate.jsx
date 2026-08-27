@@ -172,7 +172,7 @@ export const SwiperB20Template = ({ data }) => {
 }
 
 // 附件预览
-export const SwiperAnnexTemplate = ({ data }) => {
+export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
     if (!data)
         return (
             <div className='SwiperCenter'>
@@ -192,12 +192,12 @@ export const SwiperAnnexTemplate = ({ data }) => {
             {data.map(v => (
                 <SwiperSlide key={v.uuid}>
                     {(() => {
-                        if (!v.url) return false
-                        const type = getFileTypeFromUrl(v.url)
+                        if (!v[urlField]) return false
+                        const type = getFileTypeFromUrl(v[urlField])
                         switch (type) {
-                            case 'image': return <Image width={'100%'} height={'100%'} src={v.url} />
-                            case 'video': return <VideoTemplateA02 url={v.url} />
-                            case 'pdf': return <embed src={v.url} type="application/pdf" width="100%" height="100%" />
+                            case 'image': return <Image width={'100%'} height={'100%'} src={v[urlField]} />
+                            case 'video': return <VideoTemplateA02 url={v[urlField]} />
+                            case 'pdf': return <embed src={v[urlField]} type="application/pdf" width="100%" height="100%" />
                             case 'word': return <div>word</div>
                             case 'excel': return <div>excel</div>
                             case 'md': return <div>md</div>
