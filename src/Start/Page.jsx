@@ -3,10 +3,10 @@ import './page.scss'
 import "react-grid-layout/css/styles.css"
 import "react-resizable/css/styles.css"
 import { v4 } from 'uuid'
-import { useSize } from 'ahooks'
+import { useMount, useSize } from 'ahooks'
 import copy from 'copy-to-clipboard'
 import ReactGridLayout from 'react-grid-layout'
-import { FloatButton, Dropdown, App } from 'antd'
+import { FloatButton, Dropdown, App, Spin, Result } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'
 import { useEffect, useState, useRef } from 'react'
 import { GridBackground } from "react-grid-layout/extras"
@@ -52,10 +52,12 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [WindowData, setWindowData] = useState()
     const [ParamsData, setParamsData] = useState()
     const [LayoutStatus, setLayoutStatus] = useState(false)
-
     const [UrlData, setUrlData] = useState({})
-
     const [FoldStatus, setFoldStatus] = useState(false)
+
+    const [Independent, setIndependent] = useState({ loading: true, status: true, error: null, Template: null })
+
+
 
     const getApiData = (params) => {
         if (!params && !page.params) return
@@ -323,9 +325,9 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     useEffect(() => { setPAGEDate(page) }, [pathname])
 
     if (page) {
-        const { page_layPadding, page_fold, page_diff, page_back } = page
+        const { page_layPadding, page_fold, page_diff, page_back, page_back_url } = page
         const pageStyle = { padding: SpacingCallBack(page_layPadding) }
-
+        const status = page_fold ? FoldStatus : true
         return (
             <div className='MenuTypeLay_Content' style={pageStyle}>
                 {(() => {
@@ -369,102 +371,120 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                             </div>
                         )
                     }
+
                 })()}
-                <Dropdown
-                    trigger={['contextMenu']}
-                    menu={{ items: (port && LayoutStatus) ? GlobalOperation({ LayoutEvent }) : [] }}
-                >
-                    <div className={`ContentBox ${LayoutStatus ? 'Edit' : 'Preview'}`} ref={ContentBoxRef}>
-                        {SIZE &&
-                            <>
-                                {LayoutStatus &&
-                                    <GridBackground
-                                        className='LayoutBack'
-                                        cols={24}
-                                        rows={24}
+                {(() => {
+                    if (page_diff) {
+                        console.log('异色模板')
+                    }
+                })()}
+                {(() => {
+                    if (page_back) {
+                        useMount(async () => {
+                            const module = await import(`./page/${page_back_url}.jsx`)
+                            const Component = module.default || module
+                            if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) throw new Error(`导入的模块不是有效的React组件`)
+                            setIndependent({ loading: false, status: false, error: false, Template: Component })
+                        })
+                        if (Independent.loading) return (<div className='OutletBox NotSet'><Spin size='large' /></div>)
+                        if (Independent.status) return (
+                            <div className='OutletBox NotSet'>
+                                <Result status="403" title={`未检测到${pathname}配置!`} subTitle={`请联系系统管理员处理.${Independent.error}`} />
+                            </div>
+                        )
+                        if (Independent.error) return (
+                            <div className='OutletBox NotSet'>
+                                <Result status="404" title="未检测到页面配置!" subTitle={`请联系系统管理员处理.${Independent.error}`} />
+                            </div>
+                        )
+                        const { Template } = Independent
+                        return (
+                            <Template />
+                        )
+                    }
+                })()}
+                {status &&
+                    <Dropdown
+                        trigger={['contextMenu']}
+                        menu={{ items: (port && LayoutStatus) ? GlobalOperation({ LayoutEvent }) : [] }}
+                    >
+                        <div className={`ContentBox ${LayoutStatus ? 'Edit' : 'Preview'}`} ref={ContentBoxRef}>
+                            {SIZE &&
+                                <>
+                                    {LayoutStatus &&
+                                        <GridBackground
+                                            className='LayoutBack'
+                                            cols={24}
+                                            rows={24}
+                                            width={SIZE.width}
+                                            rowHeight={SIZE.height / 24}
+                                            margin={[0, 0]}
+                                            color="#cccccc10"
+                                            borderRadius={4}
+                                        />
+                                    }
+                                    <ReactGridLayout
+                                        resizeConfig={{ enabled: LayoutStatus }}
+                                        dragConfig={{ enabled: LayoutStatus }}
                                         width={SIZE.width}
-                                        rowHeight={SIZE.height / 24}
-                                        margin={[0, 0]}
-                                        color="#cccccc10"
-                                        borderRadius={4}
-                                    />
-                                }
-                                <ReactGridLayout
-                                    resizeConfig={{ enabled: LayoutStatus }}
-                                    dragConfig={{ enabled: LayoutStatus }}
-                                    width={SIZE.width}
-                                    layout={LayoutData}
-                                    isBounded={true}
-                                    gridConfig={{ cols: 24, rowHeight: SIZE.height / 24, margin: [0, 0] }}
-                                    onLayoutChange={setLayoutData}
-                                >
-                                    {LayoutData.map(item => {
-                                        const {
+                                        layout={LayoutData}
+                                        isBounded={true}
+                                        gridConfig={{ cols: 24, rowHeight: SIZE.height / 24, margin: [0, 0] }}
+                                        onLayoutChange={setLayoutData}
+                                    >
+                                        {LayoutData.map(item => {
+                                            const {
+                                                // 基础信息
+                                                window_title, window_style,
+                                                window_backColor, window_backDeg, window_padding, window_radius,
+                                                window_border, window_borderColor, window_borderSize, window_borderType,
+                                                window_filter, window_filterColor, window_filterSize,
+                                                // 标题设置
+                                                window_titleMar, window_titlePad, window_titleTxt, window_titleColor, window_titleDeg,
+                                                window_titleSize, window_titleFamily, window_titleWeight, window_titleStyle,
+                                                window_titleFilter, window_titleFilterSize, window_titleFilterColor,
+                                                window_NavType,
+                                            } = ParamsData[item.i]
                                             // 基础信息
-                                            window_title, window_style,
-                                            window_backColor, window_backDeg, window_padding, window_radius,
-                                            window_border, window_borderColor, window_borderSize, window_borderType,
-                                            window_filter, window_filterColor, window_filterSize,
+
+
+                                            const style = {
+                                                background: ColorCallBack(window_backColor, window_backDeg),
+                                                padding: SpacingCallBack(window_padding),
+                                                borderRadius: SpacingCallBack(window_radius),
+                                                border: SetBorderParams(window_border, window_borderSize, window_borderType, window_borderColor),
+                                                filter: SetFilderParams(window_filter, window_filterSize, window_filterColor),
+                                            }
                                             // 标题设置
-                                            window_titleMar, window_titlePad, window_titleTxt, window_titleColor, window_titleDeg,
-                                            window_titleSize, window_titleFamily, window_titleWeight, window_titleStyle,
-                                            window_titleFilter, window_titleFilterSize, window_titleFilterColor,
-                                            window_NavType,
-                                        } = ParamsData[item.i]
-                                        // 基础信息
+                                            const titleStyle = {
+                                                '--titleColor': ColorCallBack(window_titleColor, window_titleDeg),
+                                                lineHeight: window_titleSize + 'px',
+                                                padding: SpacingCallBack(window_titlePad),
+                                                margin: SpacingCallBack(window_titleMar),
+                                                fontSize: window_titleSize,
+                                                fontFamily: window_titleFamily,
+                                                fontWeight: window_titleWeight,
+                                                fontStyle: window_titleStyle,
+                                                filter: SetFilderParams(window_titleFilter, window_titleFilterSize, window_titleFilterColor),
+                                            }
+
+                                            const setClass = page_fold ? 'animate__animated ' : ''
 
 
-                                        const style = {
-                                            background: ColorCallBack(window_backColor, window_backDeg),
-                                            padding: SpacingCallBack(window_padding),
-                                            borderRadius: SpacingCallBack(window_radius),
-                                            border: SetBorderParams(window_border, window_borderSize, window_borderType, window_borderColor),
-                                            filter: SetFilderParams(window_filter, window_filterSize, window_filterColor),
-                                        }
-                                        // 标题设置
-                                        const titleStyle = {
-                                            '--titleColor': ColorCallBack(window_titleColor, window_titleDeg),
-                                            lineHeight: window_titleSize + 'px',
-                                            padding: SpacingCallBack(window_titlePad),
-                                            margin: SpacingCallBack(window_titleMar),
-                                            fontSize: window_titleSize,
-                                            fontFamily: window_titleFamily,
-                                            fontWeight: window_titleWeight,
-                                            fontStyle: window_titleStyle,
-                                            filter: SetFilderParams(window_titleFilter, window_titleFilterSize, window_titleFilterColor),
-                                        }
-
-                                        const setClass = page_fold ? 'animate__animated ' : ''
-
-
-                                        return (
-                                            <div key={item.i} className='WindowBox'>
-                                                <Dropdown
-                                                    trigger={['contextMenu']}
-                                                    menu={{
-                                                        items: (port && LayoutStatus) ?
-                                                            GlobalOperation({ type: 'window', winId: item.i, LayoutEvent }) : []
-                                                    }}
-                                                >
-                                                    <div className={`WindowItem ${LayoutStatus ? 'Edit' : 'Preview'}`} onContextMenu={(e) => e.stopPropagation()}>
-                                                        {window_style === 'DIY' ?
-                                                            <div className={`WindowContent ${setClass}`} style={style}>
-                                                                {LayoutStatus && <div className='SCALE'>window : {item.w}*{item.h}</div>}
-                                                                {window_title && <div className='WindowTitle' style={titleStyle} >{window_titleTxt}</div>}
-                                                                <div className='WindowNavSwiper' style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}>
-                                                                    <SwiperTemplate
-                                                                        data={item}
-                                                                        status={LayoutStatus}
-                                                                        params={ParamsData}
-                                                                        winData={WindowData}
-                                                                        LayoutEvent={LayoutEvent}
-                                                                        UrlData={UrlData}
-                                                                    />
-                                                                </div>
-                                                            </div> :
-                                                            <WinTemplate Config={{ ...data, ...ParamsData[item.i], setClass }} >
-                                                                <div className='WindowContent' >
+                                            return (
+                                                <div key={item.i} className='WindowBox'>
+                                                    <Dropdown
+                                                        trigger={['contextMenu']}
+                                                        menu={{
+                                                            items: (port && LayoutStatus) ?
+                                                                GlobalOperation({ type: 'window', winId: item.i, LayoutEvent }) : []
+                                                        }}
+                                                    >
+                                                        <div className={`WindowItem ${LayoutStatus ? 'Edit' : 'Preview'}`} onContextMenu={(e) => e.stopPropagation()}>
+                                                            {window_style === 'DIY' ?
+                                                                <div className={`WindowContent ${setClass}`} style={style}>
                                                                     {LayoutStatus && <div className='SCALE'>window : {item.w}*{item.h}</div>}
+                                                                    {window_title && <div className='WindowTitle' style={titleStyle} >{window_titleTxt}</div>}
                                                                     <div className='WindowNavSwiper' style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}>
                                                                         <SwiperTemplate
                                                                             data={item}
@@ -475,20 +495,34 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                                                                             UrlData={UrlData}
                                                                         />
                                                                     </div>
-                                                                </div>
-                                                            </WinTemplate>
-                                                        }
-                                                    </div>
-                                                </Dropdown>
-                                            </div>
-                                        )
-                                    })}
-                                </ReactGridLayout>
-                            </>
-                        }
-                    </div>
-                </Dropdown>
-
+                                                                </div> :
+                                                                <WinTemplate Config={{ ...data, ...ParamsData[item.i], setClass }} >
+                                                                    <div className='WindowContent' >
+                                                                        {LayoutStatus && <div className='SCALE'>window : {item.w}*{item.h}</div>}
+                                                                        <div className='WindowNavSwiper' style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}>
+                                                                            <SwiperTemplate
+                                                                                data={item}
+                                                                                status={LayoutStatus}
+                                                                                params={ParamsData}
+                                                                                winData={WindowData}
+                                                                                LayoutEvent={LayoutEvent}
+                                                                                UrlData={UrlData}
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </WinTemplate>
+                                                            }
+                                                        </div>
+                                                    </Dropdown>
+                                                </div>
+                                            )
+                                        })}
+                                    </ReactGridLayout>
+                                </>
+                            }
+                        </div>
+                    </Dropdown>
+                }
                 {port &&
                     <FloatButton
                         icon={<AlertOutlined />}

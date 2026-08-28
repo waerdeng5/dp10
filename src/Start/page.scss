@@ -40,6 +40,7 @@
         overflow: hidden;
         position: relative;
         z-index: 1;
+        pointer-events: none;
 
         &.Edit {
             box-shadow: 0 0 8px #262626 inset;
@@ -68,6 +69,7 @@
 
             .WindowBox {
                 overflow: hidden;
+                pointer-events: auto;
 
                 .WindowItem {
                     width: 100%;
