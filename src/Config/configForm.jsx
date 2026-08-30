@@ -6588,6 +6588,287 @@ const PrefabricatedChartCandlestick = [
     ChartDataCommonFormList,
     ChartCandlestickFormList,
 ]
+// TODO 甘特图
+const PrefabricatedChartGantt = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'api_config', label: '数据配置', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'api_source', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
+            {
+                span: 24, formType: 'GROUP', name: 'fields_config', label: '字段配置', collapsible: true,
+                jugde: [{ field: 'api_source', value: ['A02', 'A03'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'fields_id', label: '数据唯一值', rules: true, tooltip: 'id' },
+                    { span: 12, formType: 'INPUT', name: 'fields_hierarchyState', label: '折叠状态', rules: true, tooltip: 'hierarchyState' },
+                    { span: 12, formType: 'INPUT', name: 'fields_start', label: '开始时间', rules: true, tooltip: 'start' },
+                    { span: 12, formType: 'INPUT', name: 'fields_end', label: '结束时间', rules: true, tooltip: 'end' },
+                    { span: 12, formType: 'INPUT', name: 'fields_baseStart', label: '基础开始时间', rules: true, tooltip: 'baseStart' },
+                    { span: 12, formType: 'INPUT', name: 'fields_baseEnd', label: '基础结束时间', rules: true, tooltip: 'end' },
+                    { span: 12, formType: 'INPUT', name: 'fields_type', label: '数据类型', rules: true, tooltip: 'type' },
+                    { span: 12, formType: 'INPUT', name: 'fields_progress', label: '进度字段', rules: true, tooltip: 'progress' },
+                    {
+                        span: 24, formType: 'LIST', name: 'fields_columns', label: '左侧列表', collapsible: true, title: '列表',
+                        children: [
+                            { span: 8, formType: 'INPUT', name: 'title', label: '名称', rules: true },
+                            { span: 8, formType: 'INPUT', name: 'field', label: '字段', rules: true },
+                            { span: 8, formType: 'INPUT', name: 'width', label: '宽度', rules: true },
+                            { span: 12, formType: 'RADIO', name: 'sort', label: '排序', rules: true, valueEnum: MappingData.IsEnabledBool },
+                            { span: 12, formType: 'RADIO', name: 'dragHeader', label: '拖动', rules: true, valueEnum: MappingData.IsEnabledBool },
+                            { span: 12, formType: 'RADIO', name: 'tree', label: '树结构', rules: true, valueEnum: MappingData.IsEnabledBool },
+                            { span: 12, formType: 'RADIO', name: 'hide', label: '隐藏', rules: true, valueEnum: MappingData.IsEnabledBool },
+                        ]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'api_http', label: '接口配置', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'api_source', value: ['A02'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'http_urlName', label: '接口名称', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'http_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'http_urlMapping', label: '接口层级', jugde: [{ field: 'http_urlLevel', value: [true] }] },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskListTable', label: '左侧列表', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 8, formType: 'INPUT', name: 'taskListTable_tableWidth', label: '默认宽度', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'taskListTable_minTableWidth', label: '最小宽度', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'taskListTable_maxTableWidth', label: '最大宽度', rules: true },
+
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_headerStyle', label: '头部样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'NUMBER', name: 'headerStyle_padding', label: '内填充', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'headerStyle_bgColor', label: '背景颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'headerStyle_borderLineWidth', label: '边框线', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'headerStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_textAlign', label: '水平对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+                    {
+                        span: 24, formType: 'RADIO', name: 'headerStyle_textBaseline', label: '垂直对齐', rules: true,
+                        valueEnum: MappingData.Charts__VchartsTextBaseline
+                    },
+                    { span: 24, formType: 'COLOR', name: 'headerStyle_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'COLOR', name: 'headerStyle_strokeColor', label: '描边颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'headerStyle_fontSize', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'headerStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_fontStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_bodyStyle', label: '列表样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_padding', label: '内填充', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'bodyStyle_bgColor', label: '背景颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_borderLineWidth', label: '边框线', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'bodyStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    {
+                        span: 24, formType: 'RADIO', name: 'bodyStyle_textAlign', label: '水平对齐', rules: true,
+                        valueEnum: MappingData.Charts__VchartsTextAlign
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'bodyStyle_textBaseline', label: '垂直对齐', rules: true,
+                        valueEnum: MappingData.Charts__VchartsTextBaseline
+                    },
+                    { span: 24, formType: 'COLOR', name: 'bodyStyle_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'COLOR', name: 'bodyStyle_strokeColor', label: '描边颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_fontSize', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'bodyStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'bodyStyle_fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'bodyStyle_fontStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                ]
+            },
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_timelineHeader', label: '时间刻度配置', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 12, formType: 'NUMBER', name: 'timelineHeader_colWidth', label: '列宽', rules: true },
+            { span: 12, formType: 'COLOR', name: 'timelineHeader_backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'RADIO', name: 'timelineHeader_hideWeekend', label: '隐藏周末', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'NUMBER', name: 'timelineHeader_weekendColWidth', label: '周末列宽', rules: true },
+            {
+                span: 12, formType: 'GROUP', name: 'timelineHeader_horizontalLine', label: '水平线', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'timelineHeader_backgroundColor_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'timelineHeader_backgroundColor_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'timelineHeader_backgroundColor_lineDash', label: '虚实比例', rules: true },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'timelineHeader_verticalLine', label: '垂直线', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'timelineHeader_verticalLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'timelineHeader_verticalLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'timelineHeader_verticalLine_lineDash', label: '虚实比例', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'timelineHeader_scales', label: '时间刻度', collapsible: true,
+                children: [
+                    { span: 12, formType: 'NUMBER', name: 'rowHeight', label: '行高', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'unit', label: '单位', rules: true, valueEnum: MappingData.Charts__ganntDateUnit },
+                    { span: 12, formType: 'NUMBER', name: 'step', label: '步长', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'startOfWeek', label: '开始日期', rules: true, valueEnum: MappingData.Charts__ganntStartOfWeek },
+                    { span: 12, formType: 'RADIO', name: 'isPrefix', label: '前缀', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'prefixText', label: '前缀内容', rules: true, jugde: [{ field: 'isPrefix', value: [true] }] },
+                    { span: 12, formType: 'RADIO', name: 'isSuffix', label: '后缀', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'suffixText', label: '后缀内容', rules: true, jugde: [{ field: 'isSuffix', value: [true] }] },
+                    { span: 12, formType: 'RADIO', name: 'formatType', label: '格式化', rules: true, valueEnum: MappingData.Charts__ganntDateFormat },
+                    { span: 12, formType: 'INPUT', name: 'formatMapping', label: '日期格式', rules: true, jugde: [{ field: 'formatType', value: ['date'] }] },
+                    { span: 12, formType: 'RADIO', name: 'textAlign', label: '水平对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextAlign },
+                    { span: 12, formType: 'RADIO', name: 'textBaseline', label: '垂直对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextBaseline },
+                    { span: 12, formType: 'NUMBER', name: 'padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'fontSize', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'COLOR', name: 'strokeColor', label: '描边颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'RADIO', name: 'textOverflow', label: '超出隐藏', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'textStick', label: '始终显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar', label: '任务条设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'RADIO', name: 'taskBar_resizable', label: '是否可调整大小', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_moveable', label: '是否可移动', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_progressAdjustable', label: '进度是否可调整', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_moveToExtendDateRange', label: '自动扩展日期范围', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_selectable', label: '是否可选', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_locateIcon', label: '定位图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'taskBar_scheduleCreatable', label: '数据排期', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+
+
+
+            { span: 12, formType: 'RADIO', name: 'taskBar_isLabelText', label: '任务条文字', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'taskBar_labelText', label: '文字内容', rules: true, tooltip: '{title} 完成 {progress}%',
+                jugde: [{ field: 'taskBar_isLabelText', value: [true] }]
+            },
+            { span: 12, formType: 'RADIO', name: 'taskBar_typeStatus', label: '任务条类型', rules: true, valueEnum: MappingData.Charts__ganntTaskBarType },
+            { span: 12, formType: 'RADIO', name: 'taskBar_isMilestone', label: '显示里程碑', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_labelTextStyle', label: '文字内容样式', collapsible: true,
+                jugde: [{ field: 'taskBar_isLabelText', value: [true] }], children: [
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_labelTextStyle_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'taskBar_labelTextStyle_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_labelTextStyle_fontSize', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'taskBar_labelTextStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    {
+                        span: 12, formType: 'RADIO', name: 'taskBar_labelTextStyle_textAlign', label: '水平对齐', rules: true,
+                        valueEnum: MappingData.Charts__VchartsTextAlign
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'taskBar_labelTextStyle_textBaseline', label: '垂直对齐', rules: true,
+                        valueEnum: MappingData.Charts__VchartsTextBaseline
+                    },
+                    { span: 12, formType: 'RADIO', name: 'taskBar_labelTextStyle_orient', label: '标签位置', valueEnum: MappingData.x6__Position },
+                    {
+                        span: 12, formType: 'RADIO', name: 'taskBar_labelTextStyle_orientHandleWithOverflow', label: '超出位置', rules: true,
+                        valueEnum: MappingData.Start__navPosition, jugde: [{ field: 'taskBar_labelTextStyle_orient', value: ['center'] }]
+                    },
+                    {
+                        span: 12, formType: 'RADIO', name: 'taskBar_labelTextStyle_textOverflow', label: '超出省略', rules: true,
+                        valueEnum: MappingData.IsEnabledBool
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_barStyle', label: '系统任务条', collapsible: true,
+                jugde: [{ field: 'taskBar_typeStatus', value: ['barStyle'] }], children: [
+                    { span: 12, formType: 'COLOR', name: 'taskBar_barStyle_barColor', label: '任务颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'COLOR', name: 'taskBar_barStyle_completedBarColor', label: '进度颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_barStyle_width', label: '宽度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_barStyle_cornerRadius', label: '圆角', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_barStyle_borderLineWidth', label: '边框尺寸', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'taskBar_barStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_barStyle_minSize', label: '最小尺寸', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_barStyle_paddingTop', label: '顶部距离', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_customLayout', label: '自定义任务条', collapsible: true,
+                jugde: [{ field: 'taskBar_typeStatus', value: ['customLayout'] }], children: [
+
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_milestoneStyle', label: '里程碑样式', collapsible: true,
+                jugde: [{ field: 'taskBar_isMilestone', value: [true] }], children: [
+                    //   /** 里程碑边框颜色 */
+                    //   borderColor?: string;
+                    //   /** 里程碑边框宽度 */
+                    //   borderLineWidth?: number;
+                    //   /** 里程碑填充颜色 */
+                    //   fillColor?: string;
+                    //   /** 里程碑正方形圆角 */
+                    //   cornerRadius?: number;
+                    //   /** 里程碑默认是个正方形，这个width配置正方形的边长 */
+                    //   width?: number;
+                    //   /** 里程碑展示文字。可以配置固定文本 或者 字符串模版 */
+                    //   labelText?: ITaskBarLabelText;
+                    //   /** 里程碑文字样式 */
+                    //   labelTextStyle:{
+                    //     fontFamily?: string;
+                    //     fontSize?: number;
+                    //     color?: string;
+                    //     padding?: number | number[];
+                    //   }
+                    //   /** 文字相对于里程碑的位置 */
+                    //   textOrient?: 'left' | 'top' | 'right' | 'bottom';
+                ]
+            },
+        ]
+    },
+
+
+
+
+    //     resizable: false,  // 是否可调整大小。
+    //     moveable: false, // 是否可移动。
+    //     progressAdjustable: false, // 是否可调整进度。
+
+    //     hoverBarStyle: {  // 悬停任务条样式
+    //         cornerRadius: 0,
+    //         barOverlayColor: 'rgba(99, 144, 0, 0.4)'
+    //     },
+
+    //     selectable: true,
+    //     selectedBarStyle: { // 选中状态
+    //         borderLineWidth: 10
+    //         // shadowBlur?: number; //阴影宽度
+    //         // shadowOffsetX?: number; //x方向偏移
+    //         // shadowOffsetY?: number; //Y方向偏移
+    //         // shadowColor?: string; //阴影颜色
+    //         // borderColor?: string; //边框颜色
+    //         // borderLineWidth?: number;
+    //     },
+    //     locateIcon: true, // 是否显示定位图标
+    //     // scheduleCreation: { // 创建任务条按钮
+    //     //     buttonStyle: {
+    //     //         lineWidth: 1,
+    //     //         // lineColor?: string;
+    //     //         // lineWidth?: number;
+    //     //         // lineDash?: number[];
+    //     //         // cornerRadius?: number;
+    //     //         // backgroundColor?: string;
+    //     //     },
+    //     //     // customLayout: true, // 是否自定义布局
+    //     // },
+    // },
+
+
+    // 网格配置
+    // 标记配置
+    // 整体设置
+    // 滚动条设置
+]
 
 // TODO 数据配置
 const TemplateApiConfig = {
@@ -9029,6 +9310,7 @@ export const FormConfig = {
     PrefabricatedChartVenn,
     PrefabricatedChartMosaic,
     PrefabricatedChartCandlestick,
+    PrefabricatedChartGantt,
 
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,

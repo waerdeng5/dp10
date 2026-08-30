@@ -579,7 +579,6 @@ export const MappingData = {
     ],
     System_weatherType: [
         { value: 'A01', label: '格式一' },
-
     ],
 
     // Todo 样式-通用属性
@@ -1554,14 +1553,43 @@ export const MappingData = {
         { value: 'selected', label: '选中' },
         { value: 'selected_reverse', label: '未被选中' },
     ],
-
-
+    Charts__ganntDataType: [
+        { value: 'text', label: '数据字段' },
+        { value: 'milestone', label: '里程碑' },
+    ],
+    Charts__ganntDateUnit: [
+        { value: 'day', label: '天' },
+        { value: 'week', label: '周' },
+        { value: 'month', label: '月' },
+        { value: 'quarter', label: '季' },
+        { value: 'year', label: '年' },
+        { value: 'hour', label: '时' },
+        { value: 'minute', label: '分' },
+        { value: 'second', label: '秒' },
+    ],
+    Charts__ganntStartOfWeek: [
+        { value: 'sunday', label: '周日' },
+        { value: 'monday', label: '周一' },
+    ],
+    Charts__ganntDateFormat: [
+        { value: 'date', label: '日期' },
+        { value: 'index', label: '索引' },
+    ],
+    Charts__ganntOverflow: [
+        { value: 'date', label: '日期' },
+        { value: 'date', label: '日期' },
+        { value: 'date', label: '日期' },
+    ],
+    Charts__ganntTaskBarType: [
+        { value: 'barStyle', label: '系统条图' },
+        { value: 'customLayout', label: '自定义条图' },
+    ],
 
     // !!! 大屏配置
     Start__backType: [
-        { value: 'color', label: '颜色' },
-        { value: 'image', label: '图片' },
-        { value: 'video', label: '视频' },
+        { value: 'clip', label: '切割' },
+        { value: 'ellipsis', label: '省略号' },
+        { value: 'fade', label: '淡入淡出' },
     ],
 
     Start__textList: [

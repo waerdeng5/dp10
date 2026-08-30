@@ -1,7 +1,9 @@
 import './Prefabricated.scss'
+import dayjs from 'dayjs'
 import { useRef, useState } from 'react'
 import { VChart } from '@visactor/react-vchart'
-import { Gantt } from '@visactor/vtable-gantt';
+import { Gantt, VRender } from '@visactor/vtable-gantt';
+import * as VTableGantt from '@visactor/vtable-gantt';
 import { useEffect } from 'react'
 import { isEmptyObject, getRandomInt, getNestedValue } from '../Utils'
 
@@ -1609,84 +1611,80 @@ const PrefabricatedChartGantt = () => {
     const GanttRef = useRef(null)
     const ganttInstance = useRef(null)
     const records = [
-        // {
-        //     id: '12',
-        //     title: '土方工程',
-        //     start: '07/24/2024',
-        //     type: 'milestone',
-        //     progress: 100,
-        //     parent: '0'
-        // },
         {
             id: 1,
             title: 'Task 1',
             hierarchyState: 'expand',
+            // baselineStartDateField: '2024-08-02',
+            // baselineEndDateField: '2024-08-10',
+            start: "2024-08-01",
+            end: "2024-08-20",
+
             children: [
-                { id: 11, title: "子任务 #1", start: "2024-08-01", end: "2024-08-10", progress: 60, priority: 'P0' },
+                { id: 11, title: "子任务 #1", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
                 { id: 12, title: "里程碑", type: "milestone", start: "2024-08-8" }
             ]
         },
-        // {
-        //     id: 2,
-        //     title: 'Task 2',
-        //     hierarchyState: 'expand',
-        //     children: [
-        //         { id: 21, title: "子任务 #1", start: "07/24/2024", end: "07/30/2024", progress: 60, priority: 'P0' },
-        //         { id: 22, title: "里程碑", type: "milestone", start: "07/31/2024" }
-        //     ]
-        // },
         { id: 3, title: "子任务 #1", start: "2024-08-01", end: "2024-08-11", progress: 60, priority: 'P0' },
-        // {
-        //     id: 2,
-        //     title: 'Task 2',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '07/24/2024',
-        //     end: '08/04/2024',
-        //     progress: 60,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 3,
-        //     title: 'Task 3',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-08-04',
-        //     end: '2024-08-04',
-        //     progress: 100,
-        //     priority: 'P1'
-        // },
-        // {
-        //     id: 4,
-        //     title: 'Task 4',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-26',
-        //     end: '2024-07-28',
-        //     progress: 31,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 5,
-        //     title: 'Task 5',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-26',
-        //     end: '2024-07-28',
-        //     progress: 60,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 6,
-        //     title: 'Task 6',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-29',
-        //     end: '2024-08-11',
-        //     progress: 100,
-        //     priority: 'P1'
-        // }
+        {
+            id: 2,
+            title: 'Task 2',
+            developer: 'liufangfang.jane@bytedance.com',
+            start: '07/24/2024',
+            end: '08/04/2024',
+            progress: 60,
+            priority: 'P0'
+        },
+        {
+            id: 3,
+            title: 'Task 3',
+            developer: 'liufangfang.jane@bytedance.com',
+            start: '2024-08-04',
+            end: '2024-08-04',
+            progress: 100,
+            priority: 'P1'
+        },
+        {
+            id: 4,
+            title: 'Task 4',
+            developer: 'liufangfang.jane@bytedance.com',
+            start: '2024-07-26',
+            end: '2024-07-28',
+            progress: 31,
+            priority: 'P0'
+        },
+        {
+            id: 5,
+            title: 'Task 5',
+            developer: 'liufangfang.jane@bytedance.com',
+            start: '2024-07-26',
+            end: '2024-07-28',
+            progress: 60,
+            priority: 'P0'
+        },
+        {
+            id: 6,
+            title: 'Task 6',
+            developer: 'liufangfang.jane@bytedance.com',
+            start: '2024-07-29',
+            end: '2024-08-11',
+            progress: 100,
+            priority: 'P1'
+        }
     ];
 
     const columns = [
         {
             field: 'title',
             title: '标题',
+            width: 'auto',
+            sort: true,
+            tree: true,
+            editor: 'input'
+        },
+        {
+            field: 'developer',
+            title: '标题2',
             width: 'auto',
             sort: true,
             tree: true,
@@ -1702,19 +1700,25 @@ const PrefabricatedChartGantt = () => {
             maxTableWidth: 600,  // 最大宽度
             theme: {
                 headerStyle: {
-                    borderColor: '#e1e4e8',
-                    borderLineWidth: 1,
+                    padding: 0,
+                    borderColor: 'red',
+                    borderLineWidth: [0, 1, 0, 1],
                     fontSize: 18,
                     fontWeight: 'bold',
-                    color: 'red',
-                    bgColor: '#EEF1F5'
+                    fontFamily: 'ShuHeiTi',
+                    color: '#262626',
+                    bgColor: '#EEF1F5',
+                    textAlign: 'center',
+                    textBaseline: 'bottom'
                 },
                 bodyStyle: {
-                    borderColor: '#e1e4e8',
+                    padding: 40,
+                    borderColor: '#ff0000',
                     borderLineWidth: [1, 0, 1, 0],
                     fontSize: 16,
                     color: '#4D4D4D',
-                    bgColor: '#FFF'
+                    bgColor: '#FFF',
+                    fontFamily: 'ShuHeiTi',
                 }
             },
             // rightFrozenColCount: 1
@@ -1738,21 +1742,21 @@ const PrefabricatedChartGantt = () => {
                 {
                     visible: true,  // 是否显示时间刻度
                     rowHeight: 44, // 行高
-                    unit: 'week', // 时间单位
+                    unit: 'month', // 时间单位
                     step: 1,     // 步长
                     startOfWeek: 'sunday', // 周一 or 周日
                     format(date) {
-                        return `week ${date.dateIndex}`;  // 格式化时间刻度
+                        return dayjs(date.startDate).format('YYYY-MM');  // 格式化时间刻度
                     },
                     style: {  // 时间刻度样式
                         fontSize: 20,
                         fontWeight: 'bold',
-                        color: '#262626',
+                        color: '#f8f8f8',
                         strokeColor: 'black',
                         textAlign: 'right',
                         textBaseline: 'bottom',
-                        backgroundColor: '#EEF1F550',
-                        textStick: true
+                        textStick: true,
+                        fontFamily: 'DIN',
                         // padding: [0, 30, 0, 20]
                     }
                 },
@@ -1760,7 +1764,11 @@ const PrefabricatedChartGantt = () => {
                     unit: 'day',
                     step: 1,
                     format(date) {
-                        return date.dateIndex.toString();
+                        // console.log(dayjs(date.startDate).format('YYYY-MM-DD HH:mm:ss'))
+                        // console.log(dayjs(date.endDate).format('YYYY-MM-DD HH:mm:ss'))
+                        // return date.dateIndex.toString();
+
+                        return dayjs(date.startDate).format('YYYY-MM-DD');  // 格式化时间刻度
                     },
                     style: {
                         fontSize: 20,
@@ -1773,32 +1781,93 @@ const PrefabricatedChartGantt = () => {
                     }
                 }
             ],
+            // zoomScale: {
+            //     enabled: true,
+            //     dataZoomAxis: {
+            //         enabled: true,
+            //         height: 30,
+            //         delayTime: 1
+            //     },
+            // },
         },
         taskBar: {  // 任务条配置
             startDateField: 'start',  // 开始日期字段
             endDateField: 'end',  // 结束日期字段
+            baselineStartDateField: 'baselineStartDateField',
+            baselineEndDateField: 'baselineEndDateField',
+
             progressField: 'progress',  // 进度字段
-            labelText: '{title}  完成 {progress}%',  // 任务条标签格式
+            labelText: '{title}  完成 {progress}%  {start}/{end}',  // 任务条标签格式
             labelTextStyle: {  // 任务条标签样式
+                padding: 40,
                 color: '#262626',
                 fontFamily: 'DIN',
                 fontSize: 16,
                 textAlign: 'right',
-                textOverflow: 'ellipsis'
+                textOverflow: true,
+                // orient: 'center',
+                // orientHandleWithOverflow: 'right' // 超出隐藏
             },
-            barStyle: {  // 任务条样式
-                width: 20,
-                /** 任务条的颜色 */
-                barColor: '#ee8800',
-                /** 已完成部分任务条的颜色 */
-                completedBarColor: '#91e8e0',
-                /** 任务条的圆角 */
-                cornerRadius: 8,
-                /** 任务条的边框 */
-                borderLineWidth: 1,
-                /** 边框颜色 */
-                borderColor: 'red',
+            // barStyle: (e) => {
+            //     return false
+            //     return {  // 任务条样式
+            //         width: 24,
+            //         /** 任务条的颜色 */
+            //         barColor: '#ee8800',
+            //         /** 已完成部分任务条的颜色 */
+            //         completedBarColor: '#91e8e0',
+            //         /** 任务条的圆角 */
+            //         cornerRadius: 8,
+            //         /** 任务条的边框 */
+            //         borderLineWidth: 1,
+            //         /** 边框颜色 */
+            //         borderColor: 'red',
+            //         paddingTop: 16
+            //     }
+            // },
+            customLayout: (e) => {
+                const { width, height, index, startDate, endDate, taskDays, progress, taskRecord, ganttInstance } = e
+                // return false
+
+                const container = new VRender.Group({
+                    width,
+                    height,
+                    cornerRadius: 20,
+                    fill: {
+                        gradient: 'linear',
+                        x0: 0,
+                        y0: 0,
+                        x1: 1,
+                        y1: 0,
+                        stops: [
+                            {
+                                offset: 0,
+                                color: '#f00'
+                            },
+                            {
+                                offset: 0.5,
+                                color: '#0f0'
+                            },
+                            {
+                                offset: 1,
+                                color: '#00f'
+                            }
+                        ]
+                    },
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'nowrap'
+                });
+
+                console.log(container)
+
+                return {
+                    rootContainer: container
+                    // renderDefaultBar: true
+                    // renderDefaultText: true
+                };
             },
+
             milestoneStyle: {
                 width: 16,
                 fillColor: value => (value.record.progress >= 100 ? '#597ef7' : '#d6e4ff'),
@@ -1810,7 +1879,8 @@ const PrefabricatedChartGantt = () => {
                     color: 'rgb(1, 43, 75)'
                 }
             },
-            resizable: false,  // 是否可调整大小。
+
+            resizable: true,  // 是否可调整大小。
             moveable: false, // 是否可移动。
             progressAdjustable: false, // 是否可调整进度。
             hoverBarStyle: {  // 悬停任务条样式
@@ -1829,6 +1899,7 @@ const PrefabricatedChartGantt = () => {
                 // borderLineWidth?: number;
             },
             locateIcon: true, // 是否显示定位图标
+            scheduleCreatable: false,
             // scheduleCreation: { // 创建任务条按钮
             //     buttonStyle: {
             //         lineWidth: 1,
@@ -1928,7 +1999,7 @@ const PrefabricatedChartGantt = () => {
 
         overscrollBehavior: 'none', // 涅出滚动行为
         dateFormat: 'yyyy-MM-dd', // 日期格式
-        underlayBackgroundColor: '#f7f7f7', // 背景颜色
+        underlayBackgroundColor: '#f7f7f700', // 背景颜色
 
         scrollStyle: {
             hoverOn: true,

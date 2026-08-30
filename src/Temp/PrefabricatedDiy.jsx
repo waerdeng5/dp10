@@ -641,10 +641,10 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
 
         return (
             <div className='weatherTypeA01' style={weaStyle}>
-                <div className='max' style={maxStyle}>{max_field}</div>
+                {Data?.[max_field] && <div className='max' style={maxStyle}>{Data?.[max_field]}</div>}
                 <div className='item'>
-                    <div className='min' style={minStyle}>{min_field}</div>
-                    <div className='war' style={minStyle}>{war_field}</div>
+                    {Data?.[min_field] && <div className='min' style={minStyle}>/{Data?.[min_field]} ℃</div>}
+                    {Data?.[war_field] && <div className='war' style={minStyle}>{Data?.[war_field]}</div>}
                 </div>
             </div>
         )
@@ -653,6 +653,7 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
         setData(backData)
+        console.log(backData)
     }, [UrlData, data])
 
     return (
@@ -671,7 +672,7 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
                                 filter: SetFilderParams(fileiled, fileiled_data, fileiled_color)
                             }
                             return (
-                                <div key={i} className='dateText' style={dateTextStyle}>{date_field}</div>
+                                <div key={i} className='dateText' style={dateTextStyle}>{Data?.[date_field]}</div>
                             )
                         })}
                     </div>
@@ -679,8 +680,8 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
                 {weatherType === 'A01' && <WeatherTypeA01 />}
 
             </div>
-            {isIcon &&
-                <img style={imgStyle} src={IconList?.[icon_field]} alt={icon_field} />
+            {isIcon && IconList?.[Data?.[icon_field]] &&
+                <img style={imgStyle} src={IconList?.[Data?.[icon_field]]} alt={icon_field} />
             }
         </div>
     )
