@@ -583,6 +583,8 @@ export const SwiperTemplatePage = [
 export const VisualTemplatePage = [
     { uuid: 'PrefabricatedVisualMonitoring', title: '视频监控', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedVisualRecorded', title: '录播视频', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedVisualLive', title: '视频直播', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+
 ]
 
 
@@ -1076,6 +1078,9 @@ export const TemplateParamsMapping = {
     },
     PrefabricatedVisualRecorded: {
         value: 'PrefabricatedVisualRecorded',
+    },
+    PrefabricatedVisualLive: {
+        value: 'PrefabricatedVisualLive',
     }
 }
 

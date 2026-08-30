@@ -574,8 +574,19 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
     )
 }
 
+// 无人机直播
+const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
+    console.log(data)
+    return (
+        <div>
+            无人机直播
+        </div>
+    )
+}
+
 
 export const PrefabricatedVisualTemplate = {
     PrefabricatedVisualMonitoring,
-    PrefabricatedVisualRecorded
+    PrefabricatedVisualRecorded,
+    PrefabricatedVisualLive
 }
