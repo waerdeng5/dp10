@@ -577,6 +577,10 @@ export const MappingData = {
         { value: 'A02', label: '接口字段' },
         { value: 'A03', label: '折叠图标' },
     ],
+    System_weatherType: [
+        { value: 'A01', label: '格式一' },
+
+    ],
 
     // Todo 样式-通用属性
     Style__BoxShadow: [

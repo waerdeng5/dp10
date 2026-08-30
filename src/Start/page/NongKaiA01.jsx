@@ -45,6 +45,18 @@ const NongKaiA01 = () => {
                     })}
                 </div>
             </div>
+            <div className='MapBtm'>
+                <img src={imageUrl + 'MapBack.png'} alt="" />
+                {MapList.map(v => {
+                    const status = active === v.uuid
+                    return (
+                        <div className='item' key={v.uuid} onClick={() => setActive(v.uuid)}>
+                            <div>{v.name}</div>
+                            {status && <img src={imageUrl + 'MapActive.png'} alt="" />}
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 };

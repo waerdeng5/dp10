@@ -470,9 +470,6 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         filter: SetFilderParams(extra_title_filed, extra_title_filed_data, extra_title_filed_color),
     }
 
-    console.log(itemTitleStyle)
-
-
     const onOpen = (e) => {
         if (!isOpenClose) return false
         setOpen(Open.includes(e) ? Open.filter(item => item !== e) : [...Open, e])
@@ -543,9 +540,149 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
 }
 
 // 天气组件
-const PrefabricatedDiyWeather = () => {
+const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
+
+    const [Data, setData] = useState()
+    const [IconList, setIconList] = useState({})
+
+
+    const { align_items, align_content, justify_content, flex_direction, flex_wrap,
+        back_color, back_deg, back_padding, back_margin, back_radius, isIcon,
+        icon_width, icon_height, icon_margin, icon_field, weather_list,
+        text_align_items, text_align_content, text_justify_content, text_flex_direction, text_flex_wrap, isDate, weatherType,
+        data_align_items, data_align_content, data_justify_content, data_flex_direction, data_flex_wrap,
+        date_list, date_widthUnit, date_width, date_heightUnit, date_height, date_padding, date_margin,
+        wea_widthUnit, wea_width, wea_heightUnit, wea_height, wea_padding, wea_margin,
+        max_field, max_padding, max_color, max_deg, max_size, max_family, max_weight, max_style, max_filed, max_filed_data, max_filed_color,
+        min_field, war_field, war_color, war_deg, war_size, war_family, war_weight, war_style, war_filed, war_filed_data, war_filed_color,
+    } = data
+
+    const boxStyle = {
+        width: SpacingSizeCallBack(back_margin, 100),
+        height: SpacingSizeCallBack(back_margin, 100, true),
+        background: ColorCallBack(back_color, back_deg),
+        padding: SpacingCallBack(back_padding),
+        margin: SpacingCallBack(back_margin),
+        borderRadius: SpacingCallBack(back_radius),
+        '--align_items': align_items,
+        '--calign_content': align_content,
+        '--justify_content': justify_content,
+        '--flex_direction': flex_direction,
+        '--flex_wrap': flex_wrap,
+    }
+
+    const imgStyle = {
+        width: icon_width,
+        height: icon_height,
+        margin: SpacingCallBack(icon_margin),
+    }
+
+    const textStyle = {
+        '--text_align_items': text_align_items,
+        '--text_align_content': text_align_content,
+        '--text_justify_content': text_justify_content,
+        '--text_flex_direction': text_flex_direction,
+        '--text_flex_wrap': text_flex_wrap,
+    }
+
+    const dateStyle = {
+        '--data_align_items': data_align_items,
+        '--data_align_content': data_align_content,
+        '--data_justify_content': data_justify_content,
+        '--data_flex_direction': data_flex_direction,
+        '--data_flex_wrap': data_flex_wrap,
+        ...UnitCallBackStruct(date_widthUnit, date_width, 'width'),
+        ...UnitCallBackStruct(date_heightUnit, date_height, 'height'),
+        padding: SpacingCallBack(date_padding),
+        margin: SpacingCallBack(date_margin),
+    }
+
+    useEffect(() => {
+        if (isIcon) {
+            const list = Object.fromEntries(
+                weather_list.flatMap(v => {
+                    const { weather_map, weather_url } = v
+                    if (typeof weather_map !== 'string') return []
+                    return weather_map.split(',').map(k => [k.trim(), weather_url])
+                })
+            )
+            setIconList(list)
+        }
+    }, [isIcon, weather_list])
+
+    const WeatherTypeA01 = () => {
+        if (weatherType !== 'A01') return null
+
+        const weaStyle = {
+            ...UnitCallBackStruct(wea_widthUnit, wea_width, 'width'),
+            ...UnitCallBackStruct(wea_heightUnit, wea_height, 'height'),
+            padding: SpacingCallBack(wea_padding),
+            margin: SpacingCallBack(wea_margin),
+        }
+
+        const maxStyle = {
+            padding: SpacingCallBack(max_padding),
+            '--color': ColorCallBack(max_color, max_deg),
+            fontSize: max_size,
+            fontFamily: max_family,
+            fontWeight: max_weight,
+            fontStyle: max_style,
+            filter: SetFilderParams(max_filed, max_filed_data, max_filed_color)
+        }
+
+        const minStyle = {
+            '--color': ColorCallBack(war_color, war_deg),
+            fontSize: war_size,
+            fontFamily: war_family,
+            fontWeight: war_weight,
+            fontStyle: war_style,
+            filter: SetFilderParams(war_filed, war_filed_data, war_filed_color)
+        }
+
+        return (
+            <div className='weatherTypeA01' style={weaStyle}>
+                <div className='max' style={maxStyle}>{max_field}</div>
+                <div className='item'>
+                    <div className='min' style={minStyle}>{min_field}</div>
+                    <div className='war' style={minStyle}>{war_field}</div>
+                </div>
+            </div>
+        )
+    }
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
+        setData(backData)
+    }, [UrlData, data])
+
     return (
-        <div>天气信息</div>
+        <div className='PrefabricatedDiyWeather' style={boxStyle}>
+            <div className='text' style={textStyle}>
+                {isDate &&
+                    <div className='date' style={dateStyle}>
+                        {date_list.map((v, i) => {
+                            const { date_field, size, color, deg, family, weight, style, fileiled, fileiled_data, fileiled_color } = v
+                            const dateTextStyle = {
+                                '--color': ColorCallBack(color, deg),
+                                fontSize: size,
+                                fontFamily: family,
+                                fontWeight: weight,
+                                fontStyle: style,
+                                filter: SetFilderParams(fileiled, fileiled_data, fileiled_color)
+                            }
+                            return (
+                                <div key={i} className='dateText' style={dateTextStyle}>{date_field}</div>
+                            )
+                        })}
+                    </div>
+                }
+                {weatherType === 'A01' && <WeatherTypeA01 />}
+
+            </div>
+            {isIcon &&
+                <img style={imgStyle} src={IconList?.[icon_field]} alt={icon_field} />
+            }
+        </div>
     )
 }
 

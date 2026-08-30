@@ -1082,3 +1082,45 @@
         pointer-events: auto;
     }
 }
+
+.PrefabricatedDiyWeather {
+    display: flex;
+    align-items: var(--align_items);
+    align-content: var(--align_content);
+    justify-content: var(--justify_content);
+    flex-direction: var(--flex_direction);
+    flex-wrap: var(--flex_wrap);
+
+    &>.text {
+        width: 100%;
+        display: flex;
+        align-items: var(--text_align_items);
+        align-content: var(--text_align_content);
+        justify-content: var(--text_justify_content);
+        flex-direction: var(--text_flex_direction);
+        flex-wrap: var(--text_flex_wrap);
+
+        &>.date {
+            display: flex;
+            align-items: var(--data_align_items);
+            align-content: var(--data_align_content);
+            justify-content: var(--data_justify_content);
+            flex-direction: var(--data_flex_direction);
+            flex-wrap: var(--data_flex_wrap);
+
+            &>.dateText {
+                background: var(--color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+        }
+
+        &>.weatherTypeA01 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    }
+}
