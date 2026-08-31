@@ -559,7 +559,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
             width: B08_modelWidth,
             height: B08_modelHeight,
             Event: DEVEvent,
-            modelData: item
+            modelData: { ...item, Initial: data },
         })
     }
     const B13Func = item => {

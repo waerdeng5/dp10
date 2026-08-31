@@ -668,7 +668,13 @@ const OptionsModel = ({ data, Event }) => {
                 const { dataField, caption, valueType, mappingType, mappingData, mappingApi, mappingPar, mappingParExtra, mappingJudge,
                     mappingValue, mappingLable, tooltipStatus, tooltip, rules, judge, judgeData
                 } = v
-                const obj = { dataField, caption, valueType, rules, }
+                const obj = {
+                    span: 24,
+                    name: dataField,
+                    label: caption,
+                    formType: valueType,
+                    rules,
+                }
                 if (FlowMenuAPIFieldJugdeValue.includes(valueType)) {
                     if (mappingType === 'DataMapping') obj.valueEnum = MappingData[mappingData]
                     if (mappingType === 'ApiMapping') {
@@ -683,11 +689,26 @@ const OptionsModel = ({ data, Event }) => {
             return results
         }
 
-
         useMount(async () => {
             const data = await FORMITEM()
             setFormItem(data)
         })
+
+
+        OptionsEvent.useSubscription(async v => {
+            const { type, data } = v
+            if (type === 'onFormBack') {
+                postData.params = { ...postData.params, ...data }
+                B08_dataArr.forEach(v => { postData.params[v.dataMap] = Initial[v.dataKey] })
+                const [err, res] = await axios(postData)
+                if (err) return false
+                Event.emit({ type: 'onRefreshData', data: {} })
+                updateModel5({})
+            }
+
+
+        })
+
         if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} />
         else return <Skeleton active paragraph={{ rows: 16 }} />
     }

@@ -2,7 +2,7 @@ import './Prefabricated.scss'
 import dayjs from 'dayjs'
 import { useRef, useState } from 'react'
 import { VChart } from '@visactor/react-vchart'
-import { Gantt, VRender } from '@visactor/vtable-gantt';
+import { Gantt, VRender, TYPES } from '@visactor/vtable-gantt';
 import * as VTableGantt from '@visactor/vtable-gantt';
 import { useEffect } from 'react'
 import { isEmptyObject, getRandomInt, getNestedValue } from '../Utils'
@@ -1606,123 +1606,141 @@ const PrefabricatedChartCandlestick = ({ tempId, data, UrlData, LayoutEvent }) =
     );
 };
 
-// gantt 甘特图
-const PrefabricatedChartGantt = () => {
+
+const recordsTestData = [
+    {
+        id: 1,
+        title: '土方工程',
+        hierarchyState: 'expand',
+        type: 'project',
+        children: [
+            { id: 11, title: "田块平整", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
+            { id: 12, title: "土方开挖", start: "2024-08-05", end: "2024-08-25", progress: 60, priority: 'P0' },
+            { id: 13, title: "土方回填", start: "2024-08-10", end: "2024-08-15", progress: 60, priority: 'P0' },
+            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+        ]
+    },
+    {
+        id: 2,
+        title: '灌溉工程',
+        hierarchyState: 'expand',
+        type: 'project',
+        children: [
+            { id: 11, title: "塘坝清淤加固", start: "2024-08-12", end: "2024-08-26", progress: 60, priority: 'P0' },
+            { id: 12, title: "蓄水池修建", start: "2024-08-15", end: "2024-08-20", progress: 60, priority: 'P0' },
+            { id: 13, title: "机井新打 / 维修", start: "2024-08-17", end: "2024-08-24", progress: 60, priority: 'P0' },
+            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+        ]
+    },
+    {
+        id: 3,
+        title: '排水工程',
+        hierarchyState: 'expand',
+        type: 'project',
+        children: [
+            { id: 11, title: "排水沟衬砌", start: "2024-08-08", end: "2024-09-15", progress: 60, priority: 'P0' },
+            { id: 12, title: "生态排水沟施工", start: "2024-08-18", end: "2024-08-25", progress: 60, priority: 'P0' },
+            { id: 13, title: "排水沟衬砌、生态排水沟施工", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
+            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+        ]
+    },
+]
+
+const columnsTestData = [
+    {
+        field: 'title',
+        title: '施工任务',
+        width: 'auto',
+        sort: true,
+        tree: true,
+        editor: 'input'
+    },
+]
+
+const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
     const GanttRef = useRef(null)
     const ganttInstance = useRef(null)
-    const records = [
-        {
-            id: 1,
-            title: 'Task 1',
-            hierarchyState: 'expand',
-            baselineStartDateField: '2024-08-02',
-            baselineEndDateField: '2024-08-10',
-            start: "2024-08-01",
-            end: "2024-08-20",
 
-            children: [
-                { id: 11, title: "子任务 #1", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
-                { id: 12, title: "里程碑", type: "milestone", start: "2024-08-8" }
-            ]
-        },
-        { id: 3, title: "子任务 #1", start: "2024-08-01", end: "2024-08-11", progress: 60, priority: 'P0' },
-        // {
-        //     id: 2,
-        //     title: 'Task 2',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '07/24/2024',
-        //     end: '08/04/2024',
-        //     progress: 60,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 3,
-        //     title: 'Task 3',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-08-04',
-        //     end: '2024-08-04',
-        //     progress: 100,
-        //     priority: 'P1'
-        // },
-        // {
-        //     id: 4,
-        //     title: 'Task 4',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-26',
-        //     end: '2024-07-28',
-        //     progress: 31,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 5,
-        //     title: 'Task 5',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-26',
-        //     end: '2024-07-28',
-        //     progress: 60,
-        //     priority: 'P0'
-        // },
-        // {
-        //     id: 6,
-        //     title: 'Task 6',
-        //     developer: 'liufangfang.jane@bytedance.com',
-        //     start: '2024-07-29',
-        //     end: '2024-08-11',
-        //     progress: 100,
-        //     priority: 'P1'
-        // }
-    ];
+    const { api_source, http_urlName, http_urlLevel, http_urlMapping,
+        fields_id, fields_hierarchyState, fields_start, fields_end, fields_baseStart, fields_baseEnd, fields_type, fields_progress, fields_columns,
+        taskListTable_tableWidth, taskListTable_minTableWidth, taskListTable_maxTableWidth,
 
-    const columns = [
-        {
-            field: 'title',
-            title: '标题',
-            width: 'auto',
-            sort: true,
-            tree: true,
-            editor: 'input'
-        },
-        {
-            field: 'developer',
-            title: '标题2',
-            width: 'auto',
-            sort: true,
-            tree: true,
-            editor: 'input'
-        },
-    ];
+        headerStyle_bgColor, headerStyle_padding, headerStyle_textAlign, headerStyle_textBaseline, headerStyle_color, headerStyle_strokeColor,
+        headerStyle_fontSize, headerStyle_fontFamily, headerStyle_fontWeight, headerStyle_fontStyle, headerStyle_autoWrapText, headerStyle_textOverflow,
+        headerStyle_borderColor, headerStyle_borderLineWidth, headerStyle_borderLineDash, headerStyle_lineHeight,
+        headerStyle_underline, headerStyle_underlineDash, headerStyle_underlineOffset,
+        bodyStyle_bgColor, bodyStyle_padding, bodyStyle_textAlign, bodyStyle_textBaseline, bodyStyle_color, bodyStyle_strokeColor,
+        bodyStyle_fontSize, bodyStyle_fontFamily, bodyStyle_fontWeight, bodyStyle_fontStyle, bodyStyle_autoWrapText, bodyStyle_textOverflow,
+        bodyStyle_borderColor, bodyStyle_borderLineWidth, bodyStyle_borderLineDash,
+        bodyStyle_lineHeight, bodyStyle_underline, bodyStyle_underlineDash, bodyStyle_underlineOffset,
+
+    } = data
+
     const option = {
-        records,   // 数据项
-        taskListTable: {   // 左侧任务列表表格
-            columns,     // 列
-            tableWidth: 'auto',  // 自动宽度
-            minTableWidth: 100,  // 最小宽度
-            maxTableWidth: 600,  // 最大宽度
+        records: recordsTestData,
+        taskListTable: {
+            columns: columnsTestData,
+            tableWidth: taskListTable_tableWidth,
+            minTableWidth: taskListTable_minTableWidth,
+            maxTableWidth: taskListTable_maxTableWidth,
             theme: {
                 headerStyle: {
-                    padding: 0,
-                    borderColor: 'red',
-                    borderLineWidth: [0, 1, 0, 1],
-                    fontSize: 18,
-                    fontWeight: 'bold',
-                    fontFamily: 'ShuHeiTi',
-                    color: '#262626',
-                    bgColor: '#EEF1F5',
-                    textAlign: 'center',
-                    textBaseline: 'bottom'
+                    hover: false,
+                    linkColor: 'red',
+                    bgColor: headerStyle_bgColor,
+                    padding: headerStyle_padding?.split(',').map(Number) || 0,
+                    textAlign: headerStyle_textAlign,
+                    textBaseline: headerStyle_textBaseline,
+                    color: headerStyle_color,
+                    strokeColor: headerStyle_strokeColor,
+                    fontSize: headerStyle_fontSize,
+                    fontFamily: headerStyle_fontFamily,
+                    fontWeight: headerStyle_fontWeight,
+                    fontStyle: headerStyle_fontStyle,
+                    autoWrapText: headerStyle_autoWrapText,
+                    textOverflow: headerStyle_textOverflow,
+                    borderColor: headerStyle_borderColor,
+                    borderLineWidth: headerStyle_borderLineWidth?.split(',').map(Number) || 0,
+                    borderLineDash: headerStyle_borderLineDash?.split(',').map(Number) || 0,
+                    lineHeight: headerStyle_lineHeight,
+                    underline: headerStyle_underline,
+                    underlineDash: headerStyle_underlineDash?.split(',').map(Number) || 0,
+                    underlineOffset: headerStyle_underlineOffset,
                 },
                 bodyStyle: {
-                    padding: 40,
-                    borderColor: '#ff0000',
-                    borderLineWidth: [1, 0, 1, 0],
-                    fontSize: 16,
-                    color: '#4D4D4D',
-                    bgColor: '#FFF',
-                    fontFamily: 'ShuHeiTi',
+                    hover: false,
+                    linkColor: 'red',
+                    bgColor: bodyStyle_bgColor,
+                    padding: bodyStyle_padding?.split(',').map(Number) || 0,
+                    textAlign: bodyStyle_textAlign,
+                    textBaseline: bodyStyle_textBaseline,
+                    color: bodyStyle_color,
+                    strokeColor: bodyStyle_strokeColor,
+                    fontSize: bodyStyle_fontSize,
+                    fontFamily: bodyStyle_fontFamily,
+                    fontWeight: bodyStyle_fontWeight,
+                    fontStyle: bodyStyle_fontStyle,
+                    autoWrapText: bodyStyle_autoWrapText,
+                    textOverflow: bodyStyle_textOverflow,
+                    borderColor: headerStyle_borderColor,
+                    borderLineWidth: bodyStyle_borderLineWidth?.split(',').map(Number) || 0,
+                    borderLineDash: bodyStyle_borderLineDash?.split(',').map(Number) || 0,
+                    lineHeight: bodyStyle_lineHeight,
+                    underline: bodyStyle_underline,
+                    underlineDash: bodyStyle_underlineDash?.split(',').map(Number) || 0,
+                    underlineOffset: bodyStyle_underlineOffset,
                 }
             },
-            // rightFrozenColCount: 1
         },
+
+
+
+        //  headerStyle_fontFamily, headerStyle_fontWeight, headerStyle_fontStyle,
+
+        // bodyStyle_padding, bodyStyle_bgColor, bodyStyle_borderLineWidth, bodyStyle_borderColor, bodyStyle_textAlign, bodyStyle_textBaseline,
+        // bodyStyle_color, bodyStyle_strokeColor, bodyStyle_fontSize, bodyStyle_fontFamily, bodyStyle_fontWeight, bodyStyle_fontStyle
+
+
         timelineHeader: {  // 时间刻度配置
             colWidth: 100,  //列宽。
             hideWeekend: false, // 是否隐藏周末。
@@ -1781,14 +1799,7 @@ const PrefabricatedChartGantt = () => {
                     }
                 }
             ],
-            // zoomScale: {
-            //     enabled: true,
-            //     dataZoomAxis: {
-            //         enabled: true,
-            //         height: 30,
-            //         delayTime: 1
-            //     },
-            // },
+
         },
         taskBar: {  // 任务条配置
             startDateField: 'start',  // 开始日期字段
@@ -1797,7 +1808,7 @@ const PrefabricatedChartGantt = () => {
             baselineEndDateField: 'baselineEndDateField',
 
             progressField: 'progress',  // 进度字段
-            baselineProgressField: 'progress',  // 进度字段
+
             labelText: '{title}  完成 {progress}%  {start}/{end}',  // 任务条标签格式
             labelTextStyle: {  // 任务条标签样式
                 padding: 40,
@@ -1805,28 +1816,27 @@ const PrefabricatedChartGantt = () => {
                 fontFamily: 'DIN',
                 fontSize: 16,
                 textAlign: 'right',
-                textOverflow: true,
+                textOverflow: 'ellipsis',
                 // orient: 'center',
                 // orientHandleWithOverflow: 'right' // 超出隐藏
             },
             baselineStyle:
                 { barColor: '#d3d3d3', completedBarColor: '#a9a9a9', width: 20, cornerRadius: 3, borderWidth: 1, borderColor: 'red' }
             ,
-            barStyle: (e) => {
-                return {  // 任务条样式
-                    width: 24,
-                    /** 任务条的颜色 */
-                    barColor: '#ee8800',
-                    /** 已完成部分任务条的颜色 */
-                    completedBarColor: '#91e8e0',
-                    /** 任务条的圆角 */
-                    cornerRadius: 8,
-                    /** 任务条的边框 */
-                    borderLineWidth: 1,
-                    /** 边框颜色 */
-                    borderColor: 'red',
-                    paddingTop: 16
-                }
+            barStyle:
+            {  // 任务条样式
+                width: 24,
+                /** 任务条的颜色 */
+                barColor: '#ee8800',
+                /** 已完成部分任务条的颜色 */
+                completedBarColor: '#91e8e0',
+                /** 任务条的圆角 */
+                cornerRadius: 8,
+                /** 任务条的边框 */
+                borderLineWidth: 1,
+                /** 边框颜色 */
+                borderColor: 'red',
+                paddingTop: 16
             },
             // customLayout: (e) => {
             //     const { width, height, index, startDate, endDate, taskDays, progress, taskRecord, ganttInstance } = e
@@ -1915,7 +1925,7 @@ const PrefabricatedChartGantt = () => {
             //     // customLayout: true, // 是否自定义布局
             // },
         },
-        tasksShowMode: 'Sub_Tasks_Separate',
+        tasksShowMode: TYPES.TasksShowMode.Project_Sub_Tasks_Inline,
         taskKeyField: 'id', // 任务条唯一标识字段
         grid: { // 网格配置
             backgroundColor: '#ff00ff00', // 背景颜色
@@ -1978,8 +1988,8 @@ const PrefabricatedChartGantt = () => {
             }
         },
 
-        // minDate: '2024/8/01', // 最小日期
-        // maxDate: '2024/8/31', // 最大日期
+        minDate: '2024/8/01', // 最小日期
+        maxDate: '2024/8/31', // 最大日期
 
         headerRowHeight: 40, // 头行高度
         rowHeight: 40, // 行高
@@ -2002,7 +2012,6 @@ const PrefabricatedChartGantt = () => {
         //         borderColor: '#e1e4e8'
         //     }
         // },
-
         scrollStyle: {
             hoverOn: true,
             barToSide: false,
@@ -2015,6 +2024,8 @@ const PrefabricatedChartGantt = () => {
         }
     };
 
+
+    console.log(option)
     useEffect(() => {
         if (GanttRef.current && !ganttInstance.current) {
             ganttInstance.current = new Gantt(GanttRef.current, option)
@@ -2027,9 +2038,8 @@ const PrefabricatedChartGantt = () => {
         }
     }, [])
 
-
     return (
-        <div className='PrefabricatedChartGantt' >
+        <div className='PrefabricatedChartGantt'   >
             <div ref={GanttRef} />
         </div>
     )

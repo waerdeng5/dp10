@@ -3625,12 +3625,12 @@
     "@visactor/vutils" "~1.0.12"
     react-is "^18.2.0"
 
-"@visactor/react-vtable@^1.26.7":
-  version "1.26.7"
-  resolved "https://registry.npmmirror.com/@visactor/react-vtable/-/react-vtable-1.26.7.tgz#12b509721b7e6a91cd7f8651e59a802bdff741bc"
-  integrity sha512-lG+OSQyzmdI3VY7tDAWnYcllHL41/b4EEH6Ye0HfaG8LLWgrzqhUT5BtSUG5+EQRsFoxO4k0jltzlXnPJeHaAA==
+"@visactor/react-vtable@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.npmmirror.com/@visactor/react-vtable/-/react-vtable-1.26.0.tgz#3e74d13c0f9f551694d706e673a274cec9039558"
+  integrity sha512-l8lzZe8UC8kSBavMGk6rJigauy9XV0RJRaa3hW7rSNJz2fs8qgaCaiYLiI5WLzcvYbjIEDJkdaGbJxB9ELDzCQ==
   dependencies:
-    "@visactor/vtable" "1.26.7"
+    "@visactor/vtable" "1.26.0"
     "@visactor/vutils" "~1.0.17"
     react-is "^18.2.0"
     react-reconciler "0.29.0"
@@ -3729,23 +3729,12 @@
     "@visactor/vrender-core" "1.0.39"
     "@visactor/vutils" "~1.0.12"
 
-"@visactor/vrender-animate@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/@visactor/vrender-animate/-/vrender-animate-1.1.4.tgz#bf653c325523b97b6947908b7c7ad90de0c86a31"
-  integrity sha512-XBaCXMLSNw9E+htAEaqjby28mdINyVokNkLjKJ/ukmGobi3XX8siekXTNzCfe9M9UG4QGRTqyph848sxLB02Tw==
+"@visactor/vrender-animate@1.0.46", "@visactor/vrender-animate@~1.0.41":
+  version "1.0.46"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-animate/-/vrender-animate-1.0.46.tgz#ec85bc2ae8f26d52d6ce73409e15935127182afb"
+  integrity sha512-FXKot9m7M+oIlX3Ztp46B7poyc6jYDsfdxSsqqipOUtgUmVx9QJLJSEXRvdgp68cbkUFm+s+ON0bHZzZG9BOQA==
   dependencies:
-    "@visactor/vrender-core" "1.1.4"
-    "@visactor/vutils" "~1.0.12"
-
-"@visactor/vrender-components@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/@visactor/vrender-components/-/vrender-components-1.1.4.tgz#7288aa932a8a26d42cca6096e8450a2b1d8ade50"
-  integrity sha512-N1bnIuefe6Lms7Ij8NGjKfNUYQpZ+M8RYsnjBR2So0wmnxAnXUTgqbpWDT9DiXzRF17qYSkF0HZJIdS/wN2o3Q==
-  dependencies:
-    "@visactor/vrender-animate" "1.1.4"
-    "@visactor/vrender-core" "1.1.4"
-    "@visactor/vrender-kits" "1.1.4"
-    "@visactor/vscale" "~1.0.12"
+    "@visactor/vrender-core" "1.0.46"
     "@visactor/vutils" "~1.0.12"
 
 "@visactor/vrender-components@~1.0.39":
@@ -3759,6 +3748,17 @@
     "@visactor/vscale" "~1.0.12"
     "@visactor/vutils" "~1.0.12"
 
+"@visactor/vrender-components@~1.0.41":
+  version "1.0.46"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-components/-/vrender-components-1.0.46.tgz#01a78ffbb308af668467ec40551e564f7b409fad"
+  integrity sha512-Jgn+Wf1U4NHamCrNHdD0vIqf31BuGITYmd8/NZ8yhYa/QQ/Pw52Ybr3GUJ0oiSb9xc1nGNY097g8EkUnIp0KHQ==
+  dependencies:
+    "@visactor/vrender-animate" "1.0.46"
+    "@visactor/vrender-core" "1.0.46"
+    "@visactor/vrender-kits" "1.0.46"
+    "@visactor/vscale" "~1.0.12"
+    "@visactor/vutils" "~1.0.12"
+
 "@visactor/vrender-core@1.0.39", "@visactor/vrender-core@~1.0.39":
   version "1.0.39"
   resolved "https://registry.npmmirror.com/@visactor/vrender-core/-/vrender-core-1.0.39.tgz#74696b88a7d7f7f25d337b3fb0e4c2f2fe699954"
@@ -3767,10 +3767,10 @@
     "@visactor/vutils" "~1.0.12"
     color-convert "2.0.1"
 
-"@visactor/vrender-core@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/@visactor/vrender-core/-/vrender-core-1.1.4.tgz#f93f18b7b65c3e3ad80b0418835ab60742603416"
-  integrity sha512-AyMKFohr/iK1Wc5jxvE/04MLcFI0VAR5qleDy+b2WwLi7UoeXn0tBhtzz72xIOKU1OrzvmflWsVmdnlh6ittwg==
+"@visactor/vrender-core@1.0.46", "@visactor/vrender-core@~1.0.41":
+  version "1.0.46"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-core/-/vrender-core-1.0.46.tgz#1d266d7cd409557e257437cf7febc9a9ccdbdc51"
+  integrity sha512-iHTJ8+SZnCxXSwvyRqUJhZfvVFlsFMQQK7de+1rtdqFSS2IGRJBxXHJCaN9te7oSiStmPJHR7Eg5/QRTZtx8Vw==
   dependencies:
     "@visactor/vutils" "~1.0.12"
     color-convert "2.0.1"
@@ -3787,27 +3787,17 @@
     lottie-web "^5.12.2"
     roughjs "4.6.6"
 
-"@visactor/vrender-kits@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/@visactor/vrender-kits/-/vrender-kits-1.1.4.tgz#59c9384cbd4367f32457601ac8888845828b5a59"
-  integrity sha512-YD1y2TWh5yl6AzpW47HPcYogk0d6KntuwUrGocXqSkLXwzsGnYntE9RvAEGTu4ketdeahh+8/0w34d6BU0Hzig==
+"@visactor/vrender-kits@1.0.46", "@visactor/vrender-kits@~1.0.41":
+  version "1.0.46"
+  resolved "https://registry.npmmirror.com/@visactor/vrender-kits/-/vrender-kits-1.0.46.tgz#c9916f8eed8eccd293ee97e8716ad6e1f64be7c9"
+  integrity sha512-JnJeu2ImSgILz8LbX2l9vvpz8tQfCvbSq4Dno8GKXsr3TUhydu+mIMkcFXM++wIEBdKRe4LFmssrQVkstyVxRA==
   dependencies:
     "@resvg/resvg-js" "2.4.1"
-    "@visactor/vrender-core" "1.1.4"
+    "@visactor/vrender-core" "1.0.46"
     "@visactor/vutils" "~1.0.12"
     gifuct-js "2.1.2"
     lottie-web "^5.12.2"
     roughjs "4.6.6"
-
-"@visactor/vrender@1.1.4":
-  version "1.1.4"
-  resolved "https://registry.npmmirror.com/@visactor/vrender/-/vrender-1.1.4.tgz#2fa22dde3c35dbfd49893dd48c3bb0142b0d10b7"
-  integrity sha512-+T09pS5EJ2HizxMCa3r8MuvgcWnoJpGUK2ykLZLcR6w+5kfpfbu2B8uQzetTOKn1CVIhDbuO05monfI7mCYGQA==
-  dependencies:
-    "@visactor/vrender-animate" "1.1.4"
-    "@visactor/vrender-components" "1.1.4"
-    "@visactor/vrender-core" "1.1.4"
-    "@visactor/vrender-kits" "1.1.4"
 
 "@visactor/vscale@1.0.21", "@visactor/vscale@~1.0.12":
   version "1.0.21"
@@ -3823,36 +3813,35 @@
   dependencies:
     "@visactor/vutils" "1.0.23"
 
-"@visactor/vtable-editors@1.26.7":
-  version "1.26.7"
-  resolved "https://registry.npmmirror.com/@visactor/vtable-editors/-/vtable-editors-1.26.7.tgz#fc154befc164fdfcffa5812181e20cf369e734ce"
-  integrity sha512-BQChgCgFMqiv/PUdfjAtOK10PVH9ZEViwjZsKL6RMisDVFmQnHQvXl5Y5xpNOYipiGtCaVMpQOGq0WPwhXtaMA==
+"@visactor/vtable-editors@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.npmmirror.com/@visactor/vtable-editors/-/vtable-editors-1.26.0.tgz#932c6930613f5cf0ea411a11cd60b9b99f0b6ee2"
+  integrity sha512-770NdvhjoWXTYSw8Q/Q3R6VtIxyGHox04JlaCSZkSJnTztR5WIO8VsRvBEq12CxhzX4Key9DWhv6n1EsVFm6hg==
 
-"@visactor/vtable-gantt@^1.26.7":
-  version "1.26.7"
-  resolved "https://registry.npmmirror.com/@visactor/vtable-gantt/-/vtable-gantt-1.26.7.tgz#707f6f97d0f57c38494d6fb4ef51cf530b7c253d"
-  integrity sha512-Ek1eYGCFI6uOVDKE04tpKEZBNZmoM9OQ7L9LzkkhXzkDOKwTZiyD3KGchPlyWpx8XBZ+V8nYUkRC0dQp2+TQkQ==
+"@visactor/vtable-gantt@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.npmmirror.com/@visactor/vtable-gantt/-/vtable-gantt-1.26.0.tgz#b6c08ddf876785bcba1b4e18b3c594abc80e2f13"
+  integrity sha512-Rpb6RCWm5BzkTuhJ6HTKngMqCMVvWgTdvxyTPhb0MCiYQFK3RT/RXfLZEVZQM9uYe5WzZwXTgI0FjIbGKiFv8g==
   dependencies:
     "@visactor/vdataset" "~1.0.17"
     "@visactor/vscale" "~1.0.17"
-    "@visactor/vtable" "1.26.7"
-    "@visactor/vtable-editors" "1.26.7"
+    "@visactor/vtable" "1.26.0"
+    "@visactor/vtable-editors" "1.26.0"
     "@visactor/vutils" "~1.0.17"
     cssfontparser "^1.2.1"
 
-"@visactor/vtable@1.26.7", "@visactor/vtable@^1.26.7":
-  version "1.26.7"
-  resolved "https://registry.npmmirror.com/@visactor/vtable/-/vtable-1.26.7.tgz#d1f42196fb975aafd1bd5befd88c27176599edcd"
-  integrity sha512-PAm1oSPg4MWFgrNkuvJd1CYYuy7R5hrlcN2FJnz3YIEqurAn+G6+T5iGkA999LCztDTtP5s1tU7xpbndPGrj6w==
+"@visactor/vtable@1.26.0":
+  version "1.26.0"
+  resolved "https://registry.npmmirror.com/@visactor/vtable/-/vtable-1.26.0.tgz#17b0198e3c082347c4f4ffca66e74f23525e919f"
+  integrity sha512-hHp34GBL65sWDuQvbJXLTWvGnPPJMIw9Jx+Bp6t4YZkfFhUUbaUlKRJ0ASo8IoU5SjSD68PuXoyeI0JRuJaV7Q==
   dependencies:
     "@visactor/vdataset" "~1.0.17"
-    "@visactor/vrender" "1.1.4"
-    "@visactor/vrender-animate" "1.1.4"
-    "@visactor/vrender-components" "1.1.4"
-    "@visactor/vrender-core" "1.1.4"
-    "@visactor/vrender-kits" "1.1.4"
+    "@visactor/vrender-animate" "~1.0.41"
+    "@visactor/vrender-components" "~1.0.41"
+    "@visactor/vrender-core" "~1.0.41"
+    "@visactor/vrender-kits" "~1.0.41"
     "@visactor/vscale" "~1.0.17"
-    "@visactor/vtable-editors" "1.26.7"
+    "@visactor/vtable-editors" "1.26.0"
     "@visactor/vutils" "~1.0.17"
     "@visactor/vutils-extension" "~2.0.12"
     cssfontparser "^1.2.1"

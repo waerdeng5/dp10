@@ -6639,11 +6639,12 @@ const PrefabricatedChartGantt = [
             {
                 span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_headerStyle', label: '头部样式', collapsible: true,
                 children: [
-                    { span: 24, formType: 'NUMBER', name: 'headerStyle_padding', label: '内填充', rules: true },
                     { span: 24, formType: 'COLOR', name: 'headerStyle_bgColor', label: '背景颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'headerStyle_borderLineWidth', label: '边框线', rules: true },
-                    { span: 24, formType: 'COLOR', name: 'headerStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'RADIO', name: 'headerStyle_textAlign', label: '水平对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+                    { span: 24, formType: 'INPUT', name: 'headerStyle_padding', label: '内填充', rules: true },
+                    {
+                        span: 24, formType: 'RADIO', name: 'headerStyle_textAlign', label: '水平对齐', rules: true,
+                        valueEnum: MappingData.System__AlignmentLCR
+                    },
                     {
                         span: 24, formType: 'RADIO', name: 'headerStyle_textBaseline', label: '垂直对齐', rules: true,
                         valueEnum: MappingData.Charts__VchartsTextBaseline
@@ -6654,18 +6655,32 @@ const PrefabricatedChartGantt = [
                     { span: 24, formType: 'SELECT', name: 'headerStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
                     { span: 24, formType: 'RADIO', name: 'headerStyle_fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
                     { span: 24, formType: 'RADIO', name: 'headerStyle_fontStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_autoWrapText', label: '自动换行', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_textOverflow', label: '省略方式', rules: true, valueEnum: MappingData.Start__backType },
+                    { span: 24, formType: 'COLOR', name: 'headerStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'headerStyle_borderLineWidth', label: '边框线', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'headerStyle_borderLineDash', label: '虚线样式', rules: true },
+
+                    { span: 24, formType: 'NUMBER', name: 'headerStyle_lineHeight', label: '行高', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'headerStyle_underline', label: '下划线', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'headerStyle_underlineDash', label: '下划线虚线样式', rules: true,
+                        jugde: [{ field: 'headerStyle_underline', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'headerStyle_underlineOffset', label: '下划线与文字的间隔距离', rules: true,
+                        jugde: [{ field: 'headerStyle_underline', value: [true] }]
+                    },
                 ]
             },
             {
                 span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_bodyStyle', label: '列表样式', collapsible: true,
                 children: [
-                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_padding', label: '内填充', rules: true },
                     { span: 24, formType: 'COLOR', name: 'bodyStyle_bgColor', label: '背景颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_borderLineWidth', label: '边框线', rules: true },
-                    { span: 24, formType: 'COLOR', name: 'bodyStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'bodyStyle_padding', label: '内填充', rules: true },
                     {
                         span: 24, formType: 'RADIO', name: 'bodyStyle_textAlign', label: '水平对齐', rules: true,
-                        valueEnum: MappingData.Charts__VchartsTextAlign
+                        valueEnum: MappingData.System__AlignmentLCR
                     },
                     {
                         span: 24, formType: 'RADIO', name: 'bodyStyle_textBaseline', label: '垂直对齐', rules: true,
@@ -6677,9 +6692,24 @@ const PrefabricatedChartGantt = [
                     { span: 24, formType: 'SELECT', name: 'bodyStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
                     { span: 24, formType: 'RADIO', name: 'bodyStyle_fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
                     { span: 24, formType: 'RADIO', name: 'bodyStyle_fontStyle', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'bodyStyle_autoWrapText', label: '自动换行', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 24, formType: 'RADIO', name: 'bodyStyle_textOverflow', label: '省略方式', rules: true, valueEnum: MappingData.Start__backType },
+                    { span: 24, formType: 'COLOR', name: 'bodyStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'bodyStyle_borderLineWidth', label: '边框线', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'bodyStyle_borderLineDash', label: '虚线样式', rules: true },
+
+                    { span: 24, formType: 'NUMBER', name: 'bodyStyle_lineHeight', label: '行高', rules: true },
+                    { span: 24, formType: 'RADIO', name: 'bodyStyle_underline', label: '下划线', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'bodyStyle_underlineDash', label: '下划线虚线样式', rules: true,
+                        jugde: [{ field: 'bodyStyle_underline', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'bodyStyle_underlineOffset', label: '下划线与文字的间隔距离', rules: true,
+                        jugde: [{ field: 'bodyStyle_underline', value: [true] }]
+                    },
                 ]
             },
-
         ]
     },
     {
@@ -6946,7 +6976,7 @@ const PrefabricatedChartGantt = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_rowSeriesNumber', label: '行号配置', collapsible: true, defaultCollapsed: false,
+        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_rowSeriesNumber', label: '行号配置', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 12, formType: 'RADIO', name: 'rowSeriesNumber_visible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'INPUT', name: 'rowSeriesNumber_title', label: '行号标题' },
