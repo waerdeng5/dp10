@@ -42,6 +42,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
             return setComponentStatus({ loading: false, status: true, error: err, Template: null })
         }
         const pageData = await Decrypt(res)
+        console.log('pageData', pageData)
         StartEvent.emit({ type: 'setCurrent', data: pageData })
         const { start_init, start_home, path, start_page, page_type, page_diyUrl } = pageData
 

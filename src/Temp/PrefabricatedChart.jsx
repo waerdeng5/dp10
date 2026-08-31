@@ -1615,8 +1615,8 @@ const PrefabricatedChartGantt = () => {
             id: 1,
             title: 'Task 1',
             hierarchyState: 'expand',
-            // baselineStartDateField: '2024-08-02',
-            // baselineEndDateField: '2024-08-10',
+            baselineStartDateField: '2024-08-02',
+            baselineEndDateField: '2024-08-10',
             start: "2024-08-01",
             end: "2024-08-20",
 
@@ -1626,51 +1626,51 @@ const PrefabricatedChartGantt = () => {
             ]
         },
         { id: 3, title: "子任务 #1", start: "2024-08-01", end: "2024-08-11", progress: 60, priority: 'P0' },
-        {
-            id: 2,
-            title: 'Task 2',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '07/24/2024',
-            end: '08/04/2024',
-            progress: 60,
-            priority: 'P0'
-        },
-        {
-            id: 3,
-            title: 'Task 3',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-08-04',
-            end: '2024-08-04',
-            progress: 100,
-            priority: 'P1'
-        },
-        {
-            id: 4,
-            title: 'Task 4',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-26',
-            end: '2024-07-28',
-            progress: 31,
-            priority: 'P0'
-        },
-        {
-            id: 5,
-            title: 'Task 5',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-26',
-            end: '2024-07-28',
-            progress: 60,
-            priority: 'P0'
-        },
-        {
-            id: 6,
-            title: 'Task 6',
-            developer: 'liufangfang.jane@bytedance.com',
-            start: '2024-07-29',
-            end: '2024-08-11',
-            progress: 100,
-            priority: 'P1'
-        }
+        // {
+        //     id: 2,
+        //     title: 'Task 2',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '07/24/2024',
+        //     end: '08/04/2024',
+        //     progress: 60,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 3,
+        //     title: 'Task 3',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-08-04',
+        //     end: '2024-08-04',
+        //     progress: 100,
+        //     priority: 'P1'
+        // },
+        // {
+        //     id: 4,
+        //     title: 'Task 4',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-26',
+        //     end: '2024-07-28',
+        //     progress: 31,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 5,
+        //     title: 'Task 5',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-26',
+        //     end: '2024-07-28',
+        //     progress: 60,
+        //     priority: 'P0'
+        // },
+        // {
+        //     id: 6,
+        //     title: 'Task 6',
+        //     developer: 'liufangfang.jane@bytedance.com',
+        //     start: '2024-07-29',
+        //     end: '2024-08-11',
+        //     progress: 100,
+        //     priority: 'P1'
+        // }
     ];
 
     const columns = [
@@ -1797,6 +1797,7 @@ const PrefabricatedChartGantt = () => {
             baselineEndDateField: 'baselineEndDateField',
 
             progressField: 'progress',  // 进度字段
+            baselineProgressField: 'progress',  // 进度字段
             labelText: '{title}  完成 {progress}%  {start}/{end}',  // 任务条标签格式
             labelTextStyle: {  // 任务条标签样式
                 padding: 40,
@@ -1808,65 +1809,67 @@ const PrefabricatedChartGantt = () => {
                 // orient: 'center',
                 // orientHandleWithOverflow: 'right' // 超出隐藏
             },
-            // barStyle: (e) => {
-            //     return false
-            //     return {  // 任务条样式
-            //         width: 24,
-            //         /** 任务条的颜色 */
-            //         barColor: '#ee8800',
-            //         /** 已完成部分任务条的颜色 */
-            //         completedBarColor: '#91e8e0',
-            //         /** 任务条的圆角 */
-            //         cornerRadius: 8,
-            //         /** 任务条的边框 */
-            //         borderLineWidth: 1,
-            //         /** 边框颜色 */
-            //         borderColor: 'red',
-            //         paddingTop: 16
-            //     }
-            // },
-            customLayout: (e) => {
-                const { width, height, index, startDate, endDate, taskDays, progress, taskRecord, ganttInstance } = e
-                // return false
-
-                const container = new VRender.Group({
-                    width,
-                    height,
-                    cornerRadius: 20,
-                    fill: {
-                        gradient: 'linear',
-                        x0: 0,
-                        y0: 0,
-                        x1: 1,
-                        y1: 0,
-                        stops: [
-                            {
-                                offset: 0,
-                                color: '#f00'
-                            },
-                            {
-                                offset: 0.5,
-                                color: '#0f0'
-                            },
-                            {
-                                offset: 1,
-                                color: '#00f'
-                            }
-                        ]
-                    },
-                    display: 'flex',
-                    flexDirection: 'row',
-                    flexWrap: 'nowrap'
-                });
-
-                console.log(container)
-
-                return {
-                    rootContainer: container
-                    // renderDefaultBar: true
-                    // renderDefaultText: true
-                };
+            baselineStyle:
+                { barColor: '#d3d3d3', completedBarColor: '#a9a9a9', width: 20, cornerRadius: 3, borderWidth: 1, borderColor: 'red' }
+            ,
+            barStyle: (e) => {
+                return {  // 任务条样式
+                    width: 24,
+                    /** 任务条的颜色 */
+                    barColor: '#ee8800',
+                    /** 已完成部分任务条的颜色 */
+                    completedBarColor: '#91e8e0',
+                    /** 任务条的圆角 */
+                    cornerRadius: 8,
+                    /** 任务条的边框 */
+                    borderLineWidth: 1,
+                    /** 边框颜色 */
+                    borderColor: 'red',
+                    paddingTop: 16
+                }
             },
+            // customLayout: (e) => {
+            //     const { width, height, index, startDate, endDate, taskDays, progress, taskRecord, ganttInstance } = e
+            //     // return false
+
+            //     const container = new VRender.Group({
+            //         width,
+            //         height,
+            //         cornerRadius: 20,
+            //         fill: {
+            //             gradient: 'linear',
+            //             x0: 0,
+            //             y0: 0,
+            //             x1: 1,
+            //             y1: 0,
+            //             stops: [
+            //                 {
+            //                     offset: 0,
+            //                     color: '#f00'
+            //                 },
+            //                 {
+            //                     offset: 0.5,
+            //                     color: '#0f0'
+            //                 },
+            //                 {
+            //                     offset: 1,
+            //                     color: '#00f'
+            //                 }
+            //             ]
+            //         },
+            //         display: 'flex',
+            //         flexDirection: 'row',
+            //         flexWrap: 'nowrap'
+            //     });
+
+            //     console.log(container)
+
+            //     return {
+            //         rootContainer: container
+            //         // renderDefaultBar: true
+            //         // renderDefaultText: true
+            //     };
+            // },
 
             milestoneStyle: {
                 width: 16,
@@ -1912,16 +1915,13 @@ const PrefabricatedChartGantt = () => {
             //     // customLayout: true, // 是否自定义布局
             // },
         },
-        // tasksShowMode: 'Sub_Tasks_Separate',
+        tasksShowMode: 'Sub_Tasks_Separate',
         taskKeyField: 'id', // 任务条唯一标识字段
-
-        dependency: { // 依赖关系配置
-
-        },
         grid: { // 网格配置
             backgroundColor: '#ff00ff00', // 背景颜色
             weekendBackgroundColor: '#f0ff0000', // 周末背景颜色
             verticalLineDependenceOnTimeScale: 'week',
+
             verticalLine: {
                 lineWidth: 1,
                 lineColor: '#e1e4e8',
@@ -1944,7 +1944,7 @@ const PrefabricatedChartGantt = () => {
                 },
                 content: '1123',
                 contentStyle: {
-                    color: 'red',
+                    color: '#fff',
                     fontSize: 16
                     // color?: string;
                     // fontSize?: string;
@@ -1953,8 +1953,9 @@ const PrefabricatedChartGantt = () => {
                     // backgroundColor?: string;
                     // cornerRadius?: string;
                 },
-            }
+            },
         ],
+
         frame: { // 整个外边框及横纵分割线配置。
             outerFrameStyle: {   // 外框样式
                 borderLineWidth: 1,
@@ -1983,6 +1984,11 @@ const PrefabricatedChartGantt = () => {
         headerRowHeight: 40, // 头行高度
         rowHeight: 40, // 行高
 
+        overscrollBehavior: 'none', // 涅出滚动行为
+        dateFormat: 'yyyy-MM-dd', // 日期格式
+        underlayBackgroundColor: '#f7f7f700', // 背景颜色
+
+
         // rowSeriesNumber: { // 行号配置
         //     title: '行号',
         //     // field:'rowNumber', // 行号字段
@@ -1997,16 +2003,12 @@ const PrefabricatedChartGantt = () => {
         //     }
         // },
 
-        overscrollBehavior: 'none', // 涅出滚动行为
-        dateFormat: 'yyyy-MM-dd', // 日期格式
-        underlayBackgroundColor: '#f7f7f700', // 背景颜色
-
         scrollStyle: {
             hoverOn: true,
             barToSide: false,
             ignoreFrozenCols: false,
             scrollRailColor: 'RGBA(246,246,246,0.5)',
-            visible: 'focus',
+            visible: 'always',
             width: 16,
             scrollSliderCornerRadius: 2,
             scrollSliderColor: '#5cb85c'

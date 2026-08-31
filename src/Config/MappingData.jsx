@@ -1584,6 +1584,27 @@ export const MappingData = {
         { value: 'barStyle', label: '系统条图' },
         { value: 'customLayout', label: '自定义条图' },
     ],
+    Charts__ganntBaselinePosition: [
+        { value: 'top', label: '上方' },
+        { value: 'bottom', label: '下方' },
+        { value: 'overlap', label: '重叠' },
+    ],
+    Charts__ganntMarkLinePosition: [
+        { value: 'left', label: '左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'middle', label: '居中' },
+        { value: 'date', label: '日期' },
+    ],
+    Charts__ganntOverscrollBehavior: [
+        { value: 'auto', label: '浏览器默认行为' },
+        { value: 'none', label: '不触发父级' },
+    ],
+    Charts__ganntScrollStyleVisible: [
+        { value: 'always', label: '常驻显示' },
+        { value: 'scrolling', label: '滚动时显示' },
+        { value: 'none', label: '不显示' },
+        { value: 'focus', label: '聚焦在画布' },
+    ],
 
     // !!! 大屏配置
     Start__backType: [

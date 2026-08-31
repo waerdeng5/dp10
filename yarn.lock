@@ -3840,7 +3840,7 @@
     "@visactor/vutils" "~1.0.17"
     cssfontparser "^1.2.1"
 
-"@visactor/vtable@1.26.7":
+"@visactor/vtable@1.26.7", "@visactor/vtable@^1.26.7":
   version "1.26.7"
   resolved "https://registry.npmmirror.com/@visactor/vtable/-/vtable-1.26.7.tgz#d1f42196fb975aafd1bd5befd88c27176599edcd"
   integrity sha512-PAm1oSPg4MWFgrNkuvJd1CYYuy7R5hrlcN2FJnz3YIEqurAn+G6+T5iGkA999LCztDTtP5s1tU7xpbndPGrj6w==

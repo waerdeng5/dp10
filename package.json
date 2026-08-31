@@ -21,6 +21,7 @@
     "@turf/turf": "^7.3.4",
     "@visactor/react-vchart": "^2.0.14",
     "@visactor/react-vtable": "^1.26.7",
+    "@visactor/vtable": "^1.26.7",
     "@visactor/vtable-gantt": "^1.26.7",
     "ahooks": "^3.9.6",
     "alova": "^3.3.4",
