@@ -1612,36 +1612,52 @@ const recordsTestData = [
         id: 1,
         title: '土方工程',
         hierarchyState: 'expand',
-        type: 'project',
+        // baselineStartDateField: '2026-08-01',
+        // baselineEndDateField: '2026-08-30',
+
+        start: "2026-08-12",
+        end: "2026-08-26",
+        progress: 40,
+
+        // type: 'project',
         children: [
-            { id: 11, title: "田块平整", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
-            { id: 12, title: "土方开挖", start: "2024-08-05", end: "2024-08-25", progress: 60, priority: 'P0' },
-            { id: 13, title: "土方回填", start: "2024-08-10", end: "2024-08-15", progress: 60, priority: 'P0' },
-            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+            { id: 14, title: "超期", type: "milestone", start: "2026-08-30" },
+            {
+                id: 11,
+                title: "田地平整",
+                baselineStartDateField: '2026-08-10',
+                baselineEndDateField: '2026-08-20',
+                start: "2026-08-10",
+                end: "2026-08-20",
+                progress: 50,
+                // priority: 'P0'
+            },
+            { id: 12, title: "土方开挖", start: "2026-08-05", end: "2026-08-25", progress: 100, priority: 'P0' },
+            { id: 13, title: "土方回填", start: "2026-08-10", end: "2026-08-15", progress: 0, priority: 'P0' },
         ]
     },
     {
         id: 2,
         title: '灌溉工程',
         hierarchyState: 'expand',
-        type: 'project',
+        // type: 'project',
         children: [
-            { id: 11, title: "塘坝清淤加固", start: "2024-08-12", end: "2024-08-26", progress: 60, priority: 'P0' },
-            { id: 12, title: "蓄水池修建", start: "2024-08-15", end: "2024-08-20", progress: 60, priority: 'P0' },
-            { id: 13, title: "机井新打 / 维修", start: "2024-08-17", end: "2024-08-24", progress: 60, priority: 'P0' },
-            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+            { id: 11, title: "塘坝清淤加固", start: "2026-08-12", end: "2026-08-26", progress: 60, priority: 'P0' },
+            { id: 12, title: "蓄水池修建", start: "2026-08-15", end: "2026-08-20", progress: 60, priority: 'P0' },
+            { id: 13, title: "机井新打 / 维修", start: "2026-08-17", end: "2026-08-24", progress: 60, priority: 'P0' },
+            { id: 14, title: "里程碑", type: "milestone", start: "2026-08-8" }
         ]
     },
     {
         id: 3,
         title: '排水工程',
         hierarchyState: 'expand',
-        type: 'project',
+        // type: 'project',
         children: [
-            { id: 11, title: "排水沟衬砌", start: "2024-08-08", end: "2024-09-15", progress: 60, priority: 'P0' },
-            { id: 12, title: "生态排水沟施工", start: "2024-08-18", end: "2024-08-25", progress: 60, priority: 'P0' },
-            { id: 13, title: "排水沟衬砌、生态排水沟施工", start: "2024-08-01", end: "2024-08-15", progress: 60, priority: 'P0' },
-            { id: 14, title: "里程碑", type: "milestone", start: "2024-08-8" }
+            { id: 11, title: "排水沟衬砌", start: "2026-08-08", end: "2026-09-15", progress: 60, priority: 'P0' },
+            { id: 12, title: "生态排水沟施工", start: "2026-08-18", end: "2026-08-25", progress: 60, priority: 'P0' },
+            { id: 13, title: "排水沟衬砌、生态排水沟施工", start: "2026-08-01", end: "2026-08-15", progress: 60, priority: 'P0' },
+            { id: 14, title: "里程碑", type: "milestone", start: "2026-08-8" }
         ]
     },
 ]
@@ -1674,10 +1690,66 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         bodyStyle_borderColor, bodyStyle_borderLineWidth, bodyStyle_borderLineDash,
         bodyStyle_lineHeight, bodyStyle_underline, bodyStyle_underlineDash, bodyStyle_underlineOffset,
 
+        timelineHeader_colWidth, timelineHeader_backgroundColor, timelineHeader_hideWeekend, timelineHeader_weekendColWidth,
+        timelineHeader_horizontalLine_lineColor, timelineHeader_horizontalLine_lineWidth, timelineHeader_horizontalLine_lineDash,
+        timelineHeader_verticalLine_lineColor, timelineHeader_verticalLine_lineWidth, timelineHeader_verticalLine_lineDash,
+        timelineHeader_scales, frame_verticalSplitLineMoveable, headerRowHeight, rowHeight, dateFormat, minDate, maxDate,
+        overscrollBehavior, underlayBackgroundColor, frame_outerFrameStyle_borderColor,
+        frame_outerFrameStyle_borderLineWidth, frame_outerFrameStyle_borderLineDash, frame_outerFrameStyle_cornerRadius,
+        frame_verticalSplitLineHighlight_lineColor, frame_verticalSplitLineHighlight_lineWidth, frame_verticalSplitLineHighlight_lineDash,
+        frame_verticalSplitLine_lineColor, frame_verticalSplitLine_lineWidth, frame_verticalSplitLine_lineDash,
+        frame_horizontalSplitLine_lineColor, frame_horizontalSplitLine_lineWidth, frame_horizontalSplitLine_lineDash,
+
+        taskBar_resizable, taskBar_moveable, taskBar_progressAdjustable, taskBar_moveToExtendDateRange, taskBar_selectable, taskBar_locateIcon,
+        taskBar_scheduleCreatable, taskBar_typeStatus, taskBar_isMilestone, taskBar_isLabelText, taskBar_labelText, taskBar_baselinePosition,
+        taskBar_baselineStyle_barColor, taskBar_baselineStyle_completedBarColor, taskBar_baselineStyle_width, taskBar_baselineStyle_cornerRadius, taskBar_baselineStyle_borderLineWidth, taskBar_baselineStyle_borderColor, taskBar_labelTextStyle_padding, taskBar_labelTextStyle_color,
+        taskBar_labelTextStyle_fontSize, taskBar_labelTextStyle_fontFamily, taskBar_labelTextStyle_textAlign, taskBar_labelTextStyle_textBaseline, taskBar_labelTextStyle_orient, taskBar_labelTextStyle_orientHandleWithOverflow, taskBar_labelTextStyle_textOverflow,
+        taskBar_barStyle_barColor, taskBar_barStyle_completedBarColor, taskBar_barStyle_width, taskBar_barStyle_cornerRadius, taskBar_barStyle_borderLineWidth, taskBar_barStyle_borderColor, taskBar_barStyle_minSize, taskBar_barStyle_paddingTop,
+        taskBar_milestoneStyle_borderColor, taskBar_milestoneStyle_borderLineWidth, taskBar_milestoneStyle_fillColor, taskBar_milestoneStyle_cornerRadius, taskBar_milestoneStyle_width, taskBar_milestoneStyle_labelText, taskBar_milestoneStyle_textOrient, taskBar_milestoneStyle_color, taskBar_milestoneStyle_fontSize, taskBar_milestoneStyle_fontFamily, taskBar_milestoneStyle_padding,
+        grid_backgroundColor, grid_weekendBackgroundColor, grid_verticalLineDependenceOnTimeScale,
+        grid_verticalLine_lineColor, grid_verticalLine_lineWidth, grid_verticalLine_lineDash,
+        grid_horizontalLine_lineColor, grid_horizontalLine_lineWidth, grid_horizontalLine_lineDash,
+        markLine_list, rowSeriesNumber_visible, rowSeriesNumber_title, rowSeriesNumber_field, rowSeriesNumber_width,
+        rowSeriesNumber_dragOrder, rowSeriesNumber_disableColumnResize, scrollStyle_visible, scrollStyle_hoverOn, scrollStyle_barToSide,
+        scrollStyle_ignoreFrozenCols, scrollStyle_scrollRailColor, scrollStyle_scrollSliderColor, scrollStyle_scrollSliderCornerRadius,
+        scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding
     } = data
 
     const option = {
+        taskKeyField: 'id',
         records: recordsTestData,
+        // tasksShowMode: TYPES.TasksShowMode.Project_Sub_Tasks_Inline,
+        minDate,
+        maxDate,
+        headerRowHeight,
+        rowHeight,
+        overscrollBehavior,
+        dateFormat,
+        underlayBackgroundColor,
+        frame: {
+            outerFrameStyle: {
+                borderColor: frame_outerFrameStyle_borderColor,
+                borderLineWidth: frame_outerFrameStyle_borderLineWidth?.split(',').map(Number) || 0,
+                borderLineDash: frame_outerFrameStyle_borderLineDash?.split(',').map(Number) || 0,
+                cornerRadius: 0
+            },
+            verticalSplitLine: { // 垂直分割线样式
+                lineColor: frame_verticalSplitLine_lineColor,
+                lineWidth: frame_verticalSplitLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: frame_verticalSplitLine_lineDash?.split(',').map(Number) || 0,
+            },
+            horizontalSplitLine: { // 水平分割线样式
+                lineColor: frame_horizontalSplitLine_lineColor,
+                lineWidth: frame_horizontalSplitLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: frame_horizontalSplitLine_lineDash?.split(',').map(Number) || 0,
+            },
+            verticalSplitLineMoveable: frame_verticalSplitLineMoveable,
+            verticalSplitLineHighlight: { // 垂直分割线高亮样式
+                lineColor: frame_verticalSplitLineHighlight_lineColor,
+                lineWidth: frame_verticalSplitLineHighlight_lineWidth?.split(',').map(Number) || 0,
+                lineDash: frame_verticalSplitLineHighlight_lineDash?.split(',').map(Number) || 0,
+            }
+        },
         taskListTable: {
             columns: columnsTestData,
             tableWidth: taskListTable_tableWidth,
@@ -1686,7 +1758,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
             theme: {
                 headerStyle: {
                     hover: false,
-                    linkColor: 'red',
                     bgColor: headerStyle_bgColor,
                     padding: headerStyle_padding?.split(',').map(Number) || 0,
                     textAlign: headerStyle_textAlign,
@@ -1709,7 +1780,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 },
                 bodyStyle: {
                     hover: false,
-                    linkColor: 'red',
                     bgColor: bodyStyle_bgColor,
                     padding: bodyStyle_padding?.split(',').map(Number) || 0,
                     textAlign: bodyStyle_textAlign,
@@ -1722,311 +1792,252 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                     fontStyle: bodyStyle_fontStyle,
                     autoWrapText: bodyStyle_autoWrapText,
                     textOverflow: bodyStyle_textOverflow,
-                    borderColor: headerStyle_borderColor,
+                    borderColor: bodyStyle_borderColor,
                     borderLineWidth: bodyStyle_borderLineWidth?.split(',').map(Number) || 0,
                     borderLineDash: bodyStyle_borderLineDash?.split(',').map(Number) || 0,
                     lineHeight: bodyStyle_lineHeight,
                     underline: bodyStyle_underline,
                     underlineDash: bodyStyle_underlineDash?.split(',').map(Number) || 0,
                     underlineOffset: bodyStyle_underlineOffset,
-                }
-            },
-        },
-
-
-
-        //  headerStyle_fontFamily, headerStyle_fontWeight, headerStyle_fontStyle,
-
-        // bodyStyle_padding, bodyStyle_bgColor, bodyStyle_borderLineWidth, bodyStyle_borderColor, bodyStyle_textAlign, bodyStyle_textBaseline,
-        // bodyStyle_color, bodyStyle_strokeColor, bodyStyle_fontSize, bodyStyle_fontFamily, bodyStyle_fontWeight, bodyStyle_fontStyle
-
-
-        timelineHeader: {  // 时间刻度配置
-            colWidth: 100,  //列宽。
-            hideWeekend: false, // 是否隐藏周末。
-            weekendColWidth: 100,     // 周末列宽。
-            backgroundColor: '#EEF1F500',  // 时间刻度背景颜色。
-            horizontalLine: {  // 水平线。
-                lineWidth: 1,
-                lineColor: '#e1e4e8',
-                lineDash: [10, 5]
-            },
-            verticalLine: {  // 垂直线。
-                lineWidth: 1,
-                lineColor: '#e1e4e8',
-                lineDash: [10, 5]
-            },
-            scales: [  // 时间刻度。
-                {
-                    visible: true,  // 是否显示时间刻度
-                    rowHeight: 44, // 行高
-                    unit: 'month', // 时间单位
-                    step: 1,     // 步长
-                    startOfWeek: 'sunday', // 周一 or 周日
-                    format(date) {
-                        return dayjs(date.startDate).format('YYYY-MM');  // 格式化时间刻度
-                    },
-                    style: {  // 时间刻度样式
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: '#f8f8f8',
-                        strokeColor: 'black',
-                        textAlign: 'right',
-                        textBaseline: 'bottom',
-                        textStick: true,
-                        fontFamily: 'DIN',
-                        // padding: [0, 30, 0, 20]
-                    }
                 },
-                {
-                    unit: 'day',
-                    step: 1,
-                    format(date) {
-                        // console.log(dayjs(date.startDate).format('YYYY-MM-DD HH:mm:ss'))
-                        // console.log(dayjs(date.endDate).format('YYYY-MM-DD HH:mm:ss'))
-                        // return date.dateIndex.toString();
-
-                        return dayjs(date.startDate).format('YYYY-MM-DD');  // 格式化时间刻度
-                    },
-                    style: {
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: 'white',
-                        strokeColor: 'black',
-                        textAlign: 'right',
-                        textBaseline: 'bottom',
-                        backgroundColor: '#EEF1F5'
-                    }
-                }
-            ],
-
+            },
         },
-        taskBar: {  // 任务条配置
-            startDateField: 'start',  // 开始日期字段
-            endDateField: 'end',  // 结束日期字段
+        timelineHeader: {
+            colWidth: timelineHeader_colWidth,
+            hideWeekend: timelineHeader_hideWeekend,
+            weekendColWidth: timelineHeader_weekendColWidth,
+            backgroundColor: timelineHeader_backgroundColor,
+            horizontalLine: {
+                lineColor: timelineHeader_horizontalLine_lineColor,
+                lineWidth: timelineHeader_horizontalLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: timelineHeader_horizontalLine_lineDash?.split(',').map(Number) || 0,
+            },
+            verticalLine: {
+                lineColor: timelineHeader_verticalLine_lineColor,
+                lineWidth: timelineHeader_verticalLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: timelineHeader_verticalLine_lineDash?.split(',').map(Number) || 0,
+            },
+        },
+        taskBar: {
+            //  taskBar_typeStatus 任务类型  判断条图显示内容
+            startDateField: 'start',
+            endDateField: 'end',
             baselineStartDateField: 'baselineStartDateField',
             baselineEndDateField: 'baselineEndDateField',
 
-            progressField: 'progress',  // 进度字段
 
-            labelText: '{title}  完成 {progress}%  {start}/{end}',  // 任务条标签格式
-            labelTextStyle: {  // 任务条标签样式
-                padding: 40,
-                color: '#262626',
-                fontFamily: 'DIN',
-                fontSize: 16,
-                textAlign: 'right',
-                textOverflow: 'ellipsis',
-                // orient: 'center',
-                // orientHandleWithOverflow: 'right' // 超出隐藏
-            },
-            baselineStyle:
-                { barColor: '#d3d3d3', completedBarColor: '#a9a9a9', width: 20, cornerRadius: 3, borderWidth: 1, borderColor: 'red' }
-            ,
-            barStyle:
-            {  // 任务条样式
-                width: 24,
-                /** 任务条的颜色 */
-                barColor: '#ee8800',
-                /** 已完成部分任务条的颜色 */
-                completedBarColor: '#91e8e0',
-                /** 任务条的圆角 */
-                cornerRadius: 8,
-                /** 任务条的边框 */
-                borderLineWidth: 1,
-                /** 边框颜色 */
-                borderColor: 'red',
-                paddingTop: 16
-            },
-            // customLayout: (e) => {
-            //     const { width, height, index, startDate, endDate, taskDays, progress, taskRecord, ganttInstance } = e
-            //     // return false
+            resizable: taskBar_resizable,
+            moveable: taskBar_moveable,
+            progressAdjustable: taskBar_progressAdjustable,
+            moveToExtendDateRange: taskBar_moveToExtendDateRange,
+            locateIcon: taskBar_locateIcon,
+            scheduleCreatable: taskBar_scheduleCreatable,
+            baselinePosition: taskBar_baselinePosition,
+            selectable: taskBar_selectable,
 
-            //     const container = new VRender.Group({
-            //         width,
-            //         height,
-            //         cornerRadius: 20,
-            //         fill: {
-            //             gradient: 'linear',
-            //             x0: 0,
-            //             y0: 0,
-            //             x1: 1,
-            //             y1: 0,
-            //             stops: [
-            //                 {
-            //                     offset: 0,
-            //                     color: '#f00'
-            //                 },
-            //                 {
-            //                     offset: 0.5,
-            //                     color: '#0f0'
-            //                 },
-            //                 {
-            //                     offset: 1,
-            //                     color: '#00f'
-            //                 }
-            //             ]
-            //         },
-            //         display: 'flex',
-            //         flexDirection: 'row',
-            //         flexWrap: 'nowrap'
-            //     });
-
-            //     console.log(container)
-
-            //     return {
-            //         rootContainer: container
-            //         // renderDefaultBar: true
-            //         // renderDefaultText: true
-            //     };
+            // selectedBarStyle: {
+            //     borderLineWidth: 10
+            // },
+            // hoverBarStyle: {  // 悬停任务条样式
+            //     cornerRadius: 0,
+            //     barOverlayColor: 'rgba(99, 144, 0, 0.4)'
             // },
 
+            labelText: taskBar_isLabelText ? taskBar_labelText : '',
+            labelTextStyle: {
+                padding: taskBar_labelTextStyle_padding?.split(',').map(Number) || 0,
+                color: taskBar_labelTextStyle_color,
+                fontFamily: taskBar_labelTextStyle_fontFamily,
+                fontSize: taskBar_labelTextStyle_fontSize,
+                textAlign: taskBar_labelTextStyle_textAlign,
+                textBaseline: taskBar_labelTextStyle_textBaseline,
+                orient: taskBar_labelTextStyle_orient,
+                orientHandleWithOverflow: taskBar_labelTextStyle_orientHandleWithOverflow,
+                textOverflow: taskBar_labelTextStyle_textOverflow,
+            },
+
+            baselineStyle: {
+                barColor: taskBar_baselineStyle_barColor,
+                completedBarColor: taskBar_baselineStyle_completedBarColor,
+                width: taskBar_baselineStyle_width,
+                cornerRadius: taskBar_baselineStyle_cornerRadius,
+                borderWidth: taskBar_baselineStyle_borderLineWidth,
+                borderColor: taskBar_baselineStyle_borderColor
+            },
+
+            barStyle: {
+                width: taskBar_barStyle_width,
+                barColor: taskBar_barStyle_barColor,
+                completedBarColor: taskBar_barStyle_completedBarColor,
+                cornerRadius: taskBar_barStyle_cornerRadius,
+                borderLineWidth: taskBar_barStyle_borderLineWidth,
+                borderColor: taskBar_barStyle_borderColor,
+                minSize: taskBar_barStyle_minSize,
+                paddingTop: taskBar_barStyle_paddingTop
+            },
             milestoneStyle: {
-                width: 16,
-                fillColor: value => (value.record.progress >= 100 ? '#597ef7' : '#d6e4ff'),
-                borderColor: '#597ef7',
-                borderLineWidth: 0,
-                labelText: '{title}',
+                width: taskBar_milestoneStyle_width,
+                // fillColor: e => {
+                //     console.log(e)
+                //     if (e.progress === 10) return '#f00'
+                //     if (e.progress === 20) return '#0ff'
+                //     // if (e.progress === 30) return taskBar_milestoneStyle_fillColor
+                //     return 'rgb(1, 43, 75)'
+                // },
+                // fillColor: taskBar_milestoneStyle_fillColor,
+                fillColor: ((e, ...i) => {
+                    console.log(e, i)
+                    return 'red'
+                })(),
+                borderColor: taskBar_milestoneStyle_borderColor,
+                borderLineWidth: taskBar_milestoneStyle_borderLineWidth,
+                cornerRadius: taskBar_milestoneStyle_cornerRadius,
+                labelText: taskBar_milestoneStyle_labelText,
+                textOrient: taskBar_milestoneStyle_textOrient,
                 labelTextStyle: {
-                    fontSize: 16,
-                    color: 'rgb(1, 43, 75)'
+                    fontFamily: taskBar_milestoneStyle_fontFamily,
+                    fontSize: taskBar_milestoneStyle_fontSize,
+                    color: taskBar_milestoneStyle_color,
+                    padding: taskBar_milestoneStyle_padding?.split(',').map(Number) || 0,
                 }
             },
-
-            resizable: true,  // 是否可调整大小。
-            moveable: false, // 是否可移动。
-            progressAdjustable: false, // 是否可调整进度。
-            hoverBarStyle: {  // 悬停任务条样式
-                cornerRadius: 0,
-                barOverlayColor: 'rgba(99, 144, 0, 0.4)'
-            },
-
-            selectable: true,
-            selectedBarStyle: { // 选中状态
-                borderLineWidth: 10
-                // shadowBlur?: number; //阴影宽度
-                // shadowOffsetX?: number; //x方向偏移
-                // shadowOffsetY?: number; //Y方向偏移
-                // shadowColor?: string; //阴影颜色
-                // borderColor?: string; //边框颜色
-                // borderLineWidth?: number;
-            },
-            locateIcon: true, // 是否显示定位图标
-            scheduleCreatable: false,
-            // scheduleCreation: { // 创建任务条按钮
-            //     buttonStyle: {
-            //         lineWidth: 1,
-            //         // lineColor?: string;
-            //         // lineWidth?: number;
-            //         // lineDash?: number[];
-            //         // cornerRadius?: number;
-            //         // backgroundColor?: string;
-            //     },
-            //     // customLayout: true, // 是否自定义布局
-            // },
         },
-        tasksShowMode: TYPES.TasksShowMode.Project_Sub_Tasks_Inline,
-        taskKeyField: 'id', // 任务条唯一标识字段
         grid: { // 网格配置
-            backgroundColor: '#ff00ff00', // 背景颜色
-            weekendBackgroundColor: '#f0ff0000', // 周末背景颜色
-            verticalLineDependenceOnTimeScale: 'week',
-
+            backgroundColor: grid_backgroundColor,
+            weekendBackgroundColor: grid_weekendBackgroundColor,
+            verticalLineDependenceOnTimeScale: grid_verticalLineDependenceOnTimeScale,
             verticalLine: {
-                lineWidth: 1,
-                lineColor: '#e1e4e8',
-                lineDash: [4, 4],
+                lineColor: grid_verticalLine_lineColor,
+                lineWidth: grid_verticalLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: grid_verticalLine_lineDash?.split(',').map(Number) || 0,
             },
             horizontalLine: {
-                lineWidth: 1,
-                lineColor: '#e1e4e8'
-            }
-        },
-        markLine: [
-            {
-                date: '2024/8/02', // 标记线日期
-                scrollToMarkLine: false, // 是否滚动到标记线
-                position: 'left', // 标记线位置
-                style: {     // 标记线样式
-                    lineColor: 'red',
-                    lineWidth: 1,
-                    lineDash: [4, 4],
-                },
-                content: '1123',
-                contentStyle: {
-                    color: '#fff',
-                    fontSize: 16
-                    // color?: string;
-                    // fontSize?: string;
-                    // fontWeight?: string;
-                    // lineHeight?: string;
-                    // backgroundColor?: string;
-                    // cornerRadius?: string;
-                },
-            },
-        ],
-
-        frame: { // 整个外边框及横纵分割线配置。
-            outerFrameStyle: {   // 外框样式
-                borderLineWidth: 1,
-                borderColor: '#00ff00',
-                cornerRadius: 0
-            },
-            verticalSplitLine: { // 垂直分割线样式
-                lineColor: '#e1e4e8',
-                lineWidth: 3
-            },
-            horizontalSplitLine: { // 水平分割线样式
-                lineColor: '#e1e4e8',
-                lineWidth: 3
-            },
-            verticalSplitLineMoveable: false, // 是否可移动垂直分割线
-            verticalSplitLineHighlight: { // 垂直分割线高亮样式
-                lineColor: 'green',
-                lineWidth: 0,
-                lineDash: [4, 4],
+                lineColor: grid_horizontalLine_lineColor,
+                lineWidth: grid_horizontalLine_lineWidth?.split(',').map(Number) || 0,
+                lineDash: grid_horizontalLine_lineDash?.split(',').map(Number) || 0,
             }
         },
 
-        minDate: '2024/8/01', // 最小日期
-        maxDate: '2024/8/31', // 最大日期
+        rowSeriesNumber: rowSeriesNumber_visible ? {
+            title: rowSeriesNumber_title,
+            field: rowSeriesNumber_field,
+            width: rowSeriesNumber_width,
+            dragOrder: rowSeriesNumber_dragOrder,
+            disableColumnResize: rowSeriesNumber_disableColumnResize,
+            headerStyle: {
+                hover: false,
+                bgColor: headerStyle_bgColor,
+                padding: headerStyle_padding?.split(',').map(Number) || 0,
+                textAlign: headerStyle_textAlign,
+                textBaseline: headerStyle_textBaseline,
+                color: headerStyle_color,
+                strokeColor: headerStyle_strokeColor,
+                fontSize: headerStyle_fontSize,
+                fontFamily: headerStyle_fontFamily,
+                fontWeight: headerStyle_fontWeight,
+                fontStyle: headerStyle_fontStyle,
+                autoWrapText: headerStyle_autoWrapText,
+                textOverflow: headerStyle_textOverflow,
+                borderColor: headerStyle_borderColor,
+                borderLineWidth: headerStyle_borderLineWidth?.split(',').map(Number) || 0,
+                borderLineDash: headerStyle_borderLineDash?.split(',').map(Number) || 0,
+                lineHeight: headerStyle_lineHeight,
+                underline: headerStyle_underline,
+                underlineDash: headerStyle_underlineDash?.split(',').map(Number) || 0,
+                underlineOffset: headerStyle_underlineOffset,
+            },
+            bodyStyle: {
+                hover: false,
+                bgColor: bodyStyle_bgColor,
+                padding: bodyStyle_padding?.split(',').map(Number) || 0,
+                textAlign: bodyStyle_textAlign,
+                textBaseline: bodyStyle_textBaseline,
+                color: bodyStyle_color,
+                strokeColor: bodyStyle_strokeColor,
+                fontSize: bodyStyle_fontSize,
+                fontFamily: bodyStyle_fontFamily,
+                fontWeight: bodyStyle_fontWeight,
+                fontStyle: bodyStyle_fontStyle,
+                autoWrapText: bodyStyle_autoWrapText,
+                textOverflow: bodyStyle_textOverflow,
+                borderColor: bodyStyle_borderColor,
+                borderLineWidth: bodyStyle_borderLineWidth?.split(',').map(Number) || 0,
+                borderLineDash: bodyStyle_borderLineDash?.split(',').map(Number) || 0,
+                lineHeight: bodyStyle_lineHeight,
+                underline: bodyStyle_underline,
+                underlineDash: bodyStyle_underlineDash?.split(',').map(Number) || 0,
+                underlineOffset: bodyStyle_underlineOffset,
+            },
 
-        headerRowHeight: 40, // 头行高度
-        rowHeight: 40, // 行高
-
-        overscrollBehavior: 'none', // 涅出滚动行为
-        dateFormat: 'yyyy-MM-dd', // 日期格式
-        underlayBackgroundColor: '#f7f7f700', // 背景颜色
-
-
-        // rowSeriesNumber: { // 行号配置
-        //     title: '行号',
-        //     // field:'rowNumber', // 行号字段
-        //     dragOrder: false, // 是否可拖动行号
-        //     disableColumnResize: false, // 是否禁用调整列宽
-        //     headerStyle: {
-        //         bgColor: '#EEF1F5',
-        //         borderColor: '#e1e4e8'
-        //     },
-        //     style: {
-        //         borderColor: '#e1e4e8'
-        //     }
-        // },
+        } : false,
         scrollStyle: {
-            hoverOn: true,
-            barToSide: false,
-            ignoreFrozenCols: false,
-            scrollRailColor: 'RGBA(246,246,246,0.5)',
-            visible: 'always',
-            width: 16,
-            scrollSliderCornerRadius: 2,
-            scrollSliderColor: '#5cb85c'
+            hoverOn: scrollStyle_hoverOn,
+            barToSide: scrollStyle_barToSide,
+            ignoreFrozenCols: scrollStyle_ignoreFrozenCols,
+            scrollRailColor: scrollStyle_scrollRailColor,
+            visible: scrollStyle_visible,
+            width: scrollStyle_width,
+            scrollSliderCornerRadius: scrollStyle_scrollSliderCornerRadius,
+            scrollSliderColor: scrollStyle_scrollSliderColor,
+            horizontalPadding: scrollStyle_horizontalPadding,
+            verticalPadding: scrollStyle_verticalPadding,
         }
     };
 
-
-    console.log(option)
     useEffect(() => {
+        const scales = timelineHeader_scales.map(v => {
+            const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
+                padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
+            } = v
+            return ({
+                rowHeight,
+                unit,
+                step,
+                startOfWeek,
+                style: {
+                    padding: padding?.split(',').map(Number) || 0,
+                    fontSize,
+                    fontWeight,
+                    color,
+                    strokeColor,
+                    textAlign,
+                    textBaseline,
+                    textOverflow,
+                    textStick
+                },
+                format(date) {
+                    const { dateIndex, startDate, endDate } = date
+                    const str = `${isPrefix ? prefixText : ''}${formatType === 'date' ? dayjs(startDate).format(formatMapping) : dateIndex}${isSuffix ? suffixText : ''}`
+                    return str
+                },
+            })
+        })
+        option.timelineHeader.scales = scales
+        const markLine = markLine_list.map(v => {
+            const { date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
+                fontWeight, cornerRadius, backgroundColor } = v
+            return ({
+                date,
+                position,
+                scrollToMarkLine,
+                style: {
+                    lineColor: style_lineColor,
+                    lineWidth: style_lineWidth,
+                    lineDash: style_lineDash?.split(',').map(Number) || 0,
+                },
+                content,
+                contentStyle: {
+                    color,
+                    fontSize,
+                    lineHeight,
+                    fontWeight,
+                    cornerRadius,
+                    backgroundColor
+                },
+            })
+        })
+        option.markLine = markLine
+
         if (GanttRef.current && !ganttInstance.current) {
             ganttInstance.current = new Gantt(GanttRef.current, option)
         }
@@ -2036,7 +2047,9 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 ganttInstance.current = null
             }
         }
-    }, [])
+    }, [data])
+
+
 
     return (
         <div className='PrefabricatedChartGantt'   >

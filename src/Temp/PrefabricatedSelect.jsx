@@ -169,7 +169,7 @@ const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
     const { isParams, isParamsConfig,
         data_source, data_type, api_method, api_url, api_params, api_https, api_level, api_mapping, api_default,
         fieldNames_key, fieldNames_title, fieldNames_children, tree_selectable, tree_expandAll, tree_blockNode, tree_switcher,
-        box_back, back_deg, back_padding, back_margin, back_radius,
+        box_back, back_deg, back_padding, back_margin, back_radius, parent_color, parent_deg, title_padding,
         title_size, title_color, title_deg, title_family, title_weight, title_style, title_filed, title_filed_data, title_filed_color,
         active_back_color, active_back_deg, active_color, active_deg, active_size, active_family, active_weight, active_style,
         active_filed, active_filed_data, active_filed_color, active_back_padding
@@ -186,6 +186,7 @@ const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
         margin: SpacingCallBack(back_margin),
         borderRadius: SpacingCallBack(back_radius),
         '--tree-switcher': tree_switcher ? 'block' : 'none',
+        '--title-padding': SpacingCallBack(title_padding),
         '--title-size': title_size + 'px',
         '--title-color': ColorCallBack(title_color, title_deg),
         '--title-family': title_family,
@@ -207,6 +208,10 @@ const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
         if (err) return false
         const data = api_level ? getNestedValue(api_mapping, res) : res
         setTreeData(data)
+
+        console.log(data)
+
+
         setSelectedKeys([api_default])
     }
 
@@ -226,9 +231,6 @@ const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
             LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
         }
     }
-
-
-
 
     return (
         <div className='PrefabricatedTreeData' style={boxStyle}>
@@ -251,5 +253,6 @@ export const PrefabricatedSelectTemplate = {
     PrefabricatedSelect,
     PrefabricatedDateSelect,
     PrefabricatedTreeData,
-
 };
+
+// https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/

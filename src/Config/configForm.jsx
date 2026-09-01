@@ -6631,6 +6631,58 @@ const PrefabricatedChartGantt = [
         ]
     },
     {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_frame', label: '整体参数', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 12, formType: 'RADIO', name: 'frame_verticalSplitLineMoveable', label: '垂直分割线是否可移动', rules: true,
+                valueEnum: MappingData.IsEnabledBool
+            },
+            { span: 12, formType: 'NUMBER', name: 'headerRowHeight', label: '头部行高', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'rowHeight', label: '表格行高', rules: true },
+            { span: 12, formType: 'INPUT', name: 'dateFormat', label: '日期格式', rules: true },
+            { span: 12, formType: 'DATETIME', name: 'minDate', label: '最小日期' },
+            { span: 12, formType: 'DATETIME', name: 'maxDate', label: '最大日期' },
+
+
+            { span: 12, formType: 'RADIO', name: 'overscrollBehavior', label: '滚动行为', rules: true, valueEnum: MappingData.Charts__ganntOverscrollBehavior },
+            { span: 12, formType: 'COLOR', name: 'underlayBackgroundColor', label: '外部背景色', rules: true, mode: ['single'] },
+
+            {
+                span: 24, formType: 'GROUP', name: 'frame_outerFrameStyle', label: '外框样式', collapsible: true,
+                children: [
+                    { span: 12, formType: 'COLOR', name: 'frame_outerFrameStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'INPUT', name: 'frame_outerFrameStyle_borderLineWidth', label: '线段尺寸', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'frame_outerFrameStyle_borderLineDash', label: '虚实比例', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'frame_outerFrameStyle_cornerRadius', label: '圆角尺寸', rules: true },
+                ]
+            },
+            {
+                span: 8, formType: 'GROUP', name: 'frame_verticalSplitLineHighlight', label: '高亮线样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'frame_verticalSplitLineHighlight_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLineHighlight_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLineHighlight_lineDash', label: '虚实比例', rules: true },
+                ]
+            },
+            {
+                span: 8, formType: 'GROUP', name: 'frame_verticalSplitLine', label: '垂直分割线', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'frame_verticalSplitLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLine_lineDash', label: '虚实比例', rules: true },
+                ]
+            },
+            {
+                span: 8, formType: 'GROUP', name: 'frame_horizontalSplitLine', label: '水平分割线', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'frame_horizontalSplitLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'frame_horizontalSplitLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'frame_horizontalSplitLine_lineDash', label: '虚实比例', rules: true },
+                ]
+            },
+        ]
+    },
+    {
         span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskListTable', label: '左侧列表', collapsible: true, defaultCollapsed: true,
         children: [
             { span: 8, formType: 'INPUT', name: 'taskListTable_tableWidth', label: '默认宽度', rules: true },
@@ -6722,16 +6774,16 @@ const PrefabricatedChartGantt = [
             {
                 span: 12, formType: 'GROUP', name: 'timelineHeader_horizontalLine', label: '水平线', collapsible: true,
                 children: [
-                    { span: 24, formType: 'COLOR', name: 'timelineHeader_backgroundColor_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'timelineHeader_backgroundColor_lineWidth', label: '线段尺寸', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'timelineHeader_backgroundColor_lineDash', label: '虚实比例', rules: true },
+                    { span: 24, formType: 'COLOR', name: 'timelineHeader_horizontalLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'INPUT', name: 'timelineHeader_horizontalLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'timelineHeader_horizontalLine_lineDash', label: '虚实比例', rules: true },
                 ]
             },
             {
                 span: 12, formType: 'GROUP', name: 'timelineHeader_verticalLine', label: '垂直线', collapsible: true,
                 children: [
                     { span: 24, formType: 'COLOR', name: 'timelineHeader_verticalLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'timelineHeader_verticalLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'timelineHeader_verticalLine_lineWidth', label: '线段尺寸', rules: true },
                     { span: 24, formType: 'INPUT', name: 'timelineHeader_verticalLine_lineDash', label: '虚实比例', rules: true },
                 ]
             },
@@ -6750,12 +6802,12 @@ const PrefabricatedChartGantt = [
                     { span: 12, formType: 'INPUT', name: 'formatMapping', label: '日期格式', rules: true, jugde: [{ field: 'formatType', value: ['date'] }] },
                     { span: 12, formType: 'RADIO', name: 'textAlign', label: '水平对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextAlign },
                     { span: 12, formType: 'RADIO', name: 'textBaseline', label: '垂直对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextBaseline },
-                    { span: 12, formType: 'NUMBER', name: 'padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'fontSize', label: '文字字号', rules: true },
-                    { span: 12, formType: 'SELECT', name: 'fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'fontWeight', label: '文字加粗', valueEnum: MappingData.Font__WeightInt },
                     { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
                     { span: 12, formType: 'COLOR', name: 'strokeColor', label: '描边颜色', rules: true, mode: ['single'] },
-                    { span: 12, formType: 'RADIO', name: 'textOverflow', label: '超出隐藏', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'textOverflow', label: '超出隐藏', rules: true, valueEnum: MappingData.Start__backType },
                     { span: 12, formType: 'RADIO', name: 'textStick', label: '始终显示', rules: true, valueEnum: MappingData.IsEnabledBool },
                 ]
             },
@@ -6796,7 +6848,7 @@ const PrefabricatedChartGantt = [
             {
                 span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_labelTextStyle', label: '文字内容样式', collapsible: true,
                 jugde: [{ field: 'taskBar_isLabelText', value: [true] }], children: [
-                    { span: 12, formType: 'NUMBER', name: 'taskBar_labelTextStyle_padding', label: '内填充', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'taskBar_labelTextStyle_padding', label: '内填充', rules: true },
                     { span: 12, formType: 'COLOR', name: 'taskBar_labelTextStyle_color', label: '文字颜色', rules: true, mode: ['single'] },
                     { span: 12, formType: 'NUMBER', name: 'taskBar_labelTextStyle_fontSize', label: '文字字号', rules: true },
                     { span: 12, formType: 'SELECT', name: 'taskBar_labelTextStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
@@ -6841,38 +6893,24 @@ const PrefabricatedChartGantt = [
             {
                 span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_taskBar_milestoneStyle', label: '里程碑样式', collapsible: true,
                 jugde: [{ field: 'taskBar_isMilestone', value: [true] }], children: [
-                    //   /** 里程碑边框颜色 */
-                    //   borderColor?: string;
-                    //   /** 里程碑边框宽度 */
-                    //   borderLineWidth?: number;
-                    //   /** 里程碑填充颜色 */
-                    //   fillColor?: string;
-                    //   /** 里程碑正方形圆角 */
-                    //   cornerRadius?: number;
-                    //   /** 里程碑默认是个正方形，这个width配置正方形的边长 */
-                    //   width?: number;
-                    //   /** 里程碑展示文字。可以配置固定文本 或者 字符串模版 */
-                    //   labelText?: ITaskBarLabelText;
-                    //   /** 里程碑文字样式 */
-                    //   labelTextStyle:{
-                    //     fontFamily?: string;
-                    //     fontSize?: number;
-                    //     color?: string;
-                    //     padding?: number | number[];
-                    //   }
-                    //   /** 文字相对于里程碑的位置 */
-                    //   textOrient?: 'left' | 'top' | 'right' | 'bottom';
+                    { span: 12, formType: 'COLOR', name: 'taskBar_milestoneStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_milestoneStyle_borderLineWidth', label: '边框尺寸', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'taskBar_milestoneStyle_fillColor', label: '填充颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_milestoneStyle_cornerRadius', label: '方形圆角', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_milestoneStyle_width', label: '方形边长', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'taskBar_milestoneStyle_labelText', label: '展示文字', rules: true, tooltip: '{title}' },
+                    {
+                        span: 12, formType: 'RADIO', name: 'taskBar_milestoneStyle_textOrient', label: '文字位置', rules: true,
+                        valueEnum: MappingData.Start__navPosition
+                    },
+                    { span: 12, formType: 'COLOR', name: 'taskBar_milestoneStyle_color', label: '文字颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'taskBar_milestoneStyle_fontSize', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'taskBar_milestoneStyle_fontFamily', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'INPUT', name: 'taskBar_milestoneStyle_padding', label: '文字填充', rules: true },
                 ]
             },
-
         ]
     },
-    // {
-    //     span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_dependency', label: '依赖关系', collapsible: true,
-    //     children: [
-
-    //     ]
-    // }, 
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_grid', label: '网格样式', collapsible: true, defaultCollapsed: true,
         children: [
@@ -6886,7 +6924,7 @@ const PrefabricatedChartGantt = [
                 span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_grid_verticalLine', label: '垂直间隔线样式', collapsible: true,
                 children: [
                     { span: 24, formType: 'COLOR', name: 'grid_verticalLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'grid_verticalLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'grid_verticalLine_lineWidth', label: '线段尺寸', rules: true },
                     { span: 24, formType: 'INPUT', name: 'grid_verticalLine_lineDash', label: '虚实比例', rules: true },
                 ]
             },
@@ -6894,7 +6932,7 @@ const PrefabricatedChartGantt = [
                 span: 12, formType: 'GROUP', name: 'PrefabricatedChartGantt_grid_horizontalLine', label: '水平间隔线样式', collapsible: true,
                 children: [
                     { span: 24, formType: 'COLOR', name: 'grid_horizontalLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'grid_horizontalLine_lineWidth', label: '线段尺寸', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'grid_horizontalLine_lineWidth', label: '线段尺寸', rules: true },
                     { span: 24, formType: 'INPUT', name: 'grid_horizontalLine_lineDash', label: '虚实比例', rules: true },
                 ]
             },
@@ -6906,7 +6944,7 @@ const PrefabricatedChartGantt = [
             {
                 span: 24, formType: 'LIST', name: 'markLine_list', label: '标记线配置', collapsible: true, title: '标记线',
                 children: [
-                    { span: 12, formType: 'DATETIME', name: 'date', label: '日期', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'date', label: '日期', rules: true },
                     { span: 12, formType: 'RADIO', name: 'position', label: '位置', rules: true, valueEnum: MappingData.Charts__ganntMarkLinePosition },
                     { span: 12, formType: 'RADIO', name: 'scrollToMarkLine', label: '滚动到标记线', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'COLOR', name: 'style_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
@@ -6919,58 +6957,6 @@ const PrefabricatedChartGantt = [
                     { span: 12, formType: 'RADIO', name: 'fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
                     { span: 12, formType: 'NUMBER', name: 'cornerRadius', label: '圆角', rules: true },
                     { span: 12, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
-                ]
-            },
-        ]
-    },
-    {
-        span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_frame', label: '整体参数', collapsible: true, defaultCollapsed: true,
-        children: [
-            {
-                span: 12, formType: 'RADIO', name: 'frame_verticalSplitLineMoveable', label: '垂直分割线是否可移动', rules: true,
-                valueEnum: MappingData.IsEnabledBool
-            },
-            { span: 12, formType: 'NUMBER', name: 'headerRowHeight', label: '头部行高', rules: true },
-            { span: 12, formType: 'NUMBER', name: 'rowHeight', label: '表格行高', rules: true },
-            { span: 12, formType: 'INPUT', name: 'dateFormat', label: '日期格式', rules: true },
-            { span: 12, formType: 'DATETIME', name: 'minDate', label: '最小日期' },
-            { span: 12, formType: 'DATETIME', name: 'maxDate', label: '最大日期' },
-
-
-            { span: 12, formType: 'RADIO', name: 'scrollToMarkLine', label: '滚动行为', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 12, formType: 'COLOR', name: 'underlayBackgroundColor', label: '外部背景色', rules: true, mode: ['single'] },
-
-            {
-                span: 24, formType: 'GROUP', name: 'frame_outerFrameStyle', label: '外框样式', collapsible: true,
-                children: [
-                    { span: 12, formType: 'COLOR', name: 'frame_outerFrameStyle_borderColor', label: '边框颜色', rules: true, mode: ['single'] },
-                    { span: 12, formType: 'NUMBER', name: 'frame_outerFrameStyle_borderLineWidth', label: '线段尺寸', rules: true },
-                    { span: 12, formType: 'INPUT', name: 'frame_outerFrameStyle_borderLineDash', label: '虚实比例', rules: true },
-                    { span: 12, formType: 'NUMBER', name: 'frame_outerFrameStyle_cornerRadius', label: '圆角尺寸', rules: true },
-                ]
-            },
-            {
-                span: 8, formType: 'GROUP', name: 'frame_verticalSplitLineHighlight', label: '高亮线样式', collapsible: true,
-                children: [
-                    { span: 24, formType: 'COLOR', name: 'frame_verticalSplitLineHighlight_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'frame_verticalSplitLineHighlight_lineWidth', label: '线段尺寸', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLineHighlight_lineDash', label: '虚实比例', rules: true },
-                ]
-            },
-            {
-                span: 8, formType: 'GROUP', name: 'frame_verticalSplitLine', label: '垂直分割线', collapsible: true,
-                children: [
-                    { span: 24, formType: 'COLOR', name: 'frame_verticalSplitLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'frame_verticalSplitLine_lineWidth', label: '线段尺寸', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'frame_verticalSplitLine_lineDash', label: '虚实比例', rules: true },
-                ]
-            },
-            {
-                span: 8, formType: 'GROUP', name: 'frame_horizontalSplitLine', label: '水平分割线', collapsible: true,
-                children: [
-                    { span: 24, formType: 'COLOR', name: 'frame_horizontalSplitLine_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
-                    { span: 24, formType: 'NUMBER', name: 'frame_horizontalSplitLine_lineWidth', label: '线段尺寸', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'frame_horizontalSplitLine_lineDash', label: '虚实比例', rules: true },
                 ]
             },
         ]
@@ -7001,6 +6987,12 @@ const PrefabricatedChartGantt = [
             { span: 12, formType: 'NUMBER', name: 'scrollStyle_verticalPadding', label: '竖向内边距', rules: true },
         ]
     },
+    // {
+    //     span: 24, formType: 'GROUP', name: 'PrefabricatedChartGantt_dependency', label: '依赖关系', collapsible: true,
+    //     children: [
+
+    //     ]
+    // }, 
 ]
 
 // TODO 数据配置
@@ -8499,8 +8491,8 @@ const PrefabricatedTreeData = [
             { span: 12, formType: 'COLOR', name: 'box_back', label: '背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true },
             { span: 12, formType: 'INPUT', name: 'back_padding', label: '内填充', rules: true },
-            { span: 12, formType: 'INPUT', name: 'back_margin', label: '外间距', rules: true },
             { span: 12, formType: 'INPUT', name: 'back_radius', label: '圆角半径', rules: true },
+            { span: 12, formType: 'INPUT', name: 'title_padding', label: '文字间距', rules: true },
             { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
             { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
@@ -8549,7 +8541,7 @@ const PrefabricatedTreeData = [
                 jugde: [{ field: 'active_filed', value: [true] }]
             },
         ]
-    }
+    },
 ]
 // !!! 轮播模块
 const PrefabricatedSwiperBox = [

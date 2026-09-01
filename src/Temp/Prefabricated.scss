@@ -1040,13 +1040,13 @@
             font-style: var(--title-style);
             filter: var(--title-filed);
             background: var(--title-color);
+            padding: var(--title-padding);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             user-select: none;
             white-space: pre-line;
         }
-
 
         .ant-tree-node-selected {
             background: var(--active-back);
