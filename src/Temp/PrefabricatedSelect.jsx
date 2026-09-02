@@ -208,10 +208,6 @@ const PrefabricatedTreeData = ({ tempId, UrlData, data, LayoutEvent }) => {
         if (err) return false
         const data = api_level ? getNestedValue(api_mapping, res) : res
         setTreeData(data)
-
-        console.log(data)
-
-
         setSelectedKeys([api_default])
     }
 

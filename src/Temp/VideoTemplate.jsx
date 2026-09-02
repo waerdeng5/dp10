@@ -46,6 +46,7 @@ export const VideoTemplateA01 = ({ url, seekTimeStart = 0, seekTimeEnd = 10 }) =
 
 // 视频预览封面
 export const VideoTemplateA02 = ({ url }) => {
+    // return
     const myRef = useRef(null)
     const easyPro = useRef(null)
 
@@ -72,6 +73,7 @@ export const VideoTemplateA02 = ({ url }) => {
             if (easyPro.current) easyPro.current.destroy().then(create)
             else create()
         }
+        return () => destroy()
     }, [url])
 
 

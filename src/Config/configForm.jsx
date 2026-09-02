@@ -2814,15 +2814,54 @@ const AddRowOptionsFormList = [
             }
         ]
     },
-
     // !!! 14 数据详情
     {
-        span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_14', label: '数据详情',
-        jugde: [{ field: 'type', value: ['B14'] }],
-        children: [
-            { span: 8, formType: 'INPUT', name: 'B14_value', label: '字段', rules: true },
-            { span: 8, formType: 'INPUT', name: 'B14_label', label: '标题', rules: true },
-            { span: 8, formType: 'RADIO', name: 'B14_type', label: '类型', rules: true, valueEnum: MappingData.System__RowB15Type },
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_14_fields', label: '渲染列表', collapsible: true,
+        jugde: [{ field: 'type', value: ['B14'] }], children: [
+            {
+                span: 24, formType: 'LIST', name: 'AddTopOptionsFormList_14', label: '数据详情',
+                children: [
+                    { span: 8, formType: 'INPUT', name: 'B14_value', label: '字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'B14_label', label: '标题', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'B14_type', label: '类型', rules: true, valueEnum: MappingData.System__RowB15Type },
+                ]
+            },
+        ]
+    },
+
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_14_list', label: '额外列表', collapsible: true,
+        jugde: [{ field: 'type', value: ['B14'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'B14_list', label: '额外列表', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'B14_source', label: '数据来源', rules: true, valueEnum: MappingData.System_fileUrlType,
+                jugde: [{ field: 'B14_list', value: [true] }]
+            },
+            { span: 24, formType: 'INPUT', name: 'B17_list_fields', label: '接口地址', rules: true, jugde: [{ field: 'B14_source', value: ['A01'] }] },
+            {
+                span: 24, formType: 'GROUP', name: 'AddTopOptionsFormList_02', label: '新增选项',
+                jugde: [{ field: 'B14_source', value: ['A02'] }],
+                children: [
+                    { span: 24, formType: 'RADIO', name: 'B02_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 24, formType: 'INPUT', name: 'B02_url', label: '接口地址', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'B02_params', label: '额外参数' },
+                    { span: 24, formType: 'INPUT', name: 'B02_uuid', label: '父级键名', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_14_extra', label: '额外列表字段', collapsible: true,
+        jugde: [{ field: 'type', value: ['B14'] }, { field: 'B14_list', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'B14_extra_title', label: '折叠标题', rules: true },
+            {
+                span: 24, formType: 'LIST', name: 'AddTopOptionsFormList_14_extra', label: '数据详情',
+                children: [
+                    { span: 8, formType: 'INPUT', name: 'B14_value', label: '字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'B14_label', label: '标题', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'B14_type', label: '类型', rules: true, valueEnum: MappingData.System__RowB15Type },
+                ]
+            },
         ]
     },
 
@@ -9100,6 +9139,42 @@ const PrefabricatedVisualMonitoring = [
 const PrefabricatedVisualRecorded = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
+    {
+        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_label', label: '标题样式', collapsible: true,
+        children: [
+            { span: 24, formType: 'COLOR', name: 'label_color', label: '文字颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'label_deg', label: '颜色角度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'label_padding', label: '文字填充', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'label_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'label_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'label_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'label_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'label_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'label_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'label_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'label_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'label_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_select', label: '下拉样式', collapsible: true,
+        children: [
+            { span: 24, formType: 'NUMBER', name: 'select_height', label: '窗体高度', rules: true },
+            { span: 24, formType: 'COLOR', name: 'select_back', label: '背景颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'select_deg', label: '颜色角度', rules: true },
+            { span: 24, formType: 'COLOR', name: 'select_color', label: '文字颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'select_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'select_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'select_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'select_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'COLOR', name: 'select_border', label: '边框颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'COLOR', name: 'select_icon', label: '图标颜色', rules: true, mode: ['single'] },
+        ]
+    },
 ]
 
 // !!! 文件夹
@@ -9328,7 +9403,7 @@ const ModelConfigFormList = [
         span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
         jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
             { span: 12, formType: 'RADIO', name: 'annex_type', label: '附件来源', rules: true, valueEnum: MappingData.System_fileUrlType },
-            { span: 12, formType: 'INPUT', name: 'lay_A01_fields', label: '附件字段', rules: true , jugde: [{ field: 'annex_type', value: ['A01'] }]},
+            { span: 12, formType: 'INPUT', name: 'lay_A01_fields', label: '附件字段', rules: true, jugde: [{ field: 'annex_type', value: ['A01'] }] },
             {
                 span: 24, formType: 'GROUP', name: 'annex_api', label: '接口设置', collapsible: true,
                 jugde: [{ field: 'annex_type', value: ['A02'] }], children: [

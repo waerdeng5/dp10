@@ -83,6 +83,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         page.api.forEach((v, i) => {
             const [err, res] = api[i]
             data[v.api_name] = err ? undefined : res
+            data[v.api_name].apiMapping = mapping[i]
             if (err) notification.error({ title: '接口请求失败!', description: `${v.api_url} 接口请求失败` })
         })
         setUrlData(data)

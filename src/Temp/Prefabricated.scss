@@ -4,8 +4,6 @@
     overflow: hidden;
 }
 
-
-
 .PrefabricatedDiyText {
     width: 100%;
     height: 100%;
@@ -1131,6 +1129,52 @@
                 user-select: none;
             }
 
+        }
+    }
+}
+
+.PrefabricatedVisualRecorded {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 16px;
+
+    &>.options {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+
+        &>.options_item_label {
+            background: var(--color);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            white-space: pre-line;
+        }
+
+        &>.ant-select {
+            width: 120px;
+
+            .ant-select-suffix {
+                color: var(--iconColor);
+            }
+        }
+    }
+
+    &>.video {
+        flex: 1;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.75);
+
+        &>.VideoTempA02 {
+            width: 100%;
+            height: 100%;
         }
     }
 }

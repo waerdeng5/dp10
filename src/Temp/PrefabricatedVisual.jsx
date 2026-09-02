@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { Select, TreeSelect, Pagination, ConfigProvider, Spin, Result } from 'antd'
+import { useMount } from 'ahooks'
 
 import {
     SpacingCallBack,
@@ -12,6 +13,9 @@ import {
     SetPositionParams,
     DiyDataReturn
 } from '../Utils'
+
+
+import { VideoTemplateA02 } from './VideoTemplate'
 
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
 
@@ -537,39 +541,101 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
 
 // 无人机航拍
 const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const { label_color, label_deg, label_padding, label_size, label_family, label_weight, label_style, label_filed, label_filed_data, label_filed_color,
+        select_height, select_back, select_deg, select_color, select_size, select_family, select_weight, select_style, select_border, select_icon
+    } = data
+
+    const labelStyle = {
+        '--color': ColorCallBack(label_color, label_deg),
+        padding: SpacingCallBack(label_padding),
+        fontSize: label_size,
+        fontFamily: label_family,
+        fontWeight: label_weight,
+        fontStyle: label_style,
+        filter: SetFilderParams(label_filed, label_filed_data, label_filed_color)
+    }
+
+    const selectStyle = {
+        height: select_height,
+        background: ColorCallBack(select_back, select_deg),
+        color: select_color,
+        fontSize: select_size,
+        fontFamily: select_family,
+        fontWeight: select_weight,
+        fontStyle: select_style,
+        borderColor: select_border,
+        '--iconColor': select_icon,
+    }
+
+
+    const [Url, setUrl] = useState('')
+    const [OrganizationUuid, setOrganizationUuid] = useState('')
+    const [Data, setData] = useState([])
+    const [dataSelect, setDataSelect] = useState()
+    const [NumberSelect, setNumberSelect] = useState()
+    const [dateValue, setDateValue] = useState()
+    const [numsValue, setNumsValue] = useState()
+
+    const getUrlData = async (date, nums, oruUuid) => {
+        const params = { OrganizationUuid: oruUuid || OrganizationUuid, OrgType: 0, YearMonth: date, Number: nums }
+        const [err, res] = await axios({ method: 'get', url: 'home/GetVideosByConjunctiveQuery', params })
+        if (err) return console.log(err)
+        const [data] = res.data.list
+        setUrl(data?.fileUrl || '')
+    }
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, {}, 'api_diyObj')
+        if (backData && backData.length !== 0) {
+            const oruUuid = UrlData[data.http_urlName].apiMapping.params.OrganizationUuid
+            setOrganizationUuid(oruUuid)
+            setData(backData)
+            const date = backData?.map(v => ({ value: v.yearMonth, label: v.yearMonth })) || []
+            const [{ yearMonth, rowsCount }] = backData
+            setDateValue(yearMonth)
+            setDataSelect(date)
+            const nums = [...Array(rowsCount).keys()].map(v => ({ value: v + 1, label: v + 1 })) || []
+            setNumsValue(1)
+            setNumberSelect(nums)
+            getUrlData(yearMonth, 1, oruUuid)
+        }
+    }, [UrlData, data])
+
+
+    const onDateChange = e => {
+        setDateValue(e)
+        const num = Data?.find(v => v.yearMonth === e)?.rowsCount || 0
+        const nums = [...Array(num).keys()].map(v => ({ value: v + 1, label: v + 1 })) || []
+        setNumberSelect(nums)
+        setNumsValue(1)
+        getUrlData(e, 1)
+    }
+    const onNumsChange = e => {
+        setNumsValue(e)
+        getUrlData(dateValue, e)
+    }
 
     return (
-        <div>
-            无人机航拍
-
-
-            newsRelease
-            moduleType=
-
-            coverUrlList
-            articleAttachment
-
-            线上安全技术交底--792e061a-8725-4a58-886f-ba888ce748cd
-            安全责任书签订--6cf70c08-5b16-4533-b7cf-9701a7af1a7f
-            风险告知--49aad8e4-8c60-4cf5-9147-7aa453d32bb9
-            专项施工方案--7f9f31f2-0997-484f-95f6-50cc7f36e193
-            危大工程方案--8510387b-0187-4620-9d68-b2ad26dcba7b
-
-
-            交底管理--6d97e414-d2ad-451a-b4d0-50ef5dd2f22c
-            原材料抽样管控--d3773470-c86e-445f-a017-56b119db428d
-            关键工序验收--3ba72de7-f04a-4103-9717-b8a9e0b5b057
-            旁站监督--f2a8f0ad-cafe-4a65-a19c-847701815cc4
-
-            企业新闻--62db9761-9bdf-4470-a48d-933bb6b274de
-
-            publishStatus
-            newsRelease/UpdateNewsReleaseStatus
-            ActionType
-
-            ff434970-a0b3-40dc-8adb-d26da0564ef3	草稿
-            d8f1cd7e-8979-497c-ae3d-40f1a92c4127	发布
-            e4074e43-44ce-4f43-85aa-93b0377414f1	下架
+        <div className='PrefabricatedVisualRecorded'>
+            <div className='options'>
+                <div className="options_item_label" style={labelStyle}>显示方式 : </div>
+                <Select
+                    value={dateValue}
+                    options={dataSelect}
+                    onChange={onDateChange}
+                    style={selectStyle}
+                />
+                <div className="options_item_label" style={labelStyle} >显示方式 : </div>
+                <Select
+                    value={numsValue}
+                    options={NumberSelect}
+                    onChange={onNumsChange}
+                    style={selectStyle}
+                />
+            </div>
+            <div className='video'>
+                <VideoTemplateA02 url={Url} />
+            </div>
         </div>
     )
 }
@@ -583,7 +649,6 @@ const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
         </div>
     )
 }
-
 
 export const PrefabricatedVisualTemplate = {
     PrefabricatedVisualMonitoring,

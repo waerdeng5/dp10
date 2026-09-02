@@ -2,7 +2,7 @@ import './OptionsModel.scss'
 import { v4 } from 'uuid'
 import { Sortable } from 'devextreme-react/sortable'
 import { useState, useCallback, useEffect } from 'react'
-import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select } from "antd"
+import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse } from "antd"
 import { TreeList, SearchPanel, HeaderFilter, Selection } from 'devextreme-react/tree-list'
 import { DataGrid, Scrolling, FilterRow, Column, Paging } from 'devextreme-react/data-grid'
 
@@ -714,7 +714,52 @@ const OptionsModel = ({ data, Event }) => {
     }
     // *** 数据详情
     if (type === 'B14') {
-        const { AddTopOptionsFormList_14, Initial } = data
+        const { Initial,
+            AddTopOptionsFormList_14, AddTopOptionsFormList_14_extra, B14_extra_title,
+            B14_list, B14_source, B17_list_fields, B02_method, B02_url, B02_params, B02_uuid
+        } = data
+        const [Extra, setExtra] = useState()
+        const getData = async () => {
+            const [err, res] = await axios({ method: B02_method, url: B02_url, params: { ...strOfurlParamsFunc(B02_params), [B02_uuid]: Initial.uuid } })
+            if (err) return false
+            const items = res.data.list.map(v => {
+                return ({
+                    key: v.uuid,
+                    label: v[B14_extra_title],
+                    children: (
+                        <div className='Box'>
+                            {AddTopOptionsFormList_14_extra.map((item, index) => {
+                                const { B14_label, B14_value, B14_type } = item
+                                if (B14_type === 'txt') {
+                                    const txt = v[B14_value]
+                                    return txt && (
+                                        <div className='TXT' key={index}>
+                                            <div className='Label'>{B14_label} : </div>
+                                            <div className='Value'>{txt}</div>
+                                        </div>
+                                    )
+                                }
+                                if (B14_type === 'att') {
+                                    const arr = v[B14_value]
+                                    return arr?.length !== 0 && (
+                                        <div className='TXT' key={index}>
+                                            <div className='Label'>{B14_label} : </div>
+                                            <div className='Attach'>
+                                                <AttachTemplateA01 data={arr} />
+                                            </div>
+                                        </div>
+                                    )
+                                }
+                            })}
+                        </div>
+                    )
+                })
+            })
+            setExtra(items)
+        }
+        useEffect(() => {
+            if (B14_list && B14_source === 'A02') getData()
+        }, [data])
         return (
             <div className='OptionsModelB14'>
                 <DevScrollView>
@@ -733,7 +778,7 @@ const OptionsModel = ({ data, Event }) => {
                             if (B14_type === 'att') {
                                 const arr = Initial[B14_value]
                                 return arr?.length !== 0 && (
-                                    <div className='ATT' key={index}>
+                                    <div className='TXT' key={index}>
                                         <div className='Label'>{B14_label} : </div>
                                         <div className='Attach'>
                                             <AttachTemplateA01 data={arr} />
@@ -742,6 +787,7 @@ const OptionsModel = ({ data, Event }) => {
                                 )
                             }
                         })}
+                        {Extra && <Collapse items={Extra} />}
                     </div>
                 </DevScrollView>
             </div>
