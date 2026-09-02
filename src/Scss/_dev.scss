@@ -41,12 +41,17 @@
                 position: absolute;
                 z-index: -1;
                 left: 0;
-                top: 0;
+                top: var(--backHeight);
                 width: 100%;
-                height: 100%;
+                height: calc(100% - var(--backHeight));
                 background: var(--backColor);
                 border: var(--backBorder);
                 backdrop-filter: blur(var(--backFilter));
+
+                &>.WinBoxBackImage {
+                    position: absolute;
+                    z-index: -1;
+                }
             }
         }
     }
@@ -56,50 +61,71 @@
         position: relative;
         z-index: 1;
 
-        &>.image {
-            position: absolute;
-            z-index: -1;
-            left: 0;
-            top: 0;
+        &>.Title {
             width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            &>img {
-                height: 100%;
-                display: block;
-            }
-        }
-
-        &>div {
-            width: 100%;
-            height: 100%;
+            position: relative;
+            z-index: 1;
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            &>div:first-child {
+            &>.text {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
                 background: var(--titleColor);
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
+                user-select: none;
+                pointer-events: none;
             }
 
-            &>div:last-child {
+            &>.img {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                &>img {
+                    height: 100%;
+                    user-select: none;
+                    pointer-events: none;
+
+                    &:nth-child(1) {
+                        width: var(--img1);
+                    }
+
+                    &:nth-child(2) {
+                        flex: 1;
+                    }
+
+                    &:nth-child(3) {
+                        width: var(--img3);
+                    }
+                }
+            }
+
+            &>.close {
                 height: 100%;
                 aspect-ratio: 1/1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-
-                &>span {
-                    color: white;
-                    filter: drop-shadow(1px 1px 1px #262626);
-                }
+                color: white;
+                filter: drop-shadow(1px 1px 1px #262626);
+                margin-right: 4px;
             }
+
+
         }
     }
+
 }

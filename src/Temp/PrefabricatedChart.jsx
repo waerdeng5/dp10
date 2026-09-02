@@ -1614,7 +1614,6 @@ const recordsTestData = [
         hierarchyState: 'expand',
         // baselineStartDateField: '2026-08-01',
         // baselineEndDateField: '2026-08-30',
-
         start: "2026-08-12",
         end: "2026-08-26",
         progress: 40,

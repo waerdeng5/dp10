@@ -6,10 +6,18 @@ import { useState, lazy, Suspense, useEffect, memo } from 'react'
 
 import { Decrypt } from '../Utils/IndexedDB'
 import { modelStore } from '../Router/zustand'
-import { isEmptyObject, ColorCallBack, SetFilderParams, SetBorderParams } from '../Utils'
+import { isEmptyObject, ColorCallBack, SetFilderParams, SetBorderParams, UnitCallBackStruct } from '../Utils'
 
 const isInteger = (str) => {
     return /^-?\d+$/.test(str);
+}
+
+const spinStyle = {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }
 
 const PopupTemplate = memo(({ modelConfig, updateModel }) => {
@@ -34,19 +42,8 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     } = modelConfig
 
     const [SIZE, setSIZE] = useState()
-
-
-    const spinStyle = {
-        width: '100%',
-        height: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-
     const [visible, setVisible] = useState(false)
     const [Template, setTemplate] = useState()
-
     const [StartData, setStartData] = useState({})
 
     const getWindow = async () => {
@@ -72,17 +69,9 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     }, [modelConfig])
     if (isEmptyObject(modelConfig)) return false
 
-
     const onClose = () => updateModel({})
+    const onResizeEnd = (e) => setSIZE({ minHeight: 400, minWidth: 400, width: e.width, height: e.height })
 
-    const onResizeEnd = (e) => {
-        setSIZE({
-            minHeight: 400,
-            minWidth: 400,
-            width: e.width,
-            height: e.height
-        })
-    }
 
     if (SIZE) {
         return (
@@ -105,28 +94,27 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                 onHiding={onClose}
                 onResizeEnd={onResizeEnd}
                 titleComponent={isStart ? (e) => {
-                    const { win_color, win_deg, win_family, win_filed, win_filed_data, win_filed_color,
-                        win_height, win_imageA01, win_imageA02, win_index, win_size, win_style, win_url, win_weight } = StartData
-
-                    const style = {
+                    const { win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
+                        win_height, win_url, win_imageA01, win_imageA02
+                    } = StartData
+                    const winTitleStyle = {
                         '--titleColor': ColorCallBack(win_color, win_deg),
-                        textIndent: win_index,
                         fontSize: win_size,
                         fontFamily: win_family,
                         fontWeight: win_weight,
                         fontStyle: win_style,
+                        textIndent: win_index,
                         filter: SetFilderParams(win_filed, win_filed_data, win_filed_color),
                     }
+
                     return (
                         <div className='StartTop' style={{ height: win_height }}>
-                            <div className='image'>
-                                <img style={{ width: win_imageA01 }} src={win_url + '01.png'} alt="" />
-                                <img style={{ flex: 1 }} src={win_url + '02.png'} alt="" />
-                                <img style={{ width: win_imageA02 }} src={win_url + '03.png'} alt="" />
-                            </div>
-                            <div>
-                                <div style={style}>{title}</div>
-                                <div><CloseOutlined style={{ fontSize: win_size }} onClick={onClose} /></div>
+                            <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
+                                <div className="text" style={winTitleStyle}>{title}</div>
+                                <div className="img">
+                                    {Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}
+                                </div>
+                                <CloseOutlined className="close" style={{ fontSize: win_size }} onClick={onClose} />
                             </div>
                         </div>
                     )
@@ -158,15 +146,46 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                 <Suspense>
                     {(() => {
                         if (isStart) {
-                            const { win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
-                                win_back_border, win_back_border_size, win_back_border_type, win_back_border_color } = StartData
+                            const { win_back_border, win_back_border_color, win_back_border_size, win_back_border_type,
+                                win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
+                                win_image_status, win_image_list, win_height
+                            } = StartData
 
                             const back = {
                                 '--backColor': ColorCallBack(win_back_color, win_back_deg),
                                 '--backBorder': SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
-                                '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0
+                                '--backFilter': win_back_filter ? win_back_filter_size + 'px' : 0,
+                                '--backHeight': win_height + 'px'
                             }
-                            return <div className="StartBack" style={back} />
+                            return (
+                                <div className="StartBack" style={back} >
+                                    {win_image_status && win_image_list.map((v, i) => {
+                                        const Style = {
+                                            ...UnitCallBackStruct(v.back_widthUnit, v.width, 'width'),
+                                            ...UnitCallBackStruct(v.back_heightUnit, v.height, 'height'),
+                                            transform: `rotate3d(${v.rotate}) `
+                                        }
+                                        const positionMap = {
+                                            'top-left': { top: v.back_top, right: null, bottom: null, left: v.back_lef, topUnit: v.back_topUnit, leftUnit: v.back_lefUnit },
+                                            'top-right': { top: v.back_top, right: v.back_rig, bottom: null, left: null, topUnit: v.back_topUnit, rightUnit: v.back_rigUnit },
+                                            'bottom-left': { top: null, right: null, bottom: v.back_btm, left: v.back_lef, bottomUnit: v.back_btmUnit, leftUnit: v.back_lefUnit },
+                                            'bottom-right': { top: null, right: v.back_rig, bottom: v.back_btm, left: null, bottomUnit: v.back_btmUnit, rightUnit: v.back_rigUnit },
+                                        };
+                                        const posConfig = positionMap[v.back_position];
+                                        Object.entries(posConfig).forEach(([key, value]) => {
+                                            if (value !== null) {
+                                                if (key.endsWith('Unit')) return
+                                                const unitKey = key + 'Unit'
+                                                const unit = posConfig[unitKey]
+                                                Style[key] = unit === 'pct' ? `${value}%` : value + unit
+                                            }
+                                        })
+                                        return (
+                                            <img className='WinBoxBackImage' key={i} src={v.image_url} alt={v.image_url} style={Style} />
+                                        )
+                                    })}
+                                </div>
+                            )
                         }
                     })()}
                     {!isEmptyObject(modelConfig) && Template ?

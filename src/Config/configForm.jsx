@@ -7023,46 +7023,32 @@ const rowClickFormList = [
     },
     // 弹窗设置
     {
-        span: 12, formType: 'TempGenerateUuid', name: 'click_model_uuid', label: '生成ID', rules: true,
+        span: 24, formType: 'GROUP', name: 'rowClickFormList_config', label: '弹窗配置', collapsible: true,
         jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-    },
-    {
-        span: 12, formType: 'RADIO', name: 'click_model_start', label: '大屏小窗', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-        valueEnum: MappingData.IsEnabledBool
-    },
-    {
-        span: 12, formType: 'RADIO', name: 'click_model_level', label: '弹窗层级', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-        valueEnum: MappingData.System__TableModelLevel
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_model_title', label: '弹窗名称', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_model_width', label: '整体宽度', tooltip: 'vw,vh,px,%',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_model_height', label: '整体高度', tooltip: 'vw,vh,px,%',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-    },
-    {
-        span: 24, formType: 'RADIO', name: 'click_model_params', label: '弹窗参数', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-        valueEnum: MappingData.IsEnabledBool
-    },
-    {
-        span: 24, formType: 'LIST', name: 'click_model_config', label: '弹窗设置', collapsible: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }, { field: 'click_model_params', value: [true] }],
         children: [
-            { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
-            { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
-            { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
-            { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
+            { span: 12, formType: 'TempGenerateUuid', name: 'click_model_uuid', label: '生成ID', rules: true, },
+            { span: 12, formType: 'RADIO', name: 'click_model_start', label: '大屏小窗', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'click_model_level', label: '弹窗层级', rules: true, valueEnum: MappingData.System__TableModelLevel },
+            { span: 12, formType: 'INPUT', name: 'click_model_title', label: '弹窗名称', rules: true, },
+            { span: 12, formType: 'INPUT', name: 'click_model_width', label: '整体宽度', tooltip: 'vw,vh,px,%', },
+            { span: 12, formType: 'INPUT', name: 'click_model_height', label: '整体高度', tooltip: 'vw,vh,px,%', },
+            {
+                span: 24, formType: 'RADIO', name: 'click_model_params', label: '弹窗参数', rules: true,
+                valueEnum: MappingData.IsEnabledBool
+            },
+            {
+                span: 24, formType: 'LIST', name: 'click_model_config', label: '弹窗设置', collapsible: true,
+                jugde: [{ field: 'click_model_params', value: [true] }],
+                children: [
+                    { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
+                    { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
+                    { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
+                ]
+            },
         ]
     },
+
     // 跳转设置
     {
         span: 24, formType: 'RADIO', name: 'click_navTo_type', label: '跳转方式', rules: true,
@@ -9341,13 +9327,8 @@ const ModelConfigFormList = [
     {
         span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
         jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
-            { span: 24, formType: 'RADIO', name: 'annex_type', label: '附件来源', rules: true, valueEnum: MappingData.System_fileUrlType },
-            {
-                span: 24, formType: 'GROUP', name: 'annex_fields', label: '数据设置', collapsible: true,
-                jugde: [{ field: 'annex_type', value: ['A01'] }], children: [
-
-                ]
-            },
+            { span: 12, formType: 'RADIO', name: 'annex_type', label: '附件来源', rules: true, valueEnum: MappingData.System_fileUrlType },
+            { span: 12, formType: 'INPUT', name: 'lay_A01_fields', label: '附件字段', rules: true , jugde: [{ field: 'annex_type', value: ['A01'] }]},
             {
                 span: 24, formType: 'GROUP', name: 'annex_api', label: '接口设置', collapsible: true,
                 jugde: [{ field: 'annex_type', value: ['A02'] }], children: [

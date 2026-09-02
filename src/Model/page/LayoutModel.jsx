@@ -44,7 +44,7 @@ const LayoutModel = ({ data, Event }) => {
         const { pageType, diyUrl } = jsonData
         if (pageType === 'DIY') {
             try {
-                const module = await import(`../home/${diyUrl}.jsx`);
+                const module = await import(`../diy/${diyUrl}.jsx`);
                 const Component = module.default || module
                 if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) throw new Error(`导入的模块不是有效的React组件`)
                 setComponentStatus({ laoding: false, error: false, Template: Component })

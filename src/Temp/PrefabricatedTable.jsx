@@ -92,7 +92,8 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
     const size = useSize(tableBox)
     const [STYLE, setSTYLE] = useState()
 
-    const [PageSize, setPageSize] = useState(data_number)
+
+    const [PageSize, setPageSize] = useState(Number(data_number))
     const [treeData, setTreeData] = useState()
     const [treeActive, setTreeActive] = useState()
     const [cardData, setCardData] = useState()
@@ -123,7 +124,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                 width: model_width,
                 height: model_height,
                 Event: LayoutEvent,
-                modelData: { json: model_uuid, data }
+                modelData: { json: model_uuid, row: data }
             })
         }
     }
@@ -475,12 +476,11 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                 request={async ({ current, pageSize, treeActive, ...item }) => {
                     if (data_type === 'A01') return ({ success: true, data: tableListDataSource })
                     if (data_type === 'A02') {
-
                         if (tree && !treeActive) return false
                         let params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
+
                         if (tree && treeActive) params[tree_http_params] = treeActive[0]
                         if (row) params = { ...params, ...row }
-                        console.log('构造请求函数', { method: data_api_method, url: data_api_url, path: data_api_https, params })
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res

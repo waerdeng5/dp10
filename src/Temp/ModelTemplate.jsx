@@ -1,38 +1,25 @@
 import './ModelTemplate.scss'
 import { useSize } from 'ahooks'
-import { useState, useRef, useEffect } from 'react'
-import { Card, Descriptions, Menu, Button, Spin } from 'antd'
 import { MailOutlined } from '@ant-design/icons'
+import { useState, useRef, useEffect } from 'react'
 import { ProTable } from '@ant-design/pro-components'
+import { Card, Descriptions, Menu, Button, Spin } from 'antd'
 
 import { Decrypt } from '../Utils/IndexedDB'
-
-import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, getNestedValue } from '../Utils'
-
-
+import { SwiperAnnexTemplate } from './SwiperTemplate'
 import { axios, strOfurlParamsFunc } from '../Utils/Api'
 import { PrefabricatedTableTemplate } from './PrefabricatedTable'
-import { SwiperAnnexTemplate } from './SwiperTemplate'
-
+import { ColorCallBack, SpacingCallBack, SetFilderParams, SetBorderParams, splitArrayEvenly, findInTree, getNestedValue } from '../Utils'
 
 const TableTemplate = PrefabricatedTableTemplate.PrefabricatedTable
-
-// 引入组件 
-
-
-
 
 // TODO 弹窗组件 
 // !!!  附件
 export const ModelAnnexTemplate = ({ config, row, Event }) => {
-    // console.log('附件窗口', config, row, Event)
-    const { annex_type,
-        annex_api_method, annex_api_url, annex_api_params, annex_api_https, annex_api_level, annex_api_mapping, annex_api_fields
-    } = config
+    const { annex_type, annex_api_method, annex_api_url, annex_api_params, annex_api_https, annex_api_level, annex_api_mapping, annex_api_fields,
+        lay_A01_fields } = config
 
     const [annexData, setAnnexData] = useState()
-
-
     const getAnnexData = async () => {
         const [err, res] = await axios({ method: annex_api_method, url: annex_api_url, params: strOfurlParamsFunc(annex_api_params), path: annex_api_https })
         if (err) return
@@ -40,12 +27,15 @@ export const ModelAnnexTemplate = ({ config, row, Event }) => {
         setAnnexData(data)
     }
 
+    const getAnnexRow = () => {
+        const data = row[lay_A01_fields]
+        setAnnexData(data)
+    }
 
     useEffect(() => {
+        if (annex_type === 'A01') getAnnexRow()
         if (annex_type === 'A02') getAnnexData()
     }, [])
-
-
 
     return (
         <div className='ModelAnnexTemplate'>
@@ -61,5 +51,3 @@ export const ModelTableTemplate = ({ config, row, Event }) => {
         </div>
     )
 }
-
-// https://jtgj-rest.ljkjkf.com/api/personStat/GetPersonCategory
