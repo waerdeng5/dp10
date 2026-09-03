@@ -1953,6 +1953,10 @@ const AddFieldsImport = [
     { span: 24, formType: 'INPUT', name: 'importSplit', label: '切割字符' },
     { span: 24, formType: 'TEXTAREA', name: 'importField', label: '字段导入', rules: true },
 ]
+// *** 字段粘贴
+const AddFieldsPaste = [
+    { span: 24, formType: 'TEXTAREA', name: 'importField', label: '字段内容', rules: true },
+]
 // *** 新增字段
 const AddFieldsFormList = [
     {
@@ -2182,6 +2186,7 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'formParams', label: '额外参数', jugde: [{ field: 'addType', value: ['form'] }] },
             { span: 24, formType: 'INPUT', name: 'formPath', label: '接口路径', jugde: [{ field: 'addType', value: ['form'] }] },
             // excel 添加
+            { span: 24, formType: 'RADIO', name: 'isORGUUID', label: '是否使用组织机构信息', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'RADIO', name: 'excelGetMethod', label: '获取方式', rules: true, valueEnum: MappingData.System__Method,
                 jugde: [{ field: 'addType', value: ['excel'] }]
@@ -7641,6 +7646,7 @@ const PrefabricatedDiyWeather = [
             },
         ]
     },
+    ...rowClickFormList
 ]
 
 // !!! 图文模块
@@ -9176,6 +9182,52 @@ const PrefabricatedVisualRecorded = [
         ]
     },
 ]
+// !!! 直播模块
+const PrefabricatedVisualLive = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_layout', label: '布局样式', collapsible: true, defaultCollapsed: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'COLOR', name: 'video_color', label: '视频默认背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'video_deg', label: '视频背景颜色角度', rules: true },
+
+            { span: 12, formType: 'INPUT', name: 'live_url', label: '直播地址字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'live_cover', label: '直播封面字段', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_padding', label: '内填充', rules: true },
+            { span: 12, formType: 'RADIO', name: 'isPage', label: '是否启用分页', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'RADIO', name: 'isScreen', label: '是否启用分屏', rules: true,
+                jugde: [{ field: 'isPage', value: [true] }], valueEnum: MappingData.IsEnabledBool
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'screen_nums', label: '分屏数量', rules: true,
+                jugde: [{ field: 'isPage', value: [true] }, { field: 'isScreen', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_page', label: '分页样式', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'isPage', value: [true] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen', label: '分屏样式', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'isScreen', value: [true] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen_layout', label: '分屏布局', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'isScreen', value: [true] }], children: [
+
+        ]
+    },
+]
+
 
 // !!! 文件夹
 const PrefabricatedDiyFolder = [
@@ -9411,9 +9463,18 @@ const ModelConfigFormList = [
                     { span: 12, formType: 'INPUT', name: 'annex_api_url', label: '请求接口', rules: true },
                     { span: 12, formType: 'INPUT', name: 'annex_api_params', label: '额外参数' },
                     { span: 12, formType: 'INPUT', name: 'annex_api_https', label: '额外地址' },
+
+                    { span: 12, formType: 'RADIO', name: 'annex_api_data', label: '使用主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'RADIO', name: 'annex_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
                     { span: 12, formType: 'INPUT', name: 'annex_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'annex_api_level', value: [true] }] },
                     { span: 12, formType: 'INPUT', name: 'annex_api_fields', label: '附件字段' },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'annex_data_mapping', label: '主数据映射', collapsible: true,
+                jugde: [{ field: 'annex_type', value: ['A02'] }, { field: 'annex_api_data', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'field', label: '数据字段' },
+                    { span: 12, formType: 'INPUT', name: 'mapping', label: '映射字段' },
                 ]
             },
         ]
@@ -9434,6 +9495,11 @@ const PrefabricatedPasteWindow = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     { span: 24, formType: 'TEXTAREA', name: 'paste', label: '粘贴内容', rules: true },
 ]
+// *** 独立窗口参数粘贴窗口
+const PrefabricatedPasteModel = [
+    { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
+    { span: 24, formType: 'TEXTAREA', name: 'paste', label: '粘贴内容', rules: true },
+]
 
 
 
@@ -9446,6 +9512,7 @@ export const FormConfig = {
     StartInitFormList,
     StartWindowFormList,
 
+    AddFieldsPaste,
     AddFieldsImport,
     AddFieldsFormList,
     SetFieldsFormList,
@@ -9510,8 +9577,9 @@ export const FormConfig = {
     PrefabricatedTreeData,
     PrefabricatedVisualMonitoring,
     PrefabricatedVisualRecorded,
+    PrefabricatedVisualLive,
 
     PrefabricatedSwiperBox,
-    PrefabricatedPasteWindow
-
+    PrefabricatedPasteWindow,
+    PrefabricatedPasteModel
 }

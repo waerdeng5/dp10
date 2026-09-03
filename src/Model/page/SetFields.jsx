@@ -86,6 +86,13 @@ const SetFields = ({ data, Event }) => {
         Event.emit({ type: 'onFormReset' })
     }
 
+    const onFieldsPaste = e => {
+        const { importField } = e
+        const addArr = JSON.parse(importField)
+        setData(arr => ([...arr, ...addArr]))
+        Event.emit({ type: 'onFormReset' })
+    }
+
     const onAddFieldsBack = (e) => {
         const status = Data.some(v => v.dataField === e.dataField)
         if (status) {
@@ -126,6 +133,8 @@ const SetFields = ({ data, Event }) => {
             ['onAddCreateFields', onAddCreateFields],
             ['onSaveField', () => onSaveField(data)],
             ['onFieldsImport', () => onFieldsImport(data)],
+            ['onFieldsPaste', () => onFieldsPaste(data)],
+
             ['onCommonFormBack', () => onAddFieldsBack(data)]
         ])
         const func = Mapping.get(type)

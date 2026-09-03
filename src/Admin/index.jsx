@@ -226,23 +226,33 @@ const AdminIndex = () => {
                                     type: 'danger',
                                     onClick: () => AdminEvent.emit({ type: 'onClearFields' })
                                 },
-                                // {
-                                //     visible: true,
-                                //     widget: 'dxButton',
-                                //     location: 'before',
-                                //     icon: 'fas fa-arrow-alt-circle-up',
-                                //     text: '导出完整字段 ',
-                                //     onClick: () => AdminEvent.emit({ type: 'onCopyFields' })
-                                // },
-                                // {
-                                //     visible: true,
-                                //     widget: 'dxButton',
-                                //     location: 'before',
-                                //     icon: 'fas fa-arrow-alt-circle-down',
-                                //     text: '导入完整字段 ',
-                                //     onClick: () => AdminEvent.emit({ type: 'onImportFields' })
-                                // },
-
+                                {
+                                    visible: true,
+                                    widget: 'dxButton',
+                                    location: 'before',
+                                    icon: 'fas fa-arrow-alt-circle-up',
+                                    text: '拷贝字段 ',
+                                    onClick: () => AdminEvent.emit({ type: 'onCopyFields' })
+                                },
+                                {
+                                    visible: true,
+                                    widget: 'dxButton',
+                                    location: 'before',
+                                    icon: 'fas fa-arrow-alt-circle-down',
+                                    text: '粘贴字段 ',
+                                    onClick: () => {
+                                        updateModel2({
+                                            title: '字段导入',
+                                            width: 800,
+                                            type: 'CommonForm',
+                                            Event: AdminEvent,
+                                            modelData: {
+                                                formItem: 'AddFieldsPaste',
+                                                eventBack: 'onFieldsPaste',
+                                            }
+                                        })
+                                    }
+                                },
                                 {
                                     visible: true,
                                     widget: 'dxButton',

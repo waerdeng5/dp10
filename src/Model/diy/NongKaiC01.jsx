@@ -4,30 +4,25 @@ import { useEventEmitter } from 'ahooks';
 
 
 const NongKaiC01 = () => {
-
     const Event = useEventEmitter()
-    const { updateModel5 } = modelStore()
-
+    const { updateModel1 } = modelStore()
 
     const List = [
         { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1001', title: '优质工程' },
-        { uuid: 2, title: '弹窗2' },
-        { uuid: 3, title: '弹窗3' },
-        { uuid: 4, title: '弹窗4' },
-        { uuid: 5, title: '弹窗5' },
-        { uuid: 6, title: '弹窗6' },
-        { uuid: 7, title: '弹窗7' },
-        { uuid: 8, title: '弹窗8' },
-        { uuid: 9, title: '弹窗9' },
-        { uuid: 10, title: '弹窗10' },
-        { uuid: 11, title: '弹窗11' },
-        { uuid: 12, title: '弹窗12' },
-        { uuid: 13, title: '弹窗13' },
-        { uuid: 14, title: '弹窗14' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1002', title: 'QC' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1003', title: '施工工法' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1004', title: '十新技术' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1005', title: '绿色工程' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1006', title: 'BIM' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1007', title: '专利' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1008', title: '参编标准' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1009', title: '样板工程' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1010', title: '智慧工地' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1011', title: '微创新' },
+        { uuid: '1154691c-a87d-40e5-9a33-946fb0bc1012', title: '科学技术成果' },
     ]
-
     const onClick = (e) => {
-        updateModel5({
+        updateModel1({
             title: e.title,
             type: 'LayoutModel',
             isStart: true,

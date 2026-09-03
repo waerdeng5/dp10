@@ -1,13 +1,13 @@
 import './SetDevRouter.scss'
+import { message } from 'antd'
 import { useState } from 'react'
+import copy from 'copy-to-clipboard'
 import { axios } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
 import { modelStore, pageStore } from '../../Router/zustand'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MappingData } from '../../Config/MappingData'
 import { Encrypt, GetIndexedDB } from '../../Utils/IndexedDB'
-
-
 
 export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => (
     <div className='SetDevRouter'>
@@ -208,11 +208,16 @@ const SetDevRouter = ({ data, Event }) => {
     }
 
     const onCopyFields = () => {
-        console.log('拷贝字段', APIdata.fields)
-
+        const success = copy(JSON.stringify(APIdata.fields))
+        if (success) message.success('复制成功！')
+        else message.error('复制失败！')
     }
+
     const onImportFields = () => {
         console.log('导入字段')
+        console.log('字段直接导入')
+
+
     }
 
     const devCallBack = (e) => {

@@ -145,6 +145,7 @@ const PrefabricatedDateSelect = ({ tempId, UrlData, data, LayoutEvent }) => {
                 v.apiData = e.format(dateMapping[picker])
                 return v
             })
+            console.log(data)
             LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
         }
     }

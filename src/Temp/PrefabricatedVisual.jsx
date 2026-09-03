@@ -15,7 +15,7 @@ import {
 } from '../Utils'
 
 
-import { VideoTemplateA02 } from './VideoTemplate'
+import { VideoTemplateA02, VideoTemplateA04 } from './VideoTemplate'
 
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
 
@@ -642,10 +642,47 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
 
 // 无人机直播
 const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
-    console.log(data)
+    const { back_color, back_deg, back_padding, isPage, isScreen, screen_nums, video_color, video_deg, live_url, live_cover,
+
+
+
+    } = data
+
+    const [PageIndex, setPageIndex] = useState(1)
+    const [PageSize, setPageSize] = useState(screen_nums)
+    const [LiveList, setLiveList] = useState()
+    const [LiveTotal, setLiveTotal] = useState(0)
+
+    const backStyle = {
+        background: ColorCallBack(back_color, back_deg),
+        padding: SpacingCallBack(back_padding),
+    }
+    const videoStyle = {
+        background: ColorCallBack(video_color, video_deg),
+    }
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, {}, 'api_diyObj')
+        const { total, list } = backData
+        // console.log(total, list)
+        setLiveList(list)
+        setLiveTotal(total)
+    }, [UrlData, data])
+
+
     return (
-        <div>
-            无人机直播
+        <div className='PrefabricatedVisualLive' style={backStyle}>
+            <div className='video'>
+                {LiveList?.map(v => {
+                    // console.log(v)
+                })}
+            </div>
+            {isPage &&
+                <div className='options'>
+                    <div className='page'><Pagination size="small" total={50} showTotal={total => `Total ${total} items`} /></div>
+                    {isScreen && <div className='screen'>分屏信息</div>}
+                </div>
+            }
         </div>
     )
 }

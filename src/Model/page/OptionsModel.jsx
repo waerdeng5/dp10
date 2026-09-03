@@ -145,12 +145,14 @@ const OptionsModel = ({ data, Event }) => {
         }
 
         if (addType === 'excel') {
-            const { excelGetMethod, excelGetUrl, excelGetParams, excelSaveMethod, excelSaveUrl, excelSaveParams } = data
+            const { excelGetMethod, excelGetUrl, excelGetParams, excelSaveMethod, excelSaveUrl, excelSaveParams, isORGUUID } = data
+            const getParams = isORGUUID ? { OrganizationUuid: ORGUUID, ...strOfurlParamsFunc(excelGetParams) } : strOfurlParamsFunc(excelGetParams)
+            const saveParams = isORGUUID ? { OrganizationUuid: ORGUUID, ...strOfurlParamsFunc(excelSaveParams) } : strOfurlParamsFunc(excelSaveParams)
             const props = {
                 data: Initial,
                 Event,
-                getData: { method: excelGetMethod, url: excelGetUrl, params: strOfurlParamsFunc(excelGetParams) },
-                saveData: { method: excelSaveMethod, url: excelSaveUrl, params: strOfurlParamsFunc(excelSaveParams) }
+                getData: { method: excelGetMethod, url: excelGetUrl, params: getParams },
+                saveData: { method: excelSaveMethod, url: excelSaveUrl, params: saveParams }
             }
             return (
                 <div className='OptionsModel__Excel'>
@@ -705,8 +707,6 @@ const OptionsModel = ({ data, Event }) => {
                 Event.emit({ type: 'onRefreshData', data: {} })
                 updateModel5({})
             }
-
-
         })
 
         if (formItem) return <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} />

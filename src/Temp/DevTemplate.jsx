@@ -260,7 +260,7 @@ export const AttachTemplateA01 = ({ data }) => {
                         </div>
                         <div className='Right'>
                             <div>{originalName}</div>
-                            <div>{url}</div>
+                            {/* <div>{url}</div> */}
                         </div>
                     </div>
                 )

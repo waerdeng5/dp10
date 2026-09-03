@@ -17,11 +17,14 @@ const TableTemplate = PrefabricatedTableTemplate.PrefabricatedTable
 // !!!  附件
 export const ModelAnnexTemplate = ({ config, row, Event }) => {
     const { annex_type, annex_api_method, annex_api_url, annex_api_params, annex_api_https, annex_api_level, annex_api_mapping, annex_api_fields,
-        lay_A01_fields } = config
+        lay_A01_fields, annex_api_data, annex_data_mapping } = config
 
     const [annexData, setAnnexData] = useState()
+
     const getAnnexData = async () => {
-        const [err, res] = await axios({ method: annex_api_method, url: annex_api_url, params: strOfurlParamsFunc(annex_api_params), path: annex_api_https })
+        const params = { ...strOfurlParamsFunc(annex_api_params) }
+        if (annex_api_data) annex_data_mapping.forEach(v => { params[v.mapping] = row[v.field] })
+        const [err, res] = await axios({ method: annex_api_method, url: annex_api_url, params, path: annex_api_https })
         if (err) return
         const data = annex_api_level ? getNestedValue(annex_api_mapping, res) : res
         setAnnexData(data)

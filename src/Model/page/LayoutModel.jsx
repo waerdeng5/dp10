@@ -1,9 +1,10 @@
 
 import './LayoutModel.scss'
 
+import copy from 'copy-to-clipboard'
 import { useEventEmitter } from 'ahooks'
 import { useState, useEffect } from 'react'
-import { Spin, Result, Button, FloatButton } from 'antd'
+import { Spin, Result, Button, FloatButton, App } from 'antd'
 
 
 import { axios } from '../../Utils/Api'
@@ -23,6 +24,7 @@ const LayTempMapping = {
 const LayoutModel = ({ data, Event }) => {
     const { json, row } = data
     const ModelEvent = useEventEmitter()
+    const { message, modal, notification } = App.useApp()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [Status, setStatus] = useState({ spin: true, result: true })
     const [componentStatus, setComponentStatus] = useState({ laoding: true, error: null, Template: null })
@@ -51,13 +53,47 @@ const LayoutModel = ({ data, Event }) => {
             } catch (error) { setComponentStatus({ laoding: false, error: error, Template: null }) }
         }
     }
-
     const onFormClick = () => {
         updateModel5({
             title: '弹出层设置',
             type: 'CommonForm',
             Event: ModelEvent,
-            modelData: { formItem: 'ModelConfigFormList', eventBack: 'onSaveModel', Initial: Config }
+            modelData: { formItem: 'ModelConfigFormList', eventBack: 'onSaveModel', Initial: Config },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'before',
+                    text: '复制参数',
+                    type: 'default',
+                    onClick: () => {
+                        const success = copy(JSON.stringify(Config))
+                        if (success) message.success('复制成功！')
+                        else message.error('复制失败！')
+                    }
+                },
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    text: '导入参数',
+                    type: 'default',
+                    onClick: () => {
+                        updateModel4({
+                            title: '模块设置',
+                            type: 'CommonForm',
+                            width: 640,
+                            height: 640,
+                            Event: ModelEvent,
+                            modelData: {
+                                formItem: 'PrefabricatedPasteModel',
+                                eventBack: 'onPasteIndependentModel',
+                                Initial: { json: Config.json }
+                            },
+                        })
+                    }
+                }
+            ]
         })
     }
 
@@ -75,7 +111,12 @@ const LayoutModel = ({ data, Event }) => {
         // console.log('Home', e)
         const Mapping = new Map([
             ['onSaveModel', () => onSaveModel(data)],
-
+            ['onPasteIndependentModel', () => {
+                const { json, paste } = data
+                const params = JSON.parse(paste)
+                onSaveModel({ ...params, json })
+                updateModel4({})
+            }]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -105,7 +146,7 @@ const LayoutModel = ({ data, Event }) => {
         const { Template } = componentStatus
         return (
             <div className='LayoutModel'>
-                <Template />
+                <Template data={data} />
                 <FloatButton onClick={onFormClick} />
             </div>
         )

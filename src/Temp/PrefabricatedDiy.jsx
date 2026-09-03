@@ -541,10 +541,10 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
 
 // 天气组件
 const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
 
     const [Data, setData] = useState()
     const [IconList, setIconList] = useState({})
-
 
     const { align_items, align_content, justify_content, flex_direction, flex_wrap,
         back_color, back_deg, back_padding, back_margin, back_radius, isIcon,
@@ -555,9 +555,11 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
         wea_widthUnit, wea_width, wea_heightUnit, wea_height, wea_padding, wea_margin,
         max_field, max_padding, max_color, max_deg, max_size, max_family, max_weight, max_style, max_filed, max_filed_data, max_filed_color,
         min_field, war_field, war_color, war_deg, war_size, war_family, war_weight, war_style, war_filed, war_filed_data, war_filed_color,
+        click_status,
     } = data
 
     const boxStyle = {
+        cursor: click_status ? 'pointer' : 'auto',
         width: SpacingSizeCallBack(back_margin, 100),
         height: SpacingSizeCallBack(back_margin, 100, true),
         background: ColorCallBack(back_color, back_deg),
@@ -653,11 +655,10 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, temporaryDataA01, 'api_diyObj')
         setData(backData)
-        console.log(backData)
     }, [UrlData, data])
 
     return (
-        <div className='PrefabricatedDiyWeather' style={boxStyle}>
+        <div className='PrefabricatedDiyWeather' style={boxStyle} onClick={(e) => click_status && TemplateClickFn(e, data, Data, LayoutEvent, openModel)}>
             <div className='text' style={textStyle}>
                 {isDate &&
                     <div className='date' style={dateStyle}>
@@ -678,7 +679,6 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
                     </div>
                 }
                 {weatherType === 'A01' && <WeatherTypeA01 />}
-
             </div>
             {isIcon && IconList?.[Data?.[icon_field]] &&
                 <img style={imgStyle} src={IconList?.[Data?.[icon_field]]} alt={icon_field} />

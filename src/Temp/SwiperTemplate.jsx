@@ -179,6 +179,24 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
                 <Result status="404" title="404" subTitle="未检测到附件信息" />
             </div>
         )
+
+    const AnnexRender = (url) => {
+        const type = getFileTypeFromUrl(url)
+        switch (type) {
+            case 'image': return <Image width={'100%'} height={'100%'} src={url} />
+            case 'video': return <VideoTemplateA02 url={url} />
+            case 'pdf': return <embed src={url} type="application/pdf" width="100%" height="100%" />
+            case 'word': return <div>word</div>
+            case 'excel': return <div>excel</div>
+            case 'md': return <div>md</div>
+            case 'txt': return <div>txt</div>
+            case 'edge': return <div>edge</div>
+            default: return <div>未知附件</div>
+        }
+    }
+
+
+
     return (
         <Swiper
             className='B20_swiper'
@@ -193,23 +211,14 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
                 <SwiperSlide key={v.uuid}>
                     {(() => {
                         if (!v[urlField]) return false
-                        const type = getFileTypeFromUrl(v[urlField])
-                        switch (type) {
-                            case 'image': return <Image width={'100%'} height={'100%'} src={v[urlField]} />
-                            case 'video': return <VideoTemplateA02 url={v[urlField]} />
-                            case 'pdf': return <embed src={v[urlField]} type="application/pdf" width="100%" height="100%" />
-                            case 'word': return <div>word</div>
-                            case 'excel': return <div>excel</div>
-                            case 'md': return <div>md</div>
-                            case 'txt': return <div>txt</div>
-                            case 'edge': return <div>edge</div>
-                            default: return <div>未知附件</div>
+                        if (typeof v[urlField] === 'string') return AnnexRender(v[urlField])
+                        else {
+                            const [{ url }] = v[urlField]
+                            return AnnexRender(url)
                         }
                     })()}
                 </SwiperSlide>
             ))}
         </Swiper>
     )
-
-
 }

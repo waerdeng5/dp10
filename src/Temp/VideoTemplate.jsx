@@ -89,7 +89,6 @@ export const VideoTemplateA03 = ({ data }) => {
     useEffect(() => {
         const url = 'https://yingshi.ljkjkf.com'
         if (SIZE) {
-            console.log(SIZE)
             const { width, height } = SIZE
             if (cameraFactory === 1)
                 setUrl(`${url}/webvideo.html?url=ezopen://open.ys7.com/${deviceSerial}/${channelNo}${hd ? '.hd' : ''}.live&token=${token}&width=${width}&height=${height}`)
@@ -115,4 +114,40 @@ export const VideoTemplateA03 = ({ data }) => {
             }
         </div>
     )
+}
+
+// 直播视频
+export const VideoTemplateA04 = ({ url }) => {
+    // return
+    const myRef = useRef(null)
+    const easyPro = useRef(null)
+
+    const data = { isLive: true, bufferTime: 0.2, loadTimeReplay: 3, loadTimeOut: 10, MSE: true, hasAudio: false, stretch: false, poster: '' }
+
+    const create = () => {
+        easyPro.current = new window.EasyPlayerPro(myRef.current, data)
+        play()
+    }
+
+    const play = () => {
+        if (!easyPro.current) return create()
+        easyPro.current.play(url).catch(destroy)
+    }
+
+    const destroy = () => {
+        if (!easyPro.current) return create()
+        easyPro.current.destroy(url)
+    }
+
+
+    useEffect(() => {
+        if (url) {
+            if (easyPro.current) easyPro.current.destroy().then(create)
+            else create()
+        }
+        return () => destroy()
+    }, [url])
+
+
+    return <div className='VideoTempA02' ref={myRef} />
 }

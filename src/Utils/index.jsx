@@ -836,7 +836,7 @@ export const DiyDataReturn = (data, apiData, backData, diyKey, back = []) => {
 export const AssemblyModelData = (data, row, Event) => {
     const { click_model_uuid, click_model_start, click_model_title, click_model_width, click_model_height, click_model_params, click_model_config } = data
     const rowData = click_model_params ? click_model_config.reduce((acc, item) => {
-        acc[item.param_key] = item.param_type === 'diys' ? item.param_value : row[item.param_value]
+        acc[item.param_key] = item.param_type === 'diys' ? item.param_value : row[item.param_field]
         return acc
     }, {}) : {}
 
