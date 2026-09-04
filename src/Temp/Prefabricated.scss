@@ -1190,6 +1190,10 @@
     &>.video {
         flex: 1;
         width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-wrap: wrap;
     }
 
     &>.options {
@@ -1200,6 +1204,104 @@
 
         &>.page {
             flex: 1;
+
+            &>.ant-pagination {
+                &>.ant-pagination-total-text {
+                    flex: 1;
+                    padding: var(--pageTitlePadding);
+                    background: var(--pageTitleColor);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    user-select: none;
+                    font-size: var(--pageTitleFontSize);
+                    font-family: var(--pageTitleFontFamily);
+                    font-weight: var(--pageTitleFontWeight);
+                    font-style: var(--pageTitleFontStyle);
+                    filter: var(--pageTitleFilter);
+                }
+
+                .ant-pagination-prev,
+                .ant-pagination-next {
+                    width: var(--pageBtnSize);
+                    height: var(--pageBtnSize);
+                    background: var(--pageBtnBack);
+                    border-radius: var(--pageBtnRadius);
+                }
+
+                .ant-pagination-item-ellipsis {
+                    font-size: var(--pageBtnPnSize);
+                    color: var(--pageBtnPnBack);
+                }
+
+                .ant-pagination-item-link-icon,
+                .ant-pagination-item-link {
+                    font-size: var(--pageBtnMosize);
+                    color: var(--pageBtnMoback);
+                }
+
+                .ant-pagination-item {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: var(--pageItemBack);
+                    width: var(--pageItemSize);
+                    height: var(--pageItemSize);
+                    border-radius: var(--pageItemRadius);
+                    border: var(--pageItemBorder);
+
+                    &>a {
+                        background: var(--pageItemColor);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        user-select: none;
+                        font-size: var(--pageItemFontSize);
+                        font-family: var(--pageItemFontFamily);
+                        font-weight: var(--pageItemFontWeight);
+                        font-style: var(--pageItemFontStyle);
+                        filter: var(--pageItemFilter);
+                    }
+                }
+
+                .ant-pagination-item-active {
+                    background: var(--pageActiveBack);
+                    width: var(--pageActiveSize);
+                    height: var(--pageActiveSize);
+                    border-radius: var(--pageActiveRadius);
+                    border: var(--pageActiveBorder);
+
+                    &>a {
+                        background: var(--pageActiveColor);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        user-select: none;
+                        font-size: var(--pageActiveFontSize);
+                        font-family: var(--pageActiveFontFamily);
+                        font-weight: var(--pageActiveFontWeight);
+                        font-style: var(--pageActiveFontStyle);
+                        filter: var(--pageActiveFilter);
+                    }
+                }
+            }
+        }
+
+        &>.screen {
+
+            .ant-select-content {
+                background: var(--screenColor);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+                font-size: var(--screenFontSize);
+                font-family: var(--screenFontFamily);
+                font-weight: var(--screenFontWeight);
+                font-style: var(--screenFontStyle);
+                filter: var(--screenFilter);
+                text-align: var(--screenAlign);
+            }
         }
     }
 }

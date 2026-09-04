@@ -642,14 +642,24 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
 
 // 无人机直播
 const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
-    const { back_color, back_deg, back_padding, isPage, isScreen, screen_nums, video_color, video_deg, live_url, live_cover,
-
-
-
+    const { isParams, isParamsConfig, page_field, screen_field,
+        back_color, back_deg, back_padding, isPage, isScreen, screen_nums, video_color, video_deg, live_url, live_cover,
+        isPageTitle, page_title_prefix, page_title_suffix, page_title_color, page_title_deg, page_title_margin, page_title_size, page_title_family,
+        page_title_weight, page_title_style, page_title_filed, page_title_filed_data, page_title_filed_color,
+        page_button_back, page_button_size, page_button_pnback, page_button_pnsize, page_button_moback, page_button_mosize, page_button_radius,
+        page_item_back, page_item_back_size, page_item_radius, page_item_isBorder, page_item_border_size, page_item_border_type, page_item_border_color,
+        page_item_color, page_item_deg, page_item_size, page_item_family, page_item_weight, page_item_style,
+        page_item_filed, page_item_filed_data, page_item_filed_color,
+        page_active_back, page_active_back_size, page_active_radius, page_active_isBorder, page_active_border_size, page_active_border_type, page_active_border_color,
+        page_active_color, page_active_deg, page_active_size, page_active_family, page_active_weight, page_active_style,
+        page_active_filed, page_active_filed_data, page_active_filed_color,
+        screen_back, screen_back_deg, screen_height, screen_width, screen_border, screen_color, screen_deg, screen_align, screen_size, screen_family,
+        screen_weight, screen_style, screen_filed, screen_filed_data, screen_filed_color, screen_padding, screen_select, screen_layout, screen_layout_margin
     } = data
 
+    const [RenderList, setRenderList] = useState()
     const [PageIndex, setPageIndex] = useState(1)
-    const [PageSize, setPageSize] = useState(screen_nums)
+    const [PageSize, setPageSize] = useState(isScreen ? screen_nums : 1)
     const [LiveList, setLiveList] = useState()
     const [LiveTotal, setLiveTotal] = useState(0)
 
@@ -660,27 +670,144 @@ const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
     const videoStyle = {
         background: ColorCallBack(video_color, video_deg),
     }
+    const pageStyle = {
+        '--pageTitleColor': ColorCallBack(page_title_color, page_title_deg),
+        '--pageTitlePadding': SpacingCallBack(page_title_margin),
+        '--pageTitleFontSize': page_title_size,
+        '--pageTitleFontFamily': page_title_family,
+        '--pageTitleFontWeight': page_title_weight,
+        '--pageTitleFontStyle': page_title_style,
+        '--pageTitleFilter': SetFilderParams(page_title_filed, page_title_filed_data, page_title_filed_color),
+        '--pageBtnBack': page_button_back,
+        '--pageBtnSize': page_button_size + 'px',
+        '--pageBtnPnBack': page_button_pnback,
+        '--pageBtnPnSize': page_button_pnsize + 'px',
+        '--pageBtnMoback': page_button_moback,
+        '--pageBtnMosize': page_button_mosize + 'px',
+        '--pageBtnRadius': page_button_radius + 'px',
+        '--pageItemBack': page_item_back,
+        '--pageItemSize': page_item_back_size + 'px',
+        '--pageItemRadius': page_item_radius + 'px',
+        '--pageItemBorder': SetBorderParams(page_item_isBorder, page_item_border_size, page_item_border_type, page_item_border_color),
+        '--pageItemColor': ColorCallBack(page_item_color, page_item_deg),
+        '--pageItemFontSize': page_item_size + 'px',
+        '--pageItemFontFamily': page_item_family,
+        '--pageItemFontWeight': page_item_weight,
+        '--pageItemFontStyle': page_item_style,
+        '--pageItemFilter': SetFilderParams(page_item_filed, page_item_filed_data, page_item_filed_color),
+        '--pageActiveBack': page_active_back,
+        '--pageActiveSize': page_active_back_size + 'px',
+        '--pageActiveRadius': page_active_radius + 'px',
+        '--pageActiveBorder': SetBorderParams(page_active_isBorder, page_active_border_size, page_active_border_type, page_active_border_color),
+        '--pageActiveColor': ColorCallBack(page_active_color, page_active_deg),
+        '--pageActiveFontSize': page_active_size + 'px',
+        '--pageActiveFontFamily': page_active_family,
+        '--pageActiveFontWeight': page_active_weight,
+        '--pageActiveFontStyle': page_active_style,
+        '--pageActiveFilter': SetFilderParams(page_active_filed, page_active_filed_data, page_active_filed_color),
+    }
+
+    const screenStyle = {
+        width: screen_width,
+        height: screen_height,
+        background: ColorCallBack(screen_back, screen_back_deg),
+        borderColor: screen_border,
+        '--screenColor': ColorCallBack(screen_color, screen_deg),
+        '--screenFontSize': screen_size + 'px',
+        '--screenFontFamily': screen_family,
+        '--screenFontWeight': screen_weight,
+        '--screenFontStyle': screen_style,
+        '--screenAlign': screen_align,
+        '--screenFilter': SetFilderParams(screen_filed, screen_filed_data, screen_filed_color),
+    }
 
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, {}, 'api_diyObj')
         const { total, list } = backData
-        // console.log(total, list)
         setLiveList(list)
         setLiveTotal(total)
+        const listData = screen_layout.reduce((acc, v) => {
+            const { number, row, column } = v
+            acc[number] = { width: Math.floor(100 / row), height: Math.floor(100 / column) }
+            return acc
+        }, {})
+        setRenderList(listData)
     }, [UrlData, data])
 
+    const onPaginationChange = (e) => {
+        setPageIndex(e)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === page_field) v.apiData = e
+                if (v.apiParams === screen_field) v.apiData = PageSize
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
+
+    const onScreen = e => {
+        setPageSize(e)
+        if (isParams) {
+            const data = isParamsConfig.map(v => {
+                if (v.apiParams === page_field) v.apiData = 1
+                if (v.apiParams === screen_field) v.apiData = e
+                return v
+            })
+            LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+        }
+    }
 
     return (
         <div className='PrefabricatedVisualLive' style={backStyle}>
             <div className='video'>
-                {LiveList?.map(v => {
-                    // console.log(v)
-                })}
+                {!RenderList || !LiveList &&
+                    <div className='monitoring_loading'>
+                        <Spin />
+                    </div>
+                }
+                {RenderList && LiveList && LiveList.length === 0 &&
+                    <div className='monitoring_loading'>
+                        <Result status="404" title="暂无数据" />
+                    </div>
+                }
+                {RenderList && LiveList && isScreen ? LiveList?.map(v => {
+                    const { length } = LiveList
+                    const { width, height } = RenderList[length]
+                    const itemStyle = {
+                        ...videoStyle,
+                        margin: SpacingCallBack(screen_layout_margin),
+                        width: SpacingSizeCallBack(screen_layout_margin, width),
+                        height: SpacingSizeCallBack(screen_layout_margin, height, true),
+                    }
+                    return (
+                        <div key={v.uuid} style={itemStyle}>
+                            <VideoTemplateA04 url={v[live_url]} cover={v[live_cover]} />
+                        </div>
+                    )
+                }) :
+                    LiveList && <div style={{ ...videoStyle, width: '100%', height: '100%' }}>
+                        <VideoTemplateA04 url={LiveList[0][live_url]} cover={LiveList[0][live_cover]} />
+                    </div>
+                }
             </div>
             {isPage &&
                 <div className='options'>
-                    <div className='page'><Pagination size="small" total={50} showTotal={total => `Total ${total} items`} /></div>
-                    {isScreen && <div className='screen'>分屏信息</div>}
+                    <div className='page' style={pageStyle}>
+                        <Pagination
+                            current={PageIndex}
+                            pageSize={PageSize}
+                            total={LiveTotal}
+                            showSizeChanger={false}
+                            showTotal={total => isPageTitle ? `${page_title_prefix} ${total} ${page_title_suffix}` : ''}
+                            onChange={onPaginationChange}
+                        />
+                    </div>
+                    {isScreen &&
+                        <div className='screen' style={{ padding: SpacingCallBack(screen_padding) }}>
+                            <Select style={screenStyle} value={PageSize} options={screen_select} onChange={onScreen} />
+                        </div>
+                    }
                 </div>
             }
         </div>

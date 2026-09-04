@@ -117,12 +117,10 @@ export const VideoTemplateA03 = ({ data }) => {
 }
 
 // 直播视频
-export const VideoTemplateA04 = ({ url }) => {
-    // return
+export const VideoTemplateA04 = ({ url, cover }) => {
     const myRef = useRef(null)
     const easyPro = useRef(null)
-
-    const data = { isLive: true, bufferTime: 0.2, loadTimeReplay: 3, loadTimeOut: 10, MSE: true, hasAudio: false, stretch: false, poster: '' }
+    const data = { isLive: true, bufferTime: 0.2, loadTimeReplay: 3, loadTimeOut: 10, MSE: true, hasAudio: false, stretch: false, poster: cover }
 
     const create = () => {
         easyPro.current = new window.EasyPlayerPro(myRef.current, data)

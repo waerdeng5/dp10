@@ -9186,6 +9186,15 @@ const PrefabricatedVisualRecorded = [
 const PrefabricatedVisualLive = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
+    { span: 12, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+        jugde: [{ field: 'isParams', value: [true] }], children: [
+            { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+            { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+        ]
+    },
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_layout', label: '布局样式', collapsible: true, defaultCollapsed: true,
         children: [
@@ -9193,14 +9202,18 @@ const PrefabricatedVisualLive = [
             { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
             { span: 12, formType: 'COLOR', name: 'video_color', label: '视频默认背景颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'video_deg', label: '视频背景颜色角度', rules: true },
-
             { span: 12, formType: 'INPUT', name: 'live_url', label: '直播地址字段', rules: true },
             { span: 12, formType: 'INPUT', name: 'live_cover', label: '直播封面字段', rules: true },
             { span: 12, formType: 'INPUT', name: 'back_padding', label: '内填充', rules: true },
             { span: 12, formType: 'RADIO', name: 'isPage', label: '是否启用分页', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'page_field', label: '分页参数', rules: true, jugde: [{ field: 'isPage', value: [true] }] },
             {
                 span: 12, formType: 'RADIO', name: 'isScreen', label: '是否启用分屏', rules: true,
                 jugde: [{ field: 'isPage', value: [true] }], valueEnum: MappingData.IsEnabledBool
+            },
+            {
+                span: 12, formType: 'INPUT', name: 'screen_field', label: '分屏参数', rules: true,
+                jugde: [{ field: 'isPage', value: [true] }, { field: 'isScreen', value: [true] }]
             },
             {
                 span: 12, formType: 'NUMBER', name: 'screen_nums', label: '分屏数量', rules: true,
@@ -9211,19 +9224,169 @@ const PrefabricatedVisualLive = [
     {
         span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_page', label: '分页样式', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'isPage', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'isPageTitle', label: '是否启用标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_page_title', label: '分页标题', collapsible: true, defaultCollapsed: true,
+                jugde: [{ field: 'isPageTitle', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'page_title_prefix', label: '标题前缀' },
+                    { span: 12, formType: 'INPUT', name: 'page_title_suffix', label: '标题后缀' },
+                    { span: 12, formType: 'COLOR', name: 'page_title_color', label: '文字颜色', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'page_title_deg', label: '颜色角度', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'page_title_margin', label: '内填充', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'page_title_size', label: '文字字号', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'page_title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 12, formType: 'RADIO', name: 'page_title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 12, formType: 'RADIO', name: 'page_title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 12, formType: 'RADIO', name: 'page_title_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 12, formType: 'INPUT', name: 'page_title_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'page_title_filed', value: [true] }]
+                    },
+                    {
+                        span: 12, formType: 'COLOR', name: 'page_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'page_title_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_page_button', label: '箭头按钮', collapsible: true, defaultCollapsed: true,
+                children: [
+                    { span: 8, formType: 'COLOR', name: 'page_button_back', label: '按钮背景颜色', rules: true, mode: ['single'] },
+                    { span: 8, formType: 'NUMBER', name: 'page_button_size', label: '按钮背景尺寸', rules: true },
+                    { span: 8, formType: 'NUMBER', name: 'page_button_radius', label: '按钮背景圆角', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'page_button_pnback', label: '箭头颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'page_button_pnsize', label: '箭头尺寸', rules: true },
+                    { span: 12, formType: 'COLOR', name: 'page_button_moback', label: '更多页面颜色', rules: true, mode: ['single'] },
+                    { span: 12, formType: 'NUMBER', name: 'page_button_mosize', label: '更多页码尺寸', rules: true },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedVisualLive_page_item', label: '默认分页按钮', collapsible: true, defaultCollapsed: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'page_item_back', label: '按钮背景', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'page_item_back_size', label: '按钮尺寸', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_item_radius', label: '按钮圆角', rules: true },
 
+                    { span: 24, formType: 'RADIO', name: 'page_item_isBorder', label: '底边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'page_item_border_size', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'page_item_isBorder', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'page_item_border_type', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
+                        jugde: [{ field: 'page_item_isBorder', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'page_item_border_color', label: '边框颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'page_item_isBorder', value: [true] }]
+                    },
+                    { span: 24, formType: 'COLOR', name: 'page_item_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_item_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_item_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'page_item_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'page_item_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'page_item_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'page_item_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'page_item_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'page_item_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'page_item_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'page_item_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'PrefabricatedVisualLive_page_active', label: '选中分页按钮', collapsible: true, defaultCollapsed: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'page_active_back', label: '按钮背景', rules: true, mode: ['single'] },
+                    { span: 24, formType: 'NUMBER', name: 'page_active_back_size', label: '按钮尺寸', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_active_radius', label: '按钮圆角', rules: true },
+
+                    { span: 24, formType: 'RADIO', name: 'page_active_isBorder', label: '底边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'NUMBER', name: 'page_active_border_size', label: '边框尺寸', rules: true,
+                        jugde: [{ field: 'page_active_isBorder', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'page_active_border_type', label: '边框类型', rules: true, valueEnum: MappingData.Style__BorderType,
+                        jugde: [{ field: 'page_active_isBorder', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'page_active_border_color', label: '边框颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'page_active_isBorder', value: [true] }]
+                    },
+                    { span: 24, formType: 'COLOR', name: 'page_active_color', label: '文字颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_active_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'page_active_size', label: '文字字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'page_active_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'page_active_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'page_active_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'page_active_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'page_active_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'page_active_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'page_active_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'page_active_filed', value: [true] }]
+                    },
+                ]
+            },
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen', label: '分屏样式', collapsible: true, defaultCollapsed: true,
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen', label: '分屏设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'isScreen', value: [true] }], children: [
-
-        ]
-    },
-    {
-        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen_layout', label: '分屏布局', collapsible: true, defaultCollapsed: true,
-        jugde: [{ field: 'isScreen', value: [true] }], children: [
-
+            { span: 12, formType: 'COLOR', name: 'screen_back', label: '按钮背景', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'screen_back_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'screen_width', label: '窗体宽度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'screen_height', label: '窗体高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'screen_padding', label: '外间距', rules: true },
+            { span: 12, formType: 'COLOR', name: 'screen_border', label: '边框颜色', rules: true, mode: ['single'] },
+            { span: 12, formType: 'COLOR', name: 'screen_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'screen_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'screen_align', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 12, formType: 'NUMBER', name: 'screen_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'screen_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'screen_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'screen_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'screen_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'screen_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'screen_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'screen_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'screen_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen_select', label: '分屏选项', collapsible: true, defaultCollapsed: true,
+                children: [
+                    {
+                        span: 24, formType: 'LIST', name: 'screen_select', label: '分屏选项', collapsible: true, title: '选项',
+                        children: [
+                            { span: 12, formType: 'NUMBER', name: 'value', label: '选项键', rules: true },
+                            { span: 12, formType: 'INPUT', name: 'label', label: '选项值', rules: true }
+                        ]
+                    },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'PrefabricatedVisualLive_screen_layout', label: '分屏布局', collapsible: true, defaultCollapsed: true,
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'screen_layout_margin', label: '外间距', rules: true },
+                    {
+                        span: 24, formType: 'LIST', name: 'screen_layout', label: '分屏选项', collapsible: true, title: '布局',
+                        children: [
+                            { span: 8, formType: 'NUMBER', name: 'number', label: '总数量', rules: true },
+                            { span: 8, formType: 'NUMBER', name: 'row', label: '横向数量', rules: true },
+                            { span: 8, formType: 'NUMBER', name: 'column', label: '纵向数量', rules: true }
+                        ]
+                    },
+                ]
+            },
         ]
     },
 ]

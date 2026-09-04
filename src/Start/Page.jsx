@@ -27,7 +27,8 @@ const PARAMSMAPPING = [
     'PrefabricatedDiyOrgA01',
     'PrefabricatedDiyProgress',
     'PrefabricatedVisualMonitoring',
-    'PrefabricatedTreeData'
+    'PrefabricatedTreeData',
+    'PrefabricatedVisualLive'
 ]
 
 
