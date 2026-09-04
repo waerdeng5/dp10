@@ -66,7 +66,7 @@ const ErrorModal = (status, data) => {
 
 const alovaInstance = createAlova({
     localCache: null,
-    timeout: 10000,
+    timeout: 60000,
     statesHook: ReactHook,
     requestAdapter: adapterFetch(),
     cacheFor: false, // 禁用缓存机制
