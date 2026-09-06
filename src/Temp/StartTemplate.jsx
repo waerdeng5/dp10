@@ -45,7 +45,6 @@ const tableListDataSource = Array.from(
     (_, i) => ({ key: i, name: i === 0 ? '用户认证服务' : '支付网关', createdAt: (i * 1000 + 200), progress: ((i * 17 + 23) % 100) + 1 })
 )
 
-
 const navMapping = {
     A01: { label: "nav_name", value: "nav_url", children: 'start_navTwo' },
     A02: { label: "two_name", value: "two_url", children: 'start_navTwo' },
@@ -373,6 +372,7 @@ export const NavTemplate = ({ status, styleData, navList, extra, extraJugde, ext
 const options = [{ label: '首页', value: '/Start' }, { label: '页面', value: '/Start/Page' }]
 
 export const WinTemplate = ({ Config, startType, setStartType, children }) => {
+
     const tableBox = useRef(null)
     const size = useSize(tableBox)
     const [key, setKey] = useState(['111'])
@@ -397,7 +397,6 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         border: SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
         backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
     }
-
     return (
         <div className='SmallWindowBox '>
             <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>

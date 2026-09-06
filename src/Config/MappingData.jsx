@@ -1612,12 +1612,17 @@ export const MappingData = {
     ],
 
     // !!! 大屏配置
+    Start__back: [
+        { value: 'color', label: '颜色' },
+        { value: 'image', label: '图片' },
+        { value: 'video', label: '视频' },
+    ],
+
     Start__backType: [
         { value: 'clip', label: '切割' },
         { value: 'ellipsis', label: '省略号' },
         { value: 'fade', label: '淡入淡出' },
     ],
-
     Start__textList: [
         { value: 'text', label: '纯文字' },
         { value: 'color', label: '文字颜色' },

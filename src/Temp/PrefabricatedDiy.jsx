@@ -12,7 +12,8 @@ import {
     UnitCallBackStruct,
     SpacingSizeCallBack,
     SetPositionParams,
-    SetBorderParams
+    SetBorderParams,
+    mapTreeKey
 } from '../Utils'
 
 import { ICONMapping } from '../Config/IconMapping'
@@ -359,6 +360,24 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
     )
 }
 
+const textData = [
+    { key: 1, data: '1', list: [{ key: 11, data: '1' }, { key: 2, data: '2' }, { key: 3, data: '3' }] },
+    { key: 2, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 3, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 4, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 5, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 6, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 7, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 8, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 9, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 10, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 11, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 12, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 13, data: '1', list: [{ key: 11, data: '11' }] },
+    { key: 14, data: '1', },
+    { key: 15, data: '1', },
+    { key: 16, data: '1', },
+]
 // 树形文件夹
 const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
 
@@ -369,7 +388,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         suffix_text_color, suffix_text_deg, suffix_text_size, suffix_text_family, suffix_text_weight, suffix_text_style,
         suffix_text_filed, suffix_text_filed_data, suffix_text_filed_color,
         title_type, title_field, title_color, title_deg, title_size, title_family, title_weight, title_style,
-        title_filed, title_filed_data, title_filed_color,
+        title_filed, title_filed_data, title_filed_color, title_index,
         list_color, list_deg, list_padding, list_margin, item_hidden, item_row,
         item_color, item_deg, item_padding, item_margin, item_border, item_border_size, item_border_type, item_border_color,
         item_title_type, item_title_field, item_title_color, item_title_deg, item_title_size, item_title_family, item_title_weight,
@@ -380,6 +399,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
 
 
     const [Open, setOpen] = useState([])
+    const [Data, setData] = useState([])
 
     const backStyle = {
         background: ColorCallBack(back_color, back_deg),
@@ -413,27 +433,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         fontFamily: title_family,
         fontStyle: title_style,
         filter: SetFilderParams(title_filed, title_filed_data, title_filed_color),
-
     }
-    // 
-    const textData = [
-        { key: 1, data: '1', list: [{ key: 11, data: '1' }, { key: 2, data: '2' }, { key: 3, data: '3' }] },
-        { key: 2, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 3, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 4, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 5, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 6, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 7, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 8, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 9, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 10, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 11, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 12, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 13, data: '1', list: [{ key: 11, data: '11' }] },
-        { key: 14, data: '1', },
-        { key: 15, data: '1', },
-        { key: 16, data: '1', },
-    ]
 
     const listStyle = {
         width: SpacingSizeCallBack(list_margin, 100),
@@ -479,7 +479,10 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
     useEffect(() => {
         if (data.isOpenDefault) setOpen(textData.map(item => item.key))
         else setOpen([])
-    }, [data])
+        const backData = DiyDataReturn(data, UrlData, textData, 'api_diyObj')
+        const newData = mapTreeKey(backData, title_index)
+        setData(newData)
+    }, [data, UrlData])
 
     return (
         <DevScrollView>
@@ -487,7 +490,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
                 <Masonry
                     columns={back_column}
                     gutter={back_gutter}
-                    items={textData}
+                    items={Data}
                     fresh={false}
                     itemRender={(e) => {
                         const { key, data, list } = e
@@ -499,7 +502,9 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
                             <div className='PrefabricatedDiyFolder_box' style={boxStyle}>
                                 <div className='box_title' onClick={() => onOpen(key)}>
                                     {isPrefix && <div className='box_prefix' style={prefixStyle}>{ICONMapping[prefix_icon]}</div>}
-                                    <div className='box_text' style={titleStyle}>{title_field} - {key}</div>
+                                    <div className='box_text' style={titleStyle}>
+                                        {title_type === 'A01' ? title_field : e[title_field]}
+                                    </div>
                                     {isSuffix && (suffix_type === 'A01' || suffix_type === "A02") &&
                                         <div className='box_suffix_text' style={suffixTextStyle}>{suffix_diy || suffix_field}</div>
                                     }

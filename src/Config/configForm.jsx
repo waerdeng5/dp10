@@ -640,7 +640,7 @@ const StartFormList = [
         span: 24, formType: 'GROUP', name: 'win_back', label: '背景设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'start_type', value: ['A02'] }], children: [
             { span: 12, formType: 'INPUT', name: 'commonPadding', label: '通用间距', rules: true },
-            { span: 12, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.Start__backType },
+            { span: 12, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.Start__back },
             { span: 12, formType: 'COLOR', name: 'backColor', label: '背景颜色', rules: true, jugde: [{ field: 'backType', value: ['color'] }] },
             { span: 12, formType: 'NUMBER', name: 'backDeg', label: '背景角度', rules: true, jugde: [{ field: 'backType', value: ['color'] }] },
             { span: 24, formType: 'INPUT', name: 'backImage', label: '背景图片', rules: true, jugde: [{ field: 'backType', value: ['image'] }] },
@@ -4676,7 +4676,7 @@ const PrefabricatedPlaceEmpty = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     { span: 12, formType: 'INPUT', name: 'radius', label: '背景圆角', rules: true },
     { span: 12, formType: 'INPUT', name: 'padding', label: '背景内填充', rules: true },
-    { span: 24, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.Start__backType },
+    { span: 24, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.Start__back },
     { span: 12, formType: 'RADIO', name: 'border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'RADIO', name: 'filter', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
@@ -9493,6 +9493,7 @@ const PrefabricatedDiyFolder = [
                 children: [
                     { span: 12, formType: 'RADIO', name: 'title_type', label: '文字类型', rules: true, valueEnum: MappingData.System_fileUrlType2 },
                     { span: 12, formType: 'INPUT', name: 'title_field', label: '文字内容/字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'title_index', label: '索引字段', rules: true },
                     { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },

@@ -348,14 +348,18 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
                                                     trigger={['contextMenu']}
                                                     menu={{
                                                         items: (port && LayoutStatus) ?
-                                                            GlobalOperation({ type: 'window', winId: item.i, LayoutEvent }) : []
+                                                            GlobalOperation({ type: 'window', winId: item.i, LayoutEvent }) :
+                                                            []
                                                     }}
                                                 >
                                                     <div className={`WindowItem ${LayoutStatus ? 'Edit' : 'Preview'}`} onContextMenu={(e) => e.stopPropagation()}>
                                                         <div className='WindowContent' style={style}>
                                                             {LayoutStatus && <div className='SCALE'>window : {item.w}*{item.h}</div>}
                                                             {window_title && <div className='WindowTitle' style={titleStyle} >{window_titleTxt}</div>}
-                                                            <div className='WindowNavSwiper' style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}>
+                                                            <div
+                                                                className='WindowNavSwiper'
+                                                                style={{ flexDirection: window_NavType === 'vertical' ? 'row' : 'column' }}
+                                                            >
                                                                 <SwiperTemplate
                                                                     data={item}
                                                                     status={LayoutStatus}

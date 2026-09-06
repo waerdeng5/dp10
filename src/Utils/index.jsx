@@ -141,6 +141,16 @@ export const replaceNodeById = (tree, targetId, newNode, key = 'uuid') => {
     tree.forEach(rootNode => traverse(rootNode));
     return tree
 }
+// TODO 替换属性数组的键值
+export const mapTreeKey = (tree, keyField, childrenField = 'children', value = 'key') => {
+    if (!Array.isArray(tree)) return tree;
+    return tree.map(node => {
+        const { [keyField]: keyValue, [childrenField]: children, ...rest } = node
+        const newNode = { ...rest, [value]: keyValue }
+        if (Array.isArray(children)) newNode[childrenField] = mapTreeKey(children, keyField, childrenField)
+        return newNode
+    })
+}
 
 // Todo 根据 key 替换树形数组中的对象
 export const replaceNodeByIdTwo = (tree, targetId, newNode, key = 'uuid') => {
@@ -269,7 +279,8 @@ export const removeObjectObj = (obj1, obj2) => {
 
 // Todo 根据url尾缀判断文件类型
 export const getFileTypeFromUrl = (url) => {
-    const parts = url.split('.')
+    if (!url) return 'not'
+    const parts = url?.split('.')
     const extension = parts.at(-1).toLowerCase()
     switch (extension) {
         case 'jpg': case 'jpeg': case 'png': case 'gif': case 'bmp': case 'svg': return 'image'

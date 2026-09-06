@@ -8,6 +8,7 @@ import { ScrollView } from 'devextreme-react/scroll-view'
 import { axios } from '../Utils/Api'
 import { getFileTypeFromUrl } from '../Utils'
 import { modelStore } from '../Router/zustand'
+import { VideoTemplateA02 } from './VideoTemplate'
 
 const { GC } = window
 GC.Spread.Common.CultureManager.culture('zh-cn')
@@ -243,7 +244,7 @@ export const AttachTemplateA01 = ({ data }) => {
                 const type = getFileTypeFromUrl(url)
                 const Template = () => {
                     if (type === 'image') return <Image src={url} alt={originalName} />
-                    if (type === 'video') return <i className="far fa-file-video" onClick={() => onClick(type, originalName, url)} />
+                    if (type === 'video') return <VideoTemplateA02 url={url} />
                     if (type === 'pdf') return <i className="far fa-file-pdf" onClick={() => onClick(type, originalName, url)} />
                     if (type === 'word') return <i className="far fa-file-word" onClick={() => onClick(type, originalName, url)} />
                     if (type === 'excel') return <i className="far fa-file-excel" onClick={() => onClick(type, originalName, url)} />
@@ -267,6 +268,26 @@ export const AttachTemplateA01 = ({ data }) => {
             })}
         </div>
     )
+}
+
+export const AttachTemplateA02 = ({ url }) => {
+    const type = getFileTypeFromUrl(url)
+
+    const onClick = () => {
+        console.log(url)
+    }
+
+    if (type === 'image') return <Image src={url} />
+    if (type === 'video') return <VideoTemplateA02 url={url} />
+    if (type === 'pdf') return <i className="far fa-file-pdf" onClick={() => onClick()} />
+    if (type === 'word') return <i className="far fa-file-word" onClick={() => onClick()} />
+    if (type === 'excel') return <i className="far fa-file-excel" onClick={() => onClick()} />
+    if (type === 'md') return <i className="far fa-file-alt" onClick={() => onClick()} />
+    if (type === 'txt') return <i className="far fa-file-code" onClick={() => onClick()} />
+    if (type === 'edge') return <i className="fas fa-link" onClick={() => onClick()} />
+    return <div onClick={() => onClick()}>未知文件</div>
+
+
 }
 
 // 监控数据

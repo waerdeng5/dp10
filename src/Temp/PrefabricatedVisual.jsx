@@ -642,6 +642,7 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
 
 // 无人机直播
 const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
+    console.log('data', UrlData, data,)
     const { isParams, isParamsConfig, page_field, screen_field,
         back_color, back_deg, back_padding, isPage, isScreen, screen_nums, video_color, video_deg, live_url, live_cover,
         isPageTitle, page_title_prefix, page_title_suffix, page_title_color, page_title_deg, page_title_margin, page_title_size, page_title_family,

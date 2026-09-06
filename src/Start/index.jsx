@@ -53,6 +53,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
                 const Component = module.default || module
                 if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) throw new Error(`导入的模块不是有效的React组件`)
                 setComponentStatus({ loading: false, status: false, error: false, Template: Component })
+                setPAGE(pageData)
             } catch (error) { setComponentStatus({ loading: false, status: false, error: error, Template: null }) }
 
         }
@@ -71,6 +72,7 @@ const OurletTemplate = memo(({ data, StartEvent }) => {
                 const Component = module.default || module
                 if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) throw new Error(`导入的模块不是有效的React组件`)
                 setComponentStatus({ loading: false, status: false, error: false, Template: Component })
+                setPAGE(pageData)
             } catch (error) { setComponentStatus({ loading: false, status: false, error: error, Template: null }) }
         }
 

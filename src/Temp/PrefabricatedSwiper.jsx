@@ -12,6 +12,7 @@ import 'swiper/css/grid';
 import 'swiper/css/mousewheel';
 
 
+import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react'
 import {
     Navigation,
@@ -39,7 +40,8 @@ import {
     SetFilderParams,
     DiyDataReturn
 } from '../Utils'
-import { useEffect, useState } from 'react';
+
+import { AttachTemplateA02 } from './DevTemplate'
 
 const testList = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
 
@@ -130,8 +132,8 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
         }
     }, [data, UrlData])
 
-
-
+    // <img  src={} alt={img_type} />
+    {/* */ }
     return (
         <div className="PrefabricatedSwiperBox">
             {swiper_cover && <img className='SwiperCover' src={swiper_cover_url} alt="" />}
@@ -143,7 +145,9 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
                     <SwiperSlide key={i}>
                         <div className='SwiperSlideItem' style={backStyle} onClick={() => console.log(i)}>
                             {isImage &&
-                                <img className='SwiperSlideItemImg' style={imgStyle} src={img_type === 'A01' ? img_url : v[img_url]} alt={img_type} />
+                                <div className='SwiperSlideItemImg' style={imgStyle}>
+                                    <AttachTemplateA02 url={img_type === 'A01' ? img_url : v[img_url]} />
+                                </div>
                             }
                             {isText &&
                                 <div className='SwiperSlideItemText' style={itemStyle}>
