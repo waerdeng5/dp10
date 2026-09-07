@@ -556,6 +556,7 @@ export const DIYTempList = [
     { uuid: 'PrefabricatedDiyProgress', title: '横向进度', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyFolder', title: '文件夹', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedDiyWeather', title: '天气信息', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'PrefabricatedDiyNongKaiOrg', title: '带进度机构', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const ImgAndTextTempList = [
@@ -584,7 +585,6 @@ export const VisualTemplatePage = [
     { uuid: 'PrefabricatedVisualMonitoring', title: '视频监控', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedVisualRecorded', title: '录播视频(联动选择)', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedVisualLive', title: '视频直播', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
-
 ]
 
 
@@ -981,6 +981,9 @@ export const TemplateParamsMapping = {
     },
     PrefabricatedDiyWeather: {
         value: 'PrefabricatedDiyWeather',
+    },
+    PrefabricatedDiyNongKaiOrg: {
+        value: 'PrefabricatedDiyNongKaiOrg',
     },
     // TODO 图文模块
     PrefabricatedImgText: {

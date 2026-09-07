@@ -1617,6 +1617,10 @@ export const MappingData = {
         { value: 'image', label: '图片' },
         { value: 'video', label: '视频' },
     ],
+    Start__OrgFieldType: [
+        { value: 'text', label: '文字' },
+        { value: 'pro', label: '进度' },
+    ],
 
     Start__backType: [
         { value: 'clip', label: '切割' },

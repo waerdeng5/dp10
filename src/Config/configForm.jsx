@@ -5033,7 +5033,7 @@ const ChartAxesCommonFormList = {
                             valueEnum: MappingData.Charts__axesLabelContainerAlign
                         },
                         { span: 8, formType: 'NUMBER', name: 'axes_label_space', label: '标签间距', rules: true, tooltip: '与刻度间距' },
-                        { span: 8, formType: 'NUMBER', name: 'axes_label_unit', label: '额外单位', tooltip: '显示在标签后' },
+                        { span: 8, formType: 'INPUT', name: 'axes_label_unit', label: '额外单位', tooltip: '显示在标签后' },
                         { span: 12, formType: 'RADIO', name: 'axes_label_inside', label: '标签朝向', rules: true, valueEnum: MappingData.axesLabelInside },
                         { span: 12, formType: 'RADIO', name: 'axes_label_autoRotate', label: '自动旋转', rules: true, valueEnum: MappingData.IsEnabledBool },
                         { span: 12, formType: 'RADIO', name: 'axes_label_autoLimit', label: '自动切断', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -9390,8 +9390,6 @@ const PrefabricatedVisualLive = [
         ]
     },
 ]
-
-
 // !!! 文件夹
 const PrefabricatedDiyFolder = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -9604,8 +9602,89 @@ const PrefabricatedDiyFolder = [
         ]
     },
 ]
-
-
+// !!! 农开机构
+const PrefabricatedDiyNongKaiOrg = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    TemplateApiConfig,
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedTreeData_params_data', label: '接口参数', collapsible: true,
+        children: [
+            { span: 24, formType: 'RADIO', name: 'isParams', label: '接口参数', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'isParamsConfig', label: '接口参数', collapsible: true,
+                jugde: [{ field: 'isParams', value: [true] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'apiName', label: '接口名称', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiParams', label: '接口字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'apiData', label: '默认值', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyNongKaiOrg_layout', label: '整体布局', collapsible: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_padding', label: '背景内填充', rules: true },
+            { span: 12, formType: 'INPUT', name: 'back_margin', label: '背景外边距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'PrefabricatedDiyNongKaiOrg_item', label: '单项布局', collapsible: true,
+        children: [
+            { span: 24, formType: 'COLOR', name: 'item_color', label: '背景颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'item_deg', label: '颜色角度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'item_padding', label: '背景内填充', rules: true },
+            { span: 24, formType: 'INPUT', name: 'item_margin', label: '背景外边距', rules: true },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'PrefabricatedDiyNongKaiOrg_item_active', label: '单项选中', collapsible: true,
+        children: [
+            { span: 24, formType: 'COLOR', name: 'active_color', label: '背景颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'active_deg', label: '颜色角度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'active_padding', label: '背景内填充', rules: true },
+            { span: 24, formType: 'INPUT', name: 'active_margin', label: '背景外边距', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedDiyNongKaiOrg_text', label: '文字系统', collapsible: true,
+        children: [
+            { span: 12, formType: 'NUMBER', name: 'icon_width', label: '图标宽度', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'icon_height', label: '图标高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'icon_padding', label: '图标填充', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'text_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'text_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'text_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'text_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'text_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'text_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'text_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'text_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'text_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'text_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'text_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'text_list', label: '文字列表', collapsible: true,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'icon_url', label: '图标地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'field', label: '字段', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'type', label: '字段类型', rules: true, valueEnum: MappingData.Start__OrgFieldType },
+                    { span: 12, formType: 'INPUT', name: 'prefix', label: '前缀', jugde: [{ field: 'type', value: ['text'] }] },
+                    { span: 12, formType: 'INPUT', name: 'suffix', label: '后缀', jugde: [{ field: 'type', value: ['text'] }] },
+                    { span: 12, formType: 'COLOR', name: 'back_color', label: '背景颜色', rules: true, jugde: [{ field: 'type', value: ['pro'] }] },
+                    { span: 12, formType: 'NUMBER', name: 'back_deg', label: '背景角度', rules: true, jugde: [{ field: 'type', value: ['pro'] }] },
+                    { span: 12, formType: 'COLOR', name: 'pro_color', label: '进度颜色', rules: true, jugde: [{ field: 'type', value: ['pro'] }] },
+                    { span: 12, formType: 'NUMBER', name: 'pro_deg', label: '进度角度', rules: true, jugde: [{ field: 'type', value: ['pro'] }] },
+                ]
+            },
+        ]
+    }
+]
 // *** 弹窗设置
 const ModelConfigFormList = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
@@ -9729,6 +9808,7 @@ export const FormConfig = {
     PrefabricatedDiyProgress,
     PrefabricatedDiyFolder,
     PrefabricatedDiyWeather,
+    PrefabricatedDiyNongKaiOrg,
 
     PrefabricatedImgText,
 

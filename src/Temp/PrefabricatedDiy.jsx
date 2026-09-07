@@ -693,10 +693,112 @@ const PrefabricatedDiyWeather = ({ tempId, UrlData, data, LayoutEvent }) => {
 }
 
 
+const PrefabricatedDiyNongKaiOrgData = [{}, {}, {}]
+
+// 农开带进度组织机构
+const PrefabricatedDiyNongKaiOrg = ({ tempId, UrlData, data, LayoutEvent }) => {
+
+    const [Data, setData] = useState()
+    const [activeIndex, setActiveIndex] = useState(0)
+
+    const { back_color, back_deg, back_padding, back_margin, item_color, item_deg, item_padding, item_margin,
+        active_color, active_deg, active_padding, active_margin,
+        icon_width, icon_height, icon_padding, text_size, text_color, text_deg, text_family, text_weight, text_style,
+        text_filed, text_filed_data, text_filed_color, text_list
+    } = data
+
+    const backStyle = {
+        background: ColorCallBack(back_color, back_deg),
+        padding: SpacingCallBack(back_padding),
+        margin: SpacingCallBack(back_margin),
+    }
+
+    const itemStyle = {
+        width: SpacingSizeCallBack(item_margin, 100),
+        background: ColorCallBack(item_color, item_deg),
+        padding: SpacingCallBack(item_padding),
+        margin: SpacingCallBack(item_margin),
+    }
+
+    const activeStyle = {
+        width: SpacingSizeCallBack(active_margin, 100),
+        background: ColorCallBack(active_color, active_deg),
+        padding: SpacingCallBack(active_padding),
+        margin: SpacingCallBack(active_margin),
+    }
+
+    const iconStyle = {
+        width: icon_width,
+        height: icon_height,
+        margin: SpacingCallBack(icon_padding),
+    }
+
+    const textStyle = {
+        '--color': ColorCallBack(text_color, text_deg),
+        fontSize: text_size,
+        fontFamily: text_family,
+        fontWeight: text_weight,
+        fontStyle: text_style,
+        filter: SetFilderParams(text_filed, text_filed_data, text_filed_color)
+    }
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, PrefabricatedDiyNongKaiOrgData, 'api_diyObj')
+        if (backData.length !== 0) {
+            const [{ projectUuid }] = backData
+            setActiveIndex(projectUuid)
+        }
+        console.log(backData)
+        setData(backData)
+    }, [data, UrlData])
+
+    return (
+        <div className='PrefabricatedDiyNongKaiOrg' style={backStyle}>
+            {Data && Data.map((v, i) => {
+                return (
+                    <div className='itemData' key={i} style={activeIndex === v.projectUuid ? activeStyle : itemStyle}>
+                        {text_list.map((k, s) => {
+                            const { icon_url, field, type, prefix, suffix, back_color, back_deg, pro_color, pro_deg } = k
+
+                            const Item = () => {
+                                if (type === 'text') {
+                                    return (
+                                        <div className='Text' style={textStyle}>
+                                            {prefix}{v[field]}{suffix}
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                        <div className='Progress' >
+                                            <div className='icon' style={{ background: ColorCallBack(back_color, back_deg) }}>
+                                                <div style={{ width: `${v[field]}%`, background: ColorCallBack(pro_color, pro_deg) }} />
+                                            </div>
+                                            <div className='text' style={textStyle}>{v[field]}%</div>
+                                        </div>
+                                    )
+                                }
+                            }
+
+                            return (
+                                <div key={s} className='itemList'>
+                                    <img src={icon_url} style={iconStyle} alt="" />
+                                    <Item />
+                                </div>
+                            )
+                        })}
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+
 export const PrefabricatedDiyTemplate = {
     PrefabricatedDiyText,
     PrefabricatedDiyOrgA01,
     PrefabricatedDiyProgress,
     PrefabricatedDiyFolder,
-    PrefabricatedDiyWeather
+    PrefabricatedDiyWeather,
+    PrefabricatedDiyNongKaiOrg
 }

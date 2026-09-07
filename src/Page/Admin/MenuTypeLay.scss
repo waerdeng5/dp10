@@ -23,7 +23,10 @@
         overflow: hidden;
         position: relative;
         z-index: 1;
-        // pointer-events: none;
+
+        &.Preview {
+            pointer-events: none;
+        }
 
         &.Edit {
             box-shadow: 0 0 8px #262626 inset;
