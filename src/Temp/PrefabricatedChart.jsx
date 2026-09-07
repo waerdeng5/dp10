@@ -5,7 +5,7 @@ import { VChart } from '@visactor/react-vchart'
 import { Gantt, VRender, TYPES } from '@visactor/vtable-gantt';
 import * as VTableGantt from '@visactor/vtable-gantt';
 import { useEffect } from 'react'
-import { isEmptyObject, getRandomInt, getNestedValue } from '../Utils'
+import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn } from '../Utils'
 
 const defaultDataA00 = [{ xField: 'China', yField: 0.4 }]
 const defaultDataA02 = [
@@ -1225,7 +1225,7 @@ const dataSourceTypeFn = (type, data, UrlData) => {
     if (dataSourceType === 'A02') {
         const { data_apiName, dataType, data_apiLevel, data_apiData, data_apiArr } = data
         if (isEmptyObject(UrlData) || !UrlData[data_apiName]) {
-            console.log('未获取到接口数据---111')
+            // console.log('未获取到接口数据---111')
             return ([])
         }
         const apiData = getNestedValue(data_apiLevel, UrlData[data_apiName])
@@ -1714,10 +1714,11 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding
     } = data
 
+    //  fields_hierarchyState, , , , , fields_type, fields_progress, 
+
     const option = {
-        taskKeyField: 'id',
+        taskKeyField: fields_id || 'id',
         records: recordsTestData,
-        // tasksShowMode: TYPES.TasksShowMode.Project_Sub_Tasks_Inline,
         minDate,
         maxDate,
         headerRowHeight,
@@ -1818,13 +1819,11 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
             },
         },
         taskBar: {
-            //  taskBar_typeStatus 任务类型  判断条图显示内容
-            startDateField: 'start',
-            endDateField: 'end',
-            baselineStartDateField: 'baselineStartDateField',
-            baselineEndDateField: 'baselineEndDateField',
-
-
+            startDateField: fields_start || 'start',
+            endDateField: fields_end || 'end',
+            baselineStartDateField: fields_baseStart || 'baselineStartDateField',
+            baselineEndDateField: fields_baseEnd || 'baselineEndDateField',
+            progressField: fields_progress || 'progress',
             resizable: taskBar_resizable,
             moveable: taskBar_moveable,
             progressAdjustable: taskBar_progressAdjustable,
@@ -1885,7 +1884,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 // },
                 // fillColor: taskBar_milestoneStyle_fillColor,
                 fillColor: ((e, ...i) => {
-                    console.log(e, i)
                     return 'red'
                 })(),
                 borderColor: taskBar_milestoneStyle_borderColor,
@@ -1984,6 +1982,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
     };
 
     useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
         const scales = timelineHeader_scales.map(v => {
             const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
                 padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
@@ -2038,6 +2037,8 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         option.markLine = markLine
 
         if (GanttRef.current && !ganttInstance.current) {
+            option.records = backData
+            if (fields_columns) option.taskListTable.columns = fields_columns
             ganttInstance.current = new Gantt(GanttRef.current, option)
         }
         return () => {
@@ -2046,7 +2047,9 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 ganttInstance.current = null
             }
         }
-    }, [data])
+    }, [data, UrlData])
+
+
 
 
 

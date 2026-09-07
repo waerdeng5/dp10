@@ -28,7 +28,8 @@ const PARAMSMAPPING = [
     'PrefabricatedDiyProgress',
     'PrefabricatedVisualMonitoring',
     'PrefabricatedTreeData',
-    'PrefabricatedVisualLive'
+    'PrefabricatedVisualLive',
+    'PrefabricatedDiyNongKaiOrg'
 ]
 
 
@@ -81,7 +82,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const getApiDataParams = async (mapping) => {
         let data = {}
         const api = await axiosFor(mapping)
-        console.log(mapping)
         page.api.forEach((v, i) => {
             const [err, res] = api[i]
             data[v.api_name] = err ? undefined : res

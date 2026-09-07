@@ -140,7 +140,8 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             }
         } else {
             const columns = columns_list.map(v => {
-                const { valueType, valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
+                const { valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
+                // console.log(v)
                 if (valueEnum_type) {
                     if (valueEnum_type === 'DataMapping') {
                         const obj = MappingData[valueEnum_data].reduce((acc, item) => {
@@ -150,7 +151,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         item.valueEnum = obj
                     }
                 }
-                if (valueType === 'tag') {
+                if (item.valueType === 'tag') {
                     const { valueEnum_variant, valueEnum_variant_list } = v
                     const mapping = valueEnum_variant_list.reduce((acc, k) => {
                         acc[k.field] = { color: k.color, text: k.mapping }
@@ -162,6 +163,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         </Tag>
                     )
                 }
+
                 return item
             })
             if (options_status) {
@@ -204,6 +206,8 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             }
         }
     }
+
+    console.log('columnsData', columnsData)
 
     useEffect(() => { getStyle() }, [data])
 

@@ -697,15 +697,15 @@ const PrefabricatedDiyNongKaiOrgData = [{}, {}, {}]
 
 // 农开带进度组织机构
 const PrefabricatedDiyNongKaiOrg = ({ tempId, UrlData, data, LayoutEvent }) => {
-
-    const [Data, setData] = useState()
-    const [activeIndex, setActiveIndex] = useState(0)
-
-    const { back_color, back_deg, back_padding, back_margin, item_color, item_deg, item_padding, item_margin,
+    const { isParams, isParamsConfig,
+        back_color, back_deg, back_padding, back_margin, item_color, item_deg, item_padding, item_margin,
         active_color, active_deg, active_padding, active_margin,
         icon_width, icon_height, icon_padding, text_size, text_color, text_deg, text_family, text_weight, text_style,
-        text_filed, text_filed_data, text_filed_color, text_list
+        text_filed, text_filed_data, text_filed_color, text_list, default_value
     } = data
+
+    const [Data, setData] = useState()
+    const [activeIndex, setActiveIndex] = useState(default_value)
 
     const backStyle = {
         background: ColorCallBack(back_color, back_deg),
@@ -744,19 +744,27 @@ const PrefabricatedDiyNongKaiOrg = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, PrefabricatedDiyNongKaiOrgData, 'api_diyObj')
-        if (backData.length !== 0) {
-            const [{ projectUuid }] = backData
-            setActiveIndex(projectUuid)
-        }
-        console.log(backData)
         setData(backData)
     }, [data, UrlData])
+
+    const onClick = (uuid) => {
+        if (activeIndex !== uuid) {
+            setActiveIndex(uuid)
+            if (isParams) {
+                const data = isParamsConfig.map(v => {
+                    v.apiData = uuid
+                    return v
+                })
+                LayoutEvent.emit({ type: 'onAPIParamsSelect', data })
+            }
+        }
+    }
 
     return (
         <div className='PrefabricatedDiyNongKaiOrg' style={backStyle}>
             {Data && Data.map((v, i) => {
                 return (
-                    <div className='itemData' key={i} style={activeIndex === v.projectUuid ? activeStyle : itemStyle}>
+                    <div className='itemData' key={i} style={activeIndex === v.projectUuid ? activeStyle : itemStyle} onClick={() => onClick(v.projectUuid)}>
                         {text_list.map((k, s) => {
                             const { icon_url, field, type, prefix, suffix, back_color, back_deg, pro_color, pro_deg } = k
 

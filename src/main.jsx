@@ -17,3 +17,4 @@ locale('zh')
 
 
 createRoot(document.getElementById('root')).render(<Router />)
+

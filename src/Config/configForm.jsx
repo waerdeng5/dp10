@@ -9627,6 +9627,7 @@ const PrefabricatedDiyNongKaiOrg = [
             { span: 12, formType: 'NUMBER', name: 'back_deg', label: '颜色角度', rules: true },
             { span: 12, formType: 'INPUT', name: 'back_padding', label: '背景内填充', rules: true },
             { span: 12, formType: 'INPUT', name: 'back_margin', label: '背景外边距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'default_value', label: '默认值', rules: true },
         ]
     },
     {
