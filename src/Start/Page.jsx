@@ -83,7 +83,6 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         const api = await axiosFor(mapping)
         console.log(mapping)
         page.api.forEach((v, i) => {
-            console.log(data, v)
             const [err, res] = api[i]
             data[v.api_name] = err ? undefined : res
             data[v.api_name].apiMapping = mapping[i]
