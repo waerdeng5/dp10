@@ -277,7 +277,7 @@ export const AttachTemplateA02 = ({ url }) => {
         console.log(url)
     }
 
-    if (type === 'image') return <Image src={url} />
+    if (type === 'image') return <img src={url} alt={url} />
     if (type === 'video') return <VideoTemplateA02 url={url} />
     if (type === 'pdf') return <i className="far fa-file-pdf" onClick={() => onClick()} />
     if (type === 'word') return <i className="far fa-file-word" onClick={() => onClick()} />

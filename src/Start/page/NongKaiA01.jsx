@@ -1,9 +1,26 @@
-import { useState } from 'react';
 import './NongKaiA01.scss'
-
+import { useState } from 'react'
+import { useMount } from 'ahooks'
+import { axios } from '../../Utils/Api'
 
 
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
+
+const uuidKeyMap = {
+    '22115954-4ddb-4456-8b55-22f0bc821001': 'A01',
+    '22115954-4ddb-4456-8b55-22f0bc821002': 'A02',
+    '22115954-4ddb-4456-8b55-22f0bc821003': 'A03',
+    '22115954-4ddb-4456-8b55-22f0bc821004': 'A04',
+    '22115954-4ddb-4456-8b55-22f0bc821005': 'A05',
+    '22115954-4ddb-4456-8b55-22f0bc821006': 'A06',
+    '22115954-4ddb-4456-8b55-22f0bc821007': 'A07',
+    '22115954-4ddb-4456-8b55-22f0bc821008': 'A08',
+    '22115954-4ddb-4456-8b55-22f0bc821009': 'A09',
+    '22115954-4ddb-4456-8b55-22f0bc821010': 'A10',
+    '22115954-4ddb-4456-8b55-22f0bc821011': 'A11',
+    '22115954-4ddb-4456-8b55-22f0bc821012': 'A12',
+    '22115954-4ddb-4456-8b55-22f0bc821013': 'A13',
+};
 
 const NongKaiA01 = () => {
     const [active, setActive] = useState('A01')
@@ -23,6 +40,22 @@ const NongKaiA01 = () => {
         { uuid: 'A12', img: imageUrl + 'MapA12.png', name: '绥化市', x: 362, y: 310 },
         { uuid: 'A13', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 179, y: 22 },
     ]
+
+
+
+    useMount(async () => {
+        const [err, res] = await axios({ method: 'get', url: 'engineeringProject/GetCityProjectCount' })
+        if (err) return false
+        let data = {}
+        res.data.list.forEach(v => {
+            const targetKey = uuidKeyMap[v.cityUuid]
+            if (targetKey) data[targetKey] = v.projectCount
+        })
+        setData(data)
+    })
+
+
+
 
 
     return (

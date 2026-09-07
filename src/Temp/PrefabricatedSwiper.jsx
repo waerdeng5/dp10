@@ -106,7 +106,7 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
     const imgStyle = {
         ...UnitCallBackStruct(img_widthUnit, img_width, 'width'),
         ...UnitCallBackStruct(img_heightUnit, img_height, 'height'),
-        objectFit: img_objectFit,
+        '--objectFit': img_objectFit,
         margin: SpacingCallBack(img_margin),
     }
 

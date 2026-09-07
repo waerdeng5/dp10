@@ -56,7 +56,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
 
     const onSwitch = () => {
         setActive(!Active)
-        setTimeout(() => setOpen(!Open), 1000)
+        setTimeout(() => setOpen(!Open), 800)
     }
 
     const getJsonData = async () => {
@@ -75,20 +75,8 @@ const KongDaHome = ({ data, page, StartEvent }) => {
     }
 
 
-
-
-    const getMapData = async () => {
-        console.log(mapUuid)
-
-
-
-
-    }
-
-
     useEffect(() => {
         getJsonData()
-        getMapData()
     }, [])
 
 
