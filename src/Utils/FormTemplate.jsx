@@ -38,7 +38,7 @@ import {
 import { flushSync } from 'react-dom'
 import { Spin, Image, App } from "antd"
 import { useDebounceFn, useMount } from 'ahooks'
-import { memo, useCallback, useRef, useState, } from 'react'
+import { memo, useCallback, useRef, useState, useEffect } from 'react'
 import { DeleteOutlined, CopyOutlined } from '@ant-design/icons'
 import ValueTypeToComponentMap from '@ant-design/pro-components/es/field/ValueTypeToComponent';
 
@@ -91,7 +91,7 @@ const FormTemplate = ({
     const { notification } = App.useApp()
     const formRef = useRef(null)
     const [loading, setLoading] = useState(false)
-
+    const [INIT] = useState(Initial)
     const { run } = useDebounceFn((e) => {
         FORMEVENT.emit({ type: 'onDetection', data: formCallBack(e) })
     }, { wait: 500 })
@@ -122,7 +122,9 @@ const FormTemplate = ({
     FORMEVENT.useSubscription(onFormBackFn)
     const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
 
-
+    useEffect(() => {
+        formRef.current.setFieldsValue(Initial)
+    }, [Initial])
 
 
     return (
@@ -133,7 +135,7 @@ const FormTemplate = ({
                     grid={true}
                     layout='vertical'
                     rowProps={{ span: 24 }}
-                    initialValues={Initial}
+                    initialValues={INIT}
                     scrollToFirstError={true}
                     onValuesChange={onValuesChange}
                     onFinish={onFinish}

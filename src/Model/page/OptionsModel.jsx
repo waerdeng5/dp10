@@ -1,12 +1,15 @@
 import './OptionsModel.scss'
 import { v4 } from 'uuid'
+import remarkGfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown'
+import { useEventEmitter, useMount } from 'ahooks'
 import { Sortable } from 'devextreme-react/sortable'
 import { useState, useCallback, useEffect } from 'react'
-import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse } from "antd"
+import { HappyProvider } from '@ant-design/happy-work-theme'
 import { TreeList, SearchPanel, HeaderFilter, Selection } from 'devextreme-react/tree-list'
 import { DataGrid, Scrolling, FilterRow, Column, Paging } from 'devextreme-react/data-grid'
+import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse, Tabs } from "antd"
 
-import { useEventEmitter, useMount } from 'ahooks'
 
 import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
@@ -26,16 +29,15 @@ import {
 } from '../../Temp/DevTemplate'
 import { AITemplateA01 } from '../../Temp/AITemplate'
 import { SwiperB20Template, SwiperAnnexTemplate } from '../../Temp/SwiperTemplate'
-import { HappyProvider } from '@ant-design/happy-work-theme';
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm';
+
 
 const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
 
 const OptionsModel = ({ data, Event }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const { message, modal, notification } = App.useApp()
-    const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial, menuData, isMenuData, isMenuList } = data
+    const { type, ORGUUID, OTHUUID, APIdata, targetUrl, Initial = {}, menuData, isMenuData, isMenuList } = data
+    const [INITIAL, setINITIAL] = useState(Initial)
     // 类型赋值
     const valueTypeMapping = async (fields, formFields) => {
 
@@ -88,10 +90,13 @@ const OptionsModel = ({ data, Event }) => {
             const [AIvisible, setAIvisible] = useState(false)
             const { form, group, formMethod, formUrl, formPath, formParams, isAI, A02_ai_window } = data
 
-
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
             const onFormBack = async (e) => {
+                console.log(e)
+
+                return
+
                 const HttpData = { method: formMethod, url: formUrl }
                 if (formPath) HttpData.path = formPath
                 const params = { OrganizationUuid: ORGUUID, ...e, ...strOfurlParamsFunc(formParams) }
@@ -104,7 +109,6 @@ const OptionsModel = ({ data, Event }) => {
                     return false
                 }
                 notification.success({ title: '保存成功!', key: 'OptionsModel' })
-
                 if (targetUrl === 'AdministratorsMenu') {
                     const [err, res] = await axios({ method: 'get', url: 'menu' })
                     if (err) return false
@@ -120,6 +124,7 @@ const OptionsModel = ({ data, Event }) => {
                 const Mapping = new Map([
                     ['onFormBack', () => onFormBack(data)],
                     ['onOpenAI', () => setAIvisible(!AIvisible)],
+                    ['aiAnnex', () => setINITIAL({ ...INITIAL, pitfallAttachment: data })]
                 ])
                 const func = Mapping.get(type)
                 func?.(data)
@@ -133,10 +138,10 @@ const OptionsModel = ({ data, Event }) => {
 
             if (formItem) return (
                 <div className='OptionsModel__Form'>
-                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={Initial} AI={isAI} AIconfig={data} />
+                    <FormTemplate formItem={formItem} FORMEVENT={OptionsEvent} Initial={INITIAL} AI={isAI} AIconfig={data} />
                     {AIvisible &&
                         <div className='OptionsModel__Form__AI' style={{ width: A02_ai_window }}>
-                            <AITemplateA01 AIconfig={data} />
+                            <AITemplateA01 AIconfig={data} FORMEVENT={OptionsEvent} />
                         </div>
                     }
                 </div>
@@ -1085,6 +1090,136 @@ const OptionsModel = ({ data, Event }) => {
             </div>
         )
     }
+
+    if (type === 'B1608') {
+        const [activeKey, setActiveKey] = useState('1')
+        const [UserData, setUserData] = useState({})
+        const { attachment, tableName, gender, idCard, mobile, address, entryTime, leaveTime,
+            laborCompany, groupLeader, workType, remark, organizationName } = Initial
+        useMount(async () => {
+            const [err, res] = await axios({ method: 'get', url: 'rosters/GetRosterDetails', params: { rosterUuid: Initial.uuid } })
+            if (err) return false
+            setUserData(res.data)
+        })
+        const items = [{ key: '1', label: '安全活动' }, { key: '2', label: '班前活动' }, { key: '3', label: '证书' }]
+
+        return (
+            <div className='OptionsModelB1608'>
+                <div className='UserInfo'>
+                    <div className='UserInfoContent'>
+                        <div className='AvatarContent'>
+                            {attachment.length !== 0 ?
+                                <img src={attachment[0].url} alt="" /> :
+                                <img src='https://aloss.ljkjkf.com/WebConfigFile/image/Common/EmptyAvatar.png' alt="" />
+                            }
+                        </div>
+                        <div className='UserInfoContent'>
+                            <div className='nickName'>
+                                <div>{tableName}</div>
+                                <div>{UserData?.personInfo?.organizationName}</div>
+                                <div>{workType}</div>
+                            </div>
+
+                            <div className='userInfo'>
+                                <div>劳务公司 : {laborCompany}</div>
+                                <div>性别 : {gender === 1 ? '男' : '女'}</div>
+                            </div>
+
+                            <div className='userInfo'>
+                                <div>班组长 : {groupLeader}</div>
+                                <div>籍贯 : {address}</div>
+                            </div>
+                            <div className='userInfo'>
+                                <div>进场时间 : {entryTime}</div>
+                                <div>手机号码 : {mobile}</div>
+                            </div>
+
+                            <div className='userInfo'>
+                                <div>离场时间 : {leaveTime}</div>
+                                <div>身份证号 : {idCard}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className='UserInfoTabs'>
+                        <Tabs centered activeKey={activeKey} items={items} onChange={setActiveKey} />
+                    </div>
+                </div>
+                <div className='tabs'>
+                    {activeKey === '1' &&
+                        <DataGrid
+                            id={v4()}
+                            width='100%'
+                            height='100%'
+                            keyExpr='uuid'
+                            dataStructure="tree"
+                            itemsExpr='children'
+                            dataSource={UserData.activityList || []}
+                            allowColumnReordering={true}
+                            autoExpandAll={true}
+                            allowColumnResizing={true}
+                            columnResizingMode={true}
+                            showColumnHeaders={true}
+                            showBorders={true}
+                            showRowLines={true}
+                            showColumnLines={true}
+                            rowAlternationEnabled={true}
+                        >
+                            <Column caption='组织机构' dataField='organizationName' />
+                            <Column caption='活动名称' dataField='activityName' />
+                            <Column caption='开始时间' dataField='startTime' />
+                            <Column caption='结束时间' dataField='endTime' />
+                            <Column caption='部门' dataField='department' />
+                            <Column caption='活动类别' dataField='trainingTypeName' />
+                            <Column caption='活动方式' dataField='trainingMethodName' />
+                            <Column caption='主持人' dataField='teacher' />
+                            <Column caption='活动内容' dataField='trainingContent' />
+                            <Column caption='地址' dataField='trainingLocation' />
+                            <Column caption='数量' dataField='duration' />
+                            <Paging defaultPageSize={9999999} />
+                            <Scrolling rowRenderingMode="virtual" columnRenderingMode="virtual" scrollByContent={true} showScrollbar='onHover' />
+                        </DataGrid>
+                    }
+                    {activeKey === '2' &&
+                        <DataGrid
+                            id={v4()}
+                            width='100%'
+                            height='100%'
+                            keyExpr='uuid'
+                            dataStructure="tree"
+                            itemsExpr='children'
+                            dataSource={UserData.activityList || []}
+                            allowColumnReordering={true}
+                            autoExpandAll={true}
+                            allowColumnResizing={true}
+                            columnResizingMode={true}
+                            showColumnHeaders={true}
+                            showBorders={true}
+                            showRowLines={true}
+                            showColumnLines={true}
+                            rowAlternationEnabled={true}
+                        >
+                            <Column caption='组织机构' dataField='organizationName' />
+                            <Column caption='部门' dataField='department' />
+                            <Column caption='日期' dataField='workDate' />
+                            <Column caption='工作' dataField='workContent' />
+                            <Column caption='现场负责人' dataField='siteResponsiblePerson' />
+                            <Column caption='参与人数' dataField='participantCount' />
+                            <Column caption='防护用品佩戴' dataField='protectiveEquipmentWorn' />
+                            <Column caption='作业环境描述' dataField='workEnvironmentDescription' />
+                            <Column caption='早班教育内容视频' dataField='morningEducationVideo' />
+                            <Paging defaultPageSize={9999999} />
+                            <Scrolling rowRenderingMode="virtual" columnRenderingMode="virtual" scrollByContent={true} showScrollbar='onHover' />
+                        </DataGrid>
+                    }
+                    {activeKey === '3' &&
+                        <div>证书 附件展示</div>
+                    }
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className='OptionsModelNone'>
             <Result status="403" title={`OptionsModel - 未找到功能项 - ${type}`} />

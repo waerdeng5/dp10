@@ -453,6 +453,7 @@ export const MappingData = {
                 { value: 'B1605', label: '题库AI' },
                 { value: 'B1606', label: '题库参数' },
                 { value: 'B1607', label: '交投合同AI' },
+                { value: 'B1608', label: '一人一档' },
             ]
         }
     ],

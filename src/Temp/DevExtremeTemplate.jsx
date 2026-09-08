@@ -601,6 +601,9 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
     const B1607Func = item => {
         updateModel5({ title: item.title, type: 'OptionsModel', shading: false, Event: DEVEvent, modelData: { openType: item.type, ...item, Initial: data, ORGUUID } })
     }
+    const B1608Func = item => {
+        updateModel5({ title: item.title, type: 'OptionsModel', shading: false, Event: DEVEvent, modelData: { openType: item.type, ...item, Initial: data, ORGUUID } })
+    }
     const B17Func = item => {
         updateModel5({ title: item.title, type: 'CommonModel', Event: DEVEvent, width: 640, modelData: { openType: item.type, ...item, Initial: data } })
     }
@@ -636,6 +639,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
         ['B1605', () => B1605Func(item)],
         ['B1606', () => B1606Func(item)],
         ['B1607', () => B1607Func(item)],
+        ['B1608', () => B1608Func(item)],
         ['B17', () => B17Func(item)],
         ['B20', () => B20Func(item)],
     ])

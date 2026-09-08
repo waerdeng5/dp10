@@ -242,6 +242,7 @@ const PrefabricatedDiyOrgA01 = ({ tempId, UrlData, data, LayoutEvent }) => {
 }
 
 const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const [Data, setData] = useState({})
     const {
         align_items, calign_content, justify_content, flex_direction, flex_wrap, padding, margin, color, deg,
         progress_widthUnit, progress_width, progress_heightUnit, progress_height, back_color, back_deg,
@@ -250,7 +251,7 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
         after_widthUnit, after_width, after_heightUnit, after_height, after_color, after_deg,
         before_position, before_topUnit, before_top, before_btmUnit, before_btm, before_lefUnit, before_lef, before_rigUnit, before_rig,
         before_widthUnit, before_width, before_heightUnit, before_height, before_color, before_deg,
-        icon_url, icon_color, icon_size, icon_top, PrefabricatedDiyProgress_list,
+        icon_url, icon_color, icon_size, icon_top, PrefabricatedDiyProgress_list, progress_type, progress_field,
         params_align_items, params_calign_content, params_justify_content, params_flex_direction, params_flex_wrap,
         params_padding, params_margin, params_color, params_deg, params_widthUnit, params_width, params_heightUnit, params_height
     } = data
@@ -301,19 +302,9 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
         ...UnitCallBackStruct(before_heightUnit, before_height, 'height'),
     }
 
-    const iconStyle = {
-        left: '62%',
-        color: icon_color,
-        fontSize: icon_size,
-        top: icon_top,
-        height: icon_size,
-    }
+    // progress_type, progress_field,
 
-    const progressStyle = {
-        width: '62%',
-        background: ColorCallBack(progress_color, progress_deg),
-        borderRadius: SpacingCallBack(progress_radius),
-    }
+
 
     const paramsStyle = {
         ...UnitCallBackStruct(params_widthUnit, params_width, 'width'),
@@ -328,11 +319,36 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
         '--params_flex_wrap': params_flex_wrap,
     }
 
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, PrefabricatedDiyNongKaiOrgData, 'api_diyObj')
+        setData(backData)
+    }, [data, UrlData])
+
+
     return (
         <div className='PrefabricatedDiyProgress' style={layoutStyle}>
             <div className='progressBack' style={backStyle}>
-                <div className='progressBar' style={progressStyle} />
-                {progress_icon && <span className='progressIcon' style={iconStyle}>{ICONMapping[icon_url]}</span>}
+                {(() => {
+                    const nums = progress_type === 'A01' ? progress_field : Data[progress_field] || 0
+                    const iconStyle = {
+                        left: `${nums}%`,
+                        color: icon_color,
+                        fontSize: icon_size,
+                        top: icon_top,
+                        height: icon_size,
+                    }
+                    const progressStyle = {
+                        width: `${nums}%`,
+                        background: ColorCallBack(progress_color, progress_deg),
+                        borderRadius: SpacingCallBack(progress_radius),
+                    }
+                    return (
+                        <>
+                            <div className='progressBar' style={progressStyle} />
+                            {progress_icon && <span className='progressIcon' style={iconStyle}>{ICONMapping[icon_url]}</span>}
+                        </>
+                    )
+                })()}
                 {progress_isAfter && <span className='progressAfter' style={afterStyle} />}
                 {progress_isBefore && <span className='progressBefore' style={beforeStyle} />}
             </div>
@@ -347,7 +363,7 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
                         style: style,
                         filter: SetFilderParams(filed, filed_data, filed_color)
                     }
-                    const textRend = render === 'A01' ? render_text : render_field
+                    const textRend = render === 'A01' ? render_text : Data[render_field]
                     const percentRend = percent ? Number(textRend) * (percentData === 'A01' ? 1 : 100) + '%' : textRend
                     return (
                         <div className='params_item' key={i}>

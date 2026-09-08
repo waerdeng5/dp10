@@ -1,11 +1,10 @@
 import './AITemplate.scss'
-import { App, Button, Flex, Avatar } from 'antd'
+import { App, Button, Flex, Avatar, Image } from 'antd'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { Attachments, Sender, Welcome, Think, Bubble, Actions } from '@ant-design/x'
 import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons'
 import { AntDesignOutlined, CopyOutlined, RedoOutlined, UserOutlined } from '@ant-design/icons'
-
-
+import { axiosFile } from '../Utils/Api'
 
 import { ICONMapping } from '../Config/IconMapping'
 
@@ -25,19 +24,43 @@ const actionItems = [
 
 let id = 0;
 const getKey = () => `bubble_${id++}`;
-const genItem = (isAI, config, repeat = 50) => {
+
+const genItem = (isAI, config, contentData) => {
+    const { type, content, annexList, audioList } = contentData
+    // 内容类型
+    // 内容附件
+    // 内容文本
+    // 内容音频
+
+    const ContentTemp = () => {
+        console.log(type, content, annexList, audioList)
+
+
+
+
+        return (
+            <div>
+                {annexList.length !== 0 && (
+                    annexList.map((v, i) => {
+                        return (
+                            <Image key={i} width={80} alt="basic" src={v.url} />
+                        )
+                    })
+                )}
+                <div>{content}</div>
+
+            </div>
+        )
+    }
+
+
     return Object.assign(
-        {
-            key: getKey(),
-            role: isAI ? 'ai' : 'user',
-            content: `${id} : ${isAI ? 'Mock AI content'.repeat(repeat) : 'Mock user content.'}`,
-        },
+        { key: getKey(), role: isAI ? 'ai' : 'user', content: <ContentTemp /> },
         config,
     );
 };
 
-export const AITemplateA01 = ({ AIconfig }) => {
-
+export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
     const {
         A02_ai_annex, A02_ai_audio, A02_ai_welcome, A02_ai_default_text,
         ai_urser_typing, ai_urser_avatar, ai_urser_avatar_url, ai_urser_header, ai_urser_header_text,
@@ -45,12 +68,6 @@ export const AITemplateA01 = ({ AIconfig }) => {
         ai_text_typing, ai_text_avatar, ai_text_avatar_url, ai_text_header, ai_text_header_text,
         ai_text_placement, ai_text_variant, ai_text_shape, ai_text_footer, ai_text_footerPlacement
     } = AIconfig
-
-
-
-
-
-
 
     const listRef = useRef(null)
     const senderRef = useRef(null)
@@ -61,6 +78,7 @@ export const AITemplateA01 = ({ AIconfig }) => {
 
     const [items, setItems, add] = useBubbleList()
     const [AnnexItems, setAnnexItems] = useState([])
+    const [AnnexList, setAnnexList] = useState([])
 
     const senderHeader = (
         <Sender.Header
@@ -74,24 +92,36 @@ export const AITemplateA01 = ({ AIconfig }) => {
                 ref={attachmentsRef}
                 beforeUpload={() => false}
                 items={AnnexItems}
-                onChange={({ fileList }) => setAnnexItems(fileList)}
+                onChange={async ({ file, fileList }) => {
+                    const { uid, status } = file
+                    if (!status) {
+                        const [err, res] = await axiosFile('https://nongkai-rest.ljkjkf.com/api/attachments', file)
+                        if (err) return console.log('上传失败')
+                        const { uuid, fileUrl, originalName } = res.data
+                        const fileData = [...AnnexList, { uid, uuid, url: fileUrl, originalName }]
+                        FORMEVENT.emit({ type: 'aiAnnex', data: fileData })
+                        setAnnexList(fileData)
+                    }
+                    setAnnexItems(fileList)
+                }}
                 placeholder={type =>
                     type === 'drop' ?
                         { title: 'Drop file here' } :
-                        { icon: <CloudUploadOutlined />, title: '附件上传', description: '点击或拖动文件到此处上传' }
+                        { icon: <CloudUploadOutlined />, title: '附件上传', description: '点击此处上传文件' }
                 }
                 getDropContainer={() => {
                     var _a;
                     return (_a = senderRef.current) === null || _a === void 0 ? void 0 : _a.nativeElement;
                 }}
+                onRemove={(e) => {
+                    const { uid } = e
+                    const fileData = AnnexList.filter(v => v.uid !== uid)
+                    FORMEVENT.emit({ type: 'aiAnnex', data: fileData })
+                    setAnnexList(fileData)
+                }}
             />
         </Sender.Header>
     );
-
-
-
-
-
 
     const memoRole = useMemo(
         () => ({
@@ -111,7 +141,7 @@ export const AITemplateA01 = ({ AIconfig }) => {
                 placement: ai_urser_placement,
                 typing: ai_urser_typing,
                 header: ai_urser_header ? ai_urser_header_text : false,
-                avatar: () => ai_text_avatar ? < Avatar icon={ICONMapping[ai_urser_avatar_url]} /> : false,
+                avatar: () => ai_urser_avatar ? < Avatar icon={ICONMapping[ai_urser_avatar_url]} /> : false,
                 footer: content => ai_urser_footer ? <Actions items={actionItems} onClick={() => console.log('footer', content)} /> : false,
                 footerPlacement: ai_urser_footerPlacement
 
@@ -119,23 +149,6 @@ export const AITemplateA01 = ({ AIconfig }) => {
         }),
         [],
     );
-
-
-    useEffect(() => {
-        setItems([
-            // genItem(false, { typing: false }),
-            // genItem(true, { typing: false }),
-            // genItem(false, { typing: false }),
-            // genItem(true, { typing: false }),
-            // genItem(false, { typing: false }),
-            // genItem(true, { typing: false }),
-            // genItem(false, { typing: false }),
-            // genItem(true, { typing: false }),
-            genItem(false, { typing: false }),
-            genItem(true, { typing: true }, 20),
-        ]);
-    }, []);
-
 
     return (
         <div className='AITemplateA01'>
@@ -166,13 +179,18 @@ export const AITemplateA01 = ({ AIconfig }) => {
                     onChange={setText}
                     onPasteFile={files => {
                         var _a;
-                        for (const file of files) {
-                            (_a = attachmentsRef.current) === null || _a === void 0 ? void 0 : _a.upload(file);
-                        }
-                        setOpen(true);
+                        for (const file of files) { (_a = attachmentsRef.current) === null || _a === void 0 ? void 0 : _a.upload(file) }
+                        setOpen(true)
                     }}
                     onSubmit={() => {
-                        console.log(items, text)
+                        // 附件判定 已有数据
+                        console.log(text, AnnexList)
+                        // text, AnnexList
+                        // type, content, annexList, audioList
+                        add(genItem(false, { typing: false }, { type: 'text', content: text, annexList: AnnexList || [], audioList: [] }))
+                        // 发送加载
+
+
                         // setItems([]);
                         // setText('');
                     }}

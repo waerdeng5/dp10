@@ -182,6 +182,13 @@ export const axiosFor = async (data) => {
     return Promise.all(data.map(e => axios(e)))
 }
 
+export const axiosFile = async (url, data) => {
+    const formData = new FormData()
+    formData.append('file', data)
+    return alovaInstance.Post(url, formData).then(res => [null, res]).catch(err => [err, undefined])
+}
+
+
 export const strOfurlParamsFunc = (string) => {
     if (string) {
         const data = string.trimEnd().split('&').reduce((acc, item) => {
