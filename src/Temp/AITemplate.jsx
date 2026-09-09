@@ -4,7 +4,7 @@ import { App, Button, Flex, Avatar, Image } from 'antd'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { Attachments, Sender, Welcome, Think, Bubble, Actions } from '@ant-design/x'
 import { CloudUploadOutlined, PaperClipOutlined, ApiOutlined } from '@ant-design/icons'
-import { axiosFile } from '../Utils/Api'
+import { axiosFile, appendQueryToFormData } from '../Utils/Api'
 
 import { ICONMapping } from '../Config/IconMapping'
 
@@ -217,6 +217,7 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                         const formData = new FormData()
                         formData.append('files', files)
                         formData.append('prompt', text)
+                        if (ai_params) appendQueryToFormData(formData, ai_params)
                         if (recording) formData.append('audio', audioBlob, 'recorded_audio.wav')
                         add(genItem(false, { typing: ai_urser_typing }, { type: 'text', content: text, annexList: AnnexList || [], audioList: audioBlob }))
                         const [err, res] = await axiosFile(ai_url, formData)

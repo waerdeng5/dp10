@@ -2225,6 +2225,7 @@ const AddTopOptionsFormList = [
         jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
         children: [
             { span: 24, formType: 'INPUT', name: 'ai_url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'ai_params', label: '额外参数' },
             { span: 24, formType: 'RADIO', name: 'A02_ai_annex', label: '上传附件', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'INPUT', name: 'A02_ai_annex_url', label: '附件上传接口', rules: true,

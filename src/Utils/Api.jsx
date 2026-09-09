@@ -198,3 +198,16 @@ export const strOfurlParamsFunc = (string) => {
         return data
     } else return {}
 }
+
+export const appendQueryToFormData = (formData, queryString) => {
+    if (!(formData instanceof FormData) || typeof queryString !== 'string' || !queryString.trim()) {
+        return formData
+    }
+    queryString.split('&').forEach(pair => {
+        const [encodedKey, ...encodedValueParts] = pair.split('=')
+        const key = decodeURIComponent(encodedKey || '')
+        const value = decodeURIComponent(encodedValueParts.join('=') || '')
+        if (key) formData.append(key, value)
+    })
+    return formData;
+}
