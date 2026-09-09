@@ -19,6 +19,7 @@
     "@dnd-kit/sortable": "^10.0.0",
     "@file-viewer/preset-office": "^3.0.2",
     "@file-viewer/react": "^3.0.2",
+    "@file-viewer/react-full": "^3.0.2",
     "@file-viewer/vite-plugin": "^3.0.2",
     "@rollup/plugin-dynamic-import-vars": "^2.1.5",
     "@turf/turf": "^7.3.4",
