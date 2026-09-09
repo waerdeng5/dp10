@@ -88,7 +88,7 @@ const OptionsModel = ({ data, Event }) => {
 
         if (addType === 'form') {
             const [AIvisible, setAIvisible] = useState(false)
-            const { form, group, formMethod, formUrl, formPath, formParams, isAI, A02_ai_window } = data
+            const { form, group, formMethod, formUrl, formPath, formParams, isAI, A02_ai_window, ai_annex_back_field } = data
 
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
@@ -120,7 +120,7 @@ const OptionsModel = ({ data, Event }) => {
                 const Mapping = new Map([
                     ['onFormBack', () => onFormBack(data)],
                     ['onOpenAI', () => setAIvisible(!AIvisible)],
-                    ['aiAnnex', () => setINITIAL({ ...INITIAL, pitfallAttachment: data })],
+                    ['aiAnnex', () => { if (ai_annex_back_field) setINITIAL({ ...INITIAL, [ai_annex_back_field]: data }) }],
                     ['aiBackData', () => setINITIAL({ ...INITIAL, ...data })],
                 ])
                 const func = Mapping.get(type)

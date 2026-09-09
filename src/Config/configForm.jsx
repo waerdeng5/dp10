@@ -2212,8 +2212,6 @@ const AddTopOptionsFormList = [
             { span: 24, formType: 'RADIO', name: 'A02_ai_btn_type', label: '按钮类型', rules: true, valueEnum: MappingData.DevConfig__BtnType },
             { span: 24, formType: 'RADIO', name: 'A02_ai_btn_mode', label: '按钮样式', rules: true, valueEnum: MappingData.DevConfig__BtnMode },
             { span: 24, formType: 'INPUT', name: 'A02_ai_btn_text', label: '按钮名称', rules: true },
-            { span: 24, formType: 'RADIO', name: 'A02_ai_annex', label: '上传附件', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 24, formType: 'INPUT', name: 'A02_ai_annex_url', label: '附件上传接口', rules: true, jugde: [{ field: 'A02_ai_annex', value: [true] }] },
             { span: 24, formType: 'INPUT', name: 'A02_ai_default_text', label: '默认信息' },
             { span: 24, formType: 'RADIO', name: 'A02_ai_audio', label: '音频输入', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'RADIO', name: 'A02_ai_welcome', label: '头部信息', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -2226,11 +2224,20 @@ const AddTopOptionsFormList = [
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_02_ai_data', label: 'AI数据信息',
         jugde: [{ field: 'type', value: ['A02'] }, { field: 'isAI', value: [true] }],
         children: [
-            { span: 24, formType: 'RADIO', name: 'ai_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
             { span: 24, formType: 'INPUT', name: 'ai_url', label: '接口地址', rules: true },
-            { span: 24, formType: 'INPUT', name: 'ai_params', label: '额外参数' },
-            { span: 24, formType: 'INPUT', name: 'ai_path', label: '接口路径' },
-            { span: 24, formType: 'RADIO', name: 'ai_annex', label: '附件必传', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'RADIO', name: 'A02_ai_annex', label: '上传附件', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'A02_ai_annex_url', label: '附件上传接口', rules: true,
+                jugde: [{ field: 'A02_ai_annex', value: [true] }]
+            },
+            {
+                span: 24, formType: 'RADIO', name: 'ai_annex', label: '附件必传', rules: true, valueEnum: MappingData.IsEnabledBool,
+                jugde: [{ field: 'A02_ai_annex', value: [true] }]
+            },
+            {
+                span: 24, formType: 'INPUT', name: 'ai_annex_back_field', label: '附件回填字段', rules: true,
+                jugde: [{ field: 'A02_ai_annex', value: [true] }]
+            },
             { span: 24, formType: 'RADIO', name: 'ai_render', label: '渲染类型', rules: true, valueEnum: MappingData.Data__AiBackData },
             { span: 24, formType: 'INPUT', name: 'ai_render_field', label: '渲染字段', rules: true },
             { span: 24, formType: 'INPUT', name: 'ai_back_field', label: '回填字段', rules: true },
