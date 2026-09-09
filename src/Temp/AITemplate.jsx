@@ -36,8 +36,6 @@ const genItem = (isAI, config, contentData) => {
         console.log(type, content, annexList, audioList)
 
 
-
-
         return (
             <div>
                 {annexList.length !== 0 && (
@@ -47,8 +45,7 @@ const genItem = (isAI, config, contentData) => {
                         )
                     })
                 )}
-                <div>{content}</div>
-
+                <div >{content}</div>
             </div>
         )
     }
@@ -61,12 +58,19 @@ const genItem = (isAI, config, contentData) => {
 };
 
 export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
+    const { message, notification, modal } = App.useApp()
     const {
         A02_ai_annex, A02_ai_audio, A02_ai_welcome, A02_ai_default_text,
         ai_urser_typing, ai_urser_avatar, ai_urser_avatar_url, ai_urser_header, ai_urser_header_text,
         ai_urser_placement, ai_urser_variant, ai_urser_shape, ai_urser_footer, ai_urser_footerPlacement,
         ai_text_typing, ai_text_avatar, ai_text_avatar_url, ai_text_header, ai_text_header_text,
-        ai_text_placement, ai_text_variant, ai_text_shape, ai_text_footer, ai_text_footerPlacement
+        ai_text_placement, ai_text_variant, ai_text_shape, ai_text_footer, ai_text_footerPlacement,
+        A02_ai_annex_url, A02_ai_welcome_image, A02_ai_welcome_title, A02_ai_welcome_content,
+
+        ai_method, ai_url, ai_params, ai_path, ai_annex, ai_render, ai_render_field, ai_back_field,
+
+
+
     } = AIconfig
 
     const listRef = useRef(null)
@@ -79,6 +83,8 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
     const [items, setItems, add] = useBubbleList()
     const [AnnexItems, setAnnexItems] = useState([])
     const [AnnexList, setAnnexList] = useState([])
+
+    const [loading, setLoading] = useState(false)
 
     const senderHeader = (
         <Sender.Header
@@ -95,7 +101,7 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                 onChange={async ({ file, fileList }) => {
                     const { uid, status } = file
                     if (!status) {
-                        const [err, res] = await axiosFile('https://nongkai-rest.ljkjkf.com/api/attachments', file)
+                        const [err, res] = await axiosFile(A02_ai_annex_url, [{ key: 'file', value: file }])
                         if (err) return console.log('上传失败')
                         const { uuid, fileUrl, originalName } = res.data
                         const fileData = [...AnnexList, { uid, uuid, url: fileUrl, originalName }]
@@ -153,13 +159,7 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
     return (
         <div className='AITemplateA01'>
             <div className='AITemplateA01__content'>
-                {A02_ai_welcome &&
-                    <Welcome
-                        icon="https://mdn.alipayobjects.com/huamei_iwk9zp/afts/img/A*s5sNRo5LjfQAAAAAAAAAAAAADgCCAQ/fmt.webp"
-                        title="欢迎使用AI助手"
-                        description="打造更卓越的智能视觉体验~"
-                    />
-                }
+                {A02_ai_welcome && <Welcome icon={A02_ai_welcome_image} title={A02_ai_welcome_title} description={A02_ai_welcome_content} />}
                 <Bubble.List
                     ref={listRef}
                     role={memoRole}
@@ -168,8 +168,8 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
             </div>
             <Flex style={{ maxHeight: 220 }} align="end">
                 <Sender
-                    loading={false}
-                    readOnly={false}
+                    loading={loading}
+                    readOnly={loading}
                     autoSize={{ maxRows: 6 }}
                     ref={senderRef}
                     allowSpeech={A02_ai_audio}
@@ -182,13 +182,19 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                         for (const file of files) { (_a = attachmentsRef.current) === null || _a === void 0 ? void 0 : _a.upload(file) }
                         setOpen(true)
                     }}
-                    onSubmit={() => {
+                    onSubmit={async (e) => {
+                        console.log(e)
                         // 附件判定 已有数据
-                        console.log(text, AnnexList)
-                        // text, AnnexList
-                        // type, content, annexList, audioList
-                        add(genItem(false, { typing: false }, { type: 'text', content: text, annexList: AnnexList || [], audioList: [] }))
-                        // 发送加载
+                        if (ai_annex && !AnnexList.length) return message.warning('请上传附件')
+                        // setLoading(true)
+                        // add(genItem(false, { typing: false }, { type: 'text', content: text, annexList: AnnexList || [], audioList: [] }))
+
+                        // const files = AnnexList.map(v => v.url).join(',')
+                        // const params = [{ key: 'files', value: files }, { key: 'prompt', value: text },{key:'audio'}]
+                        // const [err, res] = await axiosFile(ai_url, params)
+                        // if (err) return
+                        // console.log(res)
+
 
 
                         // setItems([]);

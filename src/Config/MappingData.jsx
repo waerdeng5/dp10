@@ -181,6 +181,10 @@ export const MappingData = {
         { value: '管理项目', label: '管理项目' },
         { value: '不管理项目', label: '不管理项目' },
     ],
+    Data__AiBackData: [
+        { value: 'text', label: 'text' },
+        { value: 'xml', label: 'xml' },
+    ],
 
     // TODO FLEX布局
     Flex_items: [

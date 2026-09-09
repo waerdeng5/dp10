@@ -183,9 +183,10 @@ export const axiosFor = async (data) => {
 }
 
 export const axiosFile = async (url, data) => {
+    const config = await GetIndexedDB('config')
     const formData = new FormData()
-    formData.append('file', data)
-    return alovaInstance.Post(url, formData).then(res => [null, res]).catch(err => [err, undefined])
+    data.forEach(v => { formData.append(v.key, v.value) })
+    return alovaInstance.Post(`${config.apiUrl}/${url}`, formData).then(res => [null, res]).catch(err => [err, undefined])
 }
 
 
