@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from 'react'
 import { App, Transfer, Tree, Table, Button, Image } from 'antd'
 import { ScrollView } from 'devextreme-react/scroll-view'
 
+import FileViewer from '@file-viewer/react-full'
+
 
 import { axios } from '../Utils/Api'
 import { getFileTypeFromUrl } from '../Utils'

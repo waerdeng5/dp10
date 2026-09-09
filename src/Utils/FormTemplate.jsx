@@ -1032,8 +1032,10 @@ const beforeUpload = (file, fileType, fileSize, message) => {
         txt: [
             'application/pdf',
             'text/plain',
+            'application/vnd.ms-powerpoint',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation',
         ],
         zip: ['application/x-zip-compressed', 'application/x-compressed']
     }

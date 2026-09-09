@@ -16,6 +16,7 @@ import { Button, Image, Result } from 'antd'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ANIMATIONLIST } from './TemplateAnimation'
 import { HappyProvider } from '@ant-design/happy-work-theme';
+import FileViewer from '@file-viewer/react-full'
 import {
     Navigation,
     Pagination,
@@ -185,17 +186,11 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
         switch (type) {
             case 'image': return <Image width={'100%'} height={'100%'} src={url} />
             case 'video': return <VideoTemplateA02 url={url} />
-            case 'pdf': return <embed src={url} type="application/pdf" width="100%" height="100%" />
-            case 'word': return <div>word</div>
-            case 'excel': return <div>excel</div>
-            case 'md': return <div>md</div>
-            case 'txt': return <div>txt</div>
-            case 'edge': return <div>edge</div>
+            case 'pdf': case 'word': case 'excel': case 'md': case 'txt': case 'edge':
+                return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
             default: return <div>未知附件</div>
         }
     }
-
-
 
     return (
         <Swiper
