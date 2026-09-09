@@ -182,10 +182,8 @@ export const axiosFor = async (data) => {
     return Promise.all(data.map(e => axios(e)))
 }
 
-export const axiosFile = async (url, data) => {
+export const axiosFile = async (url, formData) => {
     const config = await GetIndexedDB('config')
-    const formData = new FormData()
-    data.forEach(v => { formData.append(v.key, v.value) })
     return alovaInstance.Post(`${config.apiUrl}/${url}`, formData).then(res => [null, res]).catch(err => [err, undefined])
 }
 

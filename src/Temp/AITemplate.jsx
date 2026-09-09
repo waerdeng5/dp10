@@ -1,9 +1,9 @@
 import './AITemplate.scss'
+import { v4 } from 'uuid'
 import { App, Button, Flex, Avatar, Image } from 'antd'
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react'
 import { Attachments, Sender, Welcome, Think, Bubble, Actions } from '@ant-design/x'
-import { CloudUploadOutlined, PaperClipOutlined } from '@ant-design/icons'
-import { AntDesignOutlined, CopyOutlined, RedoOutlined, UserOutlined } from '@ant-design/icons'
+import { CloudUploadOutlined, PaperClipOutlined, ApiOutlined } from '@ant-design/icons'
 import { axiosFile } from '../Utils/Api'
 
 import { ICONMapping } from '../Config/IconMapping'
@@ -18,46 +18,32 @@ function useBubbleList(initialItems = []) {
 }
 
 const actionItems = [
-    { key: 'retry', icon: <RedoOutlined />, label: 'Retry' },
-    { key: 'copy', icon: <CopyOutlined />, label: 'Copy' },
+    // { key: 'retry', icon: <RedoOutlined />, label: 'Retry' },
+    // { key: 'copy', icon: <CopyOutlined />, label: 'Copy' },
+    { key: 'use', icon: <ApiOutlined />, label: '回填' },
 ];
-
-let id = 0;
-const getKey = () => `bubble_${id++}`;
 
 const genItem = (isAI, config, contentData) => {
     const { type, content, annexList, audioList } = contentData
-    // 内容类型
-    // 内容附件
-    // 内容文本
-    // 内容音频
-
     const ContentTemp = () => {
-        console.log(type, content, annexList, audioList)
-
-
         return (
             <div>
-                {annexList.length !== 0 && (
-                    annexList.map((v, i) => {
-                        return (
-                            <Image key={i} width={80} alt="basic" src={v.url} />
-                        )
-                    })
-                )}
-                <div >{content}</div>
+                {annexList && annexList.length !== 0 && (annexList.map((v, i) => (<Image key={i} width={80} alt="basic" src={v.url} />)))}
+                {type === 'text' ? <div>{content}</div> : <div dangerouslySetInnerHTML={{ __html: content }} />}
             </div>
         )
     }
 
+    return Object.assign({ key: v4(), role: isAI ? 'ai' : 'user', content: <ContentTemp /> }, config)
 
-    return Object.assign(
-        { key: getKey(), role: isAI ? 'ai' : 'user', content: <ContentTemp /> },
-        config,
-    );
 };
 
+
+
+
 export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
+    const mediaRecorderRef = useRef(null)
+    const audioChunksRef = useRef([])
     const { message, notification, modal } = App.useApp()
     const {
         A02_ai_annex, A02_ai_audio, A02_ai_welcome, A02_ai_default_text,
@@ -83,6 +69,8 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
     const [items, setItems, add] = useBubbleList()
     const [AnnexItems, setAnnexItems] = useState([])
     const [AnnexList, setAnnexList] = useState([])
+    const [recording, setRecording] = useState(false)
+    const [audioBlob, setAudioBlob] = useState(null)
 
     const [loading, setLoading] = useState(false)
 
@@ -101,7 +89,9 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                 onChange={async ({ file, fileList }) => {
                     const { uid, status } = file
                     if (!status) {
-                        const [err, res] = await axiosFile(A02_ai_annex_url, [{ key: 'file', value: file }])
+                        const formData = new FormData()
+                        formData.append('file', file)
+                        const [err, res] = await axiosFile(A02_ai_annex_url, formData)
                         if (err) return console.log('上传失败')
                         const { uuid, fileUrl, originalName } = res.data
                         const fileData = [...AnnexList, { uid, uuid, url: fileUrl, originalName }]
@@ -129,6 +119,14 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
         </Sender.Header>
     );
 
+
+    const onFooterClick = (e, info, content) => {
+        const { key } = e
+        const { extraInfo } = info
+        if (key === 'use') FORMEVENT.emit({ type: 'aiBackData', data: extraInfo })
+    }
+
+
     const memoRole = useMemo(
         () => ({
             ai: {
@@ -138,7 +136,7 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                 typing: ai_text_typing,
                 header: ai_text_header ? ai_text_header_text : false,
                 avatar: () => ai_text_avatar ? <Avatar icon={ICONMapping[ai_text_avatar_url]} /> : false,
-                footer: content => ai_text_footer ? <Actions items={actionItems} onClick={() => console.log('footer', content)} /> : false,
+                footer: (content, info) => ai_text_footer ? <Actions items={actionItems} onClick={(e) => onFooterClick(e, info, content)} /> : false,
                 footerPlacement: ai_text_footerPlacement
             },
             user: {
@@ -148,23 +146,45 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                 typing: ai_urser_typing,
                 header: ai_urser_header ? ai_urser_header_text : false,
                 avatar: () => ai_urser_avatar ? < Avatar icon={ICONMapping[ai_urser_avatar_url]} /> : false,
-                footer: content => ai_urser_footer ? <Actions items={actionItems} onClick={() => console.log('footer', content)} /> : false,
+                footer: (content, info) => ai_urser_footer ? <Actions items={actionItems} onClick={(e) => onFooterClick(e, info, content)} /> : false,
                 footerPlacement: ai_urser_footerPlacement
-
             },
         }),
         [],
     );
 
+    const startRecording = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+            const mediaRecorder = new MediaRecorder(stream)
+            mediaRecorderRef.current = mediaRecorder
+            audioChunksRef.current = []
+            mediaRecorder.ondataavailable = (event) => {
+                if (event.data.size > 0) audioChunksRef.current.push(event.data)
+            }
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' })
+                console.log('🎤 获取到录音文件:', audioBlob)
+                setAudioBlob(audioBlob)
+            }
+            mediaRecorder.start()
+        } catch (err) {
+            console.error('获取麦克风权限失败:', err);
+        }
+    };
+
+    const stopRecording = () => {
+        if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+            mediaRecorderRef.current.stop();
+            mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+        }
+    };
+
     return (
         <div className='AITemplateA01'>
             <div className='AITemplateA01__content'>
                 {A02_ai_welcome && <Welcome icon={A02_ai_welcome_image} title={A02_ai_welcome_title} description={A02_ai_welcome_content} />}
-                <Bubble.List
-                    ref={listRef}
-                    role={memoRole}
-                    items={items}
-                />
+                <Bubble.List ref={listRef} role={memoRole} items={items} />
             </div>
             <Flex style={{ maxHeight: 220 }} align="end">
                 <Sender
@@ -172,7 +192,15 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                     readOnly={loading}
                     autoSize={{ maxRows: 6 }}
                     ref={senderRef}
-                    allowSpeech={A02_ai_audio}
+                    allowSpeech={A02_ai_audio ? {
+                        recording,
+                        onRecordingChange: nextRecording => {
+                            message.info(nextRecording ? '开始录音' : '停止录音')
+                            if (nextRecording) startRecording()
+                            else stopRecording()
+                            setRecording(nextRecording)
+                        }
+                    } : false}
                     header={A02_ai_annex && senderHeader}
                     prefix={A02_ai_annex && <Button type="text" style={{ fontSize: 16 }} icon={<PaperClipOutlined />} onClick={() => setOpen(!open)} />}
                     value={text}
@@ -183,22 +211,24 @@ export const AITemplateA01 = ({ AIconfig, FORMEVENT }) => {
                         setOpen(true)
                     }}
                     onSubmit={async (e) => {
-                        console.log(e)
-                        // 附件判定 已有数据
                         if (ai_annex && !AnnexList.length) return message.warning('请上传附件')
-                        // setLoading(true)
-                        // add(genItem(false, { typing: false }, { type: 'text', content: text, annexList: AnnexList || [], audioList: [] }))
-
-                        // const files = AnnexList.map(v => v.url).join(',')
-                        // const params = [{ key: 'files', value: files }, { key: 'prompt', value: text },{key:'audio'}]
-                        // const [err, res] = await axiosFile(ai_url, params)
-                        // if (err) return
-                        // console.log(res)
-
-
-
-                        // setItems([]);
-                        // setText('');
+                        setLoading(true)
+                        const files = AnnexList.map(v => v.url).join(',')
+                        const formData = new FormData()
+                        formData.append('files', files)
+                        formData.append('prompt', text)
+                        if (recording) formData.append('audio', audioBlob, 'recorded_audio.wav')
+                        add(genItem(false, { typing: ai_urser_typing }, { type: 'text', content: text, annexList: AnnexList || [], audioList: audioBlob }))
+                        const [err, res] = await axiosFile(ai_url, formData)
+                        if (err) {
+                            message.error('AI分析失败,请重试')
+                            return setLoading(false)
+                        }
+                        add(genItem(true,
+                            { typing: true, extraInfo: res.data[ai_back_field] },
+                            { type: ai_render, content: res.data[ai_render_field] }
+                        ))
+                        setLoading(false)
                     }}
                 />
             </Flex>

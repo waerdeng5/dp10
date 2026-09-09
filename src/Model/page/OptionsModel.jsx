@@ -8,7 +8,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { HappyProvider } from '@ant-design/happy-work-theme'
 import { TreeList, SearchPanel, HeaderFilter, Selection } from 'devextreme-react/tree-list'
 import { DataGrid, Scrolling, FilterRow, Column, Paging } from 'devextreme-react/data-grid'
-import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse, Tabs } from "antd"
+import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse, Tabs, Image } from "antd"
 
 
 import { modelStore } from '../../Router/zustand'
@@ -93,10 +93,6 @@ const OptionsModel = ({ data, Event }) => {
             const [formItem, setFormItem] = useState()
             const OptionsEvent = useEventEmitter()
             const onFormBack = async (e) => {
-                console.log(e)
-
-                return
-
                 const HttpData = { method: formMethod, url: formUrl }
                 if (formPath) HttpData.path = formPath
                 const params = { OrganizationUuid: ORGUUID, ...e, ...strOfurlParamsFunc(formParams) }
@@ -124,7 +120,8 @@ const OptionsModel = ({ data, Event }) => {
                 const Mapping = new Map([
                     ['onFormBack', () => onFormBack(data)],
                     ['onOpenAI', () => setAIvisible(!AIvisible)],
-                    ['aiAnnex', () => setINITIAL({ ...INITIAL, pitfallAttachment: data })]
+                    ['aiAnnex', () => setINITIAL({ ...INITIAL, pitfallAttachment: data })],
+                    ['aiBackData', () => setINITIAL({ ...INITIAL, ...data })],
                 ])
                 const func = Mapping.get(type)
                 func?.(data)
@@ -1094,12 +1091,22 @@ const OptionsModel = ({ data, Event }) => {
     if (type === 'B1608') {
         const [activeKey, setActiveKey] = useState('1')
         const [UserData, setUserData] = useState({})
+        const [AnnexList, setAnnexList] = useState([])
         const { attachment, tableName, gender, idCard, mobile, address, entryTime, leaveTime,
             laborCompany, groupLeader, workType, remark, organizationName } = Initial
         useMount(async () => {
             const [err, res] = await axios({ method: 'get', url: 'rosters/GetRosterDetails', params: { rosterUuid: Initial.uuid } })
             if (err) return false
             setUserData(res.data)
+            const params = {
+                fileType: 1,
+                AnnexUuid: Initial.uuid,
+                menuUuid: '0f305948-d477-4ba4-98c1-0a49672f4a01',
+                organizationUuid: res.data.personInfo.organizationUuid
+            }
+            const [AnnexErr, AnnexRes] = await axios({ method: 'get', url: 'attachments/GetAttachmentDetailChildren', params })
+            if (AnnexErr) return false
+            setAnnexList(AnnexRes.data.list)
         })
         const items = [{ key: '1', label: '安全活动' }, { key: '2', label: '班前活动' }, { key: '3', label: '证书' }]
 
@@ -1213,7 +1220,22 @@ const OptionsModel = ({ data, Event }) => {
                         </DataGrid>
                     }
                     {activeKey === '3' &&
-                        <div>证书 附件展示</div>
+                        <div className='AnnexList'>
+                            {AnnexList.map((v, i) => {
+                                console.log(v)
+                                return (
+                                    <div className='AnnexItem'>
+                                        <Image
+                                            width={200}
+                                            height={200}
+                                            alt="basic"
+                                            src={v.attachment[0].url}
+                                        />
+                                        <div>{v.name1}</div>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     }
                 </div>
             </div>
