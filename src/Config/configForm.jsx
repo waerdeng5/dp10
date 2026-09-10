@@ -9601,6 +9601,7 @@ const PrefabricatedDiyFolder = [
             },
         ]
     },
+    ...rowClickFormList
 ]
 // !!! 农开机构
 const PrefabricatedDiyNongKaiOrg = [

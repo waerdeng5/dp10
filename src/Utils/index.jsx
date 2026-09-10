@@ -142,12 +142,12 @@ export const replaceNodeById = (tree, targetId, newNode, key = 'uuid') => {
     return tree
 }
 // TODO 替换属性数组的键值
-export const mapTreeKey = (tree, keyField, childrenField = 'children', value = 'key') => {
+export const mapTreeKey = (tree, keyField = 'uuid', value = 'key', childrenField = 'children', childrenValue = 'children') => {
     if (!Array.isArray(tree)) return tree;
     return tree.map(node => {
         const { [keyField]: keyValue, [childrenField]: children, ...rest } = node
-        const newNode = { ...rest, [value]: keyValue }
-        if (Array.isArray(children)) newNode[childrenField] = mapTreeKey(children, keyField, childrenField)
+        const newNode = { ...rest, [value]: keyValue, [childrenValue]: children }
+        if (Array.isArray(children)) newNode[childrenValue] = mapTreeKey(children, keyField, value, childrenField, childrenValue)
         return newNode
     })
 }

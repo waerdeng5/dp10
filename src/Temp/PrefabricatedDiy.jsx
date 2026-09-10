@@ -396,6 +396,7 @@ const textData = [
 ]
 // 树形文件夹
 const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
 
     const { back_color, back_deg, back_padding, back_column, back_gutter, isOpenClose, isOpenDefaultl,
         isBtmBorder, btm_size, btm_type, btm_color,
@@ -410,7 +411,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         item_title_type, item_title_field, item_title_color, item_title_deg, item_title_size, item_title_family, item_title_weight,
         item_title_style, item_title_filed, item_title_filed_data, item_title_filed_color,
         extra_title_type, extra_title_field, extra_title_color, extra_title_deg, extra_title_size, extra_title_family, extra_title_weight,
-        extra_title_style, extra_title_filed, extra_title_filed_data, extra_title_filed_color,
+        extra_title_style, extra_title_filed, extra_title_filed_data, extra_title_filed_color, click_status
     } = data
 
 
@@ -459,6 +460,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
     }
 
     const itemStyle = {
+        cursor: click_status ? 'pointer' : 'auto',
         width: SpacingSizeCallBack(item_margin, 100),
         background: ColorCallBack(item_color, item_deg),
         padding: SpacingCallBack(item_padding),
@@ -496,9 +498,15 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         if (data.isOpenDefault) setOpen(textData.map(item => item.key))
         else setOpen([])
         const backData = DiyDataReturn(data, UrlData, textData, 'api_diyObj')
-        const newData = mapTreeKey(backData, title_index)
+        const newData = mapTreeKey(backData, title_index, 'key', 'children', 'list')
         setData(newData)
     }, [data, UrlData])
+
+    const onClickItem = (e, v) => {
+        if (!click_status) return false
+        TemplateClickFn(e, data, v, LayoutEvent, openModel)
+    }
+
 
     return (
         <DevScrollView>
@@ -507,9 +515,9 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
                     columns={back_column}
                     gutter={back_gutter}
                     items={Data}
-                    fresh={false}
+                    fresh={true}
                     itemRender={(e) => {
-                        const { key, data, list } = e
+                        const { key, list } = e
                         const boxStyle = {
                             cursor: isOpenClose ? 'pointer' : 'default',
                             borderBottom: SetBorderParams(isBtmBorder, btm_size, btm_type, btm_color)
@@ -537,14 +545,12 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
                                     <div className='box_list' style={listStyle}>
                                         {list.map(v => {
                                             return (
-                                                <div className='box_list_item' key={v.key} style={itemStyle}>
+                                                <div className='box_list_item' key={v.key} style={itemStyle} onClick={(e) => onClickItem(e, v)}>
                                                     <div className='box_list_item_text' style={itemTitleStyle}>
-                                                        {/* {v.data} */}
-                                                        {item_title_field}
+                                                        {item_title_type === 'A01' ? item_title_field : v[item_title_field]}
                                                     </div>
                                                     <div className='box_list_item_extra' style={itemExtraStyle}>
-                                                        {/* {v.data} */}
-                                                        {extra_title_field}
+                                                        {extra_title_type === 'A01' ? extra_title_field : v[extra_title_field]}
                                                     </div>
                                                 </div>
                                             )
