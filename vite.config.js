@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [
     react(),
     mars3dPlugin(),
-    fileViewerRenderers({ copyAssets: false })
+    // fileViewerRenderers({ copyAssets: true })
   ],
   server: {
     allowedHosts: [
