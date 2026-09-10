@@ -495,11 +495,11 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
 
 
     useEffect(() => {
-        if (data.isOpenDefault) setOpen(textData.map(item => item.key))
-        else setOpen([])
         const backData = DiyDataReturn(data, UrlData, textData, 'api_diyObj')
         const newData = mapTreeKey(backData, title_index, 'key', 'children', 'list')
         setData(newData)
+        if (data.isOpenDefault) setOpen(newData.map(item => item.key))
+        else setOpen([])
     }, [data, UrlData])
 
     const onClickItem = (e, v) => {
@@ -507,6 +507,7 @@ const PrefabricatedDiyFolder = ({ tempId, UrlData, data, LayoutEvent }) => {
         TemplateClickFn(e, data, v, LayoutEvent, openModel)
     }
 
+    if (!Data.length) return
 
     return (
         <DevScrollView>
