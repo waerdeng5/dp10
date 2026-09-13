@@ -147,11 +147,13 @@ const OptionsModel = ({ data, Event }) => {
         }
 
         if (addType === 'excel') {
-            const { excelGetMethod, excelGetUrl, excelGetParams, excelSaveMethod, excelSaveUrl, excelSaveParams, isORGUUID } = data
+            const { excelGetMethod, excelGetUrl, excelGetParams, excelSaveMethod, excelSaveUrl, excelSaveParams, isORGUUID, isMenuData, isMenuList } = data
             const getParams = isORGUUID ? { OrganizationUuid: ORGUUID, ...strOfurlParamsFunc(excelGetParams) } : strOfurlParamsFunc(excelGetParams)
             const saveParams = isORGUUID ? { OrganizationUuid: ORGUUID, ...strOfurlParamsFunc(excelSaveParams) } : strOfurlParamsFunc(excelSaveParams)
             const props = {
                 data: Initial,
+                isMenuData,
+                isMenuList,
                 Event,
                 getData: { method: excelGetMethod, url: excelGetUrl, params: getParams },
                 saveData: { method: excelSaveMethod, url: excelSaveUrl, params: saveParams }

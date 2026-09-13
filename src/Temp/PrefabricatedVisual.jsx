@@ -618,14 +618,14 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
     return (
         <div className='PrefabricatedVisualRecorded'>
             <div className='options'>
-                <div className="options_item_label" style={labelStyle}>显示方式 : </div>
+                <div className="options_item_label" style={labelStyle}>航拍日期 : </div>
                 <Select
                     value={dateValue}
                     options={dataSelect}
                     onChange={onDateChange}
                     style={selectStyle}
                 />
-                <div className="options_item_label" style={labelStyle} >显示方式 : </div>
+                <div className="options_item_label" style={labelStyle}>航拍次数 : </div>
                 <Select
                     value={numsValue}
                     options={NumberSelect}

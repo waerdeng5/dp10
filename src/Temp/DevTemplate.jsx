@@ -165,7 +165,7 @@ export const TableTransfer = _a => {
 // Excel表格
 export const ExcelTemplate = (props) => {
     const { notification, message } = App.useApp()
-    const { data, Event, DEVEvent, getData, saveData, saveParams } = props
+    const { data, isMenuData, isMenuList, Event, DEVEvent, getData, saveData, saveParams } = props
     const ExcelBox = useRef()
     const WorkBox = useRef()
     const [spread, setSpread] = useState()
@@ -175,12 +175,14 @@ export const ExcelTemplate = (props) => {
     useMount(async () => {
         const spread = new GC.Spread.Sheets.Workbook(WorkBox.current, { sheetCount: 1 })
         setSpread(spread)
+        if (isMenuData) isMenuList.forEach(v => getData.params[v.dataMapping] = data[v.dataField])
         const [err, res] = await axios(getData)
         if (err) return message.warning(err.message)
         const { blob, filename } = res
         setExcelName(filename)
         const excelIo = new GC.Spread.Excel.IO()
         excelIo.open(blob, workbookObj => spread.fromJSON(workbookObj))
+
         // new GC.Spread.Sheets.Designer.Designer(ExcelBox.current, '', spread)
     })
 

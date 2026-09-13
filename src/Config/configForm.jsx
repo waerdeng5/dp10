@@ -2288,9 +2288,6 @@ const AddTopOptionsFormList = [
             },
         ]
     },
-
-
-
     // 查询字段
     {
         span: 12, formType: 'LIST', name: 'AddTopOptionsFormList_03', label: '查询字段',
@@ -2456,6 +2453,14 @@ const AddRowOptionsFormList = [
         span: 12, formType: 'GROUP', name: 'AddRowOptionsFormList_01', label: '修改选项',
         jugde: [{ field: 'type', value: ['B01'] }],
         children: [
+            { span: 24, formType: 'RADIO', name: 'isMenuData', label: '是否使用主数组', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'isMenuList', label: '主数据列表', title: '数组字段',
+                jugde: [{ field: 'isMenuData', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'dataField', label: '数据字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'dataMapping', label: '映射字段', rules: true },
+                ]
+            },
             { span: 24, formType: 'RADIO', name: 'addType', label: '修改方式', rules: true, valueEnum: MappingData.System__AddDataType },
             // form 添加
             {
