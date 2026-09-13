@@ -38,14 +38,17 @@ import {
     SpacingSizeCallBack,
     UnitCallBackStruct,
     SetFilderParams,
-    DiyDataReturn
+    DiyDataReturn,
+    TemplateClickFn
 } from '../Utils'
+import { useTemplateModel } from '../Config/useHooks'
 
 import { AttachTemplateA02 } from './DevTemplate'
 
 const testList = [{}, {}, {}, {}, {}, {}, {}, {}, {}]
 
 const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const [dataList, setDataList] = useState()
     const {
         api_source, api_dataType,
@@ -58,7 +61,7 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
         img_type, img_url, img_widthUnit, img_width, img_heightUnit, img_height, img_margin, img_objectFit,
         item_widthUnit, item_width, item_heightUnit, item_height, item_color, item_deg, item_padding, item_margin,
         item_align_items, item_align_content, item_justify_content, item_flex_direction, item_flex_wrap, list,
-        swiper_cover, swiper_cover_url
+        swiper_cover, swiper_cover_url, click_status
     } = data
 
     const SWIPER_CONFIG = {
@@ -91,6 +94,7 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
     }
 
     const backStyle = {
+        cursor: click_status ? 'pointer' : 'auto',
         '--alignItems': align_items,
         '--alignContent': align_content,
         '--justifyContent': justify_content,
@@ -132,8 +136,14 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
         }
     }, [data, UrlData])
 
-    // <img  src={} alt={img_type} />
-    {/* */ }
+
+    const onClickItem = (e, v) => {
+        console.log(e)
+        click_status && TemplateClickFn(e, data, v, LayoutEvent, openModel)
+        // TemplateClickFn
+    }
+
+
     return (
         <div className="PrefabricatedSwiperBox">
             {swiper_cover && <img className='SwiperCover' src={swiper_cover_url} alt="" />}
@@ -143,7 +153,7 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
             >
                 {dataList && dataList.map((v, i) =>
                     <SwiperSlide key={i}>
-                        <div className='SwiperSlideItem' style={backStyle} onClick={() => console.log(i)}>
+                        <div className='SwiperSlideItem' style={backStyle} onClick={(e) => onClickItem(e, v)}>
                             {isImage &&
                                 <div className='SwiperSlideItemImg' style={imgStyle}>
                                     <AttachTemplateA02 url={img_type === 'A01' ? img_url : v[img_url]} />

@@ -207,8 +207,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         }
     }
 
-    console.log('columnsData', columnsData)
-
     useEffect(() => { getStyle() }, [data])
 
     if (!STYLE || !columnsData) return <div className='PrefabricatedTable'><Spin /></div>
@@ -482,7 +480,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     if (data_type === 'A02') {
                         if (tree && !treeActive) return false
                         let params = { pageIndex: current, pageSize: pageSize, ...strOfurlParamsFunc(data_api_params), ...item }
-
                         if (tree && treeActive) params[tree_http_params] = treeActive[0]
                         if (row) params = { ...params, ...row }
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })

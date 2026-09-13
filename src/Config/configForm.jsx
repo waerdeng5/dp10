@@ -8727,6 +8727,7 @@ const PrefabricatedSwiperBox = [
             },
         ]
     },
+    ...rowClickFormList,
 ]
 
 // !!! 监控模块
