@@ -17712,6 +17712,7 @@ export const Dev_data = [
 ];
 
 export const Dev_theme = [
+// dx.carmine.compact
     // 流利
     { value: 'fluent.blue.light', label: '流利 白蓝', color: ['#ffffff', '#0f6cbd'] },
     { value: 'fluent.blue.dark', label: '流利 黑蓝', color: ['#292929', '#5486ff'] },
@@ -17737,4 +17738,30 @@ export const Dev_theme = [
     { value: 'material.purple.dark', label: '材质 黑紫', color: ['#363640', '#b427b0'] },
     { value: 'material.teal.light', label: '材质 白绿', color: ['#ffffff', '#00968f'] },
     { value: 'material.teal.dark', label: '材质 黑绿', color: ['#363640', '#00968f'] },
+    // 紧凑 流利
+    { value: 'fluent.blue.light.compact', label: '紧凑 流利 白蓝', color: ['#ffffff', '#0f6cbd'] },
+    { value: 'fluent.blue.dark.compact', label: '紧凑 流利 黑蓝', color: ['#292929', '#5486ff'] },
+    { value: 'fluent.saas.light.compact', label: '紧凑 流利 白青', color: ['#ffffff', '#0f6cbd'] },
+    { value: 'fluent.saas.dark.compact', label: '紧凑 流利 黑青', color: ['#1e2832', '#5486ff'] },
+    // 紧凑 通用
+    { value: 'light.compact', label: '紧凑 通用 白蓝', color: ['#ffffff', '#337ab7'] },
+    { value: 'softblue.compact', label: '紧凑 通用 白青', color: ['#ffffff', '#7ab8eb'] },
+    { value: 'carmine.compact', label: '紧凑 通用 白橙', color: ['#ffffff', '#f05b41'] },
+    { value: 'greenmist.compact', label: '紧凑 通用 白绿', color: ['#ffffff', '#3debd3'] },
+    { value: 'darkmoon.compact', label: '紧凑 通用 灰绿', color: ['#465672', '#3debd3'] },
+    { value: 'dark.compact', label: '紧凑 通用 黑蓝', color: ['#2a2a2a', '#1ca8dd'] },
+    { value: 'darkviolet.compact', label: '紧凑 通用 黑紫', color: ['#181820', '#9c63ff'] },
+    { value: 'contrast.compact', label: '紧凑 通用 黑粉', color: ['#000000', '#cf00d7'] },
+    // 紧凑 材质
+    { value: 'material.blue.light.compact', label: '紧凑 材质 白蓝', color: ['#ffffff', '#03b1f6'] },
+    { value: 'material.blue.dark.compact', label: '紧凑 材质 黑蓝', color: ['#363640', '#03b1f6'] },
+    { value: 'material.lime.light.compact', label: '紧凑 材质 白黄', color: ['#ffffff', '#cddc39'] },
+    { value: 'material.lime.dark.compact', label: '紧凑 材质 黑黄', color: ['#363640', '#cddc39'] },
+    { value: 'material.orange.light.compact', label: '紧凑 材质 白橙', color: ['#ffffff', '#ff5c44'] },
+    { value: 'material.orange.dark.compact', label: '紧凑 材质 黑橙', color: ['#363640', '#ff5c44'] },
+    { value: 'material.purple.light.compact', label: '紧凑 材质 白紫', color: ['#ffffff', '#b427b0'] },
+    { value: 'material.purple.dark.compact', label: '紧凑 材质 黑紫', color: ['#363640', '#b427b0'] },
+    { value: 'material.teal.light.compact', label: '紧凑 材质 白绿', color: ['#ffffff', '#00968f'] },
+    { value: 'material.teal.dark.compact', label: '紧凑 材质 黑绿', color: ['#363640', '#00968f'] },
+
 ]

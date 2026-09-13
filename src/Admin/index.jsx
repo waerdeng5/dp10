@@ -61,7 +61,7 @@ const AdminIndex = () => {
         updateList(pageList)
         updateActive(openKey)
         setConfig(config)
-        const dxTheme = theme.devTheme || 'fluent.blue.light.compact'
+        const dxTheme = userAdd.dxTheme || 'fluent.blue.light.compact'
         themes.current(dxTheme)
         setLookStatus(!!look)
     })

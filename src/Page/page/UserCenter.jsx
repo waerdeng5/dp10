@@ -1,7 +1,7 @@
 import './UserCenter.scss'
 import { useState } from 'react'
 import { useEventEmitter, useMount } from 'ahooks'
-import { Button, Input, Alert, Select } from 'antd'
+import { Button, Input, Alert, Select, message } from 'antd'
 
 import { axios } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
@@ -151,6 +151,31 @@ const UserCenter = () => {
         // getPoints()
         // getTaskList()
     })
+
+    const onThemeSelect = (e) => {
+        themes.current(e)
+        setDXTheme(e)
+    }
+
+    const onSaveTheme = async () => {
+        setLoading(true)
+        const { uuid } = await GetIndexedDB('config')
+        const [getErr, getRes] = await axios({
+            method: 'get',
+            url: 'projects/GetJsonInfoByUuid',
+            path: CommonAPIUrl,
+            params: { uuid: `${uuid}/UserInfo` }
+        })
+
+        if (getErr) return console.log(getErr)
+        const { userUuid } = userInfo
+        getRes[userUuid].dxTheme = DXTheme
+        const params = { uuid: `${uuid}/UserInfo`, content: JSON.stringify(getRes) }
+        const [postErr] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
+        if (postErr) return console.log(postErr)
+        message.success('保存成功')
+        setLoading(false)
+    }
 
     return (
         <div className='UserCenter'>
@@ -303,12 +328,7 @@ const UserCenter = () => {
                                             </span>
                                         )
                                     }}
-                                    onChange={e => {
-                                        themes.current(e)
-                                        setDXTheme(e)
-                                        // 保存个人配置
-                                        // 修改系统配置
-                                    }}
+                                    onChange={onThemeSelect}
                                 />
                             </div>
                             <div className='Table'>
@@ -328,6 +348,9 @@ const UserCenter = () => {
                                     <Pager visible={true} allowedPageSizes={10} showPageSizeSelector={true} />
                                     <Paging defaultPageSize={10} />
                                 </DataGrid>
+                            </div>
+                            <div>
+                                <Button loading={Loading} onClick={onSaveTheme}>保存个人主题</Button>
                             </div>
                         </div>
                     }
