@@ -4673,6 +4673,76 @@ const LayoutWindowStyleFormList = [
     }
 ]
 
+// !!! 点击事件
+const rowClickFormList = [
+    { span: 12, formType: 'RADIO', name: 'click_status', label: '点击事件', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 12, formType: 'RADIO', name: 'click_type', label: '操作设置', rules: true,
+        valueEnum: MappingData.System__TableOptionsType, jugde: [{ field: 'click_status', value: [true] }]
+    },
+    // 弹窗设置
+    {
+        span: 24, formType: 'GROUP', name: 'rowClickFormList_config', label: '弹窗配置', collapsible: true,
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
+        children: [
+            { span: 12, formType: 'TempGenerateUuid', name: 'click_model_uuid', label: '生成ID', rules: true, },
+            { span: 12, formType: 'RADIO', name: 'click_model_start', label: '大屏小窗', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'RADIO', name: 'click_model_level', label: '弹窗层级', rules: true, valueEnum: MappingData.System__TableModelLevel },
+            { span: 12, formType: 'INPUT', name: 'click_model_title', label: '弹窗名称', rules: true, },
+            { span: 12, formType: 'INPUT', name: 'click_model_width', label: '整体宽度', tooltip: 'vw,vh,px,%', },
+            { span: 12, formType: 'INPUT', name: 'click_model_height', label: '整体高度', tooltip: 'vw,vh,px,%', },
+            {
+                span: 24, formType: 'RADIO', name: 'click_model_params', label: '弹窗参数', rules: true,
+                valueEnum: MappingData.IsEnabledBool
+            },
+            {
+                span: 24, formType: 'LIST', name: 'click_model_config', label: '弹窗设置', collapsible: true,
+                jugde: [{ field: 'click_model_params', value: [true] }],
+                children: [
+                    { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
+                    { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
+                    { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
+                ]
+            },
+        ]
+    },
+
+    // 跳转设置
+    {
+        span: 24, formType: 'RADIO', name: 'click_navTo_type', label: '跳转方式', rules: true,
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }],
+        valueEnum: MappingData.System_TableNavToType
+    },
+    // 站内跳转
+    {
+        span: 12, formType: 'INPUT', name: 'click_navTo_int_router', label: '站内路由', rules: true,
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['int'] }],
+    },
+    {
+        span: 12, formType: 'INPUT', name: 'click_navTo_int_params', label: '参数字段',
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['int'] }],
+    },
+    // 外部链接
+    {
+        span: 12, formType: 'RADIO', name: 'click_navTo_ext_type', label: '链接方式', rules: true,
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
+        valueEnum: MappingData.System_TableNavToExtType,
+    },
+    {
+        span: 12, formType: 'INPUT', name: 'click_navTo_ext_url', label: '字段或链接', rules: true, tooltip: '数据字段或站点链接',
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
+    },
+    {
+        span: 12, formType: 'INPUT', name: 'click_navTo_ext_value', label: '参数字段',
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
+    },
+    {
+        span: 12, formType: 'INPUT', name: 'click_navTo_ext_field', label: '字段映射',
+        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
+    },
+]
+
 // !!! 各模块参数配置
 // *** 空屏占位模块
 const PrefabricatedPlaceEmpty = [
@@ -6077,6 +6147,7 @@ const PrefabricatedChartLine = [
     ChartCrosshairCommonFormList,
     ChartLabelCommonFormList,
     ChartScrollBarCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 面积图
 const ChartAreaFormList = {
@@ -6112,6 +6183,7 @@ const PrefabricatedChartArea = [
     ChartCrosshairCommonFormList,
     ChartLabelCommonFormList,
     ChartScrollBarCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 柱图 
 const ChartBarFormList = {
@@ -6145,6 +6217,7 @@ const PrefabricatedChartBar = [
     ChartCrosshairCommonFormList,
     ChartLabelCommonFormList,
     ChartScrollBarCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 直方图
 const ChartHistogramFormList = {
@@ -6155,6 +6228,7 @@ const PrefabricatedChartHistogram = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartHistogramFormList,
+    ...rowClickFormList,
 ]
 // TODO 区间柱状图
 const ChartRangeColumnFormList = {
@@ -6165,6 +6239,7 @@ const PrefabricatedChartRangeColumn = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartRangeColumnFormList,
+    ...rowClickFormList,
 ]
 // TODO 箱线图
 const ChartBoxPlotFormList = {
@@ -6175,6 +6250,7 @@ const PrefabricatedChartBoxPlot = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartBoxPlotFormList,
+    ...rowClickFormList,
 ]
 // TODO 饼图
 const ChartPieFormList = {
@@ -6233,6 +6309,7 @@ const PrefabricatedChartPie = [
     ChartLegendsCommonFormList,
     ChartLabelCommonFormList,
     ChartIndicatorCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 玫瑰图
 const ChartRoseFormList = {
@@ -6284,6 +6361,7 @@ const PrefabricatedChartRose = [
     ChartLegendsCommonFormList,
     ChartLabelCommonFormList,
     ChartCrosshairCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 漏斗图
 const ChartFunnelFormList = {
@@ -6294,6 +6372,7 @@ const PrefabricatedChartFunnel = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartFunnelFormList,
+    ...rowClickFormList,
 ]
 // TODO 雷达图
 const ChartRadarFormList = {
@@ -6329,6 +6408,7 @@ const PrefabricatedChartRadar = [
     ChartLabelCommonFormList,
     ChartCrosshairCommonFormList,
     ChartIndicatorCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 桑基图
 const ChartSankeyFormList = {
@@ -6339,6 +6419,7 @@ const PrefabricatedChartSankey = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartSankeyFormList,
+    ...rowClickFormList,
 ]
 // TODO 序列图
 const ChartSequenceFormList = {
@@ -6349,6 +6430,7 @@ const PrefabricatedChartSequence = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartSequenceFormList,
+    ...rowClickFormList,
 ]
 // TODO 词云图
 const ChartWordCloudFormList = {
@@ -6359,6 +6441,7 @@ const PrefabricatedChartWordCloud = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartWordCloudFormList,
+    ...rowClickFormList,
 ]
 // TODO 仪表盘图
 const ChartGaugeFormList = {
@@ -6459,6 +6542,7 @@ const PrefabricatedChartGauge = [
     ChartTitleCommonFormList,
     ChartTooltipCommonFormList,
     ChartIndicatorCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 线性进度图
 const ChartLinearProgressFormList = {
@@ -6478,6 +6562,7 @@ const PrefabricatedChartLinearProgress = [
     ChartBackCommonFormList,
     ChartTitleCommonFormList,
     ChartTooltipCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 环形进度图
 const ChartCircularProgressFormList = {
@@ -6519,6 +6604,7 @@ const PrefabricatedChartCircularProgress = [
     ChartTitleCommonFormList,
     ChartTooltipCommonFormList,
     ChartIndicatorCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 树图
 const ChartTreemapFormList = {
@@ -6529,6 +6615,7 @@ const PrefabricatedChartTreemap = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartTreemapFormList,
+    ...rowClickFormList,
 ]
 // TODO 瀑布图
 const ChartWaterfallFormList = {
@@ -6539,6 +6626,7 @@ const PrefabricatedChartWaterfall = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartWaterfallFormList,
+    ...rowClickFormList,
 ]
 // TODO 圆包图
 const ChartCirclePackingFormList = {
@@ -6549,6 +6637,7 @@ const PrefabricatedChartCirclePacking = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartCirclePackingFormList,
+    ...rowClickFormList,
 ]
 // TODO 旭日图
 const ChartSunburstFormList = {
@@ -6559,6 +6648,7 @@ const PrefabricatedChartSunburst = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartSunburstFormList,
+    ...rowClickFormList,
 ]
 // TODO 相关系数图
 const ChartCorrelationFormList = {
@@ -6569,6 +6659,7 @@ const PrefabricatedChartCorrelation = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartCorrelationFormList,
+    ...rowClickFormList,
 ]
 // TODO 水球图
 const ChartLiquidFormList = {
@@ -6604,6 +6695,7 @@ const PrefabricatedChartLiquid = [
     ChartTitleCommonFormList,
     ChartTooltipCommonFormList,
     ChartIndicatorCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 韦恩图
 const ChartVennFormList = {
@@ -6614,6 +6706,7 @@ const PrefabricatedChartVenn = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartVennFormList,
+    ...rowClickFormList,
 ]
 // TODO 马赛克图
 const ChartMosaicFormList = {
@@ -6624,6 +6717,7 @@ const PrefabricatedChartMosaic = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartMosaicFormList,
+    ...rowClickFormList,
 ]
 // TODO 蜡烛图
 const ChartCandlestickFormList = {
@@ -6634,6 +6728,7 @@ const PrefabricatedChartCandlestick = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     ChartDataCommonFormList,
     ChartCandlestickFormList,
+    ...rowClickFormList,
 ]
 // TODO 甘特图
 const PrefabricatedChartGantt = [
@@ -7061,75 +7156,6 @@ const TemplateApiConfig = {
         },
     ]
 }
-
-const rowClickFormList = [
-    { span: 12, formType: 'RADIO', name: 'click_status', label: '点击事件', rules: true, valueEnum: MappingData.IsEnabledBool },
-    {
-        span: 12, formType: 'RADIO', name: 'click_type', label: '操作设置', rules: true,
-        valueEnum: MappingData.System__TableOptionsType, jugde: [{ field: 'click_status', value: [true] }]
-    },
-    // 弹窗设置
-    {
-        span: 24, formType: 'GROUP', name: 'rowClickFormList_config', label: '弹窗配置', collapsible: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['model'] }],
-        children: [
-            { span: 12, formType: 'TempGenerateUuid', name: 'click_model_uuid', label: '生成ID', rules: true, },
-            { span: 12, formType: 'RADIO', name: 'click_model_start', label: '大屏小窗', rules: true, valueEnum: MappingData.IsEnabledBool },
-            { span: 12, formType: 'RADIO', name: 'click_model_level', label: '弹窗层级', rules: true, valueEnum: MappingData.System__TableModelLevel },
-            { span: 12, formType: 'INPUT', name: 'click_model_title', label: '弹窗名称', rules: true, },
-            { span: 12, formType: 'INPUT', name: 'click_model_width', label: '整体宽度', tooltip: 'vw,vh,px,%', },
-            { span: 12, formType: 'INPUT', name: 'click_model_height', label: '整体高度', tooltip: 'vw,vh,px,%', },
-            {
-                span: 24, formType: 'RADIO', name: 'click_model_params', label: '弹窗参数', rules: true,
-                valueEnum: MappingData.IsEnabledBool
-            },
-            {
-                span: 24, formType: 'LIST', name: 'click_model_config', label: '弹窗设置', collapsible: true,
-                jugde: [{ field: 'click_model_params', value: [true] }],
-                children: [
-                    { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
-                    { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
-                    { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
-                    { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
-                ]
-            },
-        ]
-    },
-
-    // 跳转设置
-    {
-        span: 24, formType: 'RADIO', name: 'click_navTo_type', label: '跳转方式', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }],
-        valueEnum: MappingData.System_TableNavToType
-    },
-    // 站内跳转
-    {
-        span: 12, formType: 'INPUT', name: 'click_navTo_int_router', label: '站内路由', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['int'] }],
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_navTo_int_params', label: '参数字段',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['int'] }],
-    },
-    // 外部链接
-    {
-        span: 12, formType: 'RADIO', name: 'click_navTo_ext_type', label: '链接方式', rules: true,
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
-        valueEnum: MappingData.System_TableNavToExtType,
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_navTo_ext_url', label: '字段或链接', rules: true, tooltip: '数据字段或站点链接',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_navTo_ext_value', label: '参数字段',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
-    },
-    {
-        span: 12, formType: 'INPUT', name: 'click_navTo_ext_field', label: '字段映射',
-        jugde: [{ field: 'click_status', value: [true] }, { field: 'click_type', value: ['navTo'] }, { field: 'click_navTo_type', value: ['ext'] }],
-    },
-]
 
 // !!! 自定义模块表单信息
 // 交投ai

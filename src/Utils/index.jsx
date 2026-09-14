@@ -878,7 +878,7 @@ export const AssemblyNavTo = (data, row, Event) => {
 
 
 export const TemplateClickFn = (e, v, row, Event, openModel) => {
-    e.stopPropagation()
+    e?.stopPropagation()
     const { click_type, click_model_level } = v
     if (click_type === 'model') {
         const modelData = AssemblyModelData(v, row, Event)

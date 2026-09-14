@@ -5,7 +5,8 @@ import { VChart } from '@visactor/react-vchart'
 import { Gantt, VRender, TYPES } from '@visactor/vtable-gantt';
 import * as VTableGantt from '@visactor/vtable-gantt';
 import { useEffect } from 'react'
-import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn } from '../Utils'
+import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn, TemplateClickFn } from '../Utils'
+import { useTemplateModel } from '../Config/useHooks'
 
 const defaultDataA00 = [{ xField: 'China', yField: 0.4 }]
 const defaultDataA02 = [
@@ -1235,7 +1236,7 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         }
         if (dataType === 'A03') {
             const mapping = data_apiArr?.flatMap(item =>
-                apiData?.map(v => ({ uuid: v.uuid, xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField }))
+                apiData?.map(v => ({ xField: v[item.data_xField], yField: v[item.data_yField], seriesField: item.data_seriesField, ...v }))
             )
             return mapping || []
         }
@@ -1296,10 +1297,23 @@ const PrefabricatedChartArea = ({ tempId, data, UrlData, LayoutEvent }) => {
         SetSpecFn(dataSourceTypeFn('area', data, UrlData))
     }, [data, UrlData])
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
-    if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} />
+    if (Spec) return (
+        <VChart
+            className='ChartsClass'
+            ref={chartRef}
+            spec={Spec}
+            options={optionsData}
+            onClickFilter={{ level: 'mark' }}
+            onClick={e => {
+                console.log(e.datum)
+                data.click_status && TemplateClickFn(null, data, e.datum, LayoutEvent, openModel)
+            }}
+        />
+    )
 };
 // Bar 柱状图
 const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     const SetSpecFn = (values) => {
@@ -1329,6 +1343,7 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
             onClickFilter={{ level: 'mark' }}
             onClick={e => {
                 console.log(e.datum)
+                data.click_status && TemplateClickFn(null, data, e.datum, LayoutEvent, openModel)
             }}
         />
     )
@@ -1606,7 +1621,6 @@ const PrefabricatedChartCandlestick = ({ tempId, data, UrlData, LayoutEvent }) =
     );
 };
 
-
 const recordsTestData = [
     {
         id: 1,
@@ -1713,8 +1727,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         scrollStyle_ignoreFrozenCols, scrollStyle_scrollRailColor, scrollStyle_scrollSliderColor, scrollStyle_scrollSliderCornerRadius,
         scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding
     } = data
-
-    //  fields_hierarchyState, , , , , fields_type, fields_progress, 
 
     const option = {
         taskKeyField: fields_id || 'id',
@@ -2049,18 +2061,12 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
     }, [data, UrlData])
 
-
-
-
-
     return (
         <div className='PrefabricatedChartGantt'   >
             <div ref={GanttRef} />
         </div>
     )
 }
-
-
 
 export const PrefabricatedChartTemplate = {
     PrefabricatedChartLine,
