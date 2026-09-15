@@ -40,7 +40,6 @@ const OptionsModel = ({ data, Event }) => {
     const [INITIAL, setINITIAL] = useState(Initial)
     // 类型赋值
     const valueTypeMapping = async (fields, formFields) => {
-
         const fieldsData = formFields.map(async item => {
             const field = fields.find(v => v.uuid === item.uuid)
             const { valueType } = field
