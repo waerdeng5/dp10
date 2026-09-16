@@ -306,15 +306,23 @@ export const MonitorTemplateA01 = ({ data }) => {
     const iframeUrl = 'https://yingshi.ljkjkf.com/webvideo.html?url=ezopen://open.ys7.com/'
 
     useEffect(() => {
-        if (cameraFactory === 1 && size) {
+        if (cameraFactory === 'b623a74b-e221-4fda-9286-55c7d0ebf84a' && size) {
             setUrl(`${iframeUrl}${deviceSerial}/${channelNo}${hD ? '.hd' : ''}.live&token=${token}&width=${size.width}&height=${size.height}`)
         }
     }, [data, size])
 
-    if (cameraFactory === 1) {
+
+    if (cameraFactory === 'b623a74b-e221-4fda-9286-55c7d0ebf84a') {
         return (
             <div className='MonitorTemplateA01' ref={BoxHeight}>
                 {Url && <iframe title="Video" src={Url} width="100%" height="100%" scrolling="no" frameBorder="0" allowFullScreen={true} />}
+            </div>
+        )
+    }
+    if (cameraFactory === 'a558c20e-5eef-402a-b941-905a955a91ba') {
+        return (
+            <div className='MonitorTemplateA01' ref={BoxHeight}>
+                {playUrl && <iframe title="Video" src={playUrl} width="100%" height="100%" scrolling="no" frameBorder="0" allowFullScreen={true} />}
             </div>
         )
     }
