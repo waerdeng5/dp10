@@ -310,8 +310,6 @@ export const MonitorTemplateA01 = ({ data }) => {
             setUrl(`${iframeUrl}${deviceSerial}/${channelNo}${hD ? '.hd' : ''}.live&token=${token}&width=${size.width}&height=${size.height}`)
         }
     }, [data, size])
-
-
     if (cameraFactory === 'b623a74b-e221-4fda-9286-55c7d0ebf84a') {
         return (
             <div className='MonitorTemplateA01' ref={BoxHeight}>
