@@ -90,18 +90,18 @@ export const VideoTemplateA03 = ({ data }) => {
         const url = 'https://yingshi.ljkjkf.com'
         if (SIZE) {
             const { width, height } = SIZE
-            if (cameraFactory === 1)
+            if (cameraFactory === 'b623a74b-e221-4fda-9286-55c7d0ebf84a')
                 setUrl(`${url}/webvideo.html?url=ezopen://open.ys7.com/${deviceSerial}/${channelNo}${hd ? '.hd' : ''}.live&token=${token}&width=${width}&height=${height}`)
-            else if (cameraFactory === 2)
+            else if (cameraFactory === '772fd9b9-1cfa-44f0-9bb0-31178e291966')
                 setUrl(`${url}/webLive.html?url=imou://open.lechange.com/${deviceSerial}/${channelNo}/1?streamId=1|kitToken=${token}&width=${width}&height=${height}`)
-            else if (cameraFactory === 4) setUrl(playUrl || '')
-            else if (cameraFactory === 5) setUrl(playUrl || '')
+            else if (cameraFactory === 'a558c20e-5eef-402a-b941-905a955a91ba') setUrl(playUrl || '')
+            else if (cameraFactory === 'a2a20473-9094-4a07-995e-95f718937b73') setUrl(playUrl || '')
         }
     }, [cameraFactory, channelNo, deviceSerial, token, playUrl, hd, SIZE])
 
     return (
         <div className='VideoTemplateA03' ref={myRef}>
-            {(cameraFactory === 1 || cameraFactory === 2) &&
+            {(cameraFactory === 'b623a74b-e221-4fda-9286-55c7d0ebf84a' || cameraFactory === '772fd9b9-1cfa-44f0-9bb0-31178e291966') &&
                 <iframe
                     title="Video"
                     src={Url}
