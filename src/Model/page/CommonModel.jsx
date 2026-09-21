@@ -209,7 +209,8 @@ const CommonModel = ({ data, Event }) => {
     }
     // 步骤条
     if (openType === 'B17') {
-        const { B17_method, B17_url, B17_params, B17_isData, B17_dataArr, B17_status, B17_statusArr, B17_render, Initial } = data
+        const { B17_method, B17_url, B17_params, B17_isData, B17_dataArr,
+            B17_status_bool, B17_status, B17_status_label, B17_statusArr, B17_render, Initial } = data
         const { B17_titleColor, B17_titleDeg, B17_titleSize, B17_titleFamily, B17_titleWeight, B17_titleStyle,
             B17_titleShadowX, B17_titleShadowY, B17_titleShadowS, B17_titleShadowC } = data
         const { B17_textColor, B17_textDeg, B17_textSize, B17_textFamily, B17_textWeight, B17_textStyle,
@@ -265,10 +266,12 @@ const CommonModel = ({ data, Event }) => {
                                             color: status?.color,
                                             content: (
                                                 <div className='TimelineData'>
-                                                    <div>
-                                                        <div style={titleStyle}>当前状态 : </div>
-                                                        <div style={textStyle}>{status?.title}</div>
-                                                    </div>
+                                                    {B17_status_bool &&
+                                                        <div>
+                                                            <div style={titleStyle}>{B17_status_label || '当前状态'} : </div>
+                                                            <div style={textStyle}>{status?.title}</div>
+                                                        </div>
+                                                    }
                                                     {B17_render.map((item, index) => {
                                                         return (
                                                             <div key={index}>

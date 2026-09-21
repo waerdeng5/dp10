@@ -2895,9 +2895,11 @@ const AddRowOptionsFormList = [
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_17_02', label: '状态判定',
         jugde: [{ field: 'type', value: ['B17'] }],
         children: [
-            { span: 24, formType: 'INPUT', name: 'B17_status', label: '状态字段', rules: true },
+            { span: 24, formType: 'RADIO', name: 'B17_status_bool', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'B17_status', label: '状态字段', rules: true, jugde: [{ field: 'B17_status_bool', value: [true] }] },
+            { span: 24, formType: 'INPUT', name: 'B17_status_label', label: '状态名称', rules: true, jugde: [{ field: 'B17_status_bool', value: [true] }] },
             {
-                span: 24, formType: 'LIST', name: 'B17_statusArr', label: '状态参数',
+                span: 24, formType: 'LIST', name: 'B17_statusArr', label: '状态参数', jugde: [{ field: 'B17_status_bool', value: [true] }],
                 children: [
                     { span: 24, formType: 'INPUT', name: 'value', label: '状态值', rules: true },
                     { span: 24, formType: 'INPUT', name: 'label', label: '状态名称', rules: true },
