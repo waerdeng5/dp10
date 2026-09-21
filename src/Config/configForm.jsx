@@ -2696,7 +2696,7 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'B09_orgKey', label: '映射键', jugde: [{ field: 'B09_orgKeyValue', value: [true] }] },
             { span: 24, formType: 'INPUT', name: 'B09_orgValue', label: '映射值', jugde: [{ field: 'B09_orgKeyValue', value: [true] }] },
             {
-                span: 24, formType: 'LIST', name: 'B09_tableArr', label: '分组测试',
+                span: 24, formType: 'LIST', name: 'B09_tableArr', label: '分组名称',
                 jugde: [{ field: 'B09_render', value: ['table'] }],
                 children: [
                     { span: 24, formType: 'INPUT', name: 'dataIndex', label: '字段', rules: true },
@@ -9777,6 +9777,15 @@ const PrefabricatedPasteModel = [
     { span: 24, formType: 'HIDDEN', name: 'json', label: '表编号', rules: true },
     { span: 24, formType: 'TEXTAREA', name: 'paste', label: '粘贴内容', rules: true },
 ]
+// *** 电子围栏参数粘贴窗口
+const FenceFormData = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'organizationUuid', label: '组织机构', rules: true },
+    { span: 24, formType: 'HIDDEN', name: 'coordinates', label: '围栏信息', rules: true },
+    { span: 24, formType: 'INPUT', name: 'tableName', label: '围栏名称', rules: true },
+    { span: 24, formType: 'COLOR', name: 'color', label: '围栏颜色', rules: true, mode: ['single'] },
+    { span: 24, formType: 'NUMBER', name: 'width', label: '围栏宽度', rules: true },
+]
 
 
 
@@ -9859,5 +9868,6 @@ export const FormConfig = {
 
     PrefabricatedSwiperBox,
     PrefabricatedPasteWindow,
-    PrefabricatedPasteModel
+    PrefabricatedPasteModel,
+    FenceFormData
 }

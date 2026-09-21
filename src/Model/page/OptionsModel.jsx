@@ -558,7 +558,6 @@ const OptionsModel = ({ data, Event }) => {
         const { B09_leftMethod, B09_leftUrl, B09_leftParams, B09_leftUuid, B09_leftMapping } = data
         const { B09_rightMethod, B09_rightUrl, B09_rightParams, B09_rightUuid, B09_rightMapping } = data
         const { B09_saveMethod, B09_saveUrl, B09_saveParams, B09_saveSelect, B09_saveUuid, B09_saveMapping } = data
-
         const { uuid } = Initial
         const Template = TransferMapping[B09_render]
 
@@ -688,6 +687,12 @@ const OptionsModel = ({ data, Event }) => {
                         obj.valueEnum = addAttr(api.data.list, { label: mappingLable, value: mappingValue, extra: mappingParExtra, judge: mappingJudge })
                     }
                 }
+
+
+                if (judge) {
+                    obj.jugde = judgeData.map(v => ({ field: v.field, value: v.value.split(',') || [] }))
+
+                }
                 return obj
             })
             const results = await Promise.all(formITEM)
@@ -696,6 +701,7 @@ const OptionsModel = ({ data, Event }) => {
 
         useMount(async () => {
             const data = await FORMITEM()
+            console.log(data)
             setFormItem(data)
         })
 

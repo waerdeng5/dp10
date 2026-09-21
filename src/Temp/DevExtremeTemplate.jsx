@@ -521,6 +521,7 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
 
     const B09Func = item => {
         const { title, B09_seeStatus, B09_seeTitle } = item
+        console.log(item)
         updateModel5({
             title: title,
             type: 'OptionsModel',

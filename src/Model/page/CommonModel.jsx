@@ -260,19 +260,20 @@ const CommonModel = ({ data, Event }) => {
                             <Timeline
                                 items={(() => {
                                     const data = Data.map(i => {
+                                        const status = statusMapping[i[B17_status]?.toString()]
                                         return ({
-                                            color: statusMapping[i[B17_status]]?.color,
+                                            color: status?.color,
                                             content: (
                                                 <div className='TimelineData'>
                                                     <div>
                                                         <div style={titleStyle}>当前状态 : </div>
-                                                        <div style={textStyle}>{statusMapping[i[B17_status]]?.title}</div>
+                                                        <div style={textStyle}>{status?.title}</div>
                                                     </div>
                                                     {B17_render.map((item, index) => {
-                                                        if (i[item.value]) return (
+                                                        return (
                                                             <div key={index}>
                                                                 <div style={titleStyle}>{item.label} : </div>
-                                                                <div style={textStyle}>{i[item.value]}</div>
+                                                                <div style={textStyle}> {i[item.value] || '-'}</div>
                                                             </div>
                                                         )
                                                     })}
