@@ -74,14 +74,9 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         setMapTilesData(MapTilesData)
     }
 
-
     useEffect(() => {
         getJsonData()
     }, [])
-
-
-
-
 
     useEffect(() => {
         if (Open) {

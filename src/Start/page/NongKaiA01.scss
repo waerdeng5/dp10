@@ -63,6 +63,56 @@
                 }
             }
         }
+
+        &>.otherImage {
+            position: absolute;
+            right: -32px;
+            bottom: 0;
+        }
+
+        &>.otherDiv {
+            position: absolute;
+            width: 222px;
+            height: 196px;
+            right: -32px;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
+            &>div {
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+                flex-direction: column;
+
+                &>div:first-child {
+                    font-family: DIN;
+                    font-weight: bold;
+                    font-size: 44px;
+                    line-height: 24px;
+                    color: #FFFFFF;
+                    text-shadow: var(--shadow);
+                    filter: drop-shadow(1px 1px 1px #262626);
+                }
+
+                &>div:last-child {
+                    background: linear-gradient(0deg, #D3FF4D, #ffffff);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    color: transparent;
+                    font-family: ShuHeiTi;
+                    font-weight: bold;
+                    font-weight: bold;
+                    font-size: 18px;
+                    text-shadow: var(--shadow);
+                    filter: drop-shadow(1px 1px 1px #262626);
+                }
+            }
+
+
+        }
     }
 
     &>.MapBtm {
