@@ -5058,9 +5058,10 @@ const ChartAxesCommonFormList = {
         {
             span: 24, formType: 'LIST', name: 'axes_arrList', label: '轴列表', collapsible: true,
             children: [
-                { span: 12, formType: 'RADIO', name: 'axes_visible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
+                { span: 8, formType: 'RADIO', name: 'axes_visible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                 // { span: 12, formType: 'RADIO', name: 'axes_type', label: '轴类型', rules: true, valueEnum: MappingData.Charts__AxesTypeList },
-                { span: 12, formType: 'SELECT', name: 'axes_orient', label: '轴位置', rules: true, valueEnum: MappingData.Charts__VchartsAxesOrientA01 },
+                { span: 8, formType: 'SELECT', name: 'axes_orient', label: '轴位置', rules: true, valueEnum: MappingData.Charts__VchartsAxesOrientA01 },
+                { span: 8, formType: 'INPUT', name: 'axes_seriesId', label: '多轴参数', tooltip: '多轴时对应数据的参数' },
                 { span: 12, formType: 'RADIO', name: 'axes_inverse', label: '反向轴', rules: true, valueEnum: MappingData.IsEnabledBool },
                 { span: 12, formType: 'RADIO', name: 'axes_hover', label: '悬浮交互', rules: true, valueEnum: MappingData.IsEnabledBool },
                 { span: 12, formType: 'RADIO', name: 'axes_select', label: '选中交互', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -6116,6 +6117,86 @@ const BarFormData = {
 }
 
 // 各图例的独立配置
+// Todo Common 组合图
+const PrefabricatedChartCommon = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'ChartCommon_data', label: '数据设置', collapsible: true,
+        children: [
+            { span: 24, formType: 'RADIO', name: 'dataSourceType', label: '数据来源', rules: true, valueEnum: MappingData.dataSourceType },
+            {
+                span: 24, formType: 'GROUP', name: 'ChartCommon_data_api', label: '接口数据', collapsible: true,
+                jugde: [{ field: 'dataSourceType', value: ['A02'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'data_apiName', label: '接口地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'data_apiLevel', label: '接口层级' },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'LIST', name: 'ChartCommon_list', label: '数据分组', collapsible: true,
+        children: [
+            { span: 8, formType: 'INPUT', name: 'id', label: '轴ID' },
+            { span: 8, formType: 'SELECT', name: 'type', label: '图例类型', rules: true, valueEnum: MappingData.Charts_type },
+            { span: 8, formType: 'RADIO', name: 'dataType', label: '数据类型', rules: true, valueEnum: MappingData.dataTypeMapping },
+            // 数据设置
+            {
+                span: 24, formType: 'LIST', name: 'data_obj', label: '对象数据', collapsible: true,
+                jugde: [{ field: 'dataType', value: ['A02'] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'xField', label: '字段', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'yField', label: '名称', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'seriesField', label: '分类', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'data_arr', label: '数组数据', collapsible: true,
+                jugde: [{ field: 'dataType', value: ['A03'] }], children: [
+                    { span: 8, formType: 'INPUT', name: 'xField', label: 'xField', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'yField', label: 'yField', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'seriesField', label: 'seriesField', rules: true },
+                ]
+            },
+            ChartLabelCommonFormList,
+            // 图元设置
+            {
+                span: 24, formType: 'GROUP', name: 'line_optison', label: '折线图图元', collapsible: true,
+                jugde: [{ field: 'type', value: ['line'] }], children: [
+                    LineFormData,
+                    PointFormData,
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'area_optison', label: '面积图图元', collapsible: true,
+                jugde: [{ field: 'type', value: ['area'] }], children: [
+                    AreaFormData,
+                    PointFormData,
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'bar_optison', label: '柱形图元', collapsible: true,
+                jugde: [{ field: 'type', value: ['bar'] }], children: [
+                    BarFormData,
+                ]
+            },
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'ChartCommon_color', label: '色板', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'color', label: '', collapsible: true,
+                children: [{ span: 24, formType: 'COLOR', name: 'color', label: '色板', rules: true }]
+            }
+        ]
+    },
+    ChartAxesCommonFormList,
+    ChartBackCommonFormList,
+    ChartTitleCommonFormList,
+    ChartLegendsCommonFormList,
+    ChartCrosshairCommonFormList,
+    ChartScrollBarCommonFormList,
+]
 // TODO 折现图
 const ChartLineFormList = {
     span: 24, formType: 'GROUP', name: 'ChartCommon_line', label: '折现图', collapsible: true,
@@ -9821,6 +9902,7 @@ export const FormConfig = {
     ModelConfigFormList,
 
     PrefabricatedPlaceEmpty,
+    PrefabricatedChartCommon,
     PrefabricatedChartLine,
     PrefabricatedChartArea,
     PrefabricatedChartBar,

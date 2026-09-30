@@ -1,9 +1,9 @@
 
 import './index.scss'
-import { createRoot } from 'react-dom/client'
 import Router from './Router/index'
-
 import config from 'devextreme/core/config'
+import { createRoot } from 'react-dom/client'
+import { StyleProvider } from '@ant-design/cssinjs';
 import { locale, loadMessages } from "devextreme/localization"
 
 import { licenseKey, Dev_zh } from './Router/devMapping'
@@ -16,5 +16,5 @@ locale('zh')
 
 
 
-createRoot(document.getElementById('root')).render(<Router />)
+createRoot(document.getElementById('root')).render(<StyleProvider><Router /></StyleProvider>)
 

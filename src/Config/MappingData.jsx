@@ -1254,6 +1254,14 @@ export const MappingData = {
     ],
 
     // TODO Charts参数
+
+    Charts_type: [
+        { label: '折线图', value: 'line' },
+        { label: '面积图', value: 'area' },
+        { label: '柱形图', value: 'bar' },
+    ],
+
+
     Charts__renderField: [
         { label: 'xField', value: 'xField' },
         { label: 'yField', value: 'yField' },

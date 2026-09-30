@@ -9,12 +9,6 @@ import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn, TemplateCli
 import { useTemplateModel } from '../Config/useHooks'
 
 const defaultDataA00 = [{ xField: 'China', yField: 0.4 }]
-const defaultDataA02 = [
-    { xField: 'China', seriesField: 'China', yField: 0.25 },
-    { xField: 'Africa', seriesField: 'Africa', yField: 0.795 },
-    { xField: 'EU', seriesField: 'EU', yField: 0.065 },
-    { xField: 'USA', seriesField: 'USA', yField: 0.55 },
-]
 const defaultDataA01 = [
     { xField: 'Nail polish', seriesField: 'Africa', yField: getRandomInt(0, 10000) },
     { xField: 'Nail polish', seriesField: 'EU', yField: getRandomInt(0, 10000) },
@@ -52,6 +46,21 @@ const defaultDataA01 = [
     { xField: 'Mascara', seriesField: 'EU', yField: getRandomInt(0, 10000) },
     { xField: 'Mascara', seriesField: 'China', yField: getRandomInt(0, 10000) },
     { xField: 'Mascara', seriesField: 'USA', yField: getRandomInt(0, 10000) },
+]
+const defaultDataA02 = [
+    { xField: 'China', seriesField: 'China', yField: 0.25 },
+    { xField: 'Africa', seriesField: 'Africa', yField: 0.795 },
+    { xField: 'EU', seriesField: 'EU', yField: 0.065 },
+    { xField: 'USA', seriesField: 'USA', yField: 0.55 },
+]
+const defaultDataA03 = [
+    { date: '周一', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周二', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周三', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周四', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周五', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周六', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
+    { date: '周七', A01: getRandomInt(0, 10000), A02: getRandomInt(0, 10000), A03: getRandomInt(0, 100) },
 ]
 
 const backgroundFn = (data) => {
@@ -203,6 +212,7 @@ const axesFn = (data) => {
             if (item.axes_visible) {
                 const obj = {
                     visible: true,
+                    seriesId: item.axes_seriesId ? item.axes_seriesId.split(',') : null,
                     mode: item.axes_mode,
                     orient: item.axes_orient,
                     inverse: item.axes_inverse,
@@ -1244,6 +1254,83 @@ const dataSourceTypeFn = (type, data, UrlData) => {
     }
 }
 // !!! 图例设置
+// Common组合图
+const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
+    const chartRef = useRef()
+    const [Spec, setSpec] = useState()
+    // if (dataType === 'A02') {
+    //     console.log('对象数据', data_obj)
+    //     const mapping = data_obj?.map(v => ({ xField: v.xField, yField: apiData[v.yField], seriesField: v.seriesField }))
+    //     return mapping || []
+    // }
+    useEffect(() => {
+
+        const dataArr = data.ChartCommon_list.reduce((acc, v, i) => {
+            if (v.dataType !== 'A03') return acc
+            const mapping = (v.data_arr ?? []).flatMap(item =>
+                (defaultDataA03 ?? []).map(base => ({
+                    xField: base[item.xField],
+                    yField: base[item.yField],
+                    seriesField: item.seriesField,
+                    ...base,
+                }))
+            )
+            acc.push({ values: mapping })
+            return acc
+        }, [])
+
+        const typeConfigMap = {
+            line: (v) => ({ line: lineFn(v), point: pointFn(v) }),
+            area: (v) => ({ area: areaFn(v), point: pointFn(v) }),
+            bar: (v) => ({ bar: barFn(v) }),
+        }
+
+        const series = data.ChartCommon_list.map((v, i) => {
+            const { id, type } = v;
+            const base = {
+                dataIndex: i,
+                id,
+                type,
+                xField: type === 'bar' ? ['xField', 'seriesField'] : 'xField',
+                yField: 'yField',
+                seriesField: 'seriesField',
+                label: labelFn(v),
+            };
+
+            const extra = typeConfigMap[type]?.(v)
+            return extra ? { ...base, ...extra } : base;
+        });
+        setSpec({
+            type: 'common',
+            data: dataArr,
+            series,
+            axes: axesFn(data),
+            color: data.color.map(item => (item.color || item)),
+            background: backgroundFn(data),
+            title: titleFn(data),
+            legends: legendFn(data),
+            crosshair: crosshairFn(data),
+            scrollBar: scrollBarFn(data),
+        })
+    }, [data, UrlData])
+
+    const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
+
+    if (Spec) return (
+        <VChart
+            className='ChartsClass'
+            ref={chartRef}
+            spec={Spec}
+            options={optionsData}
+            onClickFilter={{ level: 'mark' }}
+            onClick={e => {
+                console.log(e.datum)
+            }}
+        />
+    )
+}
+
+
 // Line 折线图
 const PrefabricatedChartLine = ({ tempId, data, UrlData, LayoutEvent }) => {
     const chartRef = useRef()
@@ -2069,6 +2156,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
 }
 
 export const PrefabricatedChartTemplate = {
+    PrefabricatedChartCommon,
     PrefabricatedChartLine,
     PrefabricatedChartArea,
     PrefabricatedChartBar,

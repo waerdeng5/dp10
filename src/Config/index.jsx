@@ -520,6 +520,7 @@ export const PlaceTempList = [
 ]
 
 export const ChartTempList = [
+    { uuid: 'PrefabricatedChartCommon', title: '组合图', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedChartLine', title: '折线图', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedChartArea', title: '面积图', img: `${CommonUrl}images/Avatar/AvatarA02.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedChartBar', title: '柱状图', img: `${CommonUrl}images/Avatar/AvatarA03.webp`, x: 0, y: 0, w: 12, h: 12 },
@@ -602,6 +603,24 @@ export const TemplateParamsMapping = {
         backDeg: 1
     },
     // TODO 图例
+    PrefabricatedChartCommon: {
+        value: 'PrefabricatedChartCommon',
+        title_text: '组合图',
+        color: ChartLineColorCommonDataA01,
+        ...ChartBackCommonData,
+        ...ChartTitleCommonData,
+        ...ChartLegendsCommonData,
+        ...ChartCrosshairCommonData,
+        ...ChartScrollBarCommonData,
+        axes_arrList: [
+            { ...ChartAxesCommonData, axes_orient: 'left' },
+            { ...ChartAxesCommonData, axes_orient: 'right' },
+            { ...ChartAxesCommonData, axes_orient: 'bottom' }
+        ],
+        // 
+
+
+    },
     PrefabricatedChartLine: {
         value: 'PrefabricatedChartLine',
         title_text: '折线图',

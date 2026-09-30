@@ -209,7 +209,7 @@ const JudgeTemplate = ({ jugde, Template }) => {
 // Todo 分组框
 const GROUP = ({ data, form, action }) => {
     const { span, name, label, collapsible = false, defaultCollapsed = false, jugde, children } = data
-    const Template = () => {
+    const Template = memo(() => {
         return (
             <ProFormGroup colProps={{ span }} key={name} >
                 <ProCard collapsible={collapsible} defaultCollapsed={defaultCollapsed} title={label} >
@@ -220,7 +220,7 @@ const GROUP = ({ data, form, action }) => {
                 </ProCard>
             </ProFormGroup>
         )
-    }
+    })
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
@@ -228,7 +228,7 @@ const GROUP = ({ data, form, action }) => {
 // TODO 数组分组
 const LIST = ({ data, form }) => {
     const { span, name, label, tooltip, jugde, children, addBtn = true, delBtn = true, copy = true, title = '分组', sort = true } = data
-    const Template = () => (
+    const Template = memo(() => (
         <div className='LIST' style={{ width: `${100 / 24 * span}%` }}>
             <ProFormList
                 name={name}
@@ -241,22 +241,22 @@ const LIST = ({ data, form }) => {
                 copyIconProps={copy ? { Icon: CopyOutlined, tooltipText: '复制此行' } : false}
                 deleteIconProps={delBtn ? { Icon: DeleteOutlined, tooltipText: '删除此行' } : false}
                 itemRender={({ listDom, action }, { index }) => {
-                    return (<ProCard bordered='true' collapsible={true} extra={action} title={`${title}${index + 1}`}>{listDom}</ProCard>)
+                    return (<ProCard bordered='true' collapsible={true} extra={action} title={`${index + 1} - ${title}`}>{listDom}</ProCard>)
                 }}
             >
                 {(_, index, action) => {
                     return (
                         <ProFormGroup key={index}>
-                            {children.map((item, key) => {
+                            {children.map(item => {
                                 const Template = TemplateMapping[item.formType]
-                                return <Template key={key} data={item} form={form} action={action} />
+                                return <Template key={item.name} data={item} form={form} action={action} />
                             })}
                         </ProFormGroup>
                     )
                 }}
             </ProFormList>
         </div>
-    )
+    ))
 
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
@@ -1057,7 +1057,6 @@ const beforeUpload = (file, fileType, fileSize, message) => {
 const UPLOAD = ({ data, form }) => {
     const { message } = App.useApp()
     const { span, name, label, tooltip, max = 1, fileType, fileSize = 1, rules = false, disabled = false, jugde, fileData = {} } = data
-    const API = sessionStorage.getItem('API')
     const Template = () => {
         const [action, setAction] = useState('')
         const [visible, setVisible] = useState(false)
@@ -1345,8 +1344,8 @@ const TemplateMapping = {
     UPLOAD,
     UPLOADOBJ,
 
-    // TempProFormCaptcha,
-    // TempTitle,
+    // // TempProFormCaptcha,
+    // // TempTitle,
 
     TempBackGrund,
     TempICON,

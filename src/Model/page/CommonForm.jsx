@@ -1,6 +1,5 @@
 import { useEventEmitter } from 'ahooks'
 import FormTemplate from '../../Utils/FormTemplate'
-import { DevScrollView } from '../../Temp/DevTemplate'
 
 import { FormConfig } from '../../Config/configForm'
 import { Mars3dFormConfig } from '../../Config/Mars3dForm'
@@ -38,18 +37,16 @@ const CommonForm = ({ data, Event }) => {
     FORMEVENT.useSubscription(formCallBack)
 
     return (
-        <DevScrollView>
-            <div className='CommonFrom' style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-                <FormTemplate
-                    formItem={FormList[formItem]}
-                    FORMEVENT={FORMEVENT}
-                    Initial={Initial || {}}
-                    NotSubmit={NotSubmit}
-                    NotLoading={NotLoading}
-                    detection={detection}
-                />
-            </div>
-        </DevScrollView>
+        <div className='CommonFrom' style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
+            <FormTemplate
+                formItem={FormList[formItem]}
+                FORMEVENT={FORMEVENT}
+                Initial={Initial || {}}
+                NotSubmit={NotSubmit}
+                NotLoading={NotLoading}
+                detection={detection}
+            />
+        </div>
     );
 };
 
