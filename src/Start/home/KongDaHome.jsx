@@ -1,4 +1,6 @@
 import './KongDaHome.scss'
+import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
+import "mars3d/mars3d.css"
 
 import { useRef, useEffect, useState } from 'react'
 
@@ -51,8 +53,9 @@ const KongDaHome = ({ data, page, StartEvent }) => {
     const [MapData, setMapData] = useState(null)
     const [MapElementData, setMapElementData] = useState(null)
     const [MapTilesData, setMapTilesData] = useState(null)
-
     const [PageData, setPageData] = useState()
+
+    const [OrganizationRemarkList, setOrganizationRemarkList] = useState([])
 
     const onSwitch = () => {
         setActive(!Active)
@@ -74,8 +77,17 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         setMapTilesData(MapTilesData)
     }
 
+
+    const GetDaPingPartyPersonDevelopment = async () => {
+        const [err, res] = await axios({ method: 'get', url: 'organization/GetOrganizationRemarkList' })
+        if (err) return console.log(err)
+        setOrganizationRemarkList(res.data.list)
+    }
+
+
     useEffect(() => {
         getJsonData()
+        GetDaPingPartyPersonDevelopment()
     }, [])
 
     useEffect(() => {
@@ -83,13 +95,11 @@ const KongDaHome = ({ data, page, StartEvent }) => {
             MapOptions?.map?.destroy()
         } else {
             if (MapData && MapElementData && MapTilesData && MapBox.current) {
-                InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: MapElementData, TILES: MapTilesData })
+                const backData = InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: MapElementData, TILES: MapTilesData })
+                setMapOptions(backData)
             }
         }
-        return () => {
-            MapOptions?.map?.destroy()
-        }
-
+        return () => { MapOptions?.map?.destroy() }
     }, [Open])
 
     if (PageData) {
@@ -231,6 +241,18 @@ const KongDaHome = ({ data, page, StartEvent }) => {
 
                                 </div>
                             </WinTemplate>
+                        </div>
+                        <div className='btmBox'>
+                            {OrganizationRemarkList.map(v => {
+                                const { uuid, tableName, remark } = v
+                                return (
+                                    <div className='item' key={uuid}>
+                                        <img src='https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeList.png' alt="" />
+                                        <div>{tableName}党支部 : </div>
+                                        <div>{remark}</div>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </>
                 }

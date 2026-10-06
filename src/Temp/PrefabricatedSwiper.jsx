@@ -138,11 +138,8 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
 
 
     const onClickItem = (e, v) => {
-        console.log(e)
         click_status && TemplateClickFn(e, data, v, LayoutEvent, openModel)
-        // TemplateClickFn
     }
-
 
     return (
         <div className="PrefabricatedSwiperBox">

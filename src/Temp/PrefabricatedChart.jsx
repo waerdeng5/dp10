@@ -1264,19 +1264,36 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
     //     return mapping || []
     // }
     useEffect(() => {
-
+        const { dataSourceType, data_apiName, data_apiLevel } = data
         const dataArr = data.ChartCommon_list.reduce((acc, v, i) => {
-            if (v.dataType !== 'A03') return acc
-            const mapping = (v.data_arr ?? []).flatMap(item =>
-                (defaultDataA03 ?? []).map(base => ({
-                    xField: base[item.xField],
-                    yField: base[item.yField],
-                    seriesField: item.seriesField,
-                    ...base,
-                }))
-            )
-            acc.push({ values: mapping })
-            return acc
+            let objData = []
+            if (dataSourceType === 'A01') objData = defaultDataA03
+            if (dataSourceType === 'A02') objData = getNestedValue(data_apiLevel, UrlData[data_apiName])
+
+            if (dataSourceType === 'A03') {
+                console.log('自定义数据')
+                objData = defaultDataA03
+            }
+            const { dataType, data_arr, data_obj } = v
+
+
+            if (dataType === 'A02') {
+                console.log('objData', objData)
+                console.log(data_obj)
+            }
+
+            if (dataType === 'A03') {
+                const mapping = (data_arr ?? []).flatMap(item =>
+                    (objData ?? []).map(base => ({
+                        xField: base[item.xField],
+                        yField: base[item.yField],
+                        seriesField: item.seriesField,
+                        ...base,
+                    }))
+                )
+                acc.push({ values: mapping })
+                return acc
+            }
         }, [])
 
         const typeConfigMap = {
@@ -1404,7 +1421,6 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     const SetSpecFn = (values) => {
-        console.log('data', SetSpecDataFn(data, 'bar', values))
         const spec = {
             ...SetSpecDataFn(data, 'bar', values),
             color: data.color.map(item => (item.color || item)),
@@ -2185,3 +2201,4 @@ export const PrefabricatedChartTemplate = {
     PrefabricatedChartCandlestick,
     PrefabricatedChartGantt,
 };
+

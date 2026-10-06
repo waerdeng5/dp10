@@ -149,7 +149,6 @@ export const BoundaryBorderFunction = (gra, clip, data) => {
 const RenderElement = (gra, data) => {
     data && data.forEach(item => {
         const { id, show, position, positions, style, type, textAlign } = item
-
         switch (type) {
             // !!! 点
             case 'labelP':
@@ -190,7 +189,6 @@ const RenderElement = (gra, data) => {
                 break;
             // !!! 线
             case 'polylineP':
-
                 const polylineP = new mars3d.graphic.PolylinePrimitive({ id, positions, show, style })
                 gra.addGraphic(polylineP)
                 break;

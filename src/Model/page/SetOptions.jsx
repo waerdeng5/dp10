@@ -27,9 +27,6 @@ const SetOptions = ({ data, Event }) => {
         const { uuid, code } = e
         let topData = topTreeData
         let rowData = rowTreeData
-
-        console.log('onAddOptions', e)
-
         if (code === 'top') {
             if (e.type === 'A01') e.fields = topTreeData.find(v => v.uuid === e.uuid)?.fields || []
             if (e.type === 'A02') {
