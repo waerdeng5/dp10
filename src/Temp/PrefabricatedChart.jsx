@@ -1404,6 +1404,7 @@ const PrefabricatedChartBar = ({ tempId, data, UrlData, LayoutEvent }) => {
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     const SetSpecFn = (values) => {
+        console.log('data', SetSpecDataFn(data, 'bar', values))
         const spec = {
             ...SetSpecDataFn(data, 'bar', values),
             color: data.color.map(item => (item.color || item)),

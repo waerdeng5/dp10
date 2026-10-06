@@ -1142,7 +1142,7 @@ const TempICON = ({ data }) => {
     const Template = memo(() => (
         <div className='TempICON' style={{ width: `${100 / 24 * span}%` }}>
             <ProFormSelect
-                fieldProps={{ classNames: { popup: { root: 'TempICON' } }, virtual: false, variant: "underlined" }}
+                fieldProps={{ classNames: { popup: { root: 'TempICONBox' } }, virtual: false, variant: "underlined" }}
                 showSearch
                 name={name}
                 label={label}

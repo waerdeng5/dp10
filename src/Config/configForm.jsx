@@ -1955,7 +1955,8 @@ const AddFieldsImport = [
 ]
 // *** 字段粘贴
 const AddFieldsPaste = [
-    { span: 24, formType: 'TEXTAREA', name: 'importField', label: '字段内容', rules: true },
+    { formType: 'HIDDEN', name: 'uuid' },
+    { span: 24, formType: 'TEXTAREA', name: 'importField', label: '导入参数', rules: true },
 ]
 // *** 新增字段
 const AddFieldsFormList = [

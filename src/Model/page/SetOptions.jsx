@@ -1,7 +1,8 @@
 import './SetOptions.scss'
-import { useState } from 'react'
-import { Tree, Button, Popconfirm } from 'antd'
 import { v4 } from 'uuid'
+import { useState } from 'react'
+import copy from 'copy-to-clipboard'
+import { Tree, Button, Popconfirm, message } from 'antd'
 
 import { onTreeDrop, replaceNodeById, replaceNodeByIdTwo, removeTreeByKey } from '../../Utils'
 
@@ -26,6 +27,8 @@ const SetOptions = ({ data, Event }) => {
         const { uuid, code } = e
         let topData = topTreeData
         let rowData = rowTreeData
+
+        console.log('onAddOptions', e)
 
         if (code === 'top') {
             if (e.type === 'A01') e.fields = topTreeData.find(v => v.uuid === e.uuid)?.fields || []
@@ -121,9 +124,87 @@ const SetOptions = ({ data, Event }) => {
 
     // 修改操作
     const onModifyTop = (e) =>
-        updateModel4({ title: '修改全局操作', type: 'CommonForm', Event: Event, modelData: { formItem: 'AddTopOptionsFormList', Initial: e } })
+        updateModel4({
+            title: '修改全局操作',
+            type: 'CommonForm',
+            Event: Event,
+            modelData: { formItem: 'AddTopOptionsFormList', Initial: e },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'before',
+                    icon: 'fas fa-arrow-alt-circle-up',
+                    text: '拷贝参数',
+                    onClick: () => {
+                        const success = copy(JSON.stringify(e))
+                        if (success) message.success('复制成功！')
+                        else message.error('复制失败！')
+                    }
+                },
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    icon: 'fas fa-arrow-alt-circle-up',
+                    text: '导入参数',
+                    onClick: () => {
+                        updateModel2({
+                            title: '导入参数',
+                            width: 800,
+                            type: 'CommonForm',
+                            Event: Event,
+                            modelData: {
+                                Initial: { uuid: e.uuid },
+                                formItem: 'AddFieldsPaste',
+                                eventBack: 'onPasteGlobalParams',
+                            }
+                        })
+                    }
+                },
+            ]
+        })
     const onModifyRow = (e) =>
-        updateModel4({ title: '修改局部操作', type: 'CommonForm', Event: Event, modelData: { formItem: 'AddRowOptionsFormList', Initial: e } })
+        updateModel4({
+            title: '修改局部操作',
+            type: 'CommonForm',
+            Event: Event,
+            modelData: { formItem: 'AddRowOptionsFormList', Initial: e },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'before',
+                    icon: 'fas fa-arrow-alt-circle-up',
+                    text: '拷贝参数',
+                    onClick: () => {
+                        const success = copy(JSON.stringify(e))
+                        if (success) message.success('复制成功！')
+                        else message.error('复制失败！')
+                    }
+                },
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    icon: 'fas fa-arrow-alt-circle-up',
+                    text: '导入参数',
+                    onClick: () => {
+                        updateModel2({
+                            title: '导入参数',
+                            width: 800,
+                            type: 'CommonForm',
+                            Event: Event,
+                            modelData: {
+                                Initial: { uuid: e.uuid },
+                                formItem: 'AddFieldsPaste',
+                                eventBack: 'onPastePartialParams',
+                            }
+                        })
+                    }
+                },
+            ]
+        })
 
     // 删除操作
     const onDeleteTop = (e) => setTopTreeData(removeTreeByKey(topTreeData, e.uuid))

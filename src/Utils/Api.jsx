@@ -61,7 +61,11 @@ const noTokenApi = [
 const ErrorModal = (status, data) => {
     const { message } = data
     notification.error({ key: 'apiError', title: codeMessage[status], description: message })
-    return (<App />)
+    return (
+        <div>
+            <App />
+        </div>
+    )
 }
 
 const alovaInstance = createAlova({
@@ -91,6 +95,10 @@ const alovaInstance = createAlova({
     responded: {
         onSuccess: async (response) => {
             const contentType = response.headers.get('Content-Type')
+            if (!contentType) {
+                ErrorModal('404', { message: 'Content-Type 为空' })
+                throw new Error('Content-Type 为空')
+            }
             if (contentType.indexOf('application/json') !== -1) {
                 try {
                     const json = await response.json()
