@@ -44,6 +44,15 @@ const axiosArr = [
     { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}_tiles` } },
 ]
 
+const pageData = [
+    { method: 'get', url: 'assessMent/GetPartyAssessmentList' },
+    { method: 'get', url: 'partyPerson/GetDaPingPartyPersonList' },
+    { method: 'get', url: 'partyPerson/GetDaPingPartyPersonConstitute' },
+    { method: 'get', url: 'partyPerson/GetPartyPersonVanguardList' },
+    { method: 'get', url: 'partyPersonType/GetDaPingPartyPersonDevelopment' },
+    { method: 'get', url: 'video/GetPartyVideo' },
+    { method: 'get', url: 'organization/GetOrganizationRemarkList' }
+]
 
 const KongDaHome = ({ data, page, StartEvent }) => {
     const MapBox = useRef()
@@ -55,7 +64,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
     const [MapTilesData, setMapTilesData] = useState(null)
     const [PageData, setPageData] = useState()
 
-    const [OrganizationRemarkList, setOrganizationRemarkList] = useState([])
+    const [RemarkList, setRemarkList] = useState([])
 
     const onSwitch = () => {
         setActive(!Active)
@@ -79,9 +88,19 @@ const KongDaHome = ({ data, page, StartEvent }) => {
 
 
     const GetDaPingPartyPersonDevelopment = async () => {
-        const [err, res] = await axios({ method: 'get', url: 'organization/GetOrganizationRemarkList' })
-        if (err) return console.log(err)
-        setOrganizationRemarkList(res.data.list)
+        const [
+            [A01Err, A01Res],
+            [A02Err, A02Res],
+            [A03Err, A03Res],
+            [A04Err, A04Res],
+            [A05Err, A05Res],
+            [A06Err, A06Res],
+            [A07Err, A07Res],
+        ] = await axiosFor(pageData)
+        if (A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err) return console.log(A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err)
+        const data = { A01: A01Res, A02: A02Res, A03: A03Res, A04: A04Res, A05: A05Res, A06: A06Res, A07: A07Res }
+        setRemarkList(data)
+
     }
 
 
@@ -115,14 +134,14 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                             {(() => {
                                                 const tempId = '6b7e8400-507c-4df3-bae4-b94a4afeed5d'
                                                 const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                             })()}
                                         </div>
                                         <div>
                                             {(() => {
                                                 const tempId = '5c8f0301-3d4d-4522-aa76-315e6a77871f'
                                                 const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                             })()}
                                         </div>
                                     </div>
@@ -130,7 +149,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = 'b32a5c7b-4bc7-4137-a59f-93dd96cc79d5'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -141,14 +160,14 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = '05b35506-0de8-4b3e-aae1-42d9e674013e'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                     <div className='btm'>
                                         {(() => {
                                             const tempId = '12dcc1d3-f3fb-44cd-a125-611bb6c2f6b8'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -162,14 +181,14 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                             {(() => {
                                                 const tempId = 'db3dda58-da63-41d7-945c-4b6b7d97070d'
                                                 const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                             })()}
                                         </div>
                                         <div>
                                             {(() => {
                                                 const tempId = 'd9d629be-f12a-4eb9-a97c-e833f5afe511'
                                                 const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                             })()}
                                         </div>
                                         <img className='backImage' src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeC02.png" alt="" />
@@ -178,7 +197,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = '52113864-d9e1-4227-a5ef-7d53eabc51af'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -189,7 +208,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = '7cecb1e2-6df6-4ef4-a961-b9ab047b1e26'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -204,7 +223,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = 'c4ed0499-eb0e-486e-98b1-c5468ed36dae'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -215,14 +234,14 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = '0d160ed7-4456-4825-9b59-4e8b6b5dae49'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                     <div className='btm'>
                                         {(() => {
                                             const tempId = '364deca1-b617-4ef3-aa74-5c915a996d51'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
                                 </div>
@@ -235,7 +254,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                         {(() => {
                                             const tempId = 'bcc54aa7-fc66-48a6-8f5f-87be2425bc2e'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={[]} LayoutEvent={StartEvent} />)
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
 
@@ -243,7 +262,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                             </WinTemplate>
                         </div>
                         <div className='btmBox'>
-                            {OrganizationRemarkList.map(v => {
+                            {RemarkList.A07.data.list.map(v => {
                                 const { uuid, tableName, remark } = v
                                 return (
                                     <div className='item' key={uuid}>

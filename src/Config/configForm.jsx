@@ -8324,15 +8324,15 @@ const PrefabricatedTable = [
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
                     },
                     {
-                        span: 12, formType: 'SELECT', name: 'valueEnum_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
+                        span: 12, formType: 'RADIO', name: 'valueEnum_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
                     },
                     {
-                        span: 12, formType: 'INPUT', name: 'valueEnum_params', label: '额外参数', rules: true,
+                        span: 12, formType: 'INPUT', name: 'valueEnum_params', label: '额外参数',
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
                     },
                     {
-                        span: 12, formType: 'INPUT', name: 'valueEnum_http', label: '额外地址', rules: true,
+                        span: 12, formType: 'INPUT', name: 'valueEnum_http', label: '额外地址',
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] }]
                     },
                     {

@@ -86,12 +86,10 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         ...item
     } = data
 
-
     // const Navigate = useNavigate()
     const tableBox = useRef(null)
     const size = useSize(tableBox)
     const [STYLE, setSTYLE] = useState()
-
 
     const [PageSize, setPageSize] = useState(Number(data_number))
     const [treeData, setTreeData] = useState()
@@ -99,7 +97,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
     const [cardData, setCardData] = useState()
 
     const [columnsData, setColumnsData] = useState()
-
 
     const onItemClick = (e, data) => {
         if (e.type === 'navTo') {
@@ -188,7 +185,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     console.log('构造组件树', { method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     const [err, res] = await axios({ method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     if (err) return console.error('获取树状结构失败', err)
+                    console.log(tree_api_level, tree_api_mapping)
                     const treeData = tree_api_level ? getNestedValue(tree_api_mapping || '', res) : res
+                    console.log(treeData)
                     const key = treeData?.[0][tree_key]
                     setTreeData(treeData)
                     setTreeActive([key])

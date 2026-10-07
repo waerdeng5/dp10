@@ -1241,7 +1241,7 @@ const dataSourceTypeFn = (type, data, UrlData) => {
         }
         const apiData = getNestedValue(data_apiLevel, UrlData[data_apiName])
         if (dataType === 'A02') {
-            const mapping = data_apiData?.map(v => ({ xField: v.xField, yField: apiData[v.yField], seriesField: v.seriesField }))
+            const mapping = data_apiData?.map(v => ({ xField: v.xField, yField: apiData[v.yField], seriesField: v.seriesField, ...apiData }))
             return mapping || []
         }
         if (dataType === 'A03') {
@@ -1255,14 +1255,26 @@ const dataSourceTypeFn = (type, data, UrlData) => {
 }
 // !!! 图例设置
 // Common组合图
+
+// 对象组合
+const transform = (list, fields, id) => {
+
+    return fields?.map(field => {
+        const values = list?.map((item) => {
+            return ({
+                xField: item[field.xField],
+                yField: item[field.yField],
+                seriesField: field.seriesField || '',
+                ...item
+            })
+        })
+        return { id: id || null, values }
+    });
+}
+
 const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
-    // if (dataType === 'A02') {
-    //     console.log('对象数据', data_obj)
-    //     const mapping = data_obj?.map(v => ({ xField: v.xField, yField: apiData[v.yField], seriesField: v.seriesField }))
-    //     return mapping || []
-    // }
     useEffect(() => {
         const { dataSourceType, data_apiName, data_apiLevel } = data
         const dataArr = data.ChartCommon_list.reduce((acc, v, i) => {
@@ -1274,12 +1286,11 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
                 console.log('自定义数据')
                 objData = defaultDataA03
             }
-            const { dataType, data_arr, data_obj } = v
-
-
+            const { id, dataType, data_arr, data_obj } = v
             if (dataType === 'A02') {
-                console.log('objData', objData)
-                console.log(data_obj)
+                const result = transform(objData, data_obj, id);
+                acc.push(...result)
+                return acc
             }
 
             if (dataType === 'A03') {
@@ -1313,7 +1324,6 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
                 seriesField: 'seriesField',
                 label: labelFn(v),
             };
-
             const extra = typeConfigMap[type]?.(v)
             return extra ? { ...base, ...extra } : base;
         });
@@ -1332,7 +1342,6 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
     }, [data, UrlData])
 
     const optionsData = { disableDirtyBounds: true, options3d: { enable: true, enableView3dTransform: true, center: { x: 500, y: 250 } } }
-
     if (Spec) return (
         <VChart
             className='ChartsClass'
@@ -1341,7 +1350,9 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
             options={optionsData}
             onClickFilter={{ level: 'mark' }}
             onClick={e => {
-                console.log(e.datum)
+                if (!e.datum.length) {
+                    console.log(e.datum)
+                }
             }}
         />
     )
