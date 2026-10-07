@@ -6197,6 +6197,7 @@ const PrefabricatedChartCommon = [
     ChartLegendsCommonFormList,
     ChartCrosshairCommonFormList,
     ChartScrollBarCommonFormList,
+    ...rowClickFormList,
 ]
 // TODO 折现图
 const ChartLineFormList = {

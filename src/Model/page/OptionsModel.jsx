@@ -1115,7 +1115,17 @@ const OptionsModel = ({ data, Event }) => {
             if (AnnexErr) return false
             setAnnexList(AnnexRes.data.list)
         })
-        const items = [{ key: '1', label: '安全活动' }, { key: '2', label: '班前活动' }, { key: '3', label: '证书' }]
+        const items = [
+            { key: '1', label: '安全活动' },
+            { key: '2', label: '班前活动' },
+            { key: '18cc5ffd-191d-4842-955a-891cc52d6e9e', label: '高空作业资质' },
+            { key: '333e2c1a-e163-49f0-a31c-0eeea7ce0d3a', label: '安全证书' },
+            { key: '65e84a7a-6486-464c-9c20-78949f2d6367', label: '无犯罪记录证明' },
+            { key: '8f1ca8b6-e47d-47f0-a40c-5032d3cc464b', label: '安全责任书' },
+            { key: 'be065994-9308-48d8-a7f3-4a40b20155f2', label: '劳务合同' },
+            { key: 'e56c3947-4c4f-45c3-a76b-0589d3a9907d', label: '工资结清单' },
+            { key: 'f8dcbf41-b368-462a-82da-2258e64a157b', label: '教育记录' },
+        ]
 
         return (
             <div className='OptionsModelB1608'>
@@ -1226,21 +1236,22 @@ const OptionsModel = ({ data, Event }) => {
                             <Scrolling rowRenderingMode="virtual" columnRenderingMode="virtual" scrollByContent={true} showScrollbar='onHover' />
                         </DataGrid>
                     }
-                    {activeKey === '3' &&
+                    {(activeKey !== '1' && activeKey !== '2') &&
                         <div className='AnnexList'>
                             {AnnexList.map((v, i) => {
-                                console.log(v)
-                                return (
-                                    <div className='AnnexItem'>
-                                        <Image
-                                            width={200}
-                                            height={200}
-                                            alt="basic"
-                                            src={v.attachment[0].url}
-                                        />
-                                        <div>{v.name1}</div>
-                                    </div>
-                                )
+                                if (v.name3 === activeKey) {
+                                    return (
+                                        <div className='AnnexItem' key={i}>
+                                            <Image
+                                                width={200}
+                                                height={200}
+                                                alt="basic"
+                                                src={v.attachment[0].url}
+                                            />
+                                            <div>{v.name1}</div>
+                                        </div>
+                                    )
+                                }
                             })}
                         </div>
                     }

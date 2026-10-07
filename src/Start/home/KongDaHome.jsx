@@ -54,6 +54,22 @@ const pageData = [
     { method: 'get', url: 'organization/GetOrganizationRemarkList' }
 ]
 
+const cityMapping = {
+    'b9b55c46-6f86-4268-bd99-3c5713593c73': '大兴安岭',
+    '5fa77593-7b04-46c0-8434-4586cf805643': '黑河',
+    '3cd20360-154c-4626-86f5-ed4b837cbcd5': '齐齐哈尔',
+    'cc0991c6-4efd-40d6-a87c-67befcefac7c': '大庆',
+    '187e311a-c80a-4e28-b367-9e4e2f3b4e01': '绥化',
+    'b6aab541-5bb5-4499-85dd-dbdbeab4fe15': '伊春',
+    '188cbf27-c3d4-40de-a61b-acf2d39b3395': '哈尔滨',
+    '4dbe825c-4b07-4346-b5fe-3695ecd5c9fc': '鹤岗',
+    'b3f9bc0b-5eb8-4844-bfdb-b031c9f1eace': '佳木斯',
+    'd0116907-e67a-4a5f-bc87-8fbabcf20f11': '双鸭山',
+    'ac88a0b3-6b06-499d-b9f5-d5d2cbc0791c': '七台河',
+    'd3a3fef9-22f6-470c-9d3a-86f3cbe88427': '鸡西',
+    '318b17c5-57b8-431c-866b-b1adb49ec8c7': '牡丹江',
+}
+
 const KongDaHome = ({ data, page, StartEvent }) => {
     const MapBox = useRef()
     const [Open, setOpen] = useState(true)
@@ -100,9 +116,7 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         if (A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err) return console.log(A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err)
         const data = { A01: A01Res, A02: A02Res, A03: A03Res, A04: A04Res, A05: A05Res, A06: A06Res, A07: A07Res }
         setRemarkList(data)
-
     }
-
 
     useEffect(() => {
         getJsonData()
@@ -116,6 +130,9 @@ const KongDaHome = ({ data, page, StartEvent }) => {
             if (MapData && MapElementData && MapTilesData && MapBox.current) {
                 const backData = InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: MapElementData, TILES: MapTilesData })
                 setMapOptions(backData)
+                backData.gra.on('click', e => {
+                    console.log(cityMapping[e.graphic.id])
+                })
             }
         }
         return () => { MapOptions?.map?.destroy() }

@@ -1273,6 +1273,7 @@ const transform = (list, fields, id) => {
 }
 
 const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     useEffect(() => {
@@ -1352,6 +1353,7 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
             onClick={e => {
                 if (!e.datum.length) {
                     console.log(e.datum)
+                    data.click_status && TemplateClickFn(null, data, e.datum, LayoutEvent, openModel)
                 }
             }}
         />
@@ -1361,6 +1363,7 @@ const PrefabricatedChartCommon = ({ tempId, data, UrlData, LayoutEvent }) => {
 
 // Line 折线图
 const PrefabricatedChartLine = ({ tempId, data, UrlData, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     const SetSpecFn = (values) => {
@@ -1385,10 +1388,12 @@ const PrefabricatedChartLine = ({ tempId, data, UrlData, LayoutEvent }) => {
     if (Spec) return <VChart className='ChartsClass' ref={chartRef} spec={Spec} options={optionsData} onClickFilter={{ level: 'mark' }}
         onClick={e => {
             console.log(e.datum)
+            data.click_status && TemplateClickFn(null, data, e.datum, LayoutEvent, openModel)
         }} />
 }
 // Area 面积图
 const PrefabricatedChartArea = ({ tempId, data, UrlData, LayoutEvent }) => {
+    const openModel = useTemplateModel()
     const chartRef = useRef()
     const [Spec, setSpec] = useState()
     const SetSpecFn = (values) => {

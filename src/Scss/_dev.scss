@@ -7,7 +7,6 @@
             padding: 0 16px;
 
             .dx-toolbar-label {
-
                 background: linear-gradient(0deg, #ffffff 0%, #70fff3 100%);
                 -webkit-background-clip: text;
                 background-clip: text;
@@ -20,7 +19,6 @@
                 filter: drop-shadow(1px 1px 1px #262626);
             }
         }
-
     }
 }
 
@@ -53,6 +51,7 @@
                     z-index: -1;
                 }
             }
+
         }
     }
 
@@ -60,6 +59,7 @@
         width: 100%;
         position: relative;
         z-index: 1;
+        overflow: hidden;
 
         &>.Title {
             width: 100%;
