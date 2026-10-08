@@ -32,6 +32,8 @@ const RouterMapping = [
 const router = createBrowserRouter(RouterMapping)
 
 const RouterPage = () => {
+
+    console.log(window.location)
     window.webDB = IndexedDBFun()
     // if (!port) debuggerFun()
     return (

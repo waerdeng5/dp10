@@ -147,7 +147,7 @@ const LayoutModel = ({ data, Event }) => {
         return (
             <div className='LayoutModel'>
                 <Template data={data} />
-                <FloatButton onClick={onFormClick} />
+                {port && <FloatButton onClick={onFormClick} />}
             </div>
         )
     }
@@ -155,7 +155,7 @@ const LayoutModel = ({ data, Event }) => {
     return (
         <div className='LayoutModel'>
             <Template config={Config} row={row} Event={Event} />
-            <FloatButton onClick={onFormClick} />;
+            {port && <FloatButton onClick={onFormClick} />}
         </div>
     );
 };
