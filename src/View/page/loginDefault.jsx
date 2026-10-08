@@ -5,6 +5,7 @@ import { useMount } from 'ahooks'
 import { CommonAPIUrl } from '../../Config'
 import { axios } from '../../Utils/Api'
 import LoadSvg from '../../Page/Loading/LoadSvg'
+import LoadA06 from '../../Page/Loading/LoadA06'
 import { SwiperLoginBack } from '../../Temp/SwiperTemplate'
 import { VideoTemplateA01 } from '../../Temp/VideoTemplate'
 import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
@@ -266,7 +267,7 @@ const LoginDefault = ({ SingPage }) => {
         )
     }
 
-    return <LoadSvg style={{ '--background': '#e8e8e8', '--stroke': '#262626', height: '100vh' }} />
+    return <LoadA06 style={{ '--background': '#e8e8e8', '--stroke': '#262626', height: '100vh' }} />
 };
 
 export default LoginDefault;

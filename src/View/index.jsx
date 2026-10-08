@@ -8,6 +8,7 @@ import { themeDefault } from '../Config/themeDefault'
 
 import { axios } from "../Utils/Api"
 import LoadSvg from '../Page/Loading/LoadSvg'
+import LoadA06 from '../Page/Loading/LoadA06'
 import { formDefaultInit, CommonAPIUrl } from '../Config'
 import { pageStore, modelStore, fromStore } from '../Router/zustand'
 import { Encrypt, Decrypt, IndexedDBClear, AddIndexdDB, GetIndexedDB } from '../Utils/IndexedDB'
@@ -117,7 +118,7 @@ const LoginIndex = () => {
             <div className="LoginPage">
                 {Template ?
                     <Template SingPage={SingPage} /> :
-                    <LoadSvg style={{ '--background': '#e8e8e8', '--stroke': '#262626', height: '100vh' }} />
+                    <LoadA06 style={{ '--background': '#e8e8e8', '--stroke': '#262626', height: '100vh' }} />
                 }
             </div>
         </Suspense>

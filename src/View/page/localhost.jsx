@@ -7,6 +7,8 @@ import { axiosFor } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
 import { Decrypt } from '../../Utils/IndexedDB'
 import LoadSvg from '../../Page/Loading/LoadSvg'
+import LoadA06 from '../../Page/Loading/LoadA06'
+
 import { modelStore } from '../../Router/zustand'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
@@ -79,7 +81,7 @@ const LocalhostLogin = () => {
     return (
         <div className="LocalhostLogin">
             <DevScrollView>
-                <div>{projects ? projects.map(v => <ProjectTemp key={v.uuid} data={v} />) : <LoadSvg />}</div>
+                <div>{projects ? projects.map(v => <ProjectTemp key={v.uuid} data={v} />) : <LoadA06 />}</div>
             </DevScrollView>
         </div >
     );

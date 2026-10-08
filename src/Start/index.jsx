@@ -13,6 +13,10 @@ import { useMount, useSessionStorageState, useTitle, useFavicon, useEventEmitter
 import { axios } from '../Utils/Api'
 import { CommonAPIUrl } from '../Config'
 import LoadSvg from '../Page/Loading/LoadSvg'
+import LoadA06 from '../Page/Loading/LoadA06'
+
+
+
 import { modelStore } from '../Router/zustand'
 import { VideoTemplateA01 } from '../Temp/VideoTemplate'
 import { ColorCallBack, SpacingCallBack } from '../Utils'
@@ -194,7 +198,8 @@ const StartIndex = () => {
 
     StartEvent.useSubscription(startCallBack)
 
-    if (Loading) return <LoadSvg />
+    // if (Loading) return <LoadSvg />
+    if (Loading) return <LoadA06 />
     if (Status) return (
         <div className='StartIndex NotSet'>
             <Result status="403" title="加载失败" subTitle={`错误: 大屏加载信息未配置`} />

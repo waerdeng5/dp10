@@ -34,7 +34,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         fullScreen = false,// 全屏
         hideOnOutsideClick = false,//单击隐藏
         resizeEnabled = true,// 调整大小
-        shadingColor = 'rgba(38,38,38,0.15)', // 阴影颜色
+        shadingColor = 'rgba(0,0,0,0.8)', // 阴影颜色
         showCloseButton = modelConfig.showCloseButton || true, // 关闭按钮
         options = [],
         modelData = [],

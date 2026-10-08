@@ -14,7 +14,7 @@ import { judgeBrowserVersion, debuggerFun } from '../Utils'
 dayjs.locale('zh-cn')
 
 const { port } = window.location
-const Loading = lazy(() => import('../Page/Loading/LoadSvg'))
+const Loading = lazy(() => import('../Page/Loading/LoadA06'))
 
 
 const View = lazy(() => import('../View'))
