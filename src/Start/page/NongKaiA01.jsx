@@ -26,19 +26,19 @@ const NongKaiA01 = () => {
     const [active, setActive] = useState('A01')
     const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0 })
     const MapList = [
-        { uuid: 'A01', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 440, y: 480 },
-        { uuid: 'A02', img: imageUrl + 'MapA02.png', name: '齐齐哈尔市', x: 171, y: 320 },
-        { uuid: 'A03', img: imageUrl + 'MapA03.png', name: '鸡西市', x: 840, y: 480 },
-        { uuid: 'A04', img: imageUrl + 'MapA04.png', name: '鹤岗市', x: 680, y: 320 },
-        { uuid: 'A05', img: imageUrl + 'MapA05.png', name: '双鸭山市', x: 800, y: 420 },
-        { uuid: 'A06', img: imageUrl + 'MapA06.png', name: '大庆市', x: 200, y: 440 },
-        { uuid: 'A07', img: imageUrl + 'MapA07.png', name: '伊春市', x: 560, y: 320 },
-        { uuid: 'A08', img: imageUrl + 'MapA08.png', name: '佳木斯市', x: 640, y: 400 },
-        { uuid: 'A09', img: imageUrl + 'MapA09.png', name: '七台河市', x: 700, y: 460 },
-        { uuid: 'A10', img: imageUrl + 'MapA10.png', name: '牡丹江市', x: 620, y: 560 },
-        { uuid: 'A11', img: imageUrl + 'MapA11.png', name: '黑河市', x: 377, y: 220 },
-        { uuid: 'A12', img: imageUrl + 'MapA12.png', name: '绥化市', x: 362, y: 380 },
-        { uuid: 'A13', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 179, y: 22 },
+        { uuid: 'A01', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
+        { uuid: 'A02', img: imageUrl + 'MapA02.png', name: '齐齐哈尔市', x: 320, y: 380 },
+        { uuid: 'A03', img: imageUrl + 'MapA03.png', name: '鸡西市', x: 720, y: 520 },
+        { uuid: 'A04', img: imageUrl + 'MapA04.png', name: '鹤岗市', x: 660, y: 400 },
+        { uuid: 'A05', img: imageUrl + 'MapA05.png', name: '双鸭山市', x: 720, y: 460 },
+        { uuid: 'A06', img: imageUrl + 'MapA06.png', name: '大庆市', x: 340, y: 480 },
+        { uuid: 'A07', img: imageUrl + 'MapA07.png', name: '伊春市', x: 560, y: 400 },
+        { uuid: 'A08', img: imageUrl + 'MapA08.png', name: '佳木斯市', x: 740, y: 400 },
+        { uuid: 'A09', img: imageUrl + 'MapA09.png', name: '七台河市', x: 640, y: 500 },
+        { uuid: 'A10', img: imageUrl + 'MapA10.png', name: '牡丹江市', x: 600, y: 600 },
+        { uuid: 'A11', img: imageUrl + 'MapA11.png', name: '黑河市', x: 460, y: 300 },
+        { uuid: 'A12', img: imageUrl + 'MapA12.png', name: '绥化市', x: 460, y: 420 },
+        { uuid: 'A13', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
     ]
 
 

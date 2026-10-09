@@ -66,16 +66,18 @@
 
         &>.otherImage {
             position: absolute;
-            right: 56px;
-            top: 56px;
+            right: 240px;
+            top: 240px;
+            width: 109px;
+            height: 111px;
         }
 
         &>.otherDiv {
             position: absolute;
-            width: 222px;
-            height: 196px;
-            right: 56px;
-            top: 56px;
+            width: 109px;
+            height: 111px;
+            right: 240px;
+            top: 240px;
             display: flex;
             align-items: center;
             justify-content: center;

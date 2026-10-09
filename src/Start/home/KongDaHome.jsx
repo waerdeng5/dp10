@@ -1,6 +1,7 @@
 import './KongDaHome.scss'
 import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
 import "mars3d/mars3d.css"
+import * as mars3d from "mars3d"
 
 import { useRef, useEffect, useState } from 'react'
 
@@ -51,24 +52,26 @@ const pageData = [
     { method: 'get', url: 'partyPerson/GetPartyPersonVanguardList' },
     { method: 'get', url: 'partyPersonType/GetDaPingPartyPersonDevelopment' },
     { method: 'get', url: 'video/GetPartyVideo' },
-    { method: 'get', url: 'organization/GetOrganizationRemarkList' }
+    { method: 'get', url: 'organization/GetOrganizationRemarkList' },
 ]
 
 const cityMapping = {
-    'b9b55c46-6f86-4268-bd99-3c5713593c73': '大兴安岭',
-    '5fa77593-7b04-46c0-8434-4586cf805643': '黑河',
-    '3cd20360-154c-4626-86f5-ed4b837cbcd5': '齐齐哈尔',
-    'cc0991c6-4efd-40d6-a87c-67befcefac7c': '大庆',
-    '187e311a-c80a-4e28-b367-9e4e2f3b4e01': '绥化',
-    'b6aab541-5bb5-4499-85dd-dbdbeab4fe15': '伊春',
-    '188cbf27-c3d4-40de-a61b-acf2d39b3395': '哈尔滨',
-    '4dbe825c-4b07-4346-b5fe-3695ecd5c9fc': '鹤岗',
-    'b3f9bc0b-5eb8-4844-bfdb-b031c9f1eace': '佳木斯',
-    'd0116907-e67a-4a5f-bc87-8fbabcf20f11': '双鸭山',
-    'ac88a0b3-6b06-499d-b9f5-d5d2cbc0791c': '七台河',
-    'd3a3fef9-22f6-470c-9d3a-86f3cbe88427': '鸡西',
-    '318b17c5-57b8-431c-866b-b1adb49ec8c7': '牡丹江',
+    '22115954-4ddb-4456-8b55-22f0bc821001': { title: '哈尔滨市', position: [127.849494, 45.245517, 243.6] },
+    '22115954-4ddb-4456-8b55-22f0bc821002': { title: '齐齐哈尔', position: [124.312451, 47.676298, 165.5] },
+    '22115954-4ddb-4456-8b55-22f0bc821003': { title: '鸡西市', position: [132.29563, 45.484801, 121.7] },
+    '22115954-4ddb-4456-8b55-22f0bc821004': { title: '鹤岗市', position: [130.436071, 47.567174, 145.1] },
+    '22115954-4ddb-4456-8b55-22f0bc821005': { title: '双鸭山市', position: [132.253163, 46.380754, 97.9] },
+    '22115954-4ddb-4456-8b55-22f0bc821006': { title: '大庆市', position: [124.419975, 46.188539, 143] },
+    '22115954-4ddb-4456-8b55-22f0bc821007': { title: '伊春市', position: [129.103064, 47.503512, 215.3] },
+    '22115954-4ddb-4456-8b55-22f0bc821008': { title: '佳木斯市', position: [132.552054, 47.105604, 75.2] },
+    '22115954-4ddb-4456-8b55-22f0bc821009': { title: '七台河市', position: [130.868228, 45.720259, 124.4] },
+    '22115954-4ddb-4456-8b55-22f0bc821010': { title: '牡丹江市', position: [129.854702, 44.425733, 464.5] },
+    '22115954-4ddb-4456-8b55-22f0bc821011': { title: '黑河市', position: [126.958102, 49.117566, 104.9] },
+    '22115954-4ddb-4456-8b55-22f0bc821012': { title: '绥化市', position: [126.525435, 46.848897, 192.7] },
+    '22115954-4ddb-4456-8b55-22f0bc821013': { title: '大兴安岭', position: [124.124811, 52.121286, 378.4] },
 }
+
+
 
 const KongDaHome = ({ data, page, StartEvent }) => {
     const MapBox = useRef()
@@ -113,9 +116,58 @@ const KongDaHome = ({ data, page, StartEvent }) => {
             [A06Err, A06Res],
             [A07Err, A07Res],
         ] = await axiosFor(pageData)
-        if (A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err) return console.log(A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err)
+        if (A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err)
+            return console.log(A01Err || A02Err || A03Err || A04Err || A05Err || A06Err || A07Err)
         const data = { A01: A01Res, A02: A02Res, A03: A03Res, A04: A04Res, A05: A05Res, A06: A06Res, A07: A07Res }
         setRemarkList(data)
+    }
+
+    const getMapData = async (backData) => {
+        const [err, res] = await axios({ method: 'get', url: 'organization/GetOrganizationMapList' })
+        if (err) return console.log(err)
+        const { list } = res.data
+        Object.keys(cityMapping).forEach(v => {
+            const data = list.find(item => item.uuid === v)
+            const obj = {
+                "id": v,
+                "type": "div",
+                "show": true,
+                "style": {
+                    "offsetX": 0,
+                    "offsetY": 0,
+                    "scale": 1,
+                    "clampToGround": false,
+                    "scaleByDistance": false,
+                    "scaleByDistance_far": 1000000,
+                    "scaleByDistance_farValue": 0.1,
+                    "scaleByDistance_near": 1000,
+                    "scaleByDistance_nearValue": 1,
+                    "distanceDisplayCondition": false,
+                    "distanceDisplayCondition_far": 10000000,
+                    "distanceDisplayCondition_near": 0,
+                    "html": `
+                        <div class="KongDaHomeMapDiv" >
+                            <div class="KongDaHomeMapDivItem" style="display: ${data ? 'flex' : 'none'};" >
+                                <img src='https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeQi.png' alt='${cityMapping[v].title}' />
+                                <div >${data && data?.projectCount}</div>
+                            </div>
+                            <div class="KongDaHomeMapDivTitle" >${cityMapping[v].title}</div>
+                        </div>
+                        `
+                },
+                "_promise": {},
+                "attr": {},
+                "frameRate": 1,
+                "position": cityMapping[v].position
+            }
+            const div = new mars3d.graphic.DivGraphic(obj)
+            div.on('click', () => {
+                if (!data) return false
+                console.log('返回当前省市信息', data)
+
+            })
+            backData.gra.addGraphic(div)
+        })
     }
 
     useEffect(() => {
@@ -128,11 +180,10 @@ const KongDaHome = ({ data, page, StartEvent }) => {
             MapOptions?.map?.destroy()
         } else {
             if (MapData && MapElementData && MapTilesData && MapBox.current) {
-                const backData = InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: MapElementData, TILES: MapTilesData })
+                console.log(MapElementData)
+                const backData = InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: [], TILES: MapTilesData })
                 setMapOptions(backData)
-                backData.gra.on('click', e => {
-                    console.log(cityMapping[e.graphic.id])
-                })
+                getMapData(backData)
             }
         }
         return () => { MapOptions?.map?.destroy() }

@@ -308,3 +308,43 @@
         overflow: hidden;
     }
 }
+
+.KongDaHomeMapDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    user-select: none;
+    transform: translate(-50%, 0);
+
+    &>.KongDaHomeMapDivItem {
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        &>img {
+            width: 64px;
+            height: 56px;
+            margin: 0 8px;
+        }
+
+        &>div {
+            font-family: DIN;
+            font-weight: bold;
+            font-size: 40px;
+            color: #FFFFFF;
+            filter: drop-shadow(1px 1px 1px #262626);
+        }
+
+    }
+
+
+    &>.KongDaHomeMapDivTitle {
+        font-family: MicrosoftYaHei, MicrosoftYaHei;
+        font-weight: bold;
+        font-size: 16px;
+        color: #FFFFFF;
+        filter: drop-shadow(1px 1px 1px #262626);
+    }
+}
