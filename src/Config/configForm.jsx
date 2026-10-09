@@ -8420,6 +8420,21 @@ const PrefabricatedTable = [
                     { span: 12, formType: 'INPUT', name: 'navTo_ext_field', label: '字段映射', jugde: [{ field: 'navTo_type', value: ['ext'] }] },
                 ]
             },
+
+            {
+                span: 24, formType: 'RADIO', name: 'click_model_params', label: '弹窗参数', rules: true,
+                valueEnum: MappingData.IsEnabledBool, jugde: [{ field: 'type', value: ['model'] }],
+            },
+            {
+                span: 24, formType: 'LIST', name: 'click_model_config', label: '弹窗设置', collapsible: true,
+                jugde: [{ field: 'click_model_params', value: [true] }, { field: 'type', value: ['model'] }],
+                children: [
+                    { span: 8, formType: 'RADIO', name: 'param_type', label: '数据类型', rules: true, valueEnum: MappingData.paramTypeMapping },
+                    { span: 8, formType: 'INPUT', name: 'param_key', label: '参数键', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'param_field', label: '数据字段', rules: true, jugde: [{ field: 'param_type', value: ['data'] }] },
+                    { span: 8, formType: 'INPUT', name: 'param_value', label: '参数值', rules: true, jugde: [{ field: 'param_type', value: ['diys'] }] },
+                ]
+            },
         ]
     },
 ]

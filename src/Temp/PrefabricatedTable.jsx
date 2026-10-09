@@ -113,7 +113,12 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             }
         }
         if (e.type === 'model') {
-            const { model_level, model_title, model_width, model_height, model_uuid, model_start } = e
+            const { model_level, model_title, model_width, model_height, model_uuid, model_start, click_model_params, click_model_config } = e
+            const row = click_model_params ? click_model_config.reduce((acc, item) => {
+                acc[item.param_key] = item.param_type === 'diys' ? item.param_value : data[item.param_field]
+                return acc
+            }, {}) : data
+
             ModelOpen[model_level]({
                 title: model_title,
                 type: 'LayoutModel',
@@ -121,7 +126,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                 width: model_width,
                 height: model_height,
                 Event: LayoutEvent,
-                modelData: { json: model_uuid, row: data }
+                modelData: { json: model_uuid, row }
             })
         }
     }
@@ -182,12 +187,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             if (tree) {
                 if (tree_api_source === 'A02') {
                     const params = strOfurlParamsFunc(tree_api_params)
-                    console.log('构造组件树', { method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     const [err, res] = await axios({ method: tree_api_method, url: tree_api_url, path: tree_api_https, params })
                     if (err) return console.error('获取树状结构失败', err)
-                    console.log(tree_api_level, tree_api_mapping)
                     const treeData = tree_api_level ? getNestedValue(tree_api_mapping || '', res) : res
-                    console.log(treeData)
                     const key = treeData?.[0][tree_key]
                     setTreeData(treeData)
                     setTreeActive([key])
