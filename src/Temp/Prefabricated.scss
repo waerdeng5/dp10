@@ -266,6 +266,7 @@
                 color: transparent;
                 user-select: none;
                 white-space: pre-line;
+
             }
 
             .value {
@@ -849,12 +850,16 @@
                 flex-wrap: var(--itemFlexWrap);
 
                 .itemText {
+                    width: 100%;
                     background: var(--color);
                     -webkit-background-clip: text;
                     background-clip: text;
                     color: transparent;
                     user-select: none;
                     white-space: pre-line;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
                 }
             }
         }
