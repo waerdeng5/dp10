@@ -3,12 +3,17 @@ import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
 import "mars3d/mars3d.css"
 import * as mars3d from "mars3d"
 
+import { useEventEmitter } from 'ahooks'
 import { useRef, useEffect, useState } from 'react'
+import { useTemplateModel } from '../../Config/useHooks'
+
+
 
 import { axios, axiosFor } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
 import { Decrypt } from '../../Utils/IndexedDB'
 import { WinTemplate } from '../../Temp/StartTemplate'
+import { TemplateClickFn } from '../../Utils'
 
 import { PrefabricatedChartTemplate } from '../../Temp/PrefabricatedChart'
 import { PrefabricatedPlaceTemplate } from '../../Temp/PrefabricatedPlace'
@@ -74,6 +79,8 @@ const cityMapping = {
 
 
 const KongDaHome = ({ data, page, StartEvent }) => {
+    const openModel = useTemplateModel()
+    const KongEvent = useEventEmitter()
     const MapBox = useRef()
     const [Open, setOpen] = useState(true)
     const [Active, setActive] = useState(true)
@@ -163,8 +170,21 @@ const KongDaHome = ({ data, page, StartEvent }) => {
             const div = new mars3d.graphic.DivGraphic(obj)
             div.on('click', () => {
                 if (!data) return false
-                console.log('返回当前省市信息', data)
-
+                const obj = {
+                    click_model_height: "80vh",
+                    click_model_level: "updateModel",
+                    click_model_start: true,
+                    click_model_title: data.tableName,
+                    click_model_uuid: "7216ff50-c958-4321-1234-ad0716a7a7bb",
+                    click_model_width: "80vw",
+                    click_status: true,
+                    click_type: "model",
+                    click_model_params: true,
+                    click_model_config: [
+                        { param_type: 'data', param_key: 'address', param_field: 'uuid' }
+                    ],
+                }
+                TemplateClickFn(null, obj, data, KongEvent, openModel)
             })
             backData.gra.addGraphic(div)
         })
@@ -188,6 +208,12 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         }
         return () => { MapOptions?.map?.destroy() }
     }, [Open])
+
+
+
+    KongEvent.useSubscription(v => {
+        console.log(v)
+    })
 
     if (PageData) {
         return (

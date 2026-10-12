@@ -83,6 +83,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         columns_diyData,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
         data_api_method, data_api_url, data_api_params, data_api_https, data_api_level, data_api_mapping,
+        options_row_click,
         ...item
     } = data
 
@@ -503,6 +504,12 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         return ({ success: true, data: data })
                     }
                 }}
+                onRow={(row) => {
+                    if (!options_row_click) return {}
+                    return {
+                        onClick: e => onItemClick(item, row)
+                    }
+                }}
             />
         </div>
     );
@@ -511,3 +518,4 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
 export const PrefabricatedTableTemplate = {
     PrefabricatedTable
 };
+
