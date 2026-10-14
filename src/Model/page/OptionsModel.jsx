@@ -55,7 +55,7 @@ const OptionsModel = ({ data, Event }) => {
                     obj.valueEnum = addAttr(api.data.list, { label: mappingLable, value: mappingValue, extra: mappingParExtra, judge: mappingJudge })
                 }
             }
-            if (valueType.includes('UPLOAD')) {
+            if (valueType.includes('UPLOAD') || valueType.includes('UPLOADFACE')) {
                 const { max, fileType, fileSize } = field
                 obj.max = max
                 obj.fileType = fileType

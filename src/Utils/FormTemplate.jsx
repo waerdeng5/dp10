@@ -1135,6 +1135,82 @@ const UPLOADOBJ = ({ data }) => {
     )
 }
 
+// TODO 人脸信息上传
+const UPLOADFACE = ({ data, form }) => {
+    const { message } = App.useApp()
+    const { span, name, label, tooltip, max = 1, fileType, fileSize = 1, rules = false, disabled = false, jugde, fileData = {} } = data
+    const Template = () => {
+        const [action, setAction] = useState('')
+        const [visible, setVisible] = useState(false)
+        const [ImageUrl, setImageUrl] = useState(false)
+        const [fileList, setFileList] = useState([])
+        const [token, setToken] = useState()
+
+        useMount(async () => {
+            const token = await GetIndexedDB('token')
+            const config = await GetIndexedDB('config')
+            setToken(token)
+            setAction(config.apiUrl + '/rosters/UploadFacePhotoAndConfirm')
+            setFileList(form.current?.getFieldValue(name))
+        })
+        return (
+            <>
+                {/* {console.log('fileList--附件列表', fileList)} */}
+                <ProFormUploadButton
+                    colProps={{ span }}
+                    max={max}
+                    name={name}
+                    label={label}
+                    tooltip={tooltip}
+                    disabled={disabled}
+                    title='上传'
+                    action={action}
+                    fieldProps={{
+                        name: 'file',
+                        listType: 'picture-card',
+                        fileList,
+                        data: fileData,
+                        headers: { Authorization: token },
+                        beforeUpload: e => beforeUpload(e, fileType, fileSize, message),
+                        onPreview: e => {
+                            setVisible(true)
+                            setImageUrl(e.url || e.thumbUrl)
+                        },
+                        onChange: e => {
+                            const { file, fileList } = e
+                            const { status } = file
+                            setFileList(fileList)
+                            if (status === 'done') {
+                                fileList.pop()
+                                const { uuid, fileUrl, originalName } = file.response.data
+                                fileList.push({ uuid, url: fileUrl, originalName })
+                                setFileList(fileList)
+                            } else if (!status) {
+                                fileList.pop()
+                                setFileList(fileList)
+                            }
+                        }
+                    }}
+                    rules={[{ required: !!rules, message: `${label}必须输入` }]}
+                />
+                {visible &&
+                    <Image
+                        preview={{
+                            visible,
+                            onVisibleChange: visible => setVisible(visible),
+                            afterOpenChange: visible => !visible && setImageUrl(''),
+                        }}
+                        src={ImageUrl}
+                    />
+                }
+            </>
+        )
+    }
+    if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
+    else return <Template />
+}
+
+
 // !!! 自定义操作项
 // Todo 选择图标
 const TempICON = ({ data }) => {
@@ -1343,7 +1419,7 @@ const TemplateMapping = {
     YEARRANGE,
     UPLOAD,
     UPLOADOBJ,
-
+    UPLOADFACE,
     // // TempProFormCaptcha,
     // // TempTitle,
 

@@ -1046,8 +1046,8 @@ export const MappingData = {
         { value: 'MONTHRANGE', label: '月区间' },
         { value: 'QUARTERRANGE', label: '季区间' },
         { value: 'YEARRANGE', label: '年区间' },
-
         { value: 'UPLOAD', label: '上传附件' },
+        { value: 'UPLOADFACE', label: '考勤人像' },
         { value: 'TempICON', label: '图标选择' },
         { value: 'TempInputLink', label: '输入(带连接)' },
         { value: 'TempPwdConfirm', label: '密码确认框' },

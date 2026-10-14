@@ -2008,10 +2008,12 @@ const SetFieldsFormList = [
             // 文件上传
             {
                 span: 24, formType: 'SELECTM', name: 'fileType', label: '附件类型', rules: true,
-                valueEnum: MappingData.System__FileType, jugde: [{ field: 'valueType', value: ['UPLOAD'] }]
+                valueEnum: MappingData.System__FileType, jugde: [{ field: 'valueType', value: ['UPLOAD', 'UPLOADFACE'] }]
             },
-            { span: 24, formType: 'NUMBER', name: 'max', label: '最大附件数量', rules: true, jugde: [{ field: 'valueType', value: ['UPLOAD'] }] },
-            { span: 24, formType: 'NUMBER', name: 'fileSize', label: '体积限制(G)', rules: true, jugde: [{ field: 'valueType', value: ['UPLOAD'] }] },
+            { span: 24, formType: 'NUMBER', name: 'max', label: '最大附件数量', rules: true, jugde: [{ field: 'valueType', value: ['UPLOAD', 'UPLOADFACE'] }] },
+            { span: 24, formType: 'NUMBER', name: 'fileSize', label: '体积限制(G)', rules: true, jugde: [{ field: 'valueType', value: ['UPLOAD', 'UPLOADFACE'] }] },
+
+
             // 提示信息
             { span: 24, formType: 'RADIO', name: 'tooltipStatus', label: '提示信息', rules: true, tooltip: '新增修改时提示信息', valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'INPUT', name: 'tooltip', label: '提示内容', rules: true, jugde: [{ field: 'tooltipStatus', value: [true] }] },
