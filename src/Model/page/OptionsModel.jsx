@@ -1094,7 +1094,6 @@ const OptionsModel = ({ data, Event }) => {
             </div>
         )
     }
-
     if (type === 'B1608') {
         const [activeKey, setActiveKey] = useState('1')
         const [UserData, setUserData] = useState({})

@@ -1169,7 +1169,7 @@ const UPLOADFACE = ({ data, form }) => {
                         name: 'file',
                         listType: 'picture-card',
                         fileList,
-                        data: fileData,
+                        data: { ...fileData, RosterUuid: form.current?.getFieldValue('uuid'), FaceConfirmed: 1 },
                         headers: { Authorization: token },
                         beforeUpload: e => beforeUpload(e, fileType, fileSize, message),
                         onPreview: e => {
