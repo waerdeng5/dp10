@@ -1,17 +1,19 @@
 import './WeChat.scss'
+import dayjs from 'dayjs'
 
 import { useEffect, useState } from 'react'
 import { useMount, useEventEmitter } from 'ahooks'
 
 
-import { App, Button, Spin, Result, Tree } from 'antd'
+import { App, Button, Spin, Result, Tree, Skeleton, Divider } from 'antd'
 
-import { WeChatFormInit } from '../../Config/wechatDefault'
 
 import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { CommonAPIUrl } from '../../Config'
 import { axios, axiosFor } from '../../Utils/Api'
 import { modelStore } from '../../Router/zustand'
+
+import { ICONMapping } from '../../Config/IconMapping'
 
 
 import { DevScrollView } from '../../Temp/DevTemplate'
@@ -88,6 +90,31 @@ const { hostname, port } = window.location
 //     );
 // };
 
+const Simulator = () => {
+    return (
+        <div className='Simulator'>
+            <div className='system'>
+                <div className='top'>
+                    <div className='date'>{dayjs().format('HH:mm')}</div>
+                    <div className='shadow'>阴影</div>
+                    <div className='icon'>{ICONMapping['fasWifi']} {ICONMapping['fasBatteryFull']}</div>
+                </div>
+                <div className='opt'>
+                    {ICONMapping['fasEllipsisH']}
+                    <Divider orientation="vertical" />
+                    {ICONMapping['farDotCircle']}
+                </div>
+                <div className='btm'><div /></div>
+            </div>
+
+        </div>
+    )
+}
+
+
+
+
+
 
 
 const WeChat = () => {
@@ -110,8 +137,8 @@ const WeChat = () => {
     const [UUID, setUUID] = useState('')
     const [CONFIG, setCONFIG] = useState({})
     const [MENU, setMENU] = useState()
-    const [MENUSelect, setMENUSelect] = useState('10000000-0000-0000-0000-000000000000')
-    const [FormData, setFormData] = useState({})
+    const [MENUSelect, setMENUSelect] = useState('20000000-0000-0000-0000-000000000000')
+    const [FormData, setFormData] = useState()
     const [STATUS, setSTATUS] = useState({ loading: true, status: false })
 
     const onGetInit = async () => {
@@ -139,7 +166,6 @@ const WeChat = () => {
         }
     }
 
-
     const onInit = () => {
         updateModel({
             title: '基础信息',
@@ -159,28 +185,42 @@ const WeChat = () => {
         notification.success({ title: '保存成功!', key: 'weChat' })
     }
 
+    const onPageInit = async (data) => {
+        const { uuid } = data
+        const params = { uuid: `${UUID}/WeChat/${uuid}`, content: JSON.stringify(await Encrypt(data)) }
+        const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
+        if (err) return console.log(err)
+        notification.success({ title: '保存成功!', key: 'weChat' })
+        setFormData(data)
+    }
+
+
+    const onGetItem = async (uuid) => {
+        setFormData()
+        const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${UUID}/WeChat/${uuid}` } })
+        if (err) {
+            return notification.info({
+                title: '未找到对应文件',
+                description: "检测网络状态或重新生成",
+                key: 'wechat',
+                duration: false,
+                btn: (port && <Button type="link" onClick={() => onPageInit({ uuid })}>生成文件</Button>)
+            })
+        }
+        setFormData(await Decrypt(res))
+    }
+
     const onSelect = (e) => {
         if (e.length === 0) return
         const [uuid] = e
         setMENUSelect(uuid)
-        if (uuid !== '10000000-0000-0000-0000-000000000000') {
-            console.log('获取对应项目的对应数据', CONFIG[UUID], uuid)
-        }
-
-
-
-
-
+        if (uuid !== '10000000-0000-0000-0000-000000000000') onGetItem(uuid)
+        else setFormData(CONFIG[UUID])
     }
     const onFormBack = (e) => {
-        if (MENUSelect === '10000000-0000-0000-0000-000000000000') {
-            onInitConfig(e)
-        } else {
-            console.log('独立文件')
-        }
+        if (MENUSelect === '10000000-0000-0000-0000-000000000000') onInitConfig(e)
+        else onPageInit(e)
     }
-
-
 
     const weChatCallBack = (e) => {
         const { type, data } = e
@@ -193,7 +233,6 @@ const WeChat = () => {
         func?.(data)
     }
     WeChatEvent.useSubscription(weChatCallBack)
-
 
     useEffect(() => { onGetInit() }, [])
     if (STATUS.loading) {
@@ -229,29 +268,25 @@ const WeChat = () => {
                         />
                     </DevScrollView>
                 }
-
             </div>
             {!MENUSelect.includes('10000000-0000-0000-0000-000000000000') &&
                 <div className='WeChatPage_page'>
-                    <div className='options'>
-
-                    </div>
-                    <div className='content'>
-
-                    </div>
+                    <Simulator />
                 </div>
             }
             <div className='WeChatPage_form'>
-                <FormTemplate
-                    formItem={FormItem(MENUSelect)}
-                    FORMEVENT={WeChatEvent}
-                    Initial={FormData}
-                    NotLoading
-                />
+                {FormData ?
+                    <FormTemplate
+                        formItem={FormItem(MENUSelect)}
+                        FORMEVENT={WeChatEvent}
+                        Initial={FormData}
+                        NotLoading
+                    /> :
+                    <Skeleton active />
+                }
             </div>
         </div>
     )
 }
-
 
 export default WeChat;
