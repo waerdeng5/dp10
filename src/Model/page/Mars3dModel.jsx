@@ -356,7 +356,7 @@ const Mars3dModel = ({ data, Event }) => {
             gra.on(mars3d.EventType.editStart, async (e) => {
                 message.loading({ key: 'element', duration: 0, content: '元素编辑中...' })
                 const data = e.graphic.options
-                if (singlePoint.includes(e.editType)) data.position = e.graphic.coordinate
+                if (singlePoint.includes(e.graphic.type)) data.position = e.graphic.coordinate
                 setActivate(data)
                 updateModel5({
                     title: '元素属性',
@@ -366,7 +366,7 @@ const Mars3dModel = ({ data, Event }) => {
                     height: '100vh',
                     shading: false,
                     position: { my: 'right ', at: 'right ', of: window },
-                    modelData: { type: `Mars3D${e.editType}FormList`, Initial: data }
+                    modelData: { type: `Mars3D${e.graphic.type}FormList`, Initial: data }
                 })
             })
             gra.on(mars3d.EventType.editStop, async (e) => {

@@ -6,6 +6,8 @@ import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 
 const Mars3dForm = ({ data, Event }) => {
     const { type, Initial } = data
+    console.log(type)
+    console.log(Mars3dFormConfig[type])
     return (
         <DevScrollView>
             <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
