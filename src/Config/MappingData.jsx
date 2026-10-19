@@ -1769,7 +1769,6 @@ export const MappingData = {
         { value: 'A01', label: '无系统头' },
         { value: 'A02', label: '正常标头' },
         { value: 'A05', label: '左侧标头' },
-        { value: 'A03', label: '返回标头' },
         { value: 'A04', label: '双胶囊头' },
         { value: 'A06', label: '搜索标头' },
         { value: 'A07', label: '图片标头' },

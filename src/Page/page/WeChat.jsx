@@ -90,7 +90,8 @@ const { hostname, port } = window.location
 //     );
 // };
 
-const Simulator = () => {
+const Simulator = ({ uuid, pageUuid }) => {
+    // console.log('pageUuid->获取项目对应配置文件', uuid, pageUuid)
     return (
         <div className='Simulator'>
             <div className='system'>
@@ -106,7 +107,9 @@ const Simulator = () => {
                 </div>
                 <div className='btm'><div /></div>
             </div>
-
+            <div className='pageBox'>
+                {pageUuid}
+            </div>
         </div>
     )
 }
@@ -137,7 +140,7 @@ const WeChat = () => {
     const [UUID, setUUID] = useState('')
     const [CONFIG, setCONFIG] = useState({})
     const [MENU, setMENU] = useState()
-    const [MENUSelect, setMENUSelect] = useState('20000000-0000-0000-0000-000000000000')
+    const [MENUSelect, setMENUSelect] = useState('10000000-0000-0000-0000-000000000000')
     const [FormData, setFormData] = useState()
     const [STATUS, setSTATUS] = useState({ loading: true, status: false })
 
@@ -187,6 +190,7 @@ const WeChat = () => {
 
     const onPageInit = async (data) => {
         const { uuid } = data
+        console.log(data)
         const params = { uuid: `${UUID}/WeChat/${uuid}`, content: JSON.stringify(await Encrypt(data)) }
         const [err, res] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
         if (err) return console.log(err)
@@ -271,7 +275,7 @@ const WeChat = () => {
             </div>
             {!MENUSelect.includes('10000000-0000-0000-0000-000000000000') &&
                 <div className='WeChatPage_page'>
-                    <Simulator />
+                    <Simulator uuid={UUID} pageUuid={MENUSelect} />
                 </div>
             }
             <div className='WeChatPage_form'>

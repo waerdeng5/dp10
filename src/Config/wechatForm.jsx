@@ -1,6 +1,199 @@
 // !!! 微信小程序配置用表
 import { MappingData } from './MappingData'
 
+
+// 头部通用参数
+const headerCommon = [
+    // 是否固定在顶部
+    // 固定在顶部是否占位
+    { span: 12, formType: 'RADIO', name: 'header_fixed', label: '顶部固定', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 12, formType: 'RADIO', name: 'header_placeholder', label: '固定占位', rules: true, valueEnum: MappingData.IsEnabledBool,
+        jugde: [{ field: 'header_fixed', value: [true] }]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'heaer_background', label: '背景设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
+            { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'header_title', label: '标题设置', collapsible: true,
+        children: [
+            { span: 12, formType: 'INPUT', name: 'header_text', label: '标题内容', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'header_size', label: '标题字号', rules: true },
+            { span: 12, formType: 'COLOR', name: 'header_color', label: '标题颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'header_deg', label: '标题角度', rules: true },
+            { span: 12, formType: 'SELECT', name: 'header_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'header_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'header_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'header_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'header_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'header_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'header_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'header_filed', value: [true] }]
+            },
+        ]
+    }
+]
+
+// 通用返回操作
+const headerBackBtn = {
+    span: 24, formType: 'GROUP', name: 'heaer_backConfig', label: '返回功能', collapsible: true,
+    children: [
+        { span: 12, formType: 'RADIO', name: 'header_backStatus', label: '返回功能', rules: true, valueEnum: MappingData.IsEnabledBool },
+        { span: 12, formType: 'NUMBER', name: 'header_backDelta', label: '回退层级', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
+        {
+            span: 12, formType: 'TempInputLink', name: 'header_backICON', label: '返回图标', rules: true, urlLink: 'https://tdesign.tencent.com/icons', urlBtn: '查看图标',
+            jugde: [{ field: 'header_backStatus', value: [true] }]
+        },
+        { span: 12, formType: 'NUMBER', name: 'header_backSize', label: '图标尺寸', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
+        { span: 12, formType: 'COLOR', name: 'header_backColor', label: '图标颜色', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
+        { span: 12, formType: 'INPUT', name: 'header_backPadding', label: '填充间距', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
+    ]
+}
+
+
+// 通用头部设置
+const headerConfig = {
+    span: 24, formType: 'GROUP', name: 'navBarConfig', label: '头部设置', collapsible: true,
+    children: [
+        { span: 24, formType: 'RADIO', name: 'navigationStyle', label: '头部类型', rules: true, valueEnum: MappingData.WeChat_navigationStyle },
+        {
+            span: 24, formType: 'GROUP', name: 'defaultHeader_A02', label: '正常标头', collapsible: true,
+            jugde: [{ field: 'navigationStyle', value: ['A02'] }], children: [...headerCommon, headerBackBtn]
+        },
+        {
+            span: 24, formType: 'GROUP', name: 'defaultHeader_A05', label: '左侧标头', collapsible: true,
+            jugde: [{ field: 'navigationStyle', value: ['A05'] }], children: [...headerCommon, headerBackBtn]
+        },
+        {
+            span: 24, formType: 'GROUP', name: 'defaultHeader_A04', label: '双胶囊头', collapsible: true,
+            jugde: [{ field: 'navigationStyle', value: ['A04'] }], children: [
+                ...headerCommon,
+                {
+                    span: 24, formType: 'GROUP', name: 'capsule', label: '胶囊样式', collapsible: true,
+                    children: [
+                        { span: 12, formType: 'COLOR', name: 'header_capsule_back', label: '胶囊背景', rules: true, mode: ['single'] },
+                        { span: 12, formType: 'COLOR', name: 'header_capsule_border', label: '边框颜色', rules: true, mode: ['single'] },
+                    ]
+                },
+                {
+                    span: 12, formType: 'GROUP', name: 'iconBack', label: '返回图标', collapsible: true,
+                    children: [
+                        { span: 24, formType: 'COLOR', name: 'header_icon_backColor', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_icon_size', label: '图标尺寸', rules: true },
+                    ]
+                },
+                {
+                    span: 12, formType: 'GROUP', name: 'iconHome', label: '首页图标', collapsible: true,
+                    children: [
+                        { span: 24, formType: 'COLOR', name: 'header_icon_homeColor', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_icon_homeSize', label: '图标尺寸', rules: true },
+                    ]
+                },
+            ]
+        },
+        {
+            span: 24, formType: 'GROUP', name: 'defaultHeader_A06', label: '搜索标头', collapsible: true,
+            jugde: [{ field: 'navigationStyle', value: ['A06'] }], children: [
+                { span: 12, formType: 'RADIO', name: 'header_fixed', label: '顶部固定', rules: true, valueEnum: MappingData.IsEnabledBool },
+                {
+                    span: 12, formType: 'RADIO', name: 'header_placeholder', label: '固定占位', rules: true, valueEnum: MappingData.IsEnabledBool,
+                    jugde: [{ field: 'header_fixed', value: [true] }]
+                },
+                {
+                    span: 24, formType: 'GROUP', name: 'background', label: '背景设置', collapsible: true,
+                    children: [
+                        { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
+                        { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
+                    ]
+                },
+                headerBackBtn,
+                {
+                    span: 12, formType: 'GROUP', name: 'search', label: '搜索图标', collapsible: true,
+                    children: [
+                        { span: 24, formType: 'COLOR', name: 'header_searchIcon_color', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_searchIcon_size', label: '图标尺寸', rules: true },
+                    ]
+                },
+                {
+                    span: 12, formType: 'GROUP', name: 'clear', label: '清除图标', collapsible: true,
+                    children: [
+                        { span: 24, formType: 'COLOR', name: 'header_clearIcon_color', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_clearIcon_size', label: '图标尺寸', rules: true },
+                    ]
+                },
+                {
+                    span: 24, formType: 'GROUP', name: 'searchInput', label: '搜索框设置', collapsible: true,
+                    children: [
+                        { span: 12, formType: 'COLOR', name: 'header_input_back', label: '背景颜色', rules: true, mode: ['single'] },
+                        { span: 12, formType: 'COLOR', name: 'header_input_border', label: '边框颜色', rules: true, mode: ['single'] },
+                        { span: 12, formType: 'NUMBER', name: 'header_input_height', label: '窗口高度', rules: true },
+                        { span: 12, formType: 'NUMBER', name: 'header_input_radius', label: '窗口圆角(废弃)' },
+                        { span: 12, formType: 'INPUT', name: 'header_input_placeholder', label: '占位文字', rules: true },
+                        { span: 12, formType: 'NUMBER', name: 'header_input_size', label: '文字字号', rules: true },
+                        { span: 12, formType: 'COLOR', name: 'header_input_color', label: '文字颜色', rules: true, mode: ['single'] },
+                        { span: 12, formType: 'SELECT', name: 'header_input_famity', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+                        { span: 12, formType: 'RADIO', name: 'header_input_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                        { span: 12, formType: 'RADIO', name: 'header_input_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    ]
+                },
+
+                {
+                    span: 24, formType: 'GROUP', name: 'searchFunction', label: '搜索功能设置( --!)', collapsible: true,
+                    children: [
+
+                    ]
+                }
+            ]
+        },
+        {
+            span: 24, formType: 'GROUP', name: 'defaultHeader_A07', label: '图片标头', collapsible: true,
+            jugde: [{ field: 'navigationStyle', value: ['A07'] }], children: [
+
+                { span: 12, formType: 'RADIO', name: 'header_fixed', label: '顶部固定', rules: true, valueEnum: MappingData.IsEnabledBool },
+                {
+                    span: 12, formType: 'RADIO', name: 'header_placeholder', label: '固定占位', rules: true, valueEnum: MappingData.IsEnabledBool,
+                    jugde: [{ field: 'header_fixed', value: [true] }]
+                },
+                {
+                    span: 24, formType: 'GROUP', name: 'background', label: '背景设置', collapsible: true,
+                    children: [
+                        { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
+                        { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
+                    ]
+                },
+                headerBackBtn,
+                {
+                    span: 24, formType: 'GROUP', name: 'image', label: '图片设置', collapsible: true,
+                    children: [
+                        { span: 12, formType: 'INPUT', name: 'header_image_url', label: '图片URL', rules: true },
+                        { span: 12, formType: 'NUMBER', name: 'header_image_width', label: '图片宽度', rules: true },
+                        { span: 12, formType: 'NUMBER', name: 'header_image_height', label: '图片高度', rules: true },
+                        { span: 12, formType: 'RADIO', name: 'header_image_filed', label: '图片阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                        {
+                            span: 12, formType: 'INPUT', name: 'header_image_size', label: '阴影数值', rules: true,
+                            jugde: [{ field: 'header_image_filed', value: [true] }]
+                        },
+                        {
+                            span: 12, formType: 'COLOR', name: 'header_image_color', label: '阴影颜色', rules: true, mode: ['single'],
+                            jugde: [{ field: 'header_image_filed', value: [true] }]
+                        },
+                    ]
+                },
+            ]
+        },
+    ]
+}
+
+
+
+
 // TODO 项目基础文件信息
 const WeChatProjectForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
@@ -11,7 +204,11 @@ const WeChatProjectForm = [
 ]
 const WeChatLoginForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
-    { span: 24, formType: 'INPUT', name: 'name', label: '登录页配置', rules: true },
+    headerConfig,
+
+
+
+
 ]
 const WeChatHomeForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
@@ -25,161 +222,10 @@ const WeChatPageForm = [
 
 
 
-
-// const headerTopCommon = [
-//     // 背景设置
-//     {
-//         span: 24, formType: 'GROUP', name: 'background', label: '背景设置', collapsible: true,
-//         children: [
-//             { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
-//             { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
-//         ]
-//     },
-//     // 文字设置
-//     {
-//         span: 24, formType: 'GROUP', name: 'title', label: '标题设置', collapsible: true,
-//         children: [
-//             { span: 12, formType: 'INPUT', name: 'header_text', label: '标题内容', rules: true },
-//             { span: 12, formType: 'NUMBER', name: 'header_size', label: '标题字号', rules: true, },
-//             { span: 12, formType: 'COLOR', name: 'header_color', label: '标题颜色', rules: true, },
-//             { span: 12, formType: 'NUMBER', name: 'header_deg', label: '标题角度', rules: true, },
-//             { span: 12, formType: 'SELECT', name: 'header_famity', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
-//             { span: 12, formType: 'RADIO', name: 'header_weight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-//             { span: 12, formType: 'RADIO', name: 'header_style', label: '标题倾斜', rules: true, valueEnum: MappingData.Font__Style },
-//             { span: 12, formType: 'RADIO', name: 'header_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
-//             {
-//                 span: 12, formType: 'INPUT', name: 'header_filed_size', label: '阴影数值', rules: true,
-//                 jugde: [{ field: 'header_filed', value: [true] }]
-//             },
-//             {
-//                 span: 12, formType: 'COLOR', name: 'header_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
-//                 jugde: [{ field: 'header_filed', value: [true] }]
-//             },
-//         ]
-//     }
-// ]
-
 // // ??? 默认头部设置
 // const defaultHeader = [
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A02', label: '正常标头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A02'] }], children: headerTopCommon
-//     },
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A05', label: '左侧标头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A05'] }], children: headerTopCommon
-//     },
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A03', label: '返回标头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A03'] }], children: [
-//             {
-//                 span: 24, formType: 'GROUP', name: 'iconBack', label: '返回图标', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'COLOR', name: 'header_icon_backColor', label: '图标颜色', rules: true, mode: ['single'] },
-//                     { span: 12, formType: 'NUMBER', name: 'header_icon_size', label: '图标尺寸', rules: true },
-//                 ]
-//             },
-//             ...headerTopCommon
-//         ]
-//     },
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A04', label: '双胶囊头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A04'] }], children: [
-//             {
-//                 span: 24, formType: 'GROUP', name: 'capsule', label: '胶囊样式', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'COLOR', name: 'header_capsule_back', label: '胶囊背景', rules: true, mode: ['single'] },
-//                     { span: 12, formType: 'COLOR', name: 'header_capsule_border', label: '边框颜色', rules: true, mode: ['single'] },
-//                 ]
-//             },
-//             {
-//                 span: 12, formType: 'GROUP', name: 'iconBack', label: '返回图标', collapsible: true,
-//                 children: [
-//                     { span: 24, formType: 'COLOR', name: 'header_icon_backColor', label: '图标颜色', rules: true, mode: ['single'] },
-//                     { span: 24, formType: 'NUMBER', name: 'header_icon_size', label: '图标尺寸', rules: true },
-//                 ]
-//             },
-//             {
-//                 span: 12, formType: 'GROUP', name: 'iconHome', label: '首页图标', collapsible: true,
-//                 children: [
-//                     { span: 24, formType: 'COLOR', name: 'header_icon_homeColor', label: '图标颜色', rules: true, mode: ['single'] },
-//                     { span: 24, formType: 'NUMBER', name: 'header_icon_homeSize', label: '图标尺寸', rules: true },
-//                 ]
-//             },
 
-//             ...headerTopCommon
-//         ]
-//     },
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A06', label: '搜索标头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A06'] }], children: [
-//             {
-//                 span: 24, formType: 'GROUP', name: 'background', label: '背景设置', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
-//                     { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
-//                 ]
-//             },
-//             {
-//                 span: 12, formType: 'GROUP', name: 'search', label: '搜索图标', collapsible: true,
-//                 children: [
-//                     { span: 24, formType: 'COLOR', name: 'header_searchIcon_color', label: '图标颜色', rules: true, mode: ['single'] },
-//                     { span: 24, formType: 'NUMBER', name: 'header_searchIcon_size', label: '图标尺寸', rules: true },
-//                 ]
-//             },
-//             {
-//                 span: 12, formType: 'GROUP', name: 'clear', label: '清除图标', collapsible: true,
-//                 children: [
-//                     { span: 24, formType: 'COLOR', name: 'header_clearIcon_color', label: '图标颜色', rules: true, mode: ['single'] },
-//                     { span: 24, formType: 'NUMBER', name: 'header_clearIcon_size', label: '图标尺寸', rules: true },
-//                 ]
-//             },
-//             {
-//                 span: 24, formType: 'GROUP', name: 'searchInput', label: '搜索框设置', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'COLOR', name: 'header_input_back', label: '背景颜色', rules: true, mode: ['single'] },
-//                     { span: 12, formType: 'COLOR', name: 'header_input_border', label: '边框颜色', rules: true, mode: ['single'] },
-//                     { span: 12, formType: 'NUMBER', name: 'header_input_height', label: '窗口高度', rules: true },
-//                     { span: 12, formType: 'NUMBER', name: 'header_input_radius', label: '窗口圆角', rules: true },
-//                     { span: 12, formType: 'INPUT', name: 'header_input_placeholder', label: '占位文字', rules: true },
-//                     { span: 12, formType: 'NUMBER', name: 'header_input_size', label: '文字字号', rules: true },
-//                     { span: 12, formType: 'COLOR', name: 'header_input_color', label: '文字颜色', rules: true, mode: ['single'] },
-//                     { span: 12, formType: 'SELECT', name: 'header_input_famity', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
-//                     { span: 12, formType: 'RADIO', name: 'header_input_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-//                     { span: 12, formType: 'RADIO', name: 'header_input_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
-//                 ]
-//             }
-//         ]
-//     },
-//     {
-//         span: 24, formType: 'GROUP', name: 'defaultHeader_A07', label: '图片标头', collapsible: true,
-//         jugde: [{ field: 'navigationStyle', value: ['A07'] }], children: [
-//             {
-//                 span: 24, formType: 'GROUP', name: 'background', label: '背景设置', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'COLOR', name: 'header_back', label: '背景颜色', rules: true, },
-//                     { span: 12, formType: 'NUMBER', name: 'header_backDeg', label: '背景角度', rules: true },
-//                 ]
-//             },
-//             {
-//                 span: 24, formType: 'GROUP', name: 'image', label: '图片设置', collapsible: true,
-//                 children: [
-//                     { span: 12, formType: 'INPUT', name: 'header_image_url', label: '图片URL', rules: true },
-//                     { span: 12, formType: 'NUMBER', name: 'header_image_width', label: '图片宽度', rules: true },
-//                     { span: 12, formType: 'NUMBER', name: 'header_image_height', label: '图片高度', rules: true },
-//                     { span: 12, formType: 'RADIO', name: 'header_image_filed', label: '图片阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
-//                     {
-//                         span: 12, formType: 'INPUT', name: 'header_image_size', label: '阴影数值', rules: true,
-//                         jugde: [{ field: 'header_image_filed', value: [true] }]
-//                     },
-//                     {
-//                         span: 12, formType: 'COLOR', name: 'header_image_color', label: '阴影颜色', rules: true, mode: ['single'],
-//                         jugde: [{ field: 'header_image_filed', value: [true] }]
-//                     },
-//                 ]
-//             },
-//         ]
-//     },
+
 // ]
 
 // // TODO page

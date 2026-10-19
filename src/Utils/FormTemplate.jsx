@@ -1294,7 +1294,7 @@ const TempInputLink = ({ data }) => {
             height: "80%",
             zIndex: 1001,
             background: 'linear-gradient(45deg, #ff00f0, #0050ff)',
-            html: `<iframe src="${urlLink}" frameborder="0" allowfullscreen></iframe>`,
+            html: `<iframe src="${urlLink}" frameborder="0" allowfullscreen width="100%" height="100%"></iframe>`,
         })
     }
 
@@ -1309,9 +1309,9 @@ const TempInputLink = ({ data }) => {
                 placeholder={placeholder || `请输入${label}`}
                 fieldProps={{
                     variant: "underlined",
-                    addonAfter: <Button className='LinkButton' type='default' size='large' onClick={onOpenLine}>{urlBtn}</Button>
                 }}
             />
+            <Button className='LinkButton' type='default' size='large' onClick={onOpenLine}>{urlBtn}</Button>
         </div>
 
     )
