@@ -3,23 +3,23 @@ import './page.scss'
 import "react-grid-layout/css/styles.css"
 import "react-resizable/css/styles.css"
 import { v4 } from 'uuid'
-import { useMount, useSize } from 'ahooks'
 import copy from 'copy-to-clipboard'
 import ReactGridLayout from 'react-grid-layout'
-import { FloatButton, Dropdown, App, Spin, Result } from 'antd'
 import { AlertOutlined } from '@ant-design/icons'
 import { useEffect, useState, useRef } from 'react'
 import { GridBackground } from "react-grid-layout/extras"
 import { useLocation, useNavigate } from 'react-router-dom'
+import { FloatButton, Dropdown, App, Spin, Result } from 'antd'
+import { useMount, useSize, useSessionStorageState } from 'ahooks'
 
 import { modelStore } from '../Router/zustand'
+import { WinTemplate } from '../Temp/StartTemplate'
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
 import { Decrypt, Encrypt, GetIndexedDB } from '../Utils/IndexedDB'
 import { PageLayoutWindowDetailsStyle, CommonAPIUrl } from '../Config'
 import { GlobalOperation, SwiperTemplate } from '../Temp/LayTemplate'
 import { ColorCallBack, SetBorderParams, SetFilderParams, SpacingCallBack } from '../Utils'
 
-import { WinTemplate } from '../Temp/StartTemplate'
 
 
 const PARAMSMAPPING = [
@@ -47,6 +47,8 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const ContentBoxRef = useRef()
     const SIZE = useSize(ContentBoxRef)
 
+    const [login] = useSessionStorageState('login')
+    const [User, setUser] = useState()
     const [Loading, setLoading] = useState(true)
     const [Status, setStatus] = useState(true)
     const [ApiData, setApiData] = useState()
@@ -327,6 +329,14 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
     useEffect(() => { setPAGEDate(page) }, [pathname])
 
+    useMount(async () => {
+        if (login) {
+            const user = await GetIndexedDB('user')
+            setUser(user)
+        }
+    })
+
+
     if (page) {
         const { page_layPadding, page_fold, page_diff, page_back, page_back_url } = page
         const pageStyle = { padding: SpacingCallBack(page_layPadding) }
@@ -526,7 +536,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                         </div>
                     </Dropdown>
                 }
-                {port &&
+                {(port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') &&
                     <FloatButton
                         icon={<AlertOutlined />}
                         type={LayoutStatus ? 'primary' : 'default'}

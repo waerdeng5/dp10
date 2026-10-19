@@ -279,8 +279,7 @@ const StartIndex = () => {
 
                 {/* 页面信息 */}
                 <OurletTemplate key={PAGEUUID} data={startData} StartEvent={StartEvent} />
-                {/* || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2' */}
-                {(port) &&
+                {(port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') &&
                     <HappyProvider>
                         <Tooltip title='大屏配置' placement='left'>
                             <FloatButton icon={<SettingOutlined />} type="primary" onClick={onStartConfigClick} />

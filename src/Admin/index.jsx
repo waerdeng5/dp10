@@ -431,8 +431,7 @@ const AdminIndex = () => {
                         </div>
                     </div>
                 }
-                {/* || userInfo.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2' */}
-                {BtnStatus && (port) &&
+                {BtnStatus && (port || userInfo.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') &&
                     <HappyProvider>
                         <FloatButton.Group
                             shape="square"
