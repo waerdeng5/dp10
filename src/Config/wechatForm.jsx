@@ -1,7 +1,19 @@
 // !!! 微信小程序配置用表
 import { MappingData } from './MappingData'
 
+// Todo 接口信息设置
+const ApiConfig = {
+    span: 24, formType: 'LIST', name: 'apiList', label: '接口设置', collapsible: true, title: '接口设置',
+    children: [
+        { span: 24, formType: 'RADIO', name: 'api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+        { span: 12, formType: 'INPUT', name: 'api_name', label: '请求名称', rules: true },
+        { span: 12, formType: 'INPUT', name: 'api_url', label: '请求接口', rules: true },
+        { span: 12, formType: 'INPUT', name: 'api_params', label: '额外参数' },
+        { span: 12, formType: 'INPUT', name: 'api_https', label: '额外地址' },
+    ]
+}
 
+// Todo 通用头部设置
 // 头部通用参数
 const headerCommon = [
     // 是否固定在顶部
@@ -40,24 +52,21 @@ const headerCommon = [
         ]
     }
 ]
-
-// 通用返回操作
+// 头部通用返回操作
 const headerBackBtn = {
     span: 24, formType: 'GROUP', name: 'heaer_backConfig', label: '返回功能', collapsible: true,
     children: [
         { span: 12, formType: 'RADIO', name: 'header_backStatus', label: '返回功能', rules: true, valueEnum: MappingData.IsEnabledBool },
         { span: 12, formType: 'NUMBER', name: 'header_backDelta', label: '回退层级', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
         {
-            span: 12, formType: 'TempInputLink', name: 'header_backICON', label: '返回图标', rules: true, urlLink: 'https://tdesign.tencent.com/icons', urlBtn: '查看图标',
-            jugde: [{ field: 'header_backStatus', value: [true] }]
+            span: 12, formType: 'TempInputLink', name: 'header_backICON', label: '返回图标', rules: true,
+            urlLink: 'https://tdesign.tencent.com/icons', urlBtn: '查看图标', jugde: [{ field: 'header_backStatus', value: [true] }]
         },
         { span: 12, formType: 'NUMBER', name: 'header_backSize', label: '图标尺寸', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
         { span: 12, formType: 'COLOR', name: 'header_backColor', label: '图标颜色', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
         { span: 12, formType: 'INPUT', name: 'header_backPadding', label: '填充间距', rules: true, jugde: [{ field: 'header_backStatus', value: [true] }] },
     ]
 }
-
-
 // 通用头部设置
 const headerConfig = {
     span: 24, formType: 'GROUP', name: 'navBarConfig', label: '头部设置', collapsible: true,
@@ -83,17 +92,25 @@ const headerConfig = {
                     ]
                 },
                 {
-                    span: 12, formType: 'GROUP', name: 'iconBack', label: '返回图标', collapsible: true,
+                    span: 12, formType: 'GROUP', name: 'iconLeft', label: '左侧图标', collapsible: true,
                     children: [
-                        { span: 24, formType: 'COLOR', name: 'header_icon_backColor', label: '图标颜色', rules: true, mode: ['single'] },
-                        { span: 24, formType: 'NUMBER', name: 'header_icon_size', label: '图标尺寸', rules: true },
+                        {
+                            span: 24, formType: 'TempInputLink', name: 'header_icon_left', label: '返回图标', rules: true,
+                            urlLink: 'https://tdesign.tencent.com/icons', urlBtn: '查看图标'
+                        },
+                        { span: 24, formType: 'COLOR', name: 'header_icon_left_color', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_icon_left_size', label: '图标尺寸', rules: true },
                     ]
                 },
                 {
-                    span: 12, formType: 'GROUP', name: 'iconHome', label: '首页图标', collapsible: true,
+                    span: 12, formType: 'GROUP', name: 'iconRight', label: '右侧图标', collapsible: true,
                     children: [
-                        { span: 24, formType: 'COLOR', name: 'header_icon_homeColor', label: '图标颜色', rules: true, mode: ['single'] },
-                        { span: 24, formType: 'NUMBER', name: 'header_icon_homeSize', label: '图标尺寸', rules: true },
+                        {
+                            span: 24, formType: 'TempInputLink', name: 'header_icon_right', label: '返回图标', rules: true,
+                            urlLink: 'https://tdesign.tencent.com/icons', urlBtn: '查看图标'
+                        },
+                        { span: 24, formType: 'COLOR', name: 'header_icon_right_color', label: '图标颜色', rules: true, mode: ['single'] },
+                        { span: 24, formType: 'NUMBER', name: 'header_icon_right_size', label: '图标尺寸', rules: true },
                     ]
                 },
             ]
@@ -190,9 +207,67 @@ const headerConfig = {
         },
     ]
 }
-
-
-
+// Todo 通用背景设置
+const pageBackConfig = [
+    {
+        span: 24, formType: 'LIST', name: 'pageBackConfig', label: '背景层设置', collapsible: true, title: '背景',
+        children: [
+            { span: 24, formType: 'RADIO', name: 'position', label: '定位数据', rules: true, valueEnum: MappingData.Style__PositionType },
+            {
+                span: 12, formType: 'RADIO', name: 'topUnit', label: '顶部定位单位', rules: true,
+                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'position', value: ['top-left', 'top-right'] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'top', label: '顶部距离', rules: true,
+                jugde: [{ field: 'position', value: ['top-left', 'top-right'] }]
+            },
+            {
+                span: 12, formType: 'RADIO', name: 'btmUnit', label: '底部定位单位', rules: true,
+                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'position', value: ['bottom-left', 'bottom-right'] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'btm', label: '底部距离', rules: true,
+                jugde: [{ field: 'position', value: ['bottom-left', 'bottom-right'] }]
+            },
+            {
+                span: 12, formType: 'RADIO', name: 'lefUnit', label: '左侧定位单位', rules: true,
+                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'position', value: ['top-left', 'bottom-left'] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'lef', label: '左侧距离', rules: true,
+                jugde: [{ field: 'position', value: ['top-left', 'bottom-left'] }]
+            },
+            {
+                span: 12, formType: 'RADIO', name: 'rigUnit', label: '右侧定位单位', rules: true,
+                valueEnum: MappingData.Flex_SizeType, jugde: [{ field: 'position', value: ['top-right', 'bottom-right'] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'rig', label: '右侧距离', rules: true,
+                jugde: [{ field: 'position', value: ['top-right', 'bottom-right'] }]
+            },
+            { span: 12, formType: 'RADIO', name: 'widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'width', label: '背景宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'NUMBER', name: 'height', label: '背景高度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'backRadio', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'backType', label: '背景类型', rules: true, valueEnum: MappingData.WeChat_backType },
+            {
+                span: 24, formType: 'GROUP', name: 'colorConfig', label: '颜色设置', collapsible: true,
+                jugde: [{ field: 'backType', value: ['A01'] }], children: [
+                    { span: 12, formType: 'COLOR', name: 'color_back', label: '背景颜色', rules: true, },
+                    { span: 12, formType: 'NUMBER', name: 'color_deg', label: '背景角度', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'imageConfig', label: '图片设置', collapsible: true,
+                jugde: [{ field: 'backType', value: ['A02'] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'image_url', label: '图片地址', rules: true },
+                    { span: 12, formType: 'SELECT', name: 'image_mode', label: '渲染方式', rules: true, valueEnum: MappingData.WeChat__imageMode },
+                ]
+            },
+        ]
+    }
+]
 
 // TODO 项目基础文件信息
 const WeChatProjectForm = [
@@ -204,29 +279,61 @@ const WeChatProjectForm = [
 ]
 const WeChatLoginForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    // 接口设置
+    ApiConfig,
+    // 登录流程
+    { span: 12, formType: 'RADIO', name: 'loginType', label: '登录流程', rules: true, valueEnum: MappingData.WeChat_loginType },
+    { span: 12, formType: 'RADIO', name: 'wxLogin', label: '微信登录', rules: true, valueEnum: MappingData.IsEnabledBool },
+    // 背景设置
+    ...pageBackConfig,
+    // 通用头部设置
     headerConfig,
-
 
 
 
 ]
 const WeChatHomeForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
-    { span: 24, formType: 'INPUT', name: 'name', label: '主体程序', rules: true },
+    headerConfig,
 ]
 const WeChatPageForm = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
-    { span: 24, formType: 'INPUT', name: 'name', label: '页面配置', rules: true },
+    headerConfig,
 ]
 
 
 
+// Todo 布局页面配置
+const PageTempConfig = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: 'UUID', rules: true, disabled: true },
+    { span: 12, formType: 'RADIO', name: 'pageType', label: '页面类型', rules: true, valueEnum: MappingData.WeChat_pageType },
+    { span: 12, formType: 'RADIO', name: 'sysTop', label: '让出系统头', rules: true, valueEnum: MappingData.IsEnabledBool },
+    // nts 设置
+    {
+        span: 24, formType: 'GROUP', name: 'navBarConfig', label: 'NavBar设置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['A02'] }], children: [
 
-// // ??? 默认头部设置
-// const defaultHeader = [
+            // 导航列表 -> 指向菜单的uuid
+            // 列表样式
+            // 指定默认值
+            // 操作项
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'tabsConfig', label: 'Tabs设置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['A03'] }], children: [
+
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'sideBarConfig', label: 'SideBar设置', collapsible: true,
+        jugde: [{ field: 'pageType', value: ['A04'] }], children: [
+
+        ]
+    },
+]
 
 
-// ]
 
 // // TODO page
 // // *** 创建页面
@@ -2131,5 +2238,7 @@ export const WeChatFormConfig = {
     WeChatProjectForm,
     WeChatLoginForm,
     WeChatHomeForm,
-    WeChatPageForm
+    WeChatPageForm,
+
+    PageTempConfig
 }

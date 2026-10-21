@@ -1773,6 +1773,20 @@ export const MappingData = {
         { value: 'A06', label: '搜索标头' },
         { value: 'A07', label: '图片标头' },
     ],
+    WeChat_pageType: [
+        { value: 'A01', label: 'Page' },
+        { value: 'A02', label: 'NavBar' },
+        { value: 'A03', label: 'Tabs' },
+        { value: 'A04', label: 'SideBar' },
+    ],
+    WeChat_backType: [
+        { value: 'A01', label: '颜色' },
+        { value: 'A02', label: '图片' },
+    ],
+    WeChat_loginType: [
+        { value: 'A01', label: '单项登录' },
+        { value: 'A02', label: '公共登录' },
+    ],
     WeChat_navigationBarTextStyle: [
         { value: 'black', label: '黑色' },
         { value: 'white', label: '白色' },

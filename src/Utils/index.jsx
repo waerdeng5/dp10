@@ -633,6 +633,27 @@ export const filterTreeData = (nodes = [], uuids) => {
     })
 }
 
+// TODO 数组过滤
+export const filterTree = (tree, type, targetType) => {
+    if (!Array.isArray(tree)) return [];
+
+    return tree.reduce(function (result, node) {
+        // 如果当前节点 type 匹配，直接跳过
+        if (node[type] === targetType) {
+            return result;
+        }
+
+        // 当前节点保留，递归处理 children
+        var newNode = Object.assign({}, node);
+        if (Array.isArray(newNode.children)) {
+            newNode.children = filterTree(newNode.children, type, targetType);
+        }
+        result.push(newNode);
+        return result;
+    }, []);
+}
+
+
 // TODO 数组合并去重
 export const mergeAndDeduplicate = (arr1, arr2, key = 'uuid') => {
     const uuidMap = new Map();

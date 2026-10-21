@@ -18,8 +18,8 @@
     }
 
     .WeChatPage_page {
-        width: 380px;
-        height: 100%;
+        width: 375px;
+        height: 812px;
         background: white;
         margin: 8px;
         border-radius: 8px;
@@ -30,6 +30,7 @@
             z-index: 1;
             width: 100%;
             height: 100%;
+            border-radius: 8px;
             overflow: hidden;
 
             &>.system {
@@ -89,13 +90,14 @@
                     right: 7px;
                     top: 50px;
                     width: 88px;
-                    height: 30px;
+                    height: 32px;
                     border: 1px solid #e0e0e0;
                     background: #ffffff;
                     border-radius: 50px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
+                    pointer-events: auto;
 
                     &>i {
                         flex: 1;
@@ -134,12 +136,178 @@
                 }
             }
 
-            &>.pageBox {
+            &>.pageEmpty {
+                position: absolute;
+                z-index: 1;
                 width: 100%;
                 height: 100%;
+                left: 0;
+                top: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 overflow: hidden;
-                position: relative;
+            }
+
+            &>.pageBox {
+                position: absolute;
                 z-index: 1;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                overflow: hidden;
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-direction: column;
+
+
+                &>.SimulatorTopTemp {
+                    width: 100%;
+                    user-select: none;
+
+                    &>.system {
+                        width: 100%;
+                        height: 44px;
+                    }
+
+                    &>.topBox {
+                        width: 100%;
+                        height: 42px;
+                        padding-right: 96px;
+
+                        &>.centerTitleBox {
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+
+                            &>.back,
+                            &>.capsule {
+                                width: 88px;
+                                margin-left: 8px;
+                            }
+
+                            &>.back {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+                            }
+
+                            &>.capsule {
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                border-radius: 50px;
+                                border: 1px solid var(--border);
+
+                                &>div {
+                                    flex: 1;
+                                    height: 32px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    position: relative;
+                                    z-index: 1;
+                                    cursor: pointer;
+
+                                    &:nth-child(1)::before {
+                                        position: absolute;
+                                        content: '';
+                                        right: 0;
+                                        top: 6px;
+                                        width: 1px;
+                                        height: 20px;
+                                        background: var(--border);
+                                    }
+                                }
+                            }
+
+
+                            &>.title {
+                                flex: 1;
+                                height: 100%;
+                                padding: 0 4px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: var(--color);
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            }
+                        }
+
+                        &>.leftTitleBox {
+                            height: 100%;
+                            padding-left: 8px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-start;
+
+                            &>.back {
+                                display: flex;
+                                align-items: center;
+                                justify-content: flex-start;
+                            }
+
+                            &>.title {
+                                height: 100%;
+                                padding: 0 4px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                background: var(--color);
+                                -webkit-background-clip: text;
+                                background-clip: text;
+                                color: transparent;
+                            }
+
+                            &>.search {
+                                flex: 1;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                padding: 0 8px;
+
+                                &>div {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: flex-start;
+                                }
+
+                                &>.input {
+                                    flex: 1;
+                                    padding: 0 4px;
+                                }
+                            }
+
+                        }
+                    }
+                }
+
+                &>.BackLayerTemp {
+                    position: absolute;
+                    z-index: 1;
+                    pointer-events: none;
+                    user-select: none;
+
+                    &>img {
+                        width: 100%;
+                    }
+                }
+
+                &>.pageContent {
+                    position: relative;
+                    z-index: 2;
+                    flex: 1;
+                    width: 100%;
+                    overflow: hidden;
+                }
+
+
             }
 
         }
@@ -149,5 +317,6 @@
         flex: 1;
         height: 100%;
         margin: 8px;
+        overflow: hidden;
     }
 }
