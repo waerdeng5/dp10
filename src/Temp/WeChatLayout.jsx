@@ -28,11 +28,9 @@ export const WeChatPageTemp = ({ data, WeChatEvent }) => {
 
     useEffect(() => {
         console.log('[--WeChatPageTemp--]', data)
-        // 判断是否已经初始化了
-        // 如果已经初始化了，就直接返回
-
-
-
+        if (!data.layoutConfig || !data.tempConfig) {
+            console.log('需要初始化')
+        }
     }, [data])
 
 
