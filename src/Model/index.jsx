@@ -2,7 +2,7 @@
 import { Spin, App } from "antd"
 import { CloseOutlined } from '@ant-design/icons'
 import { Popup, ToolbarItem } from 'devextreme-react/popup'
-import { useState, lazy, Suspense, useEffect, memo } from 'react'
+import { useState, lazy, Suspense, useEffect, memo, forwardRef } from 'react'
 
 import { Decrypt } from '../Utils/IndexedDB'
 import { modelStore } from '../Router/zustand'
@@ -22,6 +22,8 @@ const spinStyle = {
 
 const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     const { message } = App.useApp()
+
+
     const {
         shading = true,
         isStart = false,
@@ -73,7 +75,6 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
     const onResizeEnd = (e) => {
         setSIZE({ minHeight: 400, minWidth: 400, width: e.width, height: e.height })
     }
-
 
     if (SIZE) {
         return (
@@ -134,9 +135,9 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
                             type = 'default',
                             onClick = () => message.warning({ content: '未定义按钮事件', key: 'PopupTemplate' })
                         } = item
+
                         return (
                             <ToolbarItem
-                                key={index}
                                 visible={visible}
                                 widget={widget}
                                 location={location}

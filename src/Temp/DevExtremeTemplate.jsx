@@ -548,7 +548,10 @@ const onRowClick = async (modelFunc, props, item, data, pageFunc) => {
         const { uuid: towUuid, type, parentUuid } = treeValue(menu, B11_url, 'targetUrl')
         const menuType = type === 'two' ? parentUuid : false
         const uuid = B11_isData ? data[B11_dataKey] : v4()
-        const title = B11_fieldTitle ? `${data[B11_fieldTitle]} - ${B11_Title}` : B11_Title
+        console.log(!!B11_fieldTitle)
+        const title = !!B11_fieldTitle && data[B11_fieldTitle] ? `${data[B11_fieldTitle]} - ${B11_Title}` : B11_Title
+
+
         const obj = { uuid, towUuid, tableName: title, type: B11_type, targetUrl: B11_url, icon: B11_Icon, menuType }
         OpenMenuFunc(uuid, pageFunc, body_tabsMax, obj)
     }

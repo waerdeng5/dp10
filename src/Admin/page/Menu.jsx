@@ -97,7 +97,7 @@ const MenuA01 = ({ Theme, AdminEvent }) => {
 
     const getMenu = useCallback((menu, role, state, mapping) => {
         return menu.reduce((menuData, { uuid, isEnabled, children, type, ...other }) => {
-            if (isEnabled === 0 || type === 'power') return menuData
+            if (isEnabled === 0 || type === 'power' || type === 'two') return menuData
             const item = getItem({ uuid, isEnabled, other, mapping })
             if (!state) {
                 if (children?.length) {
