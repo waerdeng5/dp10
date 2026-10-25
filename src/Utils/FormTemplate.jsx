@@ -39,7 +39,7 @@ import { flushSync } from 'react-dom'
 import { Spin, Image, App } from "antd"
 import { useDebounceFn, useMount } from 'ahooks'
 import { memo, useCallback, useRef, useState, useEffect } from 'react'
-import { DeleteOutlined, CopyOutlined } from '@ant-design/icons'
+import { DeleteOutlined, CopyOutlined, BugOutlined } from '@ant-design/icons'
 import ValueTypeToComponentMap from '@ant-design/pro-components/es/field/ValueTypeToComponent';
 
 import { checkConditions } from '.'
@@ -86,6 +86,7 @@ const FormTemplate = ({
     onFormBack = 'onFormBack',
     fixed = false,
     AI = false,
+    Help = false,
     AIconfig
 }) => {
     const { notification } = App.useApp()
@@ -179,6 +180,16 @@ const FormTemplate = ({
                                     stylingMode={AIconfig.A02_ai_btn_text}
                                     width={200}
                                     onClick={() => FORMEVENT.emit({ type: 'onOpenAI' })}
+                                />,
+                                Help && <Button
+                                    key='help'
+                                    disabled={false}
+                                    text='字段说明'
+                                    icon='fas fa-dice'
+                                    type="normal"
+                                    stylingMode="contained"
+                                    width={200}
+                                    onClick={() => FORMEVENT.emit({ type: 'onOpenHelp' })}
                                 />,
                             ]
                         }

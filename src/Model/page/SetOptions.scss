@@ -4,6 +4,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 1;
+
+    &>.TourBtn {
+        position: absolute;
+        right: 16px;
+        top: 8px;
+        z-index: 9;
+    }
 
     &>div {
         flex: 1;

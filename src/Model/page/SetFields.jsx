@@ -2,21 +2,27 @@ import './SetFields.scss'
 import { v4 } from 'uuid'
 import { flushSync } from 'react-dom'
 import { useEventEmitter } from 'ahooks'
-import { useState, useCallback } from 'react'
-import { Popconfirm, Button, Result } from 'antd'
 import { Sortable } from 'devextreme-react/sortable'
+import { useState, useCallback, useRef } from 'react'
+import { Popconfirm, Button, Result, Tour } from 'antd'
 
+import { BugOutlined } from '@ant-design/icons';
+import { HappyProvider } from '@ant-design/happy-work-theme'
 
-import { replaceNodeById, getDiffObjects } from '../../Utils'
 import { formDefaultInit } from '../../Config'
+import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
 import { FormConfig } from '../../Config/configForm'
 import { DevScrollView } from '../../Temp/DevTemplate'
-import { modelStore } from '../../Router/zustand'
-
-
+import { replaceNodeById, getDiffObjects } from '../../Utils'
 
 const SetFields = ({ data, Event }) => {
+    const leftRef = useRef(null)
+    const rightRef = useRef(null)
+    const [open, setOpen] = useState(false)
+    const [steps, setSteps] = useState([])
+    const [loading, setLoading] = useState(false)
+
     const { fields } = data
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
     const [Data, setData] = useState(fields || [])
@@ -134,7 +140,6 @@ const SetFields = ({ data, Event }) => {
             ['onSaveField', () => onSaveField(data)],
             ['onFieldsImport', () => onFieldsImport(data)],
             ['onFieldsPaste', () => onFieldsPaste(data)],
-
             ['onCommonFormBack', () => onAddFieldsBack(data)]
         ])
         const func = Mapping.get(type)
@@ -142,10 +147,121 @@ const SetFields = ({ data, Event }) => {
     }
     Event?.useSubscription(evetnCallBack)
 
+    const onHelp = () => {
+        setLoading(true)
+        const OLAPSteps = [
+            {
+                title: '字段设置',
+                description: '设置表单字段的参数.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldA01.png" />),
+                target: () => null
+            },
+            {
+                title: '字段列表',
+                description: '当前接口可用字段列表.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldA02.png" />),
+                target: () => leftRef.current
+            },
+            {
+                title: '字段设置',
+                description: '设置单项字段的参数信息',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldA03.png" />),
+                target: () => rightRef.current
+            }
+        ]
+        setSteps(OLAPSteps)
+        setOpen(true)
+    }
+    const onHelpA02 = () => {
+        setSteps([])
+        FORMEVENT.emit({ type: 'getHelpList' })
+    }
+
+    const openTour = ({ map, form }) => {
+        const OLAPSteps = [
+            {
+                title: '字段设置',
+                description: '单项字段的完整设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA01.png" />),
+                target: () => null
+            },
+            {
+                title: '基础信息',
+                description: '字段的表单中的主要渲染类型.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA02.png" />),
+                target: () => map.get('SetFieldsFormList_01')
+            },
+            {
+                title: '列表渲染',
+                description: '字段在列表中字段的列设置',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA03.png" />),
+                target: () => map.get('SetFieldsFormList_02')
+            },
+            {
+                title: '排序设置',
+                description: '表单允许排序下,字段的排序设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA04.png" />),
+                target: () => map.get('SetFieldsFormList_04')
+            },
+            {
+                title: '筛选设置',
+                description: '表单允许筛选下,字段的筛选设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA05.png" />),
+                target: () => map.get('SetFieldsFormList_05')
+            },
+            {
+                title: '分组设置',
+                description: '表单需要分组下,字段的分组设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA06.png" />),
+                target: () => map.get('SetFieldsFormList_03')
+            },
+            {
+                title: '判断渲染',
+                description: '字段在表单中是否根据条件渲染.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA07.png" />),
+                target: () => map.get('SetFieldsFormList_06')
+            },
+            {
+                title: '数值渲染',
+                description: '数值型字段的渲染格式.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA08.png" />),
+                target: () => map.get('SetFieldsFormList_07')
+            },
+            {
+                title: '额外模板',
+                description: '字段在表单中是否显示额外的模板.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA09.png" />),
+                target: () => map.get('SetFieldsFormList_08')
+            },
+            {
+                title: '总体统计',
+                description: '字段在表单中下方的统计设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA10.png" />),
+                target: () => map.get('SetFieldsFormList_09')
+            },
+            {
+                title: '分组统计',
+                description: '字段在表单中分组下的统计设置.',
+                cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpFieldItemA11.png" />),
+                target: () => map.get('SetFieldsFormList_10')
+            }
+        ]
+        setSteps(OLAPSteps)
+        setOpen(true)
+    }
+
+    const onCloseHelp = () => {
+        setSteps([])
+        setOpen(false)
+        setLoading(false)
+    }
+
     const FormCallBack = (e) => {
         const { type, data } = e
         const Mapping = new Map([
-            ['onFormBack', onModifyData(data)],
+            ['onOpenHelp', onHelpA02],
+            ['onFormBack', () => onModifyData(data)],
+            ['getMap', () => openTour(data)]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -153,10 +269,12 @@ const SetFields = ({ data, Event }) => {
 
     const FORMEVENT = useEventEmitter()
     FORMEVENT.useSubscription(FormCallBack)
-    console.log('字段设置')
     return (
         <div className='SetFields'>
-            <div className='left'>
+            <HappyProvider>
+                <Button className='TourBtn' type="primary" shape="circle" loading={loading} onClick={() => onHelp()} icon={<BugOutlined />} />
+            </HappyProvider>
+            <div className='left' ref={leftRef}>
                 <DevScrollView>
                     <Sortable
                         allowReordering={true} // 重新排序
@@ -198,16 +316,18 @@ const SetFields = ({ data, Event }) => {
                 </DevScrollView>
 
             </div>
-            <div className="right">
+            <div className="right" ref={rightRef}>
                 {ActiveData ?
                     <DevScrollView>
                         <div className='SetFieldsFormList'>
-                            <FormTemplate formItem={FormConfig.SetFieldsFormList} FORMEVENT={FORMEVENT} Initial={ActiveData} NotLoading />
+                            <FormTemplate formItem={FormConfig.SetFieldsFormList} FORMEVENT={FORMEVENT} Initial={ActiveData} NotLoading Help />
                         </div>
                     </DevScrollView> :
                     <Result status="403" title="请选择左侧字段进行配置!" />
                 }
             </div>
+
+            <Tour open={open} onClose={onCloseHelp} steps={steps} />
         </div>
     );
 };

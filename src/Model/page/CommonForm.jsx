@@ -335,7 +335,6 @@ const CommonForm = ({ data, Event }) => {
                 NotLoading={NotLoading}
                 detection={detection}
             />
-            {console.log(steps)}
             <Tour open={open} onClose={onCloseHelp} steps={steps} />
         </div>
     );

@@ -1973,7 +1973,7 @@ const AddFieldsFormList = [
 const SetFieldsFormList = [
     { formType: 'HIDDEN', name: 'uuid' },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_01', label: '01-基础信息', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_01', label: '01-基础信息', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'INPUT', name: 'dataField', label: '字段', rules: true },
             { span: 24, formType: 'INPUT', name: 'caption', label: '映射', rules: true },
@@ -2020,7 +2020,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_02', label: '02-列表渲染', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_02', label: '02-列表渲染', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'allowResizing', label: '改变列宽', rules: true, valueEnum: MappingData.IsYesBool },
             { span: 24, formType: 'NUMBER', name: 'width', label: '默认列宽', rules: true },
@@ -2034,7 +2034,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_04', label: '03-排序设置', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_04', label: '03-排序设置', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'allowReordering', label: '调整位置', rules: true, valueEnum: MappingData.IsYesBool },
             { span: 24, formType: 'RADIO', name: 'allowSorting', label: '调整排序', rules: true, valueEnum: MappingData.IsYesBool },
@@ -2042,7 +2042,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_05', label: '04-筛选设置', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_05', label: '04-筛选设置', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'allowHeaderFiltering', label: '筛选器', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'RADIO', name: 'allowFiltering', label: '行内筛选', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -2050,7 +2050,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_03', label: '05-分组设置', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_03', label: '05-分组设置', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'allowGrouping', label: '能否分组', rules: true, valueEnum: MappingData.IsYesBool },
             {
@@ -2060,7 +2060,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_06', label: '06-判断渲染', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_06', label: '06-判断渲染', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'judge', label: '是否启用', rules: true, tooltip: '根据数据中某一字段的值判断渲染', valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'INPUT', name: 'jugdeField', label: '判断字段', rules: true, jugde: [{ field: 'judge', value: [true] }] },
@@ -2068,7 +2068,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_07', label: '07-数值渲染', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_07', label: '07-数值渲染', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'format', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
@@ -2079,7 +2079,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_08', label: '08-额外模板', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_08', label: '08-额外模板', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'cellRender', label: '额外渲染', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
@@ -2113,7 +2113,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_09', label: '09-总体统计', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_09', label: '09-总体统计', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'totalItemStatus', label: '总体统计', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
@@ -2129,7 +2129,7 @@ const SetFieldsFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_10', label: '10-分组统计', collapsible: true, defaultCollapsed: true,
+        span: 12, formType: 'GROUP', name: 'SetFieldsFormList_10', label: '10-分组统计', collapsible: true, defaultCollapsed: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'groupItemStatus', label: '分组统计', rules: true, valueEnum: MappingData.IsEnabledBool },
             {

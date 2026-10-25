@@ -1,27 +1,83 @@
 import './SetOptions.scss'
 import { v4 } from 'uuid'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import copy from 'copy-to-clipboard'
-import { Tree, Button, Popconfirm, message } from 'antd'
+import { Tree, Button, Popconfirm, message, Tour } from 'antd'
 
-import { onTreeDrop, replaceNodeById, replaceNodeByIdTwo, removeTreeByKey } from '../../Utils'
-
-import { ICONMapping } from '../../Config/IconMapping'
+import { BugOutlined } from '@ant-design/icons';
+import { HappyProvider } from '@ant-design/happy-work-theme'
 
 import { modelStore } from '../../Router/zustand'
-
-
+import { ICONMapping } from '../../Config/IconMapping'
+import { onTreeDrop, replaceNodeById, replaceNodeByIdTwo, removeTreeByKey } from '../../Utils'
 
 const SetOptions = ({ data, Event }) => {
+    const leftRef = useRef(null)
+    const rightRef = useRef(null)
+    const itemRef = useRef(null)
+    const iconRef = useRef(null)
+    const titleRef = useRef(null)
+    const posiRef = useRef(null)
+    const optionRef = useRef(null)
+
+    const [open, setOpen] = useState(false)
+    const [steps] = useState([
+        {
+            title: '操作设置',
+            description: '统计模板配置.',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA01.png" />),
+            target: () => null
+        },
+        {
+            title: '全局操作',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA02.png" />),
+            target: () => leftRef.current
+        },
+        {
+            title: '局部操作',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA03.png" />),
+            target: () => rightRef.current
+        },
+        {
+            title: '单项操作',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA04.png" />),
+            target: () => itemRef.current
+        },
+        {
+            title: '按键图标',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA05.png" />),
+            target: () => iconRef.current
+        },
+        {
+            title: '按键名称',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA06.png" />),
+            target: () => titleRef.current
+        },
+        {
+            title: '按键位置',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA07.png" />),
+            target: () => posiRef.current
+        },
+        {
+            title: '功能设置',
+            description: '设置统计模板的基础参数',
+            cover: (<img alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpOptionsA08.png" />),
+            target: () => optionRef.current
+        },
+    ])
+    const [loading, setLoading] = useState(false)
     const { updateModel2, updateModel4, updateModel5 } = modelStore()
     const { APIdata, OPTdata = { top: [], row: [] } } = data
     const { top, row } = OPTdata
-
     const positionMapping = { left: '左侧', right: '右侧', hidden: '隐藏' }
-
     const [topTreeData, setTopTreeData] = useState(top || [])
     const [rowTreeData, setRowTreeData] = useState(row || [])
-
     const onAddOptions = (e) => {
         // --> 修改options -> onSaveOPTdataA02
         const { uuid, code } = e
@@ -44,12 +100,9 @@ const SetOptions = ({ data, Event }) => {
         OPTdata.row = rowData
         Event.emit({ type: 'onSaveOPTdataA02', data: OPTdata })
     }
-
-
     const onSaveOPT = () => {
         Event.emit({ type: 'onSaveOPTdata', data: { top: topTreeData, row: rowTreeData } })
     }
-
     const onRender = (e) => {
         updateModel4({
             title: '渲染列表',
@@ -71,7 +124,6 @@ const SetOptions = ({ data, Event }) => {
             ]
         })
     }
-
     const onSetForm = (e) => {
         updateModel4({
             title: e.title + ' - 表单编辑',
@@ -113,12 +165,9 @@ const SetOptions = ({ data, Event }) => {
             ]
         })
     }
-
     const onSetTabs = () => {
         console.log('设置多层列头')
     }
-
-
     // 修改操作
     const onModifyTop = (e) =>
         updateModel4({
@@ -202,12 +251,9 @@ const SetOptions = ({ data, Event }) => {
                 },
             ]
         })
-
     // 删除操作
     const onDeleteTop = (e) => setTopTreeData(removeTreeByKey(topTreeData, e.uuid))
     const onDeleteRow = (e) => setRowTreeData(removeTreeByKey(rowTreeData, e.uuid))
-
-
     const evetnCallBack = (e) => {
         const { type, data } = e
         const Mapping = new Map([
@@ -219,11 +265,20 @@ const SetOptions = ({ data, Event }) => {
         func?.(data)
     }
     Event?.useSubscription(evetnCallBack)
-
-    console.log('操作设置')
+    const onHelp = () => {
+        setOpen(true)
+        setLoading(true)
+    }
+    const onCloseHelp = () => {
+        setOpen(false)
+        setLoading(false)
+    }
     return (
         <div className='SetOptions'>
-            <div className='Left'>
+            <HappyProvider>
+                <Button className='TourBtn' type="primary" shape="circle" loading={loading} onClick={() => onHelp()} icon={<BugOutlined />} />
+            </HappyProvider>
+            <div className='Left' ref={leftRef}>
                 <div>全局操作</div>
                 <Tree
                     blockNode
@@ -240,13 +295,13 @@ const SetOptions = ({ data, Event }) => {
                         const { icon, color, title, position, tips, type, addType } = e
                         const A02 = type === 'A02' && addType === 'form'
                         return (
-                            <div className='TreeItem'>
-                                <div style={{ color }}>{ICONMapping[icon]}</div>
+                            <div className='TreeItem' ref={itemRef}>
+                                <div ref={iconRef} style={{ color }}>{ICONMapping[icon]}</div>
                                 <div>
-                                    <div style={{ color }}>{title}</div>
-                                    <div>( {positionMapping[position]} ) : {tips || '-'}</div>
+                                    <div ref={titleRef} style={{ color }}>{title}</div>
+                                    <div ref={posiRef}>( {positionMapping[position]} ) : {tips || '-'}</div>
                                 </div>
-                                <div>
+                                <div ref={optionRef}>
                                     {false && <Button type='link' onClick={() => onSetTabs(e)}>表头</Button>}
                                     {type === 'A01' && <Button type='link' onClick={() => onRender(e)}>渲染</Button>}
                                     {A02 && <Button type='link' onClick={() => onSetForm(e)}>表单</Button>}
@@ -266,9 +321,8 @@ const SetOptions = ({ data, Event }) => {
                         )
                     }}
                 />
-
             </div>
-            <div className='Right'>
+            <div className='Right' ref={rightRef}>
                 <div>局部操作</div>
                 <Tree
                     blockNode
@@ -309,6 +363,7 @@ const SetOptions = ({ data, Event }) => {
                     }}
                 />
             </div>
+            <Tour open={open} onClose={onCloseHelp} steps={steps} />
         </div>
     );
 };
