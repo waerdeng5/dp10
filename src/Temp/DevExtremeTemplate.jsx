@@ -830,7 +830,6 @@ export const DevExtremeLayout = memo((props) => {
                 <Item style={{ height: '100%' }}>
                     <Dropdown menu={{ items }} trigger={['contextMenu']}>
                         <div className='DevDropdom'>
-                            {/* {children} */}
                             <TemplateComponent {...props} />
                         </div>
                     </Dropdown>

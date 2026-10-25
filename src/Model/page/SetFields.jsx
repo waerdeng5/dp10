@@ -153,7 +153,7 @@ const SetFields = ({ data, Event }) => {
 
     const FORMEVENT = useEventEmitter()
     FORMEVENT.useSubscription(FormCallBack)
-
+    console.log('字段设置')
     return (
         <div className='SetFields'>
             <div className='left'>

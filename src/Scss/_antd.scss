@@ -159,3 +159,15 @@
 .mars3d-divUpLabel-text {
     writing-mode: horizontal-tb !important;
 }
+
+.ant-tour {
+    z-index: 1601 !important;
+
+    .ant-tour-description {
+        white-space: pre;
+    }
+}
+
+.ant-tour-mask {
+    z-index: 1600 !important;
+}

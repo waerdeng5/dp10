@@ -1,9 +1,13 @@
 import './SetDevRouter.scss'
 import { v4 } from 'uuid'
 
-import { message } from 'antd'
-import { useEffect, useState } from 'react'
 import copy from 'copy-to-clipboard'
+import { message, Tour, Button } from 'antd'
+import { useEffect, useRef, useState } from 'react'
+import { HappyProvider } from '@ant-design/happy-work-theme'
+
+import { BugOutlined } from '@ant-design/icons';
+
 import { axios } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
 import { modelStore, pageStore } from '../../Router/zustand'
@@ -12,6 +16,15 @@ import { MappingData } from '../../Config/MappingData'
 import { Encrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 
 export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
+    const refA01 = useRef()
+    const refA02 = useRef()
+    const refA03 = useRef()
+    const refA04 = useRef()
+    const refA05 = useRef()
+    const refA06 = useRef()
+    const refA07 = useRef()
+
+    const [open, setOpen] = useState(false)
     const [rowList, setRowList] = useState([])
     const [topList, setTopList] = useState([])
     useEffect(() => {
@@ -19,11 +32,61 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
         setRowList(OPTdata.row)
         setTopList(OPTdata.top)
     }, [OPTdata])
+
+
+    const steps = [
+        {
+            title: '模板信息',
+            description: '页面Dev组件渲染样式,详见模板设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA01.png" />),
+            target: () => refA01.current,
+        },
+        {
+            title: '渲染样式',
+            description: '页面内主要样式设置,详见样式设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA02.png" />),
+            target: () => refA02.current,
+        },
+        {
+            title: '接口信息',
+            description: '页面内主要接口设置,详见接口设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA03.png" />),
+            target: () => refA03.current,
+        },
+        {
+            title: '树形菜单',
+            description: '页面内左侧机构数与额外树设置,详见接口设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA04.png" />),
+            target: () => refA04.current,
+        },
+        {
+            title: '数据分页',
+            description: '页面内数据分页设置,详见分页设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA05.png" />),
+            target: () => refA05.current,
+        },
+        {
+            title: '字段信息',
+            description: '页面内可用字段设置,详见字段设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA06.png" />),
+            target: () => refA06.current,
+        },
+        {
+            title: '操作信息',
+            description: '页面全局操作和单行操作设置,详见操作设置',
+            cover: (<img draggable={true} alt="tour.png" src="https://aloss.ljkjkf.com/WebConfigFile/image/Common/System/HelpA07.png" />),
+            target: () => refA07.current,
+        },
+    ];
+
     return (
         <div className='SetDevRouter'>
+            <HappyProvider>
+                <Button className='TourBtn' type="primary" shape="circle" onClick={() => setOpen(true)} icon={<BugOutlined />} />
+            </HappyProvider>
             <DevScrollView>
                 <div className='SetDevRouterBox'>
-                    <div className='Title'>模板信息</div>
+                    <div className='Title' ref={refA01}>模板信息</div>
                     <div>
                         {THEdata?.template ?
                             <div className='Label'>
@@ -35,7 +98,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置模板信息</div>
                         }
                     </div>
-                    <div className='Title'>样式渲染</div>
+                    <div className='Title' ref={refA02}>样式渲染</div>
                     <div>
                         {THEdata?.style ?
                             <div className='Show'>
@@ -55,7 +118,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置渲染字段信息</div>
                         }
                     </div>
-                    <div className='Title'>接口信息</div>
+                    <div className='Title' ref={refA03}>接口信息</div>
                     <div>
                         {APIdata?.api ?
                             <div className='Label'>
@@ -75,7 +138,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置接口信息</div>
                         }
                     </div>
-                    <div className='Title'>树形菜单</div>
+                    <div className='Title' ref={refA04}>树形菜单</div>
                     <div>
                         {APIdata?.api ?
                             <div className='Show'>
@@ -91,7 +154,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置渲染字段信息</div>
                         }
                     </div>
-                    <div className='Title'>数据分页</div>
+                    <div className='Title' ref={refA05}>数据分页</div>
                     <div>
                         {APIdata?.api ?
                             <div className='Label'>
@@ -107,8 +170,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置分页信息</div>
                         }
                     </div>
-
-                    <div className='Title'>字段信息</div>
+                    <div className='Title' ref={refA06}>字段信息</div>
                     <div>
                         {APIdata?.fields && APIdata.fields.length !== 0 ?
                             <div className='Table'>
@@ -128,8 +190,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                             <div className='ErrorTips'>未配置字段信息</div>
                         }
                     </div>
-
-                    <div className='Title'>操作信息</div>
+                    <div className='Title' ref={refA07}>操作信息</div>
                     <div>
                         {OPTdata?.top && OPTdata?.row ?
                             <div className='Options'>
@@ -147,6 +208,7 @@ export const MissingTemplate = ({ APIdata, THEdata, OPTdata }) => {
                     </div>
                 </div>
             </DevScrollView>
+            <Tour open={open} onClose={() => setOpen(false)} steps={steps} />
         </div>
     )
 }

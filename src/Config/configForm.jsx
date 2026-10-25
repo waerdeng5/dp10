@@ -3033,9 +3033,8 @@ const SetDEVTemplateConfig = [
         children: [
             { span: 24, formType: 'RADIO', name: 'focusedRowEnabled', label: '聚焦选中', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_column', label: '列宽设置 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_column', label: '列宽设置 ', collapsible: true, help: true,
                 children: [
-
                     { span: 24, formType: 'RADIO', name: 'showColumnHeaders', label: '列标题', rules: true, valueEnum: MappingData.IsShowBool },
                     { span: 24, formType: 'RADIO', name: 'columnFixingEnabled', label: '固定列宽', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 24, formType: 'RADIO', name: 'allowColumnResizing', label: '调整列宽', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -3046,7 +3045,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_border', label: '边框设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_border', label: '边框设置', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'showBorders', label: '外边框', rules: true, valueEnum: MappingData.IsShowBool },
                     { span: 24, formType: 'RADIO', name: 'showRowLines', label: '底边框', rules: true, valueEnum: MappingData.IsShowBool },
@@ -3055,7 +3054,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_label', label: '选择设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_label', label: '选择设置', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'SelectionMode', label: '选择方式', rules: true,
@@ -3079,7 +3078,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_HeaderFilter', label: '过滤器', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_HeaderFilter', label: '过滤器', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'HeaderFilterVisible', label: '是否启用', rules: true,
@@ -3106,7 +3105,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_SearchPanel', label: '头部搜索', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_SearchPanel', label: '头部搜索', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'SearchPanelVisible', label: '是否启用', rules: true,
@@ -3135,7 +3134,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_FilterRow', label: '行内搜索', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_FilterRow', label: '行内搜索', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'FilterRowVisible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3149,7 +3148,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_columnChooser', label: '列选择器', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_columnChooser', label: '列选择器', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'columnChooserEnabled', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3183,7 +3182,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_GroupPanel', label: '分组面板', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_GroupPanel', label: '分组面板', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'GroupPanelVisible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3217,7 +3216,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_Sorting', label: '排序设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_Sorting', label: '排序设置', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'Sortingmode', label: '排序设置', rules: true,
@@ -3231,7 +3230,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'DataGrid_Export', label: '导出设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'DataGrid_Export', label: '导出设置', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'ExportEnabled', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3255,7 +3254,7 @@ const SetDEVTemplateConfig = [
             { span: 12, formType: 'RADIO', name: 'focusedRowEnabled', label: '聚焦选中', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'RADIO', name: 'autoExpandAll', label: '全部展开', rules: true, valueEnum: MappingData.IsOpenBool },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_column', label: '列宽设置 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_column', label: '列宽设置 ', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'showColumnHeaders', label: '列标题', rules: true, valueEnum: MappingData.IsShowBool },
                     { span: 24, formType: 'RADIO', name: 'columnFixingEnabled', label: '固定列宽', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -3267,7 +3266,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_border', label: '边框设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_border', label: '边框设置', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'showBorders', label: '外边框', rules: true, valueEnum: MappingData.IsShowBool },
                     { span: 24, formType: 'RADIO', name: 'showRowLines', label: '底边框', rules: true, valueEnum: MappingData.IsShowBool },
@@ -3276,7 +3275,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_label', label: '选择设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_label', label: '选择设置', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'SelectionMode', label: '选择方式', rules: true,
@@ -3300,7 +3299,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_HeaderFilter', label: '过滤器', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_HeaderFilter', label: '过滤器', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'HeaderFilterVisible', label: '是否启用', rules: true,
@@ -3327,7 +3326,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_SearchPanel', label: '头部搜索', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_SearchPanel', label: '头部搜索', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'SearchPanelVisible', label: '是否启用', rules: true,
@@ -3356,7 +3355,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_FilterRow', label: '行内搜索', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_FilterRow', label: '行内搜索', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'FilterRowVisible', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3370,7 +3369,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_Sorting', label: '排序设置', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_Sorting', label: '排序设置', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'Sortingmode', label: '排序设置', rules: true,
@@ -3384,7 +3383,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'TreeGrid_columnChooser', label: '列选择器', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'TreeGrid_columnChooser', label: '列选择器', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'columnChooserEnabled', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
@@ -3431,7 +3430,7 @@ const SetDEVTemplateConfig = [
         jugde: [{ field: 'devTemplate', value: ['DevExtremeOLAPGrid'] }],
         children: [
             {
-                span: 12, formType: 'GROUP', name: 'OLAPGrid_base', label: '基础设置 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'OLAPGrid_base', label: '基础设置 ', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'allowSorting', label: '是否排序', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 24, formType: 'RADIO', name: 'allowSortingBySummary', label: '是否统计', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -3442,7 +3441,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'OLAPGrid_Layout', label: '布局设置 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'OLAPGrid_Layout', label: '布局设置 ', collapsible: true, help: true,
                 children: [
                     { span: 24, formType: 'RADIO', name: 'rowHeaderLayout', label: '布局方式', rules: true, valueEnum: MappingData.DevConfig__RowHeaderLayout },
                     { span: 24, formType: 'RADIO', name: 'showTotalsPrior', label: '总计位置', rules: true, valueEnum: MappingData.DevConfig__ShowTotalsPrior },
@@ -3454,7 +3453,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'OLAPGrid_fieldChooser', label: '中控开关 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'OLAPGrid_fieldChooser', label: '中控开关 ', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'fieldChooserEnabled', label: '是否启用', rules: true,
@@ -3482,7 +3481,7 @@ const SetDEVTemplateConfig = [
                 ]
             },
             {
-                span: 12, formType: 'GROUP', name: 'OLAPGrid_fieldPanel', label: '字段面板 ', collapsible: true,
+                span: 12, formType: 'GROUP', name: 'OLAPGrid_fieldPanel', label: '字段面板 ', collapsible: true, help: true,
                 children: [
                     {
                         span: 24, formType: 'RADIO', name: 'fieldPanelVisible', label: '是否启用', rules: true,
@@ -3526,7 +3525,7 @@ const SetDEVTemplateConfig = [
 const SetDEVGetDataConfig = [
     { formType: 'HIDDEN', name: 'uuid' },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_api', label: '接口信息', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_api', label: '接口信息', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
             { span: 24, formType: 'INPUT', name: 'apiUrl', label: '接口地址', rules: true, tooltip: '获取数据接口' },
@@ -3536,7 +3535,7 @@ const SetDEVGetDataConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_pag', label: '分页设置', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_pag', label: '分页设置', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'NUMBER', name: 'pageSize', label: '默认页码', rules: true, tooltip: '每页默认获取条数' },
             { span: 24, formType: 'INPUT', name: 'pageOptions', label: '页码列表', rules: true, tooltip: '逗号分隔.只输入0不显示分页器!' },
@@ -3559,7 +3558,7 @@ const SetDEVGetDataConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_org', label: '机构树', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_org', label: '机构树', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'orgShow', label: '是否显示', rules: true, valueEnum: MappingData.IsShowBool },
             { span: 24, formType: 'RADIO', name: 'orgMethod', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
@@ -3598,7 +3597,7 @@ const SetDEVGetDataConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_oth', label: '额外树', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVGetDataConfig_oth', label: '额外树', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'othShow', label: '是否显示', rules: true, valueEnum: MappingData.IsShowBool },
             {
@@ -3653,7 +3652,7 @@ const SetDEVGetDataConfig = [
 const SetDEVStyleConfig = [
     { formType: 'HIDDEN', name: 'uuid' },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_tre', label: '树形样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_tre', label: '树形样式', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'COLOR', name: 'tree_iconColor', label: '图标颜色', rules: true },
             { span: 24, formType: 'NUMBER', name: 'tree_iconSize', label: '图标尺寸', rules: true },
@@ -3681,7 +3680,7 @@ const SetDEVStyleConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_top', label: '头部样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_top', label: '头部样式', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'top_show', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'COLOR', name: 'top_Back', label: '背景颜色', rules: true },
@@ -3706,7 +3705,7 @@ const SetDEVStyleConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_row', label: '行内样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_row', label: '行内样式', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'row_show', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 24, formType: 'INPUT', name: 'row_caption', label: '标题', rules: true, jugde: [{ field: 'row_show', value: [true] }] },
@@ -3757,7 +3756,7 @@ const SetDEVStyleConfig = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_pop', label: '弹窗样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'SetDEVStyleConfig_pop', label: '弹窗样式', collapsible: true, help: true,
         children: [
             { span: 24, formType: 'RADIO', name: 'pop_show', label: '是否启用', rules: true, valueEnum: MappingData.IsEnabledBool },
             {

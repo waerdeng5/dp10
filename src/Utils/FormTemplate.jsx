@@ -90,6 +90,7 @@ const FormTemplate = ({
 }) => {
     const { notification } = App.useApp()
     const formRef = useRef(null)
+    const formListRef = useRef(null)
     const [loading, setLoading] = useState(false)
     const [INIT] = useState(Initial)
     const { run } = useDebounceFn((e) => {
@@ -114,7 +115,8 @@ const FormTemplate = ({
                 formRef.current?.resetFields()
                 setTimeout(() => setLoading(false), 0)
             }],
-            ['onUploadInitial', () => formRef?.current?.setFieldsValue(data)]
+            ['onUploadInitial', () => formRef?.current?.setFieldsValue(data)],
+            ['getHelpList', () => FORMEVENT.emit({ type: 'getMap', data: { map: getMap(), form: formRef.current } })]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -126,6 +128,10 @@ const FormTemplate = ({
         formRef.current.setFieldsValue(Initial)
     }, [Initial])
 
+    const getMap = () => {
+        if (!formListRef.current) formListRef.current = new Map()
+        return formListRef.current;
+    }
 
     return (
         <div className='FormTemplateClass01'>
@@ -179,10 +185,12 @@ const FormTemplate = ({
                     }}
                 >
                     <DevScrollView>
-                        <div className='FormScroll'>
+                        <div className='FormScroll' >
                             {formItem?.map((item) => {
                                 const Template = TemplateMapping[item.formType]
-                                return <Template key={item.name} data={item} form={formRef} init={Initial} />
+                                return (
+                                    <Template key={item.name} data={item} form={formRef} init={Initial} getMap={getMap} />
+                                )
                             })}
                         </div>
                     </DevScrollView>
@@ -207,15 +215,20 @@ const JudgeTemplate = ({ jugde, Template }) => {
 }
 
 // Todo 分组框
-const GROUP = ({ data, form, action }) => {
-    const { span, name, label, collapsible = false, defaultCollapsed = false, jugde, children } = data
+const GROUP = ({ data, form, action, getMap }) => {
+    const { span, name, label, collapsible = false, defaultCollapsed = false, jugde, children, help } = data
     const Template = memo(() => {
         return (
-            <ProFormGroup colProps={{ span }} key={name} >
+            <ProFormGroup colProps={{ span }} key={name} ref={node => {
+                if (!help || !getMap) return
+                const map = getMap()
+                if (node) map.set(name, node)
+                else map.delete(name)
+            }} >
                 <ProCard collapsible={collapsible} defaultCollapsed={defaultCollapsed} title={label} >
                     {children?.map((item) => {
                         const Template = memo(TemplateMapping[item.formType])
-                        return <Template key={item.name} data={item} form={form} action={action} />
+                        return <Template key={item.name} data={item} form={form} action={action} getMap={getMap} />
                     })}
                 </ProCard>
             </ProFormGroup>
@@ -402,7 +415,7 @@ const SLIDER = ({ data }) => {
 }
 
 // Todo 评分框
-const RATE = ({ data }) => {
+const RATE = ({ data, getMap }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, jugde } = data
     const Template = () => (
         <div className='RATE' style={{ width: `${100 / 24 * span}%` }}>

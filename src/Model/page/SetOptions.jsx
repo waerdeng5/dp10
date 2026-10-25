@@ -220,6 +220,7 @@ const SetOptions = ({ data, Event }) => {
     }
     Event?.useSubscription(evetnCallBack)
 
+    console.log('操作设置')
     return (
         <div className='SetOptions'>
             <div className='Left'>
