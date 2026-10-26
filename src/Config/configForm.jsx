@@ -9924,10 +9924,6 @@ const ModelConfigFormList = [
         ]
     },
 ]
-
-
-
-
 // *** 模块参数粘贴窗口
 const PrefabricatedPasteWindow = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -9947,6 +9943,52 @@ const FenceFormData = [
     { span: 24, formType: 'COLOR', name: 'color', label: '围栏颜色', rules: true, mode: ['single'] },
     { span: 24, formType: 'NUMBER', name: 'width', label: '围栏宽度', rules: true },
 ]
+
+
+// !!! Bits配置参数
+// TODO Bits文字
+const BitsText_TechText = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+    { span: 12, formType: 'NUMBER', name: 'fontSize', label: '文字字号', rules: true },
+    { span: 12, formType: 'SELECT', name: 'fontFamily', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 12, formType: 'RADIO', name: 'fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+
+
+
+    // 
+
+
+
+
+
+]
+
+
+// reveal: 'letter', //渲染方式
+
+
+// letterSpacing: -0.05, 字间距
+// color: 'currentColor', 文字颜色
+// accentColor: 'currentColor', 边框颜色
+// align: 'center', 对齐方式
+// reach: 200,  面积比例
+// softness: 0.7, 滤镜
+// dashLength: 4,
+// dashGap: 2,
+// strokeWidth: 1.5,
+// lineStyle: 'dashed',
+// specks: 15,
+// selection: true,
+// labels: true,
+// draggable: true,
+// bounce: 0.4,
+// sweep: true,
+// speed: 1,
+// clickKick: true,
+// intro: 'none',
+// introDuration: 2,
+// guides: false,
 
 
 
@@ -10031,5 +10073,9 @@ export const FormConfig = {
     PrefabricatedSwiperBox,
     PrefabricatedPasteWindow,
     PrefabricatedPasteModel,
-    FenceFormData
+    FenceFormData,
+
+
+    BitsText_TechText
+
 }

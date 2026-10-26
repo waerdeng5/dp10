@@ -34,6 +34,8 @@ import { PrefabricatedSelectTemplate } from './PrefabricatedSelect'
 import { PrefabricatedSwiperTemplate } from './PrefabricatedSwiper'
 import { PrefabricatedVisualTemplate } from './PrefabricatedVisual'
 
+import { BitsTextTemplate } from '../Bits/BitsText'
+
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
 import {
@@ -47,6 +49,7 @@ import {
     SelectTemplate,
     SwiperTemplatePage,
     VisualTemplatePage,
+    BITSTextTemplate
 } from '../Config'
 
 const { port } = window.location
@@ -59,7 +62,8 @@ const TemplateMapping = [
     ...TableTemplate,
     ...SelectTemplate,
     ...SwiperTemplatePage,
-    ...VisualTemplatePage
+    ...VisualTemplatePage,
+    ...BITSTextTemplate
 ]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
@@ -70,7 +74,8 @@ const TemplateComponentMapping = {
     ...PrefabricatedTableTemplate,
     ...PrefabricatedSelectTemplate,
     ...PrefabricatedSwiperTemplate,
-    ...PrefabricatedVisualTemplate
+    ...PrefabricatedVisualTemplate,
+    ...BitsTextTemplate
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {
@@ -171,8 +176,10 @@ export const LayoutTemplate = ({ UrlData, status, winId, layId, actId, params, w
 
     const onSelectTemplate = (data) => {
         if (layId === data.layId) {
+            const Temp = TemplateMapping.find(v => v.uuid === data.tempId)
+            if (!Temp) return console.error('模块不存在', data.tempId)
             const i = v4()
-            const { x, y, w, h } = TemplateMapping.find(v => v.uuid === data.tempId)
+            const { x, y, w, h } = Temp
             const layout = { i, x, y, w, h }
             setLayoutData(prev => [...prev, layout])
             LayoutEvent.emit({ type: 'onAddTemplateParams', data: { tempId: i, params: TemplateParamsMapping[data.tempId] } })
@@ -242,7 +249,9 @@ export const LayoutTemplate = ({ UrlData, status, winId, layId, actId, params, w
                         onLayoutChange={setLayoutData}
                     >
                         {LayoutData.map(item => {
+                            if (!params[item.i]) return console.error('模块未声明', item.i)
                             const TemplateComponent = TemplateComponentMapping[params[item.i].value]
+                            item.resizeHandles = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw']
                             return (
                                 <div key={item.i} className='LayoutBox child-grid-item'>
                                     {Active && <div className='SCALE'>template : {item.w}*{item.h}</div>}

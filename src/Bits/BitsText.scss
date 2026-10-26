@@ -1,0 +1,13 @@
+.TechText {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    touch-action: pan-y;
+    user-select: none;
+}
+
+.TechText_canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

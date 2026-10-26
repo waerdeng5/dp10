@@ -11,6 +11,7 @@ import {
     SelectTemplate,
     SwiperTemplatePage,
     VisualTemplatePage,
+    BITSTextTemplate,
 } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
@@ -102,6 +103,51 @@ const LayoutTemplate = ({ data, Event }) => {
         },
         {
             key: '9', label: '视频模块', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '10', label: 'BITS文字', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '11', label: 'BITS组件', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '12', label: 'BITSMicro', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '13', label: 'BITS动画', children: (
+                <div className='LayoutTemplateBox'>
+                    <DevScrollView>
+                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                    </DevScrollView>
+                </div>
+            )
+        },
+        {
+            key: '14', label: 'BITS背景', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
                         <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />

@@ -198,7 +198,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     // !!! 布局操作
     // 添加模块
     const onAddTemplate = (data) => {
-        updateModel5({ title: '模块选择', type: 'LayoutTemplate', width: 900, Event: LayoutEvent, modelData: { layId: data } })
+        updateModel5({ title: '模块选择', type: 'LayoutTemplate', width: '80vw', Event: LayoutEvent, modelData: { layId: data } })
     }
 
     // 追加模块参数
@@ -446,6 +446,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                                         onLayoutChange={setLayoutData}
                                     >
                                         {LayoutData.map(item => {
+                                            item.resizeHandles = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw']
                                             const {
                                                 // 基础信息
                                                 window_title, window_style,
@@ -483,9 +484,8 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
 
                                             const setClass = page_fold ? 'animate__animated ' : ''
 
-
                                             return (
-                                                <div key={item.i} className='WindowBox'>
+                                                <div key={item.i} className='WindowBox' >
                                                     <Dropdown
                                                         trigger={['contextMenu']}
                                                         menu={{

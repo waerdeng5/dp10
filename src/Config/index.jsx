@@ -588,6 +588,73 @@ export const VisualTemplatePage = [
     { uuid: 'PrefabricatedVisualLive', title: '视频直播', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
+export const BITSTextTemplate = [
+    { uuid: 'BitsText_TechText', title: 'TechText', img: `${CommonUrl}BitsText/BitsText_TechText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_TextLoop', title: 'TextLoop', img: `${CommonUrl}BitsText/BitsText_TextLoop.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_MaskedHeading', title: 'MaskedHeading', img: `${CommonUrl}BitsText/BitsText_MaskedHeading.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ParticleText', title: 'ParticleText', img: `${CommonUrl}BitsText/BitsText_ParticleText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_SplitFlapText', title: 'SplitFlapText', img: `${CommonUrl}BitsText/BitsText_SplitFlapText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_WarpText', title: 'WarpText', img: `${CommonUrl}BitsText/BitsText_WarpText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_StrokeText', title: 'StrokeText', img: `${CommonUrl}BitsText/BitsText_StrokeText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_DepthText', title: 'DepthText', img: `${CommonUrl}BitsText/BitsText_DepthText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_FoldText', title: 'FoldText', img: `${CommonUrl}BitsText/BitsText_FoldText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_EchoText', title: 'EchoText', img: `${CommonUrl}BitsText/BitsText_EchoText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_SplitText', title: 'SplitText', img: `${CommonUrl}BitsText/BitsText_SplitText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_BlurText', title: 'BlurText', img: `${CommonUrl}BitsText/BitsText_BlurText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_CircularText', title: 'CircularText', img: `${CommonUrl}BitsText/BitsText_CircularText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_TextType', title: 'TextType', img: `${CommonUrl}BitsText/BitsText_TextType.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_Shuffle', title: 'Shuffle', img: `${CommonUrl}BitsText/BitsText_Shuffle.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ShinyText', title: 'ShinyText', img: `${CommonUrl}BitsText/BitsText_ShinyText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_TextPressure', title: 'TextPressure', img: `${CommonUrl}BitsText/BitsText_TextPressure.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_CurvedLoop', title: 'CurvedLoop', img: `${CommonUrl}BitsText/BitsText_CurvedLoop.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_FuzzyText', title: 'FuzzyText', img: `${CommonUrl}BitsText/BitsText_FuzzyText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_GradientText', title: 'GradientText', img: `${CommonUrl}BitsText/BitsText_GradientText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_FallingText', title: 'FallingText', img: `${CommonUrl}BitsText/BitsText_FallingText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_TextCursor', title: 'TextCursor', img: `${CommonUrl}BitsText/BitsText_TextCursor.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_DecryptedText', title: 'DecryptedText', img: `${CommonUrl}BitsText/BitsText_DecryptedText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_TrueFocus', title: 'TrueFocus', img: `${CommonUrl}BitsText/BitsText_TrueFocus.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ScrollFloat', title: 'ScrollFloat', img: `${CommonUrl}BitsText/BitsText_ScrollFloat.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ScrollReveal', title: 'ScrollReveal', img: `${CommonUrl}BitsText/BitsText_ScrollReveal.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ASCIIText', title: 'ASCIIText', img: `${CommonUrl}BitsText/BitsText_ASCIIText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ScrambledText', title: 'ScrambledText', img: `${CommonUrl}BitsText/BitsText_ScrambledText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_RotatingText', title: 'RotatingText', img: `${CommonUrl}BitsText/BitsText_RotatingText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_GlitchText', title: 'GlitchText', img: `${CommonUrl}BitsText/BitsText_GlitchText.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_ScrollVelocity', title: 'ScrollVelocity', img: `${CommonUrl}BitsText/BitsText_ScrollVelocity.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_VariableProximity', title: 'VariableProximity', img: `${CommonUrl}BitsText/BitsText_VariableProximity.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsText_CountUp', title: 'CountUp', img: `${CommonUrl}BitsText/BitsText_CountUp.png`, x: 0, y: 0, w: 12, h: 12 },
+]
+
+const BitsTextMapping = {
+    BitsText_TechText: {
+        value: 'BitsText_TechText',
+        text: 'React Bits',
+        fontFamily: 'ShuHeiTi',
+        fontWeight: 600,
+        fontSize: 50,
+        letterSpacing: -0.05,
+        color: 'currentColor',
+        accentColor: 'currentColor',
+        align: 'center',
+        reach: 200,
+        softness: 0.7,
+        dashLength: 4,
+        dashGap: 2,
+        strokeWidth: 1.5,
+        lineStyle: 'dashed',
+        reveal: 'letter',
+        specks: 15,
+        selection: true,
+        labels: true,
+        draggable: true,
+        bounce: 0.4,
+        sweep: true,
+        speed: 1,
+        clickKick: true,
+        intro: 'none',
+        introDuration: 2,
+        guides: false,
+    }
+}
 
 
 export const TemplateParamsMapping = {
@@ -1103,7 +1170,9 @@ export const TemplateParamsMapping = {
     },
     PrefabricatedVisualLive: {
         value: 'PrefabricatedVisualLive',
-    }
+    },
+    // TODO BITS组件
+    ...BitsTextMapping,
 }
 
 export const OtherDiyPageConfig = {

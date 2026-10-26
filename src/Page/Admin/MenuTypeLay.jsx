@@ -155,7 +155,7 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
     // !!! 布局操作
     // 添加模块
     const onAddTemplate = (data) => {
-        updateModel5({ title: '模块选择', type: 'LayoutTemplate', width: 900, Event: LayoutEvent, modelData: { layId: data } })
+        updateModel5({ title: '模块选择', type: 'LayoutTemplate', width: '80vw', Event: LayoutEvent, modelData: { layId: data } })
     }
 
     // 追加模块参数

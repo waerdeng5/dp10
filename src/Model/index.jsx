@@ -8,6 +8,10 @@ import { Decrypt } from '../Utils/IndexedDB'
 import { modelStore } from '../Router/zustand'
 import { isEmptyObject, ColorCallBack, SetFilderParams, SetBorderParams, UnitCallBackStruct } from '../Utils'
 
+
+const { port } = window.location
+
+
 const isInteger = (str) => {
     return /^-?\d+$/.test(str);
 }
@@ -36,7 +40,7 @@ const PopupTemplate = memo(({ modelConfig, updateModel }) => {
         fullScreen = false,// 全屏
         hideOnOutsideClick = false,//单击隐藏
         resizeEnabled = true,// 调整大小
-        shadingColor = 'rgba(0,0,0,0.8)', // 阴影颜色
+        shadingColor = port ? 'rgba(0,0,0,0.1)' : 'rgba(0,0,0,0.8)', // 阴影颜色
         showCloseButton = modelConfig.showCloseButton || true, // 关闭按钮
         options = [],
         modelData = [],
