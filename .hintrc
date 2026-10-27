@@ -19,7 +19,9 @@
           "scrollbar-width",
           "overflow: clip",
           "rx",
-          "ry"
+          "ry",
+          "text-wrap",
+          "text-wrap: balance"
         ]
       }
     ]

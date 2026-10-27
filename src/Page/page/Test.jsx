@@ -11,40 +11,7 @@ import { useRef, useEffect } from 'react'
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
 
-import TechText from '../../Bits/TechText'
-
-
-const TechTextConfig = {
-    text: '1234567890',
-    fontFamily: 'DIN',
-    fontWeight: 600,
-    fontSize: 120,
-    letterSpacing: -0.05,
-    color: 'currentColor',
-    accentColor: 'currentColor',
-    align: 'left',
-    reach: 200,
-    softness: 0.7,
-    dashLength: 4,
-    dashGap: 2,
-    strokeWidth: 1.5,
-    lineStyle: 'dashed',
-    reveal: 'letter',
-    specks: 15,
-    selection: true,
-    labels: true,
-    draggable: true,
-    bounce: 0.4,
-    sweep: true,
-    speed: 1,
-    clickKick: true,
-    intro: 'none',
-    introDuration: 2,
-    guides: false,
-    className: '',
-    style: {}
-}
-
+import FoldText from '../../Bits/FoldText'
 
 
 
@@ -53,8 +20,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div style={{ width: '100%', height: '120px', position: 'relative' }}>
-                <TechText {...TechTextConfig} />
+            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <FoldText />
             </div>
 
 

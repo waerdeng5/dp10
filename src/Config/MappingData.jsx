@@ -1123,6 +1123,100 @@ export const MappingData = {
         { value: 'A01', label: '统一配置' },
         // { value: 'A02', label: '独立配置' },
     ],
+    // TODO BITS
+    BitsText_TechTextType: [
+        { value: 'area', label: '阴影面积' },
+        { value: 'letter', label: '字符描边' },
+        { value: 'off', label: '取消特效' },
+    ],
+    BitsText_TechTextIntro: [
+        { value: 'none', label: '无' },
+        { value: 'type', label: '类型' },
+        { value: 'assemble', label: '组装' },
+        { value: 'metrics', label: '指标' },
+    ],
+    BitsText_TextLoopShape: [
+        { value: 'wave', label: '波浪' },
+        { value: 'circle', label: '环形' },
+        { value: 'infinity', label: '无限' },
+        { value: 'arch', label: '弧线' },
+        { value: 'line', label: '直线' },
+    ],
+    BitsText_TextLoopDirection: [
+        { value: 'forward', label: '向前' },
+        { value: 'reverse', label: '后退' },
+    ],
+    BitsText_MaskedHeadingMediaType: [
+        { value: 'image', label: '图片' },
+        { value: 'video', label: '视频' },
+    ],
+    BitsText_MaskedHeadingReveal: [
+        { value: 'none', label: '无' },
+        { value: 'rise', label: '上升' },
+        { value: 'scale', label: '规模' },
+        { value: 'blur', label: '模糊' },
+        { value: 'wipe', label: '擦拭' },
+        { value: 'fade', label: '褪色' },
+    ],
+    BitsText_MaskedHeadingTrigger: [
+        { value: 'view', label: '入场' },
+        { value: 'mount', label: '挂载' },
+        { value: 'hover', label: '悬停' },
+    ],
+    BitsText_ParticleTextHighlightMode: [
+        { value: 'motion', label: '选中' },
+        { value: 'gradient', label: '渐变' },
+    ],
+    BitsText_ParticleTextShape: [
+        { value: 'circle', label: '圆形' },
+        { value: 'square', label: '方形' },
+        { value: 'line', label: '直线' },
+    ],
+    BitsText_ParticleTextIntro: [
+        { value: 'gather', label: '聚集' },
+        { value: 'rain', label: '雨落' },
+        { value: 'spiral', label: '螺旋' },
+        { value: 'scan', label: '扫描' },
+    ],
+    BitsText_ParticleTextTrigger: [
+        { value: 'mount', label: '挂载' },
+        { value: 'hover', label: '悬停' },
+        { value: 'click', label: '点击' },
+    ],
+    BitsText_SplitFlapTextCharset: [
+        { value: 'alpha', label: '字母' },
+        { value: 'alphanumeric', label: '字母数字' },
+        { value: 'numeric', label: '数字' },
+        { value: 'string', label: '字符串' },
+    ],
+    BitsText_SplitFlapTextOrder: [
+        { value: 'left', label: '左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'center', label: '局中' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsText_SplitFlapTextTileStyle: [
+        { value: 'board', label: '板式' },
+        { value: 'minimal', label: '最小' },
+    ],
+    BitsText_WarpTextLens: [
+        { value: 'bulge', label: '凸起' },
+        { value: 'pinch', label: '压缩' },
+        { value: 'swirl', label: '螺旋' },
+    ],
+    BitsText_StrokeTextTrigger: [
+        { value: 'mount', label: '挂载' },
+        { value: 'hover', label: '悬停' },
+        { value: 'scroll', label: '滚动' },
+        { value: 'loop', label: '循环' },
+    ],
+    BitsText_StrokeTextFillMode: [
+        { value: 'fade', label: '褪色' },
+        { value: 'wipe', label: '擦拭' },
+        { value: 'none', label: '无' },
+    ],
+
+
 
     // TODO Dev
     DevConfig__ThemeList: [
@@ -1298,6 +1392,11 @@ export const MappingData = {
         { value: 'bottom', label: '底部' },
         { value: 'left', label: '左侧' },
         { value: 'right', label: '右侧' },
+    ],
+    BitsText_StrokeTextStrokeStyle: [
+        { value: 'solid', label: '实线' },
+        { value: 'dashed', label: '虚线' },
+        { value: 'dotted', label: '点线' },
     ],
 
     Charts__VchartsAxesOrientA01: [
