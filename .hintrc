@@ -21,7 +21,8 @@
           "rx",
           "ry",
           "text-wrap",
-          "text-wrap: balance"
+          "text-wrap: balance",
+          "-webkit-user-drag"
         ]
       }
     ]
