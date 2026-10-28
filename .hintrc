@@ -22,7 +22,8 @@
           "ry",
           "text-wrap",
           "text-wrap: balance",
-          "-webkit-user-drag"
+          "-webkit-user-drag",
+          "background-color: color-mix(in srgb, currentColor 25%, transparent)"
         ]
       }
     ]

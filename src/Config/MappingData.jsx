@@ -1232,7 +1232,54 @@ export const MappingData = {
         { value: 'edges', label: '翻转' },
         { value: 'random', label: '随机' },
     ],
+    BitsText_EchoTextDirection: [
+        { value: 'left', label: '左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'up', label: '向上' },
+        { value: 'down', label: '向下' },
+        { value: 'diagonal', label: '斜向' },
+    ],
+    BitsText_EchoTextEchoStyle: [
+        { value: 'solid', label: '实线' },
+        { value: 'outline', label: '轮廓' },
+    ],
+    BitsText_EchoTextMode: [
+        { value: 'entrance', label: '入场' },
+        { value: 'pointer', label: '指针' },
+        { value: 'both', label: '双模式' },
+    ],
+    BitsText_EchoTextTrail: [
+        { value: 'pointer', label: '指针' },
+        { value: 'auto', label: '自动' },
+        { value: 'scroll', label: '滚动' },
+    ],
+    BitsText_CircularTextHover: [
+        { value: 'slowDown', label: '减慢' },
+        { value: 'speedUp', label: '加速' },
+        { value: 'pause', label: '暂停' },
+        { value: 'goBonkers', label: '疯狂' },
+    ],
+    BitsText_CircularTextDirection: [
+        { value: 'clockwise', label: '顺时针' },
+        { value: 'counterclockwise', label: '逆时针' },
+    ],
+    BitsText_TextTypeDeleteMode: [
+        { value: 'backspace', label: '删除键' },
+        { value: 'select', label: '选择' },
+    ],
+    BitsText_TextTypeCursorStyle: [
+        { value: 'character', label: '字符' },
+        { value: 'bar', label: '条' },
+        { value: 'block', label: '块' },
+        { value: 'underscore', label: '下划线' },
+    ],
+    BitsText_TextTypeEffect: [
+        { value: 'none', label: '无' },
+        { value: 'fade', label: '褪色' },
+        { value: 'blur', label: '模糊' },
+        { value: 'rise', label: '上升' },
 
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

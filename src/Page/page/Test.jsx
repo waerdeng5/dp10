@@ -11,7 +11,7 @@ import { useRef, useEffect } from 'react'
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
 
-import FoldText from '../../Bits/FoldText'
+import TextType from '../../Bits/TextType'
 
 
 
@@ -20,8 +20,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <FoldText />
+            <div className='TextType' style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <TextType />
             </div>
 
 

@@ -4,6 +4,7 @@ import { useMount, useTitle, useFavicon } from "ahooks"
 import { useNavigate, useLocation } from 'react-router-dom'
 
 
+
 import { themeDefault } from '../Config/themeDefault'
 
 import { axios } from "../Utils/Api"
@@ -13,8 +14,11 @@ import { formDefaultInit, CommonAPIUrl } from '../Config'
 import { pageStore, modelStore, fromStore } from '../Router/zustand'
 import { Encrypt, Decrypt, IndexedDBClear, AddIndexdDB, GetIndexedDB } from '../Utils/IndexedDB'
 
-const { hostname, port } = window.location
 
+import { shanxi } from './common'
+
+
+const { hostname, port } = window.location
 const GetProject = { method: 'get', path: CommonAPIUrl, url: 'projects/getProjectConfigInfo' }
 
 const NotificationBox = ({ uuid }) => {
@@ -56,7 +60,13 @@ const LoginIndex = () => {
             const Template = lazy(() => import(`./page/${hostname}.jsx`))
             setTemplate(Template)
         }
-        if (pathname === '/') {
+        else if (hostname === 'shanxi.ljkjkf.com') {
+            console.log('山西产教融合', shanxi)
+
+
+
+        }
+        else if (pathname === '/') {
             IndexedDBClear()
             sessionStorage.clear()
             localStorage.clear()
@@ -90,6 +100,7 @@ const LoginIndex = () => {
                 return false
             }
             const theme = await Decrypt(COMdata)
+            console.log(theme)
             await AddIndexdDB('theme', theme)
             const { loginType } = theme
             if (loginType === 'A01') Navigate('/Login')

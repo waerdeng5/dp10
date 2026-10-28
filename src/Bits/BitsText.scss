@@ -830,3 +830,211 @@
         }
     }
 }
+
+.EchoText {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .echo-text {
+        position: relative;
+        display: inline-block;
+        white-space: nowrap;
+        line-height: 0.9;
+        letter-spacing: -0.04em;
+        user-select: none;
+        contain: layout style;
+        font-kerning: normal;
+        text-rendering: geometricPrecision;
+    }
+
+    .echo-text__echo {
+        position: absolute;
+        inset: 0;
+        display: block;
+        pointer-events: none;
+        transform: translate3d(0, 0, 0);
+        transform-origin: 50% 50%;
+        will-change: transform, opacity;
+        backface-visibility: hidden;
+    }
+
+    .echo-text__bursts {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+    }
+
+    .echo-text__echo--outline {
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke: max(1px, 0.014em) currentColor;
+    }
+
+    .echo-text__echo--front {
+        position: relative;
+        z-index: 2;
+        opacity: 1;
+        filter: none;
+        text-shadow: 0 0.035em 0 rgba(255, 255, 255, 0.04);
+        will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .echo-text__echo:not(.echo-text__echo--front) {
+            display: none;
+        }
+
+        .echo-text__echo--front {
+            transform: none !important;
+        }
+    }
+}
+
+.CircularText {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .circular-text {
+        position: relative;
+        margin: 0 auto;
+        border-radius: 50%;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .circular-text__tilt,
+    .circular-text__plane,
+    .circular-text__ring {
+        position: absolute;
+        inset: 0;
+    }
+
+    .circular-text__tilt {
+        transform-style: preserve-3d;
+    }
+
+    .circular-text__plane {
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .circular-text__letter {
+        position: absolute;
+        inset: 0;
+        display: inline-block;
+        white-space: pre;
+    }
+
+    .circular-text[data-settled] .circular-text__letter {
+        transition: transform 0.5s cubic-bezier(0, 0, 0, 1);
+    }
+
+    .circular-text__line {
+        position: absolute;
+        inset: 1.3em;
+        border: 0 solid currentColor;
+        border-radius: 50%;
+        pointer-events: none;
+        transition: opacity 0.4s ease;
+    }
+
+    .circular-text__center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.TextType {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .text-type {
+        position: relative;
+        display: inline-block;
+        white-space: pre-wrap;
+    }
+
+    .text-type__sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+
+    .text-type__char {
+        position: relative;
+    }
+
+    .text-type__char--selected {
+        background-color: color-mix(in srgb, currentColor 25%, transparent);
+    }
+
+    .text-type__caret {
+        display: inline-block;
+        width: 0;
+    }
+
+    .text-type__cursor {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: pre;
+        pointer-events: none;
+        transition: opacity 0.2s ease;
+        will-change: transform;
+    }
+
+    .text-type__cursor--hidden {
+        opacity: 0;
+    }
+
+    .text-type__blink {
+        display: inline-block;
+    }
+
+    .text-type__cursor--character .text-type__blink {
+        margin-left: 0.25rem;
+    }
+
+    .text-type__shape {
+        display: inline-block;
+        margin-left: 0.06em;
+        background-color: currentColor;
+    }
+
+    .text-type__cursor--bar .text-type__shape {
+        width: max(2px, 0.07em);
+        height: 1.1em;
+        vertical-align: -0.2em;
+        border-radius: 1px;
+    }
+
+    .text-type__cursor--block .text-type__shape {
+        width: 0.56em;
+        height: 1.1em;
+        vertical-align: -0.2em;
+        border-radius: 0.06em;
+    }
+
+    .text-type__cursor--underscore .text-type__shape {
+        width: 0.56em;
+        height: max(2px, 0.075em);
+        vertical-align: -0.12em;
+        border-radius: 1px;
+    }
+}

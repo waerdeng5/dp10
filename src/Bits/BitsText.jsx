@@ -7,7 +7,9 @@ import WarpText from './WarpText'
 import StrokeText from './StrokeText'
 import DepthText from './DepthText'
 import FoldText from './FoldText'
-
+import EchoText from './EchoText'
+import CircularText from './CircularText'
+import TextType from './TextType'
 
 const BitsText_TechText = ({ data }) => <TechText {...data} />
 const BitsText_TextLoop = ({ data }) => <TextLoop {...data} />
@@ -18,6 +20,9 @@ const BitsText_WarpText = ({ data }) => <WarpText {...data} />
 const BitsText_StrokeText = ({ data }) => <StrokeText {...data} />
 const BitsText_DepthText = ({ data }) => <div className='DepthText'><DepthText {...data} /></div>
 const BitsText_FoldText = ({ data }) => <div className='FoldText'><FoldText {...data} /></div>
+const BitsText_EchoText = ({ data }) => <div className='EchoText'><EchoText {...data} /></div>
+const BitsText_CircularText = ({ data }) => <div className='CircularText'><CircularText {...data} /></div>
+const BitsText_TextType = ({ data }) => <div className='TextType'><TextType {...data} /></div>
 
 
 
@@ -31,4 +36,7 @@ export const BitsTextTemplate = {
     BitsText_StrokeText,
     BitsText_DepthText,
     BitsText_FoldText,
+    BitsText_EchoText,
+    BitsText_CircularText,
+    BitsText_TextType,
 }
