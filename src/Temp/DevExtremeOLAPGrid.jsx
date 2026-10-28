@@ -66,7 +66,8 @@ const DevExtremeOLAPGrid = (props) => {
     }
 
     useDebounceEffect(() => {
-        if (ORGUUID) getData()
+        if (!!ORGUUID) getData()
+        else setLoading(true)
     }, [ORGUUID, OTHUUID, SortData, SearchData], { wait: 500 })
 
     const onExporting = e => {

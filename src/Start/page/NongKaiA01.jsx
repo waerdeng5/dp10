@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { useMount } from 'ahooks'
 import { axios } from '../../Utils/Api'
 
-
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
 
 const uuidKeyMap = {
@@ -20,11 +19,12 @@ const uuidKeyMap = {
     '22115954-4ddb-4456-8b55-22f0bc821011': 'A11',
     '22115954-4ddb-4456-8b55-22f0bc821012': 'A12',
     '22115954-4ddb-4456-8b55-22f0bc821013': 'A13',
+    '99999999-9999-9999-9999-999999999999': 'A00',
 };
 
 const NongKaiA01 = () => {
     const [active, setActive] = useState('A01')
-    const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0 })
+    const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0, A00: 0 })
     const MapList = [
         { uuid: 'A01', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
         { uuid: 'A02', img: imageUrl + 'MapA02.png', name: '齐齐哈尔市', x: 320, y: 380 },
@@ -41,8 +41,6 @@ const NongKaiA01 = () => {
         { uuid: 'A13', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
     ]
 
-
-
     useMount(async () => {
         const [err, res] = await axios({ method: 'get', url: 'engineeringProject/GetCityProjectCount' })
         if (err) return false
@@ -53,10 +51,6 @@ const NongKaiA01 = () => {
         })
         setData(data)
     })
-
-
-
-
 
     return (
         <div className='NongKaiA01'>
@@ -80,7 +74,7 @@ const NongKaiA01 = () => {
                 <img className='otherImage' src={imageUrl + 'MapA14.png'} alt="" />
                 <div className='otherDiv'>
                     <div>
-                        <div>0</div>
+                        <div>{Data['A00']}</div>
                         <div>其他省份</div>
                     </div>
                 </div>

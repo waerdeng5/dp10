@@ -24,7 +24,8 @@ import { GetIndexedDB, PutIndexedDB, Encrypt, Decrypt } from '../../Utils/Indexe
 
 
 
-const { port } = window.location
+const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
+const { hostname, port } = window.location
 
 const handleData = (e) => {
     return JSON.parse(e.data).content
@@ -35,17 +36,44 @@ const CommonModel = ({ data, Event }) => {
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
 
     const { openType, Initial } = data
+    // 机构树搜索
     if (openType === 'onTreeSearch') {
         const { searchArr, Initial } = data
-        return (
-            <DevScrollView>
-                <FormTemplate
-                    formItem={searchArr.map(item => ({ span: 24, formType: item.type, name: item.value, label: item.label }))}
-                    FORMEVENT={Event}
-                    Initial={Initial}
-                />
-            </DevScrollView>
-        )
+        const [formItem, setFormItem] = useState()
+
+        useEffect(() => {
+            // const item = searchArr.map(v => {
+            //     const { type } = v
+            //     const obj = { span: 24, formType: v.type, name: v.value, label: v.label }
+            //     if (FlowMenuAPIFieldJugdeValue.includes(type)) {
+            //         console.log('选项', v, hostname)
+
+            //         return obj
+            //     }
+            //     else return obj
+            // })
+            const obj = searchArr.map(item => ({ span: 24, formType: item.type, name: item.value, label: item.label }))
+
+            if (hostname === 'nongkai.ljkjkf.com') obj.push({
+                span: 24, formType: 'SELECT', name: 'engineeringStatus', label: '项目状态',
+                valueEnum: [
+                    { value: '3bdfe017-305e-4f7f-b70d-6d61ac32f2d4', label: '停工项目' },
+                    { value: '4039ffba-58ee-4431-a5b1-177c2a2e5b26', label: '在建项目' },
+                    { value: '89e9459a-257c-4eb6-8714-0ad607fc1f17', label: '已完工项目' },
+                ]
+            })
+            setFormItem(obj)
+        }, [searchArr])
+
+        // searchArr.map(item => ({ span: 24, formType: item.type, name: item.value, label: item.label, valueEnum: [{ value: '1', label: '1' }] }))
+
+        if (formItem) {
+            return (
+                <DevScrollView>
+                    <FormTemplate formItem={formItem} FORMEVENT={Event} Initial={Initial} />
+                </DevScrollView>
+            )
+        }
     }
 
     // 菜单排序

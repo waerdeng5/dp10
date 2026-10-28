@@ -73,10 +73,11 @@ const DevExtremeDataGrid = (props) => {
     }
 
     useEffect(() => {
-        if (ORGUUID && PageIndex && POWER.length > 0) {
+        console.log(!!ORGUUID)
+        if (!!ORGUUID && PageIndex && POWER.length > 0) {
             setLoading(true)
             getData()
-        }
+        } else setLoading(true)
     }, [ORGUUID, OTHUUID, PageIndex, PageSize, SortData, SearchData, POWER])
 
 

@@ -3591,7 +3591,7 @@ const SetDEVGetDataConfig = [
                 children: [
                     { span: 24, formType: 'INPUT', name: 'value', label: '字段', rules: true },
                     { span: 24, formType: 'INPUT', name: 'label', label: '映射', rules: true },
-                    { span: 24, formType: 'SELECT', name: 'type', label: '类型', rules: true, valueEnum: MappingData.Form__SearchType },
+                    { span: 24, formType: 'SELECT', name: 'type', label: '类型', rules: true, valueEnum: MappingData.Form__TypeList },
                 ]
             },
         ]
@@ -3641,7 +3641,7 @@ const SetDEVGetDataConfig = [
                 children: [
                     { span: 24, formType: 'INPUT', name: 'value', label: '字段', rules: true },
                     { span: 24, formType: 'INPUT', name: 'label', label: '映射', rules: true },
-                    { span: 24, formType: 'SELECT', name: 'type', label: '类型', rules: true, valueEnum: MappingData.Form__SearchType },
+                    { span: 24, formType: 'SELECT', name: 'type', label: '类型', rules: true, valueEnum: MappingData.Form__TypeList },
                 ]
             },
         ]

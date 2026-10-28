@@ -1,5 +1,4 @@
 import './SetDevRouter.scss'
-import { v4 } from 'uuid'
 
 import copy from 'copy-to-clipboard'
 import { message, Tour, Button } from 'antd'
