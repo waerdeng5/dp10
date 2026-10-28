@@ -10332,6 +10332,107 @@ const BitsText_TextType = [
     },
 ]
 
+const BitsText_Shuffle = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'Shuffle_A01', label: '文字设置', collapsible: true, children: [
+            { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+            { span: 6, formType: 'RADIO', name: 'triggerOnce', label: '仅执行一次', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 6, formType: 'RADIO', name: 'respectReducedMotion', label: '立即显示', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 6, formType: 'COLOR', name: 'colorFrom', label: '变换开始', rules: true, mode: ['single'] },
+            { span: 6, formType: 'COLOR', name: 'colorTo', label: '变换结束', rules: true, mode: ['single'] },
+            { span: 6, formType: 'INPUT', name: 'tag', label: '标签', rules: true },
+            { span: 6, formType: 'NUMBER', name: ['style', 'fontSize'], label: '文字字号', rules: true },
+            { span: 6, formType: 'SELECT', name: ['style', 'fontFamily'], label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 6, formType: 'RADIO', name: ['style', 'fontWeight'], label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'Shuffle_A02', label: '翻转设置', collapsible: true, children: [
+            { span: 8, formType: 'RADIO', name: 'shuffleDirection', label: '翻转方向', rules: true, valueEnum: MappingData.BitsText_ShuffleDirection },
+            { span: 8, formType: 'RADIO', name: 'animationMode', label: '动画模式', rules: true, valueEnum: MappingData.BitsText_ShuffleAnimation },
+            { span: 8, formType: 'RADIO', name: 'effect', label: '触发效果', rules: true, valueEnum: MappingData.BitsText_ShuffleEffect },
+            { span: 8, formType: 'RADIO', name: 'motionBlur', label: '运动模糊', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'RADIO', name: 'loop', label: '持续循环', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'RADIO', name: 'triggerOnHover', label: '悬停触发', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 8, formType: 'NUMBER', name: 'duration', label: '持续时间', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'maxDelay', label: '最大延迟', rules: true },
+            { span: 8, formType: 'INPUT', name: 'ease', label: '动画效果', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'threshold', label: '阈值', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'rootMargin', label: '根边距', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'shuffleTimes', label: '翻转次数', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'loopDelay', label: '循环延迟', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'stagger', label: '错位', rules: true },
+            { span: 8, formType: 'NUMBER', name: 'hoverRadius', label: '滑动半径', rules: true },
+        ]
+    }
+]
+
+const BitsText_ShinyText = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
+    { span: 6, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'COLOR', name: 'shineColor', label: '光泽颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'NUMBER', name: 'shineWidth', label: '光泽比例', rules: true, min: 1, max: 100 },
+    { span: 6, formType: 'NUMBER', name: 'glow', label: '发光比例', rules: true, min: 0, max: 1 },
+    { span: 8, formType: 'NUMBER', name: ['style', 'fontSize'], label: '文字字号', rules: true },
+    { span: 8, formType: 'SELECT', name: ['style', 'fontFamily'], label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 8, formType: 'RADIO', name: ['style', 'fontWeight'], label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 8, formType: 'RADIO', name: 'direction', label: '光带方向', rules: true, valueEnum: MappingData.System__AlignmentLR },
+    { span: 8, formType: 'RADIO', name: 'easing', label: '发光方式', rules: true, valueEnum: MappingData.BitsText_ShinyTextEasing },
+    { span: 8, formType: 'RADIO', name: 'trigger', label: '切换方式', rules: true, valueEnum: MappingData.BitsText_ShinyTextTrigger },
+    { span: 8, formType: 'RADIO', name: 'yoyo', label: '循环扫描', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'followPointer', label: '指针跟随', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'pauseOnHover', label: '悬停停止', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'disabled', label: '禁用动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '闪光速度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'delay', label: '延迟', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'angle', label: '角度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'softness', label: '柔和度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'bands', label: '频带数量', rules: true },
+]
+
+const BitsText_CurvedLoop = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'marqueeText', label: '文字内容', rules: true },
+    { span: 8, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'INPUT', name: 'separator', label: '分隔符号', rules: true },
+    { span: 8, formType: 'COLOR', name: 'separatorColor', label: '分隔符颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'NUMBER', name: 'letterSpacing', label: '文字间距', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'fontSize', label: '文字字号', rules: true },
+    { span: 6, formType: 'SELECT', name: 'fontFamily', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 6, formType: 'RADIO', name: 'fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 8, formType: 'RADIO', name: 'outline', label: '镂空文字', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'shape', label: '条带形状', rules: true, valueEnum: MappingData.BitsText_CurvedLoopShape },
+    { span: 8, formType: 'RADIO', name: 'direction', label: '方向', rules: true, valueEnum: MappingData.System__AlignmentLR },
+    { span: 8, formType: 'RADIO', name: 'interactive', label: '拖拽交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'pauseOnHover', label: '移入暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'curveAmount', label: '曲线幅度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'edgeFade', label: '褪色比例', rules: true, min: 0, max: 1 },
+    { span: 8, formType: 'NUMBER', name: 'scrollBoost', label: '滚动加速', rules: true, min: 0 },
+]
+
+const BitsText_GradientText = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'children', label: '文字内容', rules: true },
+    { span: 8, formType: 'COLORS', name: 'colors', label: '文字颜色', rules: true },
+
+
+    // colors: ['#5227FF', '#FF9FFC', '#B497CF'],
+    // animationSpeed: 8,
+    // variant: 'linear',
+    // angle: 90,
+    // direction: 'left',
+    // scale: 3,
+    // yoyo: true,
+    // glow: 0,
+    // showBorder: false,
+    // borderWidth: 1.5,
+    // pauseOnHover: false,
+    // followPointer: false,
+]
+
 
 export const FormConfig = {
     TextClassList,
@@ -10429,4 +10530,8 @@ export const FormConfig = {
     BitsText_EchoText,
     BitsText_CircularText,
     BitsText_TextType,
+    BitsText_Shuffle,
+    BitsText_ShinyText,
+    BitsText_CurvedLoop,
+    BitsText_GradientText,
 }

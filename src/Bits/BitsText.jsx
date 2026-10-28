@@ -10,6 +10,11 @@ import FoldText from './FoldText'
 import EchoText from './EchoText'
 import CircularText from './CircularText'
 import TextType from './TextType'
+import Shuffle from './Shuffle'
+import ShinyText from './ShinyText'
+import CurvedLoop from './CurvedLoop'
+import GradientText from './GradientText'
+
 
 const BitsText_TechText = ({ data }) => <TechText {...data} />
 const BitsText_TextLoop = ({ data }) => <TextLoop {...data} />
@@ -23,6 +28,10 @@ const BitsText_FoldText = ({ data }) => <div className='FoldText'><FoldText {...
 const BitsText_EchoText = ({ data }) => <div className='EchoText'><EchoText {...data} /></div>
 const BitsText_CircularText = ({ data }) => <div className='CircularText'><CircularText {...data} /></div>
 const BitsText_TextType = ({ data }) => <div className='TextType'><TextType {...data} /></div>
+const BitsText_Shuffle = ({ data }) => <div className='Shuffle'><Shuffle {...data} /></div>
+const BitsText_ShinyText = ({ data }) => <div className='ShinyText'><ShinyText {...data} /></div>
+const BitsText_CurvedLoop = ({ data }) => <CurvedLoop {...data} />
+const BitsText_GradientText = ({ data }) => <div className='GradientText'><GradientText {...data} /></div>
 
 
 
@@ -39,4 +48,8 @@ export const BitsTextTemplate = {
     BitsText_EchoText,
     BitsText_CircularText,
     BitsText_TextType,
+    BitsText_Shuffle,
+    BitsText_ShinyText,
+    BitsText_CurvedLoop,
+    BitsText_GradientText,
 }

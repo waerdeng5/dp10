@@ -1278,7 +1278,39 @@ export const MappingData = {
         { value: 'fade', label: '褪色' },
         { value: 'blur', label: '模糊' },
         { value: 'rise', label: '上升' },
-
+    ],
+    BitsText_ShuffleDirection: [
+        { value: 'left', label: '左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'up', label: '向上' },
+        { value: 'down', label: '向下' },
+    ],
+    BitsText_ShuffleAnimation: [
+        { value: 'evenodd', label: '偶数' },
+        { value: 'sequence', label: '序列' },
+        { value: 'center', label: '中心' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsText_ShuffleEffect: [
+        { value: 'slide', label: '滑动' },
+        { value: 'flip', label: '翻转' },
+        { value: 'blur', label: '模糊' },
+    ],
+    BitsText_ShinyTextEasing: [
+        { value: 'smooth', label: '流畅' },
+        { value: 'linear', label: '线性' },
+        { value: 'snappy', label: '锐利' },
+    ],
+    BitsText_ShinyTextTrigger: [
+        { value: 'loop', label: '循环' },
+        { value: 'hover', label: '悬停' },
+        { value: 'view', label: '查看' },
+    ],
+    BitsText_CurvedLoopShape: [
+        { value: 'arc', label: '弧形' },
+        { value: 'wave', label: '波浪' },
+        { value: 'circle', label: '圆形' },
+        { value: 'line', label: '直线' },
     ],
 
     // TODO Dev

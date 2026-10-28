@@ -23,7 +23,9 @@
           "text-wrap",
           "text-wrap: balance",
           "-webkit-user-drag",
-          "background-color: color-mix(in srgb, currentColor 25%, transparent)"
+          "background-color: color-mix(in srgb, currentColor 25%, transparent)",
+          "-webkit-mask-composite",
+          "mask-composite"
         ]
       }
     ]

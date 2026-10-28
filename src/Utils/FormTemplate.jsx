@@ -99,6 +99,7 @@ const FormTemplate = ({
     }, { wait: 500 })
 
     const onFinish = async (e) => {
+        // return console.log(e)
         const data = await formCallBack(e)
         FORMEVENT.emit({ type: onFormBack, data: { ...data, onCallBack } })
         setLoading(NotLoading ? false : true)
@@ -447,21 +448,15 @@ const RATE = ({ data, getMap }) => {
 // Todo 颜色选择
 const COLOR = memo(({ data, form, action }) => {
     const { span, name, label, tooltip, rules = false, disabled = false, jugde, mode = ['single', 'gradient'] } = data
-    const onChangeComplete = useCallback(e => {
-        const { colors } = e
-        const valueToSet = colors && Array.isArray(colors) ? colors.map(({ color, percent }) => ({ color: color.toHexString(), percent })) : e.toHexString()
-
-        console.log('valueToSet', valueToSet)
-        console.log('name', name)
-        console.log('action', action)
-
-
-        if (action) action.setCurrentRowData({ [name]: valueToSet })
-        else {
-            const value = typeof (name) === 'string' ? [name] : [...name]
-            form.current.setFieldValue(value, valueToSet)
-        }
-    }, [])
+    // const onChangeComplete = useCallback(e => {
+    //     const { colors } = e
+    //     const valueToSet = colors && Array.isArray(colors) ? colors.map(({ color, percent }) => ({ color: color.toHexString(), percent })) : e.toHexString()
+    //     if (action) action.setCurrentRowData({ [name]: valueToSet })
+    //     else {
+    //         const value = typeof (name) === 'string' ? [name] : [...name]
+    //         form.current.setFieldValue(value, valueToSet)
+    //     }
+    // }, [])
     // onChangeComplete
     const Template = () => (
         <div className='COLOR' style={{ width: `${100 / 24 * span}%` }}>
@@ -478,6 +473,54 @@ const COLOR = memo(({ data, form, action }) => {
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 })
+
+// Todo 颜色选择
+const COLORS = ({ data, form, action }) => {
+    const { span, name, label, tooltip, rules = false, disabled = false, jugde } = data
+    // const onChangeComplete = useCallback(e => {
+    //     const { colors } = e
+    //     const valueToSet = colors && Array.isArray(colors) ? colors.map(({ color, percent }) => ({ color: color.toHexString(), percent })) : e.toHexString()
+
+    //     console.log('valueToSet', valueToSet)
+    //     console.log('name', name)
+    //     console.log('action', action)
+
+
+    //     if (action) action.setCurrentRowData({ [name]: valueToSet })
+    //     else {
+    //         const value = typeof (name) === 'string' ? [name] : [...name]
+    //         form.current.setFieldValue(value, valueToSet)
+    //     }
+    // }, [])
+    // onChangeComplete
+
+
+    const Template = () => (
+        <div className='COLORS' style={{ width: `${100 / 24 * span}%` }}>
+            <ProForm.Item isListField style={{ marginBlockEnd: 0 }} label="规格值">
+                <ProFormList
+                    name="colors"
+                    creatorButtonProps={{ creatorButtonText: '新建', icon: false, type: 'link', style: { width: 'unset' } }}
+                    min={1}
+                    copyIconProps={false}
+                    deleteIconProps={{ tooltipText: '删除' }}
+                    itemRender={({ listDom, action }) => (
+                        <div style={{ display: 'inline-flex', marginInlineEnd: 25 }}>
+                            {listDom}
+                            {action}
+                        </div>
+                    )}
+                >
+                    <ProFormColorPicker allowClear={false} name='color' />
+                </ProFormList>
+            </ProForm.Item>
+
+        </div>
+    )
+    if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
+    else return <Template />
+}
+
 
 // Todo Radio单选
 const RADIO = ({ data }) => {
@@ -1409,6 +1452,9 @@ const TempGenerateUuid = ({ data, form, action }) => {
     else return <Template />
 }
 
+
+
+
 const TemplateMapping = {
     GROUP,
     LIST,
@@ -1421,6 +1467,7 @@ const TemplateMapping = {
     SLIDER,
     RATE,
     COLOR,
+    COLORS,
     RADIO,
     SELECT,
     SELECTM,
