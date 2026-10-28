@@ -1215,7 +1215,23 @@ export const MappingData = {
         { value: 'wipe', label: '擦拭' },
         { value: 'none', label: '无' },
     ],
-
+    BitsText_FoldTextSplitBy: [
+        { value: 'char', label: '字符' },
+        { value: 'word', label: '单词' },
+        { value: 'line', label: '整行' },
+    ],
+    BitsText_FoldTextFoldStyle: [
+        { value: 'paper', label: '纸张' },
+        { value: 'blinds', label: '窗帘' },
+        { value: 'flip', label: '翻转' },
+    ],
+    BitsText_FoldTextFrom: [
+        { value: 'start', label: '开始' },
+        { value: 'center', label: '中心' },
+        { value: 'end', label: '结束' },
+        { value: 'edges', label: '翻转' },
+        { value: 'random', label: '随机' },
+    ],
 
 
     // TODO Dev

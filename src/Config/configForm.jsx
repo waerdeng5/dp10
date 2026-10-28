@@ -10231,32 +10231,26 @@ const BitsText_DepthText = [
 const BitsText_FoldText = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     { span: 24, formType: 'INPUT', name: 'text', label: '文字内容', rules: true },
-
-
-    // text: 'Design unfolds',
-    // splitBy: 'char',
-    // hinge: 'top',
-    // foldStyle: 'paper',
-    // duration: 0.65,
-    // stagger: 0.045,
-    // staggerFrom: 'start',
-    // foldAngle: 92,
-    // ease: 'power3.out',
-    // perspective: 700,
-    // creaseShading: 0.55,
-    // trigger: 'mount',
-    // loopDelay: 1.4,
-    // hoverRefold: false,
-    // refoldRadius: 140,
-    // refoldAngle: 45,
-    // fontSize: 80,
-    // fontWeight: 800,
-    // color: 'currentColor',
-
-
+    { span: 6, formType: 'RADIO', name: 'splitBy', label: '入场动画', rules: true, valueEnum: MappingData.BitsText_FoldTextSplitBy },
+    { span: 6, formType: 'RADIO', name: 'hinge', label: '触发位置', rules: true, valueEnum: MappingData.Charts__LegendsOrient },
+    { span: 6, formType: 'RADIO', name: 'foldStyle', label: '折叠样式', rules: true, valueEnum: MappingData.BitsText_FoldTextFoldStyle },
+    { span: 8, formType: 'NUMBER', name: 'duration', label: '持续时间', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'stagger', label: '动画延时', rules: true },
+    { span: 6, formType: 'RADIO', name: 'staggerFrom', label: '动画方向', rules: true, valueEnum: MappingData.BitsText_FoldTextFrom },
+    { span: 8, formType: 'NUMBER', name: 'foldAngle', label: '折叠角度', rules: true },
+    { span: 24, formType: 'INPUT', name: 'ease', label: '动画效果', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'perspective', label: '视角', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'creaseShading', label: '折痕阴影', rules: true },
+    { span: 6, formType: 'RADIO', name: 'trigger', label: '切换方式', rules: true, valueEnum: MappingData.BitsText_StrokeTextTrigger },
+    { span: 8, formType: 'NUMBER', name: 'loopDelay', label: '循环延迟', rules: true },
+    { span: 6, formType: 'RADIO', name: 'hoverRefold', label: '划入重置', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'refoldRadius', label: '折叠半径', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'refoldAngle', label: '折叠角度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'fontSize', label: '文字字号', rules: true },
+    { span: 8, formType: 'SELECT', name: 'fontFamily', label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 8, formType: 'RADIO', name: 'fontWeight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 6, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true, mode: ['single'] },
 ]
-
-
 
 
 export const FormConfig = {

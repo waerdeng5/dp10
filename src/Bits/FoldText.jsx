@@ -52,6 +52,7 @@ const FoldText = ({
     refoldAngle = 45,
     fontSize = 80,
     fontWeight = 800,
+    fontFamily = 'Shuheiti',
     color = 'currentColor',
     className = '',
     style = {}
@@ -331,6 +332,7 @@ const FoldText = ({
     const rootStyle = {
         '--fold-text-font-size': typeof fontSize === 'number' ? `${fontSize}px` : fontSize,
         '--fold-text-font-weight': fontWeight,
+        '--fold-text-font-family': fontFamily,
         '--fold-text-color': color,
         '--fold-perspective': `${Math.max(120, perspective)}px`,
         ...style
