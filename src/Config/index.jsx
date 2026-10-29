@@ -1109,6 +1109,22 @@ const BitsTextMapping = {
         color: 'currentColor',
         draggable: false,
     },
+    BitsText_VariableProximity: {
+        value: 'BitsText_VariableProximity',
+        label: 'Hover me! And then star React Bits on GitHub, or else...',
+        fromFontVariationSettings: "'wght' 400, 'opsz' 9",
+        toFontVariationSettings: "'wght' 1000, 'opsz' 40",
+        radius: 50,
+        falloff: 'linear',
+        smoothing: 0.2,
+        fromColor: '#f5222d',
+        toColor: 'currentColor',
+        scale: 1,
+        lift: 0,
+        idleWave: false,
+        fontSize: 28,
+    },
+
 }
 
 

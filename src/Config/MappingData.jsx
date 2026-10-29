@@ -1361,6 +1361,11 @@ export const MappingData = {
         { value: 'dark', label: '暗' },
         { value: 'light', label: '亮' },
     ],
+    BitsText_VariableProximityFalloff: [
+        { value: 'linear', label: '线性' },
+        { value: 'exponential', label: '指数' },
+        { value: 'gaussian', label: '高斯' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

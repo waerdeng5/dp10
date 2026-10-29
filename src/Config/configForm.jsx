@@ -10610,6 +10610,22 @@ const BitsText_ScrollVelocity = [
     { span: 8, formType: 'NUMBER', name: 'gap', label: '间隙', rules: true },
 ]
 
+const BitsText_VariableProximity = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'label', label: '文字内容', rules: true },
+    { span: 4, formType: 'COLOR', name: 'fromColor', label: '开始颜色', rules: true, mode: ['single'] },
+    { span: 4, formType: 'COLOR', name: 'toColor', label: '结束颜色', rules: true, mode: ['single'] },
+    { span: 4, formType: 'NUMBER', name: 'fontSize', label: '字号', rules: true },
+    { span: 6, formType: 'SELECT', name: ['style', 'fontFamily'], label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 6, formType: 'RADIO', name: ['style', 'fontWeight'], label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 8, formType: 'RADIO', name: 'idleWave', label: '空闲波', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'falloff', label: '衰减', rules: true, valueEnum: MappingData.BitsText_VariableProximityFalloff },
+    { span: 8, formType: 'NUMBER', name: 'radius', label: '半径', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'smoothing', label: '平滑度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'lift', label: '升程', rules: true },
+]
+
 
 export const FormConfig = {
     TextClassList,
@@ -10716,4 +10732,5 @@ export const FormConfig = {
     BitsText_TrueFocus,
     BitsText_ASCIIText,
     BitsText_ScrollVelocity,
+    BitsText_VariableProximity,
 }

@@ -19,6 +19,7 @@ import DecryptedText from './DecryptedText'
 import TrueFocus from './TrueFocus'
 import ASCIIText from './ASCIIText'
 import ScrollVelocity from './ScrollVelocity'
+import VariableProximity from './VariableProximity'
 
 
 
@@ -44,6 +45,7 @@ const BitsText_DecryptedText = ({ data }) => <div className='DecryptedText'><Dec
 const BitsText_TrueFocus = ({ data }) => <div className='TrueFocus'><TrueFocus {...data} /></div>
 const BitsText_ASCIIText = ({ data }) => <ASCIIText {...data} />
 const BitsText_ScrollVelocity = ({ data }) => <div className='ScrollVelocity'><ScrollVelocity {...data} /></div>
+const BitsText_VariableProximity = ({ data }) => <div className='VariableProximity'><VariableProximity {...data} /></div>
 
 
 
@@ -69,4 +71,5 @@ export const BitsTextTemplate = {
     BitsText_TrueFocus,
     BitsText_ASCIIText,
     BitsText_ScrollVelocity,
+    BitsText_VariableProximity,
 }
