@@ -805,6 +805,7 @@ export const DevExtremeLayout = memo((props) => {
         setDxThemeMapping(dxThemeMapping)
         if (devTheme) {
             const { dxTheme } = await GetIndexedDB('userAdd')
+            if (!dxTheme) return
             const theme = dxTheme.split('.compact')[0]
             THEdata.style = { ...THEdata.style, ...dxThemeMapping[theme].style }
         }

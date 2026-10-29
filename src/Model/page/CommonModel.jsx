@@ -9,10 +9,9 @@ import { useEventEmitter, useMount, useReactive, useSize } from 'ahooks'
 import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider } from 'antd'
 import Chart, { AdaptiveLayout, CommonSeriesSettings, Size, Tooltip, Export, Label, Format, Legend } from 'devextreme-react/chart'
 
-import { CommonAPIUrl } from '../../Config'
 import FormTemplate from '../../Utils/FormTemplate'
+import { MappingData } from '../../Config/MappingData'
 import { DevScrollView } from '../../Temp/DevTemplate'
-import { onTreeDrop, ColorCallBack } from '../../Utils'
 import { WeChatTempMenu } from '../../Temp/WeChatTempMenu'
 import { VideoTemplateA02 } from '../../Temp/VideoTemplate'
 import { SwiperLookAnimation } from '../../Temp/SwiperTemplate'
@@ -20,6 +19,7 @@ import { WeChatTempClockIn } from '../../Temp/WeChatTempClockIn'
 import { modelStore, devChartsStore } from '../../Router/zustand'
 import { WeChatTempListType } from '../../Temp/WeChatTempListType'
 import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
+import { onTreeDrop, ColorCallBack, addAttr } from '../../Utils'
 import { GetIndexedDB, PutIndexedDB, Encrypt, Decrypt } from '../../Utils/IndexedDB'
 
 
@@ -41,39 +41,39 @@ const CommonModel = ({ data, Event }) => {
         const { searchArr, Initial } = data
         const [formItem, setFormItem] = useState()
 
+        const getApiData = async (v) => {
+            const { mappingType, mappingData, mappingApi, mappingPar, mappingJudge, mappingLable, mappingParExtra, mappingValue } = v
+            if (mappingType === 'DataMapping') return MappingData[mappingData]
+            if (mappingType === 'ApiMapping') {
+                const [err, api] = await axios({ method: 'get', url: mappingApi, params: { ...strOfurlParamsFunc(mappingPar) } })
+                if (err) return false
+                return addAttr(api.data.list, { label: mappingLable, value: mappingValue, extra: mappingParExtra, judge: mappingJudge })
+            }
+        }
+
+        const setFormItemFunc = async (searchArr) => {
+            const item = await Promise.all(
+                searchArr.map(async v => {
+                    const { type, label, value } = v
+                    const obj = { span: 24, formType: type, name: value, label: label }
+                    if (FlowMenuAPIFieldJugdeValue.includes(type)) obj.valueEnum = await getApiData(v)
+                    return obj
+                })
+            )
+            setFormItem(item)
+        }
+
         useEffect(() => {
-            // const item = searchArr.map(v => {
-            //     const { type } = v
-            //     const obj = { span: 24, formType: v.type, name: v.value, label: v.label }
-            //     if (FlowMenuAPIFieldJugdeValue.includes(type)) {
-            //         console.log('选项', v, hostname)
-
-            //         return obj
-            //     }
-            //     else return obj
-            // })
-            const obj = searchArr.map(item => ({ span: 24, formType: item.type, name: item.value, label: item.label }))
-
-            if (hostname === 'nongkai.ljkjkf.com') obj.push({
-                span: 24, formType: 'SELECT', name: 'engineeringStatus', label: '项目状态',
-                valueEnum: [
-                    { value: '3bdfe017-305e-4f7f-b70d-6d61ac32f2d4', label: '停工项目' },
-                    { value: '4039ffba-58ee-4431-a5b1-177c2a2e5b26', label: '在建项目' },
-                    { value: '89e9459a-257c-4eb6-8714-0ad607fc1f17', label: '已完工项目' },
-                ]
-            })
-            setFormItem(obj)
+            setFormItemFunc(searchArr)
         }, [searchArr])
 
-        // searchArr.map(item => ({ span: 24, formType: item.type, name: item.value, label: item.label, valueEnum: [{ value: '1', label: '1' }] }))
-
-        if (formItem) {
+        if (formItem && formItem.length !== 0) {
             return (
                 <DevScrollView>
                     <FormTemplate formItem={formItem} FORMEVENT={Event} Initial={Initial} />
                 </DevScrollView>
             )
-        }
+        } else return <Spin />
     }
 
     // 菜单排序
@@ -523,7 +523,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
 
     // 锁屏动画
     if (openType === 'LookAnimation') {
