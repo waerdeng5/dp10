@@ -11,7 +11,7 @@ import { useRef, useEffect } from 'react'
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
 
-import ScrollVelocity from '../../Bits/ScrollVelocity'
+import VariableProximity from '../../Bits/VariableProximity'
 
 
 
@@ -20,8 +20,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='ScrollVelocity' style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <ScrollVelocity />
+            <div className='VariableProximity' style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <VariableProximity />
             </div>
 
 

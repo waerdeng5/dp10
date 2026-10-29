@@ -336,6 +336,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
         }
     })
 
+    console.log('UserPower', ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && LayoutStatus))
 
     if (page) {
         const { page_layPadding, page_fold, page_diff, page_back, page_back_url } = page

@@ -37,7 +37,7 @@ const strengthAt = (distance, radius, falloff) => {
 
 const VariableProximity = forwardRef((props, ref) => {
     const {
-        label = '',
+        label = 'Hover me! And then star React Bits on GitHub, or else...',
         fromFontVariationSettings = "'wght' 400, 'opsz' 9",
         toFontVariationSettings = "'wght' 1000, 'opsz' 40",
         containerRef,
