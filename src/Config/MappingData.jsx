@@ -1312,6 +1312,55 @@ export const MappingData = {
         { value: 'circle', label: '圆形' },
         { value: 'line', label: '直线' },
     ],
+    BitsText_GradientTextVarinat: [
+        { value: 'linear', label: '线性' },
+        { value: 'flow', label: '流线' },
+        { value: 'conic', label: '锥形' },
+    ],
+    BitsText_TextCursorMode: [
+        { value: 'stamp', label: '戳' },
+        { value: 'chain', label: '线' },
+        { value: 'ribbon', label: '带' },
+    ],
+    BitsText_DecryptedTextDirection: [
+        { value: 'start', label: '开始' },
+        { value: 'end', label: '结束' },
+        { value: 'center', label: '中心' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsText_DecryptedTextAnimate: [
+        { value: 'view', label: '查看' },
+        { value: 'hover', label: '悬停' },
+        { value: 'inViewHover', label: '查看悬停' },
+        { value: 'click', label: '点击' },
+    ],
+    BitsText_DecryptedTextClick: [
+        { value: 'once', label: '一次' },
+        { value: 'toggle', label: '切换' },
+    ],
+    BitsText_DecryptedTextEffect: [
+        { value: 'scramble', label: '打乱' },
+        { value: 'flip', label: '翻转' },
+        { value: 'fade', label: '褪色' },
+    ],
+    BitsText_TrueFocusFocus: [
+        { value: 'brackets', label: '括号' },
+        { value: 'box', label: '框' },
+        { value: 'underline', label: '下划线' },
+        { value: 'highlight', label: '高亮' },
+    ],
+    BitsText_TrueFocusOrder: [
+        { value: 'sequential', label: '顺序' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsText_TrueFocusEasing: [
+        { value: 'smooth', label: '流畅' },
+        { value: 'spring', label: '弹簧' },
+    ],
+    BitsText_ASCIITextTheme: [
+        { value: 'dark', label: '暗' },
+        { value: 'light', label: '亮' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

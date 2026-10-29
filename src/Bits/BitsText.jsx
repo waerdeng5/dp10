@@ -14,6 +14,13 @@ import Shuffle from './Shuffle'
 import ShinyText from './ShinyText'
 import CurvedLoop from './CurvedLoop'
 import GradientText from './GradientText'
+import TextCursor from './TextCursor'
+import DecryptedText from './DecryptedText'
+import TrueFocus from './TrueFocus'
+import ASCIIText from './ASCIIText'
+import ScrollVelocity from './ScrollVelocity'
+
+
 
 
 const BitsText_TechText = ({ data }) => <TechText {...data} />
@@ -32,6 +39,11 @@ const BitsText_Shuffle = ({ data }) => <div className='Shuffle'><Shuffle {...dat
 const BitsText_ShinyText = ({ data }) => <div className='ShinyText'><ShinyText {...data} /></div>
 const BitsText_CurvedLoop = ({ data }) => <CurvedLoop {...data} />
 const BitsText_GradientText = ({ data }) => <div className='GradientText'><GradientText {...data} /></div>
+const BitsText_TextCursor = ({ data }) => <TextCursor {...data} />
+const BitsText_DecryptedText = ({ data }) => <div className='DecryptedText'><DecryptedText {...data} /></div>
+const BitsText_TrueFocus = ({ data }) => <div className='TrueFocus'><TrueFocus {...data} /></div>
+const BitsText_ASCIIText = ({ data }) => <ASCIIText {...data} />
+const BitsText_ScrollVelocity = ({ data }) => <div className='ScrollVelocity'><ScrollVelocity {...data} /></div>
 
 
 
@@ -52,4 +64,9 @@ export const BitsTextTemplate = {
     BitsText_ShinyText,
     BitsText_CurvedLoop,
     BitsText_GradientText,
+    BitsText_TextCursor,
+    BitsText_DecryptedText,
+    BitsText_TrueFocus,
+    BitsText_ASCIIText,
+    BitsText_ScrollVelocity,
 }

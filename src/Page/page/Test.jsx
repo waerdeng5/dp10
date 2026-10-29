@@ -11,7 +11,7 @@ import { useRef, useEffect } from 'react'
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
 
-import GradientText from '../../Bits/GradientText'
+import ScrollVelocity from '../../Bits/ScrollVelocity'
 
 
 
@@ -20,8 +20,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='GradientText' style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <GradientText />
+            <div className='ScrollVelocity' style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <ScrollVelocity />
             </div>
 
 

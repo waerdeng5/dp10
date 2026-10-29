@@ -127,12 +127,6 @@ const FormTemplate = ({
     const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
 
     useEffect(() => {
-
-
-        console.log('入参内容', Initial)
-
-
-
         formRef.current.setFieldsValue(Initial)
     }, [Initial])
 
@@ -417,7 +411,7 @@ const SLIDER = ({ data }) => {
                 label={label}
                 tooltip={tooltip}
                 disabled={disabled}
-                fieldProps={{ variant: "underlined" }}
+                fieldProps={{ variant: "underlined", tooltip: { open: true, placement: 'bottom' } }}
                 rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 marks={marks}
                 min={min || 0}
@@ -482,16 +476,8 @@ const COLOR = memo(({ data, form, action }) => {
 // Todo 颜色选择
 const COLORS = ({ data, form, action }) => {
     const actionRef = useRef(action)
-    const { span, name, label, tooltip, rules = false, disabled = false, jugde } = data
-
-
-
-
-
+    const { span, name, label, tooltip, rules = false, disabled = false, jugde, min, max } = data
     const Template = () => {
-
-        console.log(form)
-
         return (
             <div className='COLORS' style={{ width: `${100 / 24 * span}%` }}>
                 <div className='COLORS_BUTTON'>
@@ -499,7 +485,10 @@ const COLORS = ({ data, form, action }) => {
                         type="default"
                         stylingMode="text"
                         icon='fas fa-plus-square'
-                        onClick={() => actionRef.current?.add({ color: '#1677ff' })}
+                        onClick={() => {
+                            if (actionRef.current?.getList().length >= max) return
+                            actionRef.current?.add({ color: '#1677ff' })
+                        }}
                     />
                     <Button
                         type="danger"
@@ -517,8 +506,8 @@ const COLORS = ({ data, form, action }) => {
                     rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 >
                     <ProFormList
-                        min={1}
-                        max={5}
+                        min={min}
+                        max={max}
                         name={name}
                         actionRef={actionRef}
                         className='COLORS_LIST'

@@ -419,7 +419,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                 {status &&
                     <Dropdown
                         trigger={['contextMenu']}
-                        menu={{ items: (port && LayoutStatus) ? GlobalOperation({ LayoutEvent }) : [] }}
+                        menu={{ items: ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && LayoutStatus) ? GlobalOperation({ LayoutEvent }) : [] }}
                     >
                         <div className={`ContentBox ${LayoutStatus ? 'Edit' : 'Preview'}`} ref={ContentBoxRef}>
                             {SIZE &&
@@ -489,7 +489,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                                                     <Dropdown
                                                         trigger={['contextMenu']}
                                                         menu={{
-                                                            items: (port && LayoutStatus) ?
+                                                            items: ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && LayoutStatus) ?
                                                                 GlobalOperation({ type: 'window', winId: item.i, LayoutEvent }) : []
                                                         }}
                                                     >

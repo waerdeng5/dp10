@@ -61,7 +61,6 @@ const DepthText = ({
     className = '',
     style = {}
 }) => {
-    console.log(fontSize)
     const rootRef = useRef(null);
     const stageRef = useRef(null);
     const rotationRef = useRef(null);
