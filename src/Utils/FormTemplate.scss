@@ -201,6 +201,7 @@
         }
 
         .COLOR {
+
             .ant-color-picker-trigger {
                 padding: 24px 16px 0px 16px;
                 height: 72px;
@@ -334,8 +335,6 @@
                 }
             }
         }
-
-
     }
 }
 
@@ -517,7 +516,59 @@
             transform: rotate(-22px) !important;
         }
     }
+}
 
+
+.COLORS {
+    position: relative;
+    z-index: 1;
+
+    .COLORS_BUTTON {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9;
+
+        .dx-button {
+            margin: 0 0 0 8px !important;
+            height: auto !important;
+        }
+
+    }
+
+    .COLORS_LIST {
+        .ant-form-item-control-input-content {
+            .ant-row {
+                &>div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &>.COLORS_ITEM {
+                        flex: 1;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
+
+                        .ant-form-item-control-input {
+                            width: 100%;
+
+                            .ant-color-picker-trigger {
+                                background: #ffffff00;
+
+                                &>.ant-color-picker-clear,
+                                &>.ant-color-picker-color-block {
+                                    width: 100% !important;
+                                }
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+    }
 }
 
 .SELECTColorModel {

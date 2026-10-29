@@ -12,7 +12,8 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 export default function GradientText({
     children = 'Hello World',
-    colors = ['#5227FF', '#FF9FFC', '#B497CF'],
+    colors = [{ color: '#5227FF' }, { color: '#FF9FFC' }, { color: '#B497CF' }],
+    // colors = ["#5227FF", "#FF9FFC", "#B497CF", "#40ffaa", "#4079ff"],
     animationSpeed = 8,
     variant = 'linear',
     angle = 90,
@@ -30,8 +31,7 @@ export default function GradientText({
     const rootRef = useRef(null);
     const settingsRef = useRef(null);
     const wakeRef = useRef(null);
-    const palette = colors.length > 1 ? colors : [colors[0] ?? '#ffffff', colors[0] ?? '#ffffff'];
-
+    const palette = colors.map((item) => item.color)
     settingsRef.current = {
         colors: palette,
         speed: Math.max(0.2, animationSpeed),

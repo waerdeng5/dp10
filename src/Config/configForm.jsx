@@ -10481,7 +10481,7 @@ const BitsText_CurvedLoop = [
 const BitsText_GradientText = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     { span: 24, formType: 'INPUT', name: 'children', label: '文字内容', rules: true },
-    { span: 8, formType: 'COLORS', name: 'colors', label: '文字颜色', rules: true },
+    { span: 12, formType: 'COLORS', name: 'colors', label: '文字颜色', rules: true },
 
 
     // colors: ['#5227FF', '#FF9FFC', '#B497CF'],

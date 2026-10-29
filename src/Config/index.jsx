@@ -989,7 +989,7 @@ const BitsTextMapping = {
     BitsText_GradientText: {
         value: 'BitsText_GradientText',
         children: 'Hello World',
-        colors: ['#5227FF', '#FF9FFC', '#B497CF'],
+        colors: [{ color: '#5227FF' }, { color: '#FF9FFC' }, { color: '#B497CF' }],
         animationSpeed: 8,
         variant: 'linear',
         angle: 90,

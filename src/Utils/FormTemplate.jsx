@@ -54,6 +54,7 @@ const { WinBox } = window
 const { RangePicker } = ProFormTimePicker
 
 const formCallBack = e => {
+
     const toColor = (co) => {
         const { colors } = co
         const valueToSet = colors && Array.isArray(colors) ? colors.map(({ color, percent }) => ({ color: color.toHexString(), percent })) : co.toHexString()
@@ -93,14 +94,13 @@ const FormTemplate = ({
     const formRef = useRef(null)
     const formListRef = useRef(null)
     const [loading, setLoading] = useState(false)
-    const [INIT] = useState(Initial)
     const { run } = useDebounceFn((e) => {
         FORMEVENT.emit({ type: 'onDetection', data: formCallBack(e) })
     }, { wait: 500 })
 
     const onFinish = async (e) => {
-        // return console.log(e)
         const data = await formCallBack(e)
+        // return console.log(data)
         FORMEVENT.emit({ type: onFormBack, data: { ...data, onCallBack } })
         setLoading(NotLoading ? false : true)
     }
@@ -127,6 +127,12 @@ const FormTemplate = ({
     const onFinishFailed = (e) => { notification.warning({ key: 'onFinishFailed', title: '保存失败', description: e.message }) }
 
     useEffect(() => {
+
+
+        console.log('入参内容', Initial)
+
+
+
         formRef.current.setFieldsValue(Initial)
     }, [Initial])
 
@@ -143,7 +149,6 @@ const FormTemplate = ({
                     grid={true}
                     layout='vertical'
                     rowProps={{ span: 24 }}
-                    initialValues={INIT}
                     scrollToFirstError={true}
                     onValuesChange={onValuesChange}
                     onFinish={onFinish}
@@ -476,47 +481,59 @@ const COLOR = memo(({ data, form, action }) => {
 
 // Todo 颜色选择
 const COLORS = ({ data, form, action }) => {
+    const actionRef = useRef(action)
     const { span, name, label, tooltip, rules = false, disabled = false, jugde } = data
-    // const onChangeComplete = useCallback(e => {
-    //     const { colors } = e
-    //     const valueToSet = colors && Array.isArray(colors) ? colors.map(({ color, percent }) => ({ color: color.toHexString(), percent })) : e.toHexString()
-
-    //     console.log('valueToSet', valueToSet)
-    //     console.log('name', name)
-    //     console.log('action', action)
 
 
-    //     if (action) action.setCurrentRowData({ [name]: valueToSet })
-    //     else {
-    //         const value = typeof (name) === 'string' ? [name] : [...name]
-    //         form.current.setFieldValue(value, valueToSet)
-    //     }
-    // }, [])
-    // onChangeComplete
 
 
-    const Template = () => (
-        <div className='COLORS' style={{ width: `${100 / 24 * span}%` }}>
-            <ProForm.Item isListField style={{ marginBlockEnd: 0 }} label="规格值">
-                <ProFormList
-                    name="colors"
-                    creatorButtonProps={{ creatorButtonText: '新建', icon: false, type: 'link', style: { width: 'unset' } }}
-                    min={1}
-                    copyIconProps={false}
-                    deleteIconProps={{ tooltipText: '删除' }}
-                    itemRender={({ listDom, action }) => (
-                        <div style={{ display: 'inline-flex', marginInlineEnd: 25 }}>
-                            {listDom}
-                            {action}
-                        </div>
-                    )}
+
+    const Template = () => {
+
+        console.log(form)
+
+        return (
+            <div className='COLORS' style={{ width: `${100 / 24 * span}%` }}>
+                <div className='COLORS_BUTTON'>
+                    <Button
+                        type="default"
+                        stylingMode="text"
+                        icon='fas fa-plus-square'
+                        onClick={() => actionRef.current?.add({ color: '#1677ff' })}
+                    />
+                    <Button
+                        type="danger"
+                        stylingMode="text"
+                        icon='fas fa-minus-square'
+                        onClick={() => { actionRef.current?.remove(1) }}
+                    > </Button>
+                </div>
+                <ProForm.Item
+                    isListField
+                    style={{ marginBlockEnd: 0 }}
+                    label={label}
+                    tooltip={tooltip}
+                    disabled={disabled}
+                    rules={[{ required: !!rules, message: `${label}必须输入` }]}
                 >
-                    <ProFormColorPicker allowClear={false} name='color' />
-                </ProFormList>
-            </ProForm.Item>
+                    <ProFormList
+                        min={1}
+                        max={5}
+                        name={name}
+                        actionRef={actionRef}
+                        className='COLORS_LIST'
+                        creatorButtonProps={false}
+                        copyIconProps={false}
+                        deleteIconProps={false}
+                        itemRender={({ listDom, action }) => (<div className='COLORS_ITEM' >{listDom}{action}</div>)}
+                    >
+                        <ProFormColorPicker allowClear={false} name='color' />
+                    </ProFormList>
+                </ProForm.Item>
 
-        </div>
-    )
+            </div>
+        )
+    }
     if (jugde) return <JudgeTemplate jugde={jugde} Template={Template} />
     else return <Template />
 }
