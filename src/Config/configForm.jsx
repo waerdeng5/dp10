@@ -3674,6 +3674,39 @@ const SetDEVGetDataConfig = [
                     { span: 24, formType: 'INPUT', name: 'value', label: '字段', rules: true },
                     { span: 24, formType: 'INPUT', name: 'label', label: '映射', rules: true },
                     { span: 24, formType: 'SELECT', name: 'type', label: '类型', rules: true, valueEnum: MappingData.Form__TypeList },
+                    {
+                        span: 24, formType: 'RADIO', name: 'mappingType', label: '映射类型', rules: true, tooltip: '将字符映射为中文',
+                        valueEnum: MappingData.System__MapType, jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }]
+                    },
+                    {
+                        span: 24, formType: 'SELECT', name: 'mappingData', label: '数据映射', rules: true, tooltip: '将字符映射为中文',
+                        valueEnum: MappingData.System__MappingEnum,
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['DataMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'mappingApi', label: '数据接口', rules: true,
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'mappingPar', label: '数据参数',
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'mappingParExtra', label: '额外渲染',
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'RADIO', name: 'mappingJudge', label: '是否判断', tooltip: '根据isEnabled判断是否渲染', valueEnum: MappingData.IsEnabledBool,
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['ApiMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'mappingValue', label: '映射键', rules: true,
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['DataMapping', 'ApiMapping'] }]
+                    },
+                    {
+                        span: 24, formType: 'INPUT', name: 'mappingLable', label: '映射值', rules: true,
+                        jugde: [{ field: 'type', value: FlowMenuAPIFieldJugdeValue }, { field: 'mappingType', value: ['DataMapping', 'ApiMapping'] }]
+                    },
                 ]
             },
         ]
