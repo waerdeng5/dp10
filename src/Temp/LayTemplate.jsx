@@ -15,7 +15,7 @@ import { v4 } from 'uuid'
 import { useState, useRef, useEffect } from 'react'
 import { Button, Dropdown, Popconfirm } from 'antd'
 
-import { useSize } from 'ahooks'
+import { useSize, useMount } from 'ahooks'
 import ReactGridLayout from 'react-grid-layout'
 import { GridBackground } from "react-grid-layout/extras"
 
@@ -35,6 +35,7 @@ import { PrefabricatedSwiperTemplate } from './PrefabricatedSwiper'
 import { PrefabricatedVisualTemplate } from './PrefabricatedVisual'
 
 import { BitsTextTemplate } from '../Bits/BitsText'
+import { GetIndexedDB } from '../Utils/IndexedDB'
 
 import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
 
@@ -306,6 +307,7 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
         margin: SpacingCallBack(window_navMargin),
     }
 
+    const [User, setUser] = useState()
     const [STATUS, setSTATUS] = useState()
     const [SWIPER, setSWIPER] = useState()
     const [Active, setActive] = useState(window_NavList.length !== 0 ? window_NavList[0].window_navUuid : '')
@@ -425,6 +427,13 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
         if (SWIPER) SWIPER.slideTo(window_NavList.findIndex(v => v.window_navUuid === Active), window_swiperSpeed, false)
     }, [Active, SWIPER])
 
+    useMount(async () => {
+        const user = await GetIndexedDB('user')
+        setUser(user)
+    })
+
+    console.log('TempPower', ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && status))
+
     return (
         <>
             {window_nav &&
@@ -451,7 +460,7 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
                             <SwiperSlide key={window_navUuid}>
                                 <Dropdown
                                     trigger={['contextMenu']}
-                                    menu={{ items: (port && status) ? GlobalOperation({ type: 'layout', winId: data.i, layId: window_navUuid, actId: STATUS, LayoutEvent }) : [] }}
+                                    menu={{ items: ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && status) ? GlobalOperation({ type: 'layout', winId: data.i, layId: window_navUuid, actId: STATUS, LayoutEvent }) : [] }}
                                 >
                                     <div
                                         className={`WindowSwiperItem ${SwiperParams.noSwiping || layoutStyle ? 'swiper-no-swiping' : ''} ${layoutStyle ? 'Edit' : 'Preview'}`}

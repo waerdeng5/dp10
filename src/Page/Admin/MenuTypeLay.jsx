@@ -25,6 +25,7 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
     const SIZE = useSize(ContentBoxRef)
     const LayoutEvent = useEventEmitter()
     const { updateModel4, updateModel5 } = modelStore()
+    const [User, setUser] = useState()
 
     const [Loading, setLoading] = useState(true)
     const [Status, setStatus] = useState(true)
@@ -248,6 +249,8 @@ const MenuTypeLay = ({ data, AdminEvent }) => {
     LayoutEvent.useSubscription(layoutCallBack)
 
     useMount(async () => {
+        const user = await GetIndexedDB('user')
+        setUser(user)
         AdminEvent.emit({ type: 'onActiveMenu', data: { ...data } })
         getData()
     })
