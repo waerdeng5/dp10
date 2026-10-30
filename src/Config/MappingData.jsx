@@ -1366,6 +1366,50 @@ export const MappingData = {
         { value: 'exponential', label: '指数' },
         { value: 'gaussian', label: '高斯' },
     ],
+    BitsText_CountUpDirection: [
+        { value: 'up', label: '向上' },
+        { value: 'down', label: '向下' },
+    ],
+    BitsText_CountUpMode: [
+        { value: 'count', label: '计数' },
+        { value: 'roll', label: '滚动' },
+    ],
+    BitsText_CountUpEasing: [
+        { value: 'easeOut', label: '缓出' },
+        { value: 'linear', label: '线性' },
+        { value: 'expo', label: '指数' },
+        { value: 'spring', label: '弹簧' },
+    ],
+    BitsText_CountUpFormat: [
+        { value: 'standard', label: '标准' },
+        { value: 'compact', label: '紧凑' },
+    ],
+    BitsText_CountUpTrigger: [
+        { value: 'view', label: '查看' },
+        { value: 'load', label: '加载' },
+    ],
+    BitsComponents_HoloCardPreset: [
+        { value: 'bursts', label: '脉冲' },
+        { value: 'stars', label: '星' },
+        { value: 'shards', label: '碎片' },
+        { value: 'cosmos', label: '宇宙' },
+        { value: 'rainbow', label: '彩虹' },
+        { value: 'swirl', label: '螺旋' },
+        { value: 'glitter', label: '闪光' },
+        { value: 'gold', label: '黄金' },
+    ],
+    BitsComponents_CircularCarouselPreset: [
+        { value: 'cylinder', label: '圆柱' },
+        { value: 'orbit', label: '轨道' },
+        { value: 'wheel', label: '轮' },
+        { value: 'panorama', label: '全景' },
+    ],
+    BitsComponents_CircularCarouselIntro: [
+        { value: 'assemble', label: '组装' },
+        { value: 'rise', label: '上升' },
+        { value: 'spin', label: '旋转' },
+        { value: 'none', label: '无' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

@@ -12,6 +12,7 @@ import {
     SwiperTemplatePage,
     VisualTemplatePage,
     BITSTextTemplate,
+    BITSComponentsTemplate,
 } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
@@ -123,7 +124,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '11', label: 'BITS组件', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSComponentsTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )
@@ -132,7 +133,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '12', label: 'BITSMicro', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )
@@ -141,7 +142,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '13', label: 'BITS动画', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )
@@ -150,7 +151,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '14', label: 'BITS背景', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={VisualTemplatePage} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )

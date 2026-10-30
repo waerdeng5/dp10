@@ -28,6 +28,7 @@
           "mask-composite"
         ]
       }
-    ]
+    ],
+    "css-prefix-order": "off"
   }
 }

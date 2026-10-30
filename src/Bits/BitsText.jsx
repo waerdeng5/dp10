@@ -20,6 +20,7 @@ import TrueFocus from './TrueFocus'
 import ASCIIText from './ASCIIText'
 import ScrollVelocity from './ScrollVelocity'
 import VariableProximity from './VariableProximity'
+import CountUp from './CountUp'
 
 
 
@@ -46,6 +47,7 @@ const BitsText_TrueFocus = ({ data }) => <div className='TrueFocus'><TrueFocus {
 const BitsText_ASCIIText = ({ data }) => <ASCIIText {...data} />
 const BitsText_ScrollVelocity = ({ data }) => <div className='ScrollVelocity'><ScrollVelocity {...data} /></div>
 const BitsText_VariableProximity = ({ data }) => <div className='VariableProximity'><VariableProximity {...data} /></div>
+const BitsText_CountUp = ({ data }) => <div className='CountUp'><CountUp {...data} /></div>
 
 
 
@@ -72,4 +74,5 @@ export const BitsTextTemplate = {
     BitsText_ASCIIText,
     BitsText_ScrollVelocity,
     BitsText_VariableProximity,
+    BitsText_CountUp,
 }

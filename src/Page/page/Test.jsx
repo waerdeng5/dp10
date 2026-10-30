@@ -10,18 +10,15 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-
-import VariableProximity from '../../Bits/VariableProximity'
-
-
+import CircularCarousel from '../../Bits/CircularCarousel'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     return (
         <div className='TestPage'>
 
-            <div className='VariableProximity' style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <VariableProximity />
+            <div className='CircularCarousel' style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <CircularCarousel />
             </div>
 
 

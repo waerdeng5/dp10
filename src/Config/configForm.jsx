@@ -10626,8 +10626,127 @@ const BitsText_VariableProximity = [
     { span: 8, formType: 'NUMBER', name: 'lift', label: '升程', rules: true },
 ]
 
+const BitsText_CountUp = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'NUMBER', name: 'from', label: '起始值', rules: true },
+    { span: 12, formType: 'NUMBER', name: 'to', label: '结束值', rules: true },
+    { span: 6, formType: 'COLOR', name: ['style', 'color'], label: '文字颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'NUMBER', name: ['style', 'fontSize'], label: '文字字号', rules: true },
+    { span: 6, formType: 'SELECT', name: ['style', 'fontFamily'], label: '文字字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 6, formType: 'RADIO', name: ['style', 'fontWeight'], label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 8, formType: 'RADIO', name: 'easing', label: '动效', rules: true, valueEnum: MappingData.BitsText_CountUpEasing },
+    { span: 8, formType: 'RADIO', name: 'direction', label: '滚动方向', rules: true, valueEnum: MappingData.BitsText_CountUpDirection },
+    { span: 8, formType: 'RADIO', name: 'mode', label: '模式', rules: true, valueEnum: MappingData.BitsText_CountUpMode },
+    { span: 6, formType: 'RADIO', name: 'startWhen', label: '开始时间', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'format', label: '格式化', rules: true, valueEnum: MappingData.BitsText_CountUpFormat },
+    { span: 6, formType: 'RADIO', name: 'trigger', label: '切换模式', rules: true, valueEnum: MappingData.BitsText_CountUpTrigger },
+    { span: 6, formType: 'RADIO', name: 'replayOnHover', label: '悬停重播', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'delay', label: '延迟', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'duration', label: '持续时间', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'decimals', label: '小数位数', rules: true },
+    { span: 8, formType: 'INPUT', name: 'separator', label: '分隔符' },
+    { span: 8, formType: 'INPUT', name: 'prefix', label: '前缀' },
+    { span: 8, formType: 'INPUT', name: 'suffix', label: '后缀' },
+]
+
+const BitsComponents_HoloCard = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'image', label: '正面图片', rules: true },
+    { span: 24, formType: 'INPUT', name: 'backImage', label: '背面图片', rules: true },
+    { span: 6, formType: 'COLOR', name: 'foilColor', label: '箔片颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'SELECT', name: 'preset', label: '模式', rules: true, valueEnum: MappingData.BitsComponents_HoloCardPreset },
+    { span: 6, formType: 'RADIO', name: 'idle', label: '闲置', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'shadow', label: '阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'radius', label: '半径', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'intensity', label: '强度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'edgeSparkle', label: '边缘闪光', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'frame', label: '补帧', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'glare', label: '炫光', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'tiltMax', label: '最大倾斜', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'hoverScale', label: '悬停比例', rules: true },
+]
+
+const BitsComponents_CircularCarousel = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'BitsComponents_CircularCarouselA01', label: '轮播图片', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'items', label: '图片集', collapsible: true,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'src', label: '图片地址', rules: true },
+                    { span: 8, formType: 'INPUT', name: 'title', label: '标题' },
+                    { span: 8, formType: 'INPUT', name: 'subtitle', label: '副标题' },
+                    { span: 8, formType: 'INPUT', name: 'alt', label: '图片信息' },
+                ]
+            },
+        ]
+    },
+
+    { span: 6, formType: 'RADIO', name: 'preset', label: '预设模式', rules: true, valueEnum: MappingData.BitsComponents_CircularCarouselPreset },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场方式', rules: true, valueEnum: MappingData.BitsComponents_CircularCarouselIntro },
+
+
+
+
+
+    // cardWidth: 220,
+    // aspectRatio: 1,
+    // gap: 25,
+    // curve: 1,
+    // tilt: -5,
+    // perspective: 2500,
+    // autoplay: 'drift',
+    // speed: 14,
+    // interval: 3,
+    // direction: 'left',
+    // draggable: true,
+    // momentum: 0.6,
+    // snap: true,
+    // pauseOnHover: true,
+    // focusOnClick: true,
+    // parallax: 0.3,
+    // stretch: 0.5,
+    // depthFade: 0.55,
+    // fadeColor: '#000000',
+    // innerShade: 0.6,
+    // cornerRadius: 12,
+    // captions: false,
+
+]
+
 
 export const FormConfig = {
+    BitsComponents_CircularCarousel,
+    BitsComponents_HoloCard,
+
+    BitsText_TechText,
+    BitsText_TextLoop,
+    BitsText_MaskedHeading,
+    BitsText_ParticleText,
+    BitsText_SplitFlapText,
+    BitsText_WarpText,
+    BitsText_StrokeText,
+    BitsText_DepthText,
+    BitsText_FoldText,
+    BitsText_EchoText,
+    BitsText_CircularText,
+    BitsText_TextType,
+    BitsText_Shuffle,
+    BitsText_ShinyText,
+    BitsText_CurvedLoop,
+    BitsText_GradientText,
+    BitsText_TextCursor,
+    BitsText_DecryptedText,
+    BitsText_TrueFocus,
+    BitsText_ASCIIText,
+    BitsText_ScrollVelocity,
+    BitsText_VariableProximity,
+    BitsText_CountUp,
+
+
     TextClassList,
     AddProjectFormList,
 
@@ -10710,27 +10829,4 @@ export const FormConfig = {
     PrefabricatedPasteModel,
     FenceFormData,
 
-
-    BitsText_TechText,
-    BitsText_TextLoop,
-    BitsText_MaskedHeading,
-    BitsText_ParticleText,
-    BitsText_SplitFlapText,
-    BitsText_WarpText,
-    BitsText_StrokeText,
-    BitsText_DepthText,
-    BitsText_FoldText,
-    BitsText_EchoText,
-    BitsText_CircularText,
-    BitsText_TextType,
-    BitsText_Shuffle,
-    BitsText_ShinyText,
-    BitsText_CurvedLoop,
-    BitsText_GradientText,
-    BitsText_TextCursor,
-    BitsText_DecryptedText,
-    BitsText_TrueFocus,
-    BitsText_ASCIIText,
-    BitsText_ScrollVelocity,
-    BitsText_VariableProximity,
 }

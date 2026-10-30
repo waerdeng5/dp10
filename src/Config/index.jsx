@@ -624,6 +624,56 @@ export const BITSTextTemplate = [
     { uuid: 'BitsText_CountUp', title: 'CountUp', img: `${CommonUrl}BitsText/BitsText_CountUp.png`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
+export const BITSComponentsTemplate = [
+    { uuid: 'BitsComponents_HoloCard', title: 'HoloCard', img: `${CommonUrl}BitsText/BITSComponents_HoloCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_CircularCarousel', title: 'CircularCarousel', img: `${CommonUrl}BitsText/BITSComponents_CircularCarousel.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_FlexCarousel', title: 'FlexCarousel', img: `${CommonUrl}BitsText/BITSComponents_FlexCarousel.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_InfiniteSpiral', title: 'InfiniteSpiral', img: `${CommonUrl}BitsText/BITSComponents_InfiniteSpiral.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_DepthCarousel', title: 'DepthCarousel', img: `${CommonUrl}BitsText/BITSComponents_DepthCarousel.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_MorphSlider', title: 'MorphSlider', img: `${CommonUrl}BitsText/BITSComponents_MorphSlider.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_DrifWall', title: 'DrifWall', img: `${CommonUrl}BitsText/BITSComponents_DrifWall.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_AccordionGallery', title: 'AccordionGallery', img: `${CommonUrl}BitsText/BITSComponents_AccordionGallery.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_SpecularButton', title: 'SpecularButton', img: `${CommonUrl}BitsText/BITSComponents_SpecularButton.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_OptionWheel', title: 'OptionWheel', img: `${CommonUrl}BitsText/BITSComponents_OptionWheel.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_CurvedInput', title: 'CurvedInput', img: `${CommonUrl}BitsText/BITSComponents_CurvedInput.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_LineSidebar', title: 'LineSidebar', img: `${CommonUrl}BitsText/BITSComponents_LineSidebar.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_AnimatedList', title: 'AnimatedList', img: `${CommonUrl}BitsText/BITSComponents_AnimatedList.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ScrollStack', title: 'ScrollStack', img: `${CommonUrl}BitsText/BITSComponents_ScrollStack.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_BubbleMenu', title: 'BubbleMenu', img: `${CommonUrl}BitsText/BITSComponents_BubbleMenu.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_MagicBento', title: 'MagicBento', img: `${CommonUrl}BitsText/BITSComponents_MagicBento.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_CircularGallery', title: 'CircularGallery', img: `${CommonUrl}BitsText/BITSComponents_CircularGallery.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ReflectiveCard', title: 'ReflectiveCard', img: `${CommonUrl}BitsText/BITSComponents_ReflectiveCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_CardNav', title: 'CardNav', img: `${CommonUrl}BitsText/BITSComponents_CardNav.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Stack', title: 'Stack', img: `${CommonUrl}BitsText/BITSComponents_Stack.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_FluidGlass', title: 'FluidGlass', img: `${CommonUrl}BitsText/BITSComponents_FluidGlass.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_PillNav', title: 'PillNav', img: `${CommonUrl}BitsText/BITSComponents_PillNav.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_TiltedCard', title: 'TiltedCard', img: `${CommonUrl}BitsText/BITSComponents_TiltedCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Masonry', title: 'Masonry', img: `${CommonUrl}BitsText/BITSComponents_Masonry.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_GlassSurface', title: 'GlassSurface', img: `${CommonUrl}BitsText/BITSComponents_GlassSurface.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_DomeGallery', title: 'DomeGallery', img: `${CommonUrl}BitsText/BITSComponents_DomeGallery.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ChromaGrid', title: 'ChromaGrid', img: `${CommonUrl}BitsText/BITSComponents_ChromaGrid.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Folder', title: 'Folder', img: `${CommonUrl}BitsText/BITSComponents_Folder.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_StaggeredMenu', title: 'StaggeredMenu', img: `${CommonUrl}BitsText/BITSComponents_StaggeredMenu.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ModelViewer', title: 'ModelViewer', img: `${CommonUrl}BitsText/BITSComponents_ModelViewer.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Lanyard', title: 'Lanyard', img: `${CommonUrl}BitsText/BITSComponents_Lanyard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ProfileCard', title: 'ProfileCard', img: `${CommonUrl}BitsText/BITSComponents_ProfileCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Dock', title: 'Dock', img: `${CommonUrl}BitsText/BITSComponents_Dock.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_GooeyNav', title: 'GooeyNav', img: `${CommonUrl}BitsText/BITSComponents_GooeyNav.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_PixelCard', title: 'PixelCard', img: `${CommonUrl}BitsText/BITSComponents_PixelCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Carousel', title: 'Carousel', img: `${CommonUrl}BitsText/BITSComponents_Carousel.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_SpotlightCard', title: 'SpotlightCard', img: `${CommonUrl}BitsText/BITSComponents_SpotlightCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_BorderGlow', title: 'BorderGlow', img: `${CommonUrl}BitsText/BITSComponents_BorderGlow.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_FlyingPosters', title: 'FlyingPosters', img: `${CommonUrl}BitsText/BITSComponents_FlyingPosters.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_CardSwap', title: 'CardSwap', img: `${CommonUrl}BitsText/BITSComponents_CardSwap.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_GlassIcons', title: 'GlassIcons', img: `${CommonUrl}BitsText/BITSComponents_GlassIcons.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_DecayCard', title: 'DecayCard', img: `${CommonUrl}BitsText/BITSComponents_DecayCard.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_FlowingMenu', title: 'FlowingMenu', img: `${CommonUrl}BitsText/BITSComponents_FlowingMenu.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_ElasticSlider', title: 'ElasticSlider', img: `${CommonUrl}BitsText/BITSComponents_ElasticSlider.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Counter', title: 'Counter', img: `${CommonUrl}BitsText/BITSComponents_Counter.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_InfiniteMenu', title: 'InfiniteMenu', img: `${CommonUrl}BitsText/BITSComponents_InfiniteMenu.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_Stepper', title: 'Stepper', img: `${CommonUrl}BitsText/BITSComponents_Stepper.png`, x: 0, y: 0, w: 12, h: 12 },
+    { uuid: 'BitsComponents_BounceCards', title: 'BounceCards', img: `${CommonUrl}BitsText/BITSComponents_BounceCards.png`, x: 0, y: 0, w: 12, h: 12 },
+]
 
 const BitsTextMapping = {
     BitsText_TechText: {
@@ -1124,12 +1174,99 @@ const BitsTextMapping = {
         idleWave: false,
         fontSize: 28,
     },
+    BitsText_CountUp: {
+        value: 'BitsText_CountUp',
+        to: 100,
+        from: 0,
+        direction: 'up',
+        delay: 0,
+        duration: 2,
+        startWhen: true,
+        separator: '',
+        prefix: '',
+        suffix: '',
+        mode: 'count',
+        easing: 'easeOut',
+        decimals: 0,
+        format: 'standard',
+        trigger: 'view',
+        replayOnHover: false,
+    },
 
 }
 
+const photo = id => `https://aloss.ljkjkf.com/WebConfigFile/image/Common/BitsText/${id}.png`;
+const DEFAULT_ITEMS = [
+    { src: photo('BITSComponents_HoloCard'), alt: '', title: 'HoloCard', subtitle: 'BITSComponents_HoloCard' },
+    { src: photo('BITSComponents_CircularCarousel'), alt: '', title: 'CircularCarousel', subtitle: 'BITSComponents_CircularCarousel' },
+    { src: photo('BITSComponents_FlexCarousel'), alt: '', title: 'FlexCarousel', subtitle: 'BITSComponents_FlexCarousel' },
+    { src: photo('BITSComponents_InfiniteSpiral'), alt: '', title: 'InfiniteSpiral', subtitle: 'BITSComponents_InfiniteSpiral' },
+    { src: photo('BITSComponents_DepthCarousel'), alt: '', title: 'DepthCarousel', subtitle: 'BITSComponents_DepthCarousel' },
+    { src: photo('BITSComponents_MorphSlider'), alt: '', title: 'MorphSlider', subtitle: 'BITSComponents_MorphSlider' },
+    { src: photo('BITSComponents_DrifWall'), alt: '', title: 'DrifWall', subtitle: 'BITSComponents_DrifWall' },
+    { src: photo('BITSComponents_AccordionGallery'), alt: '', title: 'AccordionGallery', subtitle: 'BITSComponents_AccordionGallery' },
+    { src: photo('BITSComponents_SpecularButton'), alt: '', title: 'SpecularButton', subtitle: 'BITSComponents_SpecularButton' },
+    { src: photo('BITSComponents_CurvedInput'), alt: '', title: 'CurvedInput', subtitle: 'BITSComponents_CurvedInput' },
+    { src: photo('BITSComponents_AnimatedList'), alt: '', title: 'AnimatedList', subtitle: 'BITSComponents_AnimatedList' },
+    { src: photo('BITSComponents_ScrollStack'), alt: '', title: 'ScrollStack', subtitle: 'BITSComponents_ScrollStack' },
+    { src: photo('BITSComponents_BubbleMenu'), alt: '', title: 'BubbleMenu', subtitle: 'BITSComponents_BubbleMenu' },
+];
+
+const BITSComponentsMapping = {
+    BitsComponents_HoloCard: {
+        value: 'BitsComponents_HoloCard',
+        image: 'https://aloss.ljkjkf.com/Attachment/IntellisiteSystem_nongkai/MyStaticFiles/20261029/f1b4beba-edd8-40a7-9d84-1dac7facf42b.png',
+        backImage: 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/HomeBack.png',
+        alt: '',
+        preset: 'bursts',
+        intensity: 0.85,
+        scale: 1,
+        edgeSparkle: 0.8,
+        frame: 4,
+        glare: 0.5,
+        foilColor: '#e2e6ec',
+        width: 320,
+        radius: 14,
+        tiltMax: 14,
+        hoverScale: 1.04,
+        idle: true,
+        shadow: true,
+    },
+    BitsComponents_CircularCarousel: {
+        value: 'BitsComponents_CircularCarousel',
+        items: DEFAULT_ITEMS,
+        preset: 'cylinder',
+        intro: 'rise',
+        cardWidth: 220,
+        aspectRatio: 1,
+        gap: 25,
+        curve: 1,
+        tilt: -5,
+        perspective: 2500,
+        autoplay: 'drift',
+        speed: 14,
+        interval: 3,
+        direction: 'left',
+        draggable: true,
+        momentum: 0.6,
+        snap: true,
+        pauseOnHover: true,
+        focusOnClick: true,
+        parallax: 0.3,
+        stretch: 0.5,
+        depthFade: 0.55,
+        fadeColor: '#000000',
+        innerShade: 0.6,
+        cornerRadius: 12,
+        captions: false,
+    }
+}
 
 
 export const TemplateParamsMapping = {
+    // TODO BITS组件
+    ...BitsTextMapping,
+    ...BITSComponentsMapping,
     // TODO 占位组件
     PrefabricatedPlaceEmpty: {
         value: 'PrefabricatedPlaceEmpty',
@@ -1643,8 +1780,6 @@ export const TemplateParamsMapping = {
     PrefabricatedVisualLive: {
         value: 'PrefabricatedVisualLive',
     },
-    // TODO BITS组件
-    ...BitsTextMapping,
 }
 
 export const OtherDiyPageConfig = {
