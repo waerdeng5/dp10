@@ -1410,6 +1410,70 @@ export const MappingData = {
         { value: 'spin', label: '旋转' },
         { value: 'none', label: '无' },
     ],
+    BitsComponents_CircularCarouselAutoPlay: [
+        { value: 'drift', label: '漂移' },
+        { value: 'step', label: '步进' },
+        { value: 'off', label: '关闭' },
+    ],
+    BitsComponents_FlexCarouselPreset: [
+        { value: 'liquid', label: '液体' },
+        { value: 'ribbon', label: '带' },
+        { value: 'vortex', label: '涡' },
+        { value: 'arch', label: '弧' },
+    ],
+    BitsComponents_FlexCarouselIntro: [
+        { value: 'rise', label: '上升' },
+        { value: 'bloom', label: '扩散' },
+        { value: 'spin', label: '旋转' },
+        { value: 'deal', label: '处理' },
+        { value: 'none', label: '无' },
+    ],
+    BitsComponents_FlexCarouselFit: [
+        { value: 'natural', label: '自然' },
+        { value: 'portrait', label: '纵向' },
+        { value: 'square', label: '方形' },
+        { value: 'landscape', label: '横向' },
+    ],
+    BitsComponents_FlexCarouselCurl: [
+        { value: 'twist', label: '螺旋' },
+        { value: 'rise', label: '上升' },
+        { value: 'fall', label: '下降' },
+    ],
+    BitsComponents_InfiniteSpiralDirection: [
+        { value: 'up', label: '向上' },
+        { value: 'down', label: '向下' },
+    ],
+    BitsComponents_InfiniteSpiralMode: [
+        { value: 'auto', label: '自动' },
+        { value: 'drag', label: '拖动' },
+        { value: 'scroll', label: '滚动' },
+        { value: 'all', label: '所有' },
+    ],
+    BitsComponents_InfiniteSpiralFit: [
+        { value: 'cover', label: '覆盖' },
+        { value: 'contain', label: '包含' },
+    ],
+    BitsComponents_MorphSliderTransition: [
+        { value: 'melt', label: '熔化' },
+        { value: 'ripple', label: '波纹' },
+        { value: 'shear', label: '拉伸' },
+        { value: 'swirl', label: '螺旋' },
+    ],
+    BitsComponents_SpecularButtonSize: [
+        { value: 'sm', label: '小' },
+        { value: 'md', label: '中' },
+        { value: 'lg', label: '大' },
+    ],
+    BitsComponents_SpecularButtonType: [
+        { value: 'button', label: '按钮' },
+        { value: 'submit', label: '提交' },
+        { value: 'reset', label: '重置' },
+    ],
+    BitsComponents_LineSidebarFalloff: [
+        { value: 'linear', label: '线性' },
+        { value: 'smooth', label: '平滑' },
+        { value: 'sharp', label: '尖锐' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

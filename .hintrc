@@ -25,7 +25,10 @@
           "-webkit-user-drag",
           "background-color: color-mix(in srgb, currentColor 25%, transparent)",
           "-webkit-mask-composite",
-          "mask-composite"
+          "mask-composite",
+          "mask-composite: intersect",
+          "outline: 2px solid color-mix(in srgb, var(--sb-text-color) 55%, transparent)",
+          "color: color-mix(in srgb, var(--ow-active-color) calc(var(--ow-p, 0) * 100%), var(--ow-text-color))"
         ]
       }
     ],
