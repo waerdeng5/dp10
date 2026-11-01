@@ -4,9 +4,10 @@ import remarkGfm from 'remark-gfm'
 import themes from "devextreme/ui/themes"
 import ReactMarkdown from 'react-markdown'
 import { Sortable } from 'devextreme-react/sortable'
+import FileViewer from '@file-viewer/react-full'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useEventEmitter, useMount, useReactive, useSize } from 'ahooks'
-import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider } from 'antd'
+import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider, Image } from 'antd'
 import Chart, { AdaptiveLayout, CommonSeriesSettings, Size, Tooltip, Export, Label, Format, Legend } from 'devextreme-react/chart'
 
 import FormTemplate from '../../Utils/FormTemplate'
@@ -224,12 +225,17 @@ const CommonModel = ({ data, Event }) => {
                 <VideoTemplateA02 url={url} />
             </div>
         )
-        if (type === 'pdf') return (
+        else if (type === 'image') return (
             <div className='CommonModel__attDetail'>
-                <embed src={url} type="application/pdf" />
+                <Image src={url} alt={url} />
             </div>
         )
-        if (type === 'not') return (
+        else if (type === 'pdf' || type === 'word' || type === 'excel' || type === 'md' || type === 'txt' || type === 'edge') return (
+            <div className='CommonModel__attDetail'>
+                <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+            </div>
+        )
+        else return (
             <div className='CommonModel__attDetail'>
                 <Result status="404" title='未知文件' subTitle={url} />
             </div>
@@ -662,6 +668,7 @@ const CommonModel = ({ data, Event }) => {
             </DevScrollView>
         )
     }
+
 
 
     return (

@@ -10,15 +10,15 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import CircularGallery from '../../Bits/CircularGallery'
+import ReflectiveCard from '../../Bits/ReflectiveCard'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     return (
         <div className='TestPage'>
 
-            <div className='CircularGallery' style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <CircularGallery />
+            <div className='ReflectiveCard' style={{ width: '100%', height: '100%', position: 'relative' }}>
+                <ReflectiveCard />
             </div>
 
 

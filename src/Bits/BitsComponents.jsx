@@ -10,7 +10,7 @@ import SpecularButton from './SpecularButton'
 import OptionWheel from './OptionWheel'
 import LineSidebar from './LineSidebar'
 import CircularGallery from './CircularGallery'
-
+import ReflectiveCard from './ReflectiveCard'
 
 
 
@@ -26,6 +26,7 @@ const BitsComponents_SpecularButton = ({ data }) => <div className='SpecularButt
 const BitsComponents_OptionWheel = ({ data }) => <div className='OptionWheel'><OptionWheel {...data} /></div>
 const BitsComponents_LineSidebar = ({ data }) => <div className='LineSidebar'><LineSidebar {...data} /></div>
 const BitsComponents_CircularGallery = ({ data }) => <div className='CircularGallery'><CircularGallery {...data} /></div>
+const BitsComponents_ReflectiveCard = ({ data }) => <div className='ReflectiveCard'><ReflectiveCard {...data} /></div>
 
 
 
@@ -42,4 +43,5 @@ export const BitsComponentsTemplate = {
     BitsComponents_OptionWheel,
     BitsComponents_LineSidebar,
     BitsComponents_CircularGallery,
+    BitsComponents_ReflectiveCard,
 }

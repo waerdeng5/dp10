@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react'
 import { App, Transfer, Tree, Table, Button, Image } from 'antd'
 import { ScrollView } from 'devextreme-react/scroll-view'
 
-import FileViewer from '@file-viewer/react-full'
 
 
 import { axios } from '../Utils/Api'
@@ -237,36 +236,31 @@ export const ExcelTemplate = (props) => {
 export const AttachTemplateA01 = ({ data }) => {
     const { updateModel3 } = modelStore()
     const onClick = (type, title, url) => {
-        if (type === 'word' || type === 'excel' || type === 'md' || type === 'txt' || type === 'edge') return window.open(url)
-        updateModel3({ title, type: 'CommonModel', modelData: { openType: 'attDetail', type, url } })
+
+        updateModel3({ title, type: 'CommonModel', modelData: { openType: 'attDetail', type, title, url } })
     }
+
+
 
     return (
         <div className='AttachTemplateA01'>
             {data.map(item => {
                 const { uuid, url, originalName } = item
                 const type = getFileTypeFromUrl(url)
-                const Template = () => {
-                    if (type === 'image') return <Image src={url} alt={originalName} />
-                    if (type === 'video') return <VideoTemplateA02 url={url} />
-                    if (type === 'pdf') return <i className="far fa-file-pdf" onClick={() => onClick(type, originalName, url)} />
-                    if (type === 'word') return <i className="far fa-file-word" onClick={() => onClick(type, originalName, url)} />
-                    if (type === 'excel') return <i className="far fa-file-excel" onClick={() => onClick(type, originalName, url)} />
-                    if (type === 'md') return <i className="far fa-file-alt" onClick={() => onClick(type, originalName, url)} />
-                    if (type === 'txt') return <i className="far fa-file-code" onClick={() => onClick(type, originalName, url)} />
-                    if (type === 'edge') return <i className="fas fa-link" onClick={() => onClick(type, originalName, url)} />
-                    return <div onClick={() => onClick(type, originalName, url)}>未知文件</div>
-                }
-
+                // const Template = () => {
+                //     if (type === 'image') return <Image src={url} alt={originalName} />
+                //     if (type === 'video') return <VideoTemplateA02 url={url} />
+                //     if (type === 'pdf') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     if (type === 'word') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     if (type === 'excel') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     if (type === 'md') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     if (type === 'txt') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     if (type === 'edge') return <FileViewer url={url} options={{ theme: 'light', toolbar: { position: 'bottom-right' } }} />
+                //     return <div onClick={() => onClick(type, originalName, url)}>未知文件</div>
+                // }
                 return (
                     <div className='AttachItem' key={uuid}>
-                        <div className='Left'>
-                            <Template />
-                        </div>
-                        <div className='Right'>
-                            <div>{originalName}</div>
-                            {/* <div>{url}</div> */}
-                        </div>
+                        <Button type='link' onClick={() => onClick(type, originalName, url)}>{originalName}</Button>
                     </div>
                 )
             })}

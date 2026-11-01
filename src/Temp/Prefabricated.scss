@@ -855,10 +855,13 @@
                     background-clip: text;
                     color: transparent;
                     user-select: none;
-                    white-space: pre-line;
+
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: var(--webkit-line-clamp);
                     overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
+                    word-break: break-word;
+
                 }
             }
         }

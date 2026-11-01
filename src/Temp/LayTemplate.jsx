@@ -437,8 +437,6 @@ export const SwiperTemplate = ({ UrlData, data, status, params, winData, LayoutE
         setUser(user)
     })
 
-    console.log('TempPower', ((port || User?.userUuid === '1e99e116-6ec0-425c-87b4-64dd2ce458e2') && status))
-
     return (
         <>
             {window_nav &&

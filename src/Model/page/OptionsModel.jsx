@@ -463,7 +463,7 @@ const OptionsModel = ({ data, Event }) => {
 
 
         if (laoding) return <div className='OptionsModelB09'><Spin /></div>
-        return <SwiperAnnexTemplate data={LIST} />
+        return <SwiperAnnexTemplate data={LIST} Event={Event} />
     }
     // *** Excel
     if (type === 'B05') {

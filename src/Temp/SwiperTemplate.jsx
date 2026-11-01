@@ -199,6 +199,8 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event
         }
     }, [swiper, activeIndex])
 
+    console.log(data)
+
     return (
         <Swiper
             className='B20_swiper'
@@ -209,7 +211,7 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             onSwiper={setSwiper}
-            onSlideChange={e => Event.emit({ type: 'onSlideChange', data: e.activeIndex })}
+            onSlideChange={e => Event?.emit({ type: 'onSlideChange', data: e.activeIndex })}
         >
             {data.map(v => (
                 <SwiperSlide key={v.uuid}>

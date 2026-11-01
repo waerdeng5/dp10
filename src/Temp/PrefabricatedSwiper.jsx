@@ -159,10 +159,12 @@ const PrefabricatedSwiperBox = ({ tempId, UrlData, data, LayoutEvent }) => {
                             {isText &&
                                 <div className='SwiperSlideItemText' style={itemStyle}>
                                     {list.map((k, i) => {
-                                        const { type, field, color, deg, padding, size, family, weight, style, filed, filed_data, filed_color } = k
-
+                                        const { type, field, color, deg, padding, size, family, weight, style, filed, filed_data, filed_color, widthUnit, width, num, align } = k
                                         const textStyle = {
+                                            ...UnitCallBackStruct(widthUnit, width, 'width'),
                                             '--color': ColorCallBack(color, deg),
+                                            '--webkit-line-clamp': num,
+                                            textAlign: align,
                                             fontSize: SpacingCallBack(size),
                                             fontFamily: family,
                                             fontWeight: weight,

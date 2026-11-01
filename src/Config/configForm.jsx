@@ -8960,6 +8960,11 @@ const PrefabricatedSwiperBox = [
         jugde: [{ field: 'isText', value: [true] }], children: [
             {
                 span: 24, formType: 'LIST', name: 'list', label: '文字列表', collapsible: true, children: [
+                    { span: 12, formType: 'RADIO', name: 'widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+                    { span: 12, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
+                    { span: 12, formType: 'NUMBER', name: 'num', label: '最大行数', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'align', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+
                     { span: 12, formType: 'RADIO', name: 'type', label: '文字类型', rules: true, valueEnum: MappingData.System_fileUrlType2 },
                     { span: 12, formType: 'INPUT', name: 'field', label: '文字内容/字段', rules: true },
                     { span: 12, formType: 'COLOR', name: 'color', label: '文字颜色', rules: true },
@@ -11116,15 +11121,11 @@ const BitsComponents_CircularGallery = [
     { span: 6, formType: 'RADIO', name: 'grayscale', label: '灰度', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 6, formType: 'RADIO', name: 'snap', label: '快照', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 6, formType: 'RADIO', name: 'showTitles', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
-
     { span: 6, formType: 'COLOR', name: 'textColor', label: '标题颜色', rules: true, mode: ['single'] },
     { span: 6, formType: 'NUMBER', name: 'fontSize', label: '标题字号', rules: true },
     { span: 6, formType: 'SELECT', name: 'fontFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
     { span: 6, formType: 'RADIO', name: 'fontWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
-
-
     { span: 6, formType: 'NUMBER', name: 'bend', label: '弯曲度', rules: true },
-
     { span: 6, formType: 'NUMBER', name: 'borderRadius', label: '边界半径', rules: true },
     { span: 6, formType: 'NUMBER', name: 'scrollSpeed', label: '滚动速度', rules: true },
     { span: 6, formType: 'NUMBER', name: 'scrollEase', label: '缓动速度', rules: true },
@@ -11134,16 +11135,49 @@ const BitsComponents_CircularGallery = [
     { span: 6, formType: 'NUMBER', name: 'wave', label: '波浪', rules: true },
     { span: 6, formType: 'NUMBER', name: 'fadeEdges', label: '渐进边缘', rules: true },
     { span: 6, formType: 'NUMBER', name: 'shadow', label: '阴影', rules: true },
-
-
     { span: 6, formType: 'NUMBER', name: 'autoScroll', label: '自动滚动', rules: true },
+]
+
+const BitsComponents_ReflectiveCard = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 6, formType: 'RADIO', name: 'children', label: '显示文字', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+    { span: 12, formType: 'INPUT', name: 'name', label: '名称', rules: true },
+    { span: 12, formType: 'INPUT', name: 'role', label: '角色', rules: true },
+    { span: 12, formType: 'INPUT', name: 'badge', label: '徽记', rules: true },
+    { span: 12, formType: 'INPUT', name: 'status', label: '状态', rules: true },
+    { span: 6, formType: 'COLOR', name: 'statusColor', label: '状态颜色', rules: true, mode: ['single'] },
+
+    { span: 12, formType: 'INPUT', name: 'idLabel', label: '底部标签', rules: true },
+    { span: 12, formType: 'INPUT', name: 'idValue', label: '底部内容标签', rules: true },
+
+    { span: 6, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 6, formType: 'COLOR', name: 'tint', label: '色调', rules: true, mode: ['single'] },
+
+    { span: 6, formType: 'NUMBER', name: 'metalness', label: '金属感', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'roughness', label: '粗糙度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'blurStrength', label: '蓝光强度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'grayscale', label: '灰度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'warp', label: '扭曲', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'warpScale', label: '扭曲比例', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'shine', label: '光泽度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'bevel', label: '斜面', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'glare', label: '炫光强度', rules: true },
 
 
+    { span: 6, formType: 'RADIO', name: 'enableTilt', label: '启用倾斜', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'tiltStrength', label: '倾斜度', rules: true },
 
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场效果', rules: true, valueEnum: MappingData.IsEnabledBool },
+
+    { span: 6, formType: 'NUMBER', name: 'width', label: '宽度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'height', label: '高度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'radius', label: '圆角', rules: true },
 ]
 
 
 export const FormConfig = {
+    BitsComponents_ReflectiveCard,
     BitsComponents_CircularGallery,
     BitsComponents_LineSidebar,
     BitsComponents_OptionWheel,

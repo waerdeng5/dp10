@@ -260,49 +260,48 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                         if (func === 'admin' && userInfo?.userUuid !== '1e99e116-6ec0-425c-87b4-64dd2ce458e2') return false
                         // if (func === 'admin' && !port) return false
                         return (
-                            <Dropdown
-                                key={index}
-                                menu={{ items: [] }}
-                                placement='bottom'
-                                disabled={func !== 'admin' && func !== 0}
-                                trigger={[gridClick]}
-                                popupRender={() => {
-                                    const { gridNumber, gridSize, gridList, gridIconSize, gridTextFamily, gridTextSize, gridTextStyle, gridTextWeight,
-                                        gridFiled, gridFiled_data, gridFiled_color } = item
-                                    const gridStyle = { minWidth: gridSize + 16, minHeight: gridSize + 16, maxWidth: gridSize * gridNumber + 16 }
-                                    return (
-                                        <div className='DropdownGrid' style={gridStyle}>
-                                            {gridList.map((item, index) => {
-                                                const { func, title, icon, color, } = item
-                                                const divStyle = { width: gridSize, height: gridSize }
-                                                const IconStyle = {
-                                                    color,
-                                                    '--size': gridIconSize + 'px',
-                                                    '--filter': SetFilderParams(gridFiled, gridFiled_data, gridFiled_color),
-                                                }
-                                                const TextStyle = {
-                                                    fontSize: gridTextSize,
-                                                    fontFamily: gridTextFamily,
-                                                    fontStyle: gridTextStyle,
-                                                    fontWeight: gridTextWeight,
-                                                }
-                                                return (
-                                                    <div key={index} style={divStyle} onClick={() => onItemClick(func)}>
-                                                        <span style={IconStyle}> {ICONMapping[icon]}</span>
-                                                        <div style={TextStyle}>{title}</div>
-                                                    </div>
-                                                )
-                                            })}
-                                        </div>
-                                    )
-                                }}
-                            >
-                                <Tooltip placement="left" title={title}>
+                            <Tooltip placement="left" title={title} key={index}>
+                                <Dropdown
+                                    menu={{ items: [] }}
+                                    placement='bottom'
+                                    disabled={func !== 'admin' && func !== 0}
+                                    trigger={[gridClick]}
+                                    popupRender={() => {
+                                        const { gridNumber, gridSize, gridList, gridIconSize, gridTextFamily, gridTextSize, gridTextStyle, gridTextWeight,
+                                            gridFiled, gridFiled_data, gridFiled_color } = item
+                                        const gridStyle = { minWidth: gridSize + 16, minHeight: gridSize + 16, maxWidth: gridSize * gridNumber + 16 }
+                                        return (
+                                            <div className='DropdownGrid' style={gridStyle}>
+                                                {gridList.map((item, index) => {
+                                                    const { func, title, icon, color, } = item
+                                                    const divStyle = { width: gridSize, height: gridSize }
+                                                    const IconStyle = {
+                                                        color,
+                                                        '--size': gridIconSize + 'px',
+                                                        '--filter': SetFilderParams(gridFiled, gridFiled_data, gridFiled_color),
+                                                    }
+                                                    const TextStyle = {
+                                                        fontSize: gridTextSize,
+                                                        fontFamily: gridTextFamily,
+                                                        fontStyle: gridTextStyle,
+                                                        fontWeight: gridTextWeight,
+                                                    }
+                                                    return (
+                                                        <div key={index} style={divStyle} onClick={() => onItemClick(func)}>
+                                                            <span style={IconStyle}> {ICONMapping[icon]}</span>
+                                                            <div style={TextStyle}>{title}</div>
+                                                        </div>
+                                                    )
+                                                })}
+                                            </div>
+                                        )
+                                    }}
+                                >
                                     <div style={itemStyle} onClick={() => onItemClick(func)}>
                                         {ICONMapping[icon]}
                                     </div>
-                                </Tooltip>
-                            </Dropdown>
+                                </Dropdown>
+                            </Tooltip>
                         )
                     })}
                 </div>

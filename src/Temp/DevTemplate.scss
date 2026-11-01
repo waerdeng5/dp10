@@ -30,69 +30,75 @@
     &>.AttachItem {
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         margin-bottom: 4px;
-
-        &>.Left {
-            width: 120px;
-            height: 120px;
-            margin-right: 8px;
-            padding: 8px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            overflow: hidden;
+        font-family: ShuHeiTi;
+        font-weight: bold;
+        font-size: 18px;
+        color: #383838;
 
 
-            &>div {
-                width: 100%;
-                height: 100%;
 
-                &>img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: contain;
-                }
-            }
+        // &>.Left {
+        //     width: 480px;
+        //     height: 120px;
+        //     margin-right: 8px;
+        //     padding: 8px;
+        //     border-radius: 8px;
+        //     border: 1px solid #ccc;
+        //     display: flex;
+        //     align-items: center;
+        //     justify-content: center;
+        //     cursor: pointer;
+        //     overflow: hidden;
 
-            &>i {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 64px;
-                color: #262626;
-                filter: drop-shadow(1px 1px 1px #ffffff);
-            }
-        }
 
-        &>.Right {
-            flex: 1;
-            height: 120px;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            flex-direction: column;
+        //     &>div {
+        //         width: 100%;
+        //         height: 100%;
 
-            &>div:first-child {
-                font-family: ShuHeiTi;
-                font-weight: bold;
-                font-size: 18px;
-                color: #383838;
-                margin-bottom: 8px;
-            }
+        //         &>img {
+        //             width: 100%;
+        //             height: 100%;
+        //             object-fit: contain;
+        //         }
+        //     }
 
-            &>div:last-child {
-                font-family: ShuHeiTi;
-                font-weight: bold;
-                font-size: 18px;
-                color: #262626;
-            }
-        }
+        //     &>i {
+        //         width: 100%;
+        //         height: 100%;
+        //         display: flex;
+        //         align-items: center;
+        //         justify-content: center;
+        //         font-size: 64px;
+        //         color: #262626;
+        //         filter: drop-shadow(1px 1px 1px #ffffff);
+        //     }
+        // }
+
+        // &>.Right {
+        //     flex: 1;
+        //     height: 120px;
+        //     display: flex;
+        //     align-items: flex-start;
+        //     justify-content: center;
+        //     flex-direction: column;
+
+        //     &>div:first-child {
+        //         font-family: ShuHeiTi;
+        //         font-weight: bold;
+        //         font-size: 18px;
+        //         color: #383838;
+        //         margin-bottom: 8px;
+        //     }
+
+        //     &>div:last-child {
+        //         font-family: ShuHeiTi;
+        //         font-weight: bold;
+        //         font-size: 18px;
+        //         color: #262626;
+        //     }
+        // }
     }
 }
 
