@@ -3739,9 +3739,9 @@ const SetDEVStyleConfig = [
             { span: 24, formType: 'COLOR', name: 'tree_activeColor', label: '选中文字', rules: true },
             { span: 24, formType: 'NUMBER', name: 'tree_activeDeg', label: '选中角度', rules: true },
             { span: 24, formType: 'COLOR', name: 'tree_activeShadowC', label: '选中阴影', rules: true },
-            { span: 24, formType: 'COLOR', name: 'tree_searchColor', label: '选中阴影', rules: true },
-            { span: 24, formType: 'COLOR', name: 'tree_resetColor', label: '选中阴影', rules: true },
-            { span: 24, formType: 'COLOR', name: 'tree_foldColor', label: '选中阴影', rules: true },
+            { span: 24, formType: 'COLOR', name: 'tree_searchColor', label: '搜索颜色', rules: true },
+            { span: 24, formType: 'COLOR', name: 'tree_resetColor', label: '重置颜色', rules: true },
+            { span: 24, formType: 'COLOR', name: 'tree_foldColor', label: '折叠颜色', rules: true },
         ]
     },
     {
@@ -9958,6 +9958,11 @@ const ModelConfigFormList = [
         span: 24, formType: 'GROUP', name: 'lay_A01', label: '附件窗口配置', collapsible: true,
         jugde: [{ field: 'pageType', value: ['LAY'] }, { field: 'layType', value: ['A01'] }], children: [
             { span: 12, formType: 'RADIO', name: 'annex_type', label: '附件来源', rules: true, valueEnum: MappingData.System_fileUrlType },
+            { span: 12, formType: 'RADIO', name: 'annex_list', label: '数据列表', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'annex_listPosition', label: '列表位置', rules: true, valueEnum: MappingData.Start__navPosition,
+                jugde: [{ field: 'annex_list', value: [true] }]
+            },
             { span: 12, formType: 'INPUT', name: 'lay_A01_fields', label: '附件字段', rules: true, jugde: [{ field: 'annex_type', value: ['A01'] }] },
             {
                 span: 24, formType: 'GROUP', name: 'annex_api', label: '接口设置', collapsible: true,
@@ -9988,6 +9993,88 @@ const ModelConfigFormList = [
             ...PrefabricatedTable,
         ]
     },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_list', label: '列表窗口设置', collapsible: true,
+        jugde: [{ field: 'annex_list', value: [true] }], children: [
+            { span: 12, formType: 'RADIO', name: 'list_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'INPUT', name: 'list_width', label: '宽度', rules: true },
+            { span: 12, formType: 'RADIO', name: 'list_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
+            { span: 12, formType: 'INPUT', name: 'list_height', label: '高度', rules: true },
+            { span: 8, formType: 'SELECT', name: 'list_align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'list_align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'list_justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 12, formType: 'SELECT', name: 'list_flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 12, formType: 'SELECT', name: 'list_flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'RADIO', name: 'list_cover', label: '渲染封面', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'list_cover_field', label: '封面字段' },
+            { span: 12, formType: 'RADIO', name: 'list_title', label: '渲染标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 12, formType: 'INPUT', name: 'list_title_field', label: '标题字段' },
+            {
+                span: 12, formType: 'RADIO', name: 'cover_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType,
+                jugde: [{ field: 'list_cover', value: [true] }]
+            },
+            { span: 12, formType: 'INPUT', name: 'cover_width', label: '宽度', rules: true, jugde: [{ field: 'list_cover', value: [true] }] },
+            {
+                span: 12, formType: 'RADIO', name: 'cover_heightUnit', label: '高度单位', rules: true, valueEnum: MappingData.Flex_SizeType,
+                jugde: [{ field: 'list_cover', value: [true] }]
+            },
+            { span: 12, formType: 'INPUT', name: 'cover_height', label: '高度', rules: true, jugde: [{ field: 'list_cover', value: [true] }] },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'lay_list_default', label: '列表默认样式', collapsible: true,
+        jugde: [{ field: 'annex_list', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'list_default_back', label: '背景颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'list_default_deg', label: '背景角度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'list_default_radius', label: '圆角', rules: true },
+            { span: 24, formType: 'INPUT', name: 'list_default_padding', label: '内填充', rules: true },
+            { span: 24, formType: 'RADIO', name: 'list_default_align', label: '标题对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 24, formType: 'COLOR', name: 'list_default_color', label: '标题颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'list_default_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'list_default_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'list_default_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'list_default_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'list_default_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'list_default_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'list_default_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'list_default_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'list_default_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'lay_list_active', label: '列表激活样式', collapsible: true,
+        jugde: [{ field: 'annex_list', value: [true] }], children: [
+            { span: 24, formType: 'COLOR', name: 'list_active_back', label: '背景颜色', rules: true },
+            { span: 24, formType: 'NUMBER', name: 'list_active_deg', label: '背景角度', rules: true },
+            { span: 24, formType: 'INPUT', name: 'list_active_radius', label: '圆角', rules: true },
+            { span: 24, formType: 'INPUT', name: 'list_active_padding', label: '内填充', rules: true },
+            { span: 24, formType: 'RADIO', name: 'list_active_align', label: '标题对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 24, formType: 'COLOR', name: 'list_active_color', label: '标题颜色', rules: true, mode: ['single'] },
+            { span: 24, formType: 'NUMBER', name: 'list_active_size', label: '文字字号', rules: true },
+            { span: 24, formType: 'SELECT', name: 'list_active_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 24, formType: 'RADIO', name: 'list_active_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 24, formType: 'RADIO', name: 'list_active_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 24, formType: 'RADIO', name: 'list_active_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'INPUT', name: 'list_active_filed_size', label: '阴影数值', rules: true,
+                jugde: [{ field: 'list_active_filed', value: [true] }]
+            },
+            {
+                span: 24, formType: 'COLOR', name: 'list_active_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'list_active_filed', value: [true] }]
+            },
+        ]
+    },
+
+
+
+
+    // 默认样式
+    // 激活样式
 ]
 // *** 模块参数粘贴窗口
 const PrefabricatedPasteWindow = [

@@ -120,6 +120,7 @@ const LoginIndex = () => {
             }
         }
     }
+
     useEffect(() => {
         setLoginPage()
     }, [pathname])

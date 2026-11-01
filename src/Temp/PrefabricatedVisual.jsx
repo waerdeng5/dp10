@@ -814,7 +814,6 @@ const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
         </div>
     )
 }
-
 export const PrefabricatedVisualTemplate = {
     PrefabricatedVisualMonitoring,
     PrefabricatedVisualRecorded,

@@ -11,7 +11,7 @@ import 'swiper/css/grid';
 import './SwiperTemplate.scss'
 
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Button, Image, Result } from 'antd'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { ANIMATIONLIST } from './TemplateAnimation'
@@ -173,7 +173,8 @@ export const SwiperB20Template = ({ data }) => {
 }
 
 // 附件预览
-export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
+export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event }) => {
+    const [swiper, setSwiper] = useState(null);
     if (!data)
         return (
             <div className='SwiperCenter'>
@@ -192,6 +193,12 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
         }
     }
 
+    useEffect(() => {
+        if (swiper) {
+            swiper.slideTo(activeIndex)
+        }
+    }, [swiper, activeIndex])
+
     return (
         <Swiper
             className='B20_swiper'
@@ -201,6 +208,8 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url' }) => {
             navigation
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
+            onSwiper={setSwiper}
+            onSlideChange={e => Event.emit({ type: 'onSlideChange', data: e.activeIndex })}
         >
             {data.map(v => (
                 <SwiperSlide key={v.uuid}>
