@@ -554,6 +554,7 @@ const ReflectiveCard = ({
     name = 'Alexander Doe',
     role = 'Senior Developer',
     badge = 'Verified',
+    badgeIcon = 'fasDice',
     status = 'Active',
     statusColor = '#22c55e',
     idLabel = 'ID number',
@@ -1004,7 +1005,7 @@ const ReflectiveCard = ({
                                 <div className="reflective-card__header">
                                     {badge && (
                                         <span className="reflective-card__badge">
-                                            <span>{ICONMapping['fasDice']}</span>
+                                            <span>{ICONMapping[badgeIcon]}</span>
                                             {badge}
                                         </span>
                                     )}

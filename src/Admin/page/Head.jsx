@@ -143,6 +143,16 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
         const page = OtherDiyPageConfig.SetThemeConfig
         OpenMenuFunc(page.uuid, pageFunc, body_tabsMax, page)
     }
+    const onSetPassword = () => {
+        updateModel5({
+            title: '修改密码',
+            type: 'CommonModel',
+            width: 480,
+            height: 600,
+            Event: AdminEvent,
+            modelData: { openType: 'SetPassword', eventBack: 'onSavePassword' }
+        })
+    }
 
 
     const onItemClick = (key) => {
@@ -163,6 +173,7 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
             [3, onWorkstation],
             [4, onWeChatBinding],
             [5, onOfficialAccount],
+            [6, onSetPassword],
             [7, () => AdminEvent.emit({ type: 'onLookPage' })],
             [8, () => Navigate('/')],
         ])

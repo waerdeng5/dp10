@@ -929,13 +929,12 @@ export const MappingData = {
         { value: 'start', label: '大屏配置' },
         { value: 'test', label: '自定页面测试' },
         { value: 'layout', label: '布局页面测试' },
-
         { value: 1, label: '切换首页' },
         { value: 2, label: '用户中心' },
         { value: 3, label: '工作台' },
         { value: 4, label: '微信绑定' },
         { value: 5, label: '公众号绑定' },
-
+        { value: 6, label: '修改密码' },
         { value: 7, label: '锁屏' },
         { value: 8, label: '退出登录' },
     ],

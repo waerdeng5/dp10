@@ -7,7 +7,7 @@ import { Sortable } from 'devextreme-react/sortable'
 import FileViewer from '@file-viewer/react-full'
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { useEventEmitter, useMount, useReactive, useSize } from 'ahooks'
-import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider, Image } from 'antd'
+import { Result, Button, Tree, App, Select, Spin, Timeline, Skeleton, Popconfirm, Divider, Image, Alert } from 'antd'
 import Chart, { AdaptiveLayout, CommonSeriesSettings, Size, Tooltip, Export, Label, Format, Legend } from 'devextreme-react/chart'
 
 import FormTemplate from '../../Utils/FormTemplate'
@@ -23,6 +23,9 @@ import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
 import { onTreeDrop, ColorCallBack, addAttr } from '../../Utils'
 import { GetIndexedDB, PutIndexedDB, Encrypt, Decrypt } from '../../Utils/IndexedDB'
 
+
+
+import { FormConfig } from '../../Config/configForm'
 
 
 const FlowMenuAPIFieldJugdeValue = ['RADIO', 'SELECT', 'SELECTM', 'TREE', 'TREEM', 'CASCADER', 'RADIOLIST', 'CHECKBOXLIST']
@@ -666,6 +669,21 @@ const CommonModel = ({ data, Event }) => {
                     })}
                 </div>
             </DevScrollView>
+        )
+    }
+    // 修改免密
+    if (openType === 'SetPassword') {
+
+        Event.useSubscription(v => {
+            // console.log('SetPassword', v)
+            // if(v.type === 'onSavePassword'){
+        })
+
+        return (
+            <div className='SetPassword'>
+                <Alert type="error" title="密码规则-6位以上，包含至少一个大小写字母、数字" banner />
+                <FormTemplate formItem={FormConfig.ModifyPasswordFormList} FORMEVENT={Event} />
+            </div>
         )
     }
 
