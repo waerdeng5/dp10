@@ -104,7 +104,6 @@ const UserCenter = () => {
 
     const formCallBack = e => {
         const { type, data } = e
-        console.log(e)
         const Mapping = new Map([
             ['onSelectLook', () => setLookAnimation(data)],
             ['onFormBack', () => onModifyPwd(data)]

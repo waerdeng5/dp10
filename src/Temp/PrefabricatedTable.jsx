@@ -83,9 +83,10 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         columns_diyData,
         columns_list, options_status, options, options_name, options_width, options_align, options_fixed,
         data_api_method, data_api_url, data_api_params, data_api_https, data_api_level, data_api_mapping,
-        options_row_click,
+        options_row_click, columns_rowsColor, columns_rowsField, columns_rowsList,
         ...item
     } = data
+
 
     // const Navigate = useNavigate()
     const tableBox = useRef(null)
@@ -144,7 +145,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
         } else {
             const columns = columns_list.map(v => {
                 const { valueEnum_type, valueEnum_data, columns_list, valueEnum_key, valueEnum_value, ...item } = v
-                // console.log(v)
                 if (valueEnum_type) {
                     if (valueEnum_type === 'DataMapping') {
                         const obj = MappingData[valueEnum_data].reduce((acc, item) => {
@@ -161,12 +161,11 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         return acc
                     }, {})
                     item.render = (_, record) => (
-                        <Tag variant={valueEnum_variant} color={mapping[record[v.dataIndex]].color}>
+                        <Tag variant={valueEnum_variant} color={mapping?.[record[v.dataIndex]].color}>
                             {mapping[record[v.dataIndex]].text}
                         </Tag>
                     )
                 }
-
                 return item
             })
             if (options_status) {
@@ -428,6 +427,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             <ProTable
                 {...proTableConfig}
                 columns={columnsData}
+
                 pagination={paginaBox ?? { showSizeChanger: true, pageSize: PageSize, onChange: (i, s) => setPageSize(s) }}
                 tableRender={(_, dom) => {
                     return (
@@ -505,10 +505,10 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     }
                 }}
                 onRow={(row) => {
-                    if (!options_row_click) return {}
-                    return {
-                        onClick: e => onItemClick(item, row)
-                    }
+                    const result = {}
+                    if (options_row_click) result.onClick = (e) => onItemClick(item, row)
+                    if (columns_rowsColor) result.style = { color: columns_rowsList.find(v => v.value === row[columns_rowsField])?.color || '#fff' }
+                    return result
                 }}
             />
         </div>

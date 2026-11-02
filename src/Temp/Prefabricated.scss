@@ -648,9 +648,12 @@
                 }
             }
 
+            tr {
+                color: var(--listColor);
+            }
+
             td.ant-table-cell {
                 background: var(--listBack);
-                color: var(--listColor);
                 font-size: var(--listSize);
                 font-family: var(--listFamily);
                 font-style: var(--listStyle);

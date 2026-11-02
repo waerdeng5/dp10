@@ -8340,7 +8340,6 @@ const PrefabricatedTable = [
             { span: 12, formType: 'INPUT', name: 'tree_children', label: 'children映射' },
         ]
     },
-
     {
         span: 24, formType: 'GROUP', name: 'columns_field', label: '字段设置', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'data_type', value: ['A02', 'A03'] }], children: [
@@ -8357,7 +8356,6 @@ const PrefabricatedTable = [
                     { span: 12, formType: 'RADIO', name: 'ellipsis', label: '缩略', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'INPUT', name: 'tooltip', label: '提示' },
                     { span: 12, formType: 'SELECT', name: 'valueType', label: '类型', rules: true, valueEnum: MappingData.Form__AntdValueType },
-
                     {
                         span: 24, formType: 'RADIO', name: 'valueEnum_variant', label: '标签变体', rules: true, valueEnum: MappingData.System__TagType,
                         jugde: [{ field: 'valueType', value: ['tag'] }]
@@ -8411,6 +8409,20 @@ const PrefabricatedTable = [
                         jugde: [{ field: 'valueType', value: ['select', 'cascader', 'treeSelect'] }, { field: 'valueEnum_type', value: ['ApiMapping'] },
                         { field: 'valueEnum_level', value: [true] }]
                     },
+                ]
+            },
+        ]
+    },
+    { span: 24, formType: 'RADIO', name: 'columns_rowsColor', label: '整行变色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'options_rowsColorConfig', label: '变色判断', collapsible: true, defaultCollapsed: true,
+        jugde: [{ field: 'columns_rowsColor', value: [true] }], children: [
+            { span: 24, formType: 'INPUT', name: 'columns_rowsField', label: '判断字段' },
+            {
+                span: 24, formType: 'LIST', name: 'columns_rowsList', label: '字段列表', collapsible: true,
+                children: [
+                    { span: 12, formType: 'INPUT', name: 'value', label: '数值' },
+                    { span: 12, formType: 'COLOR', name: 'color', label: '颜色', rules: true, mode: ['single'] }
                 ]
             },
         ]
@@ -9999,7 +10011,7 @@ const ModelConfigFormList = [
         ]
     },
     {
-        span: 24, formType: 'GROUP', name: 'lay_list', label: '列表窗口设置', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'lay_list', label: '附件窗口设置', collapsible: true,
         jugde: [{ field: 'annex_list', value: [true] }], children: [
             { span: 12, formType: 'RADIO', name: 'list_widthUnit', label: '宽度单位', rules: true, valueEnum: MappingData.Flex_SizeType },
             { span: 12, formType: 'INPUT', name: 'list_width', label: '宽度', rules: true },
@@ -10027,7 +10039,7 @@ const ModelConfigFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'lay_list_default', label: '列表默认样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'lay_list_default', label: '附件列表默认样式', collapsible: true,
         jugde: [{ field: 'annex_list', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'list_default_back', label: '背景颜色', rules: true },
             { span: 24, formType: 'NUMBER', name: 'list_default_deg', label: '背景角度', rules: true },
@@ -10051,7 +10063,7 @@ const ModelConfigFormList = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'lay_list_active', label: '列表激活样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'lay_list_active', label: '附件列表激活样式', collapsible: true,
         jugde: [{ field: 'annex_list', value: [true] }], children: [
             { span: 24, formType: 'COLOR', name: 'list_active_back', label: '背景颜色', rules: true },
             { span: 24, formType: 'NUMBER', name: 'list_active_deg', label: '背景角度', rules: true },
@@ -10077,9 +10089,6 @@ const ModelConfigFormList = [
 
 
 
-
-    // 默认样式
-    // 激活样式
 ]
 // *** 模块参数粘贴窗口
 const PrefabricatedPasteWindow = [

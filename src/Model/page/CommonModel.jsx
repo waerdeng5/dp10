@@ -674,9 +674,13 @@ const CommonModel = ({ data, Event }) => {
     // 修改免密
     if (openType === 'SetPassword') {
 
-        Event.useSubscription(v => {
-            // console.log('SetPassword', v)
-            // if(v.type === 'onSavePassword'){
+        Event.useSubscription(async v => {
+            if (v.type === 'onFormBack') {
+                const [err, res] = await axios({ method: 'post', url: 'users/changePassword', params: data })
+                Event.emit({ type: 'closeFormLoading' })
+                if (err) return console.log('修改失败')
+                message, success('密码修改成功!')
+            }
         })
 
         return (
