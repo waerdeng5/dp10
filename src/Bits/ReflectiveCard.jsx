@@ -559,6 +559,7 @@ const ReflectiveCard = ({
     statusColor = '#22c55e',
     idLabel = 'ID number',
     idValue = '8901 2345 6789',
+    idIcon = 'fasDice',
     children = true,
     theme = 'dark',
     webcam = false,
@@ -1028,7 +1029,7 @@ const ReflectiveCard = ({
                                         {idValue && <span className="reflective-card__value">{idValue}</span>}
                                     </div>
                                     <span className="reflective-card__tile">
-                                        <span>{ICONMapping['fasFingerprint']}</span>
+                                        <span>{ICONMapping[idIcon]}</span>
                                     </span>
                                 </div>
                             )}

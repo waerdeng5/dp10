@@ -1473,6 +1473,38 @@ export const MappingData = {
         { value: 'smooth', label: '平滑' },
         { value: 'sharp', label: '尖锐' },
     ],
+    BitsComponents_StackLayout: [
+        { value: 'fan', label: '螺旋' },
+        { value: 'cascade', label: '级联' },
+        { value: 'deck', label: '牌' },
+        { value: 'pile', label: '堆' },
+    ],
+    BitsComponents_FluidGlassShape: [
+        { value: 'torus', label: '圆环' },
+        { value: 'lens', label: '镜头' },
+        { value: 'blob', label: '球' },
+        { value: 'pill', label: '丸' },
+        { value: 'cube', label: '立方体' },
+        { value: 'prism', label: '棱锥' },
+        { value: 'diamond', label: '钻石' },
+    ],
+    BitsComponents_FluidGlassInteraction: [
+        { value: 'follow', label: '跟随' },
+        { value: 'drag', label: '拖动' },
+        { value: 'static', label: '静态' },
+    ],
+    BitsComponents_TiltedCardAxis: [
+        { value: 'both', label: '同时' },
+        { value: 'horizontal', label: '水平' },
+        { value: 'vertical', label: '垂直' },
+    ],
+    BitsComponents_DomeGalleryFitBasis: [
+        { value: 'auto', label: '自动' },
+        { value: 'min', label: '最小' },
+        { value: 'max', label: '最大' },
+        { value: 'width', label: '宽度' },
+        { value: 'height', label: '高度' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

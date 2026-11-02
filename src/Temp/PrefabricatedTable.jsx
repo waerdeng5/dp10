@@ -427,7 +427,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             <ProTable
                 {...proTableConfig}
                 columns={columnsData}
-
                 pagination={paginaBox ?? { showSizeChanger: true, pageSize: PageSize, onChange: (i, s) => setPageSize(s) }}
                 tableRender={(_, dom) => {
                     return (

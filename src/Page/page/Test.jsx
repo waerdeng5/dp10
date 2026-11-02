@@ -10,15 +10,15 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import ReflectiveCard from '../../Bits/ReflectiveCard'
+import DomeGallery from '../../Bits/DomeGallery'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     return (
         <div className='TestPage'>
 
-            <div className='ReflectiveCard' style={{ width: '100%', height: '100%', position: 'relative' }}>
-                <ReflectiveCard />
+            <div className='DomeGallery' >
+                <DomeGallery />
             </div>
 
 

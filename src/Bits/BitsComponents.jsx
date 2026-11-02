@@ -11,6 +11,10 @@ import OptionWheel from './OptionWheel'
 import LineSidebar from './LineSidebar'
 import CircularGallery from './CircularGallery'
 import ReflectiveCard from './ReflectiveCard'
+import Stack from './Stack'
+import FluidGlass from './FluidGlass'
+import TiltedCard from './TiltedCard'
+import DomeGallery from './DomeGallery'
 
 
 
@@ -27,6 +31,10 @@ const BitsComponents_OptionWheel = ({ data }) => <div className='OptionWheel'><O
 const BitsComponents_LineSidebar = ({ data }) => <div className='LineSidebar'><LineSidebar {...data} /></div>
 const BitsComponents_CircularGallery = ({ data }) => <div className='CircularGallery'><CircularGallery {...data} /></div>
 const BitsComponents_ReflectiveCard = ({ data }) => <div className='ReflectiveCard'><ReflectiveCard {...data} /></div>
+const BitsComponents_Stack = ({ data }) => <div className='Stack'><Stack {...data} /></div>
+const BitsComponents_FluidGlass = ({ data }) => <div className='FluidGlass'><FluidGlass {...data} /></div>
+const BitsComponents_TiltedCard = ({ data }) => <div className='TiltedCard'><TiltedCard {...data} /></div>
+const BitsComponents_DomeGallery = ({ data }) => <div className='DomeGallery'><DomeGallery {...data} /></div>
 
 
 
@@ -44,4 +52,8 @@ export const BitsComponentsTemplate = {
     BitsComponents_LineSidebar,
     BitsComponents_CircularGallery,
     BitsComponents_ReflectiveCard,
+    BitsComponents_Stack,
+    BitsComponents_FluidGlass,
+    BitsComponents_TiltedCard,
+    BitsComponents_DomeGallery,
 }
