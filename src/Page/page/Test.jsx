@@ -10,21 +10,24 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import DomeGallery from '../../Bits/DomeGallery'
+import DecayCard from '../../Bits/DecayCard'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     return (
         <div className='TestPage'>
 
-            <div className='DomeGallery' >
-                <DomeGallery />
+            <div className='DecayCard' >
+                <DecayCard />
             </div>
-
-
-
-
-            {/* <DevScrollView>
+            engineeringStatus
+            项目状态
+            menuDictionary
+            menuDictionaryTypeUuid=f8ec3161-244e-405b-91dc-30375035cfab
+            uuid
+            tableName
+            {/* 
+            <DevScrollView>
                 <div className='fontInfo'>
                     {Font__Family.map(v =>
                         <div key={v.value} style={{ fontFamily: v.value }}>

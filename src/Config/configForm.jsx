@@ -11315,14 +11315,100 @@ const BitsComponents_DomeGallery = [
     { span: 6, formType: 'NUMBER', name: 'openedImageHeight', label: '打开图片高度', rules: true },
     { span: 6, formType: 'NUMBER', name: 'openedImageBorderRadius', label: '打开图片圆角', rules: true },
     { span: 6, formType: 'NUMBER', name: 'imageBorderRadius', label: '图片圆角', rules: true },
-
-
-
-
+]
+const BitsComponents_Carousel = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'BitsComponents_CircularCarouselA01', label: '轮播图片', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'images', label: '图片集', collapsible: true,
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'src', label: '图片地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'title', label: '图片标题' },
+                    { span: 12, formType: 'INPUT', name: 'alt', label: '图片信息' },
+                ]
+            },
+        ]
+    },
+    { span: 8, formType: 'RADIO', name: 'effect', label: '动效', rules: true, valueEnum: MappingData.BitsComponents_CarouselEffect },
+    { span: 8, formType: 'RADIO', name: 'indicator', label: '指示器', rules: true, valueEnum: MappingData.BitsComponents_CarouselIndicator },
+    { span: 8, formType: 'RADIO', name: 'frame', label: '边框', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'arrows', label: '箭头', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 8, formType: 'RADIO', name: 'loop', label: '无限循环', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'pauseOnHover', label: '悬浮停止', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'draggable', label: '拖动', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'round', label: '圆形', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'autoplay', label: '自动播放', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'autoplayDelay', label: '播放间隔', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'baseWidth', label: '基础宽度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'aspectRatio', label: '横纵比', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'peek', label: '峰值', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'gap', label: '间隙', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'radius', label: '圆角', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'initialIndex', label: '默认索引', rules: true },
 ]
 
+const BitsComponents_ProfileCard = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'avatarUrl', label: '卡片头像', rules: true },
+    { span: 24, formType: 'INPUT', name: 'miniAvatarUrl', label: '小头像', rules: true },
+    { span: 6, formType: 'RADIO', name: 'showUserInfo', label: '用户信息', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'INPUT', name: 'name', label: '姓名', rules: true },
+    { span: 8, formType: 'INPUT', name: 'title', label: '标签', rules: true },
+    { span: 8, formType: 'INPUT', name: 'handle', label: '句柄', rules: true },
+    { span: 8, formType: 'INPUT', name: 'status', label: '状态', rules: true },
+    { span: 8, formType: 'COLOR', name: 'statusColor', label: '状态颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 8, formType: 'TempICON', name: 'contactIcon', label: '按钮图标', rules: true },
+    { span: 8, formType: 'INPUT', name: 'contactText', label: '按钮文字', rules: true },
+    { span: 6, formType: 'RADIO', name: 'enableTilt', label: '倾斜', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'tiltStrength', label: '倾斜强度', rules: true },
+    { span: 6, formType: 'RADIO', name: 'enableMobileTilt', label: '移动倾斜', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'parallax', label: '倾斜灵敏度', rules: true },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'COLOR', name: 'backdropColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'NUMBER', name: 'radius', label: '圆角', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'holo', label: '整体', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'glare', label: '炫光', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'parallax', label: '视差', rules: true },
+]
+
+const BitsComponents_BounceCards = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'BitsComponents_CircularCarouselA01', label: '轮播图片', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'images', label: '图片集', collapsible: true,
+                children: [
+                    { span: 20, formType: 'INPUT', name: 'src', label: '图片地址', rules: true },
+                    { span: 4, formType: 'INPUT', name: 'alt', label: '图片信息' },
+                ]
+            },
+        ]
+    },
+    { span: 6, formType: 'RADIO', name: 'enableHover', label: '悬浮', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'shadow', label: '阴影效果', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'borderWidth', label: '边框宽度', rules: true },
+    { span: 6, formType: 'COLOR', name: 'borderColor', label: '边框颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'NUMBER', name: 'cardSize', label: '卡片尺寸', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'spread', label: '分布', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'pushDistance', label: '推开距离', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'hoverScale', label: '选中比例', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'rotation', label: '旋转', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'arc', label: '弧度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'animationDelay', label: '动画延迟', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'animationStagger', label: '动画交错', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'bounciness', label: '弹性', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'radius', label: '卡片圆角', rules: true },
+]
 
 export const FormConfig = {
+    BitsComponents_BounceCards,
+    BitsComponents_ProfileCard,
+    BitsComponents_Carousel,
     BitsComponents_DomeGallery,
     BitsComponents_TiltedCard,
     BitsComponents_FluidGlass,

@@ -15,6 +15,9 @@ import Stack from './Stack'
 import FluidGlass from './FluidGlass'
 import TiltedCard from './TiltedCard'
 import DomeGallery from './DomeGallery'
+import Carousel from './Carousel'
+import ProfileCard from './ProfileCard'
+import BounceCards from './BounceCards'
 
 
 
@@ -35,6 +38,9 @@ const BitsComponents_Stack = ({ data }) => <div className='Stack'><Stack {...dat
 const BitsComponents_FluidGlass = ({ data }) => <div className='FluidGlass'><FluidGlass {...data} /></div>
 const BitsComponents_TiltedCard = ({ data }) => <div className='TiltedCard'><TiltedCard {...data} /></div>
 const BitsComponents_DomeGallery = ({ data }) => <div className='DomeGallery'><DomeGallery {...data} /></div>
+const BitsComponents_Carousel = ({ data }) => <div className='Carousel'><Carousel {...data} /></div>
+const BitsComponents_ProfileCard = ({ data }) => <div className='ProfileCard'><ProfileCard {...data} /></div>
+const BitsComponents_BounceCards = ({ data }) => <div className='BounceCards'><BounceCards {...data} /></div>
 
 
 
@@ -56,4 +62,7 @@ export const BitsComponentsTemplate = {
     BitsComponents_FluidGlass,
     BitsComponents_TiltedCard,
     BitsComponents_DomeGallery,
+    BitsComponents_Carousel,
+    BitsComponents_ProfileCard,
+    BitsComponents_BounceCards,
 }

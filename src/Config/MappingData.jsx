@@ -1505,6 +1505,19 @@ export const MappingData = {
         { value: 'width', label: '宽度' },
         { value: 'height', label: '高度' },
     ],
+    BitsComponents_CarouselEffect: [
+        { value: 'tilt', label: '倾斜' },
+        { value: 'slide', label: '滑动' },
+        { value: 'scale', label: '缩放' },
+        { value: 'fade', label: '淡入' },
+        { value: 'cube', label: '立方体' },
+    ],
+    BitsComponents_CarouselIndicator: [
+        { value: 'dots', label: '点' },
+        { value: 'bars', label: '条' },
+        { value: 'counter', label: '计数' },
+        { value: 'none', label: '无' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
