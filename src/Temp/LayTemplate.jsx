@@ -36,6 +36,9 @@ import { PrefabricatedVisualTemplate } from './PrefabricatedVisual'
 
 import { BitsTextTemplate } from '../Bits/BitsText'
 import { BitsComponentsTemplate } from '../Bits/BitsComponents'
+import { BitsMicroTemplate } from '../Bits/BitsMicro'
+import { BitsAnimationsTemplate } from '../Bits/BitsAnimations'
+
 
 import { GetIndexedDB } from '../Utils/IndexedDB'
 
@@ -53,7 +56,9 @@ import {
     SwiperTemplatePage,
     VisualTemplatePage,
     BITSTextTemplate,
-    BITSComponentsTemplate
+    BITSComponentsTemplate,
+    BITSMicroTemplate,
+    BITSAnimationsTemplate,
 } from '../Config'
 
 const { port } = window.location
@@ -69,6 +74,8 @@ const TemplateMapping = [
     ...VisualTemplatePage,
     ...BITSTextTemplate,
     ...BITSComponentsTemplate,
+    ...BITSMicroTemplate,
+    ...BITSAnimationsTemplate,
 ]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
@@ -81,7 +88,9 @@ const TemplateComponentMapping = {
     ...PrefabricatedSwiperTemplate,
     ...PrefabricatedVisualTemplate,
     ...BitsTextTemplate,
-    ...BitsComponentsTemplate
+    ...BitsComponentsTemplate,
+    ...BitsMicroTemplate,
+    ...BitsAnimationsTemplate,
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {

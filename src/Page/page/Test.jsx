@@ -10,15 +10,17 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import PaperCrumple from '../../Bits/PaperCrumple'
+import RippleDistortion from '../../Bits/RippleDistortion'
+
+// 
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     return (
         <div className='TestPage'>
 
-            <div className='PaperCrumple' >
-                <PaperCrumple />
+            <div className='RippleDistortion' >
+                <RippleDistortion />
             </div>
 
             {/* 

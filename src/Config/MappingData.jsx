@@ -1522,6 +1522,54 @@ export const MappingData = {
         { value: 'window', label: '窗口' },
         { value: 'card', label: '卡片' },
     ],
+    BitsMicro_PaperCrumpleReleaseBehavior: [
+        { value: 'stay', label: '保持' },
+        { value: 'restore', label: '恢复' },
+        { value: 'creased', label: '折叠' },
+    ],
+    BitsAnimations_CrystalizedBallPreset: [
+        { value: 'plasma', label: '粒子' },
+        { value: 'aurora', label: '极光' },
+        { value: 'nebula', label: '星云' },
+        { value: 'ember', label: '火焰' },
+        { value: 'frost', label: '寒冰' },
+        { value: 'solar', label: '太阳' },
+        { value: 'eclipse', label: '日食' },
+        { value: 'abyss', label: '深渊' },
+    ],
+    BitsAnimations_CrystalizedBallMotion: [
+        { value: 'rise', label: '上升' },
+        { value: 'fall', label: '下降' },
+        { value: 'drift', label: '漂移' },
+        { value: 'orbit', label: '轨道' },
+    ],
+    BitsAnimations_CrystalizedBallParticleShape: [
+        { value: 'square', label: '方形' },
+        { value: 'round', label: '圆形' },
+    ],
+    BitsAnimations_DitherVeilPattern: [
+        { value: 'bayer', label: '点阵' },
+        { value: 'noise', label: '噪声' },
+        { value: 'atkinson', label: 'Atkinson' },
+        { value: 'floyd', label: 'Floyd' },
+        { value: 'lines', label: '线段' },
+    ],
+    BitsAnimations_DitherVeilPalette: [
+        { value: 'duotone', label: '双色' },
+        { value: 'rgb', label: 'RGB' },
+    ],
+    BitsAnimations_GlowCursorQuality: [
+        { value: 'high', label: '高' },
+        { value: 'medium', label: '中' },
+        { value: 'low', label: '低' },
+    ],
+    BitsAnimations_RippleDistortionTrigger: [
+        { value: 'hover', label: '悬停' },
+        { value: 'click', label: '点击' },
+        { value: 'both', label: '同时' },
+    ],
+
+
 
     // TODO Dev
     DevConfig__ThemeList: [

@@ -237,12 +237,11 @@ function createPaperPath(rest, triangles, shortSide, density, sharpness, depth, 
     return { samples, creased };
 }
 const PaperCrumple = ({
-    src,
+    src = 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/BitsText/BitsMicro_PaperCrumple.png',
     alt = 'Crumplable image',
     backSrc = '',
     width = 320,
     height = 400,
-    sceneHeight = 560,
     imageFit = 'cover',
     releaseBehavior = 'restore',
     crumpleAmount = 0.85,
@@ -1074,7 +1073,7 @@ const PaperCrumple = ({
         <div
             ref={rootRef}
             className={`paper-crumple ${className}`}
-            style={{ height: sceneHeight, ...style }}
+            style={{ height: '100%', ...style }}
             data-status={status}
         >
             <canvas

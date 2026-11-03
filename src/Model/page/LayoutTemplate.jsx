@@ -14,6 +14,7 @@ import {
     BITSTextTemplate,
     BITSComponentsTemplate,
     BITSMicroTemplate,
+    BITSAnimationsTemplate,
 } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
@@ -143,7 +144,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '13', label: 'BITS动画', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSAnimationsTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )
