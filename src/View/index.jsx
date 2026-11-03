@@ -62,9 +62,6 @@ const LoginIndex = () => {
         }
         else if (hostname === 'shanxi.ljkjkf.com') {
             console.log('山西产教融合', shanxi)
-
-
-
         }
         else if (pathname === '/') {
             IndexedDBClear()

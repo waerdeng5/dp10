@@ -13,6 +13,7 @@ import {
     VisualTemplatePage,
     BITSTextTemplate,
     BITSComponentsTemplate,
+    BITSMicroTemplate,
 } from '../../Config'
 
 const ItemTemplate = ({ layId, name, data, Event }) => {
@@ -133,7 +134,7 @@ const LayoutTemplate = ({ data, Event }) => {
             key: '12', label: 'BITSMicro', children: (
                 <div className='LayoutTemplateBox'>
                     <DevScrollView>
-                        <ItemTemplate name='Legend' layId={data.layId} data={BITSTextTemplate} Event={Event} />
+                        <ItemTemplate name='Legend' layId={data.layId} data={BITSMicroTemplate} Event={Event} />
                     </DevScrollView>
                 </div>
             )

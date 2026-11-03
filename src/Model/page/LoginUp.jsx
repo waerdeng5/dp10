@@ -1,6 +1,6 @@
 
 import './LoginUp.scss'
-import { useMount } from 'ahooks'
+import { useMount, useEventEmitter } from 'ahooks'
 import { lazy, Suspense, useState } from 'react'
 import { axios, axiosFor } from '../../Utils/Api'
 import { modelStore } from '../../Router/zustand'
@@ -10,6 +10,7 @@ import { GetIndexedDB, AddIndexdDB, PutIndexedDB } from '../../Utils/IndexedDB'
 const homePage = [{ uuid: 'a0b4f6b8-ef44-4b43-925f-85a299eb52cb', tableName: '首页', targetUrl: 'Home', icon: 'shou', closable: true, type: 'lay' }]
 
 const LoginUp = ({ data, Event }) => {
+    const LoginEvent = useEventEmitter()
     const { updateModel } = modelStore()
     const [loading, setLoading] = useState(false)
     const [LoadTemp, setLoadTemp] = useState(null)
@@ -21,16 +22,33 @@ const LoginUp = ({ data, Event }) => {
             setTimeout(() => updateModel({}), 500)
             return false
         }
-        const TOKEN = `${res.data.token_type} ${res.data.access_token}`
+        const { token_type, access_token, strong_password, strong_passwordmsg } = res.data
+        const TOKEN = `${token_type} ${access_token}`
+        const DBtoken = await GetIndexedDB('token')
+        if (DBtoken) await PutIndexedDB('token', TOKEN)
+        else await AddIndexdDB('token', TOKEN)
+        // 13333333333
+        // 123456
+
+        if (!strong_password) {
+            Event.emit({ type: 'onLoadingFlase' })
+            updateModel({
+                title: '加强密码',
+                type: 'CommonModel',
+                width: 480,
+                height: 600,
+                Event: LoginEvent,
+                modelData: { openType: 'SetPassword', eventBack: 'onSavePassword', tips: strong_passwordmsg }
+            })
+            return false
+        }
+
         onToken(config, TOKEN)
     }
 
     const onToken = async (config, token) => {
-        const userAdd = { nickName: '佚名', backImage: 'BackboardA01', avatar: 'AvatarA01' }
-        const DBtoken = await GetIndexedDB('token')
         const configData = await GetIndexedDB('config')
-        if (DBtoken) await PutIndexedDB('token', token)
-        else await AddIndexdDB('token', token)
+        const userAdd = { nickName: '佚名', backImage: 'BackboardA01', avatar: 'AvatarA01' }
 
         const urlMapping = [
             { method: 'get', url: 'roleMenu/GetRoleMenuListByUserUuid' },
@@ -78,6 +96,13 @@ const LoginUp = ({ data, Event }) => {
             const upData = { ...data, client_id: client_Id, grant_type: grant_Type, client_secret: client_Secret }
             onSignUp(config, upData)
         }
+    })
+
+
+    LoginEvent.useSubscription(e => {
+        console.log(e)
+
+
     })
 
     return (

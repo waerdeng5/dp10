@@ -158,7 +158,7 @@ const compile = (gl, type, source) => {
 };
 
 const DecayCard = ({
-    image = 'https://images.unsplash.com/photo-1762846818262-33c197852fa8?w=900&q=80&auto=format&fit=crop',
+    image = 'https://aloss.ljkjkf.com/WebConfigFile/image/Common/BitsText/BITSComponents_HoloCard.png',
     width = 300,
     height = 400,
     intensity = 0.5,

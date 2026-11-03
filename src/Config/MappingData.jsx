@@ -1518,6 +1518,10 @@ export const MappingData = {
         { value: 'counter', label: '计数' },
         { value: 'none', label: '无' },
     ],
+    BitsComponents_DecayCardScope: [
+        { value: 'window', label: '窗口' },
+        { value: 'card', label: '卡片' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

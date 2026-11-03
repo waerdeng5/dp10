@@ -18,6 +18,7 @@ import DomeGallery from './DomeGallery'
 import Carousel from './Carousel'
 import ProfileCard from './ProfileCard'
 import BounceCards from './BounceCards'
+import DecayCard from './DecayCard'
 
 
 
@@ -41,6 +42,8 @@ const BitsComponents_DomeGallery = ({ data }) => <div className='DomeGallery'><D
 const BitsComponents_Carousel = ({ data }) => <div className='Carousel'><Carousel {...data} /></div>
 const BitsComponents_ProfileCard = ({ data }) => <div className='ProfileCard'><ProfileCard {...data} /></div>
 const BitsComponents_BounceCards = ({ data }) => <div className='BounceCards'><BounceCards {...data} /></div>
+const BitsComponents_DecayCard = ({ data }) => <div className='DecayCard'><DecayCard {...data} /></div>
+
 
 
 
@@ -65,4 +68,5 @@ export const BitsComponentsTemplate = {
     BitsComponents_Carousel,
     BitsComponents_ProfileCard,
     BitsComponents_BounceCards,
+    BitsComponents_DecayCard,
 }

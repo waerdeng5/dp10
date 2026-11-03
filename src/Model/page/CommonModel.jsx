@@ -38,7 +38,6 @@ const handleData = (e) => {
 const CommonModel = ({ data, Event }) => {
     const { message, modal, notification } = App.useApp()
     const { updateModel, updateModel1, updateModel2, updateModel3, updateModel4, updateModel5 } = modelStore()
-
     const { openType, Initial } = data
     // 机构树搜索
     if (openType === 'onTreeSearch') {
@@ -79,7 +78,6 @@ const CommonModel = ({ data, Event }) => {
             )
         } else return <Spin />
     }
-
     // 菜单排序
     if (openType === 'A1001' || openType === 'A1002') {
         const mapping = {
@@ -128,7 +126,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // 重置密码
     if (openType === 'B1504') {
         const { uuid, tableName, fullName } = Initial
@@ -157,7 +154,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // OLAP图例
     if (openType === 'A0903') {
         const ChartsType = [
@@ -218,7 +214,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // 附件详情
     if (openType === 'attDetail') {
         const { type, url } = data
@@ -331,7 +326,6 @@ const CommonModel = ({ data, Event }) => {
             </div >
         )
     }
-
     // 题目单独解析
     if (openType === 'B1605') {
         const { uuid, category, topicTypeName, tableName, explanation } = Initial
@@ -385,7 +379,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     if (openType === 'B1606') {
         const { uuid, topicTypeName, explanation, tableName, category } = data.Initial
         const [options, setOptions] = useState([])
@@ -515,7 +508,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     if (openType === 'clearFields') {
         const onReset = () => Event.emit({ type: 'onConfirmClearFields' })
         const onClose = () => updateModel5({})
@@ -532,7 +524,6 @@ const CommonModel = ({ data, Event }) => {
             </div>
         )
     }
-
     // 锁屏动画
     if (openType === 'LookAnimation') {
         return (
@@ -616,7 +607,6 @@ const CommonModel = ({ data, Event }) => {
         const { wx_image } = head_optionsList.find(v => v.func === 5)
         return <img className='CommonModel_OfficialAccount' src={wx_image} alt="" />
     }
-
     // 小程序选择列表
     if (openType === 'WeChatTempList') {
         return (
@@ -671,27 +661,24 @@ const CommonModel = ({ data, Event }) => {
             </DevScrollView>
         )
     }
-    // 修改免密
+    // 修改密码
     if (openType === 'SetPassword') {
-
         Event.useSubscription(async v => {
             if (v.type === 'onFormBack') {
-                const [err, res] = await axios({ method: 'post', url: 'users/changePassword', params: data })
+                const [err, res] = await axios({ method: 'post', url: 'users/changePassword', params: v.data })
                 Event.emit({ type: 'closeFormLoading' })
-                if (err) return console.log('修改失败')
-                message, success('密码修改成功!')
+                if (err) return message.error('修改失败')
+                message.success('密码修改成功!')
+                updateModel({})
             }
         })
-
         return (
             <div className='SetPassword'>
-                <Alert type="error" title="密码规则-6位以上，包含至少一个大小写字母、数字" banner />
+                <Alert type="error" title={data.tips || "密码规则-6位以上，包含至少一个大小写字母、数字"} banner />
                 <FormTemplate formItem={FormConfig.ModifyPasswordFormList} FORMEVENT={Event} />
             </div>
         )
     }
-
-
 
     return (
         <div className='CommonModelNone'>

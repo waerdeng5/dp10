@@ -11405,7 +11405,30 @@ const BitsComponents_BounceCards = [
     { span: 8, formType: 'NUMBER', name: 'radius', label: '卡片圆角', rules: true },
 ]
 
+const BitsComponents_DecayCard = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'image', label: '图片地址', rules: true },
+    { span: 8, formType: 'RADIO', name: 'scope', label: '作用域', rules: true, valueEnum: MappingData.BitsComponents_DecayCardScope },
+    { span: 8, formType: 'RADIO', name: 'grayscale', label: '灰度', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'intensity', label: '强度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'width', label: '图片宽度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'height', label: '图片高度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'sensitivity', label: '灵敏度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'hoverDecay', label: '悬停衰减', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'recovery', label: '恢复率', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'grain', label: '颗粒半径', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'detail', label: '详情', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'pattern', label: '模式', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'idle', label: '空闲', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'flow', label: '流量', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'chroma', label: '色度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'travel', label: '行进', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'tilt', label: '倾斜', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'radius', label: '圆角', rules: true },
+]
+
 export const FormConfig = {
+    BitsComponents_DecayCard,
     BitsComponents_BounceCards,
     BitsComponents_ProfileCard,
     BitsComponents_Carousel,
