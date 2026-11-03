@@ -88,3 +88,103 @@
     }
 
 }
+
+.ElasticMesh {
+    width: 100%;
+    height: 100%;
+
+    .elastic-mesh {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: pan-y;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .elastic-mesh-canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+.SwarmCursor {
+    width: 100%;
+    height: 100%;
+
+    .swarm-cursor {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .swarm-cursor-canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .swarm-cursor-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+.HalftoneReveal {
+    width: 100%;
+    height: 100%;
+
+    .halftone-reveal {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .halftone-reveal-canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.CursorGrid {
+    width: 100%;
+    height: 100%;
+
+    .cursor-grid {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .cursor-grid__canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+    }
+
+    .cursor-grid__content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+}

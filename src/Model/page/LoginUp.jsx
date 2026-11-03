@@ -27,10 +27,8 @@ const LoginUp = ({ data, Event }) => {
         const DBtoken = await GetIndexedDB('token')
         if (DBtoken) await PutIndexedDB('token', TOKEN)
         else await AddIndexdDB('token', TOKEN)
-        // 13333333333
-        // 123456
 
-        if (!strong_password) {
+        if ('strong_passwordmsg' in res.data && !strong_password) {
             Event.emit({ type: 'onLoadingFlase' })
             updateModel({
                 title: '加强密码',

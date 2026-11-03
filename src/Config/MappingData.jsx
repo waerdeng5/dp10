@@ -1568,8 +1568,50 @@ export const MappingData = {
         { value: 'click', label: '点击' },
         { value: 'both', label: '同时' },
     ],
-
-
+    BitsAnimations_ElasticMeshMaterial: [
+        { value: 'balloon', label: '气球' },
+        { value: 'chrome', label: '金属' },
+        { value: 'jelly', label: '果冻' },
+        { value: 'clay', label: '黏土' },
+    ],
+    BitsAnimations_SwarmCursorShape: [
+        { value: 'dot', label: '点' },
+        { value: 'streak', label: '线' },
+        { value: 'square', label: '方形' },
+    ],
+    BitsAnimations_SwarmCursorIdle: [
+        { value: 'roam', label: '自由移动' },
+        { value: 'gather', label: '聚集' },
+        { value: 'hide', label: '隐藏' },
+    ],
+    BitsAnimations_SwarmCursorClick: [
+        { value: 'burst', label: '爆炸' },
+        { value: 'pulse', label: '脉冲' },
+        { value: 'none', label: '无' },
+    ],
+    BitsAnimations_HalftoneRevealMode: [
+        { value: 'mono', label: '单色模式' },
+        { value: 'duotone', label: '双色模式' },
+        { value: 'color', label: '颜色模式' },
+    ],
+    BitsAnimations_HalftoneRevealShape: [
+        { value: 'dot', label: '点' },
+        { value: 'ellipse', label: '椭圆' },
+        { value: 'square', label: '方形' },
+        { value: 'diamond', label: '钻石' },
+        { value: 'line', label: '线' },
+        { value: 'cross', label: '十字' },
+    ],
+    BitsAnimations_CursorGridHighlight: [
+        { value: 'area', label: '区域' },
+        { value: 'cell', label: '单元格' },
+    ],
+    BitsAnimations_CursorGridGridStyle: [
+        { value: 'dots', label: '点' },
+        { value: 'lines', label: '线' },
+        { value: 'dashed', label: '虚线' },
+        { value: 'crosses', label: '十字' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

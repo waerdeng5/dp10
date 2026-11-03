@@ -1,6 +1,6 @@
 import './Test.scss'
 import dayjs from 'dayjs'
-import { Tooltip, } from 'antd'
+import { Tooltip, Button } from 'antd'
 import { ICONMapping } from '../../Config/IconMapping'
 import { DevScrollView } from '../../Temp/DevTemplate'
 import { MappingData } from '../../Config/MappingData'
@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import RippleDistortion from '../../Bits/RippleDistortion'
+import CursorGrid from '../../Bits/CursorGrid'
 
 // 
 
@@ -19,8 +19,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='RippleDistortion' >
-                <RippleDistortion />
+            <div className='CursorGrid' >
+                <CursorGrid />
             </div>
 
             {/* 
