@@ -752,8 +752,8 @@ export const BITSAnimationsTemplate = [
     { uuid: 'BitsAnimations_Ribbons', title: 'Ribbons', img: `${CommonUrl}BitsText/BitsAnimations_Ribbons.png`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'BitsAnimations_SplashCursor', title: 'SplashCursor', img: `${CommonUrl}BitsText/BitsAnimations_SplashCursor.png`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'BitsAnimations_MetaBalls', title: 'MetaBalls', img: `${CommonUrl}BitsText/BitsAnimations_MetaBalls.png`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'BitsAnimations_BlobCursor', title: 'BlobCursor', img: `${CommonUrl}BitsText/BitsAnimations_BlobCursor.png`, x: 0, y: 0, w: 12, h: 12 },
-    { uuid: 'BitsAnimations_StarBorder', title: 'StarBorder', img: `${CommonUrl}BitsText/BitsAnimations_StarBorder.png`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'BitsAnimations_BlobCursor', title: 'BlobCursor', img: `${CommonUrl}BitsText/BitsAnimations_BlobCursor.png`, x: 0, y: 0, w: 12, h: 12 },
+    // { uuid: 'BitsAnimations_StarBorder', title: 'StarBorder', img: `${CommonUrl}BitsText/BitsAnimations_StarBorder.png`, x: 0, y: 0, w: 12, h: 12 },
 ]
 
 export const BITSBackgroundsTemplate = [
