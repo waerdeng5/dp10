@@ -8,6 +8,12 @@ import ElasticMesh from './ElasticMesh'
 import SwarmCursor from './SwarmCursor'
 import HalftoneReveal from './HalftoneReveal'
 import CursorGrid from './CursorGrid'
+import OrbitImages from './OrbitImages'
+import LaserFlow from './LaserFlow'
+import GhostCursor from './GhostCursor'
+import ClickSpark from './ClickSpark'
+import Strands from './Strands'
+import StickerPeel from './StickerPeel'
 
 
 
@@ -20,6 +26,12 @@ const BitsAnimations_ElasticMesh = ({ data }) => <div className='ElasticMesh'><E
 const BitsAnimations_SwarmCursor = ({ data }) => <div className='SwarmCursor'><SwarmCursor {...data} /></div>
 const BitsAnimations_HalftoneReveal = ({ data }) => <div className='HalftoneReveal'><HalftoneReveal {...data} /></div>
 const BitsAnimations_CursorGrid = ({ data }) => <div className='CursorGrid'><CursorGrid {...data} /></div>
+const BitsAnimations_OrbitImages = ({ data }) => <div className='OrbitImages'><OrbitImages {...data} /></div>
+const BitsAnimations_LaserFlow = ({ data }) => <div className='LaserFlow'><LaserFlow {...data} /></div>
+const BitsAnimations_GhostCursor = ({ data }) => <div className='GhostCursor'><GhostCursor {...data} /></div>
+const BitsAnimations_ClickSpark = ({ data }) => <div className='ClickSpark'><ClickSpark {...data} /></div>
+const BitsAnimations_Strands = ({ data }) => <div className='Strands'><Strands {...data} /></div>
+const BitsAnimations_StickerPeel = ({ data }) => <div className='StickerPeel'><StickerPeel {...data} /></div>
 
 
 
@@ -33,4 +45,10 @@ export const BitsAnimationsTemplate = {
     BitsAnimations_SwarmCursor,
     BitsAnimations_HalftoneReveal,
     BitsAnimations_CursorGrid,
+    BitsAnimations_OrbitImages,
+    BitsAnimations_LaserFlow,
+    BitsAnimations_GhostCursor,
+    BitsAnimations_ClickSpark,
+    BitsAnimations_Strands,
+    BitsAnimations_StickerPeel,
 }

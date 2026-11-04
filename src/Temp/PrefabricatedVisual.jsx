@@ -542,8 +542,12 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
 // 无人机航拍
 const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => {
     const { label_color, label_deg, label_padding, label_size, label_family, label_weight, label_style, label_filed, label_filed_data, label_filed_color,
-        select_height, select_back, select_deg, select_color, select_size, select_family, select_weight, select_style, select_border, select_icon
+        select_height, select_back, select_deg, select_color, select_size, select_family, select_weight, select_style, select_border, select_icon,
+        isTitle, title_field, align_items, align_content, justify_content, flex_direction, flex_wrap, title_color, title_deg,
+        title_padding, title_size, title_family, title_weight, title_style, title_filed, title_filed_data, title_filed_color,
     } = data
+
+
 
     const labelStyle = {
         '--color': ColorCallBack(label_color, label_deg),
@@ -567,8 +571,24 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
         '--iconColor': select_icon,
     }
 
+    const titleStyle = {
+        '--align_items': align_items,
+        '--align_content': align_content,
+        '--justify_content': justify_content,
+        '--flex_direction': flex_direction,
+        '--flex_wrap': flex_wrap,
+        color: ColorCallBack(title_color, title_deg),
+        fontSize: title_size,
+        fontFamily: title_family,
+        fontWeight: title_weight,
+        fontStyle: title_style,
+        padding: SpacingCallBack(title_padding),
+        filter: SetFilderParams(title_filed, title_filed_data, title_filed_color)
+    }
+
 
     const [Url, setUrl] = useState('')
+    const [Title, setTitle] = useState('')
     const [OrganizationUuid, setOrganizationUuid] = useState('')
     const [Data, setData] = useState([])
     const [dataSelect, setDataSelect] = useState()
@@ -582,6 +602,7 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
         if (err) return console.log(err)
         const [data] = res.data.list
         setUrl(data?.fileUrl || '')
+        setTitle(data?.[title_field] || '')
     }
 
     useEffect(() => {
@@ -634,6 +655,11 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
                 />
             </div>
             <div className='video'>
+                {isTitle &&
+                    <div className='title' style={titleStyle}>
+                        <div>{Title}</div>
+                    </div>
+                }
                 <VideoTemplateA02 url={Url} />
             </div>
         </div>

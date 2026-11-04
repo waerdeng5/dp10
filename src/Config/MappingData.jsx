@@ -1612,6 +1612,49 @@ export const MappingData = {
         { value: 'dashed', label: '虚线' },
         { value: 'crosses', label: '十字' },
     ],
+    BitsAnimations_OrbitImagesShape: [
+        { value: 'ellipse', label: '椭圆' },
+        { value: 'circle', label: '圆形' },
+        { value: 'square', label: '方形' },
+        { value: 'rectangle', label: '矩形' },
+        { value: 'triangle', label: '三角' },
+        { value: 'star', label: '星星' },
+        { value: 'heart', label: '心形' },
+        { value: 'infinity', label: '无限' },
+        { value: 'wave', label: '波纹' },
+    ],
+    BitsAnimations_OrbitImagesDirection: [
+        { value: 'normal', label: '正常' },
+        { value: 'reverse', label: '反向' },
+    ],
+    BitsAnimations_OrbitImagesEasing: [
+        { value: 'linear', label: '线性' },
+        { value: 'easeIn', label: '缓入' },
+        { value: 'easeOut', label: '缓出' },
+        { value: 'easeInOut', label: '缓入缓出' },
+    ],
+    BitsAnimations_ClickSparkEasing: [
+        { value: 'ease-out', label: '缓出缓入' },
+        { value: 'ease-in-out', label: '缓入缓出' },
+        { value: 'ease-in', label: '缓入缓出' },
+        { value: 'linear', label: '线性' },
+        { value: 'spring', label: '弹簧' },
+    ],
+    BitsAnimations_ClickSparkShape: [
+        { value: 'dot', label: '点' },
+        { value: 'line', label: '线' },
+        { value: 'streak', label: '连续' },
+        { value: 'star', label: '星星' },
+    ],
+    BitsAnimations_ClickSparkLayer: [
+        { value: 'front', label: '前' },
+        { value: 'back', label: '后' },
+    ],
+    BitsAnimations_StickerPeelFinish: [
+        { value: 'gloss', label: '光泽' },
+        { value: 'matte', label: '哑光' },
+        { value: 'holo', label: '全息' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

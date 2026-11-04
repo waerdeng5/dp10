@@ -9420,8 +9420,36 @@ const PrefabricatedVisualMonitoring = [
 const PrefabricatedVisualRecorded = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
     TemplateApiConfig,
+    { span: 24, formType: 'RADIO', name: 'isTitle', label: '显示标题', rules: true, valueEnum: MappingData.IsEnabledBool },
     {
-        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_label', label: '标题样式', collapsible: true,
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_title', label: '标题样式', collapsible: true,
+        jugde: [{ field: 'isTitle', value: [true] }], children: [
+            { span: 8, formType: 'INPUT', name: 'title_field', label: '标题字段', rules: true },
+            { span: 8, formType: 'SELECT', name: 'align_items', label: 'align-items', rules: true, valueEnum: MappingData.Flex_items },
+            { span: 8, formType: 'SELECT', name: 'align_content', label: 'align-content', rules: true, valueEnum: MappingData.Flex_content },
+            { span: 8, formType: 'SELECT', name: 'justify_content', label: 'justify-content', rules: true, valueEnum: MappingData.Flex_justify },
+            { span: 8, formType: 'SELECT', name: 'flex_direction', label: 'flex-direction', rules: true, valueEnum: MappingData.Flex_direction },
+            { span: 8, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
+            { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
+            { span: 8, formType: 'INPUT', name: 'title_padding', label: '文字间距', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'title_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'title_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'title_filed', value: [true] }]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_label', label: '操作标签', collapsible: true,
         children: [
             { span: 24, formType: 'COLOR', name: 'label_color', label: '文字颜色', rules: true },
             { span: 24, formType: 'NUMBER', name: 'label_deg', label: '颜色角度', rules: true },
@@ -9442,7 +9470,7 @@ const PrefabricatedVisualRecorded = [
         ]
     },
     {
-        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_select', label: '下拉样式', collapsible: true,
+        span: 12, formType: 'GROUP', name: 'PrefabricatedVisualRecorded_select', label: '操作窗口', collapsible: true,
         children: [
             { span: 24, formType: 'NUMBER', name: 'select_height', label: '窗体高度', rules: true },
             { span: 24, formType: 'COLOR', name: 'select_back', label: '背景颜色', rules: true },
@@ -9457,6 +9485,7 @@ const PrefabricatedVisualRecorded = [
         ]
     },
 ]
+
 // !!! 直播模块
 const PrefabricatedVisualLive = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
@@ -11666,8 +11695,182 @@ const BitsAnimations_CursorGrid = [
     { span: 8, formType: 'NUMBER', name: 'edgeFade', label: '边缘淡化', rules: true, },
 ]
 
+const BitsAnimations_OrbitImages = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    {
+        span: 24, formType: 'GROUP', name: 'BitsComponents_CircularCarouselA01', label: '轮播图片', collapsible: true, defaultCollapsed: true,
+        children: [
+            {
+                span: 24, formType: 'LIST', name: 'images', label: '图片集', collapsible: true,
+                children: [{ span: 24, formType: 'INPUT', name: 'src', label: '图片地址', rules: true }]
+            },
+        ]
+    },
+    { span: 6, formType: 'RADIO', name: 'draggable', label: '拖动', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'clickToFront', label: '点击效果', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'alignToPath', label: '路径对齐', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'direction', label: '方向', rules: true, valueEnum: MappingData.BitsAnimations_OrbitImagesDirection },
+    { span: 6, formType: 'RADIO', name: 'fill', label: '填充', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'easing', label: '缓冲', rules: true, valueEnum: MappingData.BitsAnimations_OrbitImagesEasing },
+    { span: 6, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'SELECT', name: 'shape', label: '路径形状', rules: true, valueEnum: MappingData.BitsAnimations_OrbitImagesShape },
+    { span: 6, formType: 'RADIO', name: 'showPath', label: '显示路径', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 4, formType: 'COLOR', name: 'pathColor', label: '路径颜色', rules: true, mode: ['single'] },
+    { span: 4, formType: 'NUMBER', name: 'pathWidth', label: '路径宽度', rules: true, },
+    { span: 4, formType: 'NUMBER', name: 'pathDash', label: '路径虚线', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'baseWidth', label: '基础宽度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'radiusX', label: 'X轴半径', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'radiusY', label: 'Y轴半径', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'radius', label: '半径', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'itemSize', label: '图片尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'itemRadius', label: '图片圆角', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'starPoints', label: '星星边数', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'starInnerRatio', label: '星星内部比率', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'rotation', label: '旋转', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'duration', label: '持续时间', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'depth', label: '深度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'shadow', label: '阴影强度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'hoverScale', label: '悬停比例', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'hoverSpeed', label: '悬停速度', rules: true, },
+]
+
+const BitsAnimations_LaserFlow = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 6, formType: 'RADIO', name: 'mouseInteraction', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 24, formType: 'INPUT', name: 'revealImage', label: '背景图片' },
+    { span: 6, formType: 'NUMBER', name: 'beamPosition', label: '位置比例', rules: true, min: 0.2, max: 0.8 },
+    { span: 6, formType: 'NUMBER', name: 'surfaceLevel', label: '表面等级', rules: true, },
+    { span: 4, formType: 'COLOR', name: 'color', label: '光束颜色', rules: true, mode: ['single'] },
+    { span: 4, formType: 'NUMBER', name: 'intensity', label: '光束强度', rules: true, max: 2 },
+    { span: 4, formType: 'NUMBER', name: 'beamWidth', label: '光束宽度', rules: true, max: 3 },
+    { span: 6, formType: 'NUMBER', name: 'revealRadius', label: '图片半径', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'revealOpacity', label: '图片透明', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'flare', label: '接触耀斑', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'spread', label: '底部扩散', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'spill', label: '向下泄漏', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'fog', label: '雾体', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'dust', label: '灰尘', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'streaks', label: '条纹', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'dots', label: '点数', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'pulse', label: '脉冲', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, max: 2 },
+    { span: 6, formType: 'NUMBER', name: 'seed', label: '种子', rules: true, max: 20 },
+]
+
+const BitsAnimations_GhostCursor = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 6, formType: 'RADIO', name: 'clickPuff', label: '点击', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 6, formType: 'RADIO', name: 'mixBlendMode', label: '混合模式', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'COLOR', name: 'color', label: '光束颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'NUMBER', name: 'brightness', label: '亮度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'size', label: '尺寸', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'trailLength', label: '轨道长度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'inertia', label: '惯性', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'turbulence', label: '乱流', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'drift', label: '漂移', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'detail', label: '细节', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'grainIntensity', label: '颗粒度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'bloomStrength', label: '开花强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'bloomRadius', label: '开花半径', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'bloomThreshold', label: '开花阈值', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'edgeIntensity', label: '边缘强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'fadeDelayMs', label: '衰减时长', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'fadeDurationMs', label: '持续时长', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'maxDevicePixelRatio', label: '最大像素比', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'zIndex', label: '图层层级', rules: true, },
+]
+
+const BitsAnimations_ClickSpark = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'COLORS', name: 'sparkColor', label: '火花颜色', rules: true, min: 1, max: 7 },
+    { span: 6, formType: 'NUMBER', name: 'sparkSize', label: '火花尺寸', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'sparkRadius', label: '火花半径', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'sparkCount', label: '火花数量', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'sparkWidth', label: '火花宽度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'duration', label: '时序时长', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'easing', label: '动画效果', rules: true, valueEnum: MappingData.BitsAnimations_ClickSparkEasing },
+    { span: 8, formType: 'RADIO', name: 'shape', label: '动画效果', rules: true, valueEnum: MappingData.BitsAnimations_ClickSparkShape },
+    { span: 8, formType: 'NUMBER', name: 'extraScale', label: '额外比例', rules: true, },
+    { span: 6, formType: 'RADIO', name: 'ring', label: '环绕', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'disabled', label: '禁用', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'layer', label: '层级', rules: true, valueEnum: MappingData.BitsAnimations_ClickSparkLayer },
+    { span: 6, formType: 'NUMBER', name: 'randomness', label: '随机性', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'gravity', label: '重力', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'spread', label: '传播', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'direction', label: '方向', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'glow', label: '发光', rules: true, },
+]
+
+const BitsAnimations_Strands = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 1, max: 10 },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'lightMode', label: '浅色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'glass', label: '玻璃', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'listening', label: '关注', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'interactive', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'clickPulse', label: '点击', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'count', label: '计数', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'amplitude', label: '振幅', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'waviness', label: '波纹', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'thickness', label: '厚度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'glow', label: '发光', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'taper', label: '锥度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'spread', label: '扩散', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'hueShift', label: '偏转', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'intensity', label: '强度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'saturation', label: '饱和', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'opacity', label: '透明', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'refraction', label: '折射', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'dispersion', label: '分散', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glassSize', label: '尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'rim', label: '边缘', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'energy', label: '能量', rules: true, },
+]
+
+const BitsAnimations_StickerPeel = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 24, formType: 'INPUT', name: 'imageSrc', label: '背景图片', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'width', label: '宽度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'rotate', label: '旋转', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'peelDirection', label: '剥离方向', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'peelBackHoverPct', label: '悬浮比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'peelBackActivePct', label: '激活比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'curlRadius', label: '曲线半径', rules: true, },
+
+    { span: 6, formType: 'RADIO', name: 'finish', label: '表面处理', rules: true, valueEnum: MappingData.BitsAnimations_StickerPeelFinish },
+
+    { span: 6, formType: 'COLOR', name: 'backColor', label: '背景颜色', rules: true, mode: ['single'] },
+
+
+
+    // lightingIntensity: 0.5,
+    // shadowIntensity: 0.6,
+    // followPointer: true,
+    // draggable: true,
+    // swing: 1,
+    // friction: 0.5,
+    // bounce: 0.35,
+    // intro: true,
+    // initialPosition: 'center',
+]
+
 
 export const FormConfig = {
+    BitsAnimations_StickerPeel,
+    BitsAnimations_Strands,
+    BitsAnimations_ClickSpark,
+    BitsAnimations_GhostCursor,
+    BitsAnimations_LaserFlow,
+    BitsAnimations_OrbitImages,
     BitsAnimations_CursorGrid,
     BitsAnimations_HalftoneReveal,
     BitsAnimations_SwarmCursor,

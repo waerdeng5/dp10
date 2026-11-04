@@ -10,17 +10,18 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import CursorGrid from '../../Bits/CursorGrid'
+import StickerPeel from '../../Bits/StickerPeel'
 
 // 
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
+    const boxRef = useRef(null)
     return (
         <div className='TestPage'>
 
-            <div className='CursorGrid' >
-                <CursorGrid />
+            <div className='StickerPeel'  >
+                <StickerPeel />
             </div>
 
             {/* 

@@ -353,7 +353,7 @@ const PrefabricatedDiyProgress = ({ tempId, UrlData, data, LayoutEvent }) => {
                 {progress_isBefore && <span className='progressBefore' style={beforeStyle} />}
             </div>
             <div className='params' style={paramsStyle}>
-                {PrefabricatedDiyProgress_list.map((v, i) => {
+                {PrefabricatedDiyProgress_list?.map((v, i) => {
                     const { render, render_text, render_field, color, deg, size, family, weight, style, filed, filed_data, filed_color, percent, percentData } = v
                     const itemStyle = {
                         color: ColorCallBack(color, deg),

@@ -49,9 +49,7 @@ export const VideoTemplateA02 = ({ url }) => {
     // return
     const myRef = useRef(null)
     const easyPro = useRef(null)
-
     const data = { isLive: false, bufferTime: 0.2, loadTimeReplay: 3, loadTimeOut: 10, MSE: true, hasAudio: false, stretch: false, poster: '' }
-
     const create = () => {
         easyPro.current = new window.EasyPlayerPro(myRef.current, data)
         play()
