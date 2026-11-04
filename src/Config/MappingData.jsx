@@ -1679,6 +1679,21 @@ export const MappingData = {
         { value: 'screen', label: '屏幕' },
         { value: 'difference', label: '差异' },
     ],
+    BitsAnimations_RibbonsShape: [
+        { value: 'lens', label: '镜头' },
+        { value: 'comet', label: '流星' },
+        { value: 'even', label: '偶数' },
+    ],
+    BitsAnimations_MetaBallsVariant: [
+        { value: 'solid', label: '实线' },
+        { value: 'outline', label: '描边' },
+        { value: 'contour', label: '轮廓' },
+    ],
+    BitsAnimations_MetaBallsMotion: [
+        { value: 'orbit', label: '轨道' },
+        { value: 'drift', label: '漂移' },
+        { value: 'lava', label: '岩浆' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

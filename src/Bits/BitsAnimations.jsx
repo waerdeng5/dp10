@@ -18,6 +18,9 @@ import PixelTrail from './PixelTrail'
 import Cubes from './Cubes'
 import MetallicPaint from './MetallicPaint'
 import Noise from './Noise'
+import Ribbons from './Ribbons'
+import SplashCursor from './SplashCursor'
+import MetaBalls from './MetaBalls'
 
 
 
@@ -41,6 +44,9 @@ const BitsAnimations_PixelTrail = ({ data }) => <div className='PixelTrail'><Pix
 const BitsAnimations_Cubes = ({ data }) => <div className='Cubes'><Cubes {...data} /></div>
 const BitsAnimations_MetallicPaint = ({ data }) => <div className='MetallicPaint'><MetallicPaint {...data} /></div>
 const BitsAnimations_Noise = ({ data }) => <div className='Noise'><Noise {...data} /></div>
+const BitsAnimations_Ribbons = ({ data }) => <div className='Ribbons'><Ribbons {...data} /></div>
+const BitsAnimations_SplashCursor = ({ data }) => <div className='SplashCursor'><SplashCursor {...data} /></div>
+const BitsAnimations_MetaBalls = ({ data }) => <div className='MetaBalls'><MetaBalls {...data} /></div>
 
 
 
@@ -64,4 +70,7 @@ export const BitsAnimationsTemplate = {
     BitsAnimations_Cubes,
     BitsAnimations_MetallicPaint,
     BitsAnimations_Noise,
+    BitsAnimations_Ribbons,
+    BitsAnimations_SplashCursor,
+    BitsAnimations_MetaBalls,
 }

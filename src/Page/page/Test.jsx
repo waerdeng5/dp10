@@ -10,9 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import Noise from '../../Bits/Noise'
-
-// 
+import MetaBalls from '../../Bits/MetaBalls'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
@@ -20,8 +18,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='Noise'  >
-                <Noise />
+            <div className='MetaBalls'  >
+                <MetaBalls />
             </div>
 
             {/* 

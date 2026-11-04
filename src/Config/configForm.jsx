@@ -11940,8 +11940,73 @@ const BitsAnimations_Noise = [
     { span: 8, formType: 'NUMBER', name: 'zIndex', label: '层级', rules: true, },
 ]
 
+const BitsAnimations_Ribbons = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 18, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 1, max: 10 },
+    { span: 6, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'RADIO', name: 'shape', label: '形状', rules: true, valueEnum: MappingData.BitsAnimations_RibbonsShape },
+    { span: 6, formType: 'RADIO', name: 'fade', label: '衰退', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'thickness', label: '厚度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'length', label: '长度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'spread', label: '分布', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'stiffness', label: '刚度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'bounce', label: '反弹', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'wave', label: '波纹', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'softness', label: '柔软度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'opacity', label: '透明', rules: true, },
+]
+
+const BitsAnimations_SplashCursor = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 18, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 1, max: 10 },
+    { span: 6, formType: 'RADIO', name: 'rainbow', label: '彩虹色', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'quality', label: '质量', rules: true, valueEnum: MappingData.BitsAnimations_GlowCursorQuality },
+    { span: 8, formType: 'RADIO', name: 'clickSplash', label: '点击飞溅', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'contained', label: '包含', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'theme', label: '主题', rules: true, valueEnum: MappingData.BitsText_ASCIITextTheme },
+    { span: 8, formType: 'NUMBER', name: 'colorSpeed', label: '颜色切换速度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'intensity', label: '强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'size', label: '尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'force', label: '力度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'swirl', label: '旋流', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'trail', label: '踪迹', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'momentum', label: '动量', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'shading', label: '阴影', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glow', label: '发光', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'zIndex', label: '层级', rules: true, },
+]
+
+const BitsAnimations_MetaBalls = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 8, formType: 'RADIO', name: 'clickBurst', label: '点击交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'enableMouseInteraction', label: '鼠标交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'enableTransparency', label: '透明效果', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'variant', label: '变体效果', rules: true, valueEnum: MappingData.BitsAnimations_MetaBallsVariant },
+    { span: 8, formType: 'RADIO', name: 'motion', label: '运动效果', rules: true, valueEnum: MappingData.BitsAnimations_MetaBallsMotion },
+    { span: 8, formType: 'COLOR', name: 'color', label: '液体颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'COLOR', name: 'cursorBallColor', label: '光球颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'hoverSmoothness', label: '顺滑度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'animationSize', label: '动画尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'ballCount', label: '液体数量', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'clumpFactor', label: '聚集效果', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'cursorBallSize', label: '光球尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'gooeyness', label: '液体尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'stickiness', label: '液体粘性', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'stretch', label: '拉伸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'wobble', label: '摆动', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'lineWidth', label: '线宽', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'rings', label: '环数', rules: true, },
+]
+
 
 export const FormConfig = {
+    BitsAnimations_MetaBalls,
+    BitsAnimations_SplashCursor,
+    BitsAnimations_Ribbons,
     BitsAnimations_Noise,
     BitsAnimations_MetallicPaint,
     BitsAnimations_Cubes,
