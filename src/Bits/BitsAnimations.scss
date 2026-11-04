@@ -398,3 +398,96 @@
     }
 
 }
+
+.PixelTrail {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .pixel-canvas {
+        position: absolute;
+        z-index: 1;
+    }
+}
+
+.Cubes {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    .cubes-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        touch-action: pan-y;
+    }
+
+    .cubes-canvas {
+        position: absolute;
+        inset: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+.MetallicPaint {
+    width: 100%;
+    height: 100%;
+
+    .metallic-paint {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .metallic-paint-canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+}
+
+.Noise {
+    width: 100%;
+    height: 100%;
+
+    .noise {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .noise--fixed {
+        position: fixed;
+    }
+
+    .noise__grain {
+        position: absolute;
+        inset: 0;
+        background-repeat: repeat;
+        image-rendering: pixelated;
+    }
+
+    .noise__dust {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .noise__lines {
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(to bottom,
+                rgba(0, 0, 0, 0.55) 0,
+                rgba(0, 0, 0, 0.55) 1px,
+                transparent 1px,
+                transparent 3px);
+    }
+
+}

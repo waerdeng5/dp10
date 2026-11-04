@@ -14,6 +14,11 @@ import GhostCursor from './GhostCursor'
 import ClickSpark from './ClickSpark'
 import Strands from './Strands'
 import StickerPeel from './StickerPeel'
+import PixelTrail from './PixelTrail'
+import Cubes from './Cubes'
+import MetallicPaint from './MetallicPaint'
+import Noise from './Noise'
+
 
 
 
@@ -32,6 +37,10 @@ const BitsAnimations_GhostCursor = ({ data }) => <div className='GhostCursor'><G
 const BitsAnimations_ClickSpark = ({ data }) => <div className='ClickSpark'><ClickSpark {...data} /></div>
 const BitsAnimations_Strands = ({ data }) => <div className='Strands'><Strands {...data} /></div>
 const BitsAnimations_StickerPeel = ({ data }) => <div className='StickerPeel'><StickerPeel {...data} /></div>
+const BitsAnimations_PixelTrail = ({ data }) => <div className='PixelTrail'><PixelTrail {...data} /></div>
+const BitsAnimations_Cubes = ({ data }) => <div className='Cubes'><Cubes {...data} /></div>
+const BitsAnimations_MetallicPaint = ({ data }) => <div className='MetallicPaint'><MetallicPaint {...data} /></div>
+const BitsAnimations_Noise = ({ data }) => <div className='Noise'><Noise {...data} /></div>
 
 
 
@@ -51,4 +60,8 @@ export const BitsAnimationsTemplate = {
     BitsAnimations_ClickSpark,
     BitsAnimations_Strands,
     BitsAnimations_StickerPeel,
+    BitsAnimations_PixelTrail,
+    BitsAnimations_Cubes,
+    BitsAnimations_MetallicPaint,
+    BitsAnimations_Noise,
 }

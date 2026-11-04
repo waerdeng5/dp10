@@ -38,6 +38,7 @@ import { BitsTextTemplate } from '../Bits/BitsText'
 import { BitsComponentsTemplate } from '../Bits/BitsComponents'
 import { BitsMicroTemplate } from '../Bits/BitsMicro'
 import { BitsAnimationsTemplate } from '../Bits/BitsAnimations'
+import { BitsBackgroundsTemplate } from '../Bits/BitsBackgrounds'
 
 
 import { GetIndexedDB } from '../Utils/IndexedDB'
@@ -59,6 +60,7 @@ import {
     BITSComponentsTemplate,
     BITSMicroTemplate,
     BITSAnimationsTemplate,
+    BITSBackgroundsTemplate,
 } from '../Config'
 
 const { port } = window.location
@@ -76,6 +78,7 @@ const TemplateMapping = [
     ...BITSComponentsTemplate,
     ...BITSMicroTemplate,
     ...BITSAnimationsTemplate,
+    ...BITSBackgroundsTemplate,
 ]
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
@@ -91,6 +94,7 @@ const TemplateComponentMapping = {
     ...BitsComponentsTemplate,
     ...BitsMicroTemplate,
     ...BitsAnimationsTemplate,
+    ...BitsBackgroundsTemplate,
 }
 
 export const GlobalOperation = ({ type, winId, layId, actId, tempId, form, LayoutEvent }) => {

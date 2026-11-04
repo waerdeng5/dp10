@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import StickerPeel from '../../Bits/StickerPeel'
+import Noise from '../../Bits/Noise'
 
 // 
 
@@ -20,8 +20,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='StickerPeel'  >
-                <StickerPeel />
+            <div className='Noise'  >
+                <Noise />
             </div>
 
             {/* 

@@ -1655,6 +1655,30 @@ export const MappingData = {
         { value: 'matte', label: '哑光' },
         { value: 'holo', label: '全息' },
     ],
+    BitsAnimations_PixelTrailShape: [
+        { value: 'square', label: '方形' },
+        { value: 'circle', label: '圆形' },
+        { value: 'diamond', label: '钻石' },
+    ],
+    BitsAnimations_PixelTrailDecay: [
+        { value: 'fade', label: '淡出' },
+        { value: 'shrink', label: '缩小' },
+        { value: 'dither', label: '抖动' },
+    ],
+    BitsAnimations_CubesEdgeStyle: [
+        { value: 'solid', label: '实线' },
+        { value: 'dashed', label: '虚线' },
+        { value: 'dotted', label: '点线' },
+        { value: 'none', label: '无' },
+    ],
+    BitsAnimations_NoiseBlendMode: [
+        { value: 'normal', label: '正常' },
+        { value: 'overlay', label: '叠加' },
+        { value: 'soft-light', label: '软光' },
+        { value: 'multiply', label: '乘法' },
+        { value: 'screen', label: '屏幕' },
+        { value: 'difference', label: '差异' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
