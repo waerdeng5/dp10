@@ -207,9 +207,9 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             loop={true}
             speed={500}
-            navigation
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
+            // navigation
+            // pagination={{ clickable: false }}
+            // scrollbar={{ draggable: false }}
             onSwiper={setSwiper}
             onSlideChange={e => Event?.emit({ type: 'onSlideChange', data: e.activeIndex })}
         >

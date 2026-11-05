@@ -1,6 +1,8 @@
 import './VideoTemplate.scss'
 import { useSize } from 'ahooks'
 import { useRef, useState, useEffect } from 'react'
+import '@videojs/react/video/skin.css';
+import { VideoPlayer, VideoSkin, Video } from '@videojs/react/video';
 
 // 视频背景
 export const VideoTemplateA01 = ({ url, seekTimeStart = 0, seekTimeEnd = 10 }) => {
@@ -46,36 +48,16 @@ export const VideoTemplateA01 = ({ url, seekTimeStart = 0, seekTimeEnd = 10 }) =
 
 // 视频预览封面
 export const VideoTemplateA02 = ({ url }) => {
-    // return
-    const myRef = useRef(null)
-    const easyPro = useRef(null)
-    const data = { isLive: false, bufferTime: 0.2, loadTimeReplay: 3, loadTimeOut: 10, MSE: true, hasAudio: false, stretch: false, poster: '' }
-    const create = () => {
-        easyPro.current = new window.EasyPlayerPro(myRef.current, data)
-        play()
-    }
 
-    const play = () => {
-        if (!easyPro.current) return create()
-        easyPro.current.play(url).catch(destroy)
-    }
-
-    const destroy = () => {
-        if (!easyPro.current) return create()
-        easyPro.current.destroy(url)
-    }
-
-
-    useEffect(() => {
-        if (url) {
-            if (easyPro.current) easyPro.current.destroy().then(create)
-            else create()
-        }
-        return () => destroy()
-    }, [url])
-
-
-    return <div className='VideoTempA02' ref={myRef} />
+    return (
+        <div className='VideoTempA02' >
+            <VideoPlayer>
+                <VideoSkin style={{ width: '100%', aspectRatio: '16 / 9' }}>
+                    <Video src={url} playsInline loop autoPlay />
+                </VideoSkin>
+            </VideoPlayer>
+        </div >
+    )
 }
 
 // 各类监控统一处理
@@ -147,4 +129,3 @@ export const VideoTemplateA04 = ({ url, cover }) => {
 
     return <div className='VideoTempA02' ref={myRef} />
 }
-
