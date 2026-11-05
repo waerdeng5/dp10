@@ -904,7 +904,7 @@ export const TemplateClickFn = (e, v, row, Event, openModel) => {
     console.log('点击行数据', row)
     console.log('点击事件', Event)
     console.log('点击打开弹出层', openModel)
-    e?.stopPropagation()
+    e && e?.stopPropagation()
     const { click_type, click_model_level } = v
     if (click_type === 'model') {
         const modelData = AssemblyModelData(v, row, Event)

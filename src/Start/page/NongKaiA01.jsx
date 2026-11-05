@@ -1,7 +1,10 @@
 import './NongKaiA01.scss'
 import { useState } from 'react'
 import { useMount } from 'ahooks'
+import { useEventEmitter } from 'ahooks'
 import { axios } from '../../Utils/Api'
+import { TemplateClickFn } from '../../Utils'
+import { useTemplateModel } from '../../Config/useHooks'
 
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
 
@@ -23,22 +26,24 @@ const uuidKeyMap = {
 };
 
 const NongKaiA01 = () => {
+    const openModel = useTemplateModel()
+    const PageEvent = useEventEmitter()
     const [active, setActive] = useState('A01')
     const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0, A00: 0 })
     const MapList = [
-        { uuid: 'A01', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
-        { uuid: 'A02', img: imageUrl + 'MapA02.png', name: '齐齐哈尔市', x: 320, y: 380 },
-        { uuid: 'A03', img: imageUrl + 'MapA03.png', name: '鸡西市', x: 720, y: 520 },
-        { uuid: 'A04', img: imageUrl + 'MapA04.png', name: '鹤岗市', x: 660, y: 400 },
-        { uuid: 'A05', img: imageUrl + 'MapA05.png', name: '双鸭山市', x: 720, y: 460 },
-        { uuid: 'A06', img: imageUrl + 'MapA06.png', name: '大庆市', x: 340, y: 480 },
-        { uuid: 'A07', img: imageUrl + 'MapA07.png', name: '伊春市', x: 560, y: 400 },
-        { uuid: 'A08', img: imageUrl + 'MapA08.png', name: '佳木斯市', x: 740, y: 400 },
-        { uuid: 'A09', img: imageUrl + 'MapA09.png', name: '七台河市', x: 640, y: 500 },
-        { uuid: 'A10', img: imageUrl + 'MapA10.png', name: '牡丹江市', x: 600, y: 600 },
-        { uuid: 'A11', img: imageUrl + 'MapA11.png', name: '黑河市', x: 460, y: 300 },
-        { uuid: 'A12', img: imageUrl + 'MapA12.png', name: '绥化市', x: 460, y: 420 },
-        { uuid: 'A13', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
+        { uuid: 'A01', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821001', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
+        { uuid: 'A02', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821002', img: imageUrl + 'MapA02.png', name: '齐齐哈尔市', x: 320, y: 380 },
+        { uuid: 'A03', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821003', img: imageUrl + 'MapA03.png', name: '鸡西市', x: 720, y: 520 },
+        { uuid: 'A04', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821004', img: imageUrl + 'MapA04.png', name: '鹤岗市', x: 660, y: 400 },
+        { uuid: 'A05', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821005', img: imageUrl + 'MapA05.png', name: '双鸭山市', x: 720, y: 460 },
+        { uuid: 'A06', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821006', img: imageUrl + 'MapA06.png', name: '大庆市', x: 340, y: 480 },
+        { uuid: 'A07', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821007', img: imageUrl + 'MapA07.png', name: '伊春市', x: 560, y: 400 },
+        { uuid: 'A08', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821008', img: imageUrl + 'MapA08.png', name: '佳木斯市', x: 740, y: 400 },
+        { uuid: 'A09', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821009', img: imageUrl + 'MapA09.png', name: '七台河市', x: 640, y: 500 },
+        { uuid: 'A10', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821010', img: imageUrl + 'MapA10.png', name: '牡丹江市', x: 600, y: 600 },
+        { uuid: 'A11', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821011', img: imageUrl + 'MapA11.png', name: '黑河市', x: 460, y: 300 },
+        { uuid: 'A12', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821012', img: imageUrl + 'MapA12.png', name: '绥化市', x: 460, y: 420 },
+        { uuid: 'A13', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821013', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
     ]
 
     useMount(async () => {
@@ -52,6 +57,35 @@ const NongKaiA01 = () => {
         setData(data)
     })
 
+    const onClickCity = async (data) => {
+        const { uuid, name } = data
+        setActive(uuid)
+        TemplateClickFn(false, {
+            alone_back: false,
+            alone_back_image: true,
+            alone_back_image_url: "https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/StartA0115.png",
+            alone_icon: false,
+            alone_number: true,
+            alone_title: false,
+            alone_unit: false,
+            click_model_height: "80vh",
+            click_model_level: "updateModel",
+            click_model_params: true,
+            click_model_config: [{ param_type: 'data', param_key: 'cityUuid', param_field: 'cityUuid' }],
+            click_model_start: true,
+            click_model_title: name + '项目列表',
+            click_model_uuid: "19e1583a-97aa-49c2-b020-aefdd54f8123",
+            click_model_width: "80vw",
+            click_status: true,
+            click_type: "model",
+            data_img: "https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/StartA0113.png",
+            data_text: [],
+            data_textDeg: 0,
+            data_title: "累计中标金额(万)",
+            data_value: "totalContractAmount",
+        }, data, PageEvent, openModel)
+    }
+
     return (
         <div className='NongKaiA01'>
             <div className='MapBox'>
@@ -63,9 +97,9 @@ const NongKaiA01 = () => {
                                 className='ListItem'
                                 key={v.uuid}
                                 style={{ left: v.x, top: v.y, '--shadow': active === v.uuid ? '7px 15px 9px #012905' : '' }}
-                                onClick={() => setActive(v.uuid)}
+                                onClick={() => onClickCity(v)}
                             >
-                                <div>{Data[v.uuid]}</div>
+                                <div>{Data[v.uuid] || 0} </div>
                                 <div>{v.name}</div>
                             </div>
                         )
@@ -85,7 +119,7 @@ const NongKaiA01 = () => {
                 {MapList.map(v => {
                     const status = active === v.uuid
                     return (
-                        <div className='item' key={v.uuid} onClick={() => setActive(v.uuid)}>
+                        <div className='item' key={v.uuid} onClick={() => onClickCity(v)}>
                             <div>{v.name}</div>
                             {status && <img src={imageUrl + 'MapActive.png'} alt="" />}
                         </div>

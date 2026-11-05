@@ -12002,8 +12002,35 @@ const BitsAnimations_MetaBalls = [
     { span: 8, formType: 'NUMBER', name: 'rings', label: '环数', rules: true, },
 ]
 
+const BitsBackgrounds_GradientASCII = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 18, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 1, max: 8 },
+    { span: 6, formType: 'INPUT', name: 'characters', label: '字符集', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'shape', label: '运动效果', rules: true, valueEnum: MappingData.BitsBackgrounds_GradientASCIIShape },
+    { span: 8, formType: 'RADIO', name: 'mouseInteraction', label: '鼠标交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'scrambleRadius', label: '扰乱半径', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'clickEffect', label: '点击效果', rules: true, valueEnum: MappingData.BitsBackgrounds_GradientASCIIEffect },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'lightMode', label: '浅色模式', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'cellSize', label: '字符尺寸', rules: true, },
+    { span: 8, formType: 'SELECT', name: 'fontFamily', label: '字符字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 8, formType: 'NUMBER', name: 'density', label: '密度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glyphOpacity', label: '字符透明', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glow', label: '发光', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'depthOfField', label: '景深', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'flicker', label: '闪烁', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'softness', label: '柔软度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'flow', label: '流量', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'gradientOpacity', label: '颜色透明', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'grain', label: '颗粒度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'variation', label: '变化', rules: true, },
+]
+
 
 export const FormConfig = {
+    BitsBackgrounds_GradientASCII,
     BitsAnimations_MetaBalls,
     BitsAnimations_SplashCursor,
     BitsAnimations_Ribbons,

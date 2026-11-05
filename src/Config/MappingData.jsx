@@ -1694,6 +1694,17 @@ export const MappingData = {
         { value: 'drift', label: '漂移' },
         { value: 'lava', label: '岩浆' },
     ],
+    BitsBackgrounds_GradientASCIIShape: [
+        { value: 'horizon', label: '水平' },
+        { value: 'pinch', label: '压缩' },
+        { value: 'rise', label: '上升' },
+        { value: 'eclipse', label: '日食' },
+    ],
+    BitsBackgrounds_GradientASCIIEffect: [
+        { value: 'wave', label: '波纹' },
+        { value: 'burst', label: '爆发' },
+        { value: 'none', label: '无' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

@@ -2423,12 +2423,42 @@ const BitsAnimationsMapping = {
     },
 }
 
+const BitsBackgroundsMapping = {
+    BitsBackgrounds_GradientASCII: {
+        value: 'BitsBackgrounds_GradientASCII',
+        colors: [{ color: '#1e3fd8' }, { color: '#f6f8ff' }, { color: '#a5d8ff' }, { color: '#38bdf8' }],
+        shape: 'horizon',
+        characters: ' =+xX0S8#@',
+        cellSize: 18,
+        density: 0.8,
+        glyphOpacity: 0.85,
+        glow: 0.2,
+        depthOfField: 0,
+        flicker: 0.2,
+        softness: 0.5,
+        scale: 1,
+        flow: 0.5,
+        speed: 1,
+        gradientOpacity: 0.9,
+        grain: 0.08,
+        variation: 0,
+        mouseInteraction: true,
+        scrambleRadius: 0.1,
+        clickEffect: 'wave',
+        intro: true,
+        lightMode: false,
+        fontFamily: 'DIN',
+    },
+}
+
+
 export const TemplateParamsMapping = {
     // TODO BITS组件
     ...BitsTextMapping,
     ...BITSComponentsMapping,
     ...BitsMicroMapping,
     ...BitsAnimationsMapping,
+    ...BitsBackgroundsMapping,
     // TODO 占位组件
     PrefabricatedPlaceEmpty: {
         value: 'PrefabricatedPlaceEmpty',
