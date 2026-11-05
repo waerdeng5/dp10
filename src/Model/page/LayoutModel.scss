@@ -8,4 +8,36 @@
         align-items: center;
         justify-content: center;
     }
+
+    &>.DetBox {
+        width: 100%;
+        height: 100%;
+
+        &>.TXT {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            margin: 4px 8px;
+
+            .Label {
+                text-align: right;
+            }
+
+            .Value {
+                flex: 1;
+            }
+
+            .Label,
+            .Value {
+                background: var(--color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+        }
+
+
+    }
 }

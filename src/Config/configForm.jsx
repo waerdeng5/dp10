@@ -9901,6 +9901,7 @@ const PrefabricatedDiyFolder = [
                         span: 24, formType: 'COLOR', name: 'extra_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
                         jugde: [{ field: 'extra_title_filed', value: [true] }]
                     },
+
                 ]
             },
         ]
@@ -10115,9 +10116,86 @@ const ModelConfigFormList = [
             },
         ]
     },
-
-
-
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A03', label: '详情窗口配置', collapsible: true, jugde: [{ field: 'pageType', value: ['DET'] }],
+        children: [
+            { span: 12, formType: 'RADIO', name: 'lay_A03_type', label: '数据来源', rules: true, valueEnum: MappingData.System_fileUrlType },
+            {
+                span: 24, formType: 'GROUP', name: 'lay_A03_api', label: '接口设置', collapsible: true,
+                jugde: [{ field: 'lay_A03_type', value: ['A02'] }], children: [
+                    { span: 12, formType: 'RADIO', name: 'A03_api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+                    { span: 12, formType: 'INPUT', name: 'A03_api_url', label: '请求接口', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'A03_api_params', label: '额外参数' },
+                    { span: 12, formType: 'INPUT', name: 'A03_api_https', label: '额外地址' },
+                    { span: 12, formType: 'RADIO', name: 'A03_api_data', label: '使用主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'RADIO', name: 'A03_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+                    { span: 12, formType: 'INPUT', name: 'A03_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'A03_api_level', value: [true] }] },
+                ]
+            },
+            {
+                span: 24, formType: 'GROUP', name: 'A03_fields', label: '渲染列表', collapsible: true,
+                children: [
+                    {
+                        span: 24, formType: 'LIST', name: 'AddTopOptionsFormList_14', label: '数据详情',
+                        children: [
+                            { span: 8, formType: 'INPUT', name: 'B14_value', label: '字段', rules: true },
+                            { span: 8, formType: 'INPUT', name: 'B14_label', label: '标题', rules: true },
+                            { span: 8, formType: 'RADIO', name: 'B14_type', label: '类型', rules: true, valueEnum: MappingData.System__RowB15Type },
+                        ]
+                    },
+                ]
+            },
+        ]
+    },
+    {
+        span: 24, formType: 'GROUP', name: 'lay_A03_style', label: '详情窗口样式', collapsible: true, jugde: [{ field: 'pageType', value: ['DET'] }],
+        children: [
+            { span: 12, formType: 'COLOR', name: 'A03_style_color', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'A03_style_width', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'A03_style_padding', label: '背景填充', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'A03_label_width', label: '标签宽度', rules: true },
+            {
+                span: 12, formType: 'GROUP', name: 'lay_A03_label', label: '标签样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'A03_label_color', label: '标签颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'A03_label_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'A03_label_size', label: '标签字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'A03_label_family', label: '标签字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'A03_label_weight', label: '标签加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'A03_label_style', label: '标签倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'A03_label_filed', label: '标签阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'A03_label_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'A03_label_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'A03_label_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'A03_label_filed', value: [true] }]
+                    },
+                ]
+            },
+            {
+                span: 12, formType: 'GROUP', name: 'lay_A03_value', label: '内容样式', collapsible: true,
+                children: [
+                    { span: 24, formType: 'COLOR', name: 'A03_value_color', label: '内容颜色', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'A03_value_deg', label: '颜色角度', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'A03_value_size', label: '内容字号', rules: true },
+                    { span: 24, formType: 'SELECT', name: 'A03_value_family', label: '内容字体', valueEnum: MappingData.Font__Family },
+                    { span: 24, formType: 'RADIO', name: 'A03_value_weight', label: '内容加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+                    { span: 24, formType: 'RADIO', name: 'A03_value_style', label: '内容倾斜', rules: true, valueEnum: MappingData.Font__Style },
+                    { span: 24, formType: 'RADIO', name: 'A03_value_filed', label: '背景阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    {
+                        span: 24, formType: 'INPUT', name: 'A03_value_filed_data', label: '阴影数值', rules: true,
+                        jugde: [{ field: 'A03_value_filed', value: [true] }]
+                    },
+                    {
+                        span: 24, formType: 'COLOR', name: 'A03_value_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                        jugde: [{ field: 'A03_value_filed', value: [true] }]
+                    },
+                ]
+            },
+        ]
+    },
 ]
 // *** 模块参数粘贴窗口
 const PrefabricatedPasteWindow = [
@@ -12028,8 +12106,35 @@ const BitsBackgrounds_GradientASCII = [
     { span: 8, formType: 'NUMBER', name: 'variation', label: '变化', rules: true, },
 ]
 
+const BitsBackgrounds_FluxLines = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 18, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 3, max: 3 },
+    { span: 6, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'RADIO', name: 'clickSwirl', label: '点击旋涡', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'lightMode', label: '浅色模式', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'transparent', label: '透明', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'flowDirection', label: '流向', rules: true, valueEnum: MappingData.BitsText_ShuffleDirection },
+    { span: 8, formType: 'RADIO', name: 'mouseInteraction', label: '鼠标交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'mouseStrength', label: '鼠标强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'mouseRadius', label: '鼠标边境', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'mouseDampening', label: '鼠标阻力', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'turbulence', label: '涡流', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'fluidity', label: '流动', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'rimWidth', label: '边缘宽度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'sharpness', label: '锐度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'shimmer', label: '微光', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glow', label: '发光', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'lineWidth', label: '线宽', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'opacity', label: '透明度', rules: true, },
+]
+
 
 export const FormConfig = {
+    BitsBackgrounds_FluxLines,
     BitsBackgrounds_GradientASCII,
     BitsAnimations_MetaBalls,
     BitsAnimations_SplashCursor,

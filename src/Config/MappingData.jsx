@@ -2291,6 +2291,7 @@ export const MappingData = {
     ],
     Start__pageType: [
         { value: 'LAY', label: '布局页面' },
+        { value: 'DET', label: '详情页面' },
         { value: 'DIY', label: '自订页面' },
     ],
     Start__windowType: [

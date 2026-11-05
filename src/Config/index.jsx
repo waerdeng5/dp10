@@ -2449,7 +2449,35 @@ const BitsBackgroundsMapping = {
         lightMode: false,
         fontFamily: 'DIN',
     },
+    BitsBackgrounds_FluxLines: {
+        value: 'BitsBackgrounds_FluxLines',
+        colors: [{ color: '#0f0' }, { color: '#00f' }, { color: '#00f' }],
+        backgroundColor: '#00000000',
+        speed: 0.5,
+        scale: 1.6,
+        turbulence: 1,
+        fluidity: 0.1,
+        rimWidth: 0.2,
+        sharpness: 2.5,
+        shimmer: 1.5,
+        glow: 2,
+        lineWidth: 1,
+        flowDirection: 'down',
+        opacity: 1,
+        mouseInteraction: true,
+        mouseStrength: 1,
+        mouseRadius: 0.35,
+        mouseDampening: 0.15,
+        clickSwirl: true,
+        intro: true,
+        lightMode: false,
+        transparent: true,
+        paused: false,
+    },
 }
+
+
+
 
 
 export const TemplateParamsMapping = {

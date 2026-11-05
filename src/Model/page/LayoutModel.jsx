@@ -7,12 +7,13 @@ import { useState, useEffect } from 'react'
 import { Spin, Result, Button, FloatButton, App } from 'antd'
 
 
-import { axios } from '../../Utils/Api'
+import { axios, strOfurlParamsFunc } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
 import { modelStore } from '../../Router/zustand'
 import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
-
 import { ModelAnnexTemplate, ModelTableTemplate } from '../../Temp/ModelTemplate'
+import { getNestedValue, ColorCallBack, SpacingCallBack, SetFilderParams, } from '../../Utils'
+import { AttachTemplateA01 } from '../../Temp/DevTemplate'
 
 const { port } = window.location
 
@@ -30,6 +31,9 @@ const LayoutModel = ({ data, Event }) => {
     const [componentStatus, setComponentStatus] = useState({ laoding: true, error: null, Template: null })
 
     const [Config, setConfig] = useState({ json: json })
+
+
+    const [DETData, setDETData] = useState({})
 
     const getJson = async () => {
         const { uuid } = await GetIndexedDB('config')
@@ -51,6 +55,18 @@ const LayoutModel = ({ data, Event }) => {
                 if (!Component || (typeof Component !== 'function' && typeof Component !== 'object')) throw new Error(`导入的模块不是有效的React组件`)
                 setComponentStatus({ laoding: false, error: false, Template: Component })
             } catch (error) { setComponentStatus({ laoding: false, error: error, Template: null }) }
+        }
+        if (pageType === 'DET') {
+            const { lay_A03_type, A03_api_method, A03_api_url, A03_api_params, A03_api_https,
+                A03_api_data, A03_api_level, A03_api_mapping, A03_fields } = jsonData
+
+            if (lay_A03_type === 'A02') {
+                const params = A03_api_data ? { ...strOfurlParamsFunc(A03_api_params), ...row } : strOfurlParamsFunc(A03_api_params)
+                const [err, res] = await axios({ method: A03_api_method, url: A03_api_url, path: A03_api_https, params })
+                if (err) return console.error('获取树状结构失败', err)
+                const apiData = A03_api_level ? getNestedValue(A03_api_mapping || '', res) : res
+                setDETData(apiData)
+            } else setDETData(row)
         }
     }
     const onFormClick = () => {
@@ -136,6 +152,7 @@ const LayoutModel = ({ data, Event }) => {
         </div>
     )
 
+
     if (Config.pageType === 'DIY') {
         if (componentStatus.laoding) return <div className='LayoutModel Spin'><Spin size="large" /></div>
         if (componentStatus.error) return (
@@ -147,6 +164,72 @@ const LayoutModel = ({ data, Event }) => {
         return (
             <div className='LayoutModel'>
                 <Template data={data} />
+                {port && <FloatButton onClick={onFormClick} />}
+            </div>
+        )
+    }
+    if (Config.pageType === 'DET') {
+        const { AddTopOptionsFormList_14, A03_style_color, A03_style_width, A03_style_padding, A03_label_width,
+            A03_label_color, A03_label_deg, A03_label_size, A03_label_family, A03_label_weight, A03_label_style,
+            A03_label_filed, A03_label_filed_data, A03_label_filed_color,
+            A03_value_color, A03_value_deg, A03_value_size, A03_value_family, A03_value_weight, A03_value_style,
+            A03_value_filed, A03_value_filed_data, A03_value_filed_color,
+        } = Config
+
+
+        const DetStyle = {
+            background: ColorCallBack(A03_style_color, A03_style_width),
+            padding: SpacingCallBack(A03_style_padding),
+        }
+
+        const labelStyle = {
+            width: A03_label_width,
+            '--color': ColorCallBack(A03_label_color, A03_label_deg),
+            fontSize: A03_label_size,
+            fontFamily: A03_label_family,
+            fontWeight: A03_label_weight,
+            fontStyle: A03_label_style,
+            filter: SetFilderParams(A03_label_filed, A03_label_filed_data, A03_label_filed_color)
+        }
+
+        const valueStyle = {
+            '--color': ColorCallBack(A03_value_color, A03_value_deg),
+            fontSize: A03_value_size,
+            fontFamily: A03_value_family,
+            fontWeight: A03_value_weight,
+            fontStyle: A03_value_style,
+            filter: SetFilderParams(A03_value_filed, A03_value_filed_data, A03_value_filed_color)
+        }
+
+
+        return (
+            <div className='LayoutModel'>
+                <div className='DetBox' style={DetStyle}>
+                    {AddTopOptionsFormList_14?.map((item, index) => {
+                        const { B14_label, B14_value, B14_type } = item
+                        if (B14_type === 'txt') {
+                            const txt = DETData[B14_value]
+                            return txt && (
+                                <div className='TXT' key={index}>
+                                    <div className='Label' style={labelStyle}>{B14_label} : </div>
+                                    <div className='Value' style={valueStyle}>{txt}</div>
+                                </div>
+                            )
+                        }
+                        if (B14_type === 'att') {
+                            const arr = DETData[B14_value]
+                            return arr?.length !== 0 && (
+                                <div className='TXT' key={index}>
+                                    <div className='Label' style={labelStyle}>{B14_label} : </div>
+                                    <div className='Attach' >
+                                        <AttachTemplateA01 data={arr} />
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })}
+                </div>
+
                 {port && <FloatButton onClick={onFormClick} />}
             </div>
         )

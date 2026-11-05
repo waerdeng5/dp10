@@ -236,15 +236,11 @@ export const ExcelTemplate = (props) => {
 export const AttachTemplateA01 = ({ data }) => {
     const { updateModel3 } = modelStore()
     const onClick = (type, title, url) => {
-
         updateModel3({ title, type: 'CommonModel', modelData: { openType: 'attDetail', type, title, url } })
     }
-
-
-
     return (
         <div className='AttachTemplateA01'>
-            {data.map(item => {
+            {data?.map(item => {
                 const { uuid, url, originalName } = item
                 const type = getFileTypeFromUrl(url)
                 // const Template = () => {

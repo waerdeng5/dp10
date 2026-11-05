@@ -184,7 +184,7 @@ const link = gl => {
 };
 
 const FluxLines = ({
-    colors = ['#f00', '#0f0', '#00f'],
+    colors = [{ color: '#0f0' }, { color: '#00f' }, { color: '#00f' }],
     speed = 0.5,
     scale = 1.6,
     turbulence = 1,
@@ -216,7 +216,7 @@ const FluxLines = ({
     const canvasRef = useRef(null);
     const wakeRef = useRef(null);
     const settings = {
-        colors: Array.isArray(colors) && colors.length ? colors.slice(0, MAX_COLORS) : ['#ffffff'],
+        colors: colors.map(item => item.color).slice(0, MAX_COLORS),
         speed,
         scale: Math.max(0.05, scale),
         turbulence,

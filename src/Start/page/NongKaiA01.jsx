@@ -59,7 +59,7 @@ const NongKaiA01 = () => {
 
     const onClickCity = async (data) => {
         const { uuid, name } = data
-        setActive(uuid)
+        if (uuid !== 'A00') setActive(uuid)
         TemplateClickFn(false, {
             alone_back: false,
             alone_back_image: true,
@@ -106,7 +106,7 @@ const NongKaiA01 = () => {
                     })}
                 </div>
                 <img className='otherImage' src={imageUrl + 'MapA14.png'} alt="" />
-                <div className='otherDiv'>
+                <div className='otherDiv' onClick={() => onClickCity({ uuid: 'A00', name: '其他省份', cityUuid: '99999999-9999-9999-9999-999999999999' })}>
                     <div>
                         <div>{Data['A00']}</div>
                         <div>其他省份</div>

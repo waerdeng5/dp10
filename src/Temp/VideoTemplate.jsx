@@ -147,3 +147,4 @@ export const VideoTemplateA04 = ({ url, cover }) => {
 
     return <div className='VideoTempA02' ref={myRef} />
 }
+
