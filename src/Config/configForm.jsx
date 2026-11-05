@@ -10922,9 +10922,23 @@ const BitsComponents_CircularCarousel = [
 
 const BitsComponents_FlexCarousel = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    // 数据来源
+    { span: 24, formType: 'RADIO', name: 'bits_type', label: '数据来源', rules: true, valueEnum: MappingData.System_fileUrlType },
+    {
+        span: 24, formType: 'GROUP', name: 'bits_type_api', label: '接口设置', collapsible: true,
+        jugde: [{ field: 'bits_type', value: ['A02'] }], children: [
+            { span: 12, formType: 'RADIO', name: 'A03_api_method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 12, formType: 'INPUT', name: 'A03_api_url', label: '请求接口', rules: true },
+            { span: 12, formType: 'INPUT', name: 'A03_api_params', label: '额外参数' },
+            { span: 12, formType: 'INPUT', name: 'A03_api_https', label: '额外地址' },
+            { span: 12, formType: 'RADIO', name: 'A03_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
+            { span: 12, formType: 'INPUT', name: 'A03_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'A03_api_level', value: [true] }] },
+        ]
+    },
+
     {
         span: 24, formType: 'GROUP', name: 'BitsComponents_CircularCarouselA01', label: '轮播图片', collapsible: true, defaultCollapsed: true,
-        children: [
+        jugde: [{ field: 'bits_type', value: ['A01'] }], children: [
             {
                 span: 24, formType: 'LIST', name: 'items', label: '图片集', collapsible: true,
                 children: [
@@ -10936,7 +10950,6 @@ const BitsComponents_FlexCarousel = [
             },
         ]
     },
-    // { span: 6, formType: 'RADIO', name: 'preset', label: '预设模式', rules: true, valueEnum: MappingData.BitsComponents_FlexCarouselPreset },
     { span: 8, formType: 'RADIO', name: 'intro', label: '入场方式', rules: true, valueEnum: MappingData.BitsComponents_FlexCarouselIntro },
     { span: 8, formType: 'RADIO', name: 'fit', label: '适应性', rules: true, valueEnum: MappingData.BitsComponents_FlexCarouselFit },
     { span: 8, formType: 'RADIO', name: 'curl', label: '弯曲方式', rules: true, valueEnum: MappingData.BitsComponents_FlexCarouselCurl },
@@ -10954,12 +10967,27 @@ const BitsComponents_FlexCarousel = [
     { span: 6, formType: 'NUMBER', name: 'roundness', label: '圆度', rules: true },
     { span: 6, formType: 'NUMBER', name: 'bend', label: '弯曲度', rules: true },
     { span: 6, formType: 'NUMBER', name: 'reach', label: '到达度', rules: true },
-    { span: 8, formType: 'NUMBER', name: 'dispersion', label: '分散度', rules: true },
-    { span: 8, formType: 'NUMBER', name: 'liquid', label: '液体', rules: true },
-    { span: 8, formType: 'NUMBER', name: 'squeeze', label: '挤压', rules: true },
-    { span: 8, formType: 'RADIO', name: 'captions', label: '图片标题', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 8, formType: 'COLOR', name: ['style', 'color'], label: '标题颜色', rules: true, mode: ['single'] },
-    { span: 8, formType: 'SELECT', name: ['style', 'fontFamily'], label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 6, formType: 'NUMBER', name: 'dispersion', label: '分散度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'liquid', label: '液体', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'squeeze', label: '切换挤压', rules: true },
+    { span: 6, formType: 'RADIO', name: 'captions', label: '图片标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+    {
+        span: 24, formType: 'GROUP', name: 'captions_title', label: '标题设置', collapsible: true,
+        jugde: [{ field: 'captions', value: [true] }], children: [
+            { span: 6, formType: 'COLOR', name: 'title_color', label: '标题颜色', rules: true, mode: ['single'] },
+            { span: 6, formType: 'NUMBER', name: 'title_fontSize', label: '标题字号', rules: true },
+            { span: 6, formType: 'SELECT', name: 'title_fontFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 6, formType: 'RADIO', name: 'title_fontWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 6, formType: 'COLOR', name: 'small_color', label: '副标题颜色', rules: true, mode: ['single'] },
+            { span: 6, formType: 'NUMBER', name: 'small_fontSize', label: '副标题字号', rules: true },
+            { span: 6, formType: 'SELECT', name: 'small_fontFamily', label: '副标题字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 6, formType: 'RADIO', name: 'small_fontWeight', label: '副标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 6, formType: 'COLOR', name: 'label_color', label: '标签颜色', rules: true, mode: ['single'] },
+            { span: 6, formType: 'NUMBER', name: 'label_fontSize', label: '标签字号', rules: true },
+            { span: 6, formType: 'SELECT', name: 'label_fontFamily', label: '标签字体', rules: true, valueEnum: MappingData.Font__Family },
+            { span: 6, formType: 'RADIO', name: 'label_fontWeight', label: '标签加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+        ]
+    },
 ]
 
 const BitsComponents_InfiniteSpiral = [

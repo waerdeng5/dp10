@@ -1425,6 +1425,7 @@ const BITSComponentsMapping = {
     },
     BitsComponents_FlexCarousel: {
         value: 'BitsComponents_FlexCarousel',
+        bits_type: 'A01',
         items: DEFAULT_ITEMS,
         preset: 'liquid',
         intro: 'rise',

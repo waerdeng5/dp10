@@ -1,7 +1,10 @@
 'use client';
-
 import { useEffect, useRef, useState } from 'react';
 import { Renderer, Program, Mesh, Triangle, Plane, Texture, RenderTarget } from 'ogl';
+
+import { axios, strOfurlParamsFunc } from '../Utils/Api'
+
+
 
 import './BitsComponents.scss';
 const photo = id => `https://aloss.ljkjkf.com/WebConfigFile/image/Common/BitsText/${id}.png`;
@@ -259,11 +262,36 @@ const FlexCarousel = ({
     interval = 4,
     captions = true,
     captureWheel = true,
+
+    title_color = '#fff',
+    title_fontSize = 24,
+    title_fontFamily = 'Arial',
+    title_fontWeight = 0,
+    small_color = '#fff',
+    small_fontSize = 18,
+    small_fontFamily = 'Arial',
+    small_fontWeight = 0,
+    label_color = '#fff',
+    label_fontSize = 14,
+    label_fontFamily = 'Arial',
+    label_fontWeight = 0,
+
+    bits_type = 'A01',
+    A03_api_method = '',
+    A03_api_url = '',
+    A03_api_params = '',
+    A03_api_https = '',
+    A03_api_level = false,
+    A03_api_mapping = '',
+
+
     onChange,
     onSelect,
     className = '',
     style
 }) => {
+    const [LIST, setLIST] = useState()
+
     const containerRef = useRef(null);
     const settingsRef = useRef(null);
     const itemsRef = useRef(items);
@@ -277,39 +305,8 @@ const FlexCarousel = ({
     const pick = (value, key) => (value === undefined || value === null ? base[key] : value);
 
     const list = items && items.length ? items : DEFAULT_ITEMS;
-    const itemsKey = list.map(item => item.src).join('|');
 
-    useEffect(() => {
-        itemsRef.current = list;
-        callbacksRef.current = { onChange, onSelect };
-        settingsRef.current = {
-            intro,
-            cardHeight,
-            gap,
-            radius,
-            fit,
-            lensWidth: pick(lensWidth, 'lensWidth'),
-            lensHeight: pick(lensHeight, 'lensHeight'),
-            tilt: pick(tilt, 'tilt'),
-            roundness: pick(roundness, 'roundness'),
-            bend: pick(bend, 'bend'),
-            reach: pick(reach, 'reach'),
-            curl: pick(curl, 'curl'),
-            dispersion: pick(dispersion, 'dispersion'),
-            liquid: pick(liquid, 'liquid'),
-            followCursor: pick(followCursor, 'followCursor'),
-            squeeze,
-            focusOnClick,
-            autoplay,
-            interval,
-            captureWheel
-        };
-        engineRef.current?.wake();
-    });
 
-    useEffect(() => {
-        engineRef.current?.setItems(itemsRef.current);
-    }, [itemsKey]);
 
     useEffect(() => {
         const container = containerRef.current;
@@ -1217,6 +1214,69 @@ const FlexCarousel = ({
     const current = list[active] || list[0];
     const label = current ? current.title || current.alt || `Image ${active + 1}` : '';
 
+
+    const titleStyle = {
+        color: title_color,
+        fontSize: title_fontSize,
+        fontFamily: title_fontFamily,
+        fontWeight: title_fontWeight,
+    }
+    const smallStyle = {
+        color: small_color,
+        fontSize: small_fontSize,
+        fontFamily: small_fontFamily,
+        fontWeight: small_fontWeight,
+    }
+    const labelStyle = {
+        color: label_color,
+        fontSize: label_fontSize,
+        fontFamily: label_fontFamily,
+        fontWeight: label_fontWeight,
+    }
+    // moduleType=792e061a-8725-4a58-886f-ba888ce748cd
+    // newsRelease
+    useEffect(() => {
+    });
+
+    useEffect(() => {
+
+        // axios, strOfurlParamsFunc 
+
+        if (bits_type === 'A01') {
+            console.log('固定数据')
+        } else {
+            console.log('接口信息')
+            console.log(A03_api_method, A03_api_url, A03_api_params, A03_api_https, A03_api_level, A03_api_mapping)
+        }
+
+
+        itemsRef.current = list;
+        callbacksRef.current = { onChange, onSelect };
+        settingsRef.current = {
+            intro,
+            cardHeight,
+            gap,
+            radius,
+            fit,
+            lensWidth: pick(lensWidth, 'lensWidth'),
+            lensHeight: pick(lensHeight, 'lensHeight'),
+            tilt: pick(tilt, 'tilt'),
+            roundness: pick(roundness, 'roundness'),
+            bend: pick(bend, 'bend'),
+            reach: pick(reach, 'reach'),
+            curl: pick(curl, 'curl'),
+            dispersion: pick(dispersion, 'dispersion'),
+            liquid: pick(liquid, 'liquid'),
+            followCursor: pick(followCursor, 'followCursor'),
+            squeeze,
+            focusOnClick,
+            autoplay,
+            interval,
+            captureWheel
+        };
+        engineRef.current?.wake();
+    }, [])
+
     return (
         <div
             ref={containerRef}
@@ -1229,11 +1289,11 @@ const FlexCarousel = ({
         >
             {captions && current && revealed && (
                 <div className="flex-carousel__caption" aria-hidden="true">
-                    <span key={active} className="flex-carousel__title">
+                    <span key={active} className="flex-carousel__title" style={titleStyle}>
                         {current.title || current.alt}
-                        {current.subtitle && <span className="flex-carousel__subtitle">{current.subtitle}</span>}
+                        {current.subtitle && <span className="flex-carousel__subtitle" style={smallStyle}>{current.subtitle}</span>}
                     </span>
-                    <span className="flex-carousel__count" data-hidden={focusOpen ? '' : undefined}>
+                    <span className="flex-carousel__count" data-hidden={focusOpen ? '' : undefined} style={labelStyle}>
                         <Digits value={active + 1} />
                         <span className="flex-carousel__slash">/</span>
                         <span>{String(list.length).padStart(2, '0')}</span>
