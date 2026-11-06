@@ -2475,11 +2475,35 @@ const BitsBackgroundsMapping = {
         transparent: true,
         paused: false,
     },
+    BitsBackgrounds_PatternWaves: {
+        value: 'BitsBackgrounds_PatternWaves',
+        pattern: "dot",
+        wave: 'silk',
+        spacing: 9,
+        markSize: 0.95,
+        depth: 0.95,
+        light: 0,
+        shine: 0.8,
+        contrast: 1.2,
+        speed: 0.35,
+        scale: 1,
+        direction: 20,
+        color: '#ffffff',
+        backgroundColor: '#000000',
+        opacity: 1,
+        fade: 'edges',
+        fadeSize: 0.5,
+        characters: '.:-=+*#%@',
+        interactive: true,
+        cursorSize: 50,
+        cursorStrength: 0.6,
+        intro: true,
+        paused: false,
+    },
+    BitsBackgrounds_MicroSlats: {
+        value: 'BitsBackgrounds_MicroSlats',
+    },
 }
-
-
-
-
 
 export const TemplateParamsMapping = {
     // TODO BITS组件

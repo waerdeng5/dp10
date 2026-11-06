@@ -4,7 +4,7 @@ import { Renderer, Program, Mesh, Triangle, Plane, Texture, RenderTarget } from 
 
 import { axios, strOfurlParamsFunc } from '../Utils/Api'
 
-
+import { getNestedValue } from '../Utils'
 
 import './BitsComponents.scss';
 const photo = id => `https://aloss.ljkjkf.com/WebConfigFile/image/Common/BitsText/${id}.png`;
@@ -238,63 +238,70 @@ const Digits = ({ value }) => (
     </span>
 );
 
-const FlexCarousel = ({
-    items = DEFAULT_ITEMS,
-    preset = 'liquid',
-    intro = 'rise',
-    cardHeight = 0.5,
-    gap = 12,
-    radius = 0,
-    fit = 'natural',
-    lensWidth,
-    lensHeight,
-    tilt,
-    roundness,
-    bend,
-    reach,
-    curl,
-    dispersion,
-    liquid,
-    followCursor,
-    squeeze = 0.2,
-    focusOnClick = true,
-    autoplay = false,
-    interval = 4,
-    captions = true,
-    captureWheel = true,
+const FlexCarousel = (prop) => {
+    const {
+        items = DEFAULT_ITEMS,
+        preset = 'liquid',
+        intro = 'rise',
+        cardHeight = 0.5,
+        gap = 12,
+        radius = 0,
+        fit = 'natural',
+        lensWidth,
+        lensHeight,
+        tilt,
+        roundness,
+        bend,
+        reach,
+        curl,
+        dispersion,
+        liquid,
+        followCursor,
+        squeeze = 0.2,
+        focusOnClick = true,
+        autoplay = false,
+        interval = 4,
+        captions = true,
+        captureWheel = true,
 
-    title_color = '#fff',
-    title_fontSize = 24,
-    title_fontFamily = 'Arial',
-    title_fontWeight = 0,
-    small_color = '#fff',
-    small_fontSize = 18,
-    small_fontFamily = 'Arial',
-    small_fontWeight = 0,
-    label_color = '#fff',
-    label_fontSize = 14,
-    label_fontFamily = 'Arial',
-    label_fontWeight = 0,
+        title_color = '#fff',
+        title_fontSize = 24,
+        title_fontFamily = 'Arial',
+        title_fontWeight = 0,
+        small_color = '#fff',
+        small_fontSize = 18,
+        small_fontFamily = 'Arial',
+        small_fontWeight = 0,
+        label_color = '#fff',
+        label_fontSize = 14,
+        label_fontFamily = 'Arial',
+        label_fontWeight = 0,
 
-    bits_type = 'A01',
-    A03_api_method = '',
-    A03_api_url = '',
-    A03_api_params = '',
-    A03_api_https = '',
-    A03_api_level = false,
-    A03_api_mapping = '',
+        bits_type = 'A01',
+        A03_api_method = '',
+        A03_api_url = '',
+        A03_api_params = '',
+        A03_api_https = '',
+        A03_api_level = false,
+        A03_api_mapping = '',
+        A03_api_image = 'src',
+        A03_api_title = 'title',
+        A03_api_small = 'subtitle',
 
 
-    onChange,
-    onSelect,
-    className = '',
-    style
-}) => {
-    const [LIST, setLIST] = useState()
+        onChange,
+        onSelect,
+        className = '',
+        style
 
+    } = prop
+
+
+
+    const [LIST, setLIST] = useState([])
     const containerRef = useRef(null);
     const settingsRef = useRef(null);
-    const itemsRef = useRef(items);
+    const itemsRef = useRef([]);
     const engineRef = useRef(null);
     const callbacksRef = useRef({ onChange, onSelect });
     const [active, setActive] = useState(0);
@@ -304,7 +311,6 @@ const FlexCarousel = ({
     const base = BEND_PRESETS[preset] || BEND_PRESETS.liquid;
     const pick = (value, key) => (value === undefined || value === null ? base[key] : value);
 
-    const list = items && items.length ? items : DEFAULT_ITEMS;
 
 
 
@@ -1209,10 +1215,8 @@ const FlexCarousel = ({
             gl.getExtension('WEBGL_lose_context')?.loseContext();
             if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
         };
-    }, []);
+    }, [LIST]);
 
-    const current = list[active] || list[0];
-    const label = current ? current.title || current.alt || `Image ${active + 1}` : '';
 
 
     const titleStyle = {
@@ -1233,24 +1237,14 @@ const FlexCarousel = ({
         fontFamily: label_fontFamily,
         fontWeight: label_fontWeight,
     }
-    // moduleType=792e061a-8725-4a58-886f-ba888ce748cd
-    // newsRelease
     useEffect(() => {
     });
 
-    useEffect(() => {
 
-        // axios, strOfurlParamsFunc 
-
-        if (bits_type === 'A01') {
-            console.log('固定数据')
-        } else {
-            console.log('接口信息')
-            console.log(A03_api_method, A03_api_url, A03_api_params, A03_api_https, A03_api_level, A03_api_mapping)
-        }
-
-
-        itemsRef.current = list;
+    const setItems = (data) => {
+        console.log(data)
+        setLIST(data)
+        itemsRef.current = data;
         callbacksRef.current = { onChange, onSelect };
         settingsRef.current = {
             intro,
@@ -1275,7 +1269,25 @@ const FlexCarousel = ({
             captureWheel
         };
         engineRef.current?.wake();
-    }, [])
+    }
+
+    const getData = async () => {
+        const params = strOfurlParamsFunc(A03_api_params)
+        const [err, res] = await axios({ method: A03_api_method, url: A03_api_url, params, https: A03_api_https })
+        if (err) return console.log(err)
+        const apiData = A03_api_level ? getNestedValue(A03_api_mapping, res) : res
+        const data = apiData.map(item => ({
+            src: item[A03_api_image],
+            title: item[A03_api_title],
+            subtitle: item[A03_api_small],
+        }))
+        setItems(data)
+    }
+
+    useEffect(() => {
+        if (bits_type === 'A01') setItems(items)
+        else getData()
+    }, [prop])
 
     return (
         <div
@@ -1287,21 +1299,21 @@ const FlexCarousel = ({
             aria-label="Image carousel"
             tabIndex={0}
         >
-            {captions && current && revealed && (
+            {captions && revealed && (
                 <div className="flex-carousel__caption" aria-hidden="true">
                     <span key={active} className="flex-carousel__title" style={titleStyle}>
-                        {current.title || current.alt}
-                        {current.subtitle && <span className="flex-carousel__subtitle" style={smallStyle}>{current.subtitle}</span>}
+                        {LIST[active]?.title}
+                        {LIST[active]?.subtitle && <span className="flex-carousel__subtitle" style={smallStyle}>{LIST[active]?.subtitle}</span>}
                     </span>
                     <span className="flex-carousel__count" data-hidden={focusOpen ? '' : undefined} style={labelStyle}>
                         <Digits value={active + 1} />
                         <span className="flex-carousel__slash">/</span>
-                        <span>{String(list.length).padStart(2, '0')}</span>
+                        <span>{String(LIST.length).padStart(2, '0')}</span>
                     </span>
                 </div>
             )}
             <div className="flex-carousel__live" aria-live="polite" aria-atomic="true">
-                {`${label}, ${active + 1} of ${list.length}`}
+                {`${LIST[active]?.title}, ${active + 1} of ${LIST.length}`}
             </div>
         </div>
     );

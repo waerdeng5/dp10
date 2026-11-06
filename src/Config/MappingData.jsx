@@ -1886,6 +1886,26 @@ export const MappingData = {
         { value: 'dashed', label: '虚线' },
         { value: 'dotted', label: '点线' },
     ],
+    BitsBackgrounds_PatternWavesPattern: [
+        { value: 'dot', label: '点' },
+        { value: 'square', label: '方块' },
+        { value: 'plus', label: '加号' },
+        { value: 'line', label: '实线' },
+        { value: 'glyph', label: '字符' },
+    ],
+    BitsBackgrounds_PatternWavesWave: [
+        { value: 'silk', label: '丝' },
+        { value: 'swell', label: '波浪' },
+        { value: 'ripple', label: '涟漪' },
+    ],
+    BitsBackgrounds_PatternWavesFade: [
+        { value: 'edges', label: '边缘' },
+        { value: 'center', label: '中心' },
+        { value: 'bottom', label: '底部' },
+        { value: 'top', label: '顶部' },
+        { value: 'none', label: '无' },
+    ],
+
 
     Charts__VchartsAxesOrientA01: [
         { value: 'top', label: '顶部' },

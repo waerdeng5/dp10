@@ -7237,8 +7237,9 @@ const PrefabricatedChartGantt = [
             {
                 span: 24, formType: 'LIST', name: 'markLine_list', label: '标记线配置', collapsible: true, title: '标记线',
                 children: [
-                    { span: 12, formType: 'INPUT', name: 'date', label: '日期', rules: true },
-                    { span: 12, formType: 'RADIO', name: 'position', label: '位置', rules: true, valueEnum: MappingData.Charts__ganntMarkLinePosition },
+                    { span: 8, formType: 'RADIO', name: 'today', label: '当天日期', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 8, formType: 'INPUT', name: 'date', label: '日期', rules: true },
+                    { span: 8, formType: 'RADIO', name: 'position', label: '位置', rules: true, valueEnum: MappingData.Charts__ganntMarkLinePosition },
                     { span: 12, formType: 'RADIO', name: 'scrollToMarkLine', label: '滚动到标记线', rules: true, valueEnum: MappingData.IsEnabledBool },
                     { span: 12, formType: 'COLOR', name: 'style_lineColor', label: '线段颜色', rules: true, mode: ['single'] },
                     { span: 12, formType: 'NUMBER', name: 'style_lineWidth', label: '线段尺寸', rules: true },
@@ -10933,6 +10934,9 @@ const BitsComponents_FlexCarousel = [
             { span: 12, formType: 'INPUT', name: 'A03_api_https', label: '额外地址' },
             { span: 12, formType: 'RADIO', name: 'A03_api_level', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
             { span: 12, formType: 'INPUT', name: 'A03_api_mapping', label: '层级字段', rules: true, jugde: [{ field: 'A03_api_level', value: [true] }] },
+            { span: 8, formType: 'INPUT', name: 'A03_api_image', label: '图片地址', rules: true },
+            { span: 8, formType: 'INPUT', name: 'A03_api_title', label: '标题字段', rules: true },
+            { span: 8, formType: 'INPUT', name: 'A03_api_small', label: '副标题字段', rules: true },
         ]
     },
 
@@ -12160,8 +12164,40 @@ const BitsBackgrounds_FluxLines = [
     { span: 8, formType: 'NUMBER', name: 'opacity', label: '透明度', rules: true, },
 ]
 
+const BitsBackgrounds_PatternWaves = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 8, formType: 'RADIO', name: 'pattern', label: '图案 ', rules: true, valueEnum: MappingData.BitsBackgrounds_PatternWavesPattern },
+    { span: 8, formType: 'RADIO', name: 'wave', label: '波纹 ', rules: true, valueEnum: MappingData.BitsBackgrounds_PatternWavesWave },
+    { span: 8, formType: 'INPUT', name: 'characters', label: '字符集', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'interactive', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'INPUT', name: 'cursorSize', label: '鼠标尺寸', rules: true, },
+    { span: 8, formType: 'INPUT', name: 'cursorStrength', label: '鼠标强度', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'fade', label: '衰退 ', rules: true, valueEnum: MappingData.BitsBackgrounds_PatternWavesFade },
+    { span: 8, formType: 'NUMBER', name: 'fadeSize', label: '衰退尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'COLOR', name: 'color', label: '颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'NUMBER', name: 'spacing', label: '间距', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'markSize', label: '标记尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'depth', label: '深度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'light', label: '光线', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'shine', label: '光泽', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'contrast', label: '对比度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'direction', label: '方向', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'opacity', label: '透明度', rules: true, },
+]
+
+const BitsBackgrounds_MicroSlats = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+
+]
 
 export const FormConfig = {
+    BitsBackgrounds_MicroSlats,
+    BitsBackgrounds_PatternWaves,
     BitsBackgrounds_FluxLines,
     BitsBackgrounds_GradientASCII,
     BitsAnimations_MetaBalls,

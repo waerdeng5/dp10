@@ -2144,10 +2144,10 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         })
         option.timelineHeader.scales = scales
         const markLine = markLine_list.map(v => {
-            const { date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
+            const { today, date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
                 fontWeight, cornerRadius, backgroundColor } = v
             return ({
-                date,
+                date: today ? dayjs().format('YYYY-MM-DD') : date,
                 position,
                 scrollToMarkLine,
                 style: {
