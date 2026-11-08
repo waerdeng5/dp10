@@ -15,7 +15,7 @@ import { modelStore } from '../../Router/zustand'
 import FormTemplate from '../../Utils/FormTemplate'
 import { MappingData } from '../../Config/MappingData'
 import { ICONMapping } from '../../Config/IconMapping'
-import { axios, strOfurlParamsFunc } from '../../Utils/Api'
+import { axios, axiosFor, strOfurlParamsFunc } from '../../Utils/Api'
 import { GetIndexedDB, PutIndexedDB } from '../../Utils/IndexedDB'
 import { addAttr, AssemblySort, replaceNodeById, getNestedValue } from '../../Utils'
 import {
@@ -1257,6 +1257,183 @@ const OptionsModel = ({ data, Event }) => {
                 </div>
             </div>
         )
+    }
+    if (type === 'B1609') {
+        const { isOrg, org_Method, org_Url, org_Params, org_Path, org_send, org_width,
+            left_Method, left_Url, left_Params, left_Path, leftList, isLeft, leftMaster,
+            right_Method, right_Url, right_Params, right_Path, rightList, isRight, rightMaster,
+            save_Method, save_Url, save_Params, save_Path, save_send, isSave, saveMaster,
+            del_Method, del_Url, del_Params, del_Path, del_send, isDel, delMaster,
+        } = data
+
+
+        const [BtnLoad, setBtnLoad] = useState(false)
+        const [Loading, setLoading] = useState(false)
+        const [TreeData, setTreeData] = useState()
+        const [TreeSelect, setTreeSelect] = useState()
+
+        const [LeftData, setLeftData] = useState([])
+        const [RightData, setRightData] = useState([])
+
+        const [LeftSelect, setLeftSelect] = useState([])
+        const [RightSelect, setRightSelect] = useState([])
+
+
+        const onSelect = (key) => {
+            if (key.length !== 0) {
+                setTreeSelect(key[0])
+                getLeftList(key[0])
+            }
+        }
+
+
+        const getLeftList = async (org) => {
+            const params = { ...strOfurlParamsFunc(left_Params), [org_send]: org || TreeSelect }
+            if (isLeft) leftMaster.forEach(v => { params[v.mapping] = Initial[v.field] })
+            const [err, res] = await axios({ method: left_Method, url: left_Url, params, path: left_Path })
+            if (err) return console.log('可选列表获取失败', err)
+            setLeftData(res.data.list)
+        }
+        const getRightList = async () => {
+            const params = { ...strOfurlParamsFunc(right_Params), RoleUuid: Initial.uuid, }
+            if (isRight) rightMaster.forEach(v => { params[v.mapping] = Initial[v.field] })
+            const [err, res] = await axios({ method: right_Method, url: right_Url, params, path: right_Path })
+            if (err) return console.log('已选列表获取失败', err)
+            setRightData(res.data.list)
+        }
+
+        useMount(async () => {
+            if (isOrg) {
+                const [err, res] = await axios({ method: org_Method, url: org_Url, path: org_Path, params: strOfurlParamsFunc(org_Params) })
+                if (err) return console.log('组织机构树获取失败', err)
+                setTreeData(res.data.list)
+                setTreeSelect(res.data.defaultvalue)
+                getLeftList(res.data.defaultvalue)
+                getRightList()
+                setLoading(true)
+            } else {
+                getLeftList()
+                getRightList()
+                setLoading(true)
+            }
+        })
+
+        const onAdd = async () => {
+            setBtnLoad(true)
+            const extra = { ...strOfurlParamsFunc(save_Params) }
+            if (isOrg) extra[org_send] = TreeSelect
+            if (isSave) saveMaster.forEach(v => { extra[v.mapping] = Initial[v.field] })
+            const params = LeftSelect.map(v => ({ ...extra, [save_send]: v }))
+            const [err, res] = await axios({ method: save_Method, url: save_Url, params, path: save_Path })
+            if (err) return console.log('添加失败', err)
+            setLeftSelect([])
+            setRightSelect([])
+            getLeftList()
+            getRightList()
+            setBtnLoad(false)
+        }
+        const onDel = async () => {
+            setBtnLoad(true)
+            const extra = { ...strOfurlParamsFunc(del_Params) }
+            if (isOrg) extra[org_send] = TreeSelect
+            if (isDel) delMaster.forEach(v => { extra[v.mapping] = Initial[v.field] })
+            const params = RightSelect.map(v => ({ ...extra, [del_send]: v }))
+            const [err, res] = await axios({ method: del_Method, url: del_Url, params, path: del_Path })
+            if (err) return console.log('添加失败', err)
+            setLeftSelect([])
+            setRightSelect([])
+            getLeftList()
+            getRightList()
+            setBtnLoad(false)
+        }
+
+        if (Loading) {
+            return (
+                <div className='OptionsModelB1609'>
+                    {isOrg &&
+                        <div className='tree' style={{ width: org_width || 240 }}>
+                            <Tree
+                                defaultExpandAll
+                                selectedKeys={[TreeSelect]}
+                                fieldNames={{ key: 'value', title: 'label' }}
+                                treeData={TreeData}
+                                onSelect={onSelect}
+                            />
+                        </div>
+                    }
+                    <div className='box selectList'>
+                        <DataGrid
+                            id={v4()}
+                            width='100%'
+                            height='100%'
+                            keyExpr='uuid'
+                            dataStructure="tree"
+                            itemsExpr='children'
+                            dataSource={LeftData || []}
+                            allowColumnReordering={true}
+                            autoExpandAll={true}
+                            allowColumnResizing={true}
+                            columnResizingMode={true}
+                            showColumnHeaders={true}
+                            showBorders={true}
+                            showRowLines={true}
+                            showColumnLines={true}
+                            rowAlternationEnabled={true}
+                            onSelectionChanged={e => setLeftSelect(e.selectedRowKeys)}
+                        >
+                            <FilterRow visible={true} />
+                            <Selection mode='multiple' allowSelectAll={true} selectAllMode='allPages' showCheckBoxesMode='always' />
+                            {leftList.map(v => (<Column key={v.dataField} caption={v.caption} dataField={v.dataField} width={v.width} />))}
+                            <Paging defaultPageSize={9999999} />
+                            <Scrolling rowRenderingMode="virtual" columnRenderingMode="virtual" scrollByContent={true} showScrollbar='onHover' />
+                        </DataGrid>
+                        <div className='btn'>
+                            <Button loading={BtnLoad} block type='primary' onClick={onAdd} disabled={LeftSelect.length === 0}>
+                                添加
+                            </Button>
+                        </div>
+                    </div>
+                    <div className='box selectedList'>
+                        <DataGrid
+                            id={v4()}
+                            width='100%'
+                            height='100%'
+                            keyExpr='uuid'
+                            dataStructure="tree"
+                            itemsExpr='children'
+                            dataSource={RightData || []}
+                            allowColumnReordering={true}
+                            autoExpandAll={true}
+                            allowColumnResizing={true}
+                            columnResizingMode={true}
+                            showColumnHeaders={true}
+                            showBorders={true}
+                            showRowLines={true}
+                            showColumnLines={true}
+                            rowAlternationEnabled={true}
+                            onSelectionChanged={e => setRightSelect(e.selectedRowKeys)}
+                        >
+                            <FilterRow visible={true} />
+                            <Selection mode='multiple' allowSelectAll={true} selectAllMode='allPages' showCheckBoxesMode='always' />
+                            {rightList.map(v => (<Column key={v.dataField} caption={v.caption} dataField={v.dataField} width={v.width} />))}
+                            <Paging defaultPageSize={9999999} />
+                            <Scrolling rowRenderingMode="virtual" columnRenderingMode="virtual" scrollByContent={true} showScrollbar='onHover' />
+                        </DataGrid>
+                        <div className='btn'>
+                            <Button loading={BtnLoad} block type='primary' danger onClick={onDel} disabled={RightSelect.length === 0}>
+                                删除
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className='OptionsModelB1609'>
+                    <Spin />
+                </div>
+            )
+        }
     }
 
     return (

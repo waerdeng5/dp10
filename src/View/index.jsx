@@ -97,7 +97,6 @@ const LoginIndex = () => {
                 return false
             }
             const theme = await Decrypt(COMdata)
-            console.log(theme)
             await AddIndexdDB('theme', theme)
             const { loginType } = theme
             if (loginType === 'A01') Navigate('/Login')

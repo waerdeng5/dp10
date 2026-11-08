@@ -3010,6 +3010,111 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'B1067_sse', label: 'SSE域名', rules: true },
         ],
     },
+
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_01', label: '组织机构',
+        jugde: [{ field: 'type', value: ['B1609'] }], children: [
+            // 是否使用
+            // 接口配置
+            { span: 24, formType: 'RADIO', name: 'isOrg', label: '组织机构树', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'RADIO', name: 'org_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
+                jugde: [{ field: 'isOrg', value: [true] }]
+            },
+            { span: 24, formType: 'INPUT', name: 'org_Url', label: '接口地址', rules: true, jugde: [{ field: 'isOrg', value: [true] }] },
+            { span: 24, formType: 'INPUT', name: 'org_Params', label: '额外参数', jugde: [{ field: 'isOrg', value: [true] }] },
+            { span: 24, formType: 'INPUT', name: 'org_Path', label: '接口路径', jugde: [{ field: 'isOrg', value: [true] }] },
+            { span: 24, formType: 'INPUT', name: 'org_send', label: '发送参数', rules: true, jugde: [{ field: 'isOrg', value: [true] }] },
+            { span: 24, formType: 'NUMBER', name: 'org_width', label: '宽度', rules: true, jugde: [{ field: 'isOrg', value: [true] }] },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_02', label: '左侧列表',
+        jugde: [{ field: 'type', value: ['B1609'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'left_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 24, formType: 'INPUT', name: 'left_Url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'left_Params', label: '额外参数' },
+            { span: 24, formType: 'INPUT', name: 'left_Path', label: '接口路径' },
+            // 主数据 - 使用字段 - 映射字段
+            { span: 24, formType: 'RADIO', name: 'isLeft', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'leftMaster', label: '请求字段', title: '发送字段',
+                jugde: [{ field: 'isLeft', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'field', label: '数据字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'mapping', label: '映射字段', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'leftList', label: '渲染列表', title: '渲染字段',
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'dataField', label: '数据字段', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'caption', label: '映射字段', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'width', label: '宽度' },
+                ]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_03', label: '右侧列表',
+        jugde: [{ field: 'type', value: ['B1609'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'right_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 24, formType: 'INPUT', name: 'right_Url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'right_Params', label: '额外参数' },
+            { span: 24, formType: 'INPUT', name: 'right_Path', label: '接口路径' },
+            { span: 24, formType: 'RADIO', name: 'isRight', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'rightMaster', label: '请求字段', title: '发送字段',
+                jugde: [{ field: 'isRight', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'field', label: '数据字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'mapping', label: '映射字段', rules: true },
+                ]
+            },
+            {
+                span: 24, formType: 'LIST', name: 'rightList', label: '渲染列表', title: '渲染字段',
+                children: [
+                    { span: 24, formType: 'INPUT', name: 'dataField', label: '数据字段', rules: true },
+                    { span: 24, formType: 'INPUT', name: 'caption', label: '映射字段', rules: true },
+                    { span: 24, formType: 'NUMBER', name: 'width', label: '宽度' },
+                ]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_04', label: '保存设置',
+        jugde: [{ field: 'type', value: ['B1609'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'save_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 24, formType: 'INPUT', name: 'save_Url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'save_Params', label: '额外参数' },
+            { span: 24, formType: 'INPUT', name: 'save_Path', label: '接口路径' },
+            { span: 24, formType: 'INPUT', name: 'save_send', label: '发送参数', rules: true },
+            { span: 24, formType: 'RADIO', name: 'isSave', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'saveMaster', label: '请求字段', title: '发送字段',
+                jugde: [{ field: 'isSave', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'field', label: '数据字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'mapping', label: '映射字段', rules: true },
+                ]
+            },
+        ]
+    },
+    {
+        span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_05', label: '删除设置',
+        jugde: [{ field: 'type', value: ['B1609'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'del_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method },
+            { span: 24, formType: 'INPUT', name: 'del_Url', label: '接口地址', rules: true },
+            { span: 24, formType: 'INPUT', name: 'del_Params', label: '额外参数' },
+            { span: 24, formType: 'INPUT', name: 'del_Path', label: '接口路径' },
+            { span: 24, formType: 'INPUT', name: 'del_send', label: '发送参数', rules: true },
+            { span: 24, formType: 'RADIO', name: 'isDel', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 24, formType: 'LIST', name: 'delMaster', label: '请求字段', title: '发送字段',
+                jugde: [{ field: 'isDel', value: [true] }], children: [
+                    { span: 12, formType: 'INPUT', name: 'field', label: '数据字段', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'mapping', label: '映射字段', rules: true },
+                ]
+            },
+        ]
+    },
 ]
 
 // ***  添加表单分组
@@ -12170,8 +12275,8 @@ const BitsBackgrounds_PatternWaves = [
     { span: 8, formType: 'RADIO', name: 'wave', label: '波纹 ', rules: true, valueEnum: MappingData.BitsBackgrounds_PatternWavesWave },
     { span: 8, formType: 'INPUT', name: 'characters', label: '字符集', rules: true, },
     { span: 8, formType: 'RADIO', name: 'interactive', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
-    { span: 8, formType: 'INPUT', name: 'cursorSize', label: '鼠标尺寸', rules: true, },
-    { span: 8, formType: 'INPUT', name: 'cursorStrength', label: '鼠标强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'cursorSize', label: '鼠标尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'cursorStrength', label: '鼠标强度', rules: true, },
     { span: 8, formType: 'RADIO', name: 'fade', label: '衰退 ', rules: true, valueEnum: MappingData.BitsBackgrounds_PatternWavesFade },
     { span: 8, formType: 'NUMBER', name: 'fadeSize', label: '衰退尺寸', rules: true, },
     { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
@@ -12192,10 +12297,66 @@ const BitsBackgrounds_PatternWaves = [
 
 const BitsBackgrounds_MicroSlats = [
     { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
-
+    { span: 8, formType: 'COLOR', name: 'color', label: '颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'COLOR', name: 'glintColor', label: '高光颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'introDuration', label: '入场持续', rules: true, },
+    { span: 8, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'RADIO', name: 'interactive', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 8, formType: 'NUMBER', name: 'cursorStrength', label: '光标强度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'cursorSize', label: '光标尺寸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'slatWidth', label: '网格宽度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'slatHeight', label: '网格高度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'lean', label: '网格倾斜', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'gap', label: '间隔', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'roundness', label: '圆角', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'speed', label: '速度', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'direction', label: '方向', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'chop', label: '波浪', rules: true, },
+    { span: 6, formType: 'NUMBER', name: 'stretch', label: '拉伸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'glint', label: '拉伸', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'contrast', label: '对比度', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'perspective', label: '视角', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'fog', label: '雾化', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'swirl', label: '涡流', rules: true, },
+    { span: 8, formType: 'NUMBER', name: 'trail', label: '轨迹', rules: true, },
 ]
 
+const BitsBackgrounds_ShapeWaves = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 6, formType: 'INPUT', name: 'text', label: '文字内容' },
+    { span: 6, formType: 'NUMBER', name: 'textSize', label: '文字比例', rules: true },
+    { span: 6, formType: 'SELECT', name: 'fontFamily', label: '标题字体', rules: true, valueEnum: MappingData.Font__Family },
+    { span: 6, formType: 'RADIO', name: 'fontWeight', label: '标题加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'introDuration', label: '入场持续', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'introKey', label: '入场按键', rules: true },
+    { span: 6, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'interactive', label: '交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'shapes', label: '形状', rules: true, valueEnum: MappingData.BitsBackgrounds_ShapeWavesShapes },
+    { span: 6, formType: 'NUMBER', name: 'cellSize', label: '单元尺寸', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'dotSize', label: '点尺寸', rules: true },
+    { span: 8, formType: 'COLOR', name: 'color', label: '单元颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'COLOR', name: 'hoverColor', label: '悬浮颜色', rules: true, mode: ['single'] },
+    { span: 8, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+
+    { span: 8, formType: 'NUMBER', name: 'speed', label: '速度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'scale', label: '比例', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'contrast', label: '对比度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'brightness', label: '亮度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'flow', label: '流速', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'direction', label: '方向', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'fade', label: '衰退', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'splashRadius', label: '飞溅半径', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'splashStrength', label: '抗溅强度', rules: true },
+    { span: 8, formType: 'NUMBER', name: 'glow', label: '发光', rules: true },
+]
+
+
 export const FormConfig = {
+    BitsBackgrounds_ShapeWaves,
     BitsBackgrounds_MicroSlats,
     BitsBackgrounds_PatternWaves,
     BitsBackgrounds_FluxLines,

@@ -429,6 +429,7 @@ export const MappingData = {
         { value: 'B07', label: '弹出窗口' },
         { value: 'B08', label: '执行接口' },
         { value: 'B09', label: '穿梭框' },
+        { value: 'B1609', label: '新穿梭框' },
         { value: 'B10', label: '打开列表' },
         { value: 'B11', label: '站内路由' },
         { value: 'B12', label: '数据审核' },
@@ -1704,6 +1705,12 @@ export const MappingData = {
         { value: 'wave', label: '波纹' },
         { value: 'burst', label: '爆发' },
         { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_ShapeWavesShapes: [
+        { value: 'mixed', label: '混合' },
+        { value: 'squares', label: '方形' },
+        { value: 'circles', label: '圆形' },
+        { value: 'triangles', label: '三角' },
     ],
 
     // TODO Dev

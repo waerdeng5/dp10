@@ -1400,6 +1400,21 @@
   resolved "https://registry.npmmirror.com/@mlightcad/shx-parser/-/shx-parser-1.4.5.tgz#1c4dba7cdec522b877aa885ab714ed01d9434ac4"
   integrity sha512-wFY0X7vnuq1IYdP6JRggb7LHcKho1P8zmcWGtXa6XYthwyKZCUoZCswTXr7J26pbzyhBB7KsiCcCL48iwIevdQ==
 
+"@modelcontextprotocol/core@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/@modelcontextprotocol/core/-/core-2.0.0.tgz#c918a4c6aef22a7c59dfb0aabc2a82c187cce157"
+  integrity sha512-pJCEwGG7Lfr/+PQp9ZTwKXNeO5wzbfKL7H3MYpCorM4oFBoQrdjnBgEoqG+RjhsvS1FKrDbKux+M1HhlnGWqcA==
+  dependencies:
+    zod "^4.2.0"
+
+"@modelcontextprotocol/server@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmmirror.com/@modelcontextprotocol/server/-/server-2.0.0.tgz#4fae5ccb8f7925ed9a6bf6595bb3b58617063ffd"
+  integrity sha512-YhHWdHfpFMQfd0prsEnxKeS3Qz3ytIGmsS0sth4KDjnacIT7hxk6hXHkJ9KysxlkvTM+WZAtQbbcUhdoP4Hvtw==
+  dependencies:
+    "@modelcontextprotocol/core" "2.0.0"
+    zod "^4.2.0"
+
 "@myriaddreamin/typst-ts-renderer@0.7.0":
   version "0.7.0"
   resolved "https://registry.npmmirror.com/@myriaddreamin/typst-ts-renderer/-/typst-ts-renderer-0.7.0.tgz#0d4a2de70ba2ff8fce6165c8e9447254f281c78c"
@@ -4196,6 +4211,40 @@
   dependencies:
     "@use-gesture/core" "10.3.1"
 
+"@vgpu/adapter-mock@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@vgpu/adapter-mock/-/adapter-mock-0.5.0.tgz#c248cba234ce38d025ed9350d35088fbea69941d"
+  integrity sha512-YtgXOFn1qI+8oTJenG2wWbQPA28V0CfE5UJs5Xqbt6qyR/xaZ5LHH2XWTwFcjnqn2b1xQCyTatJCMyyOdweUnw==
+  dependencies:
+    "@vgpu/core" "0.5.0"
+
+"@vgpu/adapter-node@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@vgpu/adapter-node/-/adapter-node-0.5.0.tgz#818eb790a09f0716b59cf16c2db63dd359a3b0f6"
+  integrity sha512-lgzqFcLDejwRgwlaNStzkwLNU9b4aN2OoPpWqT1UyPmK521BSw2OIQKzAuDIkzNlREla6KNC12G6bthhOzZKzw==
+  dependencies:
+    "@vgpu/core" "0.5.0"
+    webgpu "0.4.0"
+
+"@vgpu/core@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@vgpu/core/-/core-0.5.0.tgz#51093a6199a03d0d492cf2f5403007e60c6d8a58"
+  integrity sha512-z80DHRHViv6+FKKkPzggEtT1ZZs/WCKRQbzJuwYdA135DZaSbCMoRK4anhM+I/nOHuDpf7H3xjkwE6rfolWZUw==
+  dependencies:
+    "@vgpu/wgsl" "0.5.0"
+
+"@vgpu/wgsl-std@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@vgpu/wgsl-std/-/wgsl-std-0.5.0.tgz#34933de8a1b36bfdbcaba55c4cac93f83766d2f1"
+  integrity sha512-NjMyJxwy4evFNCSqFQy4EqAbZ7iU+NUyJYyG9tLUhbdDLzBmfZlk1S3PyRZ9olBFFfEiVW2JNVw10maPKLEs1A==
+
+"@vgpu/wgsl@0.5.0":
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/@vgpu/wgsl/-/wgsl-0.5.0.tgz#62ce4fa04019508e1de3f7173a7579bc98d7be9b"
+  integrity sha512-PDlDJem7J28C9bk+vPy2kYZEoW8+nYIx2oN4nu7/WF2V7ETx32BtmWcawwMbhiu/CVsobFafML0h0eqLRBNa3Q==
+  dependencies:
+    "@vgpu/wgsl-std" "0.5.0"
+
 "@videojs/core@10.3.0":
   version "10.3.0"
   resolved "https://registry.npmmirror.com/@videojs/core/-/core-10.3.0.tgz#52582a487298ee195557ed4b99b39824330ea383"
@@ -4511,6 +4560,11 @@
     "@rolldown/pluginutils" "1.0.0-rc.3"
     "@types/babel__core" "^7.20.5"
     react-refresh "^0.18.0"
+
+"@webgpu/types@^0.1.69":
+  version "0.1.74"
+  resolved "https://registry.npmmirror.com/@webgpu/types/-/types-0.1.74.tgz#e0e0417074a90da1929c7bf710d6bb970aa91b13"
+  integrity sha512-lgiI4hbuLcI9unnm2cL/tvCaQU45dp0xcLWJh5uB/9MBGvIA4F8XIk7nSiBeg+K4xWGYwgZKn80LmERI5CxoTA==
 
 "@xml-tools/parser@^1.0.11":
   version "1.0.11"
@@ -5583,7 +5637,7 @@ dayjs@^1.11.11, dayjs@^1.11.13, dayjs@^1.11.18, dayjs@^1.11.21, dayjs@^1.8.34, d
   resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.11.23.tgz#b0a363506dde5f36cf5075e42ebe8115165a8c79"
   integrity sha512-QDTCU0M0MxR3hQfnlDJfwekQiaanm1ubOD231u73WBckQ/fsamwRLiE2GBz6D3a/xF1NgfiDLJjXBa1hYOYTtQ==
 
-debug@^4.0.0, debug@^4.1.0, debug@^4.3.1, debug@^4.3.2:
+debug@^4.0.0, debug@^4.1.0, debug@^4.3.1, debug@^4.3.2, debug@^4.4.0:
   version "4.4.3"
   resolved "https://registry.npmmirror.com/debug/-/debug-4.4.3.tgz#c6ae432d9bd9662582fce08709b038c58e9e3d6a"
   integrity sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==
@@ -8213,10 +8267,22 @@ picomatch@^4.0.2, picomatch@^4.0.3, picomatch@^4.0.4:
   resolved "https://registry.npmmirror.com/picomatch/-/picomatch-4.0.7.tgz#6313360034ccb36b3dc61ecbdff78121f90fe21f"
   integrity sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==
 
+pixelmatch@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.npmmirror.com/pixelmatch/-/pixelmatch-7.2.0.tgz#59f4e6faca733f763756d175e2579ed71369fd72"
+  integrity sha512-xhcb4yHu9sM/G7foGzoLtXYcC0zHEaOXXjRKhGup0fw78Nf2Tkiapv4EQyMzrbcmQPsllAI7DbFY2UT7PlI9Pg==
+  dependencies:
+    pngjs "^7.0.0"
+
 plantuml-encoder@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmmirror.com/plantuml-encoder/-/plantuml-encoder-1.4.0.tgz#7899302cf785de956bf1a167e15420feee5975f7"
   integrity sha512-sxMwpDw/ySY1WB2CE3+IdMuEcWibJ72DDOsXLkSmEaSzwEUaYBT6DWgOfBiHGCux4q433X6+OEFWjlVqp7gL6g==
+
+pngjs@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.npmmirror.com/pngjs/-/pngjs-7.0.0.tgz#a8b7446020ebbc6ac739db6c5415a65d17090e26"
+  integrity sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==
 
 point-at-length@^1.1.0:
   version "1.1.0"
@@ -9600,6 +9666,23 @@ vfile@^6.0.0:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
 
+vgpu@0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/vgpu/-/vgpu-0.5.0.tgz#2d46fdf0d824d1040de5c967a993726b71c8d442"
+  integrity sha512-isQfMHRTysYFfT8UWTzqQI/ROw2L7lVkj7xoUJlvIF6FjYxBNS/YNG7qp3tZ7ZvZZ3uwYjso+geQv/bEq5Hl3w==
+  dependencies:
+    "@modelcontextprotocol/server" "2.0.0"
+    "@vgpu/adapter-mock" "0.5.0"
+    "@vgpu/adapter-node" "0.5.0"
+    "@vgpu/core" "0.5.0"
+    "@vgpu/wgsl" "0.5.0"
+    "@vgpu/wgsl-std" "0.5.0"
+    "@webgpu/types" "^0.1.69"
+    pixelmatch "^7.2.0"
+    pngjs "^7.0.0"
+    wgpu-matrix "^3.4.2"
+    zod "^4.4.3"
+
 video.js@10.3.0:
   version "10.3.0"
   resolved "https://registry.npmmirror.com/video.js/-/video.js-10.3.0.tgz#7e818ddf4b2f268690bbed2ef25173ee722304ff"
@@ -9647,6 +9730,19 @@ vite@^7.1.7:
     tinyglobby "^0.2.15"
   optionalDependencies:
     fsevents "~2.3.3"
+
+webgpu@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.npmmirror.com/webgpu/-/webgpu-0.4.0.tgz#4bdbb9b38f898e468c9bb5b744b03b2f5b0b654f"
+  integrity sha512-F5pimn3Aoi0zWjuRdiVs5TnrUwSzD2lESBohsIUsqyitWkGRQlXU2fhV6ycXlQTa1bvAf3sjqiUpBEpmSQ5ptA==
+  dependencies:
+    "@webgpu/types" "^0.1.69"
+    debug "^4.4.0"
+
+wgpu-matrix@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.npmmirror.com/wgpu-matrix/-/wgpu-matrix-3.4.2.tgz#15fda104735ec8e8ec670db8d86b82ab310a9517"
+  integrity sha512-IfZFbG7olEYBD76VCZy2TzqM57GKy3LT++AZh37tMHPPByO6R2h61zXGBZFNPi2IzxNivNi8y5dvze5PjaczjA==
 
 which@^2.0.1:
   version "2.0.2"
@@ -9708,6 +9804,11 @@ zip-stream@^4.1.0:
     archiver-utils "^3.0.4"
     compress-commons "^4.1.2"
     readable-stream "^3.6.0"
+
+zod@^4.2.0, zod@^4.4.3:
+  version "4.6.7"
+  resolved "https://registry.npmmirror.com/zod/-/zod-4.6.7.tgz#e806cf64a7f4e37635ce9f2f52c04c3766f75e5b"
+  integrity sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==
 
 zustand@^5.0.8:
   version "5.0.15"
