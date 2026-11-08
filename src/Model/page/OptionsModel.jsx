@@ -8,7 +8,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { HappyProvider } from '@ant-design/happy-work-theme'
 import { TreeList, SearchPanel, HeaderFilter, Selection } from 'devextreme-react/tree-list'
 import { DataGrid, Scrolling, FilterRow, Column, Paging } from 'devextreme-react/data-grid'
-import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse, Tabs, Image } from "antd"
+import { Result, App, Button, Radio, Transfer, Tree, Spin, Skeleton, Select, Collapse, Tabs, Image, Divider } from "antd"
 
 
 import { modelStore } from '../../Router/zustand'
@@ -1260,8 +1260,8 @@ const OptionsModel = ({ data, Event }) => {
     }
     if (type === 'B1609') {
         const { isOrg, org_Method, org_Url, org_Params, org_Path, org_send, org_width,
-            left_Method, left_Url, left_Params, left_Path, leftList, isLeft, leftMaster,
-            right_Method, right_Url, right_Params, right_Path, rightList, isRight, rightMaster,
+            left_Method, left_Url, left_Params, left_Path, leftList, isLeft, leftMaster, left_isTitle, left_title,
+            right_Method, right_Url, right_Params, right_Path, rightList, isRight, rightMaster, right_isTitle, right_title,
             save_Method, save_Url, save_Params, save_Path, save_send, isSave, saveMaster,
             del_Method, del_Url, del_Params, del_Path, del_send, isDel, delMaster,
         } = data
@@ -1288,7 +1288,8 @@ const OptionsModel = ({ data, Event }) => {
 
 
         const getLeftList = async (org) => {
-            const params = { ...strOfurlParamsFunc(left_Params), [org_send]: org || TreeSelect }
+            const params = { ...strOfurlParamsFunc(left_Params) }
+            if (isOrg) params[org_send] = org || TreeSelect
             if (isLeft) leftMaster.forEach(v => { params[v.mapping] = Initial[v.field] })
             const [err, res] = await axios({ method: left_Method, url: left_Url, params, path: left_Path })
             if (err) return console.log('可选列表获取失败', err)
@@ -1362,6 +1363,7 @@ const OptionsModel = ({ data, Event }) => {
                         </div>
                     }
                     <div className='box selectList'>
+                        {left_isTitle && <Divider titlePlacement="start">{left_title}</Divider>}
                         <DataGrid
                             id={v4()}
                             width='100%'
@@ -1394,6 +1396,7 @@ const OptionsModel = ({ data, Event }) => {
                         </div>
                     </div>
                     <div className='box selectedList'>
+                        {right_isTitle && <Divider titlePlacement="start">{right_title}</Divider>}
                         <DataGrid
                             id={v4()}
                             width='100%'

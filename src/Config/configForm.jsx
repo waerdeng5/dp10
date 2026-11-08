@@ -3014,8 +3014,6 @@ const AddRowOptionsFormList = [
     {
         span: 12, formType: 'GROUP', name: 'AddTopOptionsFormList_1609_01', label: '组织机构',
         jugde: [{ field: 'type', value: ['B1609'] }], children: [
-            // 是否使用
-            // 接口配置
             { span: 24, formType: 'RADIO', name: 'isOrg', label: '组织机构树', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'RADIO', name: 'org_Method', label: '请求方式', rules: true, valueEnum: MappingData.System__Method,
@@ -3035,7 +3033,8 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'left_Url', label: '接口地址', rules: true },
             { span: 24, formType: 'INPUT', name: 'left_Params', label: '额外参数' },
             { span: 24, formType: 'INPUT', name: 'left_Path', label: '接口路径' },
-            // 主数据 - 使用字段 - 映射字段
+            { span: 24, formType: 'RADIO', name: 'left_isTitle', label: '左侧标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'left_title', label: '标题内容', rules: true, jugde: [{ field: 'left_isTitle', value: [true] }] },
             { span: 24, formType: 'RADIO', name: 'isLeft', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'LIST', name: 'leftMaster', label: '请求字段', title: '发送字段',
@@ -3061,6 +3060,8 @@ const AddRowOptionsFormList = [
             { span: 24, formType: 'INPUT', name: 'right_Url', label: '接口地址', rules: true },
             { span: 24, formType: 'INPUT', name: 'right_Params', label: '额外参数' },
             { span: 24, formType: 'INPUT', name: 'right_Path', label: '接口路径' },
+            { span: 24, formType: 'RADIO', name: 'right_isTitle', label: '右侧标题', rules: true, valueEnum: MappingData.IsEnabledBool },
+            { span: 24, formType: 'INPUT', name: 'right_title', label: '标题内容', rules: true, jugde: [{ field: 'right_isTitle', value: [true] }] },
             { span: 24, formType: 'RADIO', name: 'isRight', label: '主数据', rules: true, valueEnum: MappingData.IsEnabledBool },
             {
                 span: 24, formType: 'LIST', name: 'rightMaster', label: '请求字段', title: '发送字段',
