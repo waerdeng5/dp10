@@ -10,8 +10,9 @@ import FormTemplate from '../../Utils/FormTemplate'
 import { FormConfig } from '../../Config/configForm'
 import { Mars3dFormConfig } from '../../Config/Mars3dForm'
 import { WeChatFormConfig } from '../../Config/wechatForm'
+import { BitsFormConfig } from '../../Config/bitsForm'
 
-const FormList = { ...FormConfig, ...Mars3dFormConfig, ...WeChatFormConfig }
+const FormList = { ...FormConfig, ...Mars3dFormConfig, ...WeChatFormConfig, ...BitsFormConfig }
 
 const helpMapping = {
     SetDEVTemplateConfig: '模板设置',

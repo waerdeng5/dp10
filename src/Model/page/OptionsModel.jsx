@@ -1286,7 +1286,6 @@ const OptionsModel = ({ data, Event }) => {
             }
         }
 
-
         const getLeftList = async (org) => {
             const params = { ...strOfurlParamsFunc(left_Params) }
             if (isOrg) params[org_send] = org || TreeSelect
@@ -1296,7 +1295,7 @@ const OptionsModel = ({ data, Event }) => {
             setLeftData(res.data.list)
         }
         const getRightList = async () => {
-            const params = { ...strOfurlParamsFunc(right_Params), RoleUuid: Initial.uuid, }
+            const params = { ...strOfurlParamsFunc(right_Params) }
             if (isRight) rightMaster.forEach(v => { params[v.mapping] = Initial[v.field] })
             const [err, res] = await axios({ method: right_Method, url: right_Url, params, path: right_Path })
             if (err) return console.log('已选列表获取失败', err)

@@ -3,6 +3,11 @@ import FluxLines from './FluxLines'
 import PatternWaves from './PatternWaves'
 import MicroSlats from './MicroSlats'
 import ShapeWaves from './ShapeWaves'
+import AeroShards from './AeroShards'
+import GhostFibers from './GhostFibers'
+import CRTWarp from './CRTWarp'
+
+
 
 
 const BitsBackgrounds_GradientASCII = ({ data }) => <div className='GradientASCII'><GradientASCII {...data} /></div>
@@ -10,6 +15,10 @@ const BitsBackgrounds_FluxLines = ({ data }) => <div className='FluxLines'><Flux
 const BitsBackgrounds_PatternWaves = ({ data }) => <div className='PatternWaves'><PatternWaves {...data} /></div>
 const BitsBackgrounds_MicroSlats = ({ data }) => <div className='MicroSlats'><MicroSlats {...data} /></div>
 const BitsBackgrounds_ShapeWaves = ({ data }) => <div className='ShapeWaves'><ShapeWaves {...data} /></div>
+const BitsBackgrounds_AeroShards = ({ data }) => <div className='AeroShards'><AeroShards {...data} /></div>
+const BitsBackgrounds_GhostFibers = ({ data }) => <div className='GhostFibers'><GhostFibers {...data} /></div>
+const BitsBackgrounds_CRTWarp = ({ data }) => <div className='CRTWarp'><CRTWarp {...data} /></div>
+
 
 
 export const BitsBackgroundsTemplate = {
@@ -18,4 +27,7 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_PatternWaves,
     BitsBackgrounds_MicroSlats,
     BitsBackgrounds_ShapeWaves,
+    BitsBackgrounds_AeroShards,
+    BitsBackgrounds_GhostFibers,
+    BitsBackgrounds_CRTWarp,
 }

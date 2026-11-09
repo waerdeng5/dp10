@@ -1712,6 +1712,42 @@ export const MappingData = {
         { value: 'circles', label: '圆形' },
         { value: 'triangles', label: '三角' },
     ],
+    BitsBackgrounds_AeroShardsPlacement: [
+        { value: 'full', label: '全屏' },
+        { value: 'left', label: '左' },
+        { value: 'right', label: '右' },
+        { value: 'center', label: '中' },
+    ],
+    BitsBackgrounds_AeroShardsMaterial: [
+        { value: 'glass', label: '玻璃' },
+        { value: 'chrome', label: '金属' },
+    ],
+    BitsBackgrounds_AeroShardsMarkers: [
+        { value: 'plus', label: '加号' },
+        { value: 'dots', label: '点' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_GhostFibersFradient: [
+        { value: 'depth', label: '深度' },
+        { value: 'along', label: '沿' },
+        { value: 'across', label: '跨' },
+    ],
+    BitsBackgrounds_GhostFibersFiber: [
+        { value: 'dots', label: '点' },
+        { value: 'dashes', label: '虚线' },
+        { value: 'lines', label: '线' },
+    ],
+    BitsBackgrounds_GhostFibersHover: [
+        { value: 'focus', label: '聚焦' },
+        { value: 'part', label: '分离' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_CRTWarpMask:[
+        { value: 'aperture', label: '镜头' },
+        { value: 'shadow', label: '阴影' },
+        { value: 'slot', label: '槽' },
+        { value: 'none', label: '无' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
