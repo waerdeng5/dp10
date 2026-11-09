@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import Topography from '../../Bits/Topography'
+import LightTunnel from '../../Bits/LightTunnel'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
@@ -18,8 +18,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='Topography'  >
-                <Topography />
+            <div className='LightTunnel'  >
+                <LightTunnel />
             </div>
 
             {/* 

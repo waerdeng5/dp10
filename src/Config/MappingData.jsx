@@ -1759,6 +1759,21 @@ export const MappingData = {
         { value: 'left', label: '左' },
         { value: 'right', label: '右' },
     ],
+    BitsBackgrounds_TopographyHover: [
+        { value: 'lift', label: '提升' },
+        { value: 'trace', label: '轨迹' },
+        { value: 'light', label: '光' },
+    ],
+    BitsBackgrounds_TopographyClick: [
+        { value: 'pulse', label: '脉冲' },
+        { value: 'peak', label: '峰值' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_TopographyMarkers: [
+        { value: 'none', label: '无' },
+        { value: 'plus', label: '加号' },
+        { value: 'dots', label: '点' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

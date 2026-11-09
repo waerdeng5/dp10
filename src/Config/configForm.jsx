@@ -9541,7 +9541,7 @@ const PrefabricatedVisualRecorded = [
             { span: 8, formType: 'SELECT', name: 'flex_wrap', label: 'flex-wrap', rules: true, valueEnum: MappingData.Flex_wrap },
             { span: 12, formType: 'COLOR', name: 'title_color', label: '文字颜色', rules: true },
             { span: 12, formType: 'NUMBER', name: 'title_deg', label: '颜色角度', rules: true },
-            { span: 8, formType: 'INPUT', name: 'title_padding', label: '文字间距', rules: true },
+            { span: 12, formType: 'INPUT', name: 'title_padding', label: '文字间距', rules: true },
             { span: 12, formType: 'NUMBER', name: 'title_size', label: '文字字号', rules: true },
             { span: 12, formType: 'SELECT', name: 'title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
             { span: 12, formType: 'RADIO', name: 'title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },

@@ -10,6 +10,7 @@ import MoltenMetal from './MoltenMetal'
 import GradientWaves from './GradientWaves'
 import WebThreads from './WebThreads'
 import Topography from './Topography'
+import LightTunnel from './LightTunnel'
 
 
 
@@ -26,6 +27,7 @@ const BitsBackgrounds_MoltenMetal = ({ data }) => <div className='MoltenMetal'><
 const BitsBackgrounds_GradientWaves = ({ data }) => <div className='GradientWaves'><GradientWaves {...data} /></div>
 const BitsBackgrounds_WebThreads = ({ data }) => <div className='WebThreads'><WebThreads {...data} /></div>
 const BitsBackgrounds_Topography = ({ data }) => <div className='Topography'><Topography {...data} /></div>
+const BitsBackgrounds_LightTunnel = ({ data }) => <div className='LightTunnel'><LightTunnel {...data} /></div>
 
 
 
@@ -42,4 +44,5 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_GradientWaves,
     BitsBackgrounds_WebThreads,
     BitsBackgrounds_Topography,
+    BitsBackgrounds_LightTunnel,
 }
