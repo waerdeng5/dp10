@@ -5,7 +5,7 @@ import { VChart } from '@visactor/react-vchart'
 import { Gantt, VRender, TYPES } from '@visactor/vtable-gantt';
 import * as VTableGantt from '@visactor/vtable-gantt';
 import { useEffect } from 'react'
-import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn, TemplateClickFn } from '../Utils'
+import { isEmptyObject, getRandomInt, getNestedValue, DiyDataReturn, TemplateClickFn, getObjectValue } from '../Utils'
 import { useTemplateModel } from '../Config/useHooks'
 
 const defaultDataA00 = [{ xField: 'China', yField: 0.4 }]
@@ -211,6 +211,7 @@ const axesFn = (data) => {
         const axesArr = data.axes_arrList.map(item => {
             if (item.axes_visible) {
                 const obj = {
+                    sampling: false,
                     visible: true,
                     seriesId: item.axes_seriesId ? item.axes_seriesId.split(',') : null,
                     mode: item.axes_mode,
@@ -1845,8 +1846,11 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         markLine_list, rowSeriesNumber_visible, rowSeriesNumber_title, rowSeriesNumber_field, rowSeriesNumber_width,
         rowSeriesNumber_dragOrder, rowSeriesNumber_disableColumnResize, scrollStyle_visible, scrollStyle_hoverOn, scrollStyle_barToSide,
         scrollStyle_ignoreFrozenCols, scrollStyle_scrollRailColor, scrollStyle_scrollSliderColor, scrollStyle_scrollSliderCornerRadius,
-        scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding
+        scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding,
+        apiDate, minApiDate, maxApiDate
     } = data
+
+
 
     const option = {
         taskKeyField: fields_id || 'id',
@@ -2046,7 +2050,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 lineDash: grid_horizontalLine_lineDash?.split(',').map(Number) || 0,
             }
         },
-
         rowSeriesNumber: rowSeriesNumber_visible ? {
             title: rowSeriesNumber_title,
             field: rowSeriesNumber_field,
@@ -2115,6 +2118,10 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
 
     useEffect(() => {
         const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
+        if (apiDate && UrlData[http_urlName]) {
+            option.minDate = getObjectValue(UrlData[http_urlName], minApiDate)
+            option.maxDate = getObjectValue(UrlData[http_urlName], maxApiDate)
+        }
         const scales = timelineHeader_scales.map(v => {
             const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
                 padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick

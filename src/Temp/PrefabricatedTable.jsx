@@ -485,6 +485,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         if (row) params = { ...params, ...row }
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
+                        console.log('row', row)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
                         if (card) {
                             setCardData(list[0])

@@ -7024,7 +7024,10 @@ const PrefabricatedChartGantt = [
                 jugde: [{ field: 'api_source', value: ['A02'] }], children: [
                     { span: 12, formType: 'INPUT', name: 'http_urlName', label: '接口名称', rules: true },
                     { span: 12, formType: 'RADIO', name: 'http_urlLevel', label: '数据层级', rules: true, valueEnum: MappingData.ApiUrlLevel },
-                    { span: 12, formType: 'INPUT', name: 'http_urlMapping', label: '接口层级', jugde: [{ field: 'http_urlLevel', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'http_urlMapping', label: '数据字段', jugde: [{ field: 'http_urlLevel', value: [true] }] },
+                    { span: 12, formType: 'RADIO', name: 'apiDate', label: '接口日期', rules: true, valueEnum: MappingData.IsEnabledBool },
+                    { span: 12, formType: 'INPUT', name: 'minApiDate', label: '开始日期字段', rules: true, jugde: [{ field: 'apiDate', value: [true] }] },
+                    { span: 12, formType: 'INPUT', name: 'maxApiDate', label: '结束日期字段', rules: true, jugde: [{ field: 'apiDate', value: [true] }] },
                 ]
             },
         ]
@@ -7039,9 +7042,8 @@ const PrefabricatedChartGantt = [
             { span: 12, formType: 'NUMBER', name: 'headerRowHeight', label: '头部行高', rules: true },
             { span: 12, formType: 'NUMBER', name: 'rowHeight', label: '表格行高', rules: true },
             { span: 12, formType: 'INPUT', name: 'dateFormat', label: '日期格式', rules: true },
-            { span: 12, formType: 'DATETIME', name: 'minDate', label: '最小日期' },
-            { span: 12, formType: 'DATETIME', name: 'maxDate', label: '最大日期' },
-
+            { span: 8, formType: 'DATETIME', name: 'minDate', label: '最小日期' },
+            { span: 8, formType: 'DATETIME', name: 'maxDate', label: '最大日期' },
 
             { span: 12, formType: 'RADIO', name: 'overscrollBehavior', label: '滚动行为', rules: true, valueEnum: MappingData.Charts__ganntOverscrollBehavior },
             { span: 12, formType: 'COLOR', name: 'underlayBackgroundColor', label: '外部背景色', rules: true, mode: ['single'] },

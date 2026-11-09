@@ -7,6 +7,10 @@ import AeroShards from './AeroShards'
 import GhostFibers from './GhostFibers'
 import CRTWarp from './CRTWarp'
 import MoltenMetal from './MoltenMetal'
+import GradientWaves from './GradientWaves'
+import WebThreads from './WebThreads'
+import Topography from './Topography'
+
 
 
 
@@ -19,6 +23,9 @@ const BitsBackgrounds_AeroShards = ({ data }) => <div className='AeroShards'><Ae
 const BitsBackgrounds_GhostFibers = ({ data }) => <div className='GhostFibers'><GhostFibers {...data} /></div>
 const BitsBackgrounds_CRTWarp = ({ data }) => <div className='CRTWarp'><CRTWarp {...data} /></div>
 const BitsBackgrounds_MoltenMetal = ({ data }) => <div className='MoltenMetal'><MoltenMetal {...data} /></div>
+const BitsBackgrounds_GradientWaves = ({ data }) => <div className='GradientWaves'><GradientWaves {...data} /></div>
+const BitsBackgrounds_WebThreads = ({ data }) => <div className='WebThreads'><WebThreads {...data} /></div>
+const BitsBackgrounds_Topography = ({ data }) => <div className='Topography'><Topography {...data} /></div>
 
 
 
@@ -32,4 +39,7 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_GhostFibers,
     BitsBackgrounds_CRTWarp,
     BitsBackgrounds_MoltenMetal,
+    BitsBackgrounds_GradientWaves,
+    BitsBackgrounds_WebThreads,
+    BitsBackgrounds_Topography,
 }

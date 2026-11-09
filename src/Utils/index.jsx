@@ -864,6 +864,18 @@ export const DiyDataReturn = (data, apiData, backData, diyKey, back = []) => {
     return []
 }
 
+// TODO 获取对象指定值
+export const getObjectValue = (obj, path) => {
+    return path.split('.').reduce((acc, key) => acc?.[key], obj);
+}
+// TODO 根据模板获取返回值
+export const getTempValue = (item, template) => {
+    return template.replace(/\{([\w.]+)\}/g, (_, path) => {
+        const val = getValue(item, path);
+        return val !== undefined ? String(val) : '';
+    });
+}
+
 // TODO 组装弹出层的数据
 export const AssemblyModelData = (data, row, Event) => {
     const { click_model_uuid, click_model_start, click_model_title, click_model_width, click_model_height, click_model_params, click_model_config } = data
@@ -899,11 +911,6 @@ export const AssemblyNavTo = (data, row, Event) => {
 
 
 export const TemplateClickFn = (e, v, row, Event, openModel) => {
-    console.log('点击事件', e)
-    console.log('点击数据', v)
-    console.log('点击行数据', row)
-    console.log('点击事件', Event)
-    console.log('点击打开弹出层', openModel)
     e && e?.stopPropagation()
     const { click_type, click_model_level } = v
     if (click_type === 'model') {

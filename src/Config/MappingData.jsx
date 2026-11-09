@@ -1742,16 +1742,22 @@ export const MappingData = {
         { value: 'part', label: '分离' },
         { value: 'none', label: '无' },
     ],
-    BitsBackgrounds_CRTWarpMask:[
+    BitsBackgrounds_CRTWarpMask: [
         { value: 'aperture', label: '镜头' },
         { value: 'shadow', label: '阴影' },
         { value: 'slot', label: '槽' },
         { value: 'none', label: '无' },
     ],
-    BitsBackgrounds_MoltenMetalMode:[
+    BitsBackgrounds_MoltenMetalMode: [
         { value: 'molten', label: '岩浆' },
         { value: 'ember', label: '火焰' },
         { value: 'frost', label: '冰' },
+    ],
+    BitsBackgrounds_TopographyDirection: [
+        { value: 'forward', label: '前' },
+        { value: 'backward', label: '后' },
+        { value: 'left', label: '左' },
+        { value: 'right', label: '右' },
     ],
 
     // TODO Dev
