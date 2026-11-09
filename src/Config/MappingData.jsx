@@ -1774,6 +1774,10 @@ export const MappingData = {
         { value: 'plus', label: '加号' },
         { value: 'dots', label: '点' },
     ],
+    BitsBackgrounds_LightTunnelFlow: [
+        { value: 'inward', label: '向内' },
+        { value: 'outward', label: '向外' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

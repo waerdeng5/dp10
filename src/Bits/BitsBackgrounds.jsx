@@ -11,6 +11,7 @@ import GradientWaves from './GradientWaves'
 import WebThreads from './WebThreads'
 import Topography from './Topography'
 import LightTunnel from './LightTunnel'
+import SlicedWaves from './SlicedWaves'
 
 
 
@@ -28,6 +29,7 @@ const BitsBackgrounds_GradientWaves = ({ data }) => <div className='GradientWave
 const BitsBackgrounds_WebThreads = ({ data }) => <div className='WebThreads'><WebThreads {...data} /></div>
 const BitsBackgrounds_Topography = ({ data }) => <div className='Topography'><Topography {...data} /></div>
 const BitsBackgrounds_LightTunnel = ({ data }) => <div className='LightTunnel'><LightTunnel {...data} /></div>
+const BitsBackgrounds_SlicedWaves = ({ data }) => <div className='SlicedWaves'><SlicedWaves {...data} /></div>
 
 
 
@@ -45,4 +47,5 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_WebThreads,
     BitsBackgrounds_Topography,
     BitsBackgrounds_LightTunnel,
+    BitsBackgrounds_SlicedWaves,
 }
