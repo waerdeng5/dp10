@@ -2131,7 +2131,39 @@ const BitsBackgrounds_CRTWarp = [
     { span: 6, formType: 'NUMBER', name: 'brightness', label: '亮度', rules: true },
 ]
 
+const BitsBackgrounds_MoltenMetal = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 12, formType: 'COLORS', name: 'colors', label: '颜色', rules: true, min: 1, max: 5 },
+    { span: 6, formType: 'COLOR', name: 'coreColor', label: '核心颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'COLOR', name: 'backgroundColor', label: '背景颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'RADIO', name: 'lightMode', label: '浅色模式', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'speed', label: '速度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'scale', label: '比例', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'detail', label: '细节', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'glow', label: '发光', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'thickness', label: '厚度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'swirl', label: '旋涡', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'turbulence', label: '湍流', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'haze', label: '雾度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'brightness', label: '亮度', rules: true },
+    { span: 6, formType: 'RADIO', name: 'colorMode', label: '模式', rules: true, valueEnum: MappingData.BitsBackgrounds_MoltenMetalMode },
+    { span: 6, formType: 'NUMBER', name: 'rotation', label: '旋转', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'offsetX', label: 'X轴偏移', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'offsetY', label: 'Y轴偏移', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'drift', label: '漂移', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'grain', label: '粒径', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'opacity', label: '透明度', rules: true },
+
+    { span: 6, formType: 'RADIO', name: 'intro', label: '入场动画', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'flareOnClick', label: '点击发光', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'paused', label: '暂停', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'RADIO', name: 'mouseInteraction', label: '鼠标交互', rules: true, valueEnum: MappingData.IsEnabledBool },
+    { span: 6, formType: 'NUMBER', name: 'mouseStrength', label: '鼠标强度', rules: true },
+]
+
+
 export const BitsFormConfig = {
+    BitsBackgrounds_MoltenMetal,
     BitsBackgrounds_CRTWarp,
     BitsBackgrounds_GhostFibers,
     BitsBackgrounds_AeroShards,

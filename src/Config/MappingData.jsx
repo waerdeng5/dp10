@@ -1748,6 +1748,11 @@ export const MappingData = {
         { value: 'slot', label: '槽' },
         { value: 'none', label: '无' },
     ],
+    BitsBackgrounds_MoltenMetalMode:[
+        { value: 'molten', label: '岩浆' },
+        { value: 'ember', label: '火焰' },
+        { value: 'frost', label: '冰' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
