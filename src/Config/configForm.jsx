@@ -8927,6 +8927,14 @@ const PrefabricatedTreeData = [
             { span: 12, formType: 'RADIO', name: 'tree_blockNode', label: '占据满行', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'RADIO', name: 'tree_selectable', label: '是否可选', rules: true, valueEnum: MappingData.IsEnabledBool },
             { span: 12, formType: 'RADIO', name: 'tree_switcher', label: '折叠图标', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'COLOR', name: 'tree_switcher_color', label: '图标颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'tree_switcher', value: [true] }]
+            },
+            {
+                span: 12, formType: 'NUMBER', name: 'tree_switcher_size', label: '图标尺寸', rules: true,
+                jugde: [{ field: 'tree_switcher', value: [true] }]
+            },
         ]
     },
     {

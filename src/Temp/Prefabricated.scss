@@ -1045,6 +1045,13 @@
 
         .ant-tree-switcher {
             display: var(--tree-switcher);
+            align-items: center;
+            justify-content: center;
+
+            &>span {
+                color: var(--tree-switcher-color);
+                font-size: var(--tree-switcher-size);
+            }
         }
 
         .ant-tree-title {
