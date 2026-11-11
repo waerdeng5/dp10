@@ -22,6 +22,10 @@ import DarkVeil from './DarkVeil'
 import LightPillar from './LightPillar'
 import Antigravity from './Antigravity'
 import Silk from './Silk'
+import FloatingLines from './FloatingLines'
+import SideRays from './SideRays'
+
+
 
 
 const BitsBackgrounds_GradientASCII = ({ data }) => <div className='GradientASCII'><GradientASCII {...data} /></div>
@@ -48,6 +52,9 @@ const BitsBackgrounds_DarkVeil = ({ data }) => <div className='DarkVeil'><DarkVe
 const BitsBackgrounds_LightPillar = ({ data }) => <div className='LightPillar'><LightPillar {...data} /></div>
 const BitsBackgrounds_Antigravity = ({ data }) => <div className='Antigravity'><Antigravity {...data} /></div>
 const BitsBackgrounds_Silk = ({ data }) => <div className='Silk'><Silk {...data} /></div>
+const BitsBackgrounds_FloatingLines = ({ data }) => <div className='FloatingLines'><FloatingLines {...data} /></div>
+const BitsBackgrounds_SideRays = ({ data }) => <div className='SideRays'><SideRays {...data} /></div>
+
 
 
 
@@ -76,4 +83,6 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_LightPillar,
     BitsBackgrounds_Antigravity,
     BitsBackgrounds_Silk,
+    BitsBackgrounds_FloatingLines,
+    BitsBackgrounds_SideRays,
 }

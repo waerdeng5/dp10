@@ -241,16 +241,12 @@ const perWave = (value, waves, wave, fallback) => {
 };
 
 const FloatingLines = ({
-    linesGradient = ['#e945f5', '#ffffff'],
-    enabledWaves = ['top', 'middle', 'bottom'],
+    linesGradient = [{ color: '#e945f5', stop: '#ffffff' }],
     lineCount = 10,
     lineDistance = 6,
-    topWavePosition,
-    middleWavePosition,
-    bottomWavePosition,
     animationSpeed = 1,
     amplitude = 1,
-    lineWidth = 1,
+    lineWidth = 10,
     lineStyle = 'solid',
     glow = 1,
     brightness = 1,
@@ -265,9 +261,13 @@ const FloatingLines = ({
     clickSwirl = true,
     intro = true,
     mixBlendMode = 'screen',
-    backgroundColor,
+    backgroundColor = '#262626',
     lightMode = true,
     opacity = 1,
+    enabledWaves = ['top', 'middle', 'bottom'],
+    topWavePosition,
+    middleWavePosition,
+    bottomWavePosition,
     dpr,
     className = '',
     style,
@@ -278,7 +278,7 @@ const FloatingLines = ({
     const wakeRef = useRef(null);
     const waves = Array.isArray(enabledWaves) ? enabledWaves.filter(wave => WAVES.includes(wave)) : WAVES;
     const settings = {
-        stops: Array.isArray(linesGradient) && linesGradient.length ? linesGradient.slice(0, MAX_STOPS) : ['#ffffff'],
+        stops: linesGradient.map(item => item.color).slice(0, MAX_STOPS),
         waves: WAVES.map(wave => {
             const on = waves.includes(wave);
             const position = {
@@ -612,7 +612,7 @@ const FloatingLines = ({
     }, []);
 
     useEffect(() => {
-        wakeRef.current?.();
+        wakeRef.current?.()
     });
 
     return (

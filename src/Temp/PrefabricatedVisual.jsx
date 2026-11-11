@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import { Select, TreeSelect, Pagination, ConfigProvider, Spin, Result } from 'antd'
 import { useMount } from 'ahooks'
+import { v4 } from 'uuid'
 
 import {
     SpacingCallBack,
@@ -77,6 +78,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
     const [RenderList, setRenderList] = useState()
     const [VideoList, setVideoList] = useState()
     const [Total, setTotal] = useState(0)
+    const [Uuid, setUuid] = useState()
 
     const leftStyle = {
         width: left_width,
@@ -236,7 +238,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
     }
 
     useEffect(() => {
-        const listData = item_list.reduce((acc, v) => {
+        const listData = item_list?.reduce((acc, v) => {
             const { total, row, col } = v
             acc[total] = { width: Math.floor(100 / col), height: Math.floor(100 / row) }
             return acc
@@ -275,6 +277,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         const { list, total } = backData
         setVideoList(list)
         setTotal(total)
+        setUuid(v4())
     }, [UrlData, data])
 
 
@@ -516,7 +519,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
                             height: SpacingSizeCallBack(item_margin, height, true),
                         }
                         return (
-                            <div className='video_item' key={i} style={itemStyle}>
+                            <div className='video_item' key={i + Uuid} style={itemStyle}>
                                 {video_title && <div className='video_title' style={videoTitleStyle}>标题</div>}
                                 <MonitorTemplateA01 data={v} />
                             </div>

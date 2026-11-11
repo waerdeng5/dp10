@@ -32,7 +32,6 @@ const PARAMSMAPPING = [
     'PrefabricatedDiyNongKaiOrg'
 ]
 
-
 const { port } = window.location
 const initData = { api: [], layout: [], window: {}, params: {} }
 

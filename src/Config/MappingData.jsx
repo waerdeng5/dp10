@@ -1845,6 +1845,19 @@ export const MappingData = {
         { value: 'box', label: '盒子' },
         { value: 'tetrahedron', label: '三角' },
     ],
+    BitsBackgrounds_FloatingLinesStyle: [
+        { value: 'solid', label: '实线' },
+        { value: 'dotted', label: '点线' },
+        { value: 'dashed', label: '虚线' },
+    ],
+    BitsBackgrounds_SideRaysOrigin: [
+        { value: 'top-right', label: '顶部右侧' },
+        { value: 'top-left', label: '顶部左侧' },
+        { value: 'bottom-right', label: '底部右侧' },
+        { value: 'bottom-left', label: '底部左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'left', label: '左侧' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
