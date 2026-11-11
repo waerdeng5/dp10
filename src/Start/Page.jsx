@@ -57,7 +57,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     const [ParamsData, setParamsData] = useState()
     const [LayoutStatus, setLayoutStatus] = useState(false)
     const [UrlData, setUrlData] = useState({})
-    const [FoldStatus, setFoldStatus] = useState(false)
+    const [FoldStatus, setFoldStatus] = useState(page?.fold_status || false)
 
     const [Independent, setIndependent] = useState({ loading: true, status: true, error: null, Template: null })
 
@@ -347,8 +347,9 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
                     if (page_fold) {
                         const { fold_position, fold_left, fold_right, fold_top, fold_bottom, fold_width, fold_height, fold_url,
                             fold_open, fold_off, fold_titleColor, fold_titleDeg, fold_titleSize, fold_titleFamily, fold_titleWeight,
-                            fold_titleStyle, fold_shadow, fold_filterSize, fold_filterColor, fold_padding
+                            fold_titleStyle, fold_shadow, fold_filterSize, fold_filterColor, fold_padding, fold_status
                         } = page
+
 
                         const foldStyle = { width: fold_width, height: fold_height }
 

@@ -1622,7 +1622,8 @@ const StartInitFormList = [
             {
                 span: 24, formType: 'GROUP', name: 'page_fold_config', label: '折叠面板配置', collapsible: true,
                 jugde: [{ field: 'page_fold', value: [true] }], children: [
-                    { span: 24, formType: 'RADIO', name: 'fold_position', label: '折叠面板', rules: true, valueEnum: MappingData.System__AlignmentLRA02 },
+                    { span: 24, formType: 'RADIO', name: 'fold_status', label: '初始状态', rules: true, valueEnum: MappingData.IsOpenBool },
+                    { span: 24, formType: 'RADIO', name: 'fold_position', label: '折叠位置', rules: true, valueEnum: MappingData.System__AlignmentLRA02 },
                     {
                         span: 24, formType: 'NUMBER', name: 'fold_left', label: '左侧距离', rules: true,
                         jugde: [{ field: 'fold_position', value: ['leftTop', 'leftBtm'] }]

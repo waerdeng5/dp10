@@ -1778,6 +1778,73 @@ export const MappingData = {
         { value: 'inward', label: '向内' },
         { value: 'outward', label: '向外' },
     ],
+    BitsBackgrounds_AcidSquaresShape: [
+        { value: 'square', label: '方形' },
+        { value: 'round', label: '圆形' },
+    ],
+    BitsBackgrounds_AcidSquaresPulse: [
+        { value: 'center', label: '中心' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsBackgrounds_AcidSquaresLighting: [
+        { value: 'split', label: '分割' },
+        { value: 'backlit', label: '背光' },
+        { value: 'overhead', label: ' 空中' },
+    ],
+    BitsBackgrounds_AcidSquaresHover: [
+        { value: 'press', label: '按下' },
+        { value: 'lift', label: '提升' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_AcidSquaresDetail: [
+        { value: 'low', label: '低' },
+        { value: 'medium', label: '中' },
+        { value: 'high', label: '高' },
+    ],
+    BitsBackgrounds_ScannerScan: [
+        { value: 'vertical', label: '垂直' },
+        { value: 'horizontal', label: '水平' },
+        { value: 'diagonal', label: '斜向' },
+    ],
+    BitsBackgrounds_ScannerMode: [
+        { value: 'repel', label: '排斥' },
+        { value: 'attract', label: '吸引' },
+    ],
+    BitsBackgrounds_ScannerClick: [
+        { value: 'ping', label: '点击' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_FerrofluidFlow: [
+        { value: 'down', label: '下' },
+        { value: 'up', label: '上' },
+        { value: 'left', label: '左' },
+        { value: 'right', label: '右' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_PrismType: [
+        { value: 'rotate', label: '旋转' },
+        { value: '3drotate', label: '3D旋转' },
+        { value: 'hover', label: '悬停' },
+        { value: 'static', label: '静态' },
+    ],
+    BitsBackgrounds_LightPillarMode: [
+        { value: 'screen', label: '屏幕' },
+        { value: 'normal', label: '正常' },
+        { value: 'lighten', label: '加深' },
+        { value: 'colorDodge', label: '颜色加深' },
+        { value: 'luminosity', label: '亮度' },
+    ],
+    BitsBackgrounds_AntigravityMode: [
+        { value: 'conic', label: '圆锥' },
+        { value: 'radial', label: '径向' },
+        { value: 'random', label: '随机' },
+    ],
+    BitsBackgrounds_AntigravityShape: [
+        { value: 'capsule', label: '圆柱' },
+        { value: 'sphere', label: '圆点' },
+        { value: 'box', label: '盒子' },
+        { value: 'tetrahedron', label: '三角' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

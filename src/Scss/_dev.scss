@@ -49,6 +49,8 @@
                 &>.WinBoxBackImage {
                     position: absolute;
                     z-index: -1;
+                    background: #00000001;
+                    display: block;
                 }
             }
 

@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import AcidSquares from '../../Bits/AcidSquares'
+import FloatingLines from '../../Bits/FloatingLines'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
@@ -18,8 +18,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='AcidSquares'  >
-                <AcidSquares />
+            <div className='FloatingLines'  >
+                <FloatingLines />
             </div>
 
             {/* 
