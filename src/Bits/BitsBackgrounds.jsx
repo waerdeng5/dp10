@@ -24,7 +24,10 @@ import Antigravity from './Antigravity'
 import Silk from './Silk'
 import FloatingLines from './FloatingLines'
 import SideRays from './SideRays'
-
+import LightRays from './LightRays'
+import PixelBlast from './PixelBlast'
+import ColorBends from './ColorBends'
+import LineWaves from './LineWaves'
 
 
 
@@ -54,7 +57,10 @@ const BitsBackgrounds_Antigravity = ({ data }) => <div className='Antigravity'><
 const BitsBackgrounds_Silk = ({ data }) => <div className='Silk'><Silk {...data} /></div>
 const BitsBackgrounds_FloatingLines = ({ data }) => <div className='FloatingLines'><FloatingLines {...data} /></div>
 const BitsBackgrounds_SideRays = ({ data }) => <div className='SideRays'><SideRays {...data} /></div>
-
+const BitsBackgrounds_LightRays = ({ data }) => <div className='LightRays'><LightRays {...data} /></div>
+const BitsBackgrounds_PixelBlast = ({ data }) => <div className='PixelBlast'><PixelBlast {...data} /></div>
+const BitsBackgrounds_ColorBends = ({ data }) => <div className='ColorBends'><ColorBends {...data} /></div>
+const BitsBackgrounds_LineWaves = ({ data }) => <div className='LineWaves'><LineWaves {...data} /></div>
 
 
 
@@ -85,4 +91,8 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_Silk,
     BitsBackgrounds_FloatingLines,
     BitsBackgrounds_SideRays,
+    BitsBackgrounds_LightRays,
+    BitsBackgrounds_PixelBlast,
+    BitsBackgrounds_ColorBends,
+    BitsBackgrounds_LineWaves,
 }

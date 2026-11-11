@@ -1858,6 +1858,29 @@ export const MappingData = {
         { value: 'right', label: '右侧' },
         { value: 'left', label: '左侧' },
     ],
+    BitsBackgrounds_LightRaysOrigin: [
+        { value: 'top-center', label: '顶部中心' },
+        { value: 'top-left', label: '顶部左侧' },
+        { value: 'top-right', label: '顶部右侧' },
+        { value: 'left', label: '左侧' },
+        { value: 'right', label: '右侧' },
+        { value: 'bottom-center', label: '底部中心' },
+        { value: 'bottom-left', label: '底部左侧' },
+        { value: 'bottom-right', label: '底部右侧' },
+    ],
+    BitsBackgrounds_PixelBlastVariant: [
+        { value: 'square', label: '方形' },
+        { value: 'circle', label: '圆形' },
+        { value: 'triangle', label: '三角形' },
+        { value: 'diamond', label: '钻石' },
+        { value: 'cross', label: '十字' },
+        { value: 'ring', label: '环' },
+    ],
+    BitsBackgrounds_PixelBlastHover:[
+        { value: 'reveal', label: '显示' },
+        { value: 'grow', label: '增长' },
+        { value: 'none', label: '无' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
