@@ -2290,6 +2290,46 @@ const DivTemplate = {
                     </div>
                     <img src="${imgUrl}" alt="" style="${Object.keys(imgStyle).map(k => `${k}:${imgStyle[k]}`).join(';')}">
                 </div >`
+    },
+    A04: e => {
+        const { background, padding, margin, radius, list,
+            border, borderSize, borderType, borderColor,
+            shadow, shadowSize, shadowColor, shadowType,
+            color, font_size, font_family, font_weight, font_style, filter, filterSize, filterColor,
+            imgUrl, imgWidth, imgHeight, imgPad, imgMar, imgFil, imgFilSize, imgFilColor,
+        } = e
+
+        console.log(e)
+        const backStyle = {
+            background,
+            padding: SpacingCallBack(padding),
+            margin: SpacingCallBack(margin),
+            'border-radius': SpacingCallBack(radius),
+            border: SetBorderParams(border, borderSize, borderType, borderColor),
+            'box-shadow': SetShadowParams(shadow, shadowSize, shadowColor, shadowType),
+            color,
+            'font-size': font_size + 'px',
+            'font-family': font_family,
+            'font-weight': font_weight,
+            'font-style': font_style,
+            'filter': SetFilderParams(filter, filterSize, filterColor),
+        }
+        const imageStyle = {
+            width: imgWidth + 'px',
+            height: imgHeight + 'px',
+            filter: SetFilderParams(imgFil, imgFilSize, imgFilColor),
+        }
+
+        return `<div class="DivHtmlTemplate A04" >
+                    <img class="img" src="${imgUrl}" alt="" style="${Object.keys(imageStyle).map(k => `${k}:${imageStyle[k]}`).join(';')}">
+                    <div class="box">
+                        ${list.map((v, i) => `
+                            <div class="text text${i}" style="${Object.keys(backStyle).map(k => `${k}:${backStyle[k]}`).join(';')}">
+                                ${v.text}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div >`
     }
 }
 // *** 扩散DIV

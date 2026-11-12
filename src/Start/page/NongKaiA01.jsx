@@ -1,12 +1,26 @@
 import './NongKaiA01.scss'
-import { useState } from 'react'
+import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
+import "mars3d/mars3d.css"
+import { useEffect, useRef, useState } from 'react'
 import { useMount } from 'ahooks'
 import { useEventEmitter } from 'ahooks'
-import { axios } from '../../Utils/Api'
+import { axios, axiosFor } from '../../Utils/Api'
 import { TemplateClickFn } from '../../Utils'
 import { useTemplateModel } from '../../Config/useHooks'
+import { CommonAPIUrl } from '../../Config'
+import { Decrypt } from '../../Utils/IndexedDB'
+import { InitMap } from '../../Mars3d'
 
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
+
+
+
+const mapUuid = '1081d01e-0cc7-4415-bdb4-0528bb80050a/MAP_PAGE/2ec7b8e6-a0a2-4338-a537-2590f78e01f4'
+
+const MapApi = [
+    { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}` } },
+    { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}_element` } },
+]
 
 const uuidKeyMap = {
     '22115954-4ddb-4456-8b55-22f0bc821001': 'A01',
@@ -25,10 +39,23 @@ const uuidKeyMap = {
     '99999999-9999-9999-9999-999999999999': 'A00',
 };
 
+const topNav = [
+    { value: 'A02', title: '3D地图' },
+    { value: 'A01', title: '测绘地图' },
+]
+
+
+
+
 const NongKaiA01 = () => {
+    const mapRef = useRef(null)
     const openModel = useTemplateModel()
     const PageEvent = useEventEmitter()
+    const [MpaPar, setMpaPar] = useState({ map: null, gra: null, clip: null })
+
+
     const [active, setActive] = useState('A01')
+    const [TabsActive, setTabsActive] = useState('A01')
     const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0, A00: 0 })
     const MapList = [
         { uuid: 'A01', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821001', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
@@ -45,6 +72,8 @@ const NongKaiA01 = () => {
         { uuid: 'A12', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821012', img: imageUrl + 'MapA12.png', name: '绥化市', x: 460, y: 420 },
         { uuid: 'A13', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821013', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
     ]
+
+
 
     useMount(async () => {
         const [err, res] = await axios({ method: 'get', url: 'engineeringProject/GetCityProjectCount' })
@@ -86,46 +115,93 @@ const NongKaiA01 = () => {
         }, data, PageEvent, openModel)
     }
 
+    useEffect(() => {
+        if (mapRef.current) onInitMap()
+        else {
+            console.log('mapRef.current is null')
+        }
+        return () => {
+            MpaPar.map?.destroy()
+        }
+    }, [mapRef])
+
+    const onTabNavTo = (e) => {
+        setTabsActive(e)
+        if (e === 'A01') MpaPar.map?.destroy()
+        else onInitMap()
+    }
+
+
+    const onInitMap = async () => {
+        const [[mapErr, mapRes], [eleErr, eleRes]] = await axiosFor(MapApi)
+        if (mapErr || eleErr) return false
+        const mapData = await Decrypt(mapRes)
+        const eleData = await Decrypt(eleRes)
+        const { map, gra, clip } = InitMap({ BOX: mapRef.current, CONFIG: mapData, ELEMENT: eleData })
+        setMpaPar({ map, gra, clip })
+    }
+
     return (
         <div className='NongKaiA01'>
-            <div className='MapBox'>
-                {MapList.map(v => { if (active === v.uuid) return (<img className='Image' key={v.uuid} src={v.img} alt="" />) })}
-                <div className='List'>
-                    {MapList.map(v => {
+            <div className='top'>
+                <div className='topNav'>
+                    <img src={imageUrl + 'TopNavBack.png'} alt="" />
+                    {topNav.map(v => {
+                        const status = TabsActive === v.value
                         return (
-                            <div
-                                className='ListItem'
-                                key={v.uuid}
-                                style={{ left: v.x, top: v.y, '--shadow': active === v.uuid ? '7px 15px 9px #012905' : '' }}
-                                onClick={() => onClickCity(v)}
-                            >
-                                <div>{Data[v.uuid] || 0} </div>
-                                <div>{v.name}</div>
+                            <div key={v.value} onClick={() => onTabNavTo(v.value)}>
+                                <div>{v.title}</div>
+                                {status && <img style={v.value === 'A02' ? { left: 8 } : { right: 8 }} src={imageUrl + 'TopNavAct.png'} alt="" />}
                             </div>
                         )
-                    })}
+                    }
+                    )}
                 </div>
-                <img className='otherImage' src={imageUrl + 'MapA14.png'} alt="" />
-                <div className='otherDiv' onClick={() => onClickCity({ uuid: 'A00', name: '其他省份', cityUuid: '99999999-9999-9999-9999-999999999999' })}>
-                    <div>
-                        <div>{Data['A00']}</div>
-                        <div>其他省份</div>
-                    </div>
-                </div>
+            </div>
 
-            </div>
-            <div className='MapBtm'>
-                <img src={imageUrl + 'MapBack.png'} alt="" />
-                {MapList.map(v => {
-                    const status = active === v.uuid
-                    return (
-                        <div className='item' key={v.uuid} onClick={() => onClickCity(v)}>
-                            <div>{v.name}</div>
-                            {status && <img src={imageUrl + 'MapActive.png'} alt="" />}
+
+
+            {TabsActive === 'A01' ?
+                <>
+                    <div className='MapBox'>
+                        {MapList.map(v => { if (active === v.uuid) return (<img className='Image' key={v.uuid} src={v.img} alt="" />) })}
+                        <div className='List'>
+                            {MapList.map(v => {
+                                return (
+                                    <div
+                                        className='ListItem'
+                                        key={v.uuid}
+                                        style={{ left: v.x, top: v.y, '--shadow': active === v.uuid ? '7px 15px 9px #012905' : '' }}
+                                        onClick={() => onClickCity(v)}
+                                    >
+                                        <div>{Data[v.uuid] || 0} </div>
+                                        <div>{v.name}</div>
+                                    </div>
+                                )
+                            })}
                         </div>
-                    )
-                })}
-            </div>
+                        <img className='otherImage' src={imageUrl + 'MapA14.png'} alt="" />
+                        <div className='otherDiv' onClick={() => onClickCity({ uuid: 'A00', name: '其他省份', cityUuid: '99999999-9999-9999-9999-999999999999' })}>
+                            <div>
+                                <div>{Data['A00']}</div>
+                                <div>其他省份</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='MapBtm'>
+                        <img src={imageUrl + 'BtmBack.png'} alt="" />
+                        {MapList.map(v => {
+                            const status = active === v.uuid
+                            return (
+                                <div className='item' key={v.uuid} onClick={() => onClickCity(v)}>
+                                    <div>{v.name}</div>
+                                    <img src={`${imageUrl}${status ? 'BtmBackAct.png' : 'BtmBackDev.png'}`} alt="" />
+                                </div>
+                            )
+                        })}
+                    </div>
+                </> : <div className='MapBox3D' ref={mapRef} />
+            }
         </div>
     );
 };

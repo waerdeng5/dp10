@@ -12,7 +12,7 @@ export const LayerListMap = (arr) => {
     })
 }
 
-export const InitMap = ({ BOX, CONFIG, ELEMENT, TILES }) => {
+export const InitMap = ({ BOX, CONFIG, ELEMENT = [], TILES = [] }) => {
     mars3d.Log.hasInfo(false)
     const { scene, globe, cameraController, terrain, other, weather, colour, camera } = CONFIG
     scene.globe = globe
@@ -169,6 +169,7 @@ const RenderElement = (gra, data) => {
                 break;
             case 'div':
                 const div = new mars3d.graphic.DivGraphic({ id, position, show, style })
+                console.log(gra, div)
                 gra.addGraphic(div)
                 break;
             case 'divLightPoint':

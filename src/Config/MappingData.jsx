@@ -2988,6 +2988,7 @@ export const MappingData = {
         { value: 'A01', label: '一号版' },
         { value: 'A02', label: '二号版' },
         { value: 'A03', label: '三号版' },
+        { value: 'A04', label: '四号版' },
     ],
     // TODO 管道形状
     mars3d__shape: [
