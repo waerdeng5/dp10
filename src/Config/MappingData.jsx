@@ -1890,6 +1890,32 @@ export const MappingData = {
         { value: 'ripple', label: '涟漪' },
         { value: 'breathe', label: '呼吸' },
     ],
+    BitsBackgrounds_AuroraDirection: [
+        { value: 'top', label: '顶部' },
+        { value: 'bottom', label: '底部' },
+    ],
+    BitsBackgrounds_PlasmaDirection: [
+        { value: 'forward', label: '前' },
+        { value: 'reverse', label: '后' },
+        { value: 'pingpong', label: '往返' },
+    ],
+    BitsBackgrounds_ParticlesShape: [
+        { value: 'circle', label: '圆形' },
+        { value: 'square', label: '方形' },
+        { value: 'ring', label: '环' },
+        { value: 'sparkle', label: '十字' },
+    ],
+    BitsBackgrounds_ParticlesHover: [
+        { value: 'parallax', label: '透视效果' },
+        { value: 'repel', label: '排斥' },
+        { value: 'attract', label: '吸引' },
+    ],
+    BitsBackgrounds_ParticlesDrift: [
+        { value: 'none', label: '吸引' },
+        { value: 'up', label: '吸引' },
+        { value: 'down', label: '吸引' },
+        { value: 'forward', label: '吸引' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [

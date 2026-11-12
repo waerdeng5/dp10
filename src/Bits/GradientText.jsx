@@ -13,7 +13,6 @@ const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 export default function GradientText({
     children = 'Hello World',
     colors = [{ color: '#5227FF' }, { color: '#FF9FFC' }, { color: '#B497CF' }],
-    // colors = ["#5227FF", "#FF9FFC", "#B497CF", "#40ffaa", "#4079ff"],
     animationSpeed = 8,
     variant = 'linear',
     angle = 90,

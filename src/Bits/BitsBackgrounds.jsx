@@ -31,6 +31,10 @@ import LineWaves from './LineWaves'
 import Radar from './Radar'
 import SoftAurora from './SoftAurora'
 import MagicRings from './MagicRings'
+import Aurora from './Aurora'
+import Plasma from './Plasma'
+import PlasmaWave from './PlasmaWave'
+import Particles from './Particles'
 
 
 
@@ -67,6 +71,10 @@ const BitsBackgrounds_LineWaves = ({ data }) => <div className='LineWaves'><Line
 const BitsBackgrounds_Radar = ({ data }) => <div className='Radar'><Radar {...data} /></div>
 const BitsBackgrounds_SoftAurora = ({ data }) => <div className='SoftAurora'><SoftAurora {...data} /></div>
 const BitsBackgrounds_MagicRings = ({ data }) => <div className='MagicRings'><MagicRings {...data} /></div>
+const BitsBackgrounds_Aurora = ({ data }) => <div className='Aurora'><Aurora {...data} /></div>
+const BitsBackgrounds_Plasma = ({ data }) => <div className='Plasma'><Plasma {...data} /></div>
+const BitsBackgrounds_PlasmaWave = ({ data }) => <div className='PlasmaWave'><PlasmaWave {...data} /></div>
+const BitsBackgrounds_Particles = ({ data }) => <div className='Particles'><Particles {...data} /></div>
 
 
 
@@ -104,4 +112,8 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_Radar,
     BitsBackgrounds_SoftAurora,
     BitsBackgrounds_MagicRings,
+    BitsBackgrounds_Aurora,
+    BitsBackgrounds_Plasma,
+    BitsBackgrounds_PlasmaWave,
+    BitsBackgrounds_Particles,
 }
