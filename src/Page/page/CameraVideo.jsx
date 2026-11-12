@@ -7,10 +7,9 @@ import { Button, Col, Form, Input, Row, Select, Space, TreeSelect, Pagination, T
 
 import { axios, axiosFor } from '../../Utils/Api'
 
-import { VideoTemplateA03 } from '../../Temp/VideoTemplate'
 import { DevScrollView } from '../../Temp/DevTemplate'
 
-
+import { MonitorTemplateA01 } from '../../Temp/DevTemplate'
 const defaultData = {
     pageIndex: 1,
     pageSize: 6,
@@ -175,7 +174,7 @@ const CameraVideo = () => {
                     {Data.map(item => {
                         return (
                             <div key={item.uuid}>
-                                <VideoTemplateA03 data={item} />
+                                <MonitorTemplateA01 data={item} />
                             </div>
                         )
                     })}

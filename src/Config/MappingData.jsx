@@ -1876,10 +1876,19 @@ export const MappingData = {
         { value: 'cross', label: '十字' },
         { value: 'ring', label: '环' },
     ],
-    BitsBackgrounds_PixelBlastHover:[
+    BitsBackgrounds_PixelBlastHover: [
         { value: 'reveal', label: '显示' },
         { value: 'grow', label: '增长' },
         { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_RadarMode: [
+        { value: 'sweep', label: '扫描' },
+        { value: 'pulse', label: '脉冲' },
+    ],
+    BitsBackgrounds_MagicRingsMotion: [
+        { value: 'pulse', label: '脉冲' },
+        { value: 'ripple', label: '涟漪' },
+        { value: 'breathe', label: '呼吸' },
     ],
 
     // TODO Dev

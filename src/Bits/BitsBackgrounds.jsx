@@ -28,6 +28,9 @@ import LightRays from './LightRays'
 import PixelBlast from './PixelBlast'
 import ColorBends from './ColorBends'
 import LineWaves from './LineWaves'
+import Radar from './Radar'
+import SoftAurora from './SoftAurora'
+import MagicRings from './MagicRings'
 
 
 
@@ -61,6 +64,9 @@ const BitsBackgrounds_LightRays = ({ data }) => <div className='LightRays'><Ligh
 const BitsBackgrounds_PixelBlast = ({ data }) => <div className='PixelBlast'><PixelBlast {...data} /></div>
 const BitsBackgrounds_ColorBends = ({ data }) => <div className='ColorBends'><ColorBends {...data} /></div>
 const BitsBackgrounds_LineWaves = ({ data }) => <div className='LineWaves'><LineWaves {...data} /></div>
+const BitsBackgrounds_Radar = ({ data }) => <div className='Radar'><Radar {...data} /></div>
+const BitsBackgrounds_SoftAurora = ({ data }) => <div className='SoftAurora'><SoftAurora {...data} /></div>
+const BitsBackgrounds_MagicRings = ({ data }) => <div className='MagicRings'><MagicRings {...data} /></div>
 
 
 
@@ -95,4 +101,7 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_PixelBlast,
     BitsBackgrounds_ColorBends,
     BitsBackgrounds_LineWaves,
+    BitsBackgrounds_Radar,
+    BitsBackgrounds_SoftAurora,
+    BitsBackgrounds_MagicRings,
 }
