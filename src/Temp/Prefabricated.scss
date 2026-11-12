@@ -1414,3 +1414,91 @@
         }
     }
 }
+
+.PrefabricatedVisualList {
+    display: flex;
+    width: 100%;
+    height: 100%;
+
+    &>.box {
+        height: 100%;
+    }
+
+    &>.video {
+        flex: 1;
+        overflow: hidden;
+        position: relative;
+        z-index: 1;
+
+        &>.title {
+            position: absolute;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: var(--title_align_items);
+            align-content: var(--title_align_content);
+            justify-content: var(--title_justify_content);
+            flex-direction: var(--title_flex_direction);
+            flex-wrap: var(--title_flex_wrap);
+            pointer-events: none;
+
+            &>div {
+                background: var(--color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                color: transparent;
+                user-select: none;
+            }
+        }
+
+
+        &>.VideoTempA02 {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+    }
+
+    &>.list {
+
+
+        .itemBox {
+            width: 100%;
+            height: 100%;
+
+            &>.item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+
+                &>.cover {
+                    flex: 1;
+                    width: 100%;
+                }
+
+                &>.title {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+
+                    &>div {
+                        width: 100%;
+                        background: var(--itemColor);
+                        -webkit-background-clip: text;
+                        background-clip: text;
+                        color: transparent;
+                        user-select: none;
+                    }
+                }
+            }
+        }
+    }
+
+
+}

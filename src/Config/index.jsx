@@ -586,8 +586,7 @@ export const VisualTemplatePage = [
     { uuid: 'PrefabricatedVisualMonitoring', title: '视频监控', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedVisualRecorded', title: '录播视频(联动选择)', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
     { uuid: 'PrefabricatedVisualLive', title: '视频直播', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 },
-
-
+    { uuid: 'PrefabricatedVisualList', title: '视频列表', img: `${CommonUrl}images/Avatar/AvatarA01.webp`, x: 0, y: 0, w: 12, h: 12 }
 ]
 
 export const BITSTextTemplate = [
@@ -3950,6 +3949,9 @@ export const TemplateParamsMapping = {
     },
     PrefabricatedVisualLive: {
         value: 'PrefabricatedVisualLive',
+    },
+    PrefabricatedVisualList: {
+        value: 'PrefabricatedVisualList',
     },
 }
 

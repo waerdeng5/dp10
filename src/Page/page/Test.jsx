@@ -21,9 +21,8 @@ const Test = () => {
             <div className='GradientBlinds'  >
                 <GradientBlinds />
             </div>
-            https://aloss.ljkjkf.com/WebConfigFile/image/Common/RedFlagA01.png
-            {/* 
-            <DevScrollView>
+
+            {/* <DevScrollView>
                 <div className='fontInfo'>
                     {Font__Family.map(v =>
                         <div key={v.value} style={{ fontFamily: v.value }}>

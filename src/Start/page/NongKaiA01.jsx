@@ -73,8 +73,6 @@ const NongKaiA01 = () => {
         { uuid: 'A13', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821013', img: imageUrl + 'MapA13.png', name: '大兴安岭地区', x: 280, y: 60 },
     ]
 
-
-
     useMount(async () => {
         const [err, res] = await axios({ method: 'get', url: 'engineeringProject/GetCityProjectCount' })
         if (err) return false

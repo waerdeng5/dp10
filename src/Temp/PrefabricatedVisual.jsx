@@ -19,12 +19,10 @@ import {
 import { VideoTemplateA02, VideoTemplateA04 } from './VideoTemplate'
 
 import { axios, axiosFor, strOfurlParamsFunc } from '../Utils/Api'
-
-import { MonitorTemplateA01 } from './DevTemplate'
+import { MonitorTemplateA01, DevScrollView } from './DevTemplate'
 
 // 监控视频
 const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) => {
-
     const { isParams, isParamsConfig, left_options, top_options,
         left_width, left_radius, left_color, left_deg, left_padding, left_margin, left_list,
         left_label_color, left_label_deg, left_label_padding, left_label_size, left_label_family, left_label_weight, left_label_style,
@@ -541,7 +539,6 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         </div>
     );
 };
-
 // 无人机航拍
 const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => {
     const { label_color, label_deg, label_padding, label_size, label_family, label_weight, label_style, label_filed, label_filed_data, label_filed_color,
@@ -668,10 +665,8 @@ const PrefabricatedVisualRecorded = ({ tempId, UrlData, data, LayoutEvent }) => 
         </div>
     )
 }
-
 // 无人机直播
 const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
-    console.log('data', UrlData, data,)
     const { isParams, isParamsConfig, page_field, screen_field,
         back_color, back_deg, back_padding, isPage, isScreen, screen_nums, video_color, video_deg, live_url, live_cover,
         isPageTitle, page_title_prefix, page_title_suffix, page_title_color, page_title_deg, page_title_margin, page_title_size, page_title_family,
@@ -843,8 +838,106 @@ const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
         </div>
     )
 }
+// 视频列表
+const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
+    const { isTitle, isList, videoUrl, padding, align_items, align_content, justify_content, flex_direction, flex_wrap,
+        title_field, title_align_items, title_align_content, title_justify_content, title_flex_direction, title_flex_wrap,
+        title_color, title_deg, title_padding, title_size, title_family, title_weight, title_style,
+        title_font_size, title_font_weight, title_font_style,
+        list_cover, list_title, list_width, list_height, list_margin, list_back, list_deg, list_radius,
+
+        list_title_height, list_title_align, list_title_color, list_title_deg, list_title_padding, list_title_size, list_title_family, list_title_weight,
+        list_title_style, list_title_filed, list_title_filed_data, list_title_filed_color,
+    } = data
+
+    const boxLayStyle = {
+        padding: SpacingCallBack(padding),
+        '--align_items': align_items,
+        '--align_content': align_content,
+        '--justify_content': justify_content,
+        '--flex_direction': flex_direction,
+        '--flex_wrap': flex_wrap,
+    }
+
+    const titleBoxStyle = {
+        '--title_align_items': title_align_items,
+        '--title_align_content': title_align_content,
+        '--title_justify_content': title_justify_content,
+        '--title_flex_direction': title_flex_direction,
+        '--title_flex_wrap': title_flex_wrap,
+    }
+
+    const titleStyle = {
+        '--color': ColorCallBack(title_color, title_deg),
+        fontSize: title_size,
+        fontFamily: title_family,
+        fontWeight: title_weight,
+        fontStyle: title_style,
+        padding: SpacingCallBack(title_padding),
+        filter: SetFilderParams(title_font_size, title_font_weight, title_font_style)
+    }
+
+    const listStyle = {
+        height: list_height,
+        margin: SpacingCallBack(list_margin),
+        background: ColorCallBack(list_back, list_deg),
+        borderRadius: SpacingCallBack(list_radius),
+    }
+
+    const smallStyle = {
+        textAlign: list_title_align,
+        '--itemColor': ColorCallBack(list_title_color, list_title_deg),
+        padding: SpacingCallBack(list_title_padding),
+        fontSize: list_title_size,
+        fontFamily: list_title_family,
+        fontWeight: list_title_weight,
+        fontStyle: list_title_style,
+        filter: SetFilderParams(list_title_filed, list_title_filed_data, list_title_filed_color)
+    }
+
+
+    const testList = [{}, {}, {}, {}]
+
+
+
+    return (
+        <div className='PrefabricatedVisualList' style={boxLayStyle}>
+            <div className='box video'>
+                {isTitle &&
+                    <div className='title' style={titleBoxStyle}>
+                        <div style={titleStyle}>视频标题</div>
+                    </div>
+                }
+                <VideoTemplateA02 url={''} />
+            </div>
+            {isList &&
+                <div className='box list' style={{ width: list_width }}>
+                    <DevScrollView>
+                        <div className='itemBox'>
+                            {testList.map((v, i) => {
+                                return (
+                                    <div key={i} className='item' style={listStyle}>
+                                        <img className='cover' src="" alt="" />
+                                        <div className='title' style={{ height: list_title_height }}>
+                                            <div style={smallStyle}>标题名称标题名称标题名称标题名称标题名称</div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </DevScrollView>
+                </div>
+            }
+        </div>
+    )
+}
+
+
+
+
 export const PrefabricatedVisualTemplate = {
     PrefabricatedVisualMonitoring,
     PrefabricatedVisualRecorded,
-    PrefabricatedVisualLive
+    PrefabricatedVisualLive,
+    PrefabricatedVisualList
 }

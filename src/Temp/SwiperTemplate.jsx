@@ -199,8 +199,6 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event
         }
     }, [swiper, activeIndex])
 
-    console.log(data)
-
     return (
         <Swiper
             className='B20_swiper'
@@ -228,3 +226,5 @@ export const SwiperAnnexTemplate = ({ data, urlField = 'url', activeIndex, Event
         </Swiper>
     )
 }
+
+// 
