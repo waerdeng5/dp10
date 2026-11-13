@@ -21,7 +21,6 @@ import BounceCards from './BounceCards'
 import DecayCard from './DecayCard'
 
 
-
 const BitsComponents_HoloCard = ({ data }) => <div className='HoloCard'><HoloCard {...data} /></div>
 const BitsComponents_CircularCarousel = ({ data }) => <div className='CircularCarousel'><CircularCarousel {...data} /></div>
 const BitsComponents_FlexCarousel = ({ data }) => <div className='FlexCarousel'><FlexCarousel {...data} /></div>
@@ -43,7 +42,6 @@ const BitsComponents_Carousel = ({ data }) => <div className='Carousel'><Carouse
 const BitsComponents_ProfileCard = ({ data }) => <div className='ProfileCard'><ProfileCard {...data} /></div>
 const BitsComponents_BounceCards = ({ data }) => <div className='BounceCards'><BounceCards {...data} /></div>
 const BitsComponents_DecayCard = ({ data }) => <div className='DecayCard'><DecayCard {...data} /></div>
-
 
 
 

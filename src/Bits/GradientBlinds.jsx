@@ -256,7 +256,7 @@ const prepStops = stops => {
 };
 
 const GradientBlinds = ({
-    gradientColors = ["#FF9FFC", "#5227FF"],
+    gradientColors = [{ color: "#FF9FFC" }, { color: "#5227FF" }],
     angle = 0,
     noise = 0.3,
     blindCount = 16,
@@ -290,11 +290,13 @@ const GradientBlinds = ({
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const wakeRef = useRef(null);
-    const colorKey = (gradientColors && gradientColors.length ? gradientColors : ['#FF9FFC', '#5227FF']).join(',');
+    const colorKey = gradientColors.map(item => item.color).join(',');
+
+
     const settings = {
         paused,
         colorKey,
-        gradientColors,
+        gradientColors: gradientColors.map(item => item.color),
         angle,
         noise: clamp(noise, 0, 2),
         blindCount: Math.max(1, blindCount || 1),
@@ -321,7 +323,6 @@ const GradientBlinds = ({
         lightMode,
         dpr
     };
-    console.log(settings)
     const settingsRef = useRef(settings);
     settingsRef.current = settings;
 

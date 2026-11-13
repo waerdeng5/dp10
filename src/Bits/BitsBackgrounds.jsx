@@ -35,6 +35,12 @@ import Aurora from './Aurora'
 import Plasma from './Plasma'
 import PlasmaWave from './PlasmaWave'
 import Particles from './Particles'
+import GradientBlinds from './GradientBlinds'
+import Grainient from './Grainient'
+import GridScan from './GridScan'
+import Beams from './Beams'
+import PixelSnow from './PixelSnow'
+import Lightning from './Lightning'
 
 
 
@@ -75,6 +81,12 @@ const BitsBackgrounds_Aurora = ({ data }) => <div className='Aurora'><Aurora {..
 const BitsBackgrounds_Plasma = ({ data }) => <div className='Plasma'><Plasma {...data} /></div>
 const BitsBackgrounds_PlasmaWave = ({ data }) => <div className='PlasmaWave'><PlasmaWave {...data} /></div>
 const BitsBackgrounds_Particles = ({ data }) => <div className='Particles'><Particles {...data} /></div>
+const BitsBackgrounds_GradientBilnds = ({ data }) => <div className='GradientBlinds'><GradientBlinds {...data} /></div>
+const BitsBackgrounds_Grainient = ({ data }) => <div className='Grainient'><Grainient {...data} /></div>
+const BitsBackgrounds_GridScan = ({ data }) => <div className='GridScan'><GridScan {...data} /></div>
+const BitsBackgrounds_Beams = ({ data }) => <div className='Beams'><Beams {...data} /></div>
+const BitsBackgrounds_PixelShow = ({ data }) => <div className='PixelSnow'><PixelSnow {...data} /></div>
+const BitsBackgrounds_Lightning = ({ data }) => <div className='Lightning'><Lightning {...data} /></div>
 
 
 
@@ -116,4 +128,10 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_Plasma,
     BitsBackgrounds_PlasmaWave,
     BitsBackgrounds_Particles,
+    BitsBackgrounds_GradientBilnds,
+    BitsBackgrounds_Grainient,
+    BitsBackgrounds_GridScan,
+    BitsBackgrounds_Beams,
+    BitsBackgrounds_PixelShow,
+    BitsBackgrounds_Lightning,
 }

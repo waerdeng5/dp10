@@ -1916,6 +1916,35 @@ export const MappingData = {
         { value: 'down', label: '吸引' },
         { value: 'forward', label: '吸引' },
     ],
+    BitsComponents_GradientBlindsClick: [
+        { value: 'ripple', label: '涟漪' },
+        { value: 'none', label: '无' },
+    ],
+    BitsComponents_GradientBlindsIdle: [
+        { value: 'drift', label: '漂移' },
+        { value: 'center', label: '中心' },
+        { value: 'stay', label: '停留' },
+    ],
+    BitsBackgrounds_GrainientType: [
+        { value: 'linear', label: '线性' },
+        { value: 'radial', label: '径向' },
+    ],
+    BitsBackgrounds_GridScanScan: [
+        { value: 'forward', label: '前' },
+        { value: 'backward', label: '后' },
+        { value: 'pingpong', label: '往返' },
+    ],
+    BitsBackgrounds_GridScanClick: [
+        { value: 'ping', label: '点击' },
+        { value: 'scan', label: '扫描' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_PixelSnowVariant: [
+        { value: 'snowflake', label: '雪花' },
+        { value: 'square', label: '方形' },
+        { value: 'round', label: '圆形' },
+    ],
+
 
     // TODO Dev
     DevConfig__ThemeList: [

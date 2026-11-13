@@ -9,11 +9,9 @@ import { TemplateClickFn } from '../../Utils'
 import { useTemplateModel } from '../../Config/useHooks'
 import { CommonAPIUrl } from '../../Config'
 import { Decrypt } from '../../Utils/IndexedDB'
-import { InitMap } from '../../Mars3d'
+import { InitMap, LayerListMap } from '../../Mars3d'
 
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
-
-
 
 const mapUuid = '1081d01e-0cc7-4415-bdb4-0528bb80050a/MAP_PAGE/2ec7b8e6-a0a2-4338-a537-2590f78e01f4'
 
@@ -39,13 +37,28 @@ const uuidKeyMap = {
     '99999999-9999-9999-9999-999999999999': 'A00',
 };
 
+const mapColor = {
+    CoverElement230100: '#5099d880',
+    CoverElement230200: '#4b5fac80',
+    CoverElement230300: '#54bb8280',
+    CoverElement230400: '#00893b80',
+    CoverElement230500: '#5099d880',
+    CoverElement230600: '#4b5fac80',
+    CoverElement230700: '#54bb8280',
+    CoverElement2308002306: '#00893b80',
+    CoverElement23080049: '#00893b80',
+    CoverElement230900: '#5099d880',
+    CoverElement231000: '#4b5fac80',
+    CoverElement231100: '#5099d880',
+    CoverElement231200: '#00893b80',
+    CoverElement232700992: '#00893b80',
+    CoverElement232700157: '#00893b80',
+}
+
 const topNav = [
-    { value: 'A02', title: '3D地图' },
-    { value: 'A01', title: '测绘地图' },
+    { value: 'A01', title: '项目统计' },
+    { value: 'A02', title: '项目分部' },
 ]
-
-
-
 
 const NongKaiA01 = () => {
     const mapRef = useRef(null)
@@ -55,7 +68,7 @@ const NongKaiA01 = () => {
 
 
     const [active, setActive] = useState('A01')
-    const [TabsActive, setTabsActive] = useState('A01')
+    const [TabsActive, setTabsActive] = useState('A02')
     const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0, A00: 0 })
     const MapList = [
         { uuid: 'A01', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821001', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },
@@ -135,7 +148,16 @@ const NongKaiA01 = () => {
         if (mapErr || eleErr) return false
         const mapData = await Decrypt(mapRes)
         const eleData = await Decrypt(eleRes)
-        const { map, gra, clip } = InitMap({ BOX: mapRef.current, CONFIG: mapData, ELEMENT: eleData })
+        const { map, gra, clip } = await InitMap({ BOX: mapRef.current, CONFIG: mapData, ELEMENT: eleData })
+
+        setTimeout(() => {
+            Object.keys(mapColor).forEach(v => {
+                if (gra.getGraphicById(v)) {
+                    const ELE = gra.getGraphicById(v)
+                    ELE.setOptions({ style: { ...ELE.style, materialOptions: { color: mapColor[v], materialType: "Color" } } })
+                }
+            })
+        }, 240);
         setMpaPar({ map, gra, clip })
     }
 
@@ -149,7 +171,7 @@ const NongKaiA01 = () => {
                         return (
                             <div key={v.value} onClick={() => onTabNavTo(v.value)}>
                                 <div>{v.title}</div>
-                                {status && <img style={v.value === 'A02' ? { left: 8 } : { right: 8 }} src={imageUrl + 'TopNavAct.png'} alt="" />}
+                                {status && <img style={v.value === 'A01' ? { left: 8 } : { right: 8 }} src={imageUrl + 'TopNavAct.png'} alt="" />}
                             </div>
                         )
                     }

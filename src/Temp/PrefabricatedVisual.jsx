@@ -15,6 +15,8 @@ import {
     DiyDataReturn
 } from '../Utils'
 
+import FluidGlass from '../Bits/FluidGlass'
+
 
 import { VideoTemplateA02, VideoTemplateA04 } from './VideoTemplate'
 
@@ -947,37 +949,48 @@ const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
 
     return (
         <div className='PrefabricatedVisualList' style={boxLayStyle}>
-            <div className='box video'>
-                {isTitle &&
-                    <div className='title' style={titleBoxStyle}>
-                        <div style={titleStyle}>{Title}</div>
+
+            {Url ? <>
+                <div className='box video'>
+                    {isTitle &&
+                        <div className='title' style={titleBoxStyle}>
+                            <div style={titleStyle}>{Title}</div>
+                        </div>
+                    }
+                    <VideoTemplateA02 url={Url} />
+                </div>
+                {isList &&
+                    <div className='box list' style={{ width: list_width }}>
+                        <DevScrollView>
+                            <div className='itemBox'>
+                                {VideoList.map((v, i) => {
+                                    const status = Active === v.uuid
+                                    return (
+                                        <div
+                                            key={i}
+                                            className={status ? 'item active' : 'item'}
+                                            style={status ? { ...listStyle, ...actBack } : { ...listStyle, ...listBack }}
+                                            onClick={() => { onActive(v) }}
+                                        >
+                                            <img className='cover' src={v?.[list_cover] || ''} alt="" />
+                                            <div className='title' style={{ height: list_title_height }}>
+                                                <div style={status ? actSmall : smallStyle}>{v?.[list_title] || ''}</div>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </DevScrollView>
                     </div>
                 }
-                <VideoTemplateA02 url={Url} />
-            </div>
-            {isList &&
-                <div className='box list' style={{ width: list_width }}>
-                    <DevScrollView>
-                        <div className='itemBox'>
-                            {VideoList.map((v, i) => {
-                                const status = Active === v.uuid
-                                return (
-                                    <div
-                                        key={i}
-                                        className={status ? 'item active' : 'item'}
-                                        style={status ? { ...listStyle, ...actBack } : { ...listStyle, ...listBack }}
-                                        onClick={() => { onActive(v) }}
-                                    >
-                                        <img className='cover' src={v?.[list_cover] || ''} alt="" />
-                                        <div className='title' style={{ height: list_title_height }}>
-                                            <div style={status ? actSmall : smallStyle}>{v?.[list_title] || ''}</div>
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    </DevScrollView>
-                </div>
+            </> :
+                // <div className='FluidGlass'>
+                //     <FluidGlass text='未找到视频信息!' textColor='#fff' fontFamily='汉真广标' fontSize={88} />
+                // </div>
+                <Result
+                    status="500"
+                    title="无视频"
+                />
             }
         </div>
     )

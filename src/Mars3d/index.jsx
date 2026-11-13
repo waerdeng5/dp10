@@ -4,6 +4,7 @@ import { CommonSceneUrl } from '../Config'
 
 
 const specialMap = [120000, 150000, 340000, 140525, 150223, 150723]
+const specialMap2 = [230800, 232700]
 export const LayerListMap = (arr) => {
     return layerList.map(item => {
         const isItemInValue = arr.includes(item.id)
@@ -92,12 +93,14 @@ const processPositions = (item, callback) => {
 }
 
 // 通用渲染函数
-const renderCanver = (gra, arr, data, graphicCreator) => {
+const renderCanver = (gra, arr, data, type, graphicCreator) => {
     const { show, style } = data
     if (!show) return
     arr.forEach(item => {
         processPositions(item, positions => {
-            const graphic = graphicCreator(positions, style);
+            const id = specialMap2.includes(item.attr.adcode) ? `${type}${item.attr.adcode}${positions.length}` : `${type}${item.attr.adcode}`
+            // console.log(id)
+            const graphic = graphicCreator(id, positions, style);
             gra.addGraphic(graphic);
         });
     });
@@ -123,9 +126,9 @@ const ClearGra = (gra, clip) => {
 };
 
 // 各图层渲染函数
-const CoverCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.PolygonPrimitive({ attr: 'CoverElement', positions, style }))
-const LineCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.PolylineEntity({ attr: 'LineElement', positions, style }))
-const WallCanver = (gra, arr, data) => renderCanver(gra, arr, data, (positions, style) => new mars3d.graphic.WallPrimitive({ attr: 'WallElement', positions, style }))
+const CoverCanver = (gra, arr, data, type) => renderCanver(gra, arr, data, type, (id, positions, style) => new mars3d.graphic.PolygonPrimitive({ id, attr: 'CoverElement', positions, style }))
+const LineCanver = (gra, arr, data, type) => renderCanver(gra, arr, data, type, (id, positions, style) => new mars3d.graphic.PolylineEntity({ id, attr: 'LineElement', positions, style }))
+const WallCanver = (gra, arr, data, type) => renderCanver(gra, arr, data, type, (id, positions, style) => new mars3d.graphic.WallPrimitive({ id, attr: 'WallElement', positions, style }))
 
 // 主函数
 export const BoundaryBorderFunction = (gra, clip, data) => {
@@ -137,9 +140,9 @@ export const BoundaryBorderFunction = (gra, clip, data) => {
         .then(results => {
             const allGraphics = results.flatMap(res => mars3d.Util.geoJsonToGraphics(res));
             clipFunc(allGraphics, true, clip);
-            CoverCanver(gra, allGraphics, cover);
-            LineCanver(gra, allGraphics, line);
-            WallCanver(gra, allGraphics, wall);
+            CoverCanver(gra, allGraphics, cover, 'CoverElement');
+            LineCanver(gra, allGraphics, line, 'LineElement');
+            WallCanver(gra, allGraphics, wall, 'WallElement');
         })
         .catch(error => console.error('数据加载失败:', error));
 }
@@ -169,7 +172,6 @@ const RenderElement = (gra, data) => {
                 break;
             case 'div':
                 const div = new mars3d.graphic.DivGraphic({ id, position, show, style })
-                console.log(gra, div)
                 gra.addGraphic(div)
                 break;
             case 'divLightPoint':

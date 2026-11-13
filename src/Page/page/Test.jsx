@@ -10,7 +10,7 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import GradientBlinds from '../../Bits/GradientBlinds'
+import Lightning from '../../Bits/Lightning'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
@@ -18,8 +18,8 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='GradientBlinds'  >
-                <GradientBlinds />
+            <div className='Lightning'  >
+                <Lightning />
             </div>
 
             {/* <DevScrollView>
