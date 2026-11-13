@@ -9887,6 +9887,32 @@ const PrefabricatedVisualList = [
             },
         ]
     },
+
+    {
+        span: 24, formType: 'GROUP', name: 'PrefabricatedVisualList_active', label: '列表设置', collapsible: true,
+        jugde: [{ field: 'isList', value: [true] }], children: [
+            { span: 12, formType: 'COLOR', name: 'act_back', label: '背景颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'act_deg', label: '背景角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'act_radius', label: '背景圆角', rules: true },
+            { span: 12, formType: 'RADIO', name: 'act_title_align', label: '对齐方式', rules: true, valueEnum: MappingData.System__AlignmentLCR },
+            { span: 12, formType: 'COLOR', name: 'act_title_color', label: '文字颜色', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'act_title_deg', label: '颜色角度', rules: true },
+            { span: 12, formType: 'INPUT', name: 'act_title_padding', label: '文字间距', rules: true },
+            { span: 12, formType: 'NUMBER', name: 'act_title_size', label: '文字字号', rules: true },
+            { span: 12, formType: 'SELECT', name: 'act_title_family', label: '文字字体', valueEnum: MappingData.Font__Family },
+            { span: 12, formType: 'RADIO', name: 'act_title_weight', label: '文字加粗', rules: true, valueEnum: MappingData.Font__WeightInt },
+            { span: 12, formType: 'RADIO', name: 'act_title_style', label: '文字倾斜', rules: true, valueEnum: MappingData.Font__Style },
+            { span: 12, formType: 'RADIO', name: 'act_title_filed', label: '文字阴影', rules: true, valueEnum: MappingData.IsEnabledBool },
+            {
+                span: 12, formType: 'INPUT', name: 'act_title_filed_data', label: '阴影数值', rules: true,
+                jugde: [{ field: 'act_title_filed', value: [true] }]
+            },
+            {
+                span: 12, formType: 'COLOR', name: 'act_title_filed_color', label: '阴影颜色', rules: true, mode: ['single'],
+                jugde: [{ field: 'act_title_filed', value: [true] }]
+            },
+        ]
+    },
 ]
 
 // !!! 文件夹

@@ -840,14 +840,17 @@ const PrefabricatedVisualLive = ({ tempId, UrlData, data, LayoutEvent }) => {
 }
 // 视频列表
 const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
-    const { isTitle, isList, videoUrl, padding, align_items, align_content, justify_content, flex_direction, flex_wrap,
-        title_field, title_align_items, title_align_content, title_justify_content, title_flex_direction, title_flex_wrap,
+    const { videoUrl, title_field, list_cover, list_title,
+        isTitle, isList, padding, align_items, align_content, justify_content, flex_direction, flex_wrap,
+        title_align_items, title_align_content, title_justify_content, title_flex_direction, title_flex_wrap,
         title_color, title_deg, title_padding, title_size, title_family, title_weight, title_style,
         title_font_size, title_font_weight, title_font_style,
-        list_cover, list_title, list_width, list_height, list_margin, list_back, list_deg, list_radius,
-
+        list_width, list_height, list_margin, list_back, list_deg, list_radius,
         list_title_height, list_title_align, list_title_color, list_title_deg, list_title_padding, list_title_size, list_title_family, list_title_weight,
         list_title_style, list_title_filed, list_title_filed_data, list_title_filed_color,
+        act_back, act_deg, act_radius, act_title_align, act_title_color, act_title_deg, act_title_padding,
+        act_title_size, act_title_family, act_title_weight, act_title_style, act_title_filed, act_title_filed_data, act_title_filed_color
+
     } = data
 
     const boxLayStyle = {
@@ -880,6 +883,9 @@ const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
     const listStyle = {
         height: list_height,
         margin: SpacingCallBack(list_margin),
+    }
+
+    const listBack = {
         background: ColorCallBack(list_back, list_deg),
         borderRadius: SpacingCallBack(list_radius),
     }
@@ -895,8 +901,47 @@ const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
         filter: SetFilderParams(list_title_filed, list_title_filed_data, list_title_filed_color)
     }
 
+    const actBack = {
+        background: ColorCallBack(act_back, act_deg),
+        borderRadius: SpacingCallBack(act_radius),
+    }
+    const actSmall = {
+        textAlign: act_title_align,
+        '--itemColor': ColorCallBack(act_title_color, act_title_deg),
+        padding: SpacingCallBack(act_title_padding),
+        fontSize: act_title_size,
+        fontFamily: act_title_family,
+        fontWeight: act_title_weight,
+        fontStyle: act_title_style,
+        filter: SetFilderParams(act_title_filed, act_title_filed_data, act_title_filed_color)
+    }
 
-    const testList = [{}, {}, {}, {}]
+
+    const [VideoList, setVideoList] = useState([])
+    const [Title, setTitle] = useState('')
+    const [Url, setUrl] = useState('')
+    const [Active, setActive] = useState('')
+
+    useEffect(() => {
+        const backData = DiyDataReturn(data, UrlData, {}, 'api_diyObj')
+        if (backData.length === 0) {
+            setVideoList([])
+            setTitle('')
+            setUrl('')
+            setActive('')
+        } else {
+            setVideoList(backData)
+            setTitle(backData[0][title_field])
+            setUrl(backData[0][videoUrl])
+            setActive(backData[0].uuid)
+        }
+    }, [data, UrlData])
+
+    const onActive = (e) => {
+        setTitle(e?.[title_field] || '')
+        setUrl(e?.[videoUrl] || '')
+        setActive(e.uuid)
+    }
 
 
 
@@ -905,21 +950,27 @@ const PrefabricatedVisualList = ({ tempId, UrlData, data, LayoutEvent }) => {
             <div className='box video'>
                 {isTitle &&
                     <div className='title' style={titleBoxStyle}>
-                        <div style={titleStyle}>视频标题</div>
+                        <div style={titleStyle}>{Title}</div>
                     </div>
                 }
-                <VideoTemplateA02 url={''} />
+                <VideoTemplateA02 url={Url} />
             </div>
             {isList &&
                 <div className='box list' style={{ width: list_width }}>
                     <DevScrollView>
                         <div className='itemBox'>
-                            {testList.map((v, i) => {
+                            {VideoList.map((v, i) => {
+                                const status = Active === v.uuid
                                 return (
-                                    <div key={i} className='item' style={listStyle}>
-                                        <img className='cover' src="" alt="" />
+                                    <div
+                                        key={i}
+                                        className={status ? 'item active' : 'item'}
+                                        style={status ? { ...listStyle, ...actBack } : { ...listStyle, ...listBack }}
+                                        onClick={() => { onActive(v) }}
+                                    >
+                                        <img className='cover' src={v?.[list_cover] || ''} alt="" />
                                         <div className='title' style={{ height: list_title_height }}>
-                                            <div style={smallStyle}>标题名称标题名称标题名称标题名称标题名称</div>
+                                            <div style={status ? actSmall : smallStyle}>{v?.[list_title] || ''}</div>
                                         </div>
                                     </div>
                                 )
