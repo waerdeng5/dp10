@@ -381,6 +381,20 @@ const SetDevRouter = ({ data, Event }) => {
         })
     }
 
+    const onCopyStyle = () => {
+        const success = copy(JSON.stringify(THEdata.style))
+        if (success) message.success('复制成功！')
+        else message.error('复制失败！')
+    }
+
+    const onStylePaste = (e) => {
+        const { importField } = e
+        THEdata.style = JSON.parse(importField)
+        message.success('导入成功！')
+        updateModel2({})
+        onSaveTHE(THEdata)
+    }
+
     const devCallBack = (e) => {
         const { type, data } = e
         console.log('[----------SetDevRouter-CallBack---------]', type, data)
@@ -395,6 +409,8 @@ const SetDevRouter = ({ data, Event }) => {
             ['onImportFields', onImportFields],
             ['onPasteGlobalParams', () => onPasteGlobalParams(data)],
             ['onPastePartialParams', () => onPastePartialParams(data)],
+            ['onCopyStyle', () => onCopyStyle()],
+            ['onStylePaste', () => onStylePaste(data)],
         ])
         const func = Mapping.get(type)
         func?.(data)

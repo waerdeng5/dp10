@@ -183,7 +183,36 @@ const AdminIndex = () => {
                                 formItem: 'SetDEVStyleConfig',
                                 eventBack: 'onBackStyle',
                                 Initial: THEdata?.style || formDefaultInit.FlowMenuStyleConfig
-                            }
+                            },
+                            options: [
+                                {
+                                    visible: true,
+                                    widget: 'dxButton',
+                                    location: 'before',
+                                    icon: 'fas fa-arrow-alt-circle-up',
+                                    text: '拷贝样式 ',
+                                    onClick: () => AdminEvent.emit({ type: 'onCopyStyle' })
+                                },
+                                {
+                                    visible: true,
+                                    widget: 'dxButton',
+                                    location: 'after',
+                                    icon: 'fas fa-arrow-alt-circle-down',
+                                    text: '粘贴样式 ',
+                                    onClick: () => {
+                                        updateModel2({
+                                            title: '字段导入',
+                                            width: 800,
+                                            type: 'CommonForm',
+                                            Event: AdminEvent,
+                                            modelData: {
+                                                formItem: 'AddFieldsPaste',
+                                                eventBack: 'onStylePaste',
+                                            }
+                                        })
+                                    }
+                                },
+                            ],
                         })
                     }
                 },
