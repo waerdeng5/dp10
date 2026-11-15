@@ -241,8 +241,10 @@ export const LayoutTemplate = ({ UrlData, status, winId, layId, actId, params, w
 
     LayoutEvent.useSubscription(layoutCallBack)
 
+
+
     return (
-        <div className='WindowLayout' ref={layRef}>
+        <div className='WindowLayout' ref={layRef} >
             {SIZE &&
                 <>
                     {Active &&

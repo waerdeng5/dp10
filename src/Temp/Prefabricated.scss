@@ -1017,6 +1017,15 @@
 
         &>.pagination {
 
+            li {
+
+                &>a,
+                &>button {
+                    color: white !important;
+                }
+            }
+
+
             ul>li:nth-child(1) {
                 flex: 1;
 
@@ -1028,6 +1037,8 @@
                     user-select: none;
                     white-space: pre-line;
                 }
+
+
             }
         }
     }

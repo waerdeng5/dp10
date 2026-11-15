@@ -1003,7 +1003,10 @@ export const MappingData = {
         { value: 'A01', label: '全屏' },
         { value: 'A02', label: '小窗' },
     ],
-
+    Theme__windowType: [
+        { value: 'A01', label: '标准小窗' },
+        { value: 'A02', label: '竖向小窗' },
+    ],
 
     // Todo 文本框内容
     // 穿梭框机构选择

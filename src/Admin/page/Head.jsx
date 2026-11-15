@@ -268,8 +268,8 @@ const HeadA01 = ({ Theme, AdminEvent, DxTheme }) => {
                             background: ColorCallBack(head_itemBack, head_itemDeg),
                             '--filter': SetFilderParams(head_itemFiled, head_itemFiled_data, head_itemFiled_color),
                         }
-                        if (func === 'admin' && userInfo?.userUuid !== '1e99e116-6ec0-425c-87b4-64dd2ce458e2') return false
-                        // if (func === 'admin' && !port) return false
+                        // if (func === 'admin' && userInfo?.userUuid !== '1e99e116-6ec0-425c-87b4-64dd2ce458e2') return false
+                        if (func === 'admin' && !port) return false
                         return (
                             <Tooltip placement="left" title={title} key={index}>
                                 <Dropdown

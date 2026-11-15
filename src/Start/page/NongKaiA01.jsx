@@ -68,7 +68,7 @@ const NongKaiA01 = () => {
 
 
     const [active, setActive] = useState('A01')
-    const [TabsActive, setTabsActive] = useState('A02')
+    const [TabsActive, setTabsActive] = useState('A01')
     const [Data, setData] = useState({ A01: 0, A02: 0, A03: 0, A04: 0, A05: 0, A06: 0, A07: 0, A08: 0, A09: 0, A10: 0, A11: 0, A12: 0, A13: 0, A00: 0 })
     const MapList = [
         { uuid: 'A01', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821001', img: imageUrl + 'MapA01.png', name: '哈尔滨市', x: 480, y: 520 },

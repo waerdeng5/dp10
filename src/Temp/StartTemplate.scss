@@ -6,6 +6,8 @@
     justify-content: center;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
+    z-index: 1;
 
     &>.Title {
         width: 100%;
@@ -505,6 +507,55 @@
             z-index: -1;
             background: #00000001;
             display: block;
+        }
+    }
+
+    &>.WinTypeA02 {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+
+        &>.Title {
+            background: var(--titleColor);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        &>.Image {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: -1;
+
+            &>img {
+                width: 100%;
+                display: block;
+
+                &:nth-child(1) {
+                    height: var(--img1);
+                }
+
+                &:nth-child(2) {
+                    flex: 1;
+                    overflow: hidden;
+                }
+
+                &:nth-child(3) {
+                    height: var(--img3);
+                }
+            }
         }
     }
 }

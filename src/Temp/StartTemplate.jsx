@@ -381,8 +381,9 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         win_back_color, win_back_deg, win_back_filter, win_back_filter_size,
         win_color, win_deg, win_family, win_size, win_index, win_style, win_weight, win_filed, win_filed_data, win_filed_color,
         win_title, win_height, win_url, win_imageA01, win_imageA02, window_titleTxt, window_backImg, window_backImgUrl,
-        win_image_status, win_image_list
+        win_image_status, win_image_list, win_type = 'A01', win_align = 'left', window_padding
     } = Config
+
     const winTitleStyle = {
         '--titleColor': ColorCallBack(win_color, win_deg),
         fontSize: win_size,
@@ -390,19 +391,35 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
         fontWeight: win_weight,
         fontStyle: win_style,
         textIndent: win_index,
+        textAlign: win_align,
         filter: SetFilderParams(win_filed, win_filed_data, win_filed_color),
     }
     const winBoxStyle = {
         background: ColorCallBack(win_back_color, win_back_deg),
         border: SetBorderParams(win_back_border, win_back_border_size, win_back_border_type, win_back_border_color),
-        backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none'
+        backdropFilter: win_back_filter ? `blur(${win_back_filter_size}px)` : 'none',
+        padding: SpacingCallBack(window_padding)
     }
     return (
         <div className='SmallWindowBox '>
-            <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
-                <div style={winTitleStyle}>{startType && setStartType ? win_title : window_titleTxt}</div>
-                <div>{Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}</div>
-            </div>
+            {win_type === 'A01' &&
+                <div className='Title' style={{ height: win_height, '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
+                    <div style={winTitleStyle}>{startType && setStartType ? win_title : window_titleTxt}</div>
+                    <div>{Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `0${i + 1}.png`} alt="win_imageA01" />))}</div>
+                </div>
+            }
+            {win_type === 'A02' &&
+                <div className='WinTypeA02' style={{ '--img1': win_imageA01 + 'px', '--img3': win_imageA02 + 'px' }}>
+                    <div className='Title' style={{ ...winTitleStyle, height: win_height, lineHeight: win_height + 'px' }}>
+                        {startType && setStartType ? win_title : window_titleTxt}
+                    </div>
+                    <div className='Image'>
+                        {Array.from({ length: 3 }, (_, i) => (<img key={i} src={win_url + `v0${i + 1}.png`} alt="win_imageA01" />))}
+                    </div>
+                </div>
+            }
+
+
             <div className='WinBox' style={winBoxStyle}>
                 {window_backImg && <img className='WinBackImg' src={window_backImgUrl} alt="window_backImgUrl" />}
                 {startType && setStartType ? (() => {
@@ -609,7 +626,7 @@ export const WinTemplate = ({ Config, startType, setStartType, children }) => {
                     }
 
                     return (
-                        <div className='ConfigPage'  >
+                        <div className='ConfigPage' style={win_type === 'A02' ? { paddingTop: win_height } : { paddingTop: 0 }}>
                             <Radio.Group
                                 options={options}
                                 defaultValue={startType}

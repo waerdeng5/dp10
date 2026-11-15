@@ -224,7 +224,7 @@ const PrefabricatedVisualMonitoring = ({ tempId, UrlData, data, LayoutEvent }) =
         width: SpacingSizeCallBack(pagination_margin, 100),
         background: ColorCallBack(pagination_back, pagination_deg),
         padding: SpacingCallBack(pagination_padding),
-        margin: SpacingCallBack(pagination_margin),
+        margin: SpacingCallBack(pagination_margin)
     }
 
     const PaginationTheme = {

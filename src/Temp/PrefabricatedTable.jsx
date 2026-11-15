@@ -202,6 +202,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         acc[v.key] = v.value
                         return acc
                     }, {})
+                    console.log('A03Card', A03Card)
                     setCardData(A03Card)
                 }
             }
@@ -463,6 +464,7 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     if (card) {
                         const status = data_type === 'A01'
                         const list = status ? cardList : card_renderList
+                        console.log('list', list)
                         return (
                             <Card className='TableExtra' style={cardStyle}>
                                 <Descriptions size="small" column={table_card_number}>

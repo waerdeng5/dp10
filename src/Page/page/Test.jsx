@@ -18,11 +18,11 @@ const Test = () => {
     return (
         <div className='TestPage'>
 
-            <div className='Lightning'  >
+            {/* <div className='Lightning'  >
                 <Lightning />
-            </div>
+            </div> */}
 
-            {/* <DevScrollView>
+            <DevScrollView>
                 <div className='fontInfo'>
                     {Font__Family.map(v =>
                         <div key={v.value} style={{ fontFamily: v.value }}>
@@ -45,7 +45,7 @@ const Test = () => {
                         )
                     })}
                 </div>
-            </DevScrollView> */}
+            </DevScrollView>
         </div>
     );
 };

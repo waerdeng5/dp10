@@ -17712,7 +17712,7 @@ export const Dev_data = [
 ];
 
 export const Dev_theme = [
-// dx.carmine.compact
+    // dx.carmine.compact
     // 流利
     { value: 'fluent.blue.light', label: '流利 白蓝', color: ['#ffffff', '#0f6cbd'] },
     { value: 'fluent.blue.dark', label: '流利 黑蓝', color: ['#292929', '#5486ff'] },

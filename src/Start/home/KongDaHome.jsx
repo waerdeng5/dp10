@@ -1,13 +1,12 @@
 import './KongDaHome.scss'
-import "mars3d-cesium/Build/Cesium/Widgets/widgets.css"
-import "mars3d/mars3d.css"
-import * as mars3d from "mars3d"
 
 import { useEventEmitter } from 'ahooks'
+import { createPortal } from 'react-dom'
 import { useRef, useEffect, useState } from 'react'
 import { useTemplateModel } from '../../Config/useHooks'
 
 
+import { ICONMapping } from '../../Config/IconMapping'
 
 import { axios, axiosFor } from '../../Utils/Api'
 import { CommonAPIUrl } from '../../Config'
@@ -26,9 +25,6 @@ import { PrefabricatedSwiperTemplate } from '../../Temp/PrefabricatedSwiper'
 import { PrefabricatedVisualTemplate } from '../../Temp/PrefabricatedVisual'
 
 
-import { InitMap } from '../../Mars3d'
-
-
 const TemplateComponentMapping = {
     ...PrefabricatedChartTemplate,
     ...PrefabricatedPlaceTemplate,
@@ -42,12 +38,22 @@ const TemplateComponentMapping = {
 }
 
 const uuid = '9df8a94e-158e-4a1d-9305-220c18a7c0b8'
-const mapUuid = '9df8a94e-158e-4a1d-9305-220c18a7c0b8/MAP_PAGE/dd71fa8d-4b31-4c6d-8b11-da10767098e0'
 
-const axiosArr = [
-    { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}` } },
-    { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}_element` } },
-    { method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}_tiles` } },
+const MapList = [
+    { uuid: 'A01', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821001', name: '哈尔滨市', x: 440, y: 650 },
+    { uuid: 'A02', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821002', name: '齐齐哈尔市', x: 170, y: 450 },
+    { uuid: 'A03', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821003', name: '鸡西市', x: 810, y: 640 },
+    { uuid: 'A04', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821004', name: '鹤岗市', x: 660, y: 440 },
+    { uuid: 'A05', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821005', name: '双鸭山市', x: 780, y: 540 },
+    { uuid: 'A06', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821006', name: '大庆市', x: 250, y: 560 },
+    { uuid: 'A07', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821007', name: '伊春市', x: 560, y: 440 },
+    { uuid: 'A08', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821008', name: '佳木斯市', x: 640, y: 530 },
+    { uuid: 'A09', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821009', name: '七台河市', x: 670, y: 600 },
+    { uuid: 'A10', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821010', name: '牡丹江市', x: 600, y: 720 },
+    { uuid: 'A11', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821011', name: '黑河市', x: 400, y: 300 },
+    { uuid: 'A12', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821012', name: '绥化市', x: 410, y: 480 },
+    { uuid: 'A13', cityUuid: '22115954-4ddb-4456-8b55-22f0bc821013', name: '大兴安岭地区', x: 200, y: 100 },
+    { uuid: 'A14', cityUuid: '99999999-9999-9999-9999-999999999999', name: '其他省份', x: 800, y: 190 },
 ]
 
 const pageData = [
@@ -58,39 +64,18 @@ const pageData = [
     { method: 'get', url: 'partyPersonType/GetDaPingPartyPersonDevelopment' },
     { method: 'get', url: 'video/GetPartyVideo' },
     { method: 'get', url: 'organization/GetOrganizationRemarkList' },
+    { method: 'get', url: 'newsRelease/GetPartyBuildingList' },
 ]
-
-const cityMapping = {
-    '22115954-4ddb-4456-8b55-22f0bc821001': { title: '哈尔滨市', position: [127.849494, 45.245517, 243.6] },
-    '22115954-4ddb-4456-8b55-22f0bc821002': { title: '齐齐哈尔', position: [124.312451, 47.676298, 165.5] },
-    '22115954-4ddb-4456-8b55-22f0bc821003': { title: '鸡西市', position: [132.29563, 45.484801, 121.7] },
-    '22115954-4ddb-4456-8b55-22f0bc821004': { title: '鹤岗市', position: [130.436071, 47.567174, 145.1] },
-    '22115954-4ddb-4456-8b55-22f0bc821005': { title: '双鸭山市', position: [132.253163, 46.380754, 97.9] },
-    '22115954-4ddb-4456-8b55-22f0bc821006': { title: '大庆市', position: [124.419975, 46.188539, 143] },
-    '22115954-4ddb-4456-8b55-22f0bc821007': { title: '伊春市', position: [129.103064, 47.503512, 215.3] },
-    '22115954-4ddb-4456-8b55-22f0bc821008': { title: '佳木斯市', position: [132.552054, 47.105604, 75.2] },
-    '22115954-4ddb-4456-8b55-22f0bc821009': { title: '七台河市', position: [130.868228, 45.720259, 124.4] },
-    '22115954-4ddb-4456-8b55-22f0bc821010': { title: '牡丹江市', position: [129.854702, 44.425733, 464.5] },
-    '22115954-4ddb-4456-8b55-22f0bc821011': { title: '黑河市', position: [126.958102, 49.117566, 104.9] },
-    '22115954-4ddb-4456-8b55-22f0bc821012': { title: '绥化市', position: [126.525435, 46.848897, 192.7] },
-    '22115954-4ddb-4456-8b55-22f0bc821013': { title: '大兴安岭', position: [124.124811, 52.121286, 378.4] },
-}
-
-
 
 const KongDaHome = ({ data, page, StartEvent }) => {
     const openModel = useTemplateModel()
     const KongEvent = useEventEmitter()
-    const MapBox = useRef()
     const [Open, setOpen] = useState(true)
     const [Active, setActive] = useState(true)
-    const [MapOptions, setMapOptions] = useState({ map: null, gra: null })
-    const [MapData, setMapData] = useState(null)
-    const [MapElementData, setMapElementData] = useState(null)
-    const [MapTilesData, setMapTilesData] = useState(null)
     const [PageData, setPageData] = useState()
 
     const [RemarkList, setRemarkList] = useState([])
+    const [MapData, setMapData] = useState([])
 
     const onSwitch = () => {
         setActive(!Active)
@@ -102,14 +87,6 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         if (err) return console.log(err)
         const pageData = await Decrypt(res)
         setPageData(pageData.params)
-        const [[MapErr, MapRes], [MapElementErr, MapElementRes], [MapTilesErr, MapTilesRes]] = await axiosFor(axiosArr)
-        if (MapErr || MapElementErr || MapTilesErr) return console.log(MapErr || MapElementErr || MapTilesErr)
-        const MapData = await Decrypt(MapRes)
-        const MapElementData = await Decrypt(MapElementRes)
-        const MapTilesData = await Decrypt(MapTilesRes)
-        setMapData(MapData)
-        setMapElementData(MapElementData)
-        setMapTilesData(MapTilesData)
     }
 
 
@@ -133,87 +110,45 @@ const KongDaHome = ({ data, page, StartEvent }) => {
         const [err, res] = await axios({ method: 'get', url: 'organization/GetOrganizationMapList' })
         if (err) return console.log(err)
         const { list } = res.data
-        Object.keys(cityMapping).forEach(v => {
-            const data = list.find(item => item.uuid === v)
-            const obj = {
-                "id": v,
-                "type": "div",
-                "show": true,
-                "style": {
-                    "offsetX": 0,
-                    "offsetY": 0,
-                    "scale": 1,
-                    "clampToGround": false,
-                    "scaleByDistance": false,
-                    "scaleByDistance_far": 1000000,
-                    "scaleByDistance_farValue": 0.1,
-                    "scaleByDistance_near": 1000,
-                    "scaleByDistance_nearValue": 1,
-                    "distanceDisplayCondition": false,
-                    "distanceDisplayCondition_far": 10000000,
-                    "distanceDisplayCondition_near": 0,
-                    "html": `
-                        <div class="KongDaHomeMapDiv" >
-                            <div class="KongDaHomeMapDivItem" style="display: ${data ? 'flex' : 'none'};" >
-                                <img src='https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeQi.png' alt='${cityMapping[v].title}' />
-                                <div >${data && data?.projectCount}</div>
-                            </div>
-                            <div class="KongDaHomeMapDivTitle" >${cityMapping[v].title}</div>
-                        </div>
-                        `
-                },
-                "_promise": {},
-                "attr": {},
-                "frameRate": 1,
-                "position": cityMapping[v].position
-            }
-            const div = new mars3d.graphic.DivGraphic(obj)
-            div.on('click', () => {
-                if (!data) return false
-                const obj = {
-                    click_model_height: "80vh",
-                    click_model_level: "updateModel",
-                    click_model_start: true,
-                    click_model_title: data.tableName,
-                    click_model_uuid: "7216ff50-c958-4321-1234-ad0716a7a7bb",
-                    click_model_width: "80vw",
-                    click_status: true,
-                    click_type: "model",
-                    click_model_params: true,
-                    click_model_config: [
-                        { param_type: 'data', param_key: 'address', param_field: 'uuid' }
-                    ],
-                }
-                TemplateClickFn(null, obj, data, KongEvent, openModel)
-            })
-            backData.gra.addGraphic(div)
-        })
+        setMapData(list)
     }
 
     useEffect(() => {
         getJsonData()
+        getMapData()
         GetDaPingPartyPersonDevelopment()
     }, [])
 
-    useEffect(() => {
-        if (Open) {
-            MapOptions?.map?.destroy()
-        } else {
-            if (MapData && MapElementData && MapTilesData && MapBox.current) {
-                console.log(MapElementData)
-                const backData = InitMap({ BOX: MapBox.current, CONFIG: MapData, ELEMENT: [], TILES: MapTilesData })
-                setMapOptions(backData)
-                getMapData(backData)
-            }
+    const onClickCity = (data) => {
+        const obj = {
+            click_model_height: "80vh",
+            click_model_level: "updateModel",
+            click_model_start: true,
+            click_model_title: data.name,
+            click_model_uuid: "7216ff50-c958-4321-1234-ad0716a7a7bb",
+            click_model_width: "80vw",
+            click_status: true,
+            click_type: "model",
+            click_model_params: true,
+            click_model_config: [{ param_type: 'data', param_key: 'address', param_field: 'cityUuid' }],
         }
-        return () => { MapOptions?.map?.destroy() }
-    }, [Open])
-
-
+        TemplateClickFn(null, obj, data, KongEvent, openModel)
+    }
 
     KongEvent.useSubscription(v => {
         console.log(v)
     })
+
+    const BackBtn = () => {
+        return createPortal(
+            <div className={`switchBtn ${Open ? 'A01' : 'A02'}`} onClick={onSwitch}>
+                {!Open &&
+                    <div> {ICONMapping['fh']}返回首页</div>
+                }
+            </div>,
+            document.body
+        )
+    }
 
     if (PageData) {
         return (
@@ -226,13 +161,6 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                     <div className='top'>
                                         <div>
                                             {(() => {
-                                                const tempId = '6b7e8400-507c-4df3-bae4-b94a4afeed5d'
-                                                const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                            })()}
-                                        </div>
-                                        <div>
-                                            {(() => {
                                                 const tempId = '5c8f0301-3d4d-4522-aa76-315e6a77871f'
                                                 const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
                                                 return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
@@ -242,6 +170,63 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                     <div className='btm'>
                                         {(() => {
                                             const tempId = 'b32a5c7b-4bc7-4137-a59f-93dd96cc79d5'
+                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
+                                        })()}
+                                    </div>
+                                </div>
+                            </WinTemplate>
+                            <WinTemplate Config={{ ...data, window_titleTxt: '党员构成情况' }} startType={false} >
+                                <div className='rightA01'>
+                                    <div className='top'>
+                                        <div>
+                                            {(() => {
+                                                const tempId = '20f2c27a-209a-4b76-a431-638be97cc01f'
+                                                const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
+                                            })()}
+                                            <img className='backImage' src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeC02.png" alt="" />
+                                        </div>
+                                        <div>
+                                            {(() => {
+                                                const tempId = 'd9d629be-f12a-4eb9-a97c-e833f5afe511'
+                                                const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
+                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
+                                            })()}
+                                        </div>
+                                    </div>
+                                    <div className='btm'>
+                                        {(() => {
+                                            const tempId = '52113864-d9e1-4227-a5ef-7d53eabc51af'
+                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
+                                        })()}
+                                    </div>
+                                </div>
+                            </WinTemplate>
+                        </div>
+                        <div className='right'>
+                            <WinTemplate Config={{ ...data, window_titleTxt: '党建组织活动' }} startType={false} >
+                                <div className='rightA03'>
+                                    <div>
+                                        {(() => {
+                                            const tempId = 'bcc54aa7-fc66-48a6-8f5f-87be2425bc2e'
+                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
+                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
+                                        })()}
+                                    </div>
+
+                                </div>
+                            </WinTemplate>
+                        </div>
+                    </> :
+                    <>
+                        <div className='leftTow'>
+                            <WinTemplate Config={{ ...data, window_titleTxt: '党员先锋岗' }} startType={false} >
+                                <div className='leftA03'>
+                                    <div>
+                                        {(() => {
+                                            const tempId = 'c4ed0499-eb0e-486e-98b1-c5468ed36dae'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
                                             return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
@@ -267,61 +252,8 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                 </div>
                             </WinTemplate>
                         </div>
-                        <div className='right'>
-                            <WinTemplate Config={{ ...data, window_titleTxt: '党员构成情况' }} startType={false} >
-                                <div className='rightA01'>
-                                    <div className='top'>
-                                        <div>
-                                            {(() => {
-                                                const tempId = 'db3dda58-da63-41d7-945c-4b6b7d97070d'
-                                                const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                            })()}
-                                        </div>
-                                        <div>
-                                            {(() => {
-                                                const tempId = 'd9d629be-f12a-4eb9-a97c-e833f5afe511'
-                                                const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                                return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                            })()}
-                                        </div>
-                                        <img className='backImage' src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeC02.png" alt="" />
-                                    </div>
-                                    <div className='btm'>
-                                        {(() => {
-                                            const tempId = '52113864-d9e1-4227-a5ef-7d53eabc51af'
-                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                        })()}
-                                    </div>
-                                </div>
-                            </WinTemplate>
-                            <WinTemplate Config={{ ...data, window_titleTxt: '党建组织活动' }} startType={false} >
-                                <div className='rightA02'>
-                                    <div>
-                                        {(() => {
-                                            const tempId = '7cecb1e2-6df6-4ef4-a961-b9ab047b1e26'
-                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                        })()}
-                                    </div>
-                                </div>
-                            </WinTemplate>
-                        </div>
-                    </> :
-                    <>
-                        <div className='leftTow'>
-                            <WinTemplate Config={{ ...data, window_titleTxt: '党员先锋岗' }} startType={false} >
-                                <div className='leftA03'>
-                                    <div>
-                                        {(() => {
-                                            const tempId = 'c4ed0499-eb0e-486e-98b1-c5468ed36dae'
-                                            const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
-                                            return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
-                                        })()}
-                                    </div>
-                                </div>
-                            </WinTemplate>
+                        <div className='rightTow'>
+
                             <WinTemplate Config={{ ...data, window_titleTxt: '党建考核' }} startType={false} >
                                 <div className='leftA04'>
                                     <div className='top'>
@@ -340,43 +272,53 @@ const KongDaHome = ({ data, page, StartEvent }) => {
                                     </div>
                                 </div>
                             </WinTemplate>
-                        </div>
-                        <div className='rightTow'>
                             <WinTemplate Config={{ ...data, window_titleTxt: '宣传片' }} startType={false} >
-                                <div className='rightA03'>
+                                <div className='rightA02'>
                                     <div>
                                         {(() => {
-                                            const tempId = 'bcc54aa7-fc66-48a6-8f5f-87be2425bc2e'
+                                            const tempId = '898c2c20-cfcd-4914-9550-cf7739fe59fb'
                                             const TemplateComponent = TemplateComponentMapping[PageData[tempId].value]
                                             return (<TemplateComponent tempId={tempId} data={PageData[tempId]} UrlData={RemarkList} LayoutEvent={StartEvent} />)
                                         })()}
                                     </div>
-
                                 </div>
                             </WinTemplate>
                         </div>
-                        <div className='btmBox'>
-                            {RemarkList.A07.data.list.map(v => {
-                                const { uuid, tableName, remark } = v
-                                return (
-                                    <div className='item' key={uuid}>
-                                        <img src='https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeList.png' alt="" />
-                                        <div>{tableName}党支部 : </div>
-                                        <div>{remark}</div>
-                                    </div>
-                                )
-                            })}
-                        </div>
                     </>
                 }
-                <div className={`switchBtn ${Open ? 'A01' : 'A02'}`} onClick={onSwitch}>{Open ? '' : '首页'}</div>
                 <img
                     style={{ left: Active ? '100%' : '-500%' }}
                     className='HomeMosk'
                     src='https://aloss.ljkjkf.com/WebConfigFile/image/nongda/HomeMosk.png'
                     alt=""
                 />
-                {!Open && <div className='Map' ref={MapBox}></div>}
+                {!Open &&
+                    <div className='MapBox'>
+                        <img src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/MapBoxBack.png" alt="" />
+                        <div className='MapBoxImage'>
+                            <img className='MapHLJ' src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/MapHLJ.png" alt="" />
+                            <img className='MapOther' src="https://aloss.ljkjkf.com/WebConfigFile/image/nongda/MapOther.png" alt="" />
+
+                            <div className='MapCity'>
+                                {MapList.map(v => {
+                                    const { uuid, cityUuid, name, x, y } = v
+                                    const style = { left: x, top: y }
+                                    const num = MapData.find(v => v.uuid === cityUuid)?.projectCount
+                                    const status = !!num
+                                    return (
+                                        <div key={uuid} style={style} onClick={() => status && onClickCity(v)}>
+                                            {status && <img className='Icon' src={`https://aloss.ljkjkf.com/WebConfigFile/image/nongda/MapIcon.png`} alt="" />}
+                                            {name}
+                                        </div>
+                                    )
+                                })}
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+                <BackBtn />
             </div>
         );
     }

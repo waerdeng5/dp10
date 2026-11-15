@@ -914,11 +914,14 @@ const StartFormList = [
     {
         span: 24, formType: 'GROUP', name: 'win_samll', label: '小窗信息', collapsible: true, defaultCollapsed: true,
         jugde: [{ field: 'start_type', value: ['A02'] }], children: [
+            { span: 24, formType: 'RADIO', name: 'win_type', label: '小窗类型', rules: true, valueEnum: MappingData.Theme__windowType },
             {
-                span: 24, formType: 'GROUP', name: 'win_top', label: '头部标题', collapsible: true, children: [
+                span: 24, formType: 'GROUP', name: 'win_top', label: '头部标题', collapsible: true,
+                children: [
                     { span: 12, formType: 'INPUT', name: 'win_title', label: '小窗标题', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_height', label: '标题高度', rules: true },
-                    { span: 24, formType: 'INPUT', name: 'win_url', label: '图片地址', rules: true },
+                    { span: 12, formType: 'INPUT', name: 'win_url', label: '图片地址', rules: true },
+                    { span: 12, formType: 'RADIO', name: 'win_align', label: '文字对齐', rules: true, valueEnum: MappingData.System__AlignmentLCR },
                     { span: 12, formType: 'NUMBER', name: 'win_imageA01', label: '图一宽度', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_imageA02', label: '图三宽度', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_index', label: '文字前距', rules: true },
@@ -940,7 +943,8 @@ const StartFormList = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'win_win', label: '窗口背景', collapsible: true, children: [
+                span: 24, formType: 'GROUP', name: 'win_win', label: '窗口背景', collapsible: true,
+                children: [
                     { span: 12, formType: 'COLOR', name: 'win_back_color', label: '背景颜色', rules: true },
                     { span: 12, formType: 'NUMBER', name: 'win_back_deg', label: '颜色角度', rules: true },
                     { span: 12, formType: 'RADIO', name: 'win_back_border', label: '背景边框', rules: true, valueEnum: MappingData.IsEnabledBool },
@@ -964,7 +968,8 @@ const StartFormList = [
                 ]
             },
             {
-                span: 24, formType: 'GROUP', name: 'win_image', label: '图片背景', collapsible: true, children: [
+                span: 24, formType: 'GROUP', name: 'win_image', label: '图片背景', collapsible: true,
+                children: [
                     { span: 24, formType: 'RADIO', name: 'win_image_status', label: '背景图层', rules: true, valueEnum: MappingData.IsEnabledBool },
                     {
                         span: 24, formType: 'LIST', name: 'win_image_list', label: '图片列表', collapsible: true, title: '图片',
@@ -1683,8 +1688,7 @@ const StartWindowFormList = [
     { span: 12, formType: 'INPUT', name: 'window_titleTxt', label: '标题内容', rules: true, jugde: [{ field: 'window_title', value: [true] }] },
     { span: 12, formType: 'RADIO', name: 'window_backImg', label: '背景图片', rules: true, valueEnum: MappingData.IsEnabledBool },
     { span: 12, formType: 'INPUT', name: 'window_backImgUrl', label: '图片地址', rules: true, jugde: [{ field: 'window_backImg', value: [true] }] },
-
-
+    { span: 12, formType: 'INPUT', name: 'window_padding', label: '背景内填充', jugde: [{ field: 'window_style', value: ['WIN'] }] },
     {
         span: 24, formType: 'GROUP', name: 'LayoutWindowStyleFormList_01', label: '样式设置', collapsible: true,
         jugde: [{ field: 'window_style', value: ['DIY'] }], children: [
