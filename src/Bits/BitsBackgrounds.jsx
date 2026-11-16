@@ -50,6 +50,8 @@ import DotField from './DotField'
 import DotGrid from './DotGrid'
 import Threads from './Threads'
 import Hyperspeed from './Hyperspeed'
+import Iridescence from './Iridescence'
+import Waves from './Waves'
 
 
 
@@ -105,6 +107,8 @@ const BitsBackgrounds_DotField = ({ data }) => <div className='DotField'><DotFie
 const BitsBackgrounds_DotGrid = ({ data }) => <div className='DotGrid'><DotGrid {...data} /></div>
 const BitsBackgrounds_Threads = ({ data }) => <div className='Threads'><Threads {...data} /></div>
 const BitsBackgrounds_Hyperspeed = ({ data }) => <div className='Hyperspeed'><Hyperspeed {...data} /></div>
+const BitsBackgrounds_Iridescence = ({ data }) => <div className='Iridescence'><Iridescence {...data} /></div>
+const BitsBackgrounds_Waves = ({ data }) => <div className='Waves'><Waves {...data} /></div>
 
 
 
@@ -161,4 +165,6 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_DotGrid,
     BitsBackgrounds_Threads,
     BitsBackgrounds_Hyperspeed,
+    BitsBackgrounds_Iridescence,
+    BitsBackgrounds_Waves,
 }

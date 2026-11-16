@@ -10,15 +10,15 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import Hyperspeed from '../../Bits/Hyperspeed'
+import Waves from '../../Bits/Waves'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     const boxRef = useRef(null)
     return (
         <div className='TestPage'>
-            <div className='Hyperspeed'  >
-                <Hyperspeed />
+            <div className='Waves'  >
+                <Waves />
             </div>
             {/* <DevScrollView>
                 <div className='fontInfo'>
