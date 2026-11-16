@@ -10,19 +10,17 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import Lightning from '../../Bits/Lightning'
+import Hyperspeed from '../../Bits/Hyperspeed'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     const boxRef = useRef(null)
     return (
         <div className='TestPage'>
-
-            {/* <div className='Lightning'  >
-                <Lightning />
-            </div> */}
-
-            <DevScrollView>
+            <div className='Hyperspeed'  >
+                <Hyperspeed />
+            </div>
+            {/* <DevScrollView>
                 <div className='fontInfo'>
                     {Font__Family.map(v =>
                         <div key={v.value} style={{ fontFamily: v.value }}>
@@ -45,7 +43,7 @@ const Test = () => {
                         )
                     })}
                 </div>
-            </DevScrollView>
+            </DevScrollView> */}
         </div>
     );
 };

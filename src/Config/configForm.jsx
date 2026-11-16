@@ -7206,6 +7206,7 @@ const PrefabricatedChartGantt = [
                     { span: 12, formType: 'INPUT', name: 'suffixText', label: '后缀内容', rules: true, jugde: [{ field: 'isSuffix', value: [true] }] },
                     { span: 12, formType: 'RADIO', name: 'formatType', label: '格式化', rules: true, valueEnum: MappingData.Charts__ganntDateFormat },
                     { span: 12, formType: 'INPUT', name: 'formatMapping', label: '日期格式', rules: true, jugde: [{ field: 'formatType', value: ['date'] }] },
+                    { span: 12, formType: 'INPUT', name: 'otherMapping', label: '指定时段', rules: true, jugde: [{ field: 'formatType', value: ['designated'] }] },
                     { span: 12, formType: 'RADIO', name: 'textAlign', label: '水平对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextAlign },
                     { span: 12, formType: 'RADIO', name: 'textBaseline', label: '垂直对齐', rules: true, valueEnum: MappingData.Charts__VchartsTextBaseline },
                     { span: 12, formType: 'INPUT', name: 'padding', label: '内填充', rules: true },

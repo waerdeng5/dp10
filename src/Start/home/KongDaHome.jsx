@@ -63,8 +63,8 @@ const pageData = [
     { method: 'get', url: 'partyPerson/GetPartyPersonVanguardList' },
     { method: 'get', url: 'partyPersonType/GetDaPingPartyPersonDevelopment' },
     { method: 'get', url: 'video/GetPartyVideo' },
-    { method: 'get', url: 'organization/GetOrganizationRemarkList' },
     { method: 'get', url: 'newsRelease/GetPartyBuildingList' },
+    // { method: 'get', url: 'organization/GetOrganizationRemarkList' },
 ]
 
 const KongDaHome = ({ data, page, StartEvent }) => {

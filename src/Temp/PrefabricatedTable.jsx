@@ -197,6 +197,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
             }
 
             if (card) {
+                console.log('card', card, data_type)
+
+
                 if (data_type === 'A03') {
                     const A03Card = card_diyData.reduce((acc, v) => {
                         acc[v.key] = v.value
@@ -464,7 +467,6 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                     if (card) {
                         const status = data_type === 'A01'
                         const list = status ? cardList : card_renderList
-                        console.log('list', list)
                         return (
                             <Card className='TableExtra' style={cardStyle}>
                                 <Descriptions size="small" column={table_card_number}>
@@ -487,9 +489,9 @@ const PrefabricatedTable = ({ tempId, UrlData, data, LayoutEvent, row }) => {
                         if (row) params = { ...params, ...row }
                         const [err, res] = await axios({ method: data_api_method, url: data_api_url, path: data_api_https, params })
                         if (err) return console.error('获取失败', err)
-                        console.log('row', row)
                         const { list, total } = data_api_level ? getNestedValue(data_api_mapping, res) : res
                         if (card) {
+                            console.log('list', list)
                             setCardData(list[0])
                             // setCardData(getNestedValue(card_field, res))
                         }

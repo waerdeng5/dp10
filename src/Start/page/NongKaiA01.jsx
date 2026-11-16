@@ -13,7 +13,7 @@ import { InitMap, LayerListMap } from '../../Mars3d'
 
 const imageUrl = 'https://aloss.ljkjkf.com/WebConfigFile/image/nongkai/'
 
-const mapUuid = '1081d01e-0cc7-4415-bdb4-0528bb80050a/MAP_PAGE/2ec7b8e6-a0a2-4338-a537-2590f78e01f4'
+const mapUuid = '1081d01e-0cc7-4415-bdb4-0528bb80050a/MAP_PAGE/8b0448f1-a791-4e55-9862-6b327b634c01'
 
 const MapApi = [
     { method: 'get', url: '/projects/GetJsonInfoByUuid', path: CommonAPIUrl, params: { uuid: `${mapUuid}` } },

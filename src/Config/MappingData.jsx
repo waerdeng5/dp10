@@ -1947,7 +1947,68 @@ export const MappingData = {
         { value: 'square', label: '方形' },
         { value: 'round', label: '圆形' },
     ],
-
+    BitsBackgrounds_PrismaticBurstAnimation: [
+        { value: 'rotate', label: '旋转' },
+        { value: 'rotate3d', label: '旋转3D' },
+        { value: 'hover', label: '悬停' },
+    ],
+    BitsBackgrounds_GalaxyDirection: [
+        { value: 'forward', label: '前' },
+        { value: 'backward', label: '后' },
+    ],
+    BitsBackgrounds_DitherMode: [
+        { value: 'bayer', label: 'Bayer' },
+        { value: 'bayer4', label: 'Bayer4' },
+        { value: 'bayer2', label: 'Bayer2' },
+        { value: 'halftone', label: '半调' },
+        { value: 'lines', label: '行' },
+        { value: 'crosshatch', label: '交叉' },
+        { value: 'noise', label: '噪点' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_DitherEffect: [
+        { value: 'erase', label: '擦除' },
+        { value: 'reveal', label: '显示' },
+        { value: 'ripple', label: '涟漪' },
+    ],
+    BitsBackgrounds_FaultyTerminalGlyphs: [
+        { value: 'blocks', label: '块' },
+        { value: 'dots', label: '点' },
+        { value: 'characters', label: '字符' },
+    ],
+    BitsBackgrounds_FaultyTerminalEffect: [
+        { value: 'glitch', label: '闪烁' },
+        { value: 'degauss', label: '模糊' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_RippleGridVariant: [
+        { value: 'lines', label: '行' },
+        { value: 'dots', label: '点' },
+        { value: 'cross', label: '十字' },
+    ],
+    BitsBackgrounds_RippleGridAuto: [
+        { value: 'center', label: '中心' },
+        { value: 'random', label: '随机' },
+        { value: 'none', label: '无' },
+    ],
+    BitsBackgrounds_DotFieldPattern: [
+        { value: 'grid', label: '网格' },
+        { value: 'hex', label: '六边形' },
+        { value: 'spiral', label: '螺旋' },
+        { value: 'scatter', label: '分散' },
+    ],
+    BitsBackgrounds_DotGridShape: [
+        { value: 'circle', label: '圆形' },
+        { value: 'square', label: '方形' },
+    ],
+    BitsBackgrounds_HyperspeedCurve: [
+        { value: 'straight', label: '直线' },
+        { value: 'gentle', label: '温和' },
+        { value: 'winding', label: '蜿蜒' },
+        { value: 'hills', label: '山丘' },
+        { value: 'racing', label: '赛车' },
+        { value: 'deep', label: '深度' },
+    ],
 
     // TODO Dev
     DevConfig__ThemeList: [
@@ -2442,6 +2503,7 @@ export const MappingData = {
     Charts__ganntDateFormat: [
         { value: 'date', label: '日期' },
         { value: 'index', label: '索引' },
+        { value: 'designated', label: '指定' },
     ],
     Charts__ganntOverflow: [
         { value: 'date', label: '日期' },

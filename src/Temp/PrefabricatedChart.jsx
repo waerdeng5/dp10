@@ -1,6 +1,6 @@
 import './Prefabricated.scss'
 import dayjs from 'dayjs'
-import { useRef, useState } from 'react'
+import { useRef, useState, useCallback } from 'react'
 import { VChart } from '@visactor/react-vchart'
 import { Gantt, VRender, TYPES } from '@visactor/vtable-gantt';
 import * as VTableGantt from '@visactor/vtable-gantt';
@@ -763,16 +763,15 @@ const indicatorFn = (data, values, type) => {
     } = data
     const percentData = (value, type) => {
         if (type === 'content' && indicator_content_percent) {
-            if (indicator_content_percentData === 'A01') return `${value}%`
-            if (indicator_content_percentData === 'A02') return `${parseInt(value * 10000) / 100}%`
+            if (indicator_content_percentData === 'A01') return `${value || 0}%`
+            if (indicator_content_percentData === 'A02') return `${parseInt(value * 10000) / 100 || 0}%`
         }
         if (type === 'title' && indicator_title_percent) {
-            if (indicator_title_percentData === 'A01') return `${value}%`
-            if (indicator_title_percentData === 'A02') return `${parseInt(value * 10000) / 100}%`
+            if (indicator_title_percentData === 'A01') return `${value || 0}%`
+            if (indicator_title_percentData === 'A02') return `${parseInt(value * 10000) / 100 || 0}%`
         }
         return value
     }
-
 
     return ({
         visible: indicator_visible,
@@ -1746,9 +1745,9 @@ const recordsTestData = [
     {
         id: 1,
         title: '土方工程',
-        hierarchyState: 'expand',
-        // baselineStartDateField: '2026-08-01',
-        // baselineEndDateField: '2026-08-30',
+        // hierarchyState: 'expand',
+        baselineStartDateField: '2026-08-01',
+        baselineEndDateField: '2026-08-30',
         start: "2026-08-12",
         end: "2026-08-26",
         progress: 40,
@@ -1810,6 +1809,10 @@ const columnsTestData = [
 const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
     const GanttRef = useRef(null)
     const ganttInstance = useRef(null)
+    const tableContainer = useRef(null)
+
+    const overlayRef = useRef(null);
+    const frontlineOffsetRef = useRef({ x: 0, y: 0 });
 
     const { api_source, http_urlName, http_urlLevel, http_urlMapping,
         fields_id, fields_hierarchyState, fields_start, fields_end, fields_baseStart, fields_baseEnd, fields_type, fields_progress, fields_columns,
@@ -1847,10 +1850,8 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         rowSeriesNumber_dragOrder, rowSeriesNumber_disableColumnResize, scrollStyle_visible, scrollStyle_hoverOn, scrollStyle_barToSide,
         scrollStyle_ignoreFrozenCols, scrollStyle_scrollRailColor, scrollStyle_scrollSliderColor, scrollStyle_scrollSliderCornerRadius,
         scrollStyle_width, scrollStyle_horizontalPadding, scrollStyle_verticalPadding,
-        apiDate, minApiDate, maxApiDate
+        apiDate, minApiDate, maxApiDate, otherMapping
     } = data
-
-
 
     const option = {
         taskKeyField: fields_id || 'id',
@@ -1968,7 +1969,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
             scheduleCreatable: taskBar_scheduleCreatable,
             baselinePosition: taskBar_baselinePosition,
             selectable: taskBar_selectable,
-
             // selectedBarStyle: {
             //     borderLineWidth: 10
             // },
@@ -1976,6 +1976,25 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
             //     cornerRadius: 0,
             //     barOverlayColor: 'rgba(99, 144, 0, 0.4)'
             // },
+            customLayout: (args) => {
+                const { width, height, progress } = args
+                const rootContainer = new VTableGantt.VRender.Group({})
+
+                // 蓝色背景条
+                rootContainer.add(new VTableGantt.VRender.Rect({
+                    x: 0, y: height * 0, width, height: height,
+                    fill: '#1890ff', cornerRadius: 3
+                }));
+
+                // 绿色进度条
+                const pw = width * (progress / 100);
+                rootContainer.add(new VTableGantt.VRender.Rect({
+                    x: 0, y: height * 0, width: pw, height: height,
+                    fill: '#52c41a', cornerRadius: 3
+                }));
+
+                return { rootContainer, renderDefaultBar: false, renderDefaultText: false };
+            },
 
             labelText: taskBar_isLabelText ? taskBar_labelText : '',
             labelTextStyle: {
@@ -1989,7 +2008,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 orientHandleWithOverflow: taskBar_labelTextStyle_orientHandleWithOverflow,
                 textOverflow: taskBar_labelTextStyle_textOverflow,
             },
-
             baselineStyle: {
                 barColor: taskBar_baselineStyle_barColor,
                 completedBarColor: taskBar_baselineStyle_completedBarColor,
@@ -1998,7 +2016,6 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 borderWidth: taskBar_baselineStyle_borderLineWidth,
                 borderColor: taskBar_baselineStyle_borderColor
             },
-
             barStyle: {
                 width: taskBar_barStyle_width,
                 barColor: taskBar_barStyle_barColor,
@@ -2116,70 +2133,295 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
         }
     };
 
-    useEffect(() => {
-        const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
-        if (apiDate && UrlData[http_urlName]) {
-            option.minDate = getObjectValue(UrlData[http_urlName], minApiDate)
-            option.maxDate = getObjectValue(UrlData[http_urlName], maxApiDate)
-        }
-        const scales = timelineHeader_scales.map(v => {
-            const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
-                padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
-            } = v
-            return ({
-                rowHeight,
-                unit,
-                step,
-                startOfWeek,
-                style: {
-                    padding: padding?.split(',').map(Number) || 0,
-                    fontSize,
-                    fontWeight,
-                    color,
-                    strokeColor,
-                    textAlign,
-                    textBaseline,
-                    textOverflow,
-                    textStick
-                },
-                format(date) {
-                    const { dateIndex, startDate, endDate } = date
-                    const str = `${isPrefix ? prefixText : ''}${formatType === 'date' ? dayjs(startDate).format(formatMapping) : dateIndex}${isSuffix ? suffixText : ''}`
-                    return str
-                },
-            })
-        })
-        option.timelineHeader.scales = scales
-        const markLine = markLine_list.map(v => {
-            const { today, date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
-                fontWeight, cornerRadius, backgroundColor } = v
-            return ({
-                date: today ? dayjs().format('YYYY-MM-DD') : date,
-                position,
-                scrollToMarkLine,
-                style: {
-                    lineColor: style_lineColor,
-                    lineWidth: style_lineWidth,
-                    lineDash: style_lineDash?.split(',').map(Number) || 0,
-                },
-                content,
-                contentStyle: {
-                    color,
-                    fontSize,
-                    lineHeight,
-                    fontWeight,
-                    cornerRadius,
-                    backgroundColor
-                },
-            })
-        })
-        option.markLine = markLine
+    // https://aloss.ljkjkf.com/WebConfigFile/image/Common/RedFlagA01.png
 
-        if (GanttRef.current && !ganttInstance.current) {
-            option.records = backData
-            if (fields_columns) option.taskListTable.columns = fields_columns
-            ganttInstance.current = new Gantt(GanttRef.current, option)
+    // /* ---------- 前锋线绘制 ---------- */
+    // const drawFrontline = useCallback(() => {
+    //     const canvas = overlayRef.current;
+    //     const gantt = ganttInstance.current;
+    //     if (!canvas || !gantt) return;
+    //     console.log(gantt.taskTableWidth)
+
+    //     const ctx = canvas.getContext('2d');
+    //     const host = GanttRef.current;
+    //     if (!host) return;
+
+    //     const { clientWidth: w, clientHeight: h } = host;
+    //     ctx.clearRect(0, 0, w, h);
+
+    //     const records = gantt.internalProps?.records || gantt.records || [];
+    //     if (!records.length) return;
+
+    //     const HEADER_HEIGHT = 84;   // getAllRowsHeight()
+    //     const ROW_HEIGHT = 32;      // getRowHeightByIndex(i)
+
+    //     const pts = [];
+    //     let yCursor = HEADER_HEIGHT;
+
+    //     records.forEach((record) => {
+    //         const s = new Date(record.start).getTime();
+    //         const e = new Date(record.end).getTime();
+
+    //         // 分组行：只推进 y，不画点
+    //         if (isNaN(s) || isNaN(e) || e <= s) {
+    //             yCursor += ROW_HEIGHT;
+    //             return;
+    //         }
+
+    //         const p = Number(record['实际进度(%)']);
+    //         const ratio = isNaN(p) ? 0 : Math.min(Math.max(p / 100, 0), 1);
+    //         const targetTime = s + (e - s) * ratio;
+
+    //         let x = null;
+    //         try {
+    //             const v = gantt.getXByTime(targetTime);
+    //             if (v != null && !isNaN(v)) x = v;
+    //         } catch (err) { }
+
+    //         if (x !== null) {
+    //             console.log('x', x)
+    //             pts.push({ x: x + gantt.taskTableWidth, y: yCursor + ROW_HEIGHT / 2 });
+    //         }
+    //         yCursor += ROW_HEIGHT;
+    //     });
+
+    //     if (pts.length === 0) return;
+
+    //     // 虚线折线
+    //     if (pts.length >= 2) {
+    //         ctx.beginPath();
+    //         pts.forEach((pt, i) => (i === 0 ? ctx.moveTo(pt.x, pt.y) : ctx.lineTo(pt.x, pt.y)));
+    //         ctx.strokeStyle = '#ff4d4f';
+    //         ctx.lineWidth = 1.5;
+    //         ctx.setLineDash([4, 3]);
+    //         ctx.stroke();
+    //         ctx.setLineDash([]);
+    //     }
+
+    //     // 端点
+    //     pts.forEach(pt => {
+    //         ctx.beginPath();
+    //         ctx.arc(pt.x, pt.y, 4, 0, Math.PI * 2);
+    //         ctx.fillStyle = '#ff4d4f';
+    //         ctx.fill();
+    //         ctx.strokeStyle = '#fff';
+    //         ctx.lineWidth = 1;
+    //         ctx.stroke();
+    //     });
+    // }, []);
+
+    // /* ---------- 原有甘特图初始化 useEffect（加 overlay + 监听） ---------- */
+    // useEffect(() => {
+    //     if (tableContainer.current) {
+    //         const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
+    //         if (apiDate && UrlData[http_urlName]) {
+    //             option.minDate = getObjectValue(UrlData[http_urlName], minApiDate)
+    //             option.maxDate = getObjectValue(UrlData[http_urlName], maxApiDate)
+    //         }
+
+    //         const scales = timelineHeader_scales.map(v => {
+    //             const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
+    //                 padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
+    //             } = v
+    //             return ({
+    //                 rowHeight,
+    //                 unit,
+    //                 step,
+    //                 startOfWeek,
+    //                 style: {
+    //                     padding: padding?.split(',').map(Number) || 0,
+    //                     fontSize,
+    //                     fontWeight,
+    //                     color,
+    //                     strokeColor,
+    //                     textAlign,
+    //                     textBaseline,
+    //                     textOverflow,
+    //                     textStick
+    //                 },
+    //                 format(date) {
+    //                     const { dateIndex, startDate, endDate } = date
+    //                     if (formatType === 'date') return `${isPrefix ? prefixText : ''}${dayjs(startDate).format(formatMapping)}${isSuffix ? suffixText : ''}`
+    //                     if (formatType === 'index') return `${isPrefix ? prefixText : ''}${dateIndex}${isSuffix ? suffixText : ''}`
+    //                     if (formatType === 'designated') return dateIndex <= 10 ? '10' : dateIndex <= 20 ? '20' : '30'
+    //                 },
+    //             })
+    //         })
+    //         option.timelineHeader.scales = scales
+
+    //         const markLine = markLine_list.map(v => {
+    //             const { today, date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
+    //                 fontWeight, cornerRadius, backgroundColor } = v
+    //             return ({
+    //                 date: today ? dayjs().format('YYYY-MM-DD') : date,
+    //                 position,
+    //                 scrollToMarkLine,
+    //                 style: {
+    //                     lineColor: style_lineColor,
+    //                     lineWidth: style_lineWidth,
+    //                     lineDash: style_lineDash?.split(',').map(Number) || 0,
+    //                 },
+    //                 content: today ? dayjs().format('MM-DD') : content,
+    //                 contentStyle: {
+    //                     color,
+    //                     fontSize,
+    //                     lineHeight,
+    //                     fontWeight,
+    //                     cornerRadius,
+    //                     backgroundColor
+    //                 },
+    //             })
+    //         })
+    //         option.markLine = markLine
+
+    //         if (GanttRef.current && !ganttInstance.current) {
+    //             option.records = backData
+    //             if (fields_columns) option.taskListTable.columns = fields_columns
+    //             ganttInstance.current = new Gantt(GanttRef.current, option)
+
+    //             // ===== 新增：创建 overlay canvas =====
+    //             const host = GanttRef.current;
+    //             const canvas = document.createElement('canvas');
+    //             canvas.style.cssText = 'position:absolute;left:0;top:0;pointer-events:none;z-index:5;';
+    //             host.appendChild(canvas);
+    //             overlayRef.current = canvas;
+
+    //             const resize = () => {
+    //                 const { clientWidth: cw, clientHeight: ch } = host;
+    //                 const dpr = window.devicePixelRatio || 1;
+    //                 canvas.width = cw * dpr;
+    //                 canvas.height = ch * dpr;
+    //                 canvas.style.width = cw + 'px';
+    //                 canvas.style.height = ch + 'px';
+    //                 canvas.getContext('2d').setTransform(dpr, 0, 0, dpr, 0, 0);
+    //             };
+    //             resize();
+
+    //             // 等 VTable 渲染完再画
+    //             setTimeout(drawFrontline, 300);
+    //         }
+
+    //         // ===== 新增：滚动/缩放时重绘 =====
+    //         const host = GanttRef.current;
+    //         const onMove = () => drawFrontline();
+
+    //         host?.addEventListener('scroll', onMove, true);
+    //         host?.addEventListener('wheel', onMove, { passive: true, capture: true });
+    //         host?.addEventListener('mousedown', onMove, true);
+    //         host?.addEventListener('mousemove', onMove, true);
+
+    //         return () => {
+    //             host?.removeEventListener('scroll', onMove, true);
+    //             host?.removeEventListener('wheel', onMove, true);
+    //             host?.removeEventListener('mousedown', onMove, true);
+    //             host?.removeEventListener('mousemove', onMove, true);
+
+    //             if (ganttInstance.current) {
+    //                 ganttInstance.current.release()
+    //                 ganttInstance.current = null
+    //             }
+    //             if (overlayRef.current) {
+    //                 overlayRef.current.remove();
+    //                 overlayRef.current = null;
+    //             }
+    //         };
+    //     }
+    // }, [data, UrlData]);
+
+    // /* ---------- 新增：数据变化时更新记录并重绘 ---------- */
+    // useEffect(() => {
+    //     const gantt = ganttInstance.current;
+    //     if (!gantt) return;
+
+    //     const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj');
+    //     gantt.setRecords(backData);
+
+    //     const t = setTimeout(drawFrontline, 300);
+    //     return () => clearTimeout(t);
+    // }, [data, UrlData]);
+
+
+    useEffect(() => {
+        if (tableContainer.current) {
+            const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
+            if (apiDate && UrlData[http_urlName]) {
+                option.minDate = getObjectValue(UrlData[http_urlName], minApiDate)
+                option.maxDate = getObjectValue(UrlData[http_urlName], maxApiDate)
+            }
+
+            const scales = timelineHeader_scales.map(v => {
+                const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
+                    padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
+                } = v
+                return ({
+                    rowHeight,
+                    unit,
+                    step,
+                    startOfWeek,
+                    style: {
+                        padding: padding?.split(',').map(Number) || 0,
+                        fontSize,
+                        fontWeight,
+                        color,
+                        strokeColor,
+                        textAlign,
+                        textBaseline,
+                        textOverflow,
+                        textStick
+                    },
+                    format(date) {
+                        const { dateIndex, startDate, endDate } = date
+                        if (formatType === 'date') return `${isPrefix ? prefixText : ''}${dayjs(startDate).format(formatMapping)}${isSuffix ? suffixText : ''}`
+                        if (formatType === 'index') return `${isPrefix ? prefixText : ''}${dateIndex}${isSuffix ? suffixText : ''}`
+                        if (formatType === 'designated') return dateIndex <= 10 ? '10' : dateIndex <= 20 ? '20' : '30'
+                    },
+                })
+            })
+            option.timelineHeader.scales = scales
+            const markLine = markLine_list.map(v => {
+                const { today, date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
+                    fontWeight, cornerRadius, backgroundColor } = v
+                return ({
+                    date: today ? dayjs().format('YYYY-MM-DD') : date,
+                    position,
+                    scrollToMarkLine,
+                    style: {
+                        lineColor: style_lineColor,
+                        lineWidth: style_lineWidth,
+                        lineDash: style_lineDash?.split(',').map(Number) || 0,
+                    },
+                    content: today ? dayjs().format('MM-DD') : content,
+                    contentStyle: {
+                        color,
+                        fontSize,
+                        lineHeight,
+                        fontWeight,
+                        cornerRadius,
+                        backgroundColor
+                    },
+                })
+            })
+            option.markLine = markLine
+
+            if (GanttRef.current && !ganttInstance.current) {
+                option.records = backData
+                if (fields_columns) option.taskListTable.columns = fields_columns
+                ganttInstance.current = new Gantt(GanttRef.current, option)
+
+                console.log(ganttInstance.current)
+
+                const g = ganttInstance.current;
+                const p = g.internalProps || g;
+                console.log('getAllRowsHeight:', g.getAllRowsHeight?.());
+                console.log('getRowHeightByIndex(0):', g.getRowHeightByIndex?.(0));
+                console.log('getRowHeightByIndex(1):', g.getRowHeightByIndex?.(1));
+                console.log('getAllTaskBarsHeight:', g.getAllTaskBarsHeight?.());
+                console.log('getDataZoomHeight:', g.getDataZoomHeight?.());
+                console.log('canvas height:', g.getContainer?.()?.querySelector('canvas')?.getBoundingClientRect().height);
+            }
         }
+
+
         return () => {
             if (ganttInstance.current) {
                 ganttInstance.current.release()
@@ -2189,7 +2431,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
     }, [data, UrlData])
 
     return (
-        <div className='PrefabricatedChartGantt'   >
+        <div className='PrefabricatedChartGantt' ref={tableContainer} >
             <div ref={GanttRef} />
         </div>
     )

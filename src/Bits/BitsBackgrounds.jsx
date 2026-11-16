@@ -41,6 +41,15 @@ import GridScan from './GridScan'
 import Beams from './Beams'
 import PixelSnow from './PixelSnow'
 import Lightning from './Lightning'
+import PrismaticBurst from './PrismaticBurst'
+import Galaxy from './Galaxy'
+import Dither from './Dither'
+import FaultyTerminal from './FaultyTerminal'
+import RippleGrid from './RippleGrid'
+import DotField from './DotField'
+import DotGrid from './DotGrid'
+import Threads from './Threads'
+import Hyperspeed from './Hyperspeed'
 
 
 
@@ -87,6 +96,15 @@ const BitsBackgrounds_GridScan = ({ data }) => <div className='GridScan'><GridSc
 const BitsBackgrounds_Beams = ({ data }) => <div className='Beams'><Beams {...data} /></div>
 const BitsBackgrounds_PixelShow = ({ data }) => <div className='PixelSnow'><PixelSnow {...data} /></div>
 const BitsBackgrounds_Lightning = ({ data }) => <div className='Lightning'><Lightning {...data} /></div>
+const BitsBackgrounds_PrismaticBurst = ({ data }) => <div className='PrismaticBurst'><PrismaticBurst {...data} /></div>
+const BitsBackgrounds_Galaxy = ({ data }) => <div className='Galaxy'><Galaxy {...data} /></div>
+const BitsBackgrounds_Dither = ({ data }) => <div className='Dither'><Dither {...data} /></div>
+const BitsBackgrounds_FaultyTerminal = ({ data }) => <div className='FaultyTerminal'><FaultyTerminal {...data} /></div>
+const BitsBackgrounds_RippleGrid = ({ data }) => <div className='RippleGrid'><RippleGrid {...data} /></div>
+const BitsBackgrounds_DotField = ({ data }) => <div className='DotField'><DotField {...data} /></div>
+const BitsBackgrounds_DotGrid = ({ data }) => <div className='DotGrid'><DotGrid {...data} /></div>
+const BitsBackgrounds_Threads = ({ data }) => <div className='Threads'><Threads {...data} /></div>
+const BitsBackgrounds_Hyperspeed = ({ data }) => <div className='Hyperspeed'><Hyperspeed {...data} /></div>
 
 
 
@@ -134,4 +152,13 @@ export const BitsBackgroundsTemplate = {
     BitsBackgrounds_Beams,
     BitsBackgrounds_PixelShow,
     BitsBackgrounds_Lightning,
+    BitsBackgrounds_PrismaticBurst,
+    BitsBackgrounds_Galaxy,
+    BitsBackgrounds_Dither,
+    BitsBackgrounds_FaultyTerminal,
+    BitsBackgrounds_RippleGrid,
+    BitsBackgrounds_DotField,
+    BitsBackgrounds_DotGrid,
+    BitsBackgrounds_Threads,
+    BitsBackgrounds_Hyperspeed,
 }
