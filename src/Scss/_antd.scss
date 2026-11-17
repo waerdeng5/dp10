@@ -21,6 +21,8 @@
 }
 
 .ant-dropdown {
+    z-index: 9999;
+
     .ant-dropdown-menu-item {
         display: flex;
         align-items: center;

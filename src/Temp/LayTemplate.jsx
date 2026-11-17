@@ -22,6 +22,13 @@ import { GridBackground } from "react-grid-layout/extras"
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Pagination, Scrollbar, A11y, Autoplay, EffectFade, EffectCube, EffectFlip, EffectCoverflow, EffectCards, EffectCreative } from 'swiper/modules'
 
+
+import { GetIndexedDB } from '../Utils/IndexedDB'
+
+import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
+
+
+
 import { modelStore } from '../Router/zustand'
 import { ICONMapping } from '../Config/IconMapping'
 import { PrefabricatedChartTemplate } from './PrefabricatedChart'
@@ -33,18 +40,11 @@ import { PrefabricatedTableTemplate } from './PrefabricatedTable'
 import { PrefabricatedSelectTemplate } from './PrefabricatedSelect'
 import { PrefabricatedSwiperTemplate } from './PrefabricatedSwiper'
 import { PrefabricatedVisualTemplate } from './PrefabricatedVisual'
-
 import { BitsTextTemplate } from '../Bits/BitsText'
 import { BitsComponentsTemplate } from '../Bits/BitsComponents'
 import { BitsMicroTemplate } from '../Bits/BitsMicro'
 import { BitsAnimationsTemplate } from '../Bits/BitsAnimations'
 import { BitsBackgroundsTemplate } from '../Bits/BitsBackgrounds'
-
-
-import { GetIndexedDB } from '../Utils/IndexedDB'
-
-import { ColorCallBack, SpacingCallBack, SetBorderParams, SetFilderParams } from '../Utils'
-
 import {
     PlaceTempList,
     ChartTempList,

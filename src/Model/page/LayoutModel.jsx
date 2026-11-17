@@ -4,7 +4,7 @@ import './LayoutModel.scss'
 import copy from 'copy-to-clipboard'
 import { useEventEmitter } from 'ahooks'
 import { useState, useEffect } from 'react'
-import { Spin, Result, Button, FloatButton, App } from 'antd'
+import { Spin, Result, Button, FloatButton, App, Dropdown, Popconfirm } from 'antd'
 
 
 import { axios, strOfurlParamsFunc } from '../../Utils/Api'
@@ -14,6 +14,44 @@ import { Encrypt, Decrypt, GetIndexedDB } from '../../Utils/IndexedDB'
 import { ModelAnnexTemplate, ModelTableTemplate } from '../../Temp/ModelTemplate'
 import { getNestedValue, ColorCallBack, SpacingCallBack, SetFilderParams, } from '../../Utils'
 import { AttachTemplateA01 } from '../../Temp/DevTemplate'
+
+
+import { PrefabricatedChartTemplate } from '../../Temp/PrefabricatedChart'
+import { PrefabricatedPlaceTemplate } from '../../Temp/PrefabricatedPlace'
+import { PrefabricatedDiyTemplate } from '../../Temp/PrefabricatedDiy'
+import { PrefabricatedListTemplate } from '../../Temp/PrefabricatedList'
+import { PrefabricatedImgTextTemplate } from '../../Temp/PrefabricatedImgText'
+import { PrefabricatedTableTemplate } from '../../Temp/PrefabricatedTable'
+import { PrefabricatedSelectTemplate } from '../../Temp/PrefabricatedSelect'
+import { PrefabricatedSwiperTemplate } from '../../Temp/PrefabricatedSwiper'
+import { PrefabricatedVisualTemplate } from '../../Temp/PrefabricatedVisual'
+import { BitsTextTemplate } from '../../Bits/BitsText'
+import { BitsComponentsTemplate } from '../../Bits/BitsComponents'
+import { BitsMicroTemplate } from '../../Bits/BitsMicro'
+import { BitsAnimationsTemplate } from '../../Bits/BitsAnimations'
+import { BitsBackgroundsTemplate } from '../../Bits/BitsBackgrounds'
+import {
+    TemplateParamsMapping
+} from '../../Config'
+
+
+const TemplateComponentMapping = {
+    ...PrefabricatedChartTemplate,
+    ...PrefabricatedPlaceTemplate,
+    ...PrefabricatedDiyTemplate,
+    ...PrefabricatedImgTextTemplate,
+    ...PrefabricatedListTemplate,
+    ...PrefabricatedTableTemplate,
+    ...PrefabricatedSelectTemplate,
+    ...PrefabricatedSwiperTemplate,
+    ...PrefabricatedVisualTemplate,
+    ...BitsTextTemplate,
+    ...BitsComponentsTemplate,
+    ...BitsMicroTemplate,
+    ...BitsAnimationsTemplate,
+    ...BitsBackgroundsTemplate,
+}
+
 
 const { port } = window.location
 
@@ -31,9 +69,11 @@ const LayoutModel = ({ data, Event }) => {
     const [componentStatus, setComponentStatus] = useState({ laoding: true, error: null, Template: null })
 
     const [Config, setConfig] = useState({ json: json })
-
-
     const [DETData, setDETData] = useState({})
+
+
+    const [TEMPData, setTEMPData] = useState({ loading: true, status: false, data: {} })
+
 
     const getJson = async () => {
         const { uuid } = await GetIndexedDB('config')
@@ -45,9 +85,16 @@ const LayoutModel = ({ data, Event }) => {
         })
         if (err) return setStatus({ spin: false, result: true })
         const jsonData = await Decrypt(res)
-        setStatus({ spin: false, result: false })
-        setConfig(jsonData)
         const { pageType, diyUrl } = jsonData
+        setConfig(jsonData)
+        setStatus({ spin: false, result: false })
+        if (pageType === 'TEM') {
+            const params = { uuid: `${uuid}/MOD_TEMP/${json}` }
+            const [err, res] = await axios({ method: 'get', url: 'projects/GetJsonInfoByUuid', path: CommonAPIUrl, params })
+            if (err) return setTEMPData({ loading: false, status: false, data: {} })
+            setTEMPData({ loading: false, status: true, data: await Decrypt(res) })
+        }
+
         if (pageType === 'DIY') {
             try {
                 const module = await import(`../diy/${diyUrl}.jsx`);
@@ -122,9 +169,28 @@ const LayoutModel = ({ data, Event }) => {
         getJson()
     }
 
+    const onSelectTemplate = async (data) => {
+        const { layId, tempId } = data
+        const { uuid } = await GetIndexedDB('config')
+        const params = { uuid: `${uuid}/MOD_TEMP/${json}`, content: JSON.stringify(await Encrypt(TemplateParamsMapping[tempId])) }
+        const [err] = await axios({ method: 'post', url: 'projects/SaveJsonInfoByUuid', path: CommonAPIUrl, params })
+        if (err) return console.log(err)
+    }
+
+
+    const onSetTemplateParamsBack = (data) => {
+        console.log(data)
+
+    }
+    const onSetPasteWindowData = (data) => {
+        setTEMPData({ loading: true, status: true, data })
+        updateModel4({})
+        updateModel5({})
+    }
+
     const startCallBack = (e) => {
         const { type, data } = e
-        // console.log('Home', e)
+        console.log('LayoutModel', e)
         const Mapping = new Map([
             ['onSaveModel', () => onSaveModel(data)],
             ['onPasteIndependentModel', () => {
@@ -132,7 +198,10 @@ const LayoutModel = ({ data, Event }) => {
                 const params = JSON.parse(paste)
                 onSaveModel({ ...params, json })
                 updateModel4({})
-            }]
+            }],
+            ['onSelectTemplate', () => onSelectTemplate(data)],
+            ['onSetTemplateParamsBack', () => onSetTemplateParamsBack(data)],
+            ['onSetPasteWindowData', () => onSetPasteWindowData(data)]
         ])
         const func = Mapping.get(type)
         func?.(data)
@@ -141,7 +210,89 @@ const LayoutModel = ({ data, Event }) => {
     ModelEvent.useSubscription(startCallBack)
     useEffect(() => { if (json) getJson() }, [json])
 
-    if (Status.spin) return <div className='LayoutModel Spin'><Spin size="large" /></div>
+
+
+    const onAddTem = () => {
+        updateModel5({ title: '模块选择', type: 'LayoutTemplate', width: '80vw', Event: ModelEvent, modelData: { layId: json } })
+    }
+    const onPutTem = () => {
+        updateModel5({
+            title: '模块设置',
+            type: 'CommonForm',
+            Event: ModelEvent,
+            modelData: {
+                formItem: TEMPData.data.value,
+                eventBack: 'onSetTemplateParamsBack',
+                Initial: TEMPData.data
+            },
+            options: [
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'before',
+                    text: '复制参数',
+                    type: 'default',
+                    onClick: () => {
+                        const success = copy(JSON.stringify(TEMPData.data))
+                        if (success) message.success('复制成功！')
+                        else message.error('复制失败！')
+                    }
+                },
+                {
+                    visible: true,
+                    widget: 'dxButton',
+                    location: 'after',
+                    text: '导入参数',
+                    type: 'default',
+                    onClick: () => {
+                        updateModel4({
+                            title: '模块设置',
+                            type: 'CommonForm',
+                            width: 640,
+                            height: 640,
+                            Event: ModelEvent,
+                            modelData: {
+                                formItem: 'PrefabricatedPasteWindow',
+                                eventBack: 'onSetPasteWindowData',
+                                Initial: { uuid: json }
+                            },
+                        })
+                    }
+                }
+            ]
+        })
+    }
+    const onDelTem = () => {
+
+    }
+
+
+    const items = [
+        { key: '3-3', label: (<Button type='link' onClick={onAddTem}>添加模块</Button>) },
+        { key: '4-1', label: (<Button type='link' onClick={onPutTem} >编辑模块</Button>) },
+        {
+            key: '4-2', label: (
+                <Popconfirm
+                    title="删除提醒"
+                    description="是否删除当前模块?请谨慎操作!"
+                    onConfirm={onDelTem}
+                    okText="删除"
+                    cancelText="取消"
+                >
+                    <Button type='link' danger>删除模块</Button>
+                </Popconfirm>
+            )
+        },
+    ]
+
+
+
+    if (Status.spin) return (
+        <div className='LayoutModel Spin'>
+            <Spin size="large" />
+            {port && <FloatButton onClick={onFormClick} />}
+        </div>
+    )
     if (Status.result) return (
         <div className='LayoutModel Spin'>
             <Result
@@ -152,12 +303,12 @@ const LayoutModel = ({ data, Event }) => {
         </div>
     )
 
-
     if (Config.pageType === 'DIY') {
         if (componentStatus.laoding) return <div className='LayoutModel Spin'><Spin size="large" /></div>
         if (componentStatus.error) return (
             <div className='LayoutModel Spin'>
                 <Result status="404" title="未检测到页面配置!" subTitle={`请联系系统管理员处理.${componentStatus.error}`} />
+                {port && <FloatButton onClick={onFormClick} />}
             </div>
         )
         const { Template } = componentStatus
@@ -234,6 +385,46 @@ const LayoutModel = ({ data, Event }) => {
             </div>
         )
     }
+
+    if (Config.pageType === 'TEM') {
+        const { loading, status, data } = TEMPData
+        if (loading) return (
+            <div className='LayoutModel Spin'>
+                <Spin size="large" />
+                {port && <FloatButton onClick={onFormClick} />}
+            </div>
+        )
+
+        if (!status) return (
+            <Dropdown
+                trigger={['contextMenu']}
+                menu={{ items: port ? items : [] }}
+            >
+                <div className='LayoutModel Spin'>
+                    <Result status="404" title="未检测到页面配置!" subTitle={`请联系系统管理员处理.`} />
+                    {port && <FloatButton onClick={onFormClick} />}
+                </div>
+            </Dropdown>
+        )
+
+        const { value } = data
+        const Template = TemplateComponentMapping[value]
+
+        return (
+            <div className='LayoutModel'>
+                <Dropdown
+                    trigger={['contextMenu']}
+                    menu={{ items: port ? items : [] }}
+                >
+                    <div className='TEM_Template'>
+                        <Template tempId={json} data={data} UrlData={[]} LayoutEvent={ModelEvent} />
+                    </div>
+                </Dropdown>
+                {port && <FloatButton onClick={onFormClick} />}
+            </div>
+        )
+    }
+
     const Template = LayTempMapping[Config.layType]
     return (
         <div className='LayoutModel'>

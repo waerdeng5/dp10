@@ -2299,7 +2299,8 @@ const DivTemplate = {
             imgUrl, imgWidth, imgHeight, imgPad, imgMar, imgFil, imgFilSize, imgFilColor,
         } = e
 
-        console.log(e)
+
+
         const backStyle = {
             background,
             padding: SpacingCallBack(padding),
@@ -2320,7 +2321,7 @@ const DivTemplate = {
             filter: SetFilderParams(imgFil, imgFilSize, imgFilColor),
         }
 
-        return `<div class="DivHtmlTemplate A04" >
+        return `<div class="DivHtmlTemplate A04" style="--list:${list.length * 30 + 24}px">
                     <img class="img" src="${imgUrl}" alt="" style="${Object.keys(imageStyle).map(k => `${k}:${imageStyle[k]}`).join(';')}">
                     <div class="box">
                         ${list.map((v, i) => `
@@ -2329,6 +2330,7 @@ const DivTemplate = {
                             </div>
                         `).join('')}
                     </div>
+                    <div class="dot"></div>
                 </div >`
     }
 }

@@ -2617,6 +2617,7 @@ export const MappingData = {
     Start__pageType: [
         { value: 'LAY', label: '布局页面' },
         { value: 'DET', label: '详情页面' },
+        { value: 'TEM', label: '模板页面' },
         { value: 'DIY', label: '自订页面' },
     ],
     Start__windowType: [
@@ -2631,7 +2632,6 @@ export const MappingData = {
     Model_layoutType: [
         { value: 'A01', label: '附件窗口' },
         { value: 'A02', label: '列表窗口' },
-
     ],
 
     // !!! 流程配置

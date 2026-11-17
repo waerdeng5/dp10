@@ -223,6 +223,7 @@ const PageTemplate = ({ data, page, StartEvent: LayoutEvent }) => {
     // 模块编辑
     const onSetTemplateParams = (data) => {
         const { form, tempId } = data
+        console.log(form)
         updateModel5({
             title: '模块设置',
             type: 'CommonForm',

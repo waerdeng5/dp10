@@ -54,6 +54,11 @@
     }
 
     &.A04 {
+        position: relative;
+        left: -24px;
+        top: var(--list);
+        z-index: 1;
         transform: translate(0, 0);
+
     }
 }

@@ -1954,6 +1954,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 lineWidth: timelineHeader_verticalLine_lineWidth?.split(',').map(Number) || 0,
                 lineDash: timelineHeader_verticalLine_lineDash?.split(',').map(Number) || 0,
             },
+
         },
         taskBar: {
             startDateField: fields_start || 'start',
@@ -1978,21 +1979,27 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
             // },
             customLayout: (args) => {
                 const { width, height, progress } = args
+                const { isSeriousDelay } = args.taskRecord
                 const rootContainer = new VTableGantt.VRender.Group({})
-
                 // 蓝色背景条
                 rootContainer.add(new VTableGantt.VRender.Rect({
-                    x: 0, y: height * 0, width, height: height,
-                    fill: '#1890ff', cornerRadius: 3
+                    x: 0,
+                    y: height * 0,
+                    width, height: height,
+                    fill: taskBar_barStyle_barColor,
+                    cornerRadius: 3
                 }));
 
                 // 绿色进度条
                 const pw = width * (progress / 100);
                 rootContainer.add(new VTableGantt.VRender.Rect({
-                    x: 0, y: height * 0, width: pw, height: height,
-                    fill: '#52c41a', cornerRadius: 3
+                    x: 0,
+                    y: height * 0,
+                    width: pw,
+                    height: height,
+                    fill: isSeriousDelay ? taskBar_baselineStyle_barColor : taskBar_barStyle_completedBarColor,
+                    cornerRadius: 3
                 }));
-
                 return { rootContainer, renderDefaultBar: false, renderDefaultText: false };
             },
 
@@ -2340,20 +2347,21 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
     //     return () => clearTimeout(t);
     // }, [data, UrlData]);
 
-
     useEffect(() => {
         if (tableContainer.current) {
+            console.log('采纳数', data, UrlData)
             const backData = DiyDataReturn(data, UrlData, recordsTestData, 'api_diyObj')
             if (apiDate && UrlData[http_urlName]) {
                 option.minDate = getObjectValue(UrlData[http_urlName], minApiDate)
                 option.maxDate = getObjectValue(UrlData[http_urlName], maxApiDate)
             }
 
-            const scales = timelineHeader_scales.map(v => {
+            const scales = timelineHeader_scales?.map(v => {
                 const { rowHeight, unit, step, startOfWeek, isPrefix, prefixText, isSuffix, suffixText, formatType, formatMapping, textAlign, textBaseline,
                     padding, fontSize, fontWeight, color, strokeColor, textOverflow, textStick
                 } = v
-                return ({
+
+                const obj = {
                     rowHeight,
                     unit,
                     step,
@@ -2373,12 +2381,74 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                         const { dateIndex, startDate, endDate } = date
                         if (formatType === 'date') return `${isPrefix ? prefixText : ''}${dayjs(startDate).format(formatMapping)}${isSuffix ? suffixText : ''}`
                         if (formatType === 'index') return `${isPrefix ? prefixText : ''}${dateIndex}${isSuffix ? suffixText : ''}`
-                        if (formatType === 'designated') return dateIndex <= 10 ? '10' : dateIndex <= 20 ? '20' : '30'
+                        // if (formatType === 'designated') return day <= 10 ? '10' : day <= 20 ? '20' : dayjs(endDate).endOf('month').format("DD")
                     },
-                })
+                    customLayout(args) {
+                        const { startDate, endDate, width, height } = args;
+                        if (formatType === 'designated') {
+                            const d = dayjs(startDate);
+                            const day = d.date();
+                            const lastDay = d.daysInMonth();
+                            let labelText = ''
+                            // // 判断是否是需要显示的日期
+                            if (day === 10) {
+                                labelText = '10'
+                            } else if (day === 20) {
+                                labelText = '20';
+                            } else if (day === lastDay) {
+                                labelText = String(lastDay);
+                            }
+                            const group = new VRender.Group({ width, height, clip: true })
+                            // 如果匹配了目标日期，则渲染文字
+                            if (labelText) {
+                                const text = new VRender.Text({
+                                    text: labelText,
+                                    x: width / 2,
+                                    y: height / 2,
+                                    padding: padding?.split(',').map(Number) || 0,
+                                    fontSize,
+                                    fontWeight,
+                                    fill: color,
+                                    strokeColor,
+                                    textAlign,
+                                    textBaseline,
+                                    textOverflow,
+                                    textStick
+                                });
+                                group.add(text);
+                            }
+
+                            return {
+                                rootContainer: group,
+                                renderDefaultText: false // 彻底关闭 VTable 默认的渲染
+                            }
+                        }
+                    }
+                }
+
+
+                return obj
+
+                // scales: [
+                //     {
+                //         unit: 'day',
+                //         step: 1,
+                //         format(date) {
+                //             const d = dayjs(date);
+                //             const day = d.date();
+                //             const lastDay = d.daysInMonth();
+
+                //             if (day === 10) return '10';
+                //             if (day === 20) return '20';
+                //             if (day === lastDay) return '月末';
+                //             return '';
+                //         }
+                //     }
+                // ]
+
             })
             option.timelineHeader.scales = scales
-            const markLine = markLine_list.map(v => {
+            const markLine = markLine_list?.map(v => {
                 const { today, date, position, scrollToMarkLine, style_lineColor, style_lineWidth, style_lineDash, content, color, fontSize, lineHeight,
                     fontWeight, cornerRadius, backgroundColor } = v
                 return ({
@@ -2390,7 +2460,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                         lineWidth: style_lineWidth,
                         lineDash: style_lineDash?.split(',').map(Number) || 0,
                     },
-                    content: today ? dayjs().format('MM-DD') : content,
+                    content: today ? '' : content,
                     contentStyle: {
                         color,
                         fontSize,
@@ -2408,16 +2478,15 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                 if (fields_columns) option.taskListTable.columns = fields_columns
                 ganttInstance.current = new Gantt(GanttRef.current, option)
 
-                console.log(ganttInstance.current)
-
-                const g = ganttInstance.current;
-                const p = g.internalProps || g;
-                console.log('getAllRowsHeight:', g.getAllRowsHeight?.());
-                console.log('getRowHeightByIndex(0):', g.getRowHeightByIndex?.(0));
-                console.log('getRowHeightByIndex(1):', g.getRowHeightByIndex?.(1));
-                console.log('getAllTaskBarsHeight:', g.getAllTaskBarsHeight?.());
-                console.log('getDataZoomHeight:', g.getDataZoomHeight?.());
-                console.log('canvas height:', g.getContainer?.()?.querySelector('canvas')?.getBoundingClientRect().height);
+                // console.log(ganttInstance.current)
+                // const g = ganttInstance.current;
+                // const p = g.internalProps || g;
+                // console.log('getAllRowsHeight:', g.getAllRowsHeight?.());
+                // console.log('getRowHeightByIndex(0):', g.getRowHeightByIndex?.(0));
+                // console.log('getRowHeightByIndex(1):', g.getRowHeightByIndex?.(1));
+                // console.log('getAllTaskBarsHeight:', g.getAllTaskBarsHeight?.());
+                // console.log('getDataZoomHeight:', g.getDataZoomHeight?.());
+                // console.log('canvas height:', g.getContainer?.()?.querySelector('canvas')?.getBoundingClientRect().height);
             }
         }
 
