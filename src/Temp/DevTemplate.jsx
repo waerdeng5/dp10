@@ -181,7 +181,6 @@ export const ExcelTemplate = (props) => {
         setExcelName(filename)
         const excelIo = new GC.Spread.Excel.IO()
         excelIo.open(blob, workbookObj => spread.fromJSON(workbookObj))
-
         // new GC.Spread.Sheets.Designer.Designer(ExcelBox.current, '', spread)
     })
 
@@ -212,7 +211,7 @@ export const ExcelTemplate = (props) => {
                 const { blob, filename, response } = res
                 const excelIo = new GC.Spread.Excel.IO()
                 excelIo.open(blob, workbookObj => spread.fromJSON(workbookObj))
-                new GC.Spread.Sheets.Designer.Designer(ExcelBox.current, '', spread)
+                // new GC.Spread.Sheets.Designer.Designer(ExcelBox.current, '', spread)
                 const text = decodeURIComponent(response.headers.get('message'))
                 notification.warning({ key: 'fromModify', title: '保存失败', description: text })
                 setLoading(false)
