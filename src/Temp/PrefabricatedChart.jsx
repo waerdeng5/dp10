@@ -2460,7 +2460,7 @@ const PrefabricatedChartGantt = ({ tempId, data, UrlData, LayoutEvent }) => {
                         lineWidth: style_lineWidth,
                         lineDash: style_lineDash?.split(',').map(Number) || 0,
                     },
-                    content: today ? '' : content,
+                    content: today ? dayjs().format('DD') : content,
                     contentStyle: {
                         color,
                         fontSize,

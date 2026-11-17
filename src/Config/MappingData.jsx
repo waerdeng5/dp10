@@ -2009,6 +2009,14 @@ export const MappingData = {
         { value: 'racing', label: '赛车' },
         { value: 'deep', label: '深度' },
     ],
+    BitsBackgrounds_HoloMosaicSpectrum: [
+        { value: 'full', label: '全频谱' },
+        { value: 'warm', label: '暖色' },
+        { value: 'cool', label: '冷色' },
+        { value: 'pearl', label: '珍珠' },
+    ],
+
+
 
     // TODO Dev
     DevConfig__ThemeList: [

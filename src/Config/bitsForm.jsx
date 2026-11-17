@@ -3365,8 +3365,53 @@ const BitsBackgrounds_Waves = [
     { span: 6, formType: 'NUMBER', name: 'opacity', label: '透明', rules: true },
 ]
 
+const BitsBackgrounds_HoloMosaic = [
+    { span: 24, formType: 'HIDDEN', name: 'uuid', label: '表编号', rules: true },
+    { span: 6, formType: 'COLOR', name: 'color', label: '基础颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'COLOR', name: 'metalColor', label: '金属颜色', rules: true, mode: ['single'] },
+    { span: 6, formType: 'RADIO', name: 'spectrum', label: '频谱', rules: true, valueEnum: MappingData.BitsBackgrounds_HoloMosaicSpectrum },
+    { span: 6, formType: 'NUMBER', name: 'tileSize', label: '瓦片尺寸', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'gap', label: '间隙', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'roundness', label: '圆度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'bevel', label: '斜面', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'rotation', label: '旋转', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'scatter', label: '散射', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'tilt', label: '倾斜', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'swirl', label: '旋流', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'ripple', label: '波纹', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'bands', label: '频带', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'softness', label: '柔软度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'intensity', label: '强度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'saturation', label: '饱和度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'glitter', label: '闪光', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'sheen', label: '光泽', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'grain', label: '粒度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'speed', label: '速度', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'variation', label: '变化', rules: true },
+    { span: 6, formType: 'NUMBER', name: 'variation', label: '变化', rules: true },
+
+
+
+
+
+    //     : 0.5,
+    //     : 0,
+    //     filter: 'none',
+    //     filterSize: 1,
+    //     fade: 0,
+    //     opacity: 1,
+    //     intro: true,
+    //     mouseInteraction: true,
+    //     mouseStrength: 1,
+    //     mouseRadius: 0.25,
+    //     flipOnClick: true,
+    //     lightMode: false,
+    //     paused: false,
+]
+
 
 export const BitsFormConfig = {
+    BitsBackgrounds_HoloMosaic,
     BitsBackgrounds_Waves,
     BitsBackgrounds_Iridescence,
     BitsBackgrounds_Hyperspeed,

@@ -10,15 +10,15 @@ import { useRef, useEffect } from 'react'
 
 import { Gantt, VRender } from '@visactor/vtable-gantt';
 
-import Waves from '../../Bits/Waves'
+import HoloMosaic from '../../Bits/HoloMosaic'
 
 const Test = () => {
     const { Theme__TemplateList, Font__Family } = MappingData
     const boxRef = useRef(null)
     return (
         <div className='TestPage'>
-            <div className='Waves'  >
-                <Waves />
+            <div className='HoloMosaic'  >
+                <HoloMosaic />
             </div>
             {/* <DevScrollView>
                 <div className='fontInfo'>
